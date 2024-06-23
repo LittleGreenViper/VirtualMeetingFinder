@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D4398E642C28922D0001FAE3 /* SwiftBMLSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E632C28922D0001FAE3 /* SwiftBMLSDK */; };
+		D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */; };
+		D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */; };
 		D49393352C2616C7006438AE /* VirtualMeetingFinderAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49393342C2616C7006438AE /* VirtualMeetingFinderAppDelegate.swift */; };
 		D49393372C2616C7006438AE /* VirtualMeetingFinderSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49393362C2616C7006438AE /* VirtualMeetingFinderSceneDelegate.swift */; };
 		D49393392C2616C7006438AE /* VirtualMeetingFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49393382C2616C7006438AE /* VirtualMeetingFinderViewController.swift */; };
@@ -16,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D4398E6B2C2892BD0001FAE3 /* jazzy.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = jazzy.command; sourceTree = "<group>"; };
 		D49393312C2616C7006438AE /* VirtualMeetingFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualMeetingFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49393342C2616C7006438AE /* VirtualMeetingFinderAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMeetingFinderAppDelegate.swift; sourceTree = "<group>"; };
 		D49393362C2616C7006438AE /* VirtualMeetingFinderSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMeetingFinderSceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +42,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */,
+				D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */,
+				D4398E642C28922D0001FAE3 /* SwiftBMLSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +115,7 @@
 				D4AD6A182C261BCA002E37F3 /* CODEOWNERS */,
 				D4AD6A192C261BCA002E37F3 /* LICENSE */,
 				D4AD6A142C261BCA002E37F3 /* PRIVACY.md */,
+				D4398E6B2C2892BD0001FAE3 /* jazzy.command */,
 				D4AD6A172C261BCA002E37F3 /* PrivacyInfo.xcprivacy */,
 			);
 			name = Meta;
@@ -129,6 +137,11 @@
 			dependencies = (
 			);
 			name = VirtualMeetingFinder;
+			packageProductDependencies = (
+				D4398E632C28922D0001FAE3 /* SwiftBMLSDK */,
+				D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */,
+				D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */,
+			);
 			productName = VirtualMeetingFinder;
 			productReference = D49393312C2616C7006438AE /* VirtualMeetingFinder.app */;
 			productType = "com.apple.product-type.application";
@@ -157,6 +170,11 @@
 				Base,
 			);
 			mainGroup = D49393282C2616C7006438AE;
+			packageReferences = (
+				D4398E622C28922D0001FAE3 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */,
+				D4398E652C2892790001FAE3 /* XCRemoteSwiftPackageReference "RVS_Generic_Swift_Toolbox" */,
+				D4398E682C2892830001FAE3 /* XCRemoteSwiftPackageReference "RVS_UIKit_Toolbox" */,
+			);
 			productRefGroup = D49393322C2616C7006438AE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -411,6 +429,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D4398E622C28922D0001FAE3 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/LittleGreenViper/SwiftBMLSDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		D4398E652C2892790001FAE3 /* XCRemoteSwiftPackageReference "RVS_Generic_Swift_Toolbox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.13.1;
+			};
+		};
+		D4398E682C2892830001FAE3 /* XCRemoteSwiftPackageReference "RVS_UIKit_Toolbox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RiftValleySoftware/RVS_UIKit_Toolbox";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D4398E632C28922D0001FAE3 /* SwiftBMLSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4398E622C28922D0001FAE3 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */;
+			productName = SwiftBMLSDK;
+		};
+		D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4398E652C2892790001FAE3 /* XCRemoteSwiftPackageReference "RVS_Generic_Swift_Toolbox" */;
+			productName = RVS_Generic_Swift_Toolbox;
+		};
+		D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4398E682C2892830001FAE3 /* XCRemoteSwiftPackageReference "RVS_UIKit_Toolbox" */;
+			productName = RVS_UIKit_Toolbox;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D49393292C2616C7006438AE /* Project object */;
 }

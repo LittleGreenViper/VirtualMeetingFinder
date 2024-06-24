@@ -601,13 +601,17 @@ extension VirtualMeetingFinderViewController: UITableViewDataSource {
     
     /* ################################################################## */
     /**
+     - parameter: The table view (ignored)
+     - parameter numberOfRowsInSection: The index path of the cell we want.
      */
-    func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
+    func tableView(_: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         let ret = UITableViewCell()
         
-        let meeting = meetings[inIndexPath.row]
-
-        ret.textLabel?.text = meeting.name
+        if (0..<meetings.count).contains(inIndexPath.row) {
+            let meeting = meetings[inIndexPath.row]
+            
+            ret.textLabel?.text = meeting.name
+        }
         
         ret.backgroundColor = (1 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : UIColor.clear
 

@@ -136,6 +136,16 @@ class VirtualMeetingFinderTimeSlider: UIControl {
     /**
      */
     weak var tickContainer: UIStackView?
+    
+    /* ################################################################## */
+    /**
+     */
+    weak var valueLabel: UILabel?
+    
+    /* ################################################################## */
+    /**
+     */
+    weak var valueStepper: UIStepper?
 
     /* ################################################################## */
     /**
@@ -151,7 +161,10 @@ extension VirtualMeetingFinderTimeSlider {
     /**
      */
     var selectedMeetings: [MeetingInstance] {
-        guard let value = sliderControl?.value else { return [] }
+        guard let value = sliderControl?.value,
+              !meetings.isEmpty
+        else { return [] }
+        
         let intValue = max(0, min((meetings.count - 1), Int(round(value))))
         
         return meetings[intValue].meetings
@@ -173,6 +186,8 @@ extension VirtualMeetingFinderTimeSlider {
            let thumbImage = UIImage(systemName: "arrowtriangle.down.fill")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large)) {
             let tempSlider = UISlider()
             tempSlider.setThumbImage(thumbImage, for: .normal)
+            tempSlider.maximumTrackTintColor = .systemGray4
+            tempSlider.minimumTrackTintColor = .systemGray4
             addSubview(tempSlider)
             sliderControl = tempSlider
             tempSlider.translatesAutoresizingMaskIntoConstraints = false
@@ -187,6 +202,9 @@ extension VirtualMeetingFinderTimeSlider {
         sliderControl?.value = 0
         
         addTicks()
+        addValueLabel()
+        
+        sliderControl?.sendActions(for: .valueChanged)
     }
 }
 
@@ -194,6 +212,45 @@ extension VirtualMeetingFinderTimeSlider {
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
 extension VirtualMeetingFinderTimeSlider {
+    /* ################################################################## */
+    /**
+     This adds the value label and stepper.
+     */
+    func addValueLabel() {
+        if nil == valueLabel,
+           !meetings.isEmpty {
+            let containerView = UIView()
+            
+            addSubview(containerView)
+            containerView.translatesAutoresizingMaskIntoConstraints = false
+            containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+            containerView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+            containerView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+
+            let label = UILabel()
+            containerView.addSubview(label)
+            valueLabel = label
+            label.textAlignment = .center
+            label.font = .systemFont(ofSize: 15)
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+            label.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+            label.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+            
+            let stepper = UIStepper()
+            stepper.minimumValue = Double(sliderControl?.minimumValue ?? 0)
+            stepper.maximumValue = Double(sliderControl?.maximumValue ?? 0)
+            stepper.stepValue = (stepper.maximumValue - stepper.minimumValue) / Double(meetings.count)
+            containerView.addSubview(stepper)
+            stepper.translatesAutoresizingMaskIntoConstraints = false
+            stepper.addTarget(self, action: #selector(stepperChanged), for: .valueChanged)
+            valueStepper = stepper
+            stepper.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
+            stepper.leftAnchor.constraint(equalTo: label.rightAnchor, constant: 4).isActive = true
+            stepper.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        }
+    }
+    
     /* ################################################################## */
     /**
      This adds all the "tick marks" to the slider.
@@ -208,6 +265,7 @@ extension VirtualMeetingFinderTimeSlider {
         
         let tempTick = UIStackView()
         insertSubview(tempTick, at: 0)
+        tickContainer = tempTick
         tempTick.translatesAutoresizingMaskIntoConstraints = false
         tempTick.topAnchor.constraint(equalTo: sliderControl.topAnchor).isActive = true
         tempTick.leftAnchor.constraint(equalTo: leftAnchor, constant: (thumbImage.size.width / 2) - TickView.tickWidthInDisplayUnits).isActive = true
@@ -244,7 +302,22 @@ extension VirtualMeetingFinderTimeSlider {
         let value = inSlider.value
         let intValue = max(0, min((meetings.count - 1), Int(round(value))))
         inSlider.value = Float(intValue)
+        valueStepper?.value = Double(intValue)
+        valueLabel?.text = meetings[intValue].time
         controller?.timeSliderChanged(intValue, slider: self)
+    }
+    
+    /* ################################################################## */
+    /**
+     Called whenever the stepper control changes.
+     
+     - parameter inSlider: The slider control that changed.
+     */
+    @objc func stepperChanged(_ inStepper: UIStepper) {
+        let value = inStepper.value
+        let intValue = max(0, min((meetings.count - 1), Int(round(value))))
+        sliderControl?.value = Float(intValue)
+        sliderControl?.sendActions(for: .valueChanged)
     }
 }
 
@@ -266,6 +339,12 @@ class VirtualMeetingFinderViewController: UIViewController {
      */
     fileprivate static let _oneDayInSeconds = TimeInterval(86400)
     
+    /* ################################################################## */
+    /**
+     The background transparency, for alternating rows.
+     */
+    private static let _alternateRowOpacity = CGFloat(0.05)
+
     /* ################################################################## */
     /**
      This is our query instance.
@@ -306,6 +385,12 @@ class VirtualMeetingFinderViewController: UIViewController {
      The slider control for the time of day.
      */
     @IBOutlet weak var timeSlider: VirtualMeetingFinderTimeSlider?
+    
+    /* ################################################################## */
+    /**
+     The table that shows the meetings for the current time.
+     */
+    @IBOutlet weak var valueTable: UITableView?
 
     /* ################################################################## */
     /**
@@ -346,6 +431,12 @@ class VirtualMeetingFinderViewController: UIViewController {
         
         return weekdayIndex
     }
+    
+    /* ################################################################## */
+    /**
+     This handles the meeting collection for this.
+     */
+    var meetings: [MeetingInstance] = []
 }
 
 /* ###################################################################################################################################### */
@@ -482,9 +573,63 @@ extension VirtualMeetingFinderViewController {
      - parameter inSelectedIndex: The time control slider value, as an index.
      */
     func timeSliderChanged(_ inSelectedIndex: Int, slider inSlider: VirtualMeetingFinderTimeSlider) {
-        guard !inSlider.selectedMeetings.isEmpty else { return }
-        
-        print("\(inSlider.meetings[inSelectedIndex].time), (\(inSlider.meetings[inSelectedIndex].meetings.count))")
+        meetings = inSlider.selectedMeetings
+        valueTable?.reloadData()
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to show a meeting details page.
+     
+     - parameter inMeeting: The meeting instance.
+     */
+    func selectMeeting(_ inMeeting: MeetingInstance) {
     }
 }
 
+/* ###################################################################################################################################### */
+// MARK: UITableViewDataSource Conformance
+/* ###################################################################################################################################### */
+extension VirtualMeetingFinderViewController: UITableViewDataSource {
+    /* ################################################################## */
+    /**
+     - parameter: The table view (ignored)
+     - parameter numberOfRowsInSection: The 0-based section index (also ignored).
+     - returns: The number of meetings to display.
+     */
+    func tableView(_: UITableView, numberOfRowsInSection: Int) -> Int { meetings.count }
+    
+    /* ################################################################## */
+    /**
+     */
+    func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
+        let ret = UITableViewCell()
+        
+        let meeting = meetings[inIndexPath.row]
+
+        ret.textLabel?.text = meeting.name
+        
+        ret.backgroundColor = (1 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : UIColor.clear
+
+        return ret
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: UITableViewDelegate Conformance
+/* ###################################################################################################################################### */
+extension VirtualMeetingFinderViewController: UITableViewDelegate {
+    /* ################################################################## */
+    /**
+     Called when a cell is selected. We will use this to open the user viewer.
+     
+     - parameter: The table view (ignored)
+     - parameter willSelectRowAt: The index path of the cell we are selecting.
+     - returns: nil (all the time).
+     */
+    func tableView(_: UITableView, willSelectRowAt inIndexPath: IndexPath) -> IndexPath? {
+        let meeting = meetings[inIndexPath.row]
+        selectMeeting(meeting)
+        return nil
+    }
+}

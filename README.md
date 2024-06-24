@@ -1,2 +1,4 @@
+![Icon](icon.png)
+
 # VirtualMeetingFinder
 

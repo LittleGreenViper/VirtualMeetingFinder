@@ -59,18 +59,6 @@ extension Array where Element == SwiftBMLSDK_MeetingLocalTimezoneCollection.Cach
 /**
  */
 class VirtualMeetingFinderTimeSlider: UIControl {
-    struct Time {
-        /* ############################################################## */
-        /**
-         */
-        let hour: Int
-        
-        /* ############################################################## */
-        /**
-         */
-        let minute: Int
-    }
-    
     /* ################################################################################################################################## */
     // MARK: Aggregator Class for Each Tick Mark
     /* ################################################################################################################################## */
@@ -80,33 +68,33 @@ class VirtualMeetingFinderTimeSlider: UIControl {
         /* ############################################################## */
         /**
          */
-        private static let _labelTickSeparationInDisplayUnits = CGFloat(4)
+        static let tickWidthInDisplayUnits = CGFloat(3)
         
         /* ############################################################## */
         /**
          */
-        private static let _tickWidthInDisplayUnits = CGFloat(4)
-        
-        /* ############################################################## */
-        /**
-         */
-        private static let _labelFont = UIFont.systemFont(ofSize: 12)
-        
-        /* ############################################################## */
-        /**
-         */
-        private static let _labelColor = UIColor.gray
-        
-        /* ############################################################## */
-        /**
-         */
-        private static let _tickColor = UIColor.gray
+        private static let _tickColor = UIColor.gray.withAlphaComponent(0.15)
 
         /* ############################################################## */
         /**
          */
-        var time: Time?
+        var time: String = ""
+
+        /* ############################################################## */
+        /**
+         */
+        var alignment: Int = 0
+
+        /* ############################################################## */
+        /**
+         */
+        var alignmentOffset = CGFloat(0)
         
+        /* ################################################################## */
+        /**
+         */
+        var meetings = [MeetingInstance]()
+
         /* ############################################################## */
         /**
          */
@@ -114,38 +102,10 @@ class VirtualMeetingFinderTimeSlider: UIControl {
         
         /* ############################################################## */
         /**
-         */
-        weak var label: UILabel?
-        
-        /* ############################################################## */
-        /**
+         Called when the pane is being laid out.
          */
         override func layoutSubviews() {
             super.layoutSubviews()
-            
-            guard let hour = time?.hour,
-                  let minute = time?.minute,
-                  let date = Calendar.current.date(from: DateComponents(hour: hour, minute: minute))
-            else { return }
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .none
-            dateFormatter.timeStyle = .short
-            
-            let displayString = dateFormatter.string(from: date)
-            
-            if nil == label {
-                let tempLabel = UILabel()
-                addSubview(tempLabel)
-                label = tempLabel
-                tempLabel.translatesAutoresizingMaskIntoConstraints = false
-                tempLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-                tempLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-                tempLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-                tempLabel.textColor = Self._labelColor
-                tempLabel.font = Self._labelFont
-                tempLabel.text = displayString
-            }
             
             if nil == tickMark {
                 let tempTickMark = UIView()
@@ -153,20 +113,14 @@ class VirtualMeetingFinderTimeSlider: UIControl {
                 tickMark = tempTickMark
                 tempTickMark.translatesAutoresizingMaskIntoConstraints = false
                 tempTickMark.topAnchor.constraint(equalTo: topAnchor).isActive = true
-                let bottomHook = label?.topAnchor ?? bottomAnchor
-                tempTickMark.bottomAnchor.constraint(equalTo: bottomHook, constant: Self._labelTickSeparationInDisplayUnits).isActive = true
-                tempTickMark.widthAnchor.constraint(equalToConstant: Self._tickWidthInDisplayUnits).isActive = true
-                tempTickMark.layer.cornerRadius = Self._tickWidthInDisplayUnits / 2
+                tempTickMark.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+                tempTickMark.widthAnchor.constraint(equalToConstant: Self.tickWidthInDisplayUnits).isActive = true
+                tempTickMark.layer.cornerRadius = Self.tickWidthInDisplayUnits / 2
                 tempTickMark.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
                 tempTickMark.backgroundColor = Self._tickColor
             }
         }
     }
-
-    /* ################################################################## */
-    /**
-     */
-    private var _ticks: [TickView] = []
 
     /* ################################################################## */
     /**
@@ -177,12 +131,22 @@ class VirtualMeetingFinderTimeSlider: UIControl {
     /**
      */
     weak var sliderControl: UISlider?
+    
+    /* ################################################################## */
+    /**
+     */
+    weak var tickContainer: UIStackView?
 
     /* ################################################################## */
     /**
      */
     @IBOutlet weak var controller: VirtualMeetingFinderViewController?
-    
+}
+
+/* ###################################################################################################################################### */
+// MARK: Computed Properties
+/* ###################################################################################################################################### */
+extension VirtualMeetingFinderTimeSlider {
     /* ################################################################## */
     /**
      */
@@ -200,13 +164,15 @@ class VirtualMeetingFinderTimeSlider: UIControl {
 extension VirtualMeetingFinderTimeSlider {
     /* ################################################################## */
     /**
+     Called when the control is being laid out.
      */
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        if nil == sliderControl {
+        if nil == sliderControl,
+           let thumbImage = UIImage(systemName: "arrowtriangle.down.fill")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large)) {
             let tempSlider = UISlider()
-            
+            tempSlider.setThumbImage(thumbImage, for: .normal)
             addSubview(tempSlider)
             sliderControl = tempSlider
             tempSlider.translatesAutoresizingMaskIntoConstraints = false
@@ -217,7 +183,7 @@ extension VirtualMeetingFinderTimeSlider {
         }
         
         sliderControl?.minimumValue = 0
-        sliderControl?.maximumValue = Float(meetings.count)
+        sliderControl?.maximumValue = max(0, Float(meetings.count - 1))
         sliderControl?.value = 0
         
         addTicks()
@@ -230,13 +196,37 @@ extension VirtualMeetingFinderTimeSlider {
 extension VirtualMeetingFinderTimeSlider {
     /* ################################################################## */
     /**
+     This adds all the "tick marks" to the slider.
      */
     func addTicks() {
-        _ticks.forEach {
-            $0.removeFromSuperview()
-        }
+        tickContainer?.removeFromSuperview()
         
-        _ticks = []
+        guard !meetings.isEmpty,
+              let sliderControl = sliderControl,
+              let thumbImage = sliderControl.thumbImage(for: .normal)
+        else { return }
+        
+        let tempTick = UIStackView()
+        insertSubview(tempTick, at: 0)
+        tempTick.translatesAutoresizingMaskIntoConstraints = false
+        tempTick.topAnchor.constraint(equalTo: sliderControl.topAnchor).isActive = true
+        tempTick.leftAnchor.constraint(equalTo: leftAnchor, constant: (thumbImage.size.width / 2) - TickView.tickWidthInDisplayUnits).isActive = true
+        tempTick.bottomAnchor.constraint(equalTo: sliderControl.bottomAnchor).isActive = true
+        tempTick.rightAnchor.constraint(equalTo: rightAnchor, constant: -((thumbImage.size.width / 2) - TickView.tickWidthInDisplayUnits)).isActive = true
+        tempTick.axis = .horizontal
+        tempTick.distribution = .equalCentering
+        
+        let stepSize = meetings.count / 10
+
+        let aragorn = stride(from: 0, to: meetings.count - 1, by: stepSize)
+        
+        for index in aragorn {
+            let dataVal = meetings[index]
+            let tickView = TickView()
+            tickView.meetings = dataVal.meetings
+            tickView.time = dataVal.time
+            tempTick.addArrangedSubview(tickView)
+        }
     }
 }
 
@@ -246,6 +236,9 @@ extension VirtualMeetingFinderTimeSlider {
 extension VirtualMeetingFinderTimeSlider {
     /* ################################################################## */
     /**
+     Called whenever the slider control changes.
+     
+     - parameter inSlider: The slider control that changed.
      */
     @objc func sliderChanged(_ inSlider: UISlider) {
         let value = inSlider.value
@@ -283,7 +276,12 @@ class VirtualMeetingFinderViewController: UIViewController {
     /**
      This handles the server data.
      */
-    private var _virtualService: SwiftBMLSDK_MeetingLocalTimezoneCollection?
+    private var _virtualService: SwiftBMLSDK_MeetingLocalTimezoneCollection? {
+        didSet {
+            mapData()
+            setTimeSlider()
+        }
+    }
 
     /* ################################################################## */
     /**
@@ -362,10 +360,7 @@ extension VirtualMeetingFinderViewController {
         super.viewDidLoad()
         isThrobbing = true
         setUpWeekdayControl()
-        findMeetings {
-            self.setTimeSlider()
-            self.isThrobbing = false
-        }
+        findMeetings()
     }
 }
 
@@ -376,15 +371,14 @@ extension VirtualMeetingFinderViewController {
     /* ################################################################## */
     /**
      Fetches all of the virtual meetings (hybrid and pure virtual).
-     
-     - parameter completion: A tail completion proc. This is always called in the main thread.
      */
-    func findMeetings(completion inCompletion: (() -> Void)?) {
+    func findMeetings() {
+        isThrobbing = true
+        _virtualService = nil
         _ = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: Self._queryInstance) { inCollection in
             DispatchQueue.main.async {
                 self._virtualService = inCollection
-                self.mapData()
-                inCompletion?()
+                self.isThrobbing = false
             }
         }
     }
@@ -410,13 +404,18 @@ extension VirtualMeetingFinderViewController {
     
     /* ################################################################## */
     /**
+     This applies the selected days meetings to the slider, in a form it understands.
      */
     func setTimeSlider() {
         guard let weekdaySwitch = self.weekdaySegmentedSwitch else { return }
         
         let selectedWeekdayIndex = Self.unMapWeekday(weekdaySwitch.selectedSegmentIndex + 1) - 1
         
-        timeSlider?.meetings = mappedDataset[selectedWeekdayIndex]
+        guard let timeSlider = timeSlider,
+              (0..<mappedDataset.count).contains(selectedWeekdayIndex)
+        else { return }
+        
+        timeSlider.meetings = mappedDataset[selectedWeekdayIndex]
     }
     
     /* ################################################################## */

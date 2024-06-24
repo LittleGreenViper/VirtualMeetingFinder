@@ -36,7 +36,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jbt-MB-zeP" customClass="VirtualMeetingFinderTimeSlider" customModule="VirtualMeetingFinder" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="39" width="361" height="64"/>
+                                        <rect key="frame" x="0.0" y="43" width="361" height="64"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="4h1-QT-BJS"/>
@@ -53,7 +53,7 @@
                                     <constraint firstItem="ucf-Dn-cRn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="x1c-LJ-wrE" secondAttribute="leading" id="EHi-lk-vym"/>
                                     <constraint firstItem="Jbt-MB-zeP" firstAttribute="leading" secondItem="x1c-LJ-wrE" secondAttribute="leading" id="RW9-CS-ZZJ"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ucf-Dn-cRn" secondAttribute="trailing" id="V6t-kc-5yi"/>
-                                    <constraint firstItem="Jbt-MB-zeP" firstAttribute="top" secondItem="ucf-Dn-cRn" secondAttribute="bottom" constant="8" id="cnm-sy-FYK"/>
+                                    <constraint firstItem="Jbt-MB-zeP" firstAttribute="top" secondItem="ucf-Dn-cRn" secondAttribute="bottom" constant="12" id="cnm-sy-FYK"/>
                                     <constraint firstAttribute="trailing" secondItem="Jbt-MB-zeP" secondAttribute="trailing" id="zav-wu-e7B"/>
                                 </constraints>
                             </view>

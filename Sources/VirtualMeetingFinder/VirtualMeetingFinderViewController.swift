@@ -22,6 +22,38 @@ import SwiftBMLSDK
 import RVS_Generic_Swift_Toolbox
 
 /* ###################################################################################################################################### */
+// MARK: - Abstraction for the Meeting Type -
+/* ###################################################################################################################################### */
+public typealias MeetingInstance = SwiftBMLSDK_Parser.Meeting
+
+/* ###################################################################################################################################### */
+// MARK: - Additional Function for Meetings -
+/* ###################################################################################################################################### */
+extension MeetingInstance {
+    /* ################################################################## */
+    /**
+     This allows us to return a string for the meeting time.
+     */
+    var timeString: String {
+        var mutableSelf = self
+        let nextDate = mutableSelf.getNextStartDate(isAdjusted: true)
+        let formatter = DateFormatter()
+        formatter.dateFormat = .none
+        formatter.timeStyle = .short
+        return formatter.string(from: nextDate)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Array Extension for Meetings -
+/* ###################################################################################################################################### */
+extension Array where Element == SwiftBMLSDK_MeetingLocalTimezoneCollection.CachedMeeting {
+    func meetingsOnWeekday(weekdayIndex inWeekdayIndex: Int) -> [SwiftBMLSDK_MeetingLocalTimezoneCollection.CachedMeeting] {
+        filter { $0.meeting.weekday == inWeekdayIndex }
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Special Slider Setup for Times -
 /* ###################################################################################################################################### */
 /**
@@ -139,12 +171,17 @@ class VirtualMeetingFinderTimeSlider: UIControl {
     /* ################################################################## */
     /**
      */
-    @IBOutlet weak var controller: VirtualMeetingFinderViewController?
+    var meetings = [VirtualMeetingFinderViewController.MappedSet]() { didSet { setNeedsLayout() } }
     
     /* ################################################################## */
     /**
      */
     weak var sliderControl: UISlider?
+
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var controller: VirtualMeetingFinderViewController?
 }
 
 /* ###################################################################################################################################### */
@@ -168,6 +205,10 @@ extension VirtualMeetingFinderTimeSlider {
             tempSlider.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
             tempSlider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
         }
+        
+        sliderControl?.minimumValue = 0
+        sliderControl?.maximumValue = Float(meetings.count)
+        sliderControl?.value = 0
         
         addTicks()
     }
@@ -197,7 +238,10 @@ extension VirtualMeetingFinderTimeSlider {
     /**
      */
     @objc func sliderChanged(_ inSlider: UISlider) {
-        controller?.timeSliderChanged(inSlider)
+        let value = inSlider.value
+        let intValue = max(0, min((meetings.count - 1), Int(round(value))))
+        inSlider.value = Float(intValue)
+        controller?.timeSliderChanged(intValue, slider: self)
     }
 }
 
@@ -207,6 +251,18 @@ extension VirtualMeetingFinderTimeSlider {
 /**
  */
 class VirtualMeetingFinderViewController: UIViewController {
+    /* ################################################################## */
+    /**
+     This is an alias for the tuple type we use for time-mapped meeting data.
+     */
+    typealias MappedSet = (time: String, meetings: [MeetingInstance])
+    
+    /* ################################################################## */
+    /**
+     How many seconds are in a 24-hour day.
+     */
+    fileprivate static let _oneDayInSeconds = TimeInterval(86400)
+    
     /* ################################################################## */
     /**
      This is our query instance.
@@ -221,23 +277,73 @@ class VirtualMeetingFinderViewController: UIViewController {
 
     /* ################################################################## */
     /**
+     This is an array of the time-mapped meeting data.
+     */
+    private var mappedDataset = [[MappedSet]]()
+    
+    /* ################################################################## */
+    /**
+     This contains all the visible items.
+     */
+    @IBOutlet weak var mainContainerView: UIView?
+
+    /* ################################################################## */
+    /**
+     The weekday switch.
      */
     @IBOutlet weak var weekdaySegmentedSwitch: UISegmentedControl?
 
     /* ################################################################## */
     /**
+     The slider control for the time of day.
      */
     @IBOutlet weak var timeSlider: VirtualMeetingFinderTimeSlider?
 
     /* ################################################################## */
     /**
+     The type of meeting to display switch.
      */
     @IBOutlet weak var typeSegmentedSwitch: UISegmentedControl?
 
     /* ################################################################## */
     /**
+     The "Throbber" view
      */
     @IBOutlet weak var throbber: UIView?
+    
+    /* ################################################################## */
+    /**
+     This is set to true, if the "throbber" is shown (hiding everything else).
+     */
+    var isThrobbing: Bool = false {
+        didSet {
+            if isThrobbing {
+                mainContainerView?.isHidden = true
+                throbber?.isHidden = false
+            } else {
+                throbber?.isHidden = true
+                mainContainerView?.isHidden = false
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     This converts the selected weekday into the 1 == Sun format needed for the meeting data.
+     */
+    static func unMapWeekday(_ inWeekdayIndex: Int) -> Int {
+        guard (1..<8).contains(inWeekdayIndex) else { return 0 }
+        
+        let firstDay = Calendar.current.firstWeekday
+        
+        var weekdayIndex = (firstDay + inWeekdayIndex) - 1
+        
+        if 7 < weekdayIndex {
+            weekdayIndex -= 7
+        }
+        
+        return weekdayIndex
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -246,13 +352,15 @@ class VirtualMeetingFinderViewController: UIViewController {
 extension VirtualMeetingFinderViewController {
     /* ################################################################## */
     /**
+     Called when the view hierarchy has loaded.
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        throbber?.isHidden = false
+        isThrobbing = true
+        setUpWeekdayControl()
         findMeetings {
-            self.throbber?.isHidden = true
-            print("DUN")
+            self.setTimeSlider()
+            self.isThrobbing = false
         }
     }
 }
@@ -263,6 +371,23 @@ extension VirtualMeetingFinderViewController {
 extension VirtualMeetingFinderViewController {
     /* ################################################################## */
     /**
+     Fetches all of the virtual meetings (hybrid and pure virtual).
+     
+     - parameter completion: A tail completion proc. This is always called in the main thread.
+     */
+    func findMeetings(completion inCompletion: (() -> Void)?) {
+        _ = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: Self._queryInstance) { inCollection in
+            DispatchQueue.main.async {
+                self._virtualService = inCollection
+                self.mapData()
+                inCompletion?()
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     This sets the proper days into the weekday control.
      */
     func setUpWeekdayControl() {
         for index in 0..<7 {
@@ -281,35 +406,98 @@ extension VirtualMeetingFinderViewController {
     
     /* ################################################################## */
     /**
-     Fetches all of the virtual meetings (hybrid and pure virtual).
-     
-     - parameter completion: A tail completion proc. This is always called in the main thread.
      */
-    func findMeetings(completion inCompletion: (() -> Void)?) {
-        _virtualService = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: Self._queryInstance) { inCollection in
-            DispatchQueue.main.async {
-                guard let switchMan = self.typeSegmentedSwitch else { return }
-                
-                for index in 0..<switchMan.numberOfSegments {
-                    var count = 0
-                    
-                    switch index {
-                    case 0:
-                        count = inCollection.meetings.count
-                    case 1:
-                        count = inCollection.hybridMeetings.count
-                    case 2:
-                        count = inCollection.virtualMeetings.count
-                    default:
-                        break
-                    }
-                    let countSuffix = 0 < count ? " (\(count))" : ""
-                    let title = "SLUG-VIRTUAL-SWITCH-\(index)".localizedVariant + countSuffix
-                    switchMan.setTitle(title, forSegmentAt: index)
+    func setTimeSlider() {
+        guard let weekdaySwitch = self.weekdaySegmentedSwitch else { return }
+        
+        let selectedWeekdayIndex = Self.unMapWeekday(weekdaySwitch.selectedSegmentIndex + 1) - 1
+        
+        timeSlider?.meetings = mappedDataset[selectedWeekdayIndex]
+        
+        setTypeSwitch()
+    }
+    
+    /* ################################################################## */
+    /**
+     This sets the numbers in the type of meeting switch, based on the selected weekday and time.
+     */
+    func setTypeSwitch() {
+        guard let switchMan = self.typeSegmentedSwitch,
+              let weekdaySwitch = self.weekdaySegmentedSwitch,
+              let virtualService = _virtualService
+        else { return }
+        
+        let selectedWeekday = Self.unMapWeekday(weekdaySwitch.selectedSegmentIndex + 1)
+        
+        for index in 0..<switchMan.numberOfSegments {
+            var count = 0
+            
+            switch index {
+            case 0:
+                count = virtualService.meetings.meetingsOnWeekday(weekdayIndex: selectedWeekday).count
+            case 1:
+                count = virtualService.hybridMeetings.meetingsOnWeekday(weekdayIndex: selectedWeekday).count
+            case 2:
+                count = virtualService.virtualMeetings.meetingsOnWeekday(weekdayIndex: selectedWeekday).count
+            default:
+                break
+            }
+            
+            let countSuffix = 0 < count ? " (\(count))" : ""
+            let title = "SLUG-VIRTUAL-SWITCH-\(index)".localizedVariant + countSuffix
+            switchMan.setTitle(title, forSegmentAt: index)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     This maps the times for the selected day.
+     */
+    func mapData() {
+        mappedDataset = []
+        
+        guard let virtualService = _virtualService else { return }
+
+        var date = Calendar.current.startOfDay(for: .now)
+        
+        var daySet = [MappedSet]()
+        
+        var meetings = [MeetingInstance]()
+        
+        let inProgressMeetings = virtualService.meetings.compactMap { $0.isInProgress ? $0 : nil }.map { $0.meeting }
+
+        for day in 0..<8 {
+            meetings = virtualService.meetings.compactMap {
+                let nextDate = $0.nextDate
+                return nextDate.isOnTheSameDayAs(date) && (nextDate >= .now || (0 < day || !$0.isInProgress)) ? $0.meeting : nil
+            }
+            
+            var times = [Int: [MeetingInstance]]()
+            
+            meetings.forEach {
+                let time = $0.adjustedIntegerStartTime
+                if nil == times[time] {
+                    times[time] = [$0]
+                } else {
+                    times[time]?.append($0)
                 }
             }
             
-            inCompletion?()
+            daySet = []
+            
+            if 0 == day,
+               !inProgressMeetings.isEmpty {
+                daySet = [MappedSet(time: "SLUG-IN-PROGRESS".localizedVariant, meetings: inProgressMeetings)]
+            }
+            
+            for timeInst in times.keys.sorted() {
+                let meetings = meetings.filter { $0.adjustedIntegerStartTime == timeInst }
+                daySet.append(MappedSet(time: meetings[0].timeString, meetings: meetings))
+            }
+            
+            mappedDataset.append(daySet)
+            
+            date = date.addingTimeInterval(Self._oneDayInSeconds)
         }
     }
 }
@@ -320,6 +508,9 @@ extension VirtualMeetingFinderViewController {
 extension VirtualMeetingFinderViewController {
     /* ################################################################## */
     /**
+     Called when the user selects a particular type of meeting.
+     
+     - parameter inTypeSegmentedControl: The segmented control that was changed.
      */
     @IBAction func typeSelected(_ inTypeSegmentedControl: UISegmentedControl) {
         
@@ -327,16 +518,25 @@ extension VirtualMeetingFinderViewController {
     
     /* ################################################################## */
     /**
+     Called when the user selects a particular weekday.
+     
+     - parameter inWeekdaySegmentedControl: The segmented control that was changed.
      */
     @IBAction func weekdaySelected(_ inWeekdaySegmentedControl: UISegmentedControl) {
-        
+        setTimeSlider()
     }
     
     /* ################################################################## */
     /**
+     Called when the user selects a time slot for the meetings.
+     
+     - parameter inSelectedIndex: The time control slider value, as an index.
      */
-    func timeSliderChanged(_ inSlider: UISlider) {
-        print("HAI")
+    func timeSliderChanged(_ inSelectedIndex: Int, slider inSlider: VirtualMeetingFinderTimeSlider) {
+        guard !inSlider.meetings.isEmpty else { return }
+        
+        setTypeSwitch()
+        print(inSlider.meetings[inSelectedIndex].time)
     }
 }
 

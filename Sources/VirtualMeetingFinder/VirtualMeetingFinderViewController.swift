@@ -182,6 +182,16 @@ class VirtualMeetingFinderTimeSlider: UIControl {
     /**
      */
     @IBOutlet weak var controller: VirtualMeetingFinderViewController?
+    
+    /* ################################################################## */
+    /**
+     */
+    var selectedMeetings: [MeetingInstance] {
+        guard let value = sliderControl?.value else { return [] }
+        let intValue = max(0, min((meetings.count - 1), Int(round(value))))
+        
+        return meetings[intValue].meetings
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -301,12 +311,6 @@ class VirtualMeetingFinderViewController: UIViewController {
 
     /* ################################################################## */
     /**
-     The type of meeting to display switch.
-     */
-    @IBOutlet weak var typeSegmentedSwitch: UISegmentedControl?
-
-    /* ################################################################## */
-    /**
      The "Throbber" view
      */
     @IBOutlet weak var throbber: UIView?
@@ -413,40 +417,6 @@ extension VirtualMeetingFinderViewController {
         let selectedWeekdayIndex = Self.unMapWeekday(weekdaySwitch.selectedSegmentIndex + 1) - 1
         
         timeSlider?.meetings = mappedDataset[selectedWeekdayIndex]
-        
-        setTypeSwitch()
-    }
-    
-    /* ################################################################## */
-    /**
-     This sets the numbers in the type of meeting switch, based on the selected weekday and time.
-     */
-    func setTypeSwitch() {
-        guard let switchMan = self.typeSegmentedSwitch,
-              let weekdaySwitch = self.weekdaySegmentedSwitch,
-              let virtualService = _virtualService
-        else { return }
-        
-        let selectedWeekday = Self.unMapWeekday(weekdaySwitch.selectedSegmentIndex + 1)
-        
-        for index in 0..<switchMan.numberOfSegments {
-            var count = 0
-            
-            switch index {
-            case 0:
-                count = virtualService.meetings.meetingsOnWeekday(weekdayIndex: selectedWeekday).count
-            case 1:
-                count = virtualService.hybridMeetings.meetingsOnWeekday(weekdayIndex: selectedWeekday).count
-            case 2:
-                count = virtualService.virtualMeetings.meetingsOnWeekday(weekdayIndex: selectedWeekday).count
-            default:
-                break
-            }
-            
-            let countSuffix = 0 < count ? " (\(count))" : ""
-            let title = "SLUG-VIRTUAL-SWITCH-\(index)".localizedVariant + countSuffix
-            switchMan.setTitle(title, forSegmentAt: index)
-        }
     }
     
     /* ################################################################## */
@@ -458,18 +428,14 @@ extension VirtualMeetingFinderViewController {
         
         guard let virtualService = _virtualService else { return }
 
-        var date = Calendar.current.startOfDay(for: .now)
-        
         var daySet = [MappedSet]()
         
         var meetings = [MeetingInstance]()
-        
-        let inProgressMeetings = virtualService.meetings.compactMap { $0.isInProgress ? $0 : nil }.map { $0.meeting }
 
-        for day in 0..<8 {
+        for day in 1...7 {
             meetings = virtualService.meetings.compactMap {
-                let nextDate = $0.nextDate
-                return nextDate.isOnTheSameDayAs(date) && (nextDate >= .now || (0 < day || !$0.isInProgress)) ? $0.meeting : nil
+                let weekday = Calendar.current.component(.weekday, from: $0.nextDate)
+                return weekday == day ? $0.meeting : nil
             }
             
             var times = [Int: [MeetingInstance]]()
@@ -485,19 +451,13 @@ extension VirtualMeetingFinderViewController {
             
             daySet = []
             
-            if 0 == day,
-               !inProgressMeetings.isEmpty {
-                daySet = [MappedSet(time: "SLUG-IN-PROGRESS".localizedVariant, meetings: inProgressMeetings)]
-            }
-            
             for timeInst in times.keys.sorted() {
                 let meetings = meetings.filter { $0.adjustedIntegerStartTime == timeInst }
-                daySet.append(MappedSet(time: meetings[0].timeString, meetings: meetings))
+                let string = (1200 == timeInst) ? "SLUG-NOON".localizedVariant : (2359 == timeInst) ? "SLUG-MIDNIGHT".localizedVariant : meetings[0].timeString
+                daySet.append(MappedSet(time: string, meetings: meetings))
             }
             
             mappedDataset.append(daySet)
-            
-            date = date.addingTimeInterval(Self._oneDayInSeconds)
         }
     }
 }
@@ -506,16 +466,6 @@ extension VirtualMeetingFinderViewController {
 // MARK: Callbacks
 /* ###################################################################################################################################### */
 extension VirtualMeetingFinderViewController {
-    /* ################################################################## */
-    /**
-     Called when the user selects a particular type of meeting.
-     
-     - parameter inTypeSegmentedControl: The segmented control that was changed.
-     */
-    @IBAction func typeSelected(_ inTypeSegmentedControl: UISegmentedControl) {
-        
-    }
-    
     /* ################################################################## */
     /**
      Called when the user selects a particular weekday.
@@ -533,10 +483,9 @@ extension VirtualMeetingFinderViewController {
      - parameter inSelectedIndex: The time control slider value, as an index.
      */
     func timeSliderChanged(_ inSelectedIndex: Int, slider inSlider: VirtualMeetingFinderTimeSlider) {
-        guard !inSlider.meetings.isEmpty else { return }
+        guard !inSlider.selectedMeetings.isEmpty else { return }
         
-        setTypeSwitch()
-        print(inSlider.meetings[inSelectedIndex].time)
+        print("\(inSlider.meetings[inSelectedIndex].time), (\(inSlider.meetings[inSelectedIndex].meetings.count))")
     }
 }
 

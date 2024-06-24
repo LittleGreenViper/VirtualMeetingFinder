@@ -45,30 +45,15 @@
                                             <outlet property="controller" destination="BYZ-38-t0r" id="l7X-1Q-V1v"/>
                                         </connections>
                                     </view>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5xi-Bt-Zgz">
-                                        <rect key="frame" x="0.0" y="103" width="361" height="32"/>
-                                        <segments>
-                                            <segment title="SLUG-VIRTUAL-SWITCH-0"/>
-                                            <segment title="SLUG-VIRTUAL-SWITCH-1"/>
-                                            <segment title="SLUG-VIRTUAL-SWITCH-2"/>
-                                        </segments>
-                                        <connections>
-                                            <action selector="typeSelected:" destination="BYZ-38-t0r" eventType="valueChanged" id="Smg-Mj-CVc"/>
-                                        </connections>
-                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="ucf-Dn-cRn" firstAttribute="centerX" secondItem="x1c-LJ-wrE" secondAttribute="centerX" id="5w1-ck-DGc"/>
                                     <constraint firstItem="ucf-Dn-cRn" firstAttribute="top" secondItem="x1c-LJ-wrE" secondAttribute="top" id="9Y1-Fy-uQP"/>
                                     <constraint firstItem="ucf-Dn-cRn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="x1c-LJ-wrE" secondAttribute="leading" id="EHi-lk-vym"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5xi-Bt-Zgz" secondAttribute="trailing" id="GGh-Zc-lR9"/>
                                     <constraint firstItem="Jbt-MB-zeP" firstAttribute="leading" secondItem="x1c-LJ-wrE" secondAttribute="leading" id="RW9-CS-ZZJ"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ucf-Dn-cRn" secondAttribute="trailing" id="V6t-kc-5yi"/>
                                     <constraint firstItem="Jbt-MB-zeP" firstAttribute="top" secondItem="ucf-Dn-cRn" secondAttribute="bottom" constant="8" id="cnm-sy-FYK"/>
-                                    <constraint firstItem="5xi-Bt-Zgz" firstAttribute="top" secondItem="Jbt-MB-zeP" secondAttribute="bottom" id="fxe-a3-0pu"/>
-                                    <constraint firstItem="5xi-Bt-Zgz" firstAttribute="centerX" secondItem="x1c-LJ-wrE" secondAttribute="centerX" id="jcS-OC-Crt"/>
-                                    <constraint firstItem="5xi-Bt-Zgz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="x1c-LJ-wrE" secondAttribute="leading" id="r4w-Gd-h22"/>
                                     <constraint firstAttribute="trailing" secondItem="Jbt-MB-zeP" secondAttribute="trailing" id="zav-wu-e7B"/>
                                 </constraints>
                             </view>
@@ -104,7 +89,6 @@
                         <outlet property="mainContainerView" destination="x1c-LJ-wrE" id="yd5-D9-u9o"/>
                         <outlet property="throbber" destination="U5m-vQ-VRU" id="4e5-Tk-SAS"/>
                         <outlet property="timeSlider" destination="Jbt-MB-zeP" id="xkC-hc-cP7"/>
-                        <outlet property="typeSegmentedSwitch" destination="5xi-Bt-Zgz" id="Uaz-gb-eoG"/>
                         <outlet property="weekdaySegmentedSwitch" destination="ucf-Dn-cRn" id="eQu-6l-bIR"/>
                     </connections>
                 </viewController>

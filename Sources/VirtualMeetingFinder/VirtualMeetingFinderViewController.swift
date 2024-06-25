@@ -78,22 +78,12 @@ class VirtualMeetingFinderTimeSlider: UIControl {
         /* ############################################################## */
         /**
          */
-        var time: String = ""
-
-        /* ############################################################## */
-        /**
-         */
         var alignment: Int = 0
 
         /* ############################################################## */
         /**
          */
         var alignmentOffset = CGFloat(0)
-        
-        /* ################################################################## */
-        /**
-         */
-        var meetings = [MeetingInstance]()
 
         /* ############################################################## */
         /**
@@ -199,8 +189,8 @@ extension VirtualMeetingFinderTimeSlider {
         
         sliderControl?.minimumValue = 0
         sliderControl?.maximumValue = max(0, Float(meetings.count - 1))
-        sliderControl?.value = 0
-        
+        sliderControl?.value = Float(max(0, min((meetings.count - 1), Int(round(sliderControl?.value ?? 0)))))
+
         addTicks()
         addValueLabel()
         
@@ -274,16 +264,8 @@ extension VirtualMeetingFinderTimeSlider {
         tempTick.axis = .horizontal
         tempTick.distribution = .equalCentering
         
-        let stepSize = meetings.count / 10
-
-        let aragorn = stride(from: 0, to: meetings.count - 1, by: stepSize)
-        
-        for index in aragorn {
-            let dataVal = meetings[index]
-            let tickView = TickView()
-            tickView.meetings = dataVal.meetings
-            tickView.time = dataVal.time
-            tempTick.addArrangedSubview(tickView)
+        for _ in (0..<11) {
+            tempTick.addArrangedSubview(TickView())
         }
     }
 }
@@ -506,7 +488,44 @@ extension VirtualMeetingFinderViewController {
               (0..<mappedDataset.count).contains(selectedWeekdayIndex)
         else { return }
         
+        var oldTimeAsTime = -1
+        
+        if !timeSlider.meetings.isEmpty {
+            let oldValue = Int(timeSlider.sliderControl?.value ?? 0)
+            oldTimeAsTime = timeSlider.meetings[oldValue].meetings.first?.adjustedIntegerStartTime ?? -1
+        }
+        
         timeSlider.meetings = mappedDataset[selectedWeekdayIndex]
+        
+        guard 0 <= oldTimeAsTime else { return }
+        
+        var newValue = 0
+        var index = 0
+        var newTime = -1
+        
+        timeSlider.meetings.forEach {
+            if $0.meetings.first?.adjustedIntegerStartTime == oldTimeAsTime {
+                newTime = $0.meetings.first?.adjustedIntegerStartTime ?? -1
+                newValue = index
+            }
+            
+            index += 1
+        }
+        
+        if newTime != oldTimeAsTime,
+           0 < oldTimeAsTime {
+            index = 0
+            newValue = 0
+            timeSlider.meetings.forEach {
+                if 0 == newValue,
+                   ($0.meetings.first?.adjustedIntegerStartTime ?? -1) >= oldTimeAsTime {
+                    newValue = index
+                }
+                index += 1
+            }
+        }
+        
+        timeSlider.sliderControl?.value = Float (newValue)
     }
     
     /* ################################################################## */

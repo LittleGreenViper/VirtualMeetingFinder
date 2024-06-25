@@ -59,73 +59,21 @@ extension Array where Element == SwiftBMLSDK_MeetingLocalTimezoneCollection.Cach
 /**
  */
 class VirtualMeetingFinderTimeSlider: UIControl {
-    /* ################################################################################################################################## */
-    // MARK: Aggregator Class for Each Tick Mark
-    /* ################################################################################################################################## */
-    /**
-     */
-    class TickView: UIView {
-        /* ############################################################## */
-        /**
-         */
-        static let tickWidthInDisplayUnits = CGFloat(3)
-        
-        /* ############################################################## */
-        /**
-         */
-        private static let _tickColor = UIColor.gray.withAlphaComponent(0.15)
-
-        /* ############################################################## */
-        /**
-         */
-        var alignment: Int = 0
-
-        /* ############################################################## */
-        /**
-         */
-        var alignmentOffset = CGFloat(0)
-
-        /* ############################################################## */
-        /**
-         */
-        weak var tickMark: UIView?
-        
-        /* ############################################################## */
-        /**
-         Called when the pane is being laid out.
-         */
-        override func layoutSubviews() {
-            super.layoutSubviews()
-            
-            if nil == tickMark {
-                let tempTickMark = UIView()
-                addSubview(tempTickMark)
-                tickMark = tempTickMark
-                tempTickMark.translatesAutoresizingMaskIntoConstraints = false
-                tempTickMark.topAnchor.constraint(equalTo: topAnchor).isActive = true
-                tempTickMark.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-                tempTickMark.widthAnchor.constraint(equalToConstant: Self.tickWidthInDisplayUnits).isActive = true
-                tempTickMark.layer.cornerRadius = Self.tickWidthInDisplayUnits / 2
-                tempTickMark.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-                tempTickMark.backgroundColor = Self._tickColor
-            }
-        }
-    }
-
     /* ################################################################## */
     /**
      */
-    var meetings = [VirtualMeetingFinderViewController.MappedSet]() { didSet { setNeedsLayout() } }
+    var meetings = [VirtualMeetingFinderViewController.MappedSet]() {
+        didSet {
+            sliderControl?.minimumValue = 0
+            sliderControl?.maximumValue = max(0, Float(meetings.count - 1))
+            setNeedsLayout()
+        }
+    }
     
     /* ################################################################## */
     /**
      */
     weak var sliderControl: UISlider?
-    
-    /* ################################################################## */
-    /**
-     */
-    weak var tickContainer: UIStackView?
     
     /* ################################################################## */
     /**
@@ -191,7 +139,6 @@ extension VirtualMeetingFinderTimeSlider {
         sliderControl?.maximumValue = max(0, Float(meetings.count - 1))
         sliderControl?.value = Float(max(0, min((meetings.count - 1), Int(round(sliderControl?.value ?? 0)))))
 
-        addTicks()
         addValueLabel()
         
         sliderControl?.sendActions(for: .valueChanged)
@@ -238,34 +185,6 @@ extension VirtualMeetingFinderTimeSlider {
             stepper.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
             stepper.leftAnchor.constraint(equalTo: label.rightAnchor, constant: 4).isActive = true
             stepper.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     This adds all the "tick marks" to the slider.
-     */
-    func addTicks() {
-        tickContainer?.removeFromSuperview()
-        
-        guard !meetings.isEmpty,
-              let sliderControl = sliderControl,
-              let thumbImage = sliderControl.thumbImage(for: .normal)
-        else { return }
-        
-        let tempTick = UIStackView()
-        insertSubview(tempTick, at: 0)
-        tickContainer = tempTick
-        tempTick.translatesAutoresizingMaskIntoConstraints = false
-        tempTick.topAnchor.constraint(equalTo: sliderControl.topAnchor).isActive = true
-        tempTick.leftAnchor.constraint(equalTo: leftAnchor, constant: (thumbImage.size.width / 2) - TickView.tickWidthInDisplayUnits).isActive = true
-        tempTick.bottomAnchor.constraint(equalTo: sliderControl.bottomAnchor).isActive = true
-        tempTick.rightAnchor.constraint(equalTo: rightAnchor, constant: -((thumbImage.size.width / 2) - TickView.tickWidthInDisplayUnits)).isActive = true
-        tempTick.axis = .horizontal
-        tempTick.distribution = .equalCentering
-        
-        for _ in (0..<11) {
-            tempTick.addArrangedSubview(TickView())
         }
     }
 }
@@ -489,13 +408,25 @@ extension VirtualMeetingFinderViewController {
         else { return }
         
         var oldTimeAsTime = -1
+        var oldTimeForcedValue = -1
         
         if !timeSlider.meetings.isEmpty {
             let oldValue = Int(timeSlider.sliderControl?.value ?? 0)
+            if oldValue == 0 || oldValue == (timeSlider.meetings.count - 1) {
+                oldTimeForcedValue = oldValue
+            }
             oldTimeAsTime = timeSlider.meetings[oldValue].meetings.first?.adjustedIntegerStartTime ?? -1
         }
         
         timeSlider.meetings = mappedDataset[selectedWeekdayIndex]
+        
+        // All the funkiness below, is trying to keep the slider pointed to the correct time, or, just above it.
+        
+        guard -1 == oldTimeForcedValue else {
+            timeSlider.sliderControl?.value = Float (0 == oldTimeForcedValue ? 0 : timeSlider.sliderControl?.maximumValue ?? Float(timeSlider.meetings.count - 1))
+            timeSlider.sliderControl?.sendActions(for: .valueChanged)
+            return
+        }
         
         guard 0 <= oldTimeAsTime else { return }
         
@@ -526,6 +457,7 @@ extension VirtualMeetingFinderViewController {
         }
         
         timeSlider.sliderControl?.value = Float (newValue)
+        timeSlider.sliderControl?.sendActions(for: .valueChanged)
     }
     
     /* ################################################################## */

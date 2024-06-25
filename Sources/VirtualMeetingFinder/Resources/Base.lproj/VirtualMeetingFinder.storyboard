@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="U2c-9b-Eip">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,6 +9,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="QCo-5c-Mxs">
+            <objects>
+                <navigationController id="U2c-9b-Eip" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YqT-VR-VmE">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="CZU-qr-B3K"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tEA-xe-YZP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-770" y="-27"/>
+        </scene>
         <!--Virtual Meeting Finder View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -18,7 +34,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x1c-LJ-wrE">
-                                <rect key="frame" x="16" y="59" width="361" height="759"/>
+                                <rect key="frame" x="16" y="103" width="361" height="715"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ucf-Dn-cRn">
                                         <rect key="frame" x="16.666666666666657" y="0.0" width="328" height="32"/>
@@ -36,18 +52,57 @@
                                         </connections>
                                     </segmentedControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jbt-MB-zeP" customClass="VirtualMeetingFinderTimeSlider" customModule="VirtualMeetingFinder" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="43" width="361" height="64"/>
+                                        <rect key="frame" x="0.0" y="43" width="361" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="64" id="4h1-QT-BJS"/>
+                                            <constraint firstAttribute="height" constant="50" id="4h1-QT-BJS"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="controller" destination="BYZ-38-t0r" id="l7X-1Q-V1v"/>
                                         </connections>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wLc-od-eP8">
-                                        <rect key="frame" x="0.0" y="107" width="361" height="652"/>
+                                        <rect key="frame" x="0.0" y="101" width="361" height="614"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" id="eKk-PK-0mI" customClass="VirtualMeetingFinderTableCell" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="50" width="361" height="52.333332061767578"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eKk-PK-0mI" id="mjt-TZ-ak7">
+                                                    <rect key="frame" x="0.0" y="0.0" width="361" height="52.333332061767578"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DGs-Jx-ttC">
+                                                            <rect key="frame" x="0.0" y="2" width="48.333333333333336" height="48.333333333333336"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="48" id="Gz1-E6-Yol"/>
+                                                                <constraint firstAttribute="width" secondItem="DGs-Jx-ttC" secondAttribute="height" multiplier="1:1" id="RNL-LP-jLe"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4QS-hH-aMI">
+                                                            <rect key="frame" x="56.333333333333343" y="2" width="284.66666666666663" height="0.0"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="DGs-Jx-ttC" firstAttribute="leading" secondItem="mjt-TZ-ak7" secondAttribute="leading" id="10I-f3-lqL"/>
+                                                        <constraint firstItem="4QS-hH-aMI" firstAttribute="leading" secondItem="DGs-Jx-ttC" secondAttribute="trailing" constant="8" id="3Q2-Il-juW"/>
+                                                        <constraint firstItem="DGs-Jx-ttC" firstAttribute="top" secondItem="mjt-TZ-ak7" secondAttribute="top" constant="2" id="B9T-SA-cNd"/>
+                                                        <constraint firstItem="DGs-Jx-ttC" firstAttribute="centerY" secondItem="mjt-TZ-ak7" secondAttribute="centerY" id="Bk3-Hi-fVh"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="4QS-hH-aMI" secondAttribute="trailing" id="dfH-Hu-PS4"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DGs-Jx-ttC" secondAttribute="bottom" constant="2" id="dnr-Xq-Vqe"/>
+                                                        <constraint firstItem="4QS-hH-aMI" firstAttribute="top" secondItem="DGs-Jx-ttC" secondAttribute="top" id="r0o-x1-ZaN"/>
+                                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="4QS-hH-aMI" secondAttribute="bottom" constant="2" id="syx-ij-64R"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="nameLabel" destination="4QS-hH-aMI" id="lZo-qF-12f"/>
+                                                    <outlet property="typeImage" destination="DGs-Jx-ttC" id="C6n-YR-8y5"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
                                         <connections>
                                             <outlet property="dataSource" destination="BYZ-38-t0r" id="7QO-z9-KIN"/>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="H6f-Xj-EiR"/>
@@ -64,7 +119,7 @@
                                     <constraint firstItem="wLc-od-eP8" firstAttribute="leading" secondItem="x1c-LJ-wrE" secondAttribute="leading" id="QII-Wk-Hl5"/>
                                     <constraint firstItem="Jbt-MB-zeP" firstAttribute="leading" secondItem="x1c-LJ-wrE" secondAttribute="leading" id="RW9-CS-ZZJ"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ucf-Dn-cRn" secondAttribute="trailing" id="V6t-kc-5yi"/>
-                                    <constraint firstItem="wLc-od-eP8" firstAttribute="top" secondItem="Jbt-MB-zeP" secondAttribute="bottom" id="Y49-2V-cXM"/>
+                                    <constraint firstItem="wLc-od-eP8" firstAttribute="top" secondItem="Jbt-MB-zeP" secondAttribute="bottom" constant="8" id="Y49-2V-cXM"/>
                                     <constraint firstItem="Jbt-MB-zeP" firstAttribute="top" secondItem="ucf-Dn-cRn" secondAttribute="bottom" constant="12" id="cnm-sy-FYK"/>
                                     <constraint firstAttribute="trailing" secondItem="Jbt-MB-zeP" secondAttribute="trailing" id="zav-wu-e7B"/>
                                 </constraints>
@@ -97,17 +152,35 @@
                             <constraint firstItem="U5m-vQ-VRU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="uQ3-gU-PPq"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="4jP-lo-p4y"/>
                     <connections>
                         <outlet property="mainContainerView" destination="x1c-LJ-wrE" id="yd5-D9-u9o"/>
                         <outlet property="throbber" destination="U5m-vQ-VRU" id="4e5-Tk-SAS"/>
                         <outlet property="timeSlider" destination="Jbt-MB-zeP" id="xkC-hc-cP7"/>
                         <outlet property="valueTable" destination="wLc-od-eP8" id="RXN-cs-nRN"/>
                         <outlet property="weekdaySegmentedSwitch" destination="ucf-Dn-cRn" id="eQu-6l-bIR"/>
+                        <segue destination="P9w-wB-EO1" kind="show" identifier="inspect-meeting" id="PMV-il-Mo8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="110.68702290076335" y="-27.464788732394368"/>
+        </scene>
+        <!--Virtual Meeting Finder Meeting View Controller-->
+        <scene sceneID="Uwk-Hi-8Do">
+            <objects>
+                <viewController id="P9w-wB-EO1" customClass="VirtualMeetingFinderMeetingViewController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BVJ-y8-8wb">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="dGq-so-hyA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="HIN-Hl-qtA"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wxd-ro-Xyx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1010" y="-27"/>
         </scene>
     </scenes>
     <resources>

@@ -17,6 +17,7 @@
 		D493933C2C2616C7006438AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D493933B2C2616C7006438AE /* Base */; };
 		D493933E2C2616C8006438AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D493933D2C2616C8006438AE /* Assets.xcassets */; };
 		D49393412C2616C8006438AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D49393402C2616C8006438AE /* Base */; };
+		D4B69A342C2B162900D24DA6 /* VirtualMeetingFinderMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B69A332C2B162800D24DA6 /* VirtualMeetingFinderMeetingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		D4AD6A172C261BCA002E37F3 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		D4AD6A182C261BCA002E37F3 /* CODEOWNERS */ = {isa = PBXFileReference; lastKnownFileType = text; path = CODEOWNERS; sourceTree = "<group>"; };
 		D4AD6A192C261BCA002E37F3 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D4B69A332C2B162800D24DA6 /* VirtualMeetingFinderMeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualMeetingFinderMeetingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				D49393342C2616C7006438AE /* VirtualMeetingFinderAppDelegate.swift */,
 				D49393362C2616C7006438AE /* VirtualMeetingFinderSceneDelegate.swift */,
 				D49393382C2616C7006438AE /* VirtualMeetingFinderViewController.swift */,
+				D4B69A332C2B162800D24DA6 /* VirtualMeetingFinderMeetingViewController.swift */,
 				D4AD6A0F2C261AB7002E37F3 /* Resources */,
 				D4AD6A102C261ACB002E37F3 /* Meta */,
 			);
@@ -210,6 +213,7 @@
 			files = (
 				D49393392C2616C7006438AE /* VirtualMeetingFinderViewController.swift in Sources */,
 				D49393352C2616C7006438AE /* VirtualMeetingFinderAppDelegate.swift in Sources */,
+				D4B69A342C2B162900D24DA6 /* VirtualMeetingFinderMeetingViewController.swift in Sources */,
 				D49393372C2616C7006438AE /* VirtualMeetingFinderSceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

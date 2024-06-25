@@ -22,6 +22,41 @@ import SwiftBMLSDK
 import RVS_Generic_Swift_Toolbox
 
 /* ###################################################################################################################################### */
+// MARK: - Custom Table Cell View -
+/* ###################################################################################################################################### */
+/**
+ This provides one table cell for the main table of meetings.
+ */
+class VirtualMeetingFinderTableCell: UITableViewCell {
+    /* ################################################################## */
+    /**
+     */
+    static let reuseID = "VirtualMeetingFinderTableCell"
+
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var typeImage: UIImageView?
+
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var nameLabel: UILabel?
+}
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension VirtualMeetingFinderTableCell {
+    /* ################################################################## */
+    /**
+     */
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Abstraction for the Meeting Type -
 /* ###################################################################################################################################### */
 public typealias MeetingInstance = SwiftBMLSDK_Parser.Meeting
@@ -133,6 +168,7 @@ extension VirtualMeetingFinderTimeSlider {
             tempSlider.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
             tempSlider.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
             tempSlider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
+            tempSlider.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sliderTapped)))
         }
         
         sliderControl?.minimumValue = 0
@@ -220,6 +256,25 @@ extension VirtualMeetingFinderTimeSlider {
         sliderControl?.value = Float(intValue)
         sliderControl?.sendActions(for: .valueChanged)
     }
+    
+    /* ################################################################## */
+    /**
+     Called whenever the user taps on the slider.
+     
+     - parameter inTapGestureRecognizer: The gesture recognizer that executed the tap.
+     */
+    @objc func sliderTapped(_ inTapGestureRecognizer: UIGestureRecognizer) {
+        guard let sliderControl = sliderControl else { return }
+        
+        let pointTapped: CGPoint = inTapGestureRecognizer.location(in: self)
+
+        let sliderOriginX = sliderControl.frame.origin.x
+        let sliderWidth = sliderControl.frame.size.width
+        let newValue = Float((pointTapped.x - sliderOriginX) * CGFloat(sliderControl.maximumValue) / sliderWidth)
+
+        sliderControl.setValue(newValue, animated: true)
+        sliderControl.sendActions(for: .valueChanged)
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -245,6 +300,12 @@ class VirtualMeetingFinderViewController: UIViewController {
      The background transparency, for alternating rows.
      */
     private static let _alternateRowOpacity = CGFloat(0.05)
+    
+    /* ################################################################## */
+    /**
+     The segue ID, for inspecting individual meetings.
+     */
+    private static let _inspectMeetingSegueID = "inspect-meeting"
 
     /* ################################################################## */
     /**
@@ -353,6 +414,17 @@ extension VirtualMeetingFinderViewController {
         isThrobbing = true
         setUpWeekdayControl()
         findMeetings()
+    }
+    
+    /* ################################################################## */
+    /**
+     Called just before the view is to appear.
+     
+     - parameter inIsAnimated: True, if the appearance is animated.
+     */
+    override func viewWillAppear(_ inIsAnimated: Bool) {
+        super.viewWillAppear(inIsAnimated)
+        navigationController?.isNavigationBarHidden = true
     }
 }
 
@@ -535,6 +607,7 @@ extension VirtualMeetingFinderViewController {
      - parameter inMeeting: The meeting instance.
      */
     func selectMeeting(_ inMeeting: MeetingInstance) {
+        performSegue(withIdentifier: Self._inspectMeetingSegueID, sender: inMeeting)
     }
 }
 
@@ -552,16 +625,48 @@ extension VirtualMeetingFinderViewController: UITableViewDataSource {
     
     /* ################################################################## */
     /**
-     - parameter: The table view (ignored)
+     - parameter inTableView: The table view
      - parameter numberOfRowsInSection: The index path of the cell we want.
      */
-    func tableView(_: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
-        let ret = UITableViewCell()
+    func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
+        guard let ret = inTableView.dequeueReusableCell(withIdentifier: VirtualMeetingFinderTableCell.reuseID, for: inIndexPath) as? VirtualMeetingFinderTableCell else { return UITableViewCell() }
         
         if (0..<meetings.count).contains(inIndexPath.row) {
             let meeting = meetings[inIndexPath.row]
             
-            ret.textLabel?.text = meeting.name
+            ret.nameLabel?.text = meeting.name
+            
+            var imageName = "G"
+            
+            if meeting.hasInPerson,
+               meeting.hasVirtual,
+               !(meeting.virtualPhoneNumber ?? "").isEmpty,
+               !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
+                imageName = "V-P-M"
+            } else if meeting.hasInPerson,
+                meeting.hasVirtual,
+                !(meeting.virtualPhoneNumber ?? "").isEmpty {
+                    imageName = "P-M"
+            } else if meeting.hasInPerson,
+                      meeting.hasVirtual,
+                      !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
+                imageName = "V-M"
+            } else if !meeting.hasInPerson,
+                      meeting.hasVirtual,
+                      !(meeting.virtualPhoneNumber ?? "").isEmpty,
+                      !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
+                imageName = "V-P"
+            } else if !meeting.hasInPerson,
+                      meeting.hasVirtual,
+                      !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
+                imageName = "V"
+            } else if !meeting.hasInPerson,
+                      meeting.hasVirtual,
+                      !(meeting.virtualPhoneNumber ?? "").isEmpty {
+                imageName = "P"
+            }
+            
+            ret.typeImage?.image = UIImage(named: imageName)
         }
         
         ret.backgroundColor = (1 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : UIColor.clear

@@ -303,6 +303,12 @@ class VirtualMeetingFinderViewController: UIViewController {
     
     /* ################################################################## */
     /**
+     The background transparency, for alternating rows (In progress).
+     */
+    private static let _alternateRowOpacityIP = CGFloat(0.5)
+
+    /* ################################################################## */
+    /**
      The segue ID, for inspecting individual meetings.
      */
     private static let _inspectMeetingSegueID = "inspect-meeting"
@@ -443,6 +449,7 @@ extension VirtualMeetingFinderViewController {
             DispatchQueue.main.async {
                 self._virtualService = inCollection
                 self.isThrobbing = false
+                self.setToNow()
             }
         }
     }
@@ -573,6 +580,51 @@ extension VirtualMeetingFinderViewController {
             mappedDataset.append(daySet)
         }
     }
+    
+    /* ################################################################## */
+    /**
+     Sets the day and time to our current day/time.
+     */
+    func setToNow() {
+        let day = Calendar.current.component(.weekday, from: .now)
+        let hour = Calendar.current.component(.hour, from: .now)
+        let minute = Calendar.current.component(.minute, from: .now)
+        let firstWeekday = Calendar.current.firstWeekday
+        var currentDay =  (day - firstWeekday)
+        
+        if 0 > currentDay {
+            currentDay += 7
+        }
+        
+        guard (0..<7).contains(currentDay) else { return }
+        
+        weekdaySegmentedSwitch?.selectedSegmentIndex = currentDay
+        weekdaySegmentedSwitch?.sendActions(for: .valueChanged)
+        
+        guard !mappedDataset.isEmpty,
+              let timeSlider = timeSlider,
+              (1...mappedDataset.count).contains(day)
+        else { return }
+
+        timeSlider.meetings = mappedDataset[day - 1]
+        
+        var index = -1
+        var counter = 0
+        let compTime = (hour * 100) + minute
+        
+        timeSlider.meetings.forEach {
+            if let time = $0.meetings.first?.adjustedIntegerStartTime,
+               -1 == index,
+               time >= compTime {
+                index = counter
+            }
+            
+            counter += 1
+        }
+        
+        timeSlider.sliderControl?.setValue(Float(index), animated: true)
+        timeSlider.sliderControl?.sendActions(for: .valueChanged)
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -631,8 +683,10 @@ extension VirtualMeetingFinderViewController: UITableViewDataSource {
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         guard let ret = inTableView.dequeueReusableCell(withIdentifier: VirtualMeetingFinderTableCell.reuseID, for: inIndexPath) as? VirtualMeetingFinderTableCell else { return UITableViewCell() }
         
+        var backgroundColorToUse: UIColor? = (1 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : .clear
+
         if (0..<meetings.count).contains(inIndexPath.row) {
-            let meeting = meetings[inIndexPath.row]
+            var meeting = meetings[inIndexPath.row]
             
             ret.nameLabel?.text = meeting.name
             
@@ -666,10 +720,18 @@ extension VirtualMeetingFinderViewController: UITableViewDataSource {
                 imageName = "P"
             }
             
+            if meeting.isMeetingInProgress() {
+                backgroundColorToUse = UIColor(named: "InProgress")
+                
+                if (1 == inIndexPath.row % 2) {
+                    backgroundColorToUse = backgroundColorToUse?.withAlphaComponent(Self._alternateRowOpacityIP)
+                }
+            }
+            
             ret.typeImage?.image = UIImage(named: imageName)
         }
         
-        ret.backgroundColor = (1 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : UIColor.clear
+        ret.backgroundColor = backgroundColorToUse
 
         return ret
     }

@@ -73,25 +73,25 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DGs-Jx-ttC">
-                                                            <rect key="frame" x="0.0" y="2" width="48.333333333333336" height="48.333333333333336"/>
+                                                            <rect key="frame" x="4" y="2" width="48.333333333333336" height="48.333333333333336"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="48" id="Gz1-E6-Yol"/>
                                                                 <constraint firstAttribute="width" secondItem="DGs-Jx-ttC" secondAttribute="height" multiplier="1:1" id="RNL-LP-jLe"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4QS-hH-aMI">
-                                                            <rect key="frame" x="56.333333333333343" y="2" width="284.66666666666663" height="0.0"/>
+                                                            <rect key="frame" x="60.333333333333343" y="2" width="276.66666666666663" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="DGs-Jx-ttC" firstAttribute="leading" secondItem="mjt-TZ-ak7" secondAttribute="leading" id="10I-f3-lqL"/>
+                                                        <constraint firstItem="DGs-Jx-ttC" firstAttribute="leading" secondItem="mjt-TZ-ak7" secondAttribute="leading" constant="4" id="10I-f3-lqL"/>
                                                         <constraint firstItem="4QS-hH-aMI" firstAttribute="leading" secondItem="DGs-Jx-ttC" secondAttribute="trailing" constant="8" id="3Q2-Il-juW"/>
                                                         <constraint firstItem="DGs-Jx-ttC" firstAttribute="top" secondItem="mjt-TZ-ak7" secondAttribute="top" constant="2" id="B9T-SA-cNd"/>
                                                         <constraint firstItem="DGs-Jx-ttC" firstAttribute="centerY" secondItem="mjt-TZ-ak7" secondAttribute="centerY" id="Bk3-Hi-fVh"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="4QS-hH-aMI" secondAttribute="trailing" id="dfH-Hu-PS4"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="4QS-hH-aMI" secondAttribute="trailing" constant="4" id="dfH-Hu-PS4"/>
                                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DGs-Jx-ttC" secondAttribute="bottom" constant="2" id="dnr-Xq-Vqe"/>
                                                         <constraint firstItem="4QS-hH-aMI" firstAttribute="top" secondItem="DGs-Jx-ttC" secondAttribute="top" id="r0o-x1-ZaN"/>
                                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="4QS-hH-aMI" secondAttribute="bottom" constant="2" id="syx-ij-64R"/>

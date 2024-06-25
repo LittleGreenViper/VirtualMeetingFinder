@@ -37,7 +37,7 @@
                                 <rect key="frame" x="16" y="103" width="361" height="715"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ucf-Dn-cRn">
-                                        <rect key="frame" x="16.666666666666657" y="0.0" width="328" height="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="32"/>
                                         <segments>
                                             <segment title="Sun"/>
                                             <segment title="Mon"/>
@@ -46,6 +46,7 @@
                                             <segment title="Thu"/>
                                             <segment title="Fri"/>
                                             <segment title="Sat"/>
+                                            <segment title="SLUG-NOW"/>
                                         </segments>
                                         <connections>
                                             <action selector="weekdaySelected:" destination="BYZ-38-t0r" eventType="valueChanged" id="Mth-8q-3Ww"/>

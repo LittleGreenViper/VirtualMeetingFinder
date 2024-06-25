@@ -211,6 +211,7 @@ extension VirtualMeetingFinderTimeSlider {
             label.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
             
             let stepper = UIStepper()
+            stepper.autorepeat = true
             stepper.minimumValue = Double(sliderControl?.minimumValue ?? 0)
             stepper.maximumValue = Double(sliderControl?.maximumValue ?? 0)
             stepper.stepValue = (stepper.maximumValue - stepper.minimumValue) / Double(meetings.count)
@@ -338,6 +339,12 @@ class VirtualMeetingFinderViewController: UIViewController {
     
     /* ################################################################## */
     /**
+     Used for the "Pull to Refresh"
+     */
+    weak private var _refreshControl: UIRefreshControl?
+    
+    /* ################################################################## */
+    /**
      This contains all the visible items.
      */
     @IBOutlet weak var mainContainerView: UIView?
@@ -372,6 +379,7 @@ class VirtualMeetingFinderViewController: UIViewController {
      */
     var isThrobbing: Bool = false {
         didSet {
+            _refreshControl?.endRefreshing()
             if isThrobbing {
                 mainContainerView?.isHidden = true
                 throbber?.isHidden = false
@@ -417,6 +425,10 @@ extension VirtualMeetingFinderViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(findMeetings), for: .valueChanged)
+        _refreshControl = refresh
+        valueTable?.refreshControl = refresh
         isThrobbing = true
         setUpWeekdayControl()
         findMeetings()
@@ -441,8 +453,12 @@ extension VirtualMeetingFinderViewController {
     /* ################################################################## */
     /**
      Fetches all of the virtual meetings (hybrid and pure virtual).
+     
+     Marked ObjC, with an ignored parameter, so it can be called from pull to refresh.
+     
+     - parameter: ignored
      */
-    func findMeetings() {
+    @objc func findMeetings(_: Any! = nil) {
         isThrobbing = true
         _virtualService = nil
         _ = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: Self._queryInstance) { inCollection in
@@ -471,6 +487,8 @@ extension VirtualMeetingFinderViewController {
 
             weekdaySegmentedSwitch?.setTitle(weekdayName, forSegmentAt: index)
         }
+        
+        weekdaySegmentedSwitch?.setTitle(weekdaySegmentedSwitch?.titleForSegment(at: 7)?.localizedVariant, forSegmentAt: 7)
     }
     
     /* ################################################################## */
@@ -638,7 +656,11 @@ extension VirtualMeetingFinderViewController {
      - parameter inWeekdaySegmentedControl: The segmented control that was changed.
      */
     @IBAction func weekdaySelected(_ inWeekdaySegmentedControl: UISegmentedControl) {
-        setTimeSlider()
+        if 7 == inWeekdaySegmentedControl.selectedSegmentIndex {
+            setToNow()
+        } else {
+            setTimeSlider()
+        }
     }
     
     /* ################################################################## */

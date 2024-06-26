@@ -440,6 +440,10 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
      The "Throbber" view
      */
     @IBOutlet weak var throbber: UIView?
+    
+    var tableFood: [(sectionTitle: String, meetings: [MeetingInstance])] {
+        return [(sectionTitle: "", meetings: _meetings)]
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -776,11 +780,20 @@ extension VMF_MainSearchViewController {
 extension VMF_MainSearchViewController: UITableViewDataSource {
     /* ################################################################## */
     /**
+     Returns the number of sections to display.
+     
+     - parameter in: The table view (ignored)
+     - returns: The number of sections to display.
+     */
+    func numberOfSections(in: UITableView) -> Int { tableFood.count }
+    
+    /* ################################################################## */
+    /**
      - parameter: The table view (ignored)
-     - parameter numberOfRowsInSection: The 0-based section index (also ignored).
+     - parameter numberOfRowsInSection: The 0-based section index.
      - returns: The number of meetings to display.
      */
-    func tableView(_: UITableView, numberOfRowsInSection: Int) -> Int { _meetings.count }
+    func tableView(_: UITableView, numberOfRowsInSection inSectionIndex: Int) -> Int { tableFood[inSectionIndex].meetings.count }
     
     /* ################################################################## */
     /**
@@ -792,53 +805,52 @@ extension VMF_MainSearchViewController: UITableViewDataSource {
         
         var backgroundColorToUse: UIColor? = (1 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : .clear
 
-        if (0..<_meetings.count).contains(inIndexPath.row) {
-            var meeting = _meetings[inIndexPath.row]
-            let inProgress = meeting.isMeetingInProgress()
-            let startTime = meeting.getPreviousStartDate(isAdjusted: true).localizedTime
+        var meeting = tableFood[inIndexPath.section].meetings[inIndexPath.row]
+    
+        let inProgress = meeting.isMeetingInProgress()
+        let startTime = meeting.getPreviousStartDate(isAdjusted: true).localizedTime
 
-            ret.nameLabel?.text = meeting.name + (inProgress ? String(format: "SLUG-IN-PROGRESS-FORMAT".localizedVariant, startTime) : "")
-            
-            var imageName = "G"
-            
-            if meeting.hasInPerson,
-               meeting.hasVirtual,
-               !(meeting.virtualPhoneNumber ?? "").isEmpty,
-               !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
-                imageName = "V-P-M"
-            } else if meeting.hasInPerson,
-                meeting.hasVirtual,
-                !(meeting.virtualPhoneNumber ?? "").isEmpty {
-                    imageName = "P-M"
-            } else if meeting.hasInPerson,
-                      meeting.hasVirtual,
-                      !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
-                imageName = "V-M"
-            } else if !meeting.hasInPerson,
-                      meeting.hasVirtual,
-                      !(meeting.virtualPhoneNumber ?? "").isEmpty,
-                      !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
-                imageName = "V-P"
-            } else if !meeting.hasInPerson,
-                      meeting.hasVirtual,
-                      !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
-                imageName = "V"
-            } else if !meeting.hasInPerson,
-                      meeting.hasVirtual,
-                      !(meeting.virtualPhoneNumber ?? "").isEmpty {
-                imageName = "P"
-            }
-            
-            if inProgress {
-                backgroundColorToUse = UIColor(named: "InProgress")
-                
-                if (0 == inIndexPath.row % 2) {
-                    backgroundColorToUse = backgroundColorToUse?.withAlphaComponent(Self._alternateRowOpacityIP)
-                }
-            }
-            
-            ret.typeImage?.image = UIImage(named: imageName)
+        ret.nameLabel?.text = meeting.name + (inProgress ? String(format: "SLUG-IN-PROGRESS-FORMAT".localizedVariant, startTime) : "")
+        
+        var imageName = "G"
+        
+        if meeting.hasInPerson,
+           meeting.hasVirtual,
+           !(meeting.virtualPhoneNumber ?? "").isEmpty,
+           !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
+            imageName = "V-P-M"
+        } else if meeting.hasInPerson,
+            meeting.hasVirtual,
+            !(meeting.virtualPhoneNumber ?? "").isEmpty {
+                imageName = "P-M"
+        } else if meeting.hasInPerson,
+                  meeting.hasVirtual,
+                  !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
+            imageName = "V-M"
+        } else if !meeting.hasInPerson,
+                  meeting.hasVirtual,
+                  !(meeting.virtualPhoneNumber ?? "").isEmpty,
+                  !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
+            imageName = "V-P"
+        } else if !meeting.hasInPerson,
+                  meeting.hasVirtual,
+                  !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
+            imageName = "V"
+        } else if !meeting.hasInPerson,
+                  meeting.hasVirtual,
+                  !(meeting.virtualPhoneNumber ?? "").isEmpty {
+            imageName = "P"
         }
+        
+        if inProgress {
+            backgroundColorToUse = UIColor(named: "InProgress")
+            
+            if (0 == inIndexPath.row % 2) {
+                backgroundColorToUse = backgroundColorToUse?.withAlphaComponent(Self._alternateRowOpacityIP)
+            }
+        }
+        
+        ret.typeImage?.image = UIImage(named: imageName)
         
         ret.backgroundColor = backgroundColorToUse
 

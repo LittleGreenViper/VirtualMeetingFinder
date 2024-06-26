@@ -97,7 +97,7 @@ class VirtualMeetingFinderTimeSlider: UIControl {
     /* ################################################################## */
     /**
      */
-    var meetings = [VirtualMeetingFinderViewController.MappedSet]() {
+    var meetings = [VMF_MainSearchViewController.MappedSet]() {
         didSet {
             sliderControl?.minimumValue = 0
             sliderControl?.maximumValue = max(0, Float(meetings.count - 1))
@@ -119,11 +119,16 @@ class VirtualMeetingFinderTimeSlider: UIControl {
     /**
      */
     weak var valueStepper: UIStepper?
+    
+    /* ################################################################## */
+    /**
+     */
+    weak var resetButton: UIButton?
 
     /* ################################################################## */
     /**
      */
-    @IBOutlet weak var controller: VirtualMeetingFinderViewController?
+    @IBOutlet weak var controller: VMF_MainSearchViewController?
 }
 
 /* ###################################################################################################################################### */
@@ -191,14 +196,17 @@ extension VirtualMeetingFinderTimeSlider {
      */
     func addValueLabel() {
         if nil == valueLabel,
+           let sliderControl = sliderControl,
            !meetings.isEmpty {
             let containerView = UIView()
             
             addSubview(containerView)
             containerView.translatesAutoresizingMaskIntoConstraints = false
+            containerView.topAnchor.constraint(greaterThanOrEqualTo: sliderControl.bottomAnchor, constant: 4).isActive = true
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-            containerView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
             containerView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+            containerView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+            containerView.setContentCompressionResistancePriority(.required, for: .vertical)
 
             let label = UILabel()
             containerView.addSubview(label)
@@ -206,22 +214,33 @@ extension VirtualMeetingFinderTimeSlider {
             label.textAlignment = .center
             label.font = .systemFont(ofSize: 15)
             label.translatesAutoresizingMaskIntoConstraints = false
-            label.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-            label.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-            label.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-            
+            label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+            label.setContentHuggingPriority(.required, for: .horizontal)
+            label.setContentCompressionResistancePriority(.required, for: .horizontal)
+
             let stepper = UIStepper()
             stepper.autorepeat = true
-            stepper.minimumValue = Double(sliderControl?.minimumValue ?? 0)
-            stepper.maximumValue = Double(sliderControl?.maximumValue ?? 0)
+            stepper.minimumValue = Double(sliderControl.minimumValue)
+            stepper.maximumValue = Double(sliderControl.maximumValue)
             stepper.stepValue = (stepper.maximumValue - stepper.minimumValue) / Double(meetings.count)
             containerView.addSubview(stepper)
             stepper.translatesAutoresizingMaskIntoConstraints = false
             stepper.addTarget(self, action: #selector(stepperChanged), for: .valueChanged)
             valueStepper = stepper
+            stepper.leftAnchor.constraint(greaterThanOrEqualTo: label.rightAnchor, constant: 4).isActive = true
             stepper.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
-            stepper.leftAnchor.constraint(equalTo: label.rightAnchor, constant: 4).isActive = true
-            stepper.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+            stepper.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
+            stepper.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+
+            let reset = UIButton(type: .roundedRect)
+            containerView.addSubview(reset)
+            reset.addTarget(self, action: #selector(resetButtonHit), for: .touchUpInside)
+            reset.setTitle("SLUG-RESET".localizedVariant, for: .normal)
+            resetButton = reset
+            reset.translatesAutoresizingMaskIntoConstraints = false
+            reset.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 8).isActive = true
+            reset.rightAnchor.constraint(lessThanOrEqualTo: label.leftAnchor).isActive = true
+            reset.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
         }
     }
 }
@@ -260,6 +279,16 @@ extension VirtualMeetingFinderTimeSlider {
     
     /* ################################################################## */
     /**
+     Called whenever the reset button is hit
+     
+     - parameter: ignored
+     */
+    @objc func resetButtonHit(_: Any) {
+        controller?.setToNow()
+    }
+    
+    /* ################################################################## */
+    /**
      Called whenever the user taps on the slider.
      
      - parameter inTapGestureRecognizer: The gesture recognizer that executed the tap.
@@ -283,7 +312,7 @@ extension VirtualMeetingFinderTimeSlider {
 /* ###################################################################################################################################### */
 /**
  */
-class VirtualMeetingFinderViewController: UIViewController {
+class VMF_MainSearchViewController: UIViewController {
     /* ################################################################## */
     /**
      This is an alias for the tuple type we use for time-mapped meeting data.
@@ -335,7 +364,13 @@ class VirtualMeetingFinderViewController: UIViewController {
     /**
      This is an array of the time-mapped meeting data.
      */
-    private var mappedDataset = [[MappedSet]]()
+    private var _mappedDataset = [[MappedSet]]()
+
+    /* ################################################################## */
+    /**
+     This is set to true, if the "now" segment is selected.
+     */
+    private var _wasNow = false
     
     /* ################################################################## */
     /**
@@ -418,7 +453,7 @@ class VirtualMeetingFinderViewController: UIViewController {
 /* ###################################################################################################################################### */
 // MARK: Base Class Overrides
 /* ###################################################################################################################################### */
-extension VirtualMeetingFinderViewController {
+extension VMF_MainSearchViewController {
     /* ################################################################## */
     /**
      Called when the view hierarchy has loaded.
@@ -443,13 +478,14 @@ extension VirtualMeetingFinderViewController {
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
         navigationController?.isNavigationBarHidden = true
+        _wasNow = false
     }
 }
 
 /* ###################################################################################################################################### */
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
-extension VirtualMeetingFinderViewController {
+extension VMF_MainSearchViewController {
     /* ################################################################## */
     /**
      Fetches all of the virtual meetings (hybrid and pure virtual).
@@ -495,13 +531,13 @@ extension VirtualMeetingFinderViewController {
     /**
      This applies the selected days meetings to the slider, in a form it understands.
      */
-    func setTimeSlider() {
+    func setTimeSlider(forceNow inForceNow: Bool = false) {
         guard let weekdaySwitch = self.weekdaySegmentedSwitch else { return }
         
         let selectedWeekdayIndex = Self.unMapWeekday(weekdaySwitch.selectedSegmentIndex + 1) - 1
-        
+
         guard let timeSlider = timeSlider,
-              (0..<mappedDataset.count).contains(selectedWeekdayIndex)
+              (0..<_mappedDataset.count).contains(selectedWeekdayIndex)
         else { return }
         
         var oldTimeAsTime = -1
@@ -515,7 +551,7 @@ extension VirtualMeetingFinderViewController {
             oldTimeAsTime = timeSlider.meetings[oldValue].meetings.first?.adjustedIntegerStartTime ?? -1
         }
         
-        timeSlider.meetings = mappedDataset[selectedWeekdayIndex]
+        timeSlider.meetings = _mappedDataset[selectedWeekdayIndex]
         
         // All the funkiness below, is trying to keep the slider pointed to the correct time, or, just above it.
         
@@ -525,7 +561,14 @@ extension VirtualMeetingFinderViewController {
             return
         }
         
+        let hour = Calendar.current.component(.hour, from: .now)
+        let minute = Calendar.current.component(.minute, from: .now)
+
         guard 0 <= oldTimeAsTime else { return }
+        
+        if inForceNow {
+            oldTimeAsTime = hour * 100 + minute
+        }
         
         var newValue = 0
         var index = 0
@@ -562,7 +605,7 @@ extension VirtualMeetingFinderViewController {
      This maps the times for the selected day.
      */
     func mapData() {
-        mappedDataset = []
+        _mappedDataset = []
         
         guard let virtualService = _virtualService else { return }
 
@@ -595,7 +638,7 @@ extension VirtualMeetingFinderViewController {
                 daySet.append(MappedSet(time: string, meetings: meetings))
             }
             
-            mappedDataset.append(daySet)
+            _mappedDataset.append(daySet)
         }
     }
     
@@ -619,12 +662,12 @@ extension VirtualMeetingFinderViewController {
         weekdaySegmentedSwitch?.selectedSegmentIndex = currentDay
         weekdaySegmentedSwitch?.sendActions(for: .valueChanged)
         
-        guard !mappedDataset.isEmpty,
+        guard !_mappedDataset.isEmpty,
               let timeSlider = timeSlider,
-              (1...mappedDataset.count).contains(day)
+              (1..._mappedDataset.count).contains(day)
         else { return }
 
-        timeSlider.meetings = mappedDataset[day - 1]
+        timeSlider.meetings = _mappedDataset[day - 1]
         
         var index = -1
         var counter = 0
@@ -648,7 +691,27 @@ extension VirtualMeetingFinderViewController {
 /* ###################################################################################################################################### */
 // MARK: Callbacks
 /* ###################################################################################################################################### */
-extension VirtualMeetingFinderViewController {
+extension VMF_MainSearchViewController {
+    /* ################################################################## */
+    /**
+     Called when the user taps on the control.
+     
+     - parameter inTapGestureRecognizer: The tap gesture
+     */
+    @IBAction func weekdayTapped(_ inTapGestureRecognizer: UITapGestureRecognizer) {
+        guard let weekdaySwitch = weekdaySegmentedSwitch else { return }
+        let pointTapped: CGPoint = inTapGestureRecognizer.location(in: weekdaySwitch)
+        let lastx = weekdaySwitch.bounds.width - (weekdaySwitch.bounds.width / CGFloat(weekdaySwitch.numberOfSegments))
+        
+        if (weekdaySwitch.numberOfSegments - 1) == weekdaySwitch.selectedSegmentIndex,
+           pointTapped.x >= lastx {
+            inTapGestureRecognizer.cancelsTouchesInView = true
+            setToNow()
+        } else {
+            inTapGestureRecognizer.cancelsTouchesInView = false
+        }
+    }
+
     /* ################################################################## */
     /**
      Called when the user selects a particular weekday.
@@ -657,9 +720,17 @@ extension VirtualMeetingFinderViewController {
      */
     @IBAction func weekdaySelected(_ inWeekdaySegmentedControl: UISegmentedControl) {
         if 7 == inWeekdaySegmentedControl.selectedSegmentIndex {
-            setToNow()
+            timeSlider?.isHidden = true
+            _wasNow = true
+            guard let virtualService = _virtualService else { return }
+
+            meetings = virtualService.meetings.filter { $0.isInProgress }.map { $0.meeting }
+            
+            valueTable?.reloadData()
         } else {
-            setTimeSlider()
+            timeSlider?.isHidden = false
+            setTimeSlider(forceNow: _wasNow)
+            _wasNow = false
         }
     }
     
@@ -688,7 +759,7 @@ extension VirtualMeetingFinderViewController {
 /* ###################################################################################################################################### */
 // MARK: UITableViewDataSource Conformance
 /* ###################################################################################################################################### */
-extension VirtualMeetingFinderViewController: UITableViewDataSource {
+extension VMF_MainSearchViewController: UITableViewDataSource {
     /* ################################################################## */
     /**
      - parameter: The table view (ignored)
@@ -762,7 +833,7 @@ extension VirtualMeetingFinderViewController: UITableViewDataSource {
 /* ###################################################################################################################################### */
 // MARK: UITableViewDelegate Conformance
 /* ###################################################################################################################################### */
-extension VirtualMeetingFinderViewController: UITableViewDelegate {
+extension VMF_MainSearchViewController: UITableViewDelegate {
     /* ################################################################## */
     /**
      Called when a cell is selected. We will use this to open the user viewer.

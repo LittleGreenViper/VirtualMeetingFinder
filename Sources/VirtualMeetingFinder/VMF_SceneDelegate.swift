@@ -24,7 +24,7 @@ import UIKit
 /* ###################################################################################################################################### */
 /**
  */
-class VirtualMeetingFinderSceneDelegate: UIResponder, UIWindowSceneDelegate {
+class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
     /* ################################################################## */
     /**
      The window object for this scene.

@@ -11,13 +11,13 @@
 		D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */; };
 		D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */; };
 		D49349722C29A6D100C58390 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D49349702C29A6D100C58390 /* Localizable.strings */; };
-		D49393352C2616C7006438AE /* VirtualMeetingFinderAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49393342C2616C7006438AE /* VirtualMeetingFinderAppDelegate.swift */; };
-		D49393372C2616C7006438AE /* VirtualMeetingFinderSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49393362C2616C7006438AE /* VirtualMeetingFinderSceneDelegate.swift */; };
-		D49393392C2616C7006438AE /* VirtualMeetingFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49393382C2616C7006438AE /* VirtualMeetingFinderViewController.swift */; };
+		D49393352C2616C7006438AE /* VMF_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49393342C2616C7006438AE /* VMF_AppDelegate.swift */; };
+		D49393372C2616C7006438AE /* VMF_SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49393362C2616C7006438AE /* VMF_SceneDelegate.swift */; };
+		D49393392C2616C7006438AE /* VMF_MainSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49393382C2616C7006438AE /* VMF_MainSearchViewController.swift */; };
 		D493933C2C2616C7006438AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D493933B2C2616C7006438AE /* Base */; };
 		D493933E2C2616C8006438AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D493933D2C2616C8006438AE /* Assets.xcassets */; };
 		D49393412C2616C8006438AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D49393402C2616C8006438AE /* Base */; };
-		D4B69A342C2B162900D24DA6 /* VirtualMeetingFinderMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B69A332C2B162800D24DA6 /* VirtualMeetingFinderMeetingViewController.swift */; };
+		D4B69A342C2B162900D24DA6 /* VMF_MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B69A332C2B162800D24DA6 /* VMF_MeetingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,12 +25,12 @@
 		D47FBFA92C28CE5600C62945 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		D49349712C29A6D100C58390 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D49393312C2616C7006438AE /* VirtualMeetingFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualMeetingFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D49393342C2616C7006438AE /* VirtualMeetingFinderAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMeetingFinderAppDelegate.swift; sourceTree = "<group>"; };
-		D49393362C2616C7006438AE /* VirtualMeetingFinderSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMeetingFinderSceneDelegate.swift; sourceTree = "<group>"; };
-		D49393382C2616C7006438AE /* VirtualMeetingFinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMeetingFinderViewController.swift; sourceTree = "<group>"; };
-		D493933B2C2616C7006438AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/VirtualMeetingFinder.storyboard; sourceTree = "<group>"; };
+		D49393342C2616C7006438AE /* VMF_AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_AppDelegate.swift; sourceTree = "<group>"; };
+		D49393362C2616C7006438AE /* VMF_SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_SceneDelegate.swift; sourceTree = "<group>"; };
+		D49393382C2616C7006438AE /* VMF_MainSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_MainSearchViewController.swift; sourceTree = "<group>"; };
+		D493933B2C2616C7006438AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/VMF.storyboard; sourceTree = "<group>"; };
 		D493933D2C2616C8006438AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D49393402C2616C8006438AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/VirtualMeetingFinderLaunchScreen.storyboard; sourceTree = "<group>"; };
+		D49393402C2616C8006438AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/VMF_LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D49393422C2616C8006438AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4AD6A122C261B75002E37F3 /* Warnings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Warnings.xcconfig; path = Meta/Warnings.xcconfig; sourceTree = "<group>"; };
 		D4AD6A142C261BCA002E37F3 /* PRIVACY.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PRIVACY.md; sourceTree = "<group>"; };
@@ -39,7 +39,7 @@
 		D4AD6A172C261BCA002E37F3 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		D4AD6A182C261BCA002E37F3 /* CODEOWNERS */ = {isa = PBXFileReference; lastKnownFileType = text; path = CODEOWNERS; sourceTree = "<group>"; };
 		D4AD6A192C261BCA002E37F3 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		D4B69A332C2B162800D24DA6 /* VirtualMeetingFinderMeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualMeetingFinderMeetingViewController.swift; sourceTree = "<group>"; };
+		D4B69A332C2B162800D24DA6 /* VMF_MeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MeetingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,10 +84,10 @@
 		D49393332C2616C7006438AE /* VirtualMeetingFinder */ = {
 			isa = PBXGroup;
 			children = (
-				D49393342C2616C7006438AE /* VirtualMeetingFinderAppDelegate.swift */,
-				D49393362C2616C7006438AE /* VirtualMeetingFinderSceneDelegate.swift */,
-				D49393382C2616C7006438AE /* VirtualMeetingFinderViewController.swift */,
-				D4B69A332C2B162800D24DA6 /* VirtualMeetingFinderMeetingViewController.swift */,
+				D49393342C2616C7006438AE /* VMF_AppDelegate.swift */,
+				D49393362C2616C7006438AE /* VMF_SceneDelegate.swift */,
+				D49393382C2616C7006438AE /* VMF_MainSearchViewController.swift */,
+				D4B69A332C2B162800D24DA6 /* VMF_MeetingViewController.swift */,
 				D4AD6A0F2C261AB7002E37F3 /* Resources */,
 				D4AD6A102C261ACB002E37F3 /* Meta */,
 			);
@@ -98,8 +98,8 @@
 			isa = PBXGroup;
 			children = (
 				D493933D2C2616C8006438AE /* Assets.xcassets */,
-				D493933A2C2616C7006438AE /* VirtualMeetingFinder.storyboard */,
-				D493933F2C2616C8006438AE /* VirtualMeetingFinderLaunchScreen.storyboard */,
+				D493933A2C2616C7006438AE /* VMF.storyboard */,
+				D493933F2C2616C8006438AE /* VMF_LaunchScreen.storyboard */,
 				D49349702C29A6D100C58390 /* Localizable.strings */,
 			);
 			path = Resources;
@@ -211,10 +211,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D49393392C2616C7006438AE /* VirtualMeetingFinderViewController.swift in Sources */,
-				D49393352C2616C7006438AE /* VirtualMeetingFinderAppDelegate.swift in Sources */,
-				D4B69A342C2B162900D24DA6 /* VirtualMeetingFinderMeetingViewController.swift in Sources */,
-				D49393372C2616C7006438AE /* VirtualMeetingFinderSceneDelegate.swift in Sources */,
+				D49393392C2616C7006438AE /* VMF_MainSearchViewController.swift in Sources */,
+				D49393352C2616C7006438AE /* VMF_AppDelegate.swift in Sources */,
+				D4B69A342C2B162900D24DA6 /* VMF_MeetingViewController.swift in Sources */,
+				D49393372C2616C7006438AE /* VMF_SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,20 +229,20 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		D493933A2C2616C7006438AE /* VirtualMeetingFinder.storyboard */ = {
+		D493933A2C2616C7006438AE /* VMF.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D493933B2C2616C7006438AE /* Base */,
 			);
-			name = VirtualMeetingFinder.storyboard;
+			name = VMF.storyboard;
 			sourceTree = "<group>";
 		};
-		D493933F2C2616C8006438AE /* VirtualMeetingFinderLaunchScreen.storyboard */ = {
+		D493933F2C2616C8006438AE /* VMF_LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D49393402C2616C8006438AE /* Base */,
 			);
-			name = VirtualMeetingFinderLaunchScreen.storyboard;
+			name = VMF_LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -380,8 +380,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/VirtualMeetingFinder/Meta/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = VirtualMeetingFinderLaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = VirtualMeetingFinder;
+				INFOPLIST_KEY_UILaunchStoryboardName = VMF_LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = VMF;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -408,8 +408,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/VirtualMeetingFinder/Meta/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = VirtualMeetingFinderLaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = VirtualMeetingFinder;
+				INFOPLIST_KEY_UILaunchStoryboardName = VMF_LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = VMF;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

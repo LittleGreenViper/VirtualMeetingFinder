@@ -16,9 +16,9 @@
 					<key>UISceneConfigurationName</key>
 					<string>Default Configuration</string>
 					<key>UISceneDelegateClassName</key>
-					<string>$(PRODUCT_MODULE_NAME).VirtualMeetingFinderSceneDelegate</string>
+					<string>$(PRODUCT_MODULE_NAME).VMF_SceneDelegate</string>
 					<key>UISceneStoryboardFile</key>
-					<string>VirtualMeetingFinder</string>
+					<string>VMF</string>
 				</dict>
 			</array>
 		</dict>

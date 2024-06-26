@@ -18,38 +18,28 @@
  */
 
 import UIKit
+import SwiftBMLSDK
+import RVS_Generic_Swift_Toolbox
 
 /* ###################################################################################################################################### */
-// MARK: - Main App Delegate -
+// MARK: - Meeting Inspector View Controller -
 /* ###################################################################################################################################### */
 /**
  */
-@main
-class VirtualMeetingFinderAppDelegate: UIResponder, UIApplicationDelegate {
+class VMF_MeetingViewController: UIViewController { }
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension VMF_MeetingViewController {
     /* ################################################################## */
     /**
-     Called when the app has set itself up, and is about to start.
+     Called just before the view is to appear.
      
-     - parameter: The application (ignored)
-     - parameter didFinishLaunchingWithOptions: Launch options (also ignored).
-     - returns: True (always).
+     - parameter inIsAnimated: True, if the appearance is animated.
      */
-    func application(_: UIApplication, didFinishLaunchingWithOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool { true }
-
-    // MARK: UISceneSession Lifecycle
-
-    /* ################################################################## */
-    /**
-     Called to deliver the scene configuration for the connection.
-     
-     - parameter: The application (ignored)
-     - parameter configurationForConnecting: The session being connected.
-     - parameter options: Launch options (also ignored).
-     - returns: The default configuration for the scene.
-     */
-    func application(_: UIApplication, configurationForConnecting inConnectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: inConnectingSceneSession.role)
+    override func viewWillAppear(_ inIsAnimated: Bool) {
+        super.viewWillAppear(inIsAnimated)
+        navigationController?.isNavigationBarHidden = false
     }
 }

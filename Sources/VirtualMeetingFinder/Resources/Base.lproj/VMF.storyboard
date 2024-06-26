@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="U2c-9b-Eip">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="QCo-5c-Mxs">
+            <objects>
+                <navigationController id="U2c-9b-Eip" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YqT-VR-VmE">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="CZU-qr-B3K"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tEA-xe-YZP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-770" y="-27"/>
+        </scene>
+        <!--Main Search View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="VMF_MainSearchViewController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2sN-QZ-xyG">
+                                <rect key="frame" x="16" y="103" width="361" height="99"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ucf-Dn-cRn">
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="32"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="QIH-oc-YOv"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Sun"/>
+                                            <segment title="Mon"/>
+                                            <segment title="Tue"/>
+                                            <segment title="Wed"/>
+                                            <segment title="Thu"/>
+                                            <segment title="Fri"/>
+                                            <segment title="Sat"/>
+                                            <segment title="SLUG-NOW"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="weekdaySelected:" destination="BYZ-38-t0r" eventType="valueChanged" id="man-sA-wLh"/>
+                                            <outletCollection property="gestureRecognizers" destination="dJS-zX-97g" appends="YES" id="Yzf-Gp-7Mw"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jbt-MB-zeP" customClass="VirtualMeetingFinderTimeSlider" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="39" width="361" height="60"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="0Ty-xX-DuD"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="controller" destination="BYZ-38-t0r" id="l7X-1Q-V1v"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wLc-od-eP8">
+                                <rect key="frame" x="16" y="210" width="361" height="608"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" id="eKk-PK-0mI" customClass="VirtualMeetingFinderTableCell" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="361" height="56.333332061767578"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eKk-PK-0mI" id="mjt-TZ-ak7">
+                                            <rect key="frame" x="0.0" y="0.0" width="361" height="56.333332061767578"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DGs-Jx-ttC">
+                                                    <rect key="frame" x="4" y="4" width="48" height="48"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="48" id="Gz1-E6-Yol"/>
+                                                        <constraint firstAttribute="width" secondItem="DGs-Jx-ttC" secondAttribute="height" multiplier="1:1" id="RNL-LP-jLe"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4QS-hH-aMI">
+                                                    <rect key="frame" x="60" y="4" width="277" height="0.0"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="277" placeholder="YES" id="AVv-1d-a4k"/>
+                                                        <constraint firstAttribute="height" placeholder="YES" id="w2v-nz-r6D"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="DGs-Jx-ttC" firstAttribute="leading" secondItem="mjt-TZ-ak7" secondAttribute="leading" constant="4" id="10I-f3-lqL"/>
+                                                <constraint firstItem="4QS-hH-aMI" firstAttribute="leading" secondItem="DGs-Jx-ttC" secondAttribute="trailing" constant="8" id="3Q2-Il-juW"/>
+                                                <constraint firstItem="DGs-Jx-ttC" firstAttribute="top" secondItem="mjt-TZ-ak7" secondAttribute="top" constant="4" id="B9T-SA-cNd"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="4QS-hH-aMI" secondAttribute="trailing" constant="4" id="dfH-Hu-PS4"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DGs-Jx-ttC" secondAttribute="bottom" constant="4" id="dnr-Xq-Vqe"/>
+                                                <constraint firstItem="4QS-hH-aMI" firstAttribute="top" secondItem="DGs-Jx-ttC" secondAttribute="top" id="r0o-x1-ZaN"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="4QS-hH-aMI" secondAttribute="bottom" constant="4" id="syx-ij-64R"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="4QS-hH-aMI" id="lZo-qF-12f"/>
+                                            <outlet property="typeImage" destination="DGs-Jx-ttC" id="C6n-YR-8y5"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="7QO-z9-KIN"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="H6f-Xj-EiR"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U5m-vQ-VRU">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="5oK-AO-vY4">
+                                        <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                        <color key="color" systemColor="labelColor"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.49689382530120479" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="5oK-AO-vY4" firstAttribute="centerY" secondItem="U5m-vQ-VRU" secondAttribute="centerY" id="hb5-UC-6cl"/>
+                                    <constraint firstItem="5oK-AO-vY4" firstAttribute="centerX" secondItem="U5m-vQ-VRU" secondAttribute="centerX" id="tqF-ge-1dg"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="U5m-vQ-VRU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="05e-HT-zja"/>
+                            <constraint firstAttribute="bottom" secondItem="U5m-vQ-VRU" secondAttribute="bottom" id="CtO-Hx-j2B"/>
+                            <constraint firstAttribute="trailing" secondItem="U5m-vQ-VRU" secondAttribute="trailing" id="FEQ-Pk-rfr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wLc-od-eP8" secondAttribute="bottom" id="NLw-NE-vQC"/>
+                            <constraint firstItem="wLc-od-eP8" firstAttribute="top" secondItem="2sN-QZ-xyG" secondAttribute="bottom" constant="8" id="Rw7-3A-eEh"/>
+                            <constraint firstItem="2sN-QZ-xyG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="baC-xc-hjv"/>
+                            <constraint firstItem="wLc-od-eP8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="bc6-8X-jrR"/>
+                            <constraint firstItem="2sN-QZ-xyG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="gnu-PU-swH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wLc-od-eP8" secondAttribute="trailing" constant="16" id="he1-yq-1zC"/>
+                            <constraint firstItem="U5m-vQ-VRU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="uQ3-gU-PPq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2sN-QZ-xyG" secondAttribute="trailing" constant="16" id="w4n-gz-Ue8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="4jP-lo-p4y"/>
+                    <connections>
+                        <outlet property="mainContainerView" destination="2sN-QZ-xyG" id="8H6-r0-EA4"/>
+                        <outlet property="throbber" destination="U5m-vQ-VRU" id="4e5-Tk-SAS"/>
+                        <outlet property="timeSlider" destination="Jbt-MB-zeP" id="xkC-hc-cP7"/>
+                        <outlet property="valueTable" destination="wLc-od-eP8" id="RXN-cs-nRN"/>
+                        <outlet property="weekdaySegmentedSwitch" destination="ucf-Dn-cRn" id="eQu-6l-bIR"/>
+                        <segue destination="P9w-wB-EO1" kind="show" identifier="inspect-meeting" id="PMV-il-Mo8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="dJS-zX-97g" userLabel="Weekday Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="weekdayTapped:" destination="BYZ-38-t0r" id="hbm-xN-enA"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="110.68702290076335" y="-27.464788732394368"/>
+        </scene>
+        <!--Meeting View Controller-->
+        <scene sceneID="Uwk-Hi-8Do">
+            <objects>
+                <viewController id="P9w-wB-EO1" customClass="VMF_MeetingViewController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BVJ-y8-8wb">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="dGq-so-hyA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="HIN-Hl-qtA"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wxd-ro-Xyx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1010" y="-27"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

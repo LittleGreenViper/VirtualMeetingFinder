@@ -26,20 +26,4 @@ import RVS_Generic_Swift_Toolbox
 /* ###################################################################################################################################### */
 /**
  */
-class VMF_MeetingViewController: UIViewController { }
-
-/* ###################################################################################################################################### */
-// MARK: Base Class Overrides
-/* ###################################################################################################################################### */
-extension VMF_MeetingViewController {
-    /* ################################################################## */
-    /**
-     Called just before the view is to appear.
-     
-     - parameter inIsAnimated: True, if the appearance is animated.
-     */
-    override func viewWillAppear(_ inIsAnimated: Bool) {
-        super.viewWillAppear(inIsAnimated)
-        navigationController?.isNavigationBarHidden = false
-    }
-}
+class VMF_MeetingViewController: VMF_BaseViewController { }

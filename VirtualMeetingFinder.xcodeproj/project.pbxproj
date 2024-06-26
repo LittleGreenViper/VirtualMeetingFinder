@@ -10,6 +10,7 @@
 		D4398E642C28922D0001FAE3 /* SwiftBMLSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E632C28922D0001FAE3 /* SwiftBMLSDK */; };
 		D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */; };
 		D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */; };
+		D47C2F0E2C2C5E6A0048C91C /* VMF_BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */; };
 		D49349722C29A6D100C58390 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D49349702C29A6D100C58390 /* Localizable.strings */; };
 		D49393352C2616C7006438AE /* VMF_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49393342C2616C7006438AE /* VMF_AppDelegate.swift */; };
 		D49393372C2616C7006438AE /* VMF_SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49393362C2616C7006438AE /* VMF_SceneDelegate.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		D4398E6B2C2892BD0001FAE3 /* jazzy.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = jazzy.command; sourceTree = "<group>"; };
+		D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_BaseViewController.swift; sourceTree = "<group>"; };
 		D47FBFA92C28CE5600C62945 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		D49349712C29A6D100C58390 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D49393312C2616C7006438AE /* VirtualMeetingFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualMeetingFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +66,25 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		D47C2F0F2C2C5E750048C91C /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				D49393342C2616C7006438AE /* VMF_AppDelegate.swift */,
+				D49393362C2616C7006438AE /* VMF_SceneDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		D47C2F102C2C5E860048C91C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */,
+				D49393382C2616C7006438AE /* VMF_MainSearchViewController.swift */,
+				D4B69A332C2B162800D24DA6 /* VMF_MeetingViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		D49393282C2616C7006438AE = {
 			isa = PBXGroup;
 			children = (
@@ -84,10 +105,8 @@
 		D49393332C2616C7006438AE /* VirtualMeetingFinder */ = {
 			isa = PBXGroup;
 			children = (
-				D49393342C2616C7006438AE /* VMF_AppDelegate.swift */,
-				D49393362C2616C7006438AE /* VMF_SceneDelegate.swift */,
-				D49393382C2616C7006438AE /* VMF_MainSearchViewController.swift */,
-				D4B69A332C2B162800D24DA6 /* VMF_MeetingViewController.swift */,
+				D47C2F0F2C2C5E750048C91C /* AppDelegate */,
+				D47C2F102C2C5E860048C91C /* ViewControllers */,
 				D4AD6A0F2C261AB7002E37F3 /* Resources */,
 				D4AD6A102C261ACB002E37F3 /* Meta */,
 			);
@@ -213,6 +232,7 @@
 			files = (
 				D49393392C2616C7006438AE /* VMF_MainSearchViewController.swift in Sources */,
 				D49393352C2616C7006438AE /* VMF_AppDelegate.swift in Sources */,
+				D47C2F0E2C2C5E6A0048C91C /* VMF_BaseViewController.swift in Sources */,
 				D4B69A342C2B162900D24DA6 /* VMF_MeetingViewController.swift in Sources */,
 				D49393372C2616C7006438AE /* VMF_SceneDelegate.swift in Sources */,
 			);

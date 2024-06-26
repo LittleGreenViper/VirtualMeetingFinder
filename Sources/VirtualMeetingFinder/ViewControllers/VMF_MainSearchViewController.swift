@@ -27,7 +27,7 @@ import RVS_Generic_Swift_Toolbox
 /**
  This provides one table cell for the main table of meetings.
  */
-class VirtualMeetingFinderTableCell: UITableViewCell {
+class VMF_TableCell: UITableViewCell {
     /* ################################################################## */
     /**
      */
@@ -47,7 +47,7 @@ class VirtualMeetingFinderTableCell: UITableViewCell {
 /* ###################################################################################################################################### */
 // MARK: Base Class Overrides
 /* ###################################################################################################################################### */
-extension VirtualMeetingFinderTableCell {
+extension VMF_TableCell {
     /* ################################################################## */
     /**
      */
@@ -93,7 +93,7 @@ extension Array where Element == SwiftBMLSDK_MeetingLocalTimezoneCollection.Cach
 /* ###################################################################################################################################### */
 /**
  */
-class VirtualMeetingFinderTimeSlider: UIControl {
+class VMF_TimeSlider: UIControl {
     /* ################################################################## */
     /**
      */
@@ -134,7 +134,7 @@ class VirtualMeetingFinderTimeSlider: UIControl {
 /* ###################################################################################################################################### */
 // MARK: Computed Properties
 /* ###################################################################################################################################### */
-extension VirtualMeetingFinderTimeSlider {
+extension VMF_TimeSlider {
     /* ################################################################## */
     /**
      */
@@ -152,7 +152,7 @@ extension VirtualMeetingFinderTimeSlider {
 /* ###################################################################################################################################### */
 // MARK: Base Class Overrides
 /* ###################################################################################################################################### */
-extension VirtualMeetingFinderTimeSlider {
+extension VMF_TimeSlider {
     /* ################################################################## */
     /**
      Called when the control is being laid out.
@@ -189,7 +189,7 @@ extension VirtualMeetingFinderTimeSlider {
 /* ###################################################################################################################################### */
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
-extension VirtualMeetingFinderTimeSlider {
+extension VMF_TimeSlider {
     /* ################################################################## */
     /**
      This adds the value label and stepper.
@@ -248,7 +248,7 @@ extension VirtualMeetingFinderTimeSlider {
 /* ###################################################################################################################################### */
 // MARK: Callbacks
 /* ###################################################################################################################################### */
-extension VirtualMeetingFinderTimeSlider {
+extension VMF_TimeSlider {
     /* ################################################################## */
     /**
      Called whenever the slider control changes.
@@ -312,7 +312,7 @@ extension VirtualMeetingFinderTimeSlider {
 /* ###################################################################################################################################### */
 /**
  */
-class VMF_MainSearchViewController: UIViewController {
+class VMF_MainSearchViewController: VMF_TabBaseViewController {
     /* ################################################################## */
     /**
      This is an alias for the tuple type we use for time-mapped meeting data.
@@ -348,6 +348,12 @@ class VMF_MainSearchViewController: UIViewController {
      This is our query instance.
      */
     private static var _queryInstance = SwiftBMLSDK_Query(serverBaseURI: URL(string: "https://littlegreenviper.com/LGV_MeetingServer/Tests/entrypoint.php"))
+    
+    /* ################################################################## */
+    /**
+     This handles the meeting collection for this.
+     */
+    private var _meetings: [MeetingInstance] = []
 
     /* ################################################################## */
     /**
@@ -376,7 +382,26 @@ class VMF_MainSearchViewController: UIViewController {
     /**
      Used for the "Pull to Refresh"
      */
-    weak private var _refreshControl: UIRefreshControl?
+    private weak var _refreshControl: UIRefreshControl?
+
+    /* ################################################################## */
+    /**
+     This is set to true, if the "throbber" is shown (hiding everything else).
+     */
+    var isThrobbing: Bool = false {
+        didSet {
+            _refreshControl?.endRefreshing()
+            if isThrobbing {
+                mainContainerView?.isHidden = true
+                valueTable?.isHidden = true
+                throbber?.isHidden = false
+            } else {
+                throbber?.isHidden = true
+                mainContainerView?.isHidden = false
+                valueTable?.isHidden = false
+            }
+        }
+    }
     
     /* ################################################################## */
     /**
@@ -394,7 +419,7 @@ class VMF_MainSearchViewController: UIViewController {
     /**
      The slider control for the time of day.
      */
-    @IBOutlet weak var timeSlider: VirtualMeetingFinderTimeSlider?
+    @IBOutlet weak var timeSlider: VMF_TimeSlider?
     
     /* ################################################################## */
     /**
@@ -407,47 +432,6 @@ class VMF_MainSearchViewController: UIViewController {
      The "Throbber" view
      */
     @IBOutlet weak var throbber: UIView?
-    
-    /* ################################################################## */
-    /**
-     This is set to true, if the "throbber" is shown (hiding everything else).
-     */
-    var isThrobbing: Bool = false {
-        didSet {
-            _refreshControl?.endRefreshing()
-            if isThrobbing {
-                mainContainerView?.isHidden = true
-                throbber?.isHidden = false
-            } else {
-                throbber?.isHidden = true
-                mainContainerView?.isHidden = false
-            }
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     This converts the selected weekday into the 1 == Sun format needed for the meeting data.
-     */
-    static func unMapWeekday(_ inWeekdayIndex: Int) -> Int {
-        guard (1..<8).contains(inWeekdayIndex) else { return 0 }
-        
-        let firstDay = Calendar.current.firstWeekday
-        
-        var weekdayIndex = (firstDay + inWeekdayIndex) - 1
-        
-        if 7 < weekdayIndex {
-            weekdayIndex -= 7
-        }
-        
-        return weekdayIndex
-    }
-    
-    /* ################################################################## */
-    /**
-     This handles the meeting collection for this.
-     */
-    var meetings: [MeetingInstance] = []
 }
 
 /* ###################################################################################################################################### */
@@ -477,8 +461,30 @@ extension VMF_MainSearchViewController {
      */
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
-        navigationController?.isNavigationBarHidden = true
         _wasNow = false
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Static Functions
+/* ###################################################################################################################################### */
+extension VMF_MainSearchViewController {
+    /* ################################################################## */
+    /**
+     This converts the selected weekday into the 1 == Sun format needed for the meeting data.
+     */
+    static func unMapWeekday(_ inWeekdayIndex: Int) -> Int {
+        guard (1..<8).contains(inWeekdayIndex) else { return 0 }
+        
+        let firstDay = Calendar.current.firstWeekday
+        
+        var weekdayIndex = (firstDay + inWeekdayIndex) - 1
+        
+        if 7 < weekdayIndex {
+            weekdayIndex -= 7
+        }
+        
+        return weekdayIndex
     }
 }
 
@@ -486,26 +492,6 @@ extension VMF_MainSearchViewController {
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
 extension VMF_MainSearchViewController {
-    /* ################################################################## */
-    /**
-     Fetches all of the virtual meetings (hybrid and pure virtual).
-     
-     Marked ObjC, with an ignored parameter, so it can be called from pull to refresh.
-     
-     - parameter: ignored
-     */
-    @objc func findMeetings(_: Any! = nil) {
-        isThrobbing = true
-        _virtualService = nil
-        _ = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: Self._queryInstance) { inCollection in
-            DispatchQueue.main.async {
-                self._virtualService = inCollection
-                self.isThrobbing = false
-                self.setToNow()
-            }
-        }
-    }
-    
     /* ################################################################## */
     /**
      This sets the proper days into the weekday control.
@@ -694,6 +680,47 @@ extension VMF_MainSearchViewController {
 extension VMF_MainSearchViewController {
     /* ################################################################## */
     /**
+     Called when the user selects a time slot for the meetings.
+     
+     - parameter inSelectedIndex: The time control slider value, as an index.
+     */
+    func timeSliderChanged(_ inSelectedIndex: Int, slider inSlider: VMF_TimeSlider) {
+        _meetings = inSlider.selectedMeetings
+        valueTable?.reloadData()
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to show a meeting details page.
+     
+     - parameter inMeeting: The meeting instance.
+     */
+    func selectMeeting(_ inMeeting: MeetingInstance) {
+        performSegue(withIdentifier: Self._inspectMeetingSegueID, sender: inMeeting)
+    }
+
+    /* ################################################################## */
+    /**
+     Fetches all of the virtual meetings (hybrid and pure virtual).
+     
+     Marked ObjC, with an ignored parameter, so it can be called from pull to refresh.
+     
+     - parameter: ignored
+     */
+    @objc func findMeetings(_: Any! = nil) {
+        isThrobbing = true
+        _virtualService = nil
+        _ = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: Self._queryInstance) { inCollection in
+            DispatchQueue.main.async {
+                self._virtualService = inCollection
+                self.isThrobbing = false
+                self.setToNow()
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
      Called when the user taps on the control.
      
      - parameter inTapGestureRecognizer: The tap gesture
@@ -724,7 +751,7 @@ extension VMF_MainSearchViewController {
             _wasNow = true
             guard let virtualService = _virtualService else { return }
 
-            meetings = virtualService.meetings.filter { $0.isInProgress }.map { $0.meeting }
+            _meetings = virtualService.meetings.filter { $0.isInProgress }.map { $0.meeting }
             
             valueTable?.reloadData()
         } else {
@@ -732,27 +759,6 @@ extension VMF_MainSearchViewController {
             setTimeSlider(forceNow: _wasNow)
             _wasNow = false
         }
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when the user selects a time slot for the meetings.
-     
-     - parameter inSelectedIndex: The time control slider value, as an index.
-     */
-    func timeSliderChanged(_ inSelectedIndex: Int, slider inSlider: VirtualMeetingFinderTimeSlider) {
-        meetings = inSlider.selectedMeetings
-        valueTable?.reloadData()
-    }
-    
-    /* ################################################################## */
-    /**
-     Called to show a meeting details page.
-     
-     - parameter inMeeting: The meeting instance.
-     */
-    func selectMeeting(_ inMeeting: MeetingInstance) {
-        performSegue(withIdentifier: Self._inspectMeetingSegueID, sender: inMeeting)
     }
 }
 
@@ -766,7 +772,7 @@ extension VMF_MainSearchViewController: UITableViewDataSource {
      - parameter numberOfRowsInSection: The 0-based section index (also ignored).
      - returns: The number of meetings to display.
      */
-    func tableView(_: UITableView, numberOfRowsInSection: Int) -> Int { meetings.count }
+    func tableView(_: UITableView, numberOfRowsInSection: Int) -> Int { _meetings.count }
     
     /* ################################################################## */
     /**
@@ -774,12 +780,12 @@ extension VMF_MainSearchViewController: UITableViewDataSource {
      - parameter numberOfRowsInSection: The index path of the cell we want.
      */
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
-        guard let ret = inTableView.dequeueReusableCell(withIdentifier: VirtualMeetingFinderTableCell.reuseID, for: inIndexPath) as? VirtualMeetingFinderTableCell else { return UITableViewCell() }
+        guard let ret = inTableView.dequeueReusableCell(withIdentifier: VMF_TableCell.reuseID, for: inIndexPath) as? VMF_TableCell else { return UITableViewCell() }
         
         var backgroundColorToUse: UIColor? = (1 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : .clear
 
-        if (0..<meetings.count).contains(inIndexPath.row) {
-            var meeting = meetings[inIndexPath.row]
+        if (0..<_meetings.count).contains(inIndexPath.row) {
+            var meeting = _meetings[inIndexPath.row]
             
             ret.nameLabel?.text = meeting.name
             
@@ -843,7 +849,7 @@ extension VMF_MainSearchViewController: UITableViewDelegate {
      - returns: nil (all the time).
      */
     func tableView(_: UITableView, willSelectRowAt inIndexPath: IndexPath) -> IndexPath? {
-        let meeting = meetings[inIndexPath.row]
+        let meeting = _meetings[inIndexPath.row]
         selectMeeting(meeting)
         return nil
     }

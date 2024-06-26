@@ -48,6 +48,7 @@ extension VMF_BaseViewController {
 // MARK: - Base View Controller for Tab Roots -
 /* ###################################################################################################################################### */
 /**
+ This class should be used as the base class for the "root" view controller for each tab.
  */
 class VMF_TabBaseViewController: VMF_BaseViewController { }
 
@@ -64,5 +65,27 @@ extension VMF_TabBaseViewController {
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
         navigationController?.isNavigationBarHidden = true
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Custom Tab Bar Controller -
+/* ###################################################################################################################################### */
+/**
+ */
+class VMF_TabBarController: UITabBarController { }
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension VMF_TabBarController {
+    /* ################################################################## */
+    /**
+     Called after the resources have been loaded and resolved.
+     */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tabBar.items?.forEach { $0.title = $0.title?.localizedVariant }
     }
 }

@@ -398,13 +398,15 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
         didSet {
             _refreshControl?.endRefreshing()
             if isThrobbing {
-                mainContainerView?.isHidden = true
+                tabBarController?.tabBar.isHidden = true
                 valueTable?.isHidden = true
+                mainContainerView?.isHidden = true
                 throbber?.isHidden = false
             } else {
                 throbber?.isHidden = true
                 mainContainerView?.isHidden = false
                 valueTable?.isHidden = false
+                tabBarController?.tabBar.isHidden = false
             }
         }
     }
@@ -792,8 +794,10 @@ extension VMF_MainSearchViewController: UITableViewDataSource {
 
         if (0..<_meetings.count).contains(inIndexPath.row) {
             var meeting = _meetings[inIndexPath.row]
-            
-            ret.nameLabel?.text = meeting.name
+            let inProgress = meeting.isMeetingInProgress()
+            let startTime = meeting.getPreviousStartDate(isAdjusted: true).localizedTime
+
+            ret.nameLabel?.text = meeting.name + (inProgress ? String(format: "SLUG-IN-PROGRESS-FORMAT".localizedVariant, startTime) : "")
             
             var imageName = "G"
             
@@ -825,10 +829,10 @@ extension VMF_MainSearchViewController: UITableViewDataSource {
                 imageName = "P"
             }
             
-            if meeting.isMeetingInProgress() {
+            if inProgress {
                 backgroundColorToUse = UIColor(named: "InProgress")
                 
-                if (1 == inIndexPath.row % 2) {
+                if (0 == inIndexPath.row % 2) {
                     backgroundColorToUse = backgroundColorToUse?.withAlphaComponent(Self._alternateRowOpacityIP)
                 }
             }

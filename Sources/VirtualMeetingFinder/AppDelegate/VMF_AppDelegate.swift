@@ -20,6 +20,54 @@
 import UIKit
 
 /* ###################################################################################################################################### */
+// MARK: - Date Extension for Localized Strings -
+/* ###################################################################################################################################### */
+extension Date {
+    /* ################################################################## */
+    /**
+     Localizes the time (not the date).
+     */
+    var localizedTime: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .none
+
+        var ret = ""
+        
+        let hour = Calendar.current.component(.hour, from: self)
+        let minute = Calendar.current.component(.minute, from: self)
+
+        if let am = dateFormatter.amSymbol {
+            if 0 == hour {
+                if 0 == minute {
+                    ret = "SLUG-MIDNIGHT-TIME".localizedVariant
+                } else {
+                    ret = String(format: "12:%02d %@", minute, am)
+                }
+            } else if 12 == hour,
+                      0 == minute {
+                ret = "SLUG-NOON-TIME".localizedVariant
+            } else {
+                ret = dateFormatter.string(from: self)
+            }
+        } else {
+            if 12 == hour,
+               0 == minute {
+                ret = "SLUG-NOON-TIME".localizedVariant
+            } else if 0 == hour,
+                      0 == minute {
+                ret = "SLUG-MIDNIGHT-TIME".localizedVariant
+            } else {
+                ret = String(format: "%d:%02d", hour, minute)
+            }
+        }
+        
+        return ret
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Main App Delegate -
 /* ###################################################################################################################################### */
 /**

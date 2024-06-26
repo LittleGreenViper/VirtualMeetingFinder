@@ -4,16 +4,19 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--SLUG-WEEKDAY-SEARCH-->
         <scene sceneID="QCo-5c-Mxs">
             <objects>
                 <navigationController id="U2c-9b-Eip" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Tdm-it-zYg"/>
+                    <tabBarItem key="tabBarItem" title="SLUG-WEEKDAY-SEARCH" id="Tdm-it-zYg">
+                        <imageReference key="image" image="magnifyingglass" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YqT-VR-VmE">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -24,9 +27,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tEA-xe-YZP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-770" y="-27"/>
+            <point key="canvasLocation" x="111" y="-748"/>
         </scene>
-        <!--Main Search View Controller-->
+        <!--SLUG-WEEKDAY-SEARCH-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="VMF_MainSearchViewController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
@@ -35,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2sN-QZ-xyG">
-                                <rect key="frame" x="16" y="103" width="361" height="99"/>
+                                <rect key="frame" x="16" y="59" width="361" height="99"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ucf-Dn-cRn">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="32"/>
@@ -71,7 +74,7 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wLc-od-eP8">
-                                <rect key="frame" x="16" y="210" width="361" height="559"/>
+                                <rect key="frame" x="16" y="166" width="361" height="603"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" id="eKk-PK-0mI" customClass="VMF_TableCell" customModule="VirtualMeetingFinder" customModuleProvider="target">
@@ -151,6 +154,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2sN-QZ-xyG" secondAttribute="trailing" constant="16" id="w4n-gz-Ue8"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="SLUG-WEEKDAY-SEARCH" id="9JH-o6-AH8">
+                        <imageReference key="image" image="magnifyingglass" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="4jP-lo-p4y"/>
                     <connections>
                         <outlet property="mainContainerView" destination="2sN-QZ-xyG" id="8H6-r0-EA4"/>
@@ -173,26 +179,26 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Ngb-7v-9dc">
             <objects>
-                <tabBarController id="h3C-G3-d8N" sceneMemberID="viewController">
+                <tabBarController id="h3C-G3-d8N" customClass="VMF_TabBarController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3co-Zh-mDK">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="U2c-9b-Eip" kind="relationship" relationship="viewControllers" id="yDb-0P-g7n"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="JRN-bM-4zR"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uNQ-6W-t3u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1691" y="-27"/>
+            <point key="canvasLocation" x="-761" y="-27"/>
         </scene>
         <!--Meeting View Controller-->
         <scene sceneID="Uwk-Hi-8Do">
             <objects>
                 <viewController id="P9w-wB-EO1" customClass="VMF_MeetingViewController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BVJ-y8-8wb">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="dGq-so-hyA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -204,7 +210,11 @@
             <point key="canvasLocation" x="1010" y="-27"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="JRN-bM-4zR"/>
+    </inferredMetricsTieBreakers>
     <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

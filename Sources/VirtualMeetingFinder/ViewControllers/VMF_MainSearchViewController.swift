@@ -22,41 +22,6 @@ import SwiftBMLSDK
 import RVS_Generic_Swift_Toolbox
 
 /* ###################################################################################################################################### */
-// MARK: - Custom Table Cell View -
-/* ###################################################################################################################################### */
-/**
- This provides one table cell for the main table of meetings.
- */
-class VMF_TableCell: UITableViewCell {
-    /* ################################################################## */
-    /**
-     */
-    static let reuseID = "VirtualMeetingFinderTableCell"
-
-    /* ################################################################## */
-    /**
-     */
-    @IBOutlet weak var typeImage: UIImageView?
-
-    /* ################################################################## */
-    /**
-     */
-    @IBOutlet weak var nameLabel: UILabel?
-}
-
-/* ###################################################################################################################################### */
-// MARK: Base Class Overrides
-/* ###################################################################################################################################### */
-extension VMF_TableCell {
-    /* ################################################################## */
-    /**
-     */
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-}
-
-/* ###################################################################################################################################### */
 // MARK: - Abstraction for the Meeting Type -
 /* ###################################################################################################################################### */
 public typealias MeetingInstance = SwiftBMLSDK_Parser.Meeting
@@ -80,22 +45,49 @@ extension MeetingInstance {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Array Extension for Meetings -
+// MARK: - Custom Table Cell View -
 /* ###################################################################################################################################### */
-extension Array where Element == SwiftBMLSDK_MeetingLocalTimezoneCollection.CachedMeeting {
-    func meetingsOnWeekday(weekdayIndex inWeekdayIndex: Int) -> [SwiftBMLSDK_MeetingLocalTimezoneCollection.CachedMeeting] {
-        filter { $0.meeting.weekday == inWeekdayIndex }
-    }
+/**
+ This provides one table cell for the main table of meetings.
+ */
+class VMF_TableCell: UITableViewCell {
+    /* ################################################################## */
+    /**
+     This is the reuse ID for the table cell.
+     */
+    static let reuseID = "VirtualMeetingFinderTableCell"
+
+    /* ################################################################## */
+    /**
+     This has an image that denotes what type of meeting we have.
+     */
+    @IBOutlet weak var typeImage: UIImageView?
+
+    /* ################################################################## */
+    /**
+     This is the meeting name.
+     */
+    @IBOutlet weak var nameLabel: UILabel?
 }
 
 /* ###################################################################################################################################### */
 // MARK: - Special Slider Setup for Times -
 /* ###################################################################################################################################### */
 /**
+ This is a conglomerate tool, containing a slider, a stepper, a label, and a button.
+ 
+ It works as a single panel in the UI, and allows the user to select a time slot for meetings.
  */
 class VMF_TimeSlider: UIControl {
     /* ################################################################## */
     /**
+     The image to use for our thumb.
+     */
+    static var thumbImage = UIImage(systemName: "arrowtriangle.down.fill")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))
+    
+    /* ################################################################## */
+    /**
+     This just contains the set of meetings to be used by this slider.
      */
     var meetings = [VMF_MainSearchViewController.MappedSet]() {
         didSet {
@@ -107,26 +99,37 @@ class VMF_TimeSlider: UIControl {
     
     /* ################################################################## */
     /**
+     This is the container for the lower part of the slider aggregate.
      */
-    weak var sliderControl: UISlider?
+    weak var container: UIView?
     
     /* ################################################################## */
     /**
+     This is the actual slider control.
+     */
+    weak var sliderControl: UISlider?
+
+    /* ################################################################## */
+    /**
+     The label that displays the currently selected time slot.
      */
     weak var valueLabel: UILabel?
     
     /* ################################################################## */
     /**
+     The stepper, to step through the values, one by one.
      */
     weak var valueStepper: UIStepper?
     
     /* ################################################################## */
     /**
+     A button to reset to today/now.
      */
     weak var resetButton: UIButton?
 
     /* ################################################################## */
     /**
+     This is the main view controller that "owns" this instance.
      */
     @IBOutlet weak var controller: VMF_MainSearchViewController?
 }
@@ -137,6 +140,7 @@ class VMF_TimeSlider: UIControl {
 extension VMF_TimeSlider {
     /* ################################################################## */
     /**
+     This is the subset of the meeting set that correspond to the selected time.
      */
     var selectedMeetings: [MeetingInstance] {
         guard let value = sliderControl?.value,
@@ -161,19 +165,19 @@ extension VMF_TimeSlider {
         super.layoutSubviews()
         
         if nil == sliderControl,
-           let thumbImage = UIImage(systemName: "arrowtriangle.down.fill")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large)) {
+           let thumbImage = Self.thumbImage {
             let tempSlider = UISlider()
             tempSlider.setThumbImage(thumbImage, for: .normal)
             tempSlider.maximumTrackTintColor = .systemGray4
             tempSlider.minimumTrackTintColor = .systemGray4
+            tempSlider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
+            tempSlider.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sliderTapped)))
             addSubview(tempSlider)
             sliderControl = tempSlider
             tempSlider.translatesAutoresizingMaskIntoConstraints = false
             tempSlider.topAnchor.constraint(equalTo: topAnchor).isActive = true
             tempSlider.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
             tempSlider.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-            tempSlider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
-            tempSlider.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sliderTapped)))
         }
         
         sliderControl?.minimumValue = 0
@@ -195,28 +199,26 @@ extension VMF_TimeSlider {
      This adds the value label and stepper.
      */
     func addValueLabel() {
-        if nil == valueLabel,
+        if nil == container,
            let sliderControl = sliderControl,
            !meetings.isEmpty {
             let containerView = UIView()
-            
             addSubview(containerView)
+            container = containerView
             containerView.translatesAutoresizingMaskIntoConstraints = false
             containerView.topAnchor.constraint(greaterThanOrEqualTo: sliderControl.bottomAnchor, constant: 4).isActive = true
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
             containerView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
             containerView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-            containerView.setContentCompressionResistancePriority(.required, for: .vertical)
 
             let label = UILabel()
-            containerView.addSubview(label)
-            valueLabel = label
             label.textAlignment = .center
             label.font = .systemFont(ofSize: 15)
+            containerView.addSubview(label)
+            valueLabel = label
             label.translatesAutoresizingMaskIntoConstraints = false
             label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
             label.setContentHuggingPriority(.required, for: .horizontal)
-            label.setContentCompressionResistancePriority(.required, for: .horizontal)
 
             let stepper = UIStepper()
             stepper.autorepeat = true
@@ -224,23 +226,26 @@ extension VMF_TimeSlider {
             stepper.maximumValue = Double(sliderControl.maximumValue)
             stepper.stepValue = (stepper.maximumValue - stepper.minimumValue) / Double(meetings.count)
             containerView.addSubview(stepper)
+            valueStepper = stepper
             stepper.translatesAutoresizingMaskIntoConstraints = false
             stepper.addTarget(self, action: #selector(stepperChanged), for: .valueChanged)
-            valueStepper = stepper
             stepper.leftAnchor.constraint(greaterThanOrEqualTo: label.rightAnchor, constant: 4).isActive = true
             stepper.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
             stepper.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
             stepper.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
 
             let reset = UIButton(type: .roundedRect)
-            containerView.addSubview(reset)
             reset.addTarget(self, action: #selector(resetButtonHit), for: .touchUpInside)
             reset.setTitle("SLUG-RESET".localizedVariant, for: .normal)
+            containerView.addSubview(reset)
             resetButton = reset
             reset.translatesAutoresizingMaskIntoConstraints = false
             reset.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 8).isActive = true
             reset.rightAnchor.constraint(lessThanOrEqualTo: label.leftAnchor).isActive = true
             reset.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
+        } else if meetings.isEmpty {
+            container?.removeFromSuperview()
+            container = nil
         }
     }
 }
@@ -311,6 +316,7 @@ extension VMF_TimeSlider {
 // MARK: - Main View Controller -
 /* ###################################################################################################################################### */
 /**
+ This is the main view controller for the weekday/time selector tab.
  */
 class VMF_MainSearchViewController: VMF_TabBaseViewController {
     /* ################################################################## */

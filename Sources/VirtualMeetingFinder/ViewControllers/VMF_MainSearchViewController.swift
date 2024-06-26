@@ -628,7 +628,7 @@ extension VMF_MainSearchViewController {
             
             for timeInst in times.keys.sorted() {
                 let meetings = meetings.filter { $0.adjustedIntegerStartTime == timeInst }
-                let string = (1200 == timeInst) ? "SLUG-NOON".localizedVariant : (2359 == timeInst) ? "SLUG-MIDNIGHT".localizedVariant : meetings[0].timeString
+                let string = (1200 == timeInst) ? "SLUG-NOON-TIME".localizedVariant : (2359 == timeInst) ? "SLUG-MIDNIGHT-TIME".localizedVariant : meetings[0].timeString
                 daySet.append(MappedSet(time: string, meetings: meetings))
             }
             

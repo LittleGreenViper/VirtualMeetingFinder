@@ -39,8 +39,8 @@ extension Date {
         let minute = Calendar.current.component(.minute, from: self)
 
         if let am = dateFormatter.amSymbol {
-            if 0 == hour {
-                if 0 == minute {
+            if 23 == hour {
+                if 59 == minute {
                     ret = "SLUG-MIDNIGHT-TIME".localizedVariant
                 } else {
                     ret = String(format: "12:%02d %@", minute, am)
@@ -55,8 +55,8 @@ extension Date {
             if 12 == hour,
                0 == minute {
                 ret = "SLUG-NOON-TIME".localizedVariant
-            } else if 0 == hour,
-                      0 == minute {
+            } else if 23 == hour,
+                      59 == minute {
                 ret = "SLUG-MIDNIGHT-TIME".localizedVariant
             } else {
                 ret = String(format: "%d:%02d", hour, minute)

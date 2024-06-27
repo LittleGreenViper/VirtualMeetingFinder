@@ -331,6 +331,32 @@ extension VMF_TimeSlider {
  This is the main view controller for the weekday/time selector tab.
  */
 class VMF_MainSearchViewController: VMF_TabBaseViewController {
+    /* ################################################################################################################################## */
+    // MARK: Meeting Table Sort Types
+    /* ################################################################################################################################## */
+    /**
+     This is the main view controller for the weekday/time selector tab.
+     */
+    enum SortType: Int {
+        /* ############################################################## */
+        /**
+         The sort is via the timezone name.
+         */
+        case timeZone
+        
+        /* ############################################################## */
+        /**
+         The sort is via the meeting type.
+         */
+        case type
+        
+        /* ############################################################## */
+        /**
+         The sort is via the meeting name.
+         */
+        case name
+    }
+    
     /* ################################################################## */
     /**
      This is an alias for the tuple type we use for time-mapped meeting data.
@@ -505,10 +531,7 @@ extension VMF_MainSearchViewController {
             var ret = false
             
             if 7 == weekdaySegmentedSwitch?.selectedSegmentIndex {
-                let hour = Calendar.current.component(.hour, from: .now)
-                let minute = Calendar.current.component(.minute, from: .now)
-                
-                let currentIntegerTime = hour * 100 + minute
+                let currentIntegerTime = Calendar.current.component(.hour, from: .now) * 100 + Calendar.current.component(.minute, from: .now)
                 var aTime = a.adjustedIntegerStartTime
                 var bTime = b.adjustedIntegerStartTime
 
@@ -520,30 +543,18 @@ extension VMF_MainSearchViewController {
                     bTime -= 2400
                 }
                 
-                ret = aTime < bTime
-            } else if let sortType = sortSegmentedSwitch?.selectedSegmentIndex {
-                switch sortType {
-                case 0:
-                    ret = Self.getMeetingTimeZone(a) < Self.getMeetingTimeZone(b)
+                ret = aTime < bTime ? true : Self.getMeetingTimeZone(a) < Self.getMeetingTimeZone(b) ? true : a.sortableMeetingType < b.sortableMeetingType ? true : a.name < b.name
+            } else if let sortType = sortSegmentedSwitch?.selectedSegmentIndex,
+                      let sortBy = SortType(rawValue: sortType) {
+                switch sortBy {
+                case .timeZone:
+                    ret = Self.getMeetingTimeZone(a) < Self.getMeetingTimeZone(b) ? true : a.sortableMeetingType < b.sortableMeetingType ? true : a.name < b.name
                     
-                case 1:
-                    if .hybrid == a.meetingType,
-                       .hybrid != b.meetingType {
-                        ret = false
-                    } else if .hybrid == b.meetingType,
-                              .hybrid != a.meetingType {
-                        ret = true
-                    } else if .hybrid == a.meetingType || .hybrid == b.meetingType {
-                        ret = nil != a.inPersonAddress && nil == b.inPersonAddress ? true : nil != a.virtualURL && nil == b.virtualURL ? true : nil != a.virtualPhoneNumber && nil == b.virtualPhoneNumber
-                    } else {
-                        ret = nil != a.virtualURL && nil == b.virtualURL ? true : nil != a.virtualPhoneNumber && nil == b.virtualPhoneNumber
-                    }
+                case .type:
+                    ret = a.sortableMeetingType < b.sortableMeetingType ? true : Self.getMeetingTimeZone(a) < Self.getMeetingTimeZone(b) ? true : a.name < b.name
                     
-                case 2:
-                    ret = a.name < b.name
-                    
-                default:
-                    break
+                case .name:
+                    ret = a.name < b.name ? true : Self.getMeetingTimeZone(a) < Self.getMeetingTimeZone(b) ? true : a.sortableMeetingType < b.sortableMeetingType
                 }
             }
             
@@ -911,11 +922,11 @@ extension VMF_MainSearchViewController {
 
             _meetings = virtualService.meetings.filter { $0.isInProgress }.map { $0.meeting }
             
-            sortSegmentedSwitch?.isHidden = true
+            sortSegmentedSwitch?.isEnabled = false
 
             valueTable?.reloadData()
         } else {
-            sortSegmentedSwitch?.isHidden = false
+            sortSegmentedSwitch?.isEnabled = true
             timeSlider?.isHidden = false
             setTimeSlider(forceNow: _wasNow)
             _wasNow = false
@@ -1003,32 +1014,21 @@ extension VMF_MainSearchViewController: UITableViewDataSource {
 
         var imageName = "G"
         
-        if meeting.hasInPerson,
-           meeting.hasVirtual,
-           !(meeting.virtualPhoneNumber ?? "").isEmpty,
-           !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
-            imageName = "V-P-M"
-        } else if meeting.hasInPerson,
-            meeting.hasVirtual,
-            !(meeting.virtualPhoneNumber ?? "").isEmpty {
-                imageName = "P-M"
-        } else if meeting.hasInPerson,
-                  meeting.hasVirtual,
-                  !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
-            imageName = "V-M"
-        } else if !meeting.hasInPerson,
-                  meeting.hasVirtual,
-                  !(meeting.virtualPhoneNumber ?? "").isEmpty,
-                  !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
+        switch meeting.sortableMeetingType {
+        case .inPerson:
+            break
+        case .virtual:
             imageName = "V-P"
-        } else if !meeting.hasInPerson,
-                  meeting.hasVirtual,
-                  !(meeting.virtualURL?.absoluteString ?? "").isEmpty {
-            imageName = "V"
-        } else if !meeting.hasInPerson,
-                  meeting.hasVirtual,
-                  !(meeting.virtualPhoneNumber ?? "").isEmpty {
+        case .virtual_phone:
             imageName = "P"
+        case .virtual_video:
+            imageName = "V"
+        case .hybrid:
+            imageName = "V-P-M"
+        case .hybrid_phone:
+            imageName = "P-M"
+        case .hybrid_video:
+            imageName = "V-M"
         }
         
         if inProgress {

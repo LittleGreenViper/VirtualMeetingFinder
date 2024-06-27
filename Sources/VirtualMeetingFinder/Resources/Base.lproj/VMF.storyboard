@@ -102,7 +102,6 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="eDU-ua-ctg" secondAttribute="bottom" id="5KO-c8-Lme"/>
-                                            <constraint firstAttribute="height" constant="31" id="LRq-h6-QUM"/>
                                             <constraint firstAttribute="bottom" secondItem="mmv-Rc-Vna" secondAttribute="bottom" id="QH9-1M-SdC"/>
                                             <constraint firstItem="mmv-Rc-Vna" firstAttribute="trailing" secondItem="eDU-ua-ctg" secondAttribute="leading" constant="4" id="R0j-ai-tvl"/>
                                             <constraint firstItem="mmv-Rc-Vna" firstAttribute="top" secondItem="1U8-Xx-4J1" secondAttribute="top" id="S4u-6F-cjp"/>
@@ -118,7 +117,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wLc-od-eP8">
-                                <rect key="frame" x="16" y="249" width="361" height="520"/>
+                                <rect key="frame" x="16" y="241" width="361" height="528"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" id="eKk-PK-0mI" customClass="VMF_TableCell" customModule="VirtualMeetingFinder" customModuleProvider="target">
@@ -206,7 +205,7 @@
                             <constraint firstAttribute="bottom" secondItem="U5m-vQ-VRU" secondAttribute="bottom" id="CtO-Hx-j2B"/>
                             <constraint firstAttribute="trailing" secondItem="U5m-vQ-VRU" secondAttribute="trailing" id="FEQ-Pk-rfr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wLc-od-eP8" secondAttribute="bottom" id="NLw-NE-vQC"/>
-                            <constraint firstItem="wLc-od-eP8" firstAttribute="top" secondItem="2sN-QZ-xyG" secondAttribute="bottom" constant="8" id="Rw7-3A-eEh"/>
+                            <constraint firstItem="wLc-od-eP8" firstAttribute="top" secondItem="2sN-QZ-xyG" secondAttribute="bottom" id="Rw7-3A-eEh"/>
                             <constraint firstItem="2sN-QZ-xyG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="baC-xc-hjv"/>
                             <constraint firstItem="wLc-od-eP8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="bc6-8X-jrR"/>
                             <constraint firstItem="2sN-QZ-xyG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="gnu-PU-swH"/>

@@ -18,6 +18,32 @@
  */
 
 import UIKit
+import SwiftBMLSDK
+
+extension SwiftBMLSDK_Parser.Meeting.SortableMeetingType {
+    var image: UIImage? {
+        var imageName = "G"
+        
+        switch self {
+        case .inPerson:
+            break
+        case .virtual:
+            imageName = "V-P"
+        case .virtual_phone:
+            imageName = "P"
+        case .virtual_video:
+            imageName = "V"
+        case .hybrid:
+            imageName = "V-P-M"
+        case .hybrid_phone:
+            imageName = "P-M"
+        case .hybrid_video:
+            imageName = "V-M"
+        }
+        
+        return UIImage(named: imageName)
+    }
+}
 
 /* ###################################################################################################################################### */
 // MARK: - Date Extension for Localized Strings -

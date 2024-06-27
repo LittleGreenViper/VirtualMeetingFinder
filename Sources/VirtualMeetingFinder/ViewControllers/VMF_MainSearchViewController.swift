@@ -1030,25 +1030,6 @@ extension VMF_MainSearchViewController: UITableViewDataSource {
         } else {
             ret.inProgressLabel?.isHidden = true
         }
-
-        var imageName = "G"
-        
-        switch meeting.sortableMeetingType {
-        case .inPerson:
-            break
-        case .virtual:
-            imageName = "V-P"
-        case .virtual_phone:
-            imageName = "P"
-        case .virtual_video:
-            imageName = "V"
-        case .hybrid:
-            imageName = "V-P-M"
-        case .hybrid_phone:
-            imageName = "P-M"
-        case .hybrid_video:
-            imageName = "V-M"
-        }
         
         if inProgress {
             backgroundColorToUse = UIColor(named: "InProgress")
@@ -1058,7 +1039,7 @@ extension VMF_MainSearchViewController: UITableViewDataSource {
             }
         }
         
-        ret.typeImage?.image = UIImage(named: imageName)
+        ret.typeImage?.image = meeting.sortableMeetingType.image
         
         ret.backgroundColor = backgroundColorToUse
 

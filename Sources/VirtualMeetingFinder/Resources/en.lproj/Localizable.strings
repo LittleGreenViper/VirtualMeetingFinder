@@ -30,3 +30,4 @@
 "SLUG-TIMEZONE"                                 =   "Timezone";
 "SLUG-NAME"                                     =   "Name";
 "SLUG-TIMEZONE-FORMAT"                          =   "Time Zone: %@ (%@)";
+"SLUG-SORT"                                     =   "Sort:";

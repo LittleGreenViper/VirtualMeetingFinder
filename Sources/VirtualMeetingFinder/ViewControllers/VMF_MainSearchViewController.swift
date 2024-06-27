@@ -26,6 +26,28 @@ import RVS_Generic_Swift_Toolbox
 /* ###################################################################################################################################### */
 public typealias MeetingInstance = SwiftBMLSDK_Parser.Meeting
 
+/* ###################################################################### */
+/**
+ This adds various functionality to the String class.
+ */
+public extension String {
+    /* ################################################################## */
+    /**
+     This tests a string to see if a given substring is present at the start.
+     
+     - parameter inSubstring: The substring to test.
+     
+     - returns: true, if the string begins with the given substring.
+     */
+    func beginsWith (_ inSubstring: String) -> Bool {
+        var ret: Bool = false
+        if let range = self.range(of: inSubstring) {
+            ret = (range.lowerBound == self.startIndex)
+        }
+        return ret
+    }
+}
+
 /* ###################################################################################################################################### */
 // MARK: - Additional Function for Meetings -
 /* ###################################################################################################################################### */
@@ -448,6 +470,19 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
     
     /* ################################################################## */
     /**
+     This is set to true, if we are in name search mode.
+     */
+    private var _isNameSearchMode: Bool = false {
+        didSet {
+            searchTextField?.isHidden = !_isNameSearchMode
+            weekdaySegmentedSwitch?.isHidden = _isNameSearchMode
+            timeSlider?.isHidden = _isNameSearchMode && (7 != weekdaySegmentedSwitch?.selectedSegmentIndex)
+            valueTable?.reloadData()
+        }
+    }
+    
+    /* ################################################################## */
+    /**
      Used for the "Pull to Refresh"
      */
     private weak var _refreshControl: UIRefreshControl?
@@ -493,6 +528,12 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
     
     /* ################################################################## */
     /**
+     The text field for name search mode.
+     */
+    @IBOutlet weak var searchTextField: UITextField?
+    
+    /* ################################################################## */
+    /**
      The table that shows the meetings for the current time.
      */
     @IBOutlet weak var valueTable: UITableView?
@@ -502,6 +543,8 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
      The segmented switch that sets the sort
      */
     @IBOutlet weak var sortSegmentedSwitch: UISegmentedControl?
+    
+    @IBOutlet weak var sortLabel: UILabel?
     
     /* ################################################################## */
     /**
@@ -522,12 +565,22 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
 extension VMF_MainSearchViewController {
     /* ################################################################## */
     /**
+     Returns meetings with names that begin with the text entered.
+     */
+    var searchedMeetings: [MeetingInstance] {
+        let testString = searchTextField?.text?.lowercased() ?? ""
+        
+        return (_virtualService?.meetings.filter { mtg in mtg.meeting.name.lowercased().beginsWith(testString) }.map { $0.meeting } ?? [])
+    }
+    
+    /* ################################################################## */
+    /**
      The data for display in the table.
      
      It is arranged in sections, with the "meetings" member, containing the row data.
      */
     var tableFood: [(sectionTitle: String, meetings: [MeetingInstance])] {
-        let meetings = _meetings.sorted { a, b in
+        let meetings = (_isNameSearchMode ? searchedMeetings : _meetings).sorted { a, b in
             var ret = false
             
             let tzA = Self.getMeetingTimeZone(a)
@@ -598,6 +651,7 @@ extension VMF_MainSearchViewController {
         refresh.addTarget(self, action: #selector(findMeetings), for: .valueChanged)
         _refreshControl = refresh
         valueTable?.refreshControl = refresh
+        sortLabel?.text = sortLabel?.text?.localizedVariant
         isThrobbing = true
         for index in (0..<(sortSegmentedSwitch?.numberOfSegments ?? 0)) {
             sortSegmentedSwitch?.setTitle(sortSegmentedSwitch?.titleForSegment(at: index)?.localizedVariant, forSegmentAt: index)
@@ -909,6 +963,16 @@ extension VMF_MainSearchViewController {
     
     /* ################################################################## */
     /**
+     Called when the user taps on the search button.
+     
+     - parameter: ignored
+     */
+    @IBAction func searchButtonHit(_: Any) {
+        _isNameSearchMode = !_isNameSearchMode
+    }
+    
+    /* ################################################################## */
+    /**
      Called when the user taps on the control.
      
      - parameter inTapGestureRecognizer: The tap gesture
@@ -970,6 +1034,18 @@ extension VMF_MainSearchViewController {
      */
     @IBAction func sortButtonHit(_: Any) {
         _isSortAsc = !_isSortAsc
+        valueTable?.reloadData()
+    }
+    
+    /* ################################################################## */
+    /**
+     The search text was changed.
+     
+     - parameter inTextField: The search text field (ignored)
+     */
+    @IBAction func searchTextChanged(_: UITextField) {
+        guard _isNameSearchMode else { return }
+        
         valueTable?.reloadData()
     }
 }

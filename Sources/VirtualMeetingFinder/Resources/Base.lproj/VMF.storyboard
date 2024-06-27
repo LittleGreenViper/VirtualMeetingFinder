@@ -71,11 +71,25 @@
                                             <outlet property="controller" destination="BYZ-38-t0r" id="l7X-1Q-V1v"/>
                                         </connections>
                                     </view>
+                                    <textField hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Lv-Av-Z6E">
+                                        <rect key="frame" x="0.0" y="103" width="361" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="searchTextChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="HFL-MY-vhf"/>
+                                        </connections>
+                                    </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1U8-Xx-4J1">
                                         <rect key="frame" x="0.0" y="107" width="361" height="31"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-SORT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tI7-i6-U3H">
+                                                <rect key="frame" x="0.0" y="0.0" width="95.333333333333329" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mmv-Rc-Vna">
-                                                <rect key="frame" x="0.0" y="0.0" width="334" height="32"/>
+                                                <rect key="frame" x="99.333333333333329" y="0.0" width="234.66666666666669" height="32"/>
                                                 <segments>
                                                     <segment title="SLUG-TIMEZONE"/>
                                                     <segment title="SLUG-TYPE"/>
@@ -102,18 +116,21 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="eDU-ua-ctg" secondAttribute="bottom" id="5KO-c8-Lme"/>
+                                            <constraint firstAttribute="bottom" secondItem="tI7-i6-U3H" secondAttribute="bottom" id="NsL-z4-YsK"/>
                                             <constraint firstAttribute="bottom" secondItem="mmv-Rc-Vna" secondAttribute="bottom" id="QH9-1M-SdC"/>
                                             <constraint firstItem="mmv-Rc-Vna" firstAttribute="trailing" secondItem="eDU-ua-ctg" secondAttribute="leading" constant="4" id="R0j-ai-tvl"/>
                                             <constraint firstItem="mmv-Rc-Vna" firstAttribute="top" secondItem="1U8-Xx-4J1" secondAttribute="top" id="S4u-6F-cjp"/>
+                                            <constraint firstItem="tI7-i6-U3H" firstAttribute="trailing" secondItem="mmv-Rc-Vna" secondAttribute="leading" constant="-4" id="UKD-Ef-aCk"/>
                                             <constraint firstAttribute="trailing" secondItem="eDU-ua-ctg" secondAttribute="trailing" id="aWz-zS-E4G"/>
                                             <constraint firstItem="eDU-ua-ctg" firstAttribute="top" secondItem="1U8-Xx-4J1" secondAttribute="top" id="dkz-FI-YUb"/>
-                                            <constraint firstItem="mmv-Rc-Vna" firstAttribute="leading" secondItem="1U8-Xx-4J1" secondAttribute="leading" id="n1l-5b-oXz"/>
+                                            <constraint firstItem="tI7-i6-U3H" firstAttribute="leading" secondItem="1U8-Xx-4J1" secondAttribute="leading" id="hWp-TH-Auk"/>
+                                            <constraint firstItem="tI7-i6-U3H" firstAttribute="top" secondItem="1U8-Xx-4J1" secondAttribute="top" id="paY-yH-iVL"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="1U8-Xx-4J1" secondAttribute="trailing" id="8HQ-cC-FBH"/>
-                                    <constraint firstItem="1U8-Xx-4J1" firstAttribute="leading" secondItem="2sN-QZ-xyG" secondAttribute="leading" id="Aj9-Jh-992"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Lv-Av-Z6E" secondAttribute="trailing" id="X6o-RH-AMd"/>
+                                    <constraint firstItem="5Lv-Av-Z6E" firstAttribute="leading" secondItem="2sN-QZ-xyG" secondAttribute="leading" id="i45-Li-eBu"/>
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wLc-od-eP8">
@@ -220,7 +237,9 @@
                     <navigationItem key="navigationItem" id="4jP-lo-p4y"/>
                     <connections>
                         <outlet property="mainContainerView" destination="2sN-QZ-xyG" id="8H6-r0-EA4"/>
+                        <outlet property="searchTextField" destination="5Lv-Av-Z6E" id="KZg-iH-9yf"/>
                         <outlet property="sortButton" destination="eDU-ua-ctg" id="Eln-d9-quZ"/>
+                        <outlet property="sortLabel" destination="tI7-i6-U3H" id="lW7-9g-MCx"/>
                         <outlet property="sortSegmentedSwitch" destination="mmv-Rc-Vna" id="a9R-c9-lNP"/>
                         <outlet property="throbber" destination="U5m-vQ-VRU" id="4e5-Tk-SAS"/>
                         <outlet property="timeSlider" destination="Jbt-MB-zeP" id="xkC-hc-cP7"/>

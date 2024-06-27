@@ -68,6 +68,18 @@ class VMF_TableCell: UITableViewCell {
      This is the meeting name.
      */
     @IBOutlet weak var nameLabel: UILabel?
+
+    /* ################################################################## */
+    /**
+     The label that displays the timezone.
+     */
+    @IBOutlet weak var timeZoneLabel: UILabel?
+
+    /* ################################################################## */
+    /**
+     The label that displays an in-progress message.
+     */
+    @IBOutlet weak var inProgressLabel: UILabel?
 }
 
 /* ###################################################################################################################################### */
@@ -83,8 +95,8 @@ class VMF_TimeSlider: UIControl {
     /**
      The image to use for our thumb.
      */
-    static var thumbImage = UIImage(systemName: "arrowtriangle.down.fill")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))
-    
+    private static let _thumbImage = UIImage(systemName: "arrowtriangle.down.fill")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))
+
     /* ################################################################## */
     /**
      This just contains the set of meetings to be used by this slider.
@@ -165,7 +177,7 @@ extension VMF_TimeSlider {
         super.layoutSubviews()
         
         if nil == sliderControl,
-           let thumbImage = Self.thumbImage {
+           let thumbImage = Self._thumbImage {
             let tempSlider = UISlider()
             tempSlider.setThumbImage(thumbImage, for: .normal)
             tempSlider.maximumTrackTintColor = .systemGray4
@@ -333,10 +345,28 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
     
     /* ################################################################## */
     /**
+     The image to use for our ascending sort.
+     */
+    private static let _sortButtonASCImage = UIImage(systemName: "arrowtriangle.up.fill")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))
+    
+    /* ################################################################## */
+    /**
+     The image to use for our descending sort.
+     */
+    private static let _sortButtonDESCImage = UIImage(systemName: "arrowtriangle.down.fill")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))
+
+    /* ################################################################## */
+    /**
+     The height of section headers.
+     */
+    private static let _sectionTitleHeightInDisplayUnits = CGFloat(30)
+    
+    /* ################################################################## */
+    /**
      The background transparency, for alternating rows.
      */
     private static let _alternateRowOpacity = CGFloat(0.05)
-    
+
     /* ################################################################## */
     /**
      The background transparency, for alternating rows (In progress).
@@ -383,6 +413,12 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
      This is set to true, if the "now" segment is selected.
      */
     private var _wasNow = false
+    
+    /* ################################################################## */
+    /**
+     This is set to true, if the sort direction is ascending.
+     */
+    private var _isSortAsc = true { didSet { setSortButton() }}
     
     /* ################################################################## */
     /**
@@ -437,12 +473,84 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
 
     /* ################################################################## */
     /**
+     The segmented switch that sets the sort
+     */
+    @IBOutlet weak var sortSegmentedSwitch: UISegmentedControl?
+    
+    /* ################################################################## */
+    /**
+     The ascending/descending sort button.
+     */
+    @IBOutlet weak var sortButton: UIButton?
+    
+    /* ################################################################## */
+    /**
      The "Throbber" view
      */
     @IBOutlet weak var throbber: UIView?
-    
+}
+
+/* ###################################################################################################################################### */
+// MARK: Computed Properties
+/* ###################################################################################################################################### */
+extension VMF_MainSearchViewController {
+    /* ################################################################## */
+    /**
+     The data for display in the table.
+     
+     It is arranged in sections, with the "meetings" member, containing the row data.
+     */
     var tableFood: [(sectionTitle: String, meetings: [MeetingInstance])] {
-        return [(sectionTitle: "", meetings: _meetings)]
+        let meetings = _meetings.sorted { a, b in
+            var ret = false
+            
+            if 7 == weekdaySegmentedSwitch?.selectedSegmentIndex {
+                let hour = Calendar.current.component(.hour, from: .now)
+                let minute = Calendar.current.component(.minute, from: .now)
+                
+                let currentIntegerTime = hour * 100 + minute
+                var aTime = a.adjustedIntegerStartTime
+                var bTime = b.adjustedIntegerStartTime
+
+                if aTime > currentIntegerTime {
+                    aTime -= 2400
+                }
+
+                if bTime > currentIntegerTime {
+                    bTime -= 2400
+                }
+                
+                ret = aTime < bTime
+            } else if let sortType = sortSegmentedSwitch?.selectedSegmentIndex {
+                switch sortType {
+                case 0:
+                    ret = Self.getMeetingTimeZone(a) < Self.getMeetingTimeZone(b)
+                    
+                case 1:
+                    if .hybrid == a.meetingType,
+                       .hybrid != b.meetingType {
+                        ret = false
+                    } else if .hybrid == b.meetingType,
+                              .hybrid != a.meetingType {
+                        ret = true
+                    } else if .hybrid == a.meetingType || .hybrid == b.meetingType {
+                        ret = nil != a.inPersonAddress && nil == b.inPersonAddress ? true : nil != a.virtualURL && nil == b.virtualURL ? true : nil != a.virtualPhoneNumber && nil == b.virtualPhoneNumber
+                    } else {
+                        ret = nil != a.virtualURL && nil == b.virtualURL ? true : nil != a.virtualPhoneNumber && nil == b.virtualPhoneNumber
+                    }
+                    
+                case 2:
+                    ret = a.name < b.name
+                    
+                default:
+                    break
+                }
+            }
+            
+            return self._isSortAsc ? ret : !ret
+        }
+        
+        return [(sectionTitle: "", meetings: meetings)]
     }
 }
 
@@ -461,6 +569,9 @@ extension VMF_MainSearchViewController {
         _refreshControl = refresh
         valueTable?.refreshControl = refresh
         isThrobbing = true
+        for index in (0..<(sortSegmentedSwitch?.numberOfSegments ?? 0)) {
+            sortSegmentedSwitch?.setTitle(sortSegmentedSwitch?.titleForSegment(at: index)?.localizedVariant, forSegmentAt: index)
+        }
         setUpWeekdayControl()
         findMeetings()
     }
@@ -474,6 +585,7 @@ extension VMF_MainSearchViewController {
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
         _wasNow = false
+        _isSortAsc = true
     }
 }
 
@@ -497,6 +609,30 @@ extension VMF_MainSearchViewController {
         }
         
         return weekdayIndex
+    }
+
+    /* ################################################################## */
+    /**
+     This returns a string, with the localized timezone name for the meeting.
+     It is not set, if the timezone is ours.
+     
+     - parameter inMeeting: The meeting instance.
+     - returns: The timezone string.
+     */
+    static func getMeetingTimeZone(_ inMeeting: MeetingInstance) -> String {
+        var ret = ""
+        
+        var meeting = inMeeting
+        let nativeTime = meeting.getNextStartDate(isAdjusted: false)
+        
+        if let myCurrentTimezoneName = TimeZone.current.localizedName(for: .standard, locale: .current),
+           let zoneName = meeting.timeZone.localizedName(for: .standard, locale: .current),
+           !zoneName.isEmpty,
+           myCurrentTimezoneName != zoneName {
+            ret = String(format: "SLUG-TIMEZONE-FORMAT".localizedVariant, zoneName, nativeTime.localizedTime)
+        }
+        
+        return ret
     }
 }
 
@@ -684,6 +820,16 @@ extension VMF_MainSearchViewController {
         timeSlider.sliderControl?.setValue(Float(index), animated: true)
         timeSlider.sliderControl?.sendActions(for: .valueChanged)
     }
+    
+    /* ################################################################## */
+    /**
+     Called to set up the sort button.
+     */
+    func setSortButton() {
+        let image = _isSortAsc ? Self._sortButtonASCImage : Self._sortButtonDESCImage
+        
+        sortButton?.setImage(image, for: .normal)
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -772,6 +918,27 @@ extension VMF_MainSearchViewController {
             _wasNow = false
         }
     }
+    
+    /* ################################################################## */
+    /**
+     The segmented switch that sets the sort was changed
+     
+     - parameter inSwitch: The switch that changed.
+     */
+    @IBAction func sortChanged(_ inSwitch: UISegmentedControl) {
+        valueTable?.reloadData()
+    }
+    
+    /* ################################################################## */
+    /**
+     The sort button was hit
+     
+     - parameter: Ignored
+     */
+    @IBAction func sortButtonHit(_: Any) {
+        _isSortAsc = !_isSortAsc
+        valueTable?.reloadData()
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -810,8 +977,27 @@ extension VMF_MainSearchViewController: UITableViewDataSource {
         let inProgress = meeting.isMeetingInProgress()
         let startTime = meeting.getPreviousStartDate(isAdjusted: true).localizedTime
 
-        ret.nameLabel?.text = meeting.name + (inProgress ? String(format: "SLUG-IN-PROGRESS-FORMAT".localizedVariant, startTime) : "")
+        let meetingName = meeting.name
+        let timeZoneString = Self.getMeetingTimeZone(meeting)
+        let inProgressString = String(format: "SLUG-IN-PROGRESS-FORMAT".localizedVariant, startTime)
         
+        ret.nameLabel?.text = meetingName
+        
+        if !timeZoneString.isEmpty {
+            ret.timeZoneLabel?.isHidden = false
+            ret.timeZoneLabel?.text = timeZoneString
+        } else {
+            ret.timeZoneLabel?.isHidden = true
+        }
+        
+        if inProgress,
+           !inProgressString.isEmpty {
+            ret.inProgressLabel?.isHidden = false
+            ret.inProgressLabel?.text = inProgressString
+        } else {
+            ret.inProgressLabel?.isHidden = true
+        }
+
         var imageName = "G"
         
         if meeting.hasInPerson,
@@ -874,5 +1060,33 @@ extension VMF_MainSearchViewController: UITableViewDelegate {
         let meeting = _meetings[inIndexPath.row]
         selectMeeting(meeting)
         return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     Returns the height for the section header, in display units.
+     
+     - parameter: The table view (ignored)
+     - parameter heightForHeaderInSection: The section we want the height for.
+     - returns: 0, if there is only one section, or the height, if there are more than one, and the section has a string.
+     */
+    func tableView(_: UITableView, heightForHeaderInSection inSection: Int) -> CGFloat { (1 < tableFood.count && !tableFood[inSection].sectionTitle.isEmpty) ? Self._sectionTitleHeightInDisplayUnits : 0 }
+    
+    /* ################################################################## */
+    /**
+     Returns the displayed header for the given section.
+     
+     - parameter: The table view (ignored)
+     - parameter viewForHeaderInSection: The 0-based section index.
+     - returns: The header view (a button).
+     */
+    func tableView(_: UITableView, viewForHeaderInSection inSection: Int) -> UIView? {
+        guard 1 < tableFood.count else { return nil }
+        let title = tableFood[inSection].sectionTitle
+        
+        let ret = UILabel()
+        
+        ret.text = title
+        return ret
     }
 }

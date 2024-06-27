@@ -38,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2sN-QZ-xyG">
-                                <rect key="frame" x="16" y="103" width="361" height="99"/>
+                                <rect key="frame" x="16" y="103" width="361" height="126"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ucf-Dn-cRn">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="32"/>
@@ -71,10 +71,45 @@
                                             <outlet property="controller" destination="BYZ-38-t0r" id="l7X-1Q-V1v"/>
                                         </connections>
                                     </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="3JV-IM-RRc">
+                                        <rect key="frame" x="0.0" y="107" width="361" height="19"/>
+                                        <subviews>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mmv-Rc-Vna">
+                                                <rect key="frame" x="0.0" y="0.0" width="338" height="20"/>
+                                                <segments>
+                                                    <segment title="SLUG-TIMEZONE"/>
+                                                    <segment title="SLUG-TYPE"/>
+                                                    <segment title="SLUG-NAME"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="sortChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="LbS-Vh-d2T"/>
+                                                </connections>
+                                            </segmentedControl>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDU-ua-ctg">
+                                                <rect key="frame" x="342" y="0.0" width="19" height="19"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="eDU-ua-ctg" secondAttribute="height" multiplier="1:1" id="bfn-q1-nen"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal">
+                                                    <imageReference key="image" image="arrowtriangle.up.fill" catalog="system" symbolScale="large"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="sortButtonHit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sex-TK-94u"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="mmv-Rc-Vna" firstAttribute="top" secondItem="3JV-IM-RRc" secondAttribute="top" id="6c9-Im-ByO"/>
+                                            <constraint firstAttribute="bottom" secondItem="eDU-ua-ctg" secondAttribute="bottom" id="9Jx-AV-85c"/>
+                                            <constraint firstItem="eDU-ua-ctg" firstAttribute="top" secondItem="3JV-IM-RRc" secondAttribute="top" id="PDc-xY-DQM"/>
+                                            <constraint firstAttribute="bottom" secondItem="mmv-Rc-Vna" secondAttribute="bottom" id="U6A-kG-MKg"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wLc-od-eP8">
-                                <rect key="frame" x="16" y="210" width="361" height="559"/>
+                                <rect key="frame" x="16" y="237" width="361" height="532"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" id="eKk-PK-0mI" customClass="VMF_TableCell" customModule="VirtualMeetingFinder" customModuleProvider="target">
@@ -91,29 +126,46 @@
                                                         <constraint firstAttribute="width" secondItem="DGs-Jx-ttC" secondAttribute="height" multiplier="1:1" id="RNL-LP-jLe"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4QS-hH-aMI">
-                                                    <rect key="frame" x="60" y="4" width="277" height="0.0"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="277" placeholder="YES" id="AVv-1d-a4k"/>
-                                                        <constraint firstAttribute="height" placeholder="YES" id="w2v-nz-r6D"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="GxW-ch-v5n">
+                                                    <rect key="frame" x="56" y="4" width="305" height="48.333333333333336"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4QS-hH-aMI">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MDC-1l-fc3">
+                                                            <rect key="frame" x="0.0" y="4" width="33" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="y6s-Lb-mzj"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vfy-2c-Bs3">
+                                                            <rect key="frame" x="0.0" y="28" width="37" height="20.333333333333329"/>
+                                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="DGs-Jx-ttC" firstAttribute="leading" secondItem="mjt-TZ-ak7" secondAttribute="leading" constant="4" id="10I-f3-lqL"/>
-                                                <constraint firstItem="4QS-hH-aMI" firstAttribute="leading" secondItem="DGs-Jx-ttC" secondAttribute="trailing" constant="8" id="3Q2-Il-juW"/>
+                                                <constraint firstAttribute="trailing" secondItem="GxW-ch-v5n" secondAttribute="trailing" id="AAY-fs-312"/>
                                                 <constraint firstItem="DGs-Jx-ttC" firstAttribute="top" secondItem="mjt-TZ-ak7" secondAttribute="top" constant="4" id="B9T-SA-cNd"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="4QS-hH-aMI" secondAttribute="trailing" constant="4" id="dfH-Hu-PS4"/>
+                                                <constraint firstItem="GxW-ch-v5n" firstAttribute="top" secondItem="mjt-TZ-ak7" secondAttribute="top" constant="4" id="W1c-kW-PeO"/>
+                                                <constraint firstItem="GxW-ch-v5n" firstAttribute="leading" secondItem="DGs-Jx-ttC" secondAttribute="trailing" constant="4" id="b45-0L-8Uk"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DGs-Jx-ttC" secondAttribute="bottom" constant="4" id="dnr-Xq-Vqe"/>
-                                                <constraint firstItem="4QS-hH-aMI" firstAttribute="top" secondItem="DGs-Jx-ttC" secondAttribute="top" id="r0o-x1-ZaN"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="4QS-hH-aMI" secondAttribute="bottom" constant="4" id="syx-ij-64R"/>
+                                                <constraint firstAttribute="bottom" secondItem="GxW-ch-v5n" secondAttribute="bottom" constant="4" id="lc7-1N-jGz"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="inProgressLabel" destination="vfy-2c-Bs3" id="0K5-Q1-LHA"/>
                                             <outlet property="nameLabel" destination="4QS-hH-aMI" id="lZo-qF-12f"/>
+                                            <outlet property="timeZoneLabel" destination="MDC-1l-fc3" id="nIW-KO-ZP5"/>
                                             <outlet property="typeImage" destination="DGs-Jx-ttC" id="C6n-YR-8y5"/>
                                         </connections>
                                     </tableViewCell>
@@ -160,6 +212,8 @@
                     <navigationItem key="navigationItem" id="4jP-lo-p4y"/>
                     <connections>
                         <outlet property="mainContainerView" destination="2sN-QZ-xyG" id="8H6-r0-EA4"/>
+                        <outlet property="sortButton" destination="eDU-ua-ctg" id="Eln-d9-quZ"/>
+                        <outlet property="sortSegmentedSwitch" destination="mmv-Rc-Vna" id="a9R-c9-lNP"/>
                         <outlet property="throbber" destination="U5m-vQ-VRU" id="4e5-Tk-SAS"/>
                         <outlet property="timeSlider" destination="Jbt-MB-zeP" id="xkC-hc-cP7"/>
                         <outlet property="valueTable" destination="wLc-od-eP8" id="RXN-cs-nRN"/>
@@ -212,6 +266,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrowtriangle.up.fill" catalog="system" width="128" height="120"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

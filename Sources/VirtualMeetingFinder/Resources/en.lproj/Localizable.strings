@@ -20,9 +20,13 @@
 "SLUG-VIRTUAL-SWITCH-0"                         =   "All";
 "SLUG-VIRTUAL-SWITCH-1"                         =   "Hybrid";
 "SLUG-VIRTUAL-SWITCH-2"                         =   "Virtual";
-"SLUG-IN-PROGRESS-FORMAT"                       =   "\n(In Progress Since %@)";
+"SLUG-IN-PROGRESS-FORMAT"                       =   "In Progress Since %@";
 "SLUG-NOON-TIME"                                =   "Noon";
 "SLUG-MIDNIGHT-TIME"                            =   "Midnight";
 "SLUG-NOW"                                      =   "Now";
 "SLUG-RESET"                                    =   "Reset";
 "SLUG-WEEKDAY-SEARCH"                           =   "Find";
+"SLUG-TYPE"                                     =   "Type";
+"SLUG-TIMEZONE"                                 =   "Timezone";
+"SLUG-NAME"                                     =   "Name";
+"SLUG-TIMEZONE-FORMAT"                          =   "Time Zone: %@ (%@)";

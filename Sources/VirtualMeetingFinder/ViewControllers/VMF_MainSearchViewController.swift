@@ -342,19 +342,19 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
         /**
          The sort is via the timezone name.
          */
-        case timeZone
+        case timeZone = 0
         
         /* ############################################################## */
         /**
          The sort is via the meeting type.
          */
-        case type
+        case type = 1
         
         /* ############################################################## */
         /**
          The sort is via the meeting name.
          */
-        case name
+        case name = 2
     }
     
     /* ################################################################## */
@@ -530,6 +530,9 @@ extension VMF_MainSearchViewController {
         let meetings = _meetings.sorted { a, b in
             var ret = false
             
+            let tzA = Self.getMeetingTimeZone(a)
+            let tzB = Self.getMeetingTimeZone(b)
+
             if 7 == weekdaySegmentedSwitch?.selectedSegmentIndex {
                 let currentIntegerTime = Calendar.current.component(.hour, from: .now) * 100 + Calendar.current.component(.minute, from: .now)
                 var aTime = a.adjustedIntegerStartTime
@@ -543,18 +546,34 @@ extension VMF_MainSearchViewController {
                     bTime -= 2400
                 }
                 
-                ret = aTime < bTime ? true : Self.getMeetingTimeZone(a) < Self.getMeetingTimeZone(b) ? true : a.sortableMeetingType < b.sortableMeetingType ? true : a.name < b.name
+                ret = aTime < bTime ? true :
+                        tzA != tzB ? false :
+                            a.sortableMeetingType < b.sortableMeetingType ? true :
+                                a.sortableMeetingType != b.sortableMeetingType ? false :
+                                    a.name < b.name
             } else if let sortType = sortSegmentedSwitch?.selectedSegmentIndex,
                       let sortBy = SortType(rawValue: sortType) {
                 switch sortBy {
                 case .timeZone:
-                    ret = Self.getMeetingTimeZone(a) < Self.getMeetingTimeZone(b) ? true : a.sortableMeetingType < b.sortableMeetingType ? true : a.name < b.name
-                    
+                    ret = tzA < tzB ? true :
+                        tzA != tzB ? false :
+                            a.sortableMeetingType < b.sortableMeetingType ? true :
+                                a.sortableMeetingType != b.sortableMeetingType ? false :
+                                    a.name < b.name
+
                 case .type:
-                    ret = a.sortableMeetingType < b.sortableMeetingType ? true : Self.getMeetingTimeZone(a) < Self.getMeetingTimeZone(b) ? true : a.name < b.name
+                    ret = a.sortableMeetingType < b.sortableMeetingType ? true :
+                        a.sortableMeetingType != b.sortableMeetingType ? false :
+                            tzA < tzB ? true :
+                                tzA != tzB ? false :
+                                    a.name < b.name
                     
                 case .name:
-                    ret = a.name < b.name ? true : Self.getMeetingTimeZone(a) < Self.getMeetingTimeZone(b) ? true : a.sortableMeetingType < b.sortableMeetingType
+                    ret = a.name < b.name ? true :
+                        a.name != b.name ? false :
+                            tzA < tzB ? true :
+                                tzA != tzB ? false :
+                                    a.sortableMeetingType < b.sortableMeetingType
                 }
             }
             

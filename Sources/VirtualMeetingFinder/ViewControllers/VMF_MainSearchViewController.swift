@@ -911,8 +911,11 @@ extension VMF_MainSearchViewController {
 
             _meetings = virtualService.meetings.filter { $0.isInProgress }.map { $0.meeting }
             
+            sortSegmentedSwitch?.isHidden = true
+
             valueTable?.reloadData()
         } else {
+            sortSegmentedSwitch?.isHidden = false
             timeSlider?.isHidden = false
             setTimeSlider(forceNow: _wasNow)
             _wasNow = false

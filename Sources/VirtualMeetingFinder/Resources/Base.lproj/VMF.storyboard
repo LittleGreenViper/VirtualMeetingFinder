@@ -38,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2sN-QZ-xyG">
-                                <rect key="frame" x="16" y="103" width="361" height="126"/>
+                                <rect key="frame" x="16" y="103" width="361" height="138"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ucf-Dn-cRn">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="32"/>
@@ -71,11 +71,11 @@
                                             <outlet property="controller" destination="BYZ-38-t0r" id="l7X-1Q-V1v"/>
                                         </connections>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="3JV-IM-RRc">
-                                        <rect key="frame" x="0.0" y="107" width="361" height="19"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1U8-Xx-4J1">
+                                        <rect key="frame" x="0.0" y="107" width="361" height="31"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mmv-Rc-Vna">
-                                                <rect key="frame" x="0.0" y="0.0" width="338" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="334" height="32"/>
                                                 <segments>
                                                     <segment title="SLUG-TIMEZONE"/>
                                                     <segment title="SLUG-TYPE"/>
@@ -86,9 +86,9 @@
                                                 </connections>
                                             </segmentedControl>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDU-ua-ctg">
-                                                <rect key="frame" x="342" y="0.0" width="19" height="19"/>
+                                                <rect key="frame" x="330" y="0.0" width="31" height="31"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="eDU-ua-ctg" secondAttribute="height" multiplier="1:1" id="bfn-q1-nen"/>
+                                                    <constraint firstAttribute="width" secondItem="eDU-ua-ctg" secondAttribute="height" multiplier="1:1" id="Gqe-qY-Evu"/>
                                                 </constraints>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal">
@@ -99,17 +99,26 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="mmv-Rc-Vna" firstAttribute="top" secondItem="3JV-IM-RRc" secondAttribute="top" id="6c9-Im-ByO"/>
-                                            <constraint firstAttribute="bottom" secondItem="eDU-ua-ctg" secondAttribute="bottom" id="9Jx-AV-85c"/>
-                                            <constraint firstItem="eDU-ua-ctg" firstAttribute="top" secondItem="3JV-IM-RRc" secondAttribute="top" id="PDc-xY-DQM"/>
-                                            <constraint firstAttribute="bottom" secondItem="mmv-Rc-Vna" secondAttribute="bottom" id="U6A-kG-MKg"/>
+                                            <constraint firstAttribute="bottom" secondItem="eDU-ua-ctg" secondAttribute="bottom" id="5KO-c8-Lme"/>
+                                            <constraint firstAttribute="height" constant="31" id="LRq-h6-QUM"/>
+                                            <constraint firstAttribute="bottom" secondItem="mmv-Rc-Vna" secondAttribute="bottom" id="QH9-1M-SdC"/>
+                                            <constraint firstItem="mmv-Rc-Vna" firstAttribute="trailing" secondItem="eDU-ua-ctg" secondAttribute="leading" constant="4" id="R0j-ai-tvl"/>
+                                            <constraint firstItem="mmv-Rc-Vna" firstAttribute="top" secondItem="1U8-Xx-4J1" secondAttribute="top" id="S4u-6F-cjp"/>
+                                            <constraint firstAttribute="trailing" secondItem="eDU-ua-ctg" secondAttribute="trailing" id="aWz-zS-E4G"/>
+                                            <constraint firstItem="eDU-ua-ctg" firstAttribute="top" secondItem="1U8-Xx-4J1" secondAttribute="top" id="dkz-FI-YUb"/>
+                                            <constraint firstItem="mmv-Rc-Vna" firstAttribute="leading" secondItem="1U8-Xx-4J1" secondAttribute="leading" id="n1l-5b-oXz"/>
                                         </constraints>
-                                    </stackView>
+                                    </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="1U8-Xx-4J1" secondAttribute="trailing" id="8HQ-cC-FBH"/>
+                                    <constraint firstItem="1U8-Xx-4J1" firstAttribute="leading" secondItem="2sN-QZ-xyG" secondAttribute="leading" id="Aj9-Jh-992"/>
+                                </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wLc-od-eP8">
-                                <rect key="frame" x="16" y="237" width="361" height="532"/>
+                                <rect key="frame" x="16" y="249" width="361" height="520"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" id="eKk-PK-0mI" customClass="VMF_TableCell" customModule="VirtualMeetingFinder" customModuleProvider="target">

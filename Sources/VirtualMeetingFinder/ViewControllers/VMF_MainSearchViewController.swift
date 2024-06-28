@@ -1370,7 +1370,7 @@ extension VMF_MainSearchViewController: UITableViewDelegate {
      - returns: nil (all the time).
      */
     func tableView(_: UITableView, willSelectRowAt inIndexPath: IndexPath) -> IndexPath? {
-        let meeting = _meetings[inIndexPath.row]
+        let meeting = tableFood[inIndexPath.section].meetings[inIndexPath.row]
         selectMeeting(meeting)
         return nil
     }

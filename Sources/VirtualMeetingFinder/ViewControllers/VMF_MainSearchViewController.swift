@@ -530,7 +530,7 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
                 searchTextField?.resignFirstResponder()
             }
             
-            timeSlider?.isHidden = _isNameSearchMode && (7 != weekdaySegmentedSwitch?.selectedSegmentIndex)
+            timeSlider?.isHidden = _isNameSearchMode || (7 == weekdaySegmentedSwitch?.selectedSegmentIndex)
             _cachedTableFood = []
             valueTable?.reloadData()
         }
@@ -797,6 +797,20 @@ extension VMF_MainSearchViewController {
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
+
+        if _isNameSearchMode {
+            searchTextField?.becomeFirstResponder()
+            searchTextContainer?.isHidden = false
+            weekdayContainer?.isHidden = true
+            sortContainer?.isHidden = true
+            timeSlider?.isHidden = true
+        } else {
+            searchTextContainer?.isHidden = true
+            weekdayContainer?.isHidden = false
+            sortContainer?.isHidden = false
+            timeSlider?.isHidden = 7 == weekdaySegmentedSwitch?.selectedSegmentIndex
+        }
+        valueTable?.reloadData()
     }
     
     /* ################################################################## */
@@ -807,7 +821,6 @@ extension VMF_MainSearchViewController {
      */
     override func viewWillDisappear(_ inIsAnimated: Bool) {
         super.viewWillDisappear(inIsAnimated)
-        _isNameSearchMode = false
         bottomConstraint?.constant = _atRestConstant
         NotificationCenter.default.removeObserver(
             self,

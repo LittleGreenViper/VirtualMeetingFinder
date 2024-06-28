@@ -528,7 +528,7 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
         didSet {
             searchTextContainer?.isHidden = !_isNameSearchMode
             weekdayContainer?.isHidden = _isNameSearchMode
-            sortContainer?.isHidden = _isNameSearchMode
+            sortContainer?.isHidden = _isNameSearchMode || tableFood.isEmpty || (1 >= tableFood[0].meetings.count)
             
             if _isNameSearchMode {
                 _refreshControl?.isEnabled = false
@@ -770,6 +770,7 @@ extension VMF_MainSearchViewController {
         refresh.addTarget(self, action: #selector(findMeetings), for: .valueChanged)
         _refreshControl = refresh
         valueTable?.refreshControl = refresh
+        valueTable?.sectionHeaderTopPadding = CGFloat(0)
         sortLabel?.text = sortLabel?.text?.localizedVariant
         searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
         isThrobbing = true
@@ -777,6 +778,7 @@ extension VMF_MainSearchViewController {
         for index in (0..<(sortSegmentedSwitch?.numberOfSegments ?? 0)) {
             sortSegmentedSwitch?.setTitle(sortSegmentedSwitch?.titleForSegment(at: index)?.localizedVariant, forSegmentAt: index)
         }
+        
         setUpWeekdayControl()
         findMeetings()
     }
@@ -1283,7 +1285,12 @@ extension VMF_MainSearchViewController: UITableViewDataSource {
      - parameter in: The table view (ignored)
      - returns: The number of sections to display.
      */
-    func numberOfSections(in: UITableView) -> Int { tableFood.count }
+    func numberOfSections(in: UITableView) -> Int {
+        if tableFood.isEmpty {
+            sortContainer?.isHidden = true
+        }
+        return tableFood.count
+    }
     
     /* ################################################################## */
     /**
@@ -1291,7 +1298,12 @@ extension VMF_MainSearchViewController: UITableViewDataSource {
      - parameter numberOfRowsInSection: The 0-based section index.
      - returns: The number of meetings to display.
      */
-    func tableView(_: UITableView, numberOfRowsInSection inSectionIndex: Int) -> Int { tableFood[inSectionIndex].meetings.count }
+    func tableView(_: UITableView, numberOfRowsInSection inSectionIndex: Int) -> Int {
+        let ret = tableFood[inSectionIndex].meetings.count
+        sortContainer?.isHidden = _isNameSearchMode || 1 >= ret
+        
+        return ret
+    }
     
     /* ################################################################## */
     /**

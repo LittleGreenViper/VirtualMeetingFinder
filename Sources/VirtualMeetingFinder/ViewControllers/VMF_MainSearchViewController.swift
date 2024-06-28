@@ -125,23 +125,23 @@ class VMF_TimeSlider: UIControl {
      */
     var meetings = [VMF_MainSearchViewController.MappedSet]() {
         didSet {
-            sliderControl?.minimumValue = 0
-            sliderControl?.maximumValue = max(0, Float(meetings.count - 1))
+            minimumValue = 0
+            maximumValue = Float(meetings.count - 1)
             setNeedsLayout()
         }
     }
     
     /* ################################################################## */
     /**
-     This is the container for the lower part of the slider aggregate.
+     This is the container for the entire control
      */
-    weak var container: UIView?
+    weak var mainContainer: UIStackView?
     
     /* ################################################################## */
     /**
-     This is the actual slider control.
+     This is the container for the lower part of the slider aggregate.
      */
-    weak var sliderControl: UISlider?
+    weak var container: UIView?
 
     /* ################################################################## */
     /**
@@ -160,6 +160,33 @@ class VMF_TimeSlider: UIControl {
      A button to reset to today/now.
      */
     weak var resetButton: UIButton?
+    
+    /* ################################################################## */
+    /**
+     The minimum value of the control.
+     */
+    @IBInspectable var minimumValue: Float = 0 { didSet { valueStepper?.minimumValue = Double(minimumValue) } }
+
+    /* ################################################################## */
+    /**
+     The maximum value of the control.
+     */
+    @IBInspectable var maximumValue: Float = 0 { didSet { valueStepper?.maximumValue = Double(maximumValue) } }
+    
+    /* ################################################################## */
+    /**
+     The value of the control.
+     */
+    @IBInspectable var value: Float = 0 {
+        didSet {
+            valueStepper?.value = Double(value)
+            let intValue = Int(max(minimumValue, min(maximumValue, value)))
+            
+            valueLabel?.text = !meetings.isEmpty ? meetings[intValue].time : ""
+            
+            sendActions(for: .valueChanged)
+        }
+    }
 
     /* ################################################################## */
     /**
@@ -177,13 +204,21 @@ extension VMF_TimeSlider {
      This is the subset of the meeting set that correspond to the selected time.
      */
     var selectedMeetings: [MeetingInstance] {
-        guard let value = sliderControl?.value,
+        guard let value = valueStepper?.value,
               !meetings.isEmpty
         else { return [] }
         
         let intValue = max(0, min((meetings.count - 1), Int(round(value))))
         
         return meetings[intValue].meetings
+    }
+    
+    /* ################################################################## */
+    /**
+     The value of the control.
+     */
+    func setValue(_ inValue: Float, animated inAnimated: Bool) {
+        valueStepper?.value = Double(inValue)
     }
 }
 
@@ -198,29 +233,11 @@ extension VMF_TimeSlider {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        if nil == sliderControl,
-           let thumbImage = Self._thumbImage {
-            let tempSlider = UISlider()
-            tempSlider.setThumbImage(thumbImage, for: .normal)
-            tempSlider.maximumTrackTintColor = .systemGray4
-            tempSlider.minimumTrackTintColor = .systemGray4
-            tempSlider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
-            tempSlider.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sliderTapped)))
-            addSubview(tempSlider)
-            sliderControl = tempSlider
-            tempSlider.translatesAutoresizingMaskIntoConstraints = false
-            tempSlider.topAnchor.constraint(equalTo: topAnchor).isActive = true
-            tempSlider.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-            tempSlider.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        }
-        
-        sliderControl?.minimumValue = 0
-        sliderControl?.maximumValue = max(0, Float(meetings.count - 1))
-        sliderControl?.value = Float(max(0, min((meetings.count - 1), Int(round(sliderControl?.value ?? 0)))))
+        minimumValue = 0
+        maximumValue = max(0, Float(meetings.count - 1))
+        value = Float(max(0, min((meetings.count - 1), Int(round(valueStepper?.value ?? 0)))))
 
-        addValueLabel()
-        
-        sliderControl?.sendActions(for: .valueChanged)
+        setUpControl()
     }
 }
 
@@ -232,19 +249,30 @@ extension VMF_TimeSlider {
     /**
      This adds the value label and stepper.
      */
-    func addValueLabel() {
-        if nil == container,
-           let sliderControl = sliderControl,
-           !meetings.isEmpty {
+    func setUpControl() {
+        if nil == mainContainer {
+            let stackView = UIStackView()
+            addSubview(stackView)
+            mainContainer = stackView
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            stackView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+            stackView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        }
+        
+        if let mainContainer = mainContainer,
+           nil == container {
             let containerView = UIView()
-            addSubview(containerView)
+            mainContainer.addArrangedSubview(containerView)
             container = containerView
             containerView.translatesAutoresizingMaskIntoConstraints = false
-            containerView.topAnchor.constraint(greaterThanOrEqualTo: sliderControl.bottomAnchor, constant: 4).isActive = true
-            containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-            containerView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-            containerView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-
+            containerView.leftAnchor.constraint(equalTo: mainContainer.leftAnchor).isActive = true
+            containerView.rightAnchor.constraint(equalTo: mainContainer.rightAnchor).isActive = true
+        }
+        
+        if nil == valueLabel,
+           let containerView = container {
             let label = UILabel()
             label.textAlignment = .center
             label.font = .systemFont(ofSize: 15)
@@ -253,12 +281,16 @@ extension VMF_TimeSlider {
             label.translatesAutoresizingMaskIntoConstraints = false
             label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
             label.setContentHuggingPriority(.required, for: .horizontal)
-
+        }
+        
+        if nil == valueStepper,
+           let containerView = container,
+           let label = valueLabel {
             let stepper = UIStepper()
             stepper.autorepeat = true
-            stepper.minimumValue = Double(sliderControl.minimumValue)
-            stepper.maximumValue = Double(sliderControl.maximumValue)
-            stepper.stepValue = (stepper.maximumValue - stepper.minimumValue) / Double(meetings.count)
+            stepper.minimumValue = Double(minimumValue)
+            stepper.maximumValue = Double(maximumValue)
+            stepper.stepValue = 1
             containerView.addSubview(stepper)
             valueStepper = stepper
             stepper.translatesAutoresizingMaskIntoConstraints = false
@@ -267,7 +299,11 @@ extension VMF_TimeSlider {
             stepper.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
             stepper.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
             stepper.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-
+        }
+        
+        if let containerView = container,
+           nil == resetButton,
+           let label = valueLabel {
             let reset = UIButton(type: .roundedRect)
             reset.addTarget(self, action: #selector(resetButtonHit), for: .touchUpInside)
             reset.setTitle("SLUG-RESET".localizedVariant, for: .normal)
@@ -277,9 +313,15 @@ extension VMF_TimeSlider {
             reset.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 8).isActive = true
             reset.rightAnchor.constraint(lessThanOrEqualTo: label.leftAnchor).isActive = true
             reset.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
-        } else if meetings.isEmpty {
-            container?.removeFromSuperview()
-            container = nil
+        }
+        
+        if !meetings.isEmpty {
+            let intValue = Int(max(minimumValue, min(maximumValue, value)))
+            valueLabel?.text = meetings[intValue].time
+            valueStepper?.isEnabled = true
+        } else {
+            valueLabel?.text = ""
+            valueStepper?.isEnabled = false
         }
     }
 }
@@ -295,12 +337,7 @@ extension VMF_TimeSlider {
      - parameter inSlider: The slider control that changed.
      */
     @objc func sliderChanged(_ inSlider: UISlider) {
-        let value = inSlider.value
-        let intValue = max(0, min((meetings.count - 1), Int(round(value))))
-        inSlider.value = Float(intValue)
-        valueStepper?.value = Double(intValue)
-        valueLabel?.text = meetings[intValue].time
-        controller?.timeSliderChanged(intValue, slider: self)
+        value = inSlider.value
     }
     
     /* ################################################################## */
@@ -310,10 +347,7 @@ extension VMF_TimeSlider {
      - parameter inSlider: The slider control that changed.
      */
     @objc func stepperChanged(_ inStepper: UIStepper) {
-        let value = inStepper.value
-        let intValue = max(0, min((meetings.count - 1), Int(round(value))))
-        sliderControl?.value = Float(intValue)
-        sliderControl?.sendActions(for: .valueChanged)
+        value = Float(inStepper.value)
     }
     
     /* ################################################################## */
@@ -324,25 +358,6 @@ extension VMF_TimeSlider {
      */
     @objc func resetButtonHit(_: Any) {
         controller?.setToNow()
-    }
-    
-    /* ################################################################## */
-    /**
-     Called whenever the user taps on the slider.
-     
-     - parameter inTapGestureRecognizer: The gesture recognizer that executed the tap.
-     */
-    @objc func sliderTapped(_ inTapGestureRecognizer: UIGestureRecognizer) {
-        guard let sliderControl = sliderControl else { return }
-        
-        let pointTapped: CGPoint = inTapGestureRecognizer.location(in: self)
-
-        let sliderOriginX = sliderControl.frame.origin.x
-        let sliderWidth = sliderControl.frame.size.width
-        let newValue = Float((pointTapped.x - sliderOriginX) * CGFloat(sliderControl.maximumValue) / sliderWidth)
-
-        sliderControl.setValue(newValue, animated: true)
-        sliderControl.sendActions(for: .valueChanged)
     }
 }
 
@@ -377,6 +392,12 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
          The sort is via the meeting name.
          */
         case name = 2
+        
+        /* ############################################################## */
+        /**
+         The sort is via the meeting start time.
+         */
+        case time = 3
     }
     
     /* ################################################################## */
@@ -580,53 +601,61 @@ extension VMF_MainSearchViewController {
      It is arranged in sections, with the "meetings" member, containing the row data.
      */
     var tableFood: [(sectionTitle: String, meetings: [MeetingInstance])] {
+        let currentIntegerTime = Calendar.current.component(.hour, from: .now) * 100 + Calendar.current.component(.minute, from: .now)
         let meetings = (_isNameSearchMode ? searchedMeetings : _meetings).sorted { a, b in
             var ret = false
             
             let tzA = Self.getMeetingTimeZone(a)
             let tzB = Self.getMeetingTimeZone(b)
+            var aTime = a.adjustedIntegerStartTime
+            var bTime = b.adjustedIntegerStartTime
 
-            if 7 == weekdaySegmentedSwitch?.selectedSegmentIndex {
-                let currentIntegerTime = Calendar.current.component(.hour, from: .now) * 100 + Calendar.current.component(.minute, from: .now)
-                var aTime = a.adjustedIntegerStartTime
-                var bTime = b.adjustedIntegerStartTime
+            if aTime > currentIntegerTime {
+                aTime -= 2400
+            }
 
-                if aTime > currentIntegerTime {
-                    aTime -= 2400
-                }
+            if bTime > currentIntegerTime {
+                bTime -= 2400
+            }
 
-                if bTime > currentIntegerTime {
-                    bTime -= 2400
-                }
-                
-                ret = aTime < bTime ? true :
-                        tzA != tzB ? false :
-                            a.sortableMeetingType < b.sortableMeetingType ? true :
-                                a.sortableMeetingType != b.sortableMeetingType ? false :
-                                    a.name < b.name
-            } else if let sortType = sortSegmentedSwitch?.selectedSegmentIndex,
-                      let sortBy = SortType(rawValue: sortType) {
+            if let sortType = sortSegmentedSwitch?.selectedSegmentIndex,
+               let sortBy = SortType(rawValue: sortType) {
                 switch sortBy {
                 case .timeZone:
                     ret = tzA < tzB ? true :
                         tzA != tzB ? false :
                             a.sortableMeetingType < b.sortableMeetingType ? true :
                                 a.sortableMeetingType != b.sortableMeetingType ? false :
-                                    a.name < b.name
+                                    aTime < bTime ? true :
+                                        aTime != bTime ? false :
+                                            a.name < b.name
 
                 case .type:
                     ret = a.sortableMeetingType < b.sortableMeetingType ? true :
                         a.sortableMeetingType != b.sortableMeetingType ? false :
                             tzA < tzB ? true :
                                 tzA != tzB ? false :
-                                    a.name < b.name
+                                    aTime < bTime ? true :
+                                        aTime != bTime ? false :
+                                            a.name < b.name
                     
                 case .name:
                     ret = a.name < b.name ? true :
                         a.name != b.name ? false :
                             tzA < tzB ? true :
                                 tzA != tzB ? false :
-                                    a.sortableMeetingType < b.sortableMeetingType
+                                    aTime < bTime ? true :
+                                        aTime != bTime ? false :
+                                            a.sortableMeetingType < b.sortableMeetingType
+
+                case .time:
+                    ret = aTime < bTime ? true :
+                            aTime != bTime ? false :
+                                tzA < tzB ? true :
+                                    tzA != tzB ? false :
+                                        a.sortableMeetingType < b.sortableMeetingType ? true :
+                                            a.sortableMeetingType != b.sortableMeetingType ? false :
+                                                a.name < b.name
                 }
             }
             
@@ -762,7 +791,7 @@ extension VMF_MainSearchViewController {
         var oldTimeForcedValue = -1
         
         if !timeSlider.meetings.isEmpty {
-            let oldValue = Int(timeSlider.sliderControl?.value ?? 0)
+            let oldValue = Int(timeSlider.value)
             if oldValue == 0 || oldValue == (timeSlider.meetings.count - 1) {
                 oldTimeForcedValue = oldValue
             }
@@ -774,8 +803,8 @@ extension VMF_MainSearchViewController {
         // All the funkiness below, is trying to keep the slider pointed to the correct time, or, just above it.
         
         guard -1 == oldTimeForcedValue else {
-            timeSlider.sliderControl?.value = Float (0 == oldTimeForcedValue ? 0 : timeSlider.sliderControl?.maximumValue ?? Float(timeSlider.meetings.count - 1))
-            timeSlider.sliderControl?.sendActions(for: .valueChanged)
+            timeSlider.value = Float(0 == oldTimeForcedValue ? 0 : timeSlider.maximumValue)
+            timeSlider.sendActions(for: .valueChanged)
             return
         }
         
@@ -814,8 +843,8 @@ extension VMF_MainSearchViewController {
             }
         }
         
-        timeSlider.sliderControl?.value = Float (newValue)
-        timeSlider.sliderControl?.sendActions(for: .valueChanged)
+        timeSlider.value = Float (newValue)
+        timeSlider.sendActions(for: .valueChanged)
     }
     
     /* ################################################################## */
@@ -885,7 +914,10 @@ extension VMF_MainSearchViewController {
               (1..._mappedDataset.count).contains(day)
         else { return }
 
-        timeSlider.meetings = _mappedDataset[day - 1]
+        let todaysMeetings = _mappedDataset[day - 1]
+        
+        timeSlider.setNeedsLayout()
+        timeSlider.meetings = todaysMeetings
         
         var index = -1
         var counter = 0
@@ -901,8 +933,8 @@ extension VMF_MainSearchViewController {
             counter += 1
         }
         
-        timeSlider.sliderControl?.setValue(Float(index), animated: true)
-        timeSlider.sliderControl?.sendActions(for: .valueChanged)
+        timeSlider.setValue(Float(index), animated: true)
+        timeSlider.sendActions(for: .valueChanged)
     }
     
     /* ################################################################## */
@@ -924,10 +956,10 @@ extension VMF_MainSearchViewController {
     /**
      Called when the user selects a time slot for the meetings.
      
-     - parameter inSelectedIndex: The time control slider value, as an index.
+     - parameter inTimeSlider: The time control slider.
      */
-    func timeSliderChanged(_ inSelectedIndex: Int, slider inSlider: VMF_TimeSlider) {
-        _meetings = inSlider.selectedMeetings
+    @IBAction func sliderChanged(_ inTimeSlider: VMF_TimeSlider) {
+        _meetings = inTimeSlider.selectedMeetings
         valueTable?.reloadData()
     }
     
@@ -1004,15 +1036,18 @@ extension VMF_MainSearchViewController {
             guard let virtualService = _virtualService else { return }
 
             _meetings = virtualService.meetings.filter { $0.isInProgress }.map { $0.meeting }
-            
-            sortSegmentedSwitch?.isEnabled = false
-
+            sortSegmentedSwitch?.setEnabled(true, forSegmentAt: SortType.time.rawValue)
+            sortSegmentedSwitch?.selectedSegmentIndex = SortType.time.rawValue
+            sortSegmentedSwitch?.sendActions(for: .valueChanged)
             valueTable?.reloadData()
         } else {
-            sortSegmentedSwitch?.isEnabled = true
             timeSlider?.isHidden = false
             setTimeSlider(forceNow: _wasNow)
             _wasNow = false
+            if 3 == sortSegmentedSwitch?.selectedSegmentIndex {
+                sortSegmentedSwitch?.selectedSegmentIndex = SortType.timeZone.rawValue
+            }
+            sortSegmentedSwitch?.setEnabled(false, forSegmentAt: SortType.time.rawValue)
         }
     }
     

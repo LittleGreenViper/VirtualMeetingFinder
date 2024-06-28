@@ -29,5 +29,6 @@
 "SLUG-TYPE"                                     =   "Type";
 "SLUG-TIMEZONE"                                 =   "Timezone";
 "SLUG-NAME"                                     =   "Name";
+"SLUG-TIME"                                     =   "Time";
 "SLUG-TIMEZONE-FORMAT"                          =   "Time Zone: %@ (%@)";
 "SLUG-SORT"                                     =   "Sort:";

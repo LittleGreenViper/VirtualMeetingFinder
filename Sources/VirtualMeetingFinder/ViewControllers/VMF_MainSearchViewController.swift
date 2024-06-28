@@ -510,6 +510,12 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
     
     /* ################################################################## */
     /**
+     This is set to false, once we have rendered, the first time.
+     */
+    private var _firstTime = true
+    
+    /* ################################################################## */
+    /**
      This is set to true, if the sort direction is ascending.
      */
     private var _isSortAsc = true { didSet { setSortButton() }}
@@ -525,8 +531,10 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
             sortContainer?.isHidden = _isNameSearchMode
             
             if _isNameSearchMode {
+                _refreshControl?.isEnabled = false
                 searchTextField?.becomeFirstResponder()
             } else {
+                _refreshControl?.isEnabled = true
                 searchTextField?.resignFirstResponder()
             }
             
@@ -782,7 +790,6 @@ extension VMF_MainSearchViewController {
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
         _wasNow = false
-        _isSortAsc = true
 
         NotificationCenter.default.addObserver(
             self,
@@ -799,17 +806,21 @@ extension VMF_MainSearchViewController {
         )
 
         if _isNameSearchMode {
-            searchTextField?.becomeFirstResponder()
+            _refreshControl?.isEnabled = false
             searchTextContainer?.isHidden = false
             weekdayContainer?.isHidden = true
             sortContainer?.isHidden = true
             timeSlider?.isHidden = true
+            searchTextField?.becomeFirstResponder()
         } else {
+            _refreshControl?.isEnabled = true
             searchTextContainer?.isHidden = true
             weekdayContainer?.isHidden = false
             sortContainer?.isHidden = false
             timeSlider?.isHidden = 7 == weekdaySegmentedSwitch?.selectedSegmentIndex
+            _cachedTableFood = []
         }
+        
         valueTable?.reloadData()
     }
     
@@ -821,6 +832,7 @@ extension VMF_MainSearchViewController {
      */
     override func viewWillDisappear(_ inIsAnimated: Bool) {
         super.viewWillDisappear(inIsAnimated)
+        searchTextField?.resignFirstResponder()
         bottomConstraint?.constant = _atRestConstant
         NotificationCenter.default.removeObserver(
             self,
@@ -1028,6 +1040,7 @@ extension VMF_MainSearchViewController {
      Sets the day and time to our current day/time.
      */
     func setToNow() {
+        _firstTime = false
         let day = Calendar.current.component(.weekday, from: .now)
         let hour = Calendar.current.component(.hour, from: .now)
         let minute = Calendar.current.component(.minute, from: .now)
@@ -1119,6 +1132,10 @@ extension VMF_MainSearchViewController {
      - parameter: ignored
      */
     @objc func findMeetings(_: Any! = nil) {
+        guard !_isNameSearchMode else {
+            _refreshControl?.endRefreshing()
+            return
+        }
         isThrobbing = true
         _virtualService = nil
         _ = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: Self._queryInstance) { inCollection in
@@ -1126,7 +1143,9 @@ extension VMF_MainSearchViewController {
                 self._virtualService = inCollection
                 self._cachedSearchMeetings = inCollection.meetings.map{ $0.meeting }.sorted { a, b in a.name.lowercased() < b.name.lowercased() }
                 self.isThrobbing = false
-                self.setToNow()
+                if self._firstTime {
+                    self.setToNow()
+                }
             }
         }
     }

@@ -805,6 +805,8 @@ extension VMF_MainSearchViewController {
             object: nil
         )
 
+        setSortButton()
+        
         if _isNameSearchMode {
             _refreshControl?.isEnabled = false
             searchTextContainer?.isHidden = false

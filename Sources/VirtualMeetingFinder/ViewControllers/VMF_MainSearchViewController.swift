@@ -547,6 +547,12 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
      Cached table data.
      */
     private var _cachedTableFood: [(sectionTitle: String, meetings: [MeetingInstance])] = []
+    
+    /* ################################################################## */
+    /**
+     Cached table data (for when in Search Mode).
+     */
+    private var _cachedSearchMeetings: [MeetingInstance] = []
 
     /* ################################################################## */
     /**
@@ -659,9 +665,9 @@ extension VMF_MainSearchViewController {
     var searchedMeetings: [MeetingInstance] {
         let testString = searchTextField?.text?.lowercased() ?? ""
         
-        guard !testString.isEmpty else { return _virtualService?.meetings.map { $0.meeting } ?? [] }
+        guard !testString.isEmpty else { return _cachedSearchMeetings }
         
-        return (_virtualService?.meetings.filter { mtg in mtg.meeting.name.lowercased().beginsWith(testString) }.map { $0.meeting } ?? [])
+        return (_cachedSearchMeetings.filter { $0.name.lowercased().beginsWith(testString) })
     }
     
     /* ################################################################## */
@@ -674,10 +680,7 @@ extension VMF_MainSearchViewController {
         guard _cachedTableFood.isEmpty else { return _cachedTableFood }
         
         let currentIntegerTime = Calendar.current.component(.hour, from: .now) * 100 + Calendar.current.component(.minute, from: .now)
-        guard !_isNameSearchMode else {
-            let meetings = searchedMeetings.sorted { a, b in a.name.lowercased() < b.name.lowercased() }
-            return [(sectionTitle: "", meetings: meetings)]
-        }
+        guard !_isNameSearchMode else { return [(sectionTitle: "", meetings: searchedMeetings)] }
         
         let meetings = _meetings.sorted { a, b in
             var ret = false
@@ -1108,6 +1111,7 @@ extension VMF_MainSearchViewController {
         _ = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: Self._queryInstance) { inCollection in
             DispatchQueue.main.async {
                 self._virtualService = inCollection
+                self._cachedSearchMeetings = inCollection.meetings.map{ $0.meeting }.sorted { a, b in a.name.lowercased() < b.name.lowercased() }
                 self.isThrobbing = false
                 self.setToNow()
             }

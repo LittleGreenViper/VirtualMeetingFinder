@@ -32,3 +32,4 @@
 "SLUG-TIME"                                     =   "Time";
 "SLUG-TIMEZONE-FORMAT"                          =   "Time Zone: %@ (%@)";
 "SLUG-SORT"                                     =   "Sort:";
+"SLUG-SEARCH-PLACEHOLDER"                       =   "Enter A Meeting Name";

@@ -38,29 +38,51 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2sN-QZ-xyG">
-                                <rect key="frame" x="16" y="103" width="361" height="108"/>
+                                <rect key="frame" x="16" y="103" width="361" height="147"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ucf-Dn-cRn">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="32"/>
-                                        <gestureRecognizers/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="owx-Oo-Kbg">
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="31"/>
+                                        <subviews>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ucf-Dn-cRn">
+                                                <rect key="frame" x="0.0" y="0.0" width="322" height="32"/>
+                                                <gestureRecognizers/>
+                                                <segments>
+                                                    <segment title="Sun"/>
+                                                    <segment title="Mon"/>
+                                                    <segment title="Tue"/>
+                                                    <segment title="Wed"/>
+                                                    <segment title="Thu"/>
+                                                    <segment title="Fri"/>
+                                                    <segment title="Sat"/>
+                                                    <segment title="SLUG-NOW"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="weekdaySelected:" destination="BYZ-38-t0r" eventType="valueChanged" id="man-sA-wLh"/>
+                                                    <outletCollection property="gestureRecognizers" destination="dJS-zX-97g" appends="YES" id="Yzf-Gp-7Mw"/>
+                                                </connections>
+                                            </segmentedControl>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZEd-Uu-Vcu" userLabel="Search Open Button">
+                                                <rect key="frame" x="330" y="0.0" width="31" height="31"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="ZEd-Uu-Vcu" secondAttribute="height" multiplier="1:1" id="Zpu-39-w9j"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal">
+                                                    <imageReference key="image" image="magnifyingglass" catalog="system" symbolScale="large"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="searchButtonHit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yBC-ca-NDN"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="31" id="QIH-oc-YOv"/>
+                                            <constraint firstAttribute="bottom" secondItem="ZEd-Uu-Vcu" secondAttribute="bottom" id="GAR-Ne-SsV"/>
+                                            <constraint firstItem="ZEd-Uu-Vcu" firstAttribute="top" secondItem="owx-Oo-Kbg" secondAttribute="top" id="JZF-8g-SfW"/>
+                                            <constraint firstAttribute="height" constant="31" id="TWl-zA-Jcz"/>
+                                            <constraint firstAttribute="bottom" secondItem="ucf-Dn-cRn" secondAttribute="bottom" id="jvC-ad-Zzo"/>
+                                            <constraint firstItem="ucf-Dn-cRn" firstAttribute="top" secondItem="owx-Oo-Kbg" secondAttribute="top" id="ocV-Zw-mOv"/>
                                         </constraints>
-                                        <segments>
-                                            <segment title="Sun"/>
-                                            <segment title="Mon"/>
-                                            <segment title="Tue"/>
-                                            <segment title="Wed"/>
-                                            <segment title="Thu"/>
-                                            <segment title="Fri"/>
-                                            <segment title="Sat"/>
-                                            <segment title="SLUG-NOW"/>
-                                        </segments>
-                                        <connections>
-                                            <action selector="weekdaySelected:" destination="BYZ-38-t0r" eventType="valueChanged" id="man-sA-wLh"/>
-                                            <outletCollection property="gestureRecognizers" destination="dJS-zX-97g" appends="YES" id="Yzf-Gp-7Mw"/>
-                                        </connections>
-                                    </segmentedControl>
+                                    </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jbt-MB-zeP" customClass="VMF_TimeSlider" customModule="VirtualMeetingFinder" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="39" width="361" height="30"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -72,16 +94,38 @@
                                             <outlet property="controller" destination="BYZ-38-t0r" id="l7X-1Q-V1v"/>
                                         </connections>
                                     </view>
-                                    <textField hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Lv-Av-Z6E">
-                                        <rect key="frame" x="0.0" y="73" width="361" height="0.0"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <action selector="searchTextChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="HFL-MY-vhf"/>
-                                        </connections>
-                                    </textField>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1U8-Xx-4J1">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="a2C-Kg-6la">
                                         <rect key="frame" x="0.0" y="77" width="361" height="31"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="SLUG-SEARCH-PLACEHOLDER" textAlignment="natural" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5Lv-Av-Z6E">
+                                                <rect key="frame" x="0.0" y="0.0" width="327.33333333333331" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="searchTextChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="HFL-MY-vhf"/>
+                                                </connections>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZMA-51-InM" userLabel="Search Close Button">
+                                                <rect key="frame" x="335.33333333333331" y="0.0" width="25.666666666666686" height="31"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal">
+                                                    <imageReference key="image" image="xmark.circle" catalog="system" symbolScale="large"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="searchButtonHit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5G6-Sz-o0P"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="ZMA-51-InM" secondAttribute="bottom" id="2Fw-N0-Su6"/>
+                                            <constraint firstItem="5Lv-Av-Z6E" firstAttribute="top" secondItem="a2C-Kg-6la" secondAttribute="top" id="Hwf-s4-gm4"/>
+                                            <constraint firstAttribute="bottom" secondItem="5Lv-Av-Z6E" secondAttribute="bottom" id="Y9z-mr-UPN"/>
+                                            <constraint firstAttribute="height" constant="31" id="a3h-ZR-nUA"/>
+                                            <constraint firstItem="ZMA-51-InM" firstAttribute="top" secondItem="a2C-Kg-6la" secondAttribute="top" id="hFr-Wn-g6x"/>
+                                        </constraints>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1U8-Xx-4J1">
+                                        <rect key="frame" x="0.0" y="116" width="361" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-SORT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tI7-i6-U3H">
                                                 <rect key="frame" x="0.0" y="0.0" width="95.333333333333329" height="31"/>
@@ -90,7 +134,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mmv-Rc-Vna">
-                                                <rect key="frame" x="99.333333333333329" y="0.0" width="234.66666666666669" height="32"/>
+                                                <rect key="frame" x="99.333333333333329" y="0.0" width="222.66666666666669" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="afU-0G-yV1"/>
                                                 </constraints>
@@ -111,7 +155,8 @@
                                                 </constraints>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal">
-                                                    <imageReference key="image" image="arrowtriangle.up.fill" catalog="system" symbolScale="large"/>
+                                                    <imageReference key="image" image="line.3.horizontal.decrease.circle" catalog="system" symbolScale="large" renderingMode="template"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="sortButtonHit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sex-TK-94u"/>
@@ -123,7 +168,7 @@
                                             <constraint firstAttribute="bottom" secondItem="eDU-ua-ctg" secondAttribute="bottom" id="5KO-c8-Lme"/>
                                             <constraint firstAttribute="bottom" secondItem="tI7-i6-U3H" secondAttribute="bottom" id="NsL-z4-YsK"/>
                                             <constraint firstAttribute="bottom" secondItem="mmv-Rc-Vna" secondAttribute="bottom" id="QH9-1M-SdC"/>
-                                            <constraint firstItem="mmv-Rc-Vna" firstAttribute="trailing" secondItem="eDU-ua-ctg" secondAttribute="leading" constant="4" id="R0j-ai-tvl"/>
+                                            <constraint firstItem="mmv-Rc-Vna" firstAttribute="trailing" secondItem="eDU-ua-ctg" secondAttribute="leading" constant="-8" id="R0j-ai-tvl"/>
                                             <constraint firstItem="mmv-Rc-Vna" firstAttribute="top" secondItem="1U8-Xx-4J1" secondAttribute="top" id="S4u-6F-cjp"/>
                                             <constraint firstItem="tI7-i6-U3H" firstAttribute="trailing" secondItem="mmv-Rc-Vna" secondAttribute="leading" constant="-4" id="UKD-Ef-aCk"/>
                                             <constraint firstAttribute="trailing" secondItem="eDU-ua-ctg" secondAttribute="trailing" id="aWz-zS-E4G"/>
@@ -134,12 +179,14 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="5Lv-Av-Z6E" secondAttribute="trailing" id="X6o-RH-AMd"/>
-                                    <constraint firstItem="5Lv-Av-Z6E" firstAttribute="leading" secondItem="2sN-QZ-xyG" secondAttribute="leading" id="i45-Li-eBu"/>
+                                    <constraint firstItem="owx-Oo-Kbg" firstAttribute="leading" secondItem="2sN-QZ-xyG" secondAttribute="leading" id="dPy-M0-40t"/>
+                                    <constraint firstAttribute="trailing" secondItem="owx-Oo-Kbg" secondAttribute="trailing" id="kOU-bj-sNg"/>
+                                    <constraint firstItem="a2C-Kg-6la" firstAttribute="leading" secondItem="2sN-QZ-xyG" secondAttribute="leading" id="sdK-9X-Tz2"/>
+                                    <constraint firstAttribute="trailing" secondItem="a2C-Kg-6la" secondAttribute="trailing" id="shL-1U-6kB"/>
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wLc-od-eP8">
-                                <rect key="frame" x="16" y="211" width="361" height="558"/>
+                                <rect key="frame" x="16" y="250" width="361" height="519"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" id="eKk-PK-0mI" customClass="VMF_TableCell" customModule="VirtualMeetingFinder" customModuleProvider="target">
@@ -241,14 +288,18 @@
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="4jP-lo-p4y"/>
                     <connections>
+                        <outlet property="bottomConstraint" destination="NLw-NE-vQC" id="e0g-Kd-vKE"/>
                         <outlet property="mainContainerView" destination="2sN-QZ-xyG" id="8H6-r0-EA4"/>
+                        <outlet property="searchTextContainer" destination="a2C-Kg-6la" id="kzb-ls-ncH"/>
                         <outlet property="searchTextField" destination="5Lv-Av-Z6E" id="KZg-iH-9yf"/>
                         <outlet property="sortButton" destination="eDU-ua-ctg" id="Eln-d9-quZ"/>
+                        <outlet property="sortContainer" destination="1U8-Xx-4J1" id="kQP-a4-mzA"/>
                         <outlet property="sortLabel" destination="tI7-i6-U3H" id="lW7-9g-MCx"/>
                         <outlet property="sortSegmentedSwitch" destination="mmv-Rc-Vna" id="a9R-c9-lNP"/>
                         <outlet property="throbber" destination="U5m-vQ-VRU" id="4e5-Tk-SAS"/>
                         <outlet property="timeSlider" destination="Jbt-MB-zeP" id="xkC-hc-cP7"/>
                         <outlet property="valueTable" destination="wLc-od-eP8" id="RXN-cs-nRN"/>
+                        <outlet property="weekdayContainer" destination="owx-Oo-Kbg" id="UV0-Sg-Uuy"/>
                         <outlet property="weekdaySegmentedSwitch" destination="ucf-Dn-cRn" id="eQu-6l-bIR"/>
                         <segue destination="P9w-wB-EO1" kind="show" identifier="inspect-meeting" id="PMV-il-Mo8"/>
                     </connections>
@@ -298,8 +349,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrowtriangle.up.fill" catalog="system" width="128" height="120"/>
+        <image name="line.3.horizontal.decrease.circle" catalog="system" width="128" height="123"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="xmark.circle" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -416,19 +416,32 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
     /**
      The image to use for our ascending sort.
      */
-    private static let _sortButtonASCImage = UIImage(systemName: "arrowtriangle.up.fill")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))
+    private class var _sortButtonASCImage: UIImage? {
+        guard let image = _sortButtonDESCImage else { return nil }
+        
+        UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
+        defer { UIGraphicsEndImageContext() }
+
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        
+        context.translateBy(x: image.size.width/2, y: image.size.height/2)
+        context.scaleBy(x: 1.0, y: -1.0)
+        context.translateBy(x: -image.size.width/2, y: -image.size.height/2)
+        
+        image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        return newImage?.withRenderingMode(.alwaysTemplate)
+    }
     
     /* ################################################################## */
     /**
-     The image to use for our descending sort.
+     The image to use for our ascending sort.
      */
-    private static let _sortButtonDESCImage = UIImage(systemName: "arrowtriangle.down.fill")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))
-
-    /* ################################################################## */
-    /**
-     The height of section headers.
-     */
-    private static let _sectionTitleHeightInDisplayUnits = CGFloat(30)
+    private class var _sortButtonDESCImage: UIImage? {
+        UIImage(systemName: "line.3.horizontal.decrease.circle")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))
+    }
     
     /* ################################################################## */
     /**
@@ -441,6 +454,12 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
      The background transparency, for alternating rows (In progress).
      */
     private static let _alternateRowOpacityIP = CGFloat(0.5)
+
+    /* ################################################################## */
+    /**
+     The height of section headers, in display units.
+     */
+    private static let _sectionTitleHeightInDisplayUnits = CGFloat(30)
 
     /* ################################################################## */
     /**
@@ -459,6 +478,12 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
      This handles the meeting collection for this.
      */
     private var _meetings: [MeetingInstance] = []
+    
+    /* ################################################################## */
+    /**
+     This is used to restore the bottom of the stack view, when the keyboard is hidden.
+     */
+    private var _atRestConstant: CGFloat = 0
 
     /* ################################################################## */
     /**
@@ -495,9 +520,18 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
      */
     private var _isNameSearchMode: Bool = false {
         didSet {
-            searchTextField?.isHidden = !_isNameSearchMode
-            weekdaySegmentedSwitch?.isHidden = _isNameSearchMode
+            searchTextContainer?.isHidden = !_isNameSearchMode
+            weekdayContainer?.isHidden = _isNameSearchMode
+            sortContainer?.isHidden = _isNameSearchMode
+            
+            if _isNameSearchMode {
+                searchTextField?.becomeFirstResponder()
+            } else {
+                searchTextField?.resignFirstResponder()
+            }
+            
             timeSlider?.isHidden = _isNameSearchMode && (7 != weekdaySegmentedSwitch?.selectedSegmentIndex)
+            _cachedTableFood = []
             valueTable?.reloadData()
         }
     }
@@ -507,6 +541,12 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
      Used for the "Pull to Refresh"
      */
     private weak var _refreshControl: UIRefreshControl?
+    
+    /* ################################################################## */
+    /**
+     Cached table data.
+     */
+    private var _cachedTableFood: [(sectionTitle: String, meetings: [MeetingInstance])] = []
 
     /* ################################################################## */
     /**
@@ -565,6 +605,22 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
      */
     @IBOutlet weak var sortSegmentedSwitch: UISegmentedControl?
     
+    /* ################################################################## */
+    /**
+     The container for the weekday switch.
+     */
+    @IBOutlet weak var weekdayContainer: UIStackView?
+    
+    /* ################################################################## */
+    /**
+     The container for the sort items.
+     */
+    @IBOutlet weak var sortContainer: UIView?
+    
+    /* ################################################################## */
+    /**
+     The label for the sort switch.
+     */
     @IBOutlet weak var sortLabel: UILabel?
     
     /* ################################################################## */
@@ -573,6 +629,18 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
      */
     @IBOutlet weak var sortButton: UIButton?
     
+    /* ################################################################## */
+    /**
+     The container for the search text field.
+     */
+    @IBOutlet weak var searchTextContainer: UIStackView?
+
+    /* ################################################################## */
+    /**
+     The bottom constraint of the text area. We use this to shrink the text area, when the keyboard is shown.
+     */
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint?
+
     /* ################################################################## */
     /**
      The "Throbber" view
@@ -591,6 +659,8 @@ extension VMF_MainSearchViewController {
     var searchedMeetings: [MeetingInstance] {
         let testString = searchTextField?.text?.lowercased() ?? ""
         
+        guard !testString.isEmpty else { return _virtualService?.meetings.map { $0.meeting } ?? [] }
+        
         return (_virtualService?.meetings.filter { mtg in mtg.meeting.name.lowercased().beginsWith(testString) }.map { $0.meeting } ?? [])
     }
     
@@ -601,8 +671,15 @@ extension VMF_MainSearchViewController {
      It is arranged in sections, with the "meetings" member, containing the row data.
      */
     var tableFood: [(sectionTitle: String, meetings: [MeetingInstance])] {
+        guard _cachedTableFood.isEmpty else { return _cachedTableFood }
+        
         let currentIntegerTime = Calendar.current.component(.hour, from: .now) * 100 + Calendar.current.component(.minute, from: .now)
-        let meetings = (_isNameSearchMode ? searchedMeetings : _meetings).sorted { a, b in
+        guard !_isNameSearchMode else {
+            let meetings = searchedMeetings.sorted { a, b in a.name.lowercased() < b.name.lowercased() }
+            return [(sectionTitle: "", meetings: meetings)]
+        }
+        
+        let meetings = _meetings.sorted { a, b in
             var ret = false
             
             let tzA = Self.getMeetingTimeZone(a)
@@ -662,7 +739,9 @@ extension VMF_MainSearchViewController {
             return self._isSortAsc ? ret : !ret
         }
         
-        return [(sectionTitle: "", meetings: meetings)]
+        _cachedTableFood = [(sectionTitle: "", meetings: meetings)]
+        
+        return _cachedTableFood
     }
 }
 
@@ -681,7 +760,9 @@ extension VMF_MainSearchViewController {
         _refreshControl = refresh
         valueTable?.refreshControl = refresh
         sortLabel?.text = sortLabel?.text?.localizedVariant
+        searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
         isThrobbing = true
+        _atRestConstant = bottomConstraint?.constant ?? 0
         for index in (0..<(sortSegmentedSwitch?.numberOfSegments ?? 0)) {
             sortSegmentedSwitch?.setTitle(sortSegmentedSwitch?.titleForSegment(at: index)?.localizedVariant, forSegmentAt: index)
         }
@@ -699,6 +780,43 @@ extension VMF_MainSearchViewController {
         super.viewWillAppear(inIsAnimated)
         _wasNow = false
         _isSortAsc = true
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
+    /* ################################################################## */
+    /**
+     Called just before the view disappears.
+     
+     - parameter inIsAnimated: True, if the disappearance is animated.
+     */
+    override func viewWillDisappear(_ inIsAnimated: Bool) {
+        super.viewWillDisappear(inIsAnimated)
+        _isNameSearchMode = false
+        bottomConstraint?.constant = _atRestConstant
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
 }
 
@@ -765,7 +883,7 @@ extension VMF_MainSearchViewController {
                 currentDay -= 7
             }
             
-            let weekdaySymbols = Calendar.current.shortWeekdaySymbols
+            let weekdaySymbols = Calendar.current.veryShortStandaloneWeekdaySymbols
             let weekdayName = weekdaySymbols[currentDay - 1]
 
             weekdaySegmentedSwitch?.setTitle(weekdayName, forSegmentAt: index)
@@ -942,9 +1060,11 @@ extension VMF_MainSearchViewController {
      Called to set up the sort button.
      */
     func setSortButton() {
+        guard let tintColor = view?.tintColor else { return }
+        
         let image = _isSortAsc ? Self._sortButtonASCImage : Self._sortButtonDESCImage
         
-        sortButton?.setImage(image, for: .normal)
+        sortButton?.setImage(image?.withTintColor(tintColor), for: .normal)
     }
 }
 
@@ -960,6 +1080,7 @@ extension VMF_MainSearchViewController {
      */
     @IBAction func sliderChanged(_ inTimeSlider: VMF_TimeSlider) {
         _meetings = inTimeSlider.selectedMeetings
+        _cachedTableFood = []
         valueTable?.reloadData()
     }
     
@@ -993,6 +1114,33 @@ extension VMF_MainSearchViewController {
         }
     }
     
+    /* ################################################################## */
+    /**
+     This is called just before the keyboard shows. We use this to "nudge" the display items up.
+     
+     - parameter notification: The notification being passed in.
+     */
+    @objc func keyboardWillShow(notification inNotification: NSNotification) {
+        DispatchQueue.main.async { [weak self] in
+            if let keyboardSize = (inNotification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                let newPosition = (keyboardSize.size.height - (self?.view?.safeAreaInsets.bottom ?? 0))
+                self?.bottomConstraint?.constant = newPosition
+            }
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     This is called just before the keyboard shows. We use this to return the login items to their original position.
+     
+     - parameter notification: The notification being passed in.
+     */
+    @objc func keyboardWillHide(notification: NSNotification) {
+        DispatchQueue.main.async { [weak self] in
+            self?.bottomConstraint?.constant = self?._atRestConstant ?? 0
+        }
+    }
+
     /* ################################################################## */
     /**
      Called when the user taps on the search button.
@@ -1039,6 +1187,7 @@ extension VMF_MainSearchViewController {
             sortSegmentedSwitch?.setEnabled(true, forSegmentAt: SortType.time.rawValue)
             sortSegmentedSwitch?.selectedSegmentIndex = SortType.time.rawValue
             sortSegmentedSwitch?.sendActions(for: .valueChanged)
+            _cachedTableFood = []
             valueTable?.reloadData()
         } else {
             timeSlider?.isHidden = false
@@ -1055,9 +1204,10 @@ extension VMF_MainSearchViewController {
     /**
      The segmented switch that sets the sort was changed
      
-     - parameter inSwitch: The switch that changed.
+     - parameter: Ignored (and can be omitted).
      */
-    @IBAction func sortChanged(_ inSwitch: UISegmentedControl) {
+    @IBAction func sortChanged(_: Any! = nil) {
+        _cachedTableFood = []
         valueTable?.reloadData()
     }
     
@@ -1069,7 +1219,7 @@ extension VMF_MainSearchViewController {
      */
     @IBAction func sortButtonHit(_: Any) {
         _isSortAsc = !_isSortAsc
-        valueTable?.reloadData()
+        sortChanged()
     }
     
     /* ################################################################## */
@@ -1080,7 +1230,6 @@ extension VMF_MainSearchViewController {
      */
     @IBAction func searchTextChanged(_: UITextField) {
         guard _isNameSearchMode else { return }
-        
         valueTable?.reloadData()
     }
 }

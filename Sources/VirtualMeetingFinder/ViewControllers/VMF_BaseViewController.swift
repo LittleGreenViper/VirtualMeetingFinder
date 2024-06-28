@@ -40,7 +40,7 @@ extension VMF_BaseViewController {
      */
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
-//        navigationController?.isNavigationBarHidden = false
+        navigationController?.isNavigationBarHidden = false
     }
 }
 
@@ -64,7 +64,7 @@ extension VMF_TabBaseViewController {
      */
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
-//        navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
     }
 }
 

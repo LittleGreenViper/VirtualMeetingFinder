@@ -850,6 +850,20 @@ extension VMF_MainSearchViewController {
             object: nil
         )
     }
+    
+    /* ################################################################## */
+    /**
+     Called just before the view segues to another one.
+     
+     - parameter for: The segue instance.
+     - parameter sender: Any associated data.
+     */
+    override func prepare(for inSegue: UIStoryboardSegue, sender inData: Any?) {
+        if let destination = inSegue.destination as? VMF_MeetingViewController,
+           let meetingInstance = inData as? MeetingInstance {
+            destination.meeting = meetingInstance
+        }
+    }
 }
 
 /* ###################################################################################################################################### */

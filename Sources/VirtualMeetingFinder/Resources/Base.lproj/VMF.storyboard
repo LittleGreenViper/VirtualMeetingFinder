@@ -402,11 +402,21 @@
                                                     <constraint firstItem="xZf-jJ-gKs" firstAttribute="width" secondItem="iiY-EJ-6gz" secondAttribute="width" id="ut8-bw-HEN"/>
                                                 </constraints>
                                             </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Jma-Ch-ImX">
+                                                <rect key="frame" x="0.0" y="104" width="361" height="50"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wIx-9C-qJ9" userLabel="FillerView">
-                                                <rect key="frame" x="155.66666666666666" y="104" width="50" height="611"/>
+                                                <rect key="frame" x="155.66666666666666" y="162" width="50" height="553"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Jma-Ch-ImX" secondAttribute="trailing" id="Acz-lt-qqX"/>
+                                            <constraint firstItem="Jma-Ch-ImX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="PxC-0D-xIc"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -438,6 +448,7 @@
                         <outlet property="globeButton" destination="csv-V3-CFc" id="la5-0z-QMb"/>
                         <outlet property="linkContainer" destination="hZz-Uk-7C5" id="TgN-KP-Y0k"/>
                         <outlet property="phoneButton" destination="iiY-EJ-6gz" id="bEv-LQ-2G3"/>
+                        <outlet property="phoneInfoLabel" destination="Jma-Ch-ImX" id="vc1-0V-Kfx"/>
                         <outlet property="timeAndDayLabel" destination="SEd-7M-M7Z" id="2Th-48-ftz"/>
                         <outlet property="timeZoneLabel" destination="JRB-g7-5Qt" id="EPy-5X-PrG"/>
                         <outlet property="videoButton" destination="xZf-jJ-gKs" id="SWs-9K-eLh"/>

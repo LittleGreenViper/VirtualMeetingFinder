@@ -524,13 +524,13 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
     /**
      This is set to true, if we are in name search mode.
      */
-    private var _isNameSearchMode: Bool = false {
+    var isNameSearchMode: Bool = false {
         didSet {
-            searchTextContainer?.isHidden = !_isNameSearchMode
-            weekdayContainer?.isHidden = _isNameSearchMode
-            sortContainer?.isHidden = _isNameSearchMode || tableFood.isEmpty || (1 >= tableFood[0].meetings.count)
+            searchTextContainer?.isHidden = !isNameSearchMode
+            weekdayContainer?.isHidden = isNameSearchMode
+            sortContainer?.isHidden = isNameSearchMode || tableFood.isEmpty || (1 >= tableFood[0].meetings.count)
             
-            if _isNameSearchMode {
+            if isNameSearchMode {
                 _refreshControl?.isEnabled = false
                 searchTextField?.becomeFirstResponder()
             } else {
@@ -538,7 +538,7 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
                 searchTextField?.resignFirstResponder()
             }
             
-            timeSlider?.isHidden = _isNameSearchMode || (7 == weekdaySegmentedSwitch?.selectedSegmentIndex)
+            timeSlider?.isHidden = isNameSearchMode || (7 == weekdaySegmentedSwitch?.selectedSegmentIndex)
             _cachedTableFood = []
             valueTable?.reloadData()
         }
@@ -688,7 +688,7 @@ extension VMF_MainSearchViewController {
         guard _cachedTableFood.isEmpty else { return _cachedTableFood }
         
         let currentIntegerTime = Calendar.current.component(.hour, from: .now) * 100 + Calendar.current.component(.minute, from: .now)
-        guard !_isNameSearchMode else { return [(sectionTitle: "", meetings: searchedMeetings)] }
+        guard !isNameSearchMode else { return [(sectionTitle: "", meetings: searchedMeetings)] }
         
         let meetings = _meetings.sorted { a, b in
             var ret = false
@@ -809,7 +809,7 @@ extension VMF_MainSearchViewController {
 
         setSortButton()
         
-        if _isNameSearchMode {
+        if isNameSearchMode {
             _refreshControl?.isEnabled = false
             searchTextContainer?.isHidden = false
             weekdayContainer?.isHidden = true
@@ -825,6 +825,8 @@ extension VMF_MainSearchViewController {
             _cachedTableFood = []
         }
         
+        VMF_AppDelegate.searchController = self
+        
         valueTable?.reloadData()
     }
     
@@ -835,6 +837,8 @@ extension VMF_MainSearchViewController {
      - parameter inIsAnimated: True, if the disappearance is animated.
      */
     override func viewWillDisappear(_ inIsAnimated: Bool) {
+        VMF_AppDelegate.searchController = nil
+        
         super.viewWillDisappear(inIsAnimated)
         searchTextField?.resignFirstResponder()
         bottomConstraint?.constant = _atRestConstant
@@ -1150,7 +1154,7 @@ extension VMF_MainSearchViewController {
      - parameter: ignored
      */
     @objc func findMeetings(_: Any! = nil) {
-        guard !_isNameSearchMode else {
+        guard !isNameSearchMode else {
             _refreshControl?.endRefreshing()
             return
         }
@@ -1202,7 +1206,7 @@ extension VMF_MainSearchViewController {
      - parameter: ignored
      */
     @IBAction func searchButtonHit(_: Any) {
-        _isNameSearchMode = !_isNameSearchMode
+        isNameSearchMode = !isNameSearchMode
     }
     
     /* ################################################################## */
@@ -1283,7 +1287,7 @@ extension VMF_MainSearchViewController {
      - parameter inTextField: The search text field (ignored)
      */
     @IBAction func searchTextChanged(_: UITextField) {
-        guard _isNameSearchMode else { return }
+        guard isNameSearchMode else { return }
         valueTable?.reloadData()
     }
 }
@@ -1314,7 +1318,7 @@ extension VMF_MainSearchViewController: UITableViewDataSource {
      */
     func tableView(_: UITableView, numberOfRowsInSection inSectionIndex: Int) -> Int {
         let ret = tableFood[inSectionIndex].meetings.count
-        sortContainer?.isHidden = _isNameSearchMode || 1 >= ret
+        sortContainer?.isHidden = isNameSearchMode || 1 >= ret
         
         return ret
     }

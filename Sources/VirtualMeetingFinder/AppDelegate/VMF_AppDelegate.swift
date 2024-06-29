@@ -20,24 +20,31 @@
 import UIKit
 import SwiftBMLSDK
 
+/* ###################################################################################################################################### */
+// MARK: - Image Assignment Enum, for Meeting Access Types -
+/* ###################################################################################################################################### */
 extension SwiftBMLSDK_Parser.Meeting.SortableMeetingType {
+    /* ################################################################## */
+    /**
+     Returns the correct image to use, for the type. Returns nil, if no image available.
+     */
     var image: UIImage? {
-        var imageName = "G"
+        var imageName = "G" // Generic Web
         
         switch self {
-        case .inPerson:
+        case .inPerson: // We don't do in-person, alone
             break
-        case .virtual:
+        case .virtual:  // Virtual, and has both video and phone
             imageName = "V-P"
-        case .virtual_phone:
+        case .virtual_phone:    // Virtual, phone-only
             imageName = "P"
-        case .virtual_video:
+        case .virtual_video:    // Virtual, video-only
             imageName = "V"
-        case .hybrid:
+        case .hybrid:           // Hybrid, with both video and phone virtual options
             imageName = "V-P-M"
-        case .hybrid_phone:
+        case .hybrid_phone:     // Hybrid, with only a phone dial-in option
             imageName = "P-M"
-        case .hybrid_video:
+        case .hybrid_video:     // Hybrid, with only a video option
             imageName = "V-M"
         }
         
@@ -97,9 +104,29 @@ extension Date {
 // MARK: - Main App Delegate -
 /* ###################################################################################################################################### */
 /**
+ This is the original app delegate part of the app (starting point). We are actually using Scene Delegate, but this is a good place to use as a "fulcrum."
  */
 @main
-class VMF_AppDelegate: UIResponder, UIApplicationDelegate {
+class VMF_AppDelegate: UIResponder {
+    /* ################################################################## */
+    /**
+     This is set to the open meeting, if we have one we are looking at.
+     */
+    static var openMeeting: VMF_MeetingViewController?
+    
+    /* ################################################################## */
+    /**
+     This is set to the open search tab, if it is selected.
+     
+     We do this, so we can exit name search mode, if we go into the background.
+     */
+    static var searchController: VMF_MainSearchViewController?
+}
+
+/* ###################################################################################################################################### */
+// MARK: UIApplicationDelegate Conformance
+/* ###################################################################################################################################### */
+extension VMF_AppDelegate: UIApplicationDelegate {
     /* ################################################################## */
     /**
      This opens a URL.
@@ -121,8 +148,6 @@ class VMF_AppDelegate: UIResponder, UIApplicationDelegate {
      - returns: True (always).
      */
     func application(_: UIApplication, didFinishLaunchingWithOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool { true }
-
-    // MARK: UISceneSession Lifecycle
 
     /* ################################################################## */
     /**

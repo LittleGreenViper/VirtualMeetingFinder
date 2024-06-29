@@ -42,5 +42,19 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ inScene: UIScene, willConnectTo: UISceneSession, options: UIScene.ConnectionOptions) {
         _ = (inScene as? UIWindowScene) // Forces the window to be set.
     }
+    
+    /* ################################################################## */
+    /**
+     Called after the scene has gone into the background.
+     
+     - parameter: The scene instance (ignored).
+     */
+    func sceneDidEnterBackground(_: UIScene) {
+        #if DEBUG
+            print("\n#### Scene Entered the Background.\n####\n")
+        #endif
+        
+        VMF_AppDelegate.searchController?.isNameSearchMode = false
+    }
 }
 

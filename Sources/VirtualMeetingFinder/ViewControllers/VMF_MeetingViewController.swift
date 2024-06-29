@@ -68,6 +68,12 @@ class VMF_MeetingViewController: VMF_BaseViewController {
      This is the Web link button.
      */
     @IBOutlet weak var globeButton: UIButton?
+    
+    /* ################################################################## */
+    /**
+     Contains any phone info that can't be turned into a URL.
+     */
+    @IBOutlet weak var phoneInfoLabel: UILabel?
 }
 
 /* ###################################################################################################################################### */
@@ -121,30 +127,41 @@ extension VMF_MeetingViewController {
         setTimeZone()
         setTimeAndWeekday()
         
-        if let videoLinkURL = meeting?.directAppURI,
-           UIApplication.shared.canOpenURL(videoLinkURL) {
-            videoButton?.isHidden = false
-        } else {
-            videoButton?.isHidden = true
+        phoneButton?.isHidden = true
+        videoButton?.isHidden = true
+        globeButton?.isHidden = true
+        phoneInfoLabel?.isHidden = true
+        
+        var directPhoneNumberString = meeting?.directPhoneURI?.absoluteString.replacingOccurrences(of: "https://", with: "tel:") ?? ""
+        
+        if directPhoneNumberString.isEmpty,
+           let numbers = meeting?.virtualPhoneNumber?.decimalOnly,
+           !numbers.isEmpty {
+            directPhoneNumberString = "tel:\(numbers)"
         }
         
-        if let webLinkURL = meeting?.virtualURL,
+        if !directPhoneNumberString.isEmpty,
+           let directURI = URL(string: directPhoneNumberString),
+           UIApplication.shared.canOpenURL(directURI) {
+            phoneButton?.isHidden = false
+        }
+        
+        if nil != meeting?.directAppURI {
+            videoButton?.isHidden = false
+        }
+        
+        if nil == meeting?.directAppURI,
+           nil == meeting?.directPhoneURI,
+           let webLinkURL = meeting?.virtualURL,
            UIApplication.shared.canOpenURL(webLinkURL) {
             globeButton?.isHidden = false
-        } else {
-            globeButton?.isHidden = true
-        }
-
-        if let phoneString = meeting?.virtualPhoneNumber {
-            if let phoneURLTemp = Self._cleanURI(urlString: phoneString),
-               let phoneURL = URL(string: phoneURLTemp) {
-                if "tel" == phoneURL.scheme,
-                   UIApplication.shared.canOpenURL(phoneURL) {
-                    phoneButton?.isHidden = false
-                } else {
-                    phoneButton?.isHidden = true
-                }
-            }
+        } 
+        
+        if directPhoneNumberString.isEmpty,
+           let vPhone = meeting?.virtualPhoneNumber,
+           !vPhone.isEmpty {
+            phoneInfoLabel?.isHidden = false
+            phoneInfoLabel?.text = String(format: "SLUG-PHONE-NUMBER-FORMAT".localizedVariant, vPhone)
         }
     }
 }
@@ -208,12 +225,18 @@ extension VMF_MeetingViewController {
      - parameter: ignored
      */
     @IBAction func phoneButtonHit(_: Any) {
-        if let phoneString = meeting?.virtualPhoneNumber,
-           let phoneURLTemp = Self._cleanURI(urlString: phoneString),
-           let phoneURL = URL(string: phoneURLTemp),
-           "tel" == phoneURL.scheme,
-           UIApplication.shared.canOpenURL(phoneURL) {
-            VMF_AppDelegate.open(url: phoneURL)
+        var directPhoneNumberString = meeting?.directPhoneURI?.absoluteString.replacingOccurrences(of: "https://", with: "tel:") ?? ""
+        
+        if directPhoneNumberString.isEmpty,
+           let numbers = meeting?.virtualPhoneNumber?.decimalOnly,
+           !numbers.isEmpty {
+            directPhoneNumberString = "tel:\(numbers)"
+        }
+        
+        if !directPhoneNumberString.isEmpty,
+           let directURI = URL(string: directPhoneNumberString),
+           UIApplication.shared.canOpenURL(directURI) {
+            VMF_AppDelegate.open(url: directURI)
         }
     }
     
@@ -237,8 +260,7 @@ extension VMF_MeetingViewController {
      - parameter: ignored
      */
     @IBAction func videoButtonHit(_: Any) {
-        if let videoLinkURL = meeting?.directAppURI,
-           UIApplication.shared.canOpenURL(videoLinkURL) {
+        if let videoLinkURL = meeting?.directAppURI {
             VMF_AppDelegate.open(url: videoLinkURL)
         }
     }

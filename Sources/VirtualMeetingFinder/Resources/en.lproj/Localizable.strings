@@ -34,3 +34,4 @@
 "SLUG-SORT"                                     =   "Sort:";
 "SLUG-SEARCH-PLACEHOLDER"                       =   "Enter A Meeting Name";
 "SLUG-WEEKDAY-TIME-FORMAT"                      =   "%@s, at %@";
+"SLUG-PHONE-NUMBER-FORMAT"                      =   "Phone: %@";

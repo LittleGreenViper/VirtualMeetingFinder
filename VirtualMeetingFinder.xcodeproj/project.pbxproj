@@ -17,6 +17,7 @@
 		D493933C2C2616C7006438AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D493933B2C2616C7006438AE /* Base */; };
 		D493933E2C2616C8006438AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D493933D2C2616C8006438AE /* Assets.xcassets */; };
 		D49393412C2616C8006438AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D49393402C2616C8006438AE /* Base */; };
+		D4A5E41C2C30BE5900CF6068 /* SwiftBMLSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D4A5E41B2C30BE5900CF6068 /* SwiftBMLSDK */; };
 		D4B69A342C2B162900D24DA6 /* VMF_MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B69A332C2B162800D24DA6 /* VMF_MeetingViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */,
+				D4A5E41C2C30BE5900CF6068 /* SwiftBMLSDK in Frameworks */,
 				D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,6 +175,7 @@
 			packageProductDependencies = (
 				D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */,
 				D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */,
+				D4A5E41B2C30BE5900CF6068 /* SwiftBMLSDK */,
 			);
 			productName = VirtualMeetingFinder;
 			productReference = D49393312C2616C7006438AE /* VirtualMeetingFinder.app */;
@@ -205,6 +208,7 @@
 			packageReferences = (
 				D4398E652C2892790001FAE3 /* XCRemoteSwiftPackageReference "RVS_Generic_Swift_Toolbox" */,
 				D4398E682C2892830001FAE3 /* XCRemoteSwiftPackageReference "RVS_UIKit_Toolbox" */,
+				D4A5E41A2C30BE5900CF6068 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */,
 			);
 			productRefGroup = D49393322C2616C7006438AE /* Products */;
 			projectDirPath = "";
@@ -489,6 +493,14 @@
 				minimumVersion = 1.6.1;
 			};
 		};
+		D4A5E41A2C30BE5900CF6068 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/LittleGreenViper/SwiftBMLSDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -501,6 +513,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D4398E682C2892830001FAE3 /* XCRemoteSwiftPackageReference "RVS_UIKit_Toolbox" */;
 			productName = RVS_UIKit_Toolbox;
+		};
+		D4A5E41B2C30BE5900CF6068 /* SwiftBMLSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4A5E41A2C30BE5900CF6068 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */;
+			productName = SwiftBMLSDK;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

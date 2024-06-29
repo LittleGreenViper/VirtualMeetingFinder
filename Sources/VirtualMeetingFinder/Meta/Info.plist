@@ -4,6 +4,15 @@
 <dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>comgooglemaps</string>
+		<string>zoomus</string>
+		<string>lmi-g2m</string>
+		<string>skype</string>
+		<string>maps</string>
+		<string>gmeet</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

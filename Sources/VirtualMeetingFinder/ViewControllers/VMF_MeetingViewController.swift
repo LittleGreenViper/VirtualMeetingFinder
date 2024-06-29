@@ -44,6 +44,67 @@ class VMF_MeetingViewController: VMF_BaseViewController {
      The label that displays the meeting start time and weekday.
      */
     @IBOutlet weak var timeAndDayLabel: UILabel?
+    
+    /* ################################################################## */
+    /**
+     This contains the tappable links.
+     */
+    @IBOutlet weak var linkContainer: UIStackView?
+    
+    /* ################################################################## */
+    /**
+     This is the phone in button.
+     */
+    @IBOutlet weak var phoneButton: UIButton?
+    
+    /* ################################################################## */
+    /**
+     This is the video link button.
+     */
+    @IBOutlet weak var videoButton: UIButton?
+    
+    /* ################################################################## */
+    /**
+     This is the Web link button.
+     */
+    @IBOutlet weak var globeButton: UIButton?
+}
+
+/* ###################################################################################################################################### */
+// MARK: Static Functions
+/* ###################################################################################################################################### */
+extension VMF_MeetingViewController {
+    /* ################################################################## */
+    /**
+     "Cleans" a URI.
+     
+     - parameter urlString: The URL, as a String. It can be optional.
+     
+     - returns: an optional String. This is the given URI, "cleaned up" ("https://" or "tel:" may be prefixed)
+     */
+    private static func _cleanURI(urlString inURLString: String?) -> String? {
+        guard var ret: String = inURLString?.urlEncodedString,
+              let regex = try? NSRegularExpression(pattern: "^(http://|https://|tel://|tel:)", options: .caseInsensitive)
+        else { return nil }
+        
+        // We specifically look for tel URIs.
+        let wasTel = ret.lowercased().beginsWith("tel:")
+        
+        // Yeah, this is pathetic, but it's quick, simple, and works a charm.
+        ret = regex.stringByReplacingMatches(in: ret, options: [], range: NSRange(location: 0, length: ret.count), withTemplate: "")
+
+        if ret.isEmpty {
+            return nil
+        }
+        
+        if wasTel {
+            ret = "tel:" + ret
+        } else {
+            ret = "https://" + ret
+        }
+        
+        return ret
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -59,6 +120,32 @@ extension VMF_MeetingViewController {
         setScreenTitle()
         setTimeZone()
         setTimeAndWeekday()
+        
+        if let videoLinkURL = meeting?.directAppURI,
+           UIApplication.shared.canOpenURL(videoLinkURL) {
+            videoButton?.isHidden = false
+        } else {
+            videoButton?.isHidden = true
+        }
+        
+        if let webLinkURL = meeting?.virtualURL,
+           UIApplication.shared.canOpenURL(webLinkURL) {
+            globeButton?.isHidden = false
+        } else {
+            globeButton?.isHidden = true
+        }
+
+        if let phoneString = meeting?.virtualPhoneNumber {
+            if let phoneURLTemp = Self._cleanURI(urlString: phoneString),
+               let phoneURL = URL(string: phoneURLTemp) {
+                if "tel" == phoneURL.scheme,
+                   UIApplication.shared.canOpenURL(phoneURL) {
+                    phoneButton?.isHidden = false
+                } else {
+                    phoneButton?.isHidden = true
+                }
+            }
+        }
     }
 }
 
@@ -107,5 +194,52 @@ extension VMF_MeetingViewController {
         topLabel.numberOfLines = 0
         topLabel.lineBreakMode = .byWordWrapping
         navigationItem.titleView = topLabel
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Callbacks
+/* ###################################################################################################################################### */
+extension VMF_MeetingViewController {
+    /* ################################################################## */
+    /**
+     The phone in button was hit.
+     
+     - parameter: ignored
+     */
+    @IBAction func phoneButtonHit(_: Any) {
+        if let phoneString = meeting?.virtualPhoneNumber,
+           let phoneURLTemp = Self._cleanURI(urlString: phoneString),
+           let phoneURL = URL(string: phoneURLTemp),
+           "tel" == phoneURL.scheme,
+           UIApplication.shared.canOpenURL(phoneURL) {
+            VMF_AppDelegate.open(url: phoneURL)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     The globe button was hit.
+     
+     - parameter: ignored
+     */
+    @IBAction func globeButtonHit(_: Any) {
+        if let webLinkURL = meeting?.virtualURL,
+           UIApplication.shared.canOpenURL(webLinkURL) {
+            VMF_AppDelegate.open(url: webLinkURL)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     The video button was hit.
+     
+     - parameter: ignored
+     */
+    @IBAction func videoButtonHit(_: Any) {
+        if let videoLinkURL = meeting?.directAppURI,
+           UIApplication.shared.canOpenURL(videoLinkURL) {
+            VMF_AppDelegate.open(url: videoLinkURL)
+        }
     }
 }

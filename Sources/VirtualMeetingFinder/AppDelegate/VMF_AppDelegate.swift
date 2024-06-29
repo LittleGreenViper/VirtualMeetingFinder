@@ -102,6 +102,18 @@ extension Date {
 class VMF_AppDelegate: UIResponder, UIApplicationDelegate {
     /* ################################################################## */
     /**
+     This opens a URL.
+     
+     - parameter url: The URL to open.
+     - parameter options: The URLoptions.
+     - parameter completionHandler: The closure to be executed, upon completion of the open.
+     */
+    class func open(url inURL: URL, options inOptions: [UIApplication.OpenExternalURLOptionsKey: Any] = [:], completionHandler inClosure: ((Bool) -> Void)? = nil) {
+        UIApplication.shared.open(inURL, options: inOptions, completionHandler: inClosure)
+    }
+
+    /* ################################################################## */
+    /**
      Called when the app has set itself up, and is about to start.
      
      - parameter: The application (ignored)

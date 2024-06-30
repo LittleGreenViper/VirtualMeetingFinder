@@ -269,6 +269,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="U5m-vQ-VRU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="05e-HT-zja"/>
                             <constraint firstAttribute="bottom" secondItem="U5m-vQ-VRU" secondAttribute="bottom" id="CtO-Hx-j2B"/>
@@ -282,6 +283,10 @@
                             <constraint firstItem="U5m-vQ-VRU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="uQ3-gU-PPq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2sN-QZ-xyG" secondAttribute="trailing" constant="16" id="w4n-gz-Ue8"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="pXA-ZD-hsi" appends="YES" id="tfE-Lf-RBq"/>
+                            <outletCollection property="gestureRecognizers" destination="A8A-Ff-Qbh" appends="YES" id="HtW-hB-TZX"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="SLUG-WEEKDAY-SEARCH" id="9JH-o6-AH8">
                         <imageReference key="image" image="magnifyingglass" catalog="system" symbolScale="large"/>
@@ -289,7 +294,9 @@
                     <navigationItem key="navigationItem" id="4jP-lo-p4y"/>
                     <connections>
                         <outlet property="bottomConstraint" destination="NLw-NE-vQC" id="e0g-Kd-vKE"/>
+                        <outlet property="leftSwipeRecognizer" destination="pXA-ZD-hsi" id="9sC-PZ-2eo"/>
                         <outlet property="mainContainerView" destination="2sN-QZ-xyG" id="8H6-r0-EA4"/>
+                        <outlet property="rightSwipeRecognizer" destination="A8A-Ff-Qbh" id="OY0-cp-pmp"/>
                         <outlet property="searchTextContainer" destination="a2C-Kg-6la" id="kzb-ls-ncH"/>
                         <outlet property="searchTextField" destination="5Lv-Av-Z6E" id="KZg-iH-9yf"/>
                         <outlet property="sortButton" destination="eDU-ua-ctg" id="Eln-d9-quZ"/>
@@ -310,6 +317,16 @@
                         <action selector="weekdayTapped:" destination="BYZ-38-t0r" id="hbm-xN-enA"/>
                     </connections>
                 </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="A8A-Ff-Qbh" userLabel="Right Swipe Gesture Recognizer">
+                    <connections>
+                        <action selector="rightSwipeRecognizerHit:" destination="BYZ-38-t0r" id="rms-Px-jDY"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="pXA-ZD-hsi" userLabel="Left Swipe Gesture Recognizer">
+                    <connections>
+                        <action selector="leftSwipeRecognizerHit:" destination="BYZ-38-t0r" id="drE-Kk-zy6"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="110.68702290076335" y="-27.464788732394368"/>
         </scene>
@@ -364,10 +381,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="hZz-Uk-7C5">
-                                                <rect key="frame" x="80.666666666666686" y="56" width="200" height="40"/>
+                                                <rect key="frame" x="80.666666666666686" y="56" width="200" height="40.333333333333343"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iiY-EJ-6gz">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.33333333333334281" width="40" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="A8T-C1-2PG"/>
                                                             <constraint firstAttribute="width" secondItem="iiY-EJ-6gz" secondAttribute="height" multiplier="1:1" id="NNH-47-f8p"/>
@@ -379,7 +396,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csv-V3-CFc">
-                                                        <rect key="frame" x="79.999999999999986" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="79.999999999999986" y="0.33333333333334281" width="40" height="40"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" image="Globe"/>
                                                         <connections>
@@ -387,7 +404,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZf-jJ-gKs">
-                                                        <rect key="frame" x="160" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="160" y="0.33333333333334281" width="40" height="40"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" image="Video"/>
                                                         <connections>
@@ -402,20 +419,22 @@
                                                     <constraint firstItem="xZf-jJ-gKs" firstAttribute="width" secondItem="iiY-EJ-6gz" secondAttribute="width" id="ut8-bw-HEN"/>
                                                 </constraints>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Jma-Ch-ImX">
-                                                <rect key="frame" x="0.0" y="104" width="361" height="50"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GER-7R-iCr">
+                                                <rect key="frame" x="0.0" y="104.33333333333334" width="361" height="36.333333333333343"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
+                                            </textView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wIx-9C-qJ9" userLabel="FillerView">
-                                                <rect key="frame" x="155.66666666666666" y="162" width="50" height="553"/>
+                                                <rect key="frame" x="155.66666666666666" y="148.66666666666669" width="50" height="566.33333333333326"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Jma-Ch-ImX" secondAttribute="trailing" id="Acz-lt-qqX"/>
-                                            <constraint firstItem="Jma-Ch-ImX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="PxC-0D-xIc"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GER-7R-iCr" secondAttribute="trailing" id="0gJ-uC-GSN"/>
+                                            <constraint firstItem="GER-7R-iCr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="7x0-3G-B7q"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -448,7 +467,7 @@
                         <outlet property="globeButton" destination="csv-V3-CFc" id="la5-0z-QMb"/>
                         <outlet property="linkContainer" destination="hZz-Uk-7C5" id="TgN-KP-Y0k"/>
                         <outlet property="phoneButton" destination="iiY-EJ-6gz" id="bEv-LQ-2G3"/>
-                        <outlet property="phoneInfoLabel" destination="Jma-Ch-ImX" id="vc1-0V-Kfx"/>
+                        <outlet property="phoneInfoTextView" destination="GER-7R-iCr" id="cTD-0c-beU"/>
                         <outlet property="timeAndDayLabel" destination="SEd-7M-M7Z" id="2Th-48-ftz"/>
                         <outlet property="timeZoneLabel" destination="JRB-g7-5Qt" id="EPy-5X-PrG"/>
                         <outlet property="videoButton" destination="xZf-jJ-gKs" id="SWs-9K-eLh"/>

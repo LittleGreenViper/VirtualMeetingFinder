@@ -73,7 +73,7 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     /**
      Contains any phone info that can't be turned into a URL.
      */
-    @IBOutlet weak var phoneInfoLabel: UILabel?
+    @IBOutlet weak var phoneInfoTextView: UITextView?
 }
 
 /* ###################################################################################################################################### */
@@ -149,7 +149,7 @@ extension VMF_MeetingViewController {
         phoneButton?.isHidden = true
         videoButton?.isHidden = true
         globeButton?.isHidden = true
-        phoneInfoLabel?.isHidden = true
+        phoneInfoTextView?.isHidden = true
         
         var directPhoneNumberString = meeting?.directPhoneURI?.absoluteString.replacingOccurrences(of: "https://", with: "tel:") ?? ""
         
@@ -178,11 +178,11 @@ extension VMF_MeetingViewController {
             globeButton?.isHidden = false
         } 
         
-        if directPhoneNumberString.isEmpty,
+        if (phoneButton?.isHidden ?? true),
            let vPhone = meeting?.virtualPhoneNumber,
            !vPhone.isEmpty {
-            phoneInfoLabel?.isHidden = false
-            phoneInfoLabel?.text = String(format: "SLUG-PHONE-NUMBER-FORMAT".localizedVariant, vPhone)
+            phoneInfoTextView?.isHidden = false
+            phoneInfoTextView?.text = String(format: "SLUG-PHONE-NUMBER-FORMAT".localizedVariant, vPhone)
         }
     }
 }

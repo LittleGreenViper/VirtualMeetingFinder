@@ -660,6 +660,18 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
      The "Throbber" view
      */
     @IBOutlet weak var throbber: UIView?
+    
+    /* ################################################################## */
+    /**
+     The swipe rcognizer for increasing time.
+     */
+    @IBOutlet weak var leftSwipeRecognizer: UISwipeGestureRecognizer?
+
+    /* ################################################################## */
+    /**
+     The swipe rcognizer for decreasing time.
+     */
+    @IBOutlet weak var rightSwipeRecognizer: UISwipeGestureRecognizer?
 }
 
 /* ###################################################################################################################################### */
@@ -779,6 +791,12 @@ extension VMF_MainSearchViewController {
             sortSegmentedSwitch?.setTitle(sortSegmentedSwitch?.titleForSegment(at: index)?.localizedVariant, forSegmentAt: index)
         }
         
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeRecognizerHit))
+        leftSwipe.direction = .left
+        valueTable?.addGestureRecognizer(leftSwipe)
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(rightSwipeRecognizerHit))
+        rightSwipe.direction = .right
+        valueTable?.addGestureRecognizer(rightSwipe)
         setUpWeekdayControl()
         findMeetings()
     }
@@ -1289,6 +1307,30 @@ extension VMF_MainSearchViewController {
     @IBAction func searchTextChanged(_: UITextField) {
         guard isNameSearchMode else { return }
         valueTable?.reloadData()
+    }
+    
+    /* ################################################################## */
+    /**
+     The swipe rcognizer for increasing time was executed.
+     
+     - parameter: Ignored
+     */
+    @IBAction func leftSwipeRecognizerHit(_: UISwipeGestureRecognizer) {
+        guard !(timeSlider?.isHidden ?? true) else { return }
+        
+        timeSlider?.value += 1
+    }
+
+    /* ################################################################## */
+    /**
+     The swipe rcognizer for decreasing time was executed.
+     
+     - parameter: Ignored
+     */
+    @IBAction func rightSwipeRecognizerHit(_: UISwipeGestureRecognizer) {
+        guard !(timeSlider?.isHidden ?? true) else { return }
+        
+        timeSlider?.value -= 1
     }
 }
 

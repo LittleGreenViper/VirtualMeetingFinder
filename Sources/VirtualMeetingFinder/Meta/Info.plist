@@ -12,6 +12,7 @@
 		<string>skype</string>
 		<string>maps</string>
 		<string>gmeet</string>
+		<string>whatsapp</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

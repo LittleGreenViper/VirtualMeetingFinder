@@ -122,6 +122,25 @@ extension VMF_MeetingViewController {
      Called when the view hierarchy has loaded.
      */
     override func viewDidLoad() {
+
+        /* ################################################################## */
+        /**
+         This simply strips out all non-decimal characters in the string, leaving only valid decimal digits.
+         */
+        func stripPhoneNumber(from inString: String) -> String {
+            let allowedChars = CharacterSet(charactersIn: "0123456789 ()-+")
+            guard !inString.reduce(false, { current, next in
+                // The higher-order function stuff will convert each character into an aggregate integer, which then becomes a Unicode scalar. Very primitive, but shouldn't be a problem for us, as we only need a very limited ASCII set.
+                guard !current,
+                      let cha = UnicodeScalar(next.unicodeScalars.map { $0.value }.reduce(0, +))
+                else { return true }
+                return !allowedChars.contains(cha)
+            })
+            else { return "" }
+            
+            return inString.decimalOnly
+        }
+        
         super.viewDidLoad()
         setScreenTitle()
         setTimeZone()
@@ -135,9 +154,11 @@ extension VMF_MeetingViewController {
         var directPhoneNumberString = meeting?.directPhoneURI?.absoluteString.replacingOccurrences(of: "https://", with: "tel:") ?? ""
         
         if directPhoneNumberString.isEmpty,
-           let numbers = meeting?.virtualPhoneNumber?.decimalOnly,
-           !numbers.isEmpty {
-            directPhoneNumberString = "tel:\(numbers)"
+           let numbersTemp = meeting?.virtualPhoneNumber {
+            let numbers = stripPhoneNumber(from: numbersTemp)
+            if !numbers.isEmpty {
+                directPhoneNumberString = "tel:\(numbers)"
+            }
         }
         
         if !directPhoneNumberString.isEmpty,

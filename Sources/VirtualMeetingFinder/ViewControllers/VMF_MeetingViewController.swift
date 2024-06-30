@@ -74,6 +74,24 @@ class VMF_MeetingViewController: VMF_BaseViewController {
      Contains any phone info that can't be turned into a URL.
      */
     @IBOutlet weak var phoneInfoTextView: UITextView?
+    
+    /* ################################################################## */
+    /**
+     Contains the in-person meeting stuff.
+     */
+    @IBOutlet weak var inPersonContainer: UIStackView?
+    
+    /* ################################################################## */
+    /**
+     The heading for the in-person meeting stuff.
+     */
+    @IBOutlet weak var inPersonHeader: UILabel?
+
+    /* ################################################################## */
+    /**
+     The text view that displays an address for in-person meetings.
+     */
+    @IBOutlet weak var inPersonAddressTextView: UITextView?
 }
 
 /* ###################################################################################################################################### */
@@ -150,6 +168,7 @@ extension VMF_MeetingViewController {
         videoButton?.isHidden = true
         globeButton?.isHidden = true
         phoneInfoTextView?.isHidden = true
+        inPersonContainer?.isHidden = true
         
         var directPhoneNumberString = meeting?.directPhoneURI?.absoluteString.replacingOccurrences(of: "https://", with: "tel:") ?? ""
         
@@ -183,6 +202,13 @@ extension VMF_MeetingViewController {
            !vPhone.isEmpty {
             phoneInfoTextView?.isHidden = false
             phoneInfoTextView?.text = String(format: "SLUG-PHONE-NUMBER-FORMAT".localizedVariant, vPhone)
+        }
+        
+        if let basicAddress = meeting?.basicInPersonAddress,
+           !basicAddress.isEmpty {
+            inPersonContainer?.isHidden = false
+            inPersonHeader?.text = inPersonHeader?.text?.localizedVariant
+            inPersonAddressTextView?.text = basicAddress
         }
     }
 }

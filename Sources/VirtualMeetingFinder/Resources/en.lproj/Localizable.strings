@@ -35,3 +35,4 @@
 "SLUG-SEARCH-PLACEHOLDER"                       =   "Enter A Meeting Name";
 "SLUG-WEEKDAY-TIME-FORMAT"                      =   "%@s, at %@";
 "SLUG-PHONE-NUMBER-FORMAT"                      =   "Phone: %@";
+"SLUG-IN-PERSON-HEADER"                         =   "In-Person Meeting Address:";

@@ -22,260 +22,75 @@ import SwiftBMLSDK
 import RVS_Generic_Swift_Toolbox
 
 /* ###################################################################################################################################### */
-// MARK: - Special Slider Setup for Times -
+// MARK: - Protocol for "Owners" of This Class -
 /* ###################################################################################################################################### */
 /**
- This is a conglomerate tool, containing a slider, a stepper, a label, and a button.
- 
- It works as a single panel in the UI, and allows the user to select a time slot for meetings.
+ This provides one table cell for the main table of meetings.
  */
-class VMF_TimeSlider: UIControl {
+protocol VMF_MasterTableController: NSObjectProtocol {
     /* ################################################################## */
     /**
-     The image to use for our thumb.
+     Returns meetings with names that begin with the text entered.
      */
-    private static let _thumbImage = UIImage(systemName: "arrowtriangle.down.fill")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))
-
-    /* ################################################################## */
-    /**
-     This just contains the set of meetings to be used by this slider.
-     */
-    var meetings = [VMF_MainSearchViewController.MappedSet]() {
-        didSet {
-            minimumValue = 0
-            maximumValue = Float(meetings.count - 1)
-            setNeedsLayout()
-        }
-    }
+    var searchedMeetings: [MeetingInstance] { get }
     
     /* ################################################################## */
     /**
-     This is the container for the entire control
+     This is set to true, if we are in name search mode.
      */
-    weak var mainContainer: UIStackView?
+    var isNameSearchMode: Bool { get }
     
     /* ################################################################## */
     /**
-     This is the container for the lower part of the slider aggregate.
+     This tracks embedded table controllers.
      */
-    weak var container: UIView?
+    var tableDisplayController: VMF_MainSearchTableController? { get set }
 
     /* ################################################################## */
     /**
-     The label that displays the currently selected time slot.
-     */
-    weak var valueLabel: UILabel?
-    
-    /* ################################################################## */
-    /**
-     The stepper, to step through the values, one by one.
-     */
-    weak var valueStepper: UIStepper?
-    
-    /* ################################################################## */
-    /**
-     A button to reset to today/now.
-     */
-    weak var resetButton: UIButton?
-    
-    /* ################################################################## */
-    /**
-     The minimum value of the control.
-     */
-    @IBInspectable var minimumValue: Float = 0 { didSet { valueStepper?.minimumValue = Double(minimumValue) } }
-
-    /* ################################################################## */
-    /**
-     The maximum value of the control.
-     */
-    @IBInspectable var maximumValue: Float = 0 { didSet { valueStepper?.maximumValue = Double(maximumValue) } }
-    
-    /* ################################################################## */
-    /**
-     The value of the control.
-     */
-    @IBInspectable var value: Float = 0 {
-        didSet {
-            valueStepper?.value = Double(value)
-            let intValue = Int(max(minimumValue, min(maximumValue, value)))
-            
-            valueLabel?.text = !meetings.isEmpty ? meetings[intValue].time : ""
-            
-            sendActions(for: .valueChanged)
-        }
-    }
-
-    /* ################################################################## */
-    /**
-     This is the main view controller that "owns" this instance.
-     */
-    @IBOutlet weak var controller: VMF_MainSearchViewController?
-}
-
-/* ###################################################################################################################################### */
-// MARK: Computed Properties
-/* ###################################################################################################################################### */
-extension VMF_TimeSlider {
-    /* ################################################################## */
-    /**
-     This is the subset of the meeting set that correspond to the selected time.
-     */
-    var selectedMeetings: [MeetingInstance] {
-        guard let value = valueStepper?.value,
-              !meetings.isEmpty
-        else { return [] }
-        
-        let intValue = max(0, min((meetings.count - 1), Int(round(value))))
-        
-        return meetings[intValue].meetings
-    }
-    
-    /* ################################################################## */
-    /**
-     The value of the control.
-     */
-    func setValue(_ inValue: Float, animated inAnimated: Bool) {
-        valueStepper?.value = Double(inValue)
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: Base Class Overrides
-/* ###################################################################################################################################### */
-extension VMF_TimeSlider {
-    /* ################################################################## */
-    /**
-     Called when the control is being laid out.
-     */
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        minimumValue = 0
-        maximumValue = max(0, Float(meetings.count - 1))
-        value = Float(max(0, min((meetings.count - 1), Int(round(valueStepper?.value ?? 0)))))
-
-        setUpControl()
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: Instance Methods
-/* ###################################################################################################################################### */
-extension VMF_TimeSlider {
-    /* ################################################################## */
-    /**
-     This adds the value label and stepper.
-     */
-    func setUpControl() {
-        if nil == mainContainer {
-            let stackView = UIStackView()
-            addSubview(stackView)
-            mainContainer = stackView
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-            stackView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-            stackView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        }
-        
-        if let mainContainer = mainContainer,
-           nil == container {
-            let containerView = UIView()
-            mainContainer.addArrangedSubview(containerView)
-            container = containerView
-            containerView.translatesAutoresizingMaskIntoConstraints = false
-            containerView.leftAnchor.constraint(equalTo: mainContainer.leftAnchor).isActive = true
-            containerView.rightAnchor.constraint(equalTo: mainContainer.rightAnchor).isActive = true
-        }
-        
-        if nil == valueLabel,
-           let containerView = container {
-            let label = UILabel()
-            label.textAlignment = .center
-            label.font = .systemFont(ofSize: 15)
-            containerView.addSubview(label)
-            valueLabel = label
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-            label.setContentHuggingPriority(.required, for: .horizontal)
-        }
-        
-        if nil == valueStepper,
-           let containerView = container,
-           let label = valueLabel {
-            let stepper = UIStepper()
-            stepper.autorepeat = true
-            stepper.minimumValue = Double(minimumValue)
-            stepper.maximumValue = Double(maximumValue)
-            stepper.stepValue = 1
-            containerView.addSubview(stepper)
-            valueStepper = stepper
-            stepper.translatesAutoresizingMaskIntoConstraints = false
-            stepper.addTarget(self, action: #selector(stepperChanged), for: .valueChanged)
-            stepper.leftAnchor.constraint(greaterThanOrEqualTo: label.rightAnchor, constant: 4).isActive = true
-            stepper.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
-            stepper.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
-            stepper.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-        }
-        
-        if let containerView = container,
-           nil == resetButton,
-           let label = valueLabel {
-            let reset = UIButton(type: .roundedRect)
-            reset.addTarget(self, action: #selector(resetButtonHit), for: .touchUpInside)
-            reset.setTitle("SLUG-RESET".localizedVariant, for: .normal)
-            containerView.addSubview(reset)
-            resetButton = reset
-            reset.translatesAutoresizingMaskIntoConstraints = false
-            reset.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 8).isActive = true
-            reset.rightAnchor.constraint(lessThanOrEqualTo: label.leftAnchor).isActive = true
-            reset.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
-        }
-        
-        if !meetings.isEmpty {
-            let intValue = Int(max(minimumValue, min(maximumValue, value)))
-            valueLabel?.text = meetings[intValue].time
-            valueStepper?.isEnabled = true
-        } else {
-            valueLabel?.text = ""
-            valueStepper?.isEnabled = false
-        }
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: Callbacks
-/* ###################################################################################################################################### */
-extension VMF_TimeSlider {
-    /* ################################################################## */
-    /**
-     Called whenever the slider control changes.
-     
-     - parameter inSlider: The slider control that changed.
-     */
-    @objc func sliderChanged(_ inSlider: UISlider) {
-        value = inSlider.value
-    }
-    
-    /* ################################################################## */
-    /**
-     Called whenever the stepper control changes.
-     
-     - parameter inSlider: The slider control that changed.
-     */
-    @objc func stepperChanged(_ inStepper: UIStepper) {
-        value = Float(inStepper.value)
-    }
-    
-    /* ################################################################## */
-    /**
-     Called whenever the reset button is hit
+     Fetches all of the virtual meetings (hybrid and pure virtual).
      
      - parameter: ignored
      */
-    @objc func resetButtonHit(_: Any) {
-        controller?.setToNow()
-    }
+    func findMeetings()
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Custom Table Cell View -
+/* ###################################################################################################################################### */
+/**
+ This provides one table cell for the main table of meetings.
+ */
+class VMF_TableCell: UITableViewCell {
+    /* ################################################################## */
+    /**
+     This is the reuse ID for the table cell.
+     */
+    static let reuseID = "VirtualMeetingFinderTableCell"
+
+    /* ################################################################## */
+    /**
+     This has an image that denotes what type of meeting we have.
+     */
+    @IBOutlet weak var typeImage: UIImageView?
+
+    /* ################################################################## */
+    /**
+     This is the meeting name.
+     */
+    @IBOutlet weak var nameLabel: UILabel?
+
+    /* ################################################################## */
+    /**
+     The label that displays the timezone.
+     */
+    @IBOutlet weak var timeZoneLabel: UILabel?
+
+    /* ################################################################## */
+    /**
+     The label that displays an in-progress message.
+     */
+    @IBOutlet weak var inProgressLabel: UILabel?
 }
 
 /* ###################################################################################################################################### */
@@ -284,7 +99,7 @@ extension VMF_TimeSlider {
 /**
  This is the main view controller for the weekday/time selector tab.
  */
-class VMF_MainSearchViewController: VMF_TabBaseViewController {
+class VMF_MainSearchTableController: VMF_TabBaseViewController {
     /* ################################################################################################################################## */
     // MARK: Meeting Table Sort Types
     /* ################################################################################################################################## */
@@ -383,35 +198,18 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
      The segue ID, for inspecting individual meetings.
      */
     private static let _inspectMeetingSegueID = "inspect-meeting"
-
-    /* ################################################################## */
-    /**
-     This is our query instance.
-     */
-    private static var _queryInstance = SwiftBMLSDK_Query(serverBaseURI: URL(string: "https://littlegreenviper.com/LGV_MeetingServer/Tests/entrypoint.php"))
     
     /* ################################################################## */
     /**
      This handles the meeting collection for this.
      */
     private var _meetings: [MeetingInstance] = []
-    
-    /* ################################################################## */
-    /**
-     This is used to restore the bottom of the stack view, when the keyboard is hidden.
-     */
-    private var _atRestConstant: CGFloat = 0
 
     /* ################################################################## */
     /**
      This handles the server data.
      */
-    private var _virtualService: SwiftBMLSDK_MeetingLocalTimezoneCollection? {
-        didSet {
-            mapData()
-            setTimeSlider()
-        }
-    }
+    private var _virtualService: SwiftBMLSDK_MeetingLocalTimezoneCollection? { didSet { mapData() } }
 
     /* ################################################################## */
     /**
@@ -439,30 +237,6 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
     
     /* ################################################################## */
     /**
-     This is set to true, if we are in name search mode.
-     */
-    var isNameSearchMode: Bool = false {
-        didSet {
-            searchTextContainer?.isHidden = !isNameSearchMode
-            weekdayContainer?.isHidden = isNameSearchMode
-            sortContainer?.isHidden = isNameSearchMode || tableFood.isEmpty || (1 >= tableFood[0].meetings.count)
-            
-            if isNameSearchMode {
-                _refreshControl?.isEnabled = false
-                searchTextField?.becomeFirstResponder()
-            } else {
-                _refreshControl?.isEnabled = true
-                searchTextField?.resignFirstResponder()
-            }
-            
-            timeSlider?.isHidden = isNameSearchMode || (7 == weekdaySegmentedSwitch?.selectedSegmentIndex)
-            _cachedTableFood = []
-            valueTable?.reloadData()
-        }
-    }
-    
-    /* ################################################################## */
-    /**
      Used for the "Pull to Refresh"
      */
     private weak var _refreshControl: UIRefreshControl?
@@ -478,27 +252,12 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
      Cached table data (for when in Search Mode).
      */
     private var _cachedSearchMeetings: [MeetingInstance] = []
-
+    
     /* ################################################################## */
     /**
-     This is set to true, if the "throbber" is shown (hiding everything else).
+     The controller that "owns" this instance.
      */
-    var isThrobbing: Bool = false {
-        didSet {
-            _refreshControl?.endRefreshing()
-            if isThrobbing {
-                tabBarController?.tabBar.isHidden = true
-                valueTable?.isHidden = true
-                mainContainerView?.isHidden = true
-                throbber?.isHidden = false
-            } else {
-                throbber?.isHidden = true
-                mainContainerView?.isHidden = false
-                valueTable?.isHidden = false
-                tabBarController?.tabBar.isHidden = false
-            }
-        }
-    }
+    weak var myController: VMF_MasterTableController?
     
     /* ################################################################## */
     /**
@@ -506,24 +265,6 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
      */
     @IBOutlet weak var mainContainerView: UIView?
 
-    /* ################################################################## */
-    /**
-     The weekday switch.
-     */
-    @IBOutlet weak var weekdaySegmentedSwitch: UISegmentedControl?
-
-    /* ################################################################## */
-    /**
-     The slider control for the time of day.
-     */
-    @IBOutlet weak var timeSlider: VMF_TimeSlider?
-    
-    /* ################################################################## */
-    /**
-     The text field for name search mode.
-     */
-    @IBOutlet weak var searchTextField: UITextField?
-    
     /* ################################################################## */
     /**
      The table that shows the meetings for the current time.
@@ -535,12 +276,6 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
      The segmented switch that sets the sort
      */
     @IBOutlet weak var sortSegmentedSwitch: UISegmentedControl?
-    
-    /* ################################################################## */
-    /**
-     The container for the weekday switch.
-     */
-    @IBOutlet weak var weekdayContainer: UIStackView?
     
     /* ################################################################## */
     /**
@@ -562,24 +297,6 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
     
     /* ################################################################## */
     /**
-     The container for the search text field.
-     */
-    @IBOutlet weak var searchTextContainer: UIStackView?
-
-    /* ################################################################## */
-    /**
-     The bottom constraint of the text area. We use this to shrink the text area, when the keyboard is shown.
-     */
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint?
-
-    /* ################################################################## */
-    /**
-     The "Throbber" view
-     */
-    @IBOutlet weak var throbber: UIView?
-    
-    /* ################################################################## */
-    /**
      The swipe rcognizer for increasing time.
      */
     @IBOutlet weak var leftSwipeRecognizer: UISwipeGestureRecognizer?
@@ -594,19 +311,19 @@ class VMF_MainSearchViewController: VMF_TabBaseViewController {
 /* ###################################################################################################################################### */
 // MARK: Computed Properties
 /* ###################################################################################################################################### */
-extension VMF_MainSearchViewController {
+extension VMF_MainSearchTableController {
     /* ################################################################## */
     /**
      Returns meetings with names that begin with the text entered.
      */
-    var searchedMeetings: [MeetingInstance] {
-        let testString = searchTextField?.text?.lowercased() ?? ""
-        
-        guard !testString.isEmpty else { return _cachedSearchMeetings }
-        
-        return (_cachedSearchMeetings.filter { $0.name.lowercased().beginsWith(testString) })
-    }
+    var searchedMeetings: [MeetingInstance] { myController?.searchedMeetings ?? [] }
     
+    /* ################################################################## */
+    /**
+     This is set to true, if we are in name search mode.
+     */
+    var isNameSearchMode: Bool { myController?.isNameSearchMode ?? false }
+
     /* ################################################################## */
     /**
      The data for display in the table.
@@ -688,7 +405,7 @@ extension VMF_MainSearchViewController {
 /* ###################################################################################################################################### */
 // MARK: Base Class Overrides
 /* ###################################################################################################################################### */
-extension VMF_MainSearchViewController {
+extension VMF_MainSearchTableController {
     /* ################################################################## */
     /**
      Called when the view hierarchy has loaded.
@@ -696,26 +413,14 @@ extension VMF_MainSearchViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let refresh = UIRefreshControl()
-        refresh.addTarget(self, action: #selector(findMeetings), for: .valueChanged)
+        refresh.addTarget(self, action: #selector(refreshPulled), for: .valueChanged)
         _refreshControl = refresh
         valueTable?.refreshControl = refresh
         valueTable?.sectionHeaderTopPadding = CGFloat(0)
-        sortLabel?.text = sortLabel?.text?.localizedVariant
-        searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
-        isThrobbing = true
-        _atRestConstant = bottomConstraint?.constant ?? 0
+
         for index in (0..<(sortSegmentedSwitch?.numberOfSegments ?? 0)) {
             sortSegmentedSwitch?.setTitle(sortSegmentedSwitch?.titleForSegment(at: index)?.localizedVariant, forSegmentAt: index)
         }
-        
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeRecognizerHit))
-        leftSwipe.direction = .left
-        valueTable?.addGestureRecognizer(leftSwipe)
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(rightSwipeRecognizerHit))
-        rightSwipe.direction = .right
-        valueTable?.addGestureRecognizer(rightSwipe)
-        setUpWeekdayControl()
-        findMeetings()
     }
     
     /* ################################################################## */
@@ -727,67 +432,8 @@ extension VMF_MainSearchViewController {
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
         _wasNow = false
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
-
-        setSortButton()
-        
-        if isNameSearchMode {
-            _refreshControl?.isEnabled = false
-            searchTextContainer?.isHidden = false
-            weekdayContainer?.isHidden = true
-            sortContainer?.isHidden = true
-            timeSlider?.isHidden = true
-            searchTextField?.becomeFirstResponder()
-        } else {
-            _refreshControl?.isEnabled = true
-            searchTextContainer?.isHidden = true
-            weekdayContainer?.isHidden = false
-            sortContainer?.isHidden = false
-            timeSlider?.isHidden = 7 == weekdaySegmentedSwitch?.selectedSegmentIndex
-            _cachedTableFood = []
-        }
-        
-        VMF_AppDelegate.searchController = self
-        
         valueTable?.reloadData()
-    }
-    
-    /* ################################################################## */
-    /**
-     Called just before the view disappears.
-     
-     - parameter inIsAnimated: True, if the disappearance is animated.
-     */
-    override func viewWillDisappear(_ inIsAnimated: Bool) {
-        VMF_AppDelegate.searchController = nil
-        
-        super.viewWillDisappear(inIsAnimated)
-        searchTextField?.resignFirstResponder()
-        bottomConstraint?.constant = _atRestConstant
-        NotificationCenter.default.removeObserver(
-            self,
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-
-        NotificationCenter.default.removeObserver(
-            self,
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
+        myController?.tableDisplayController = self
     }
     
     /* ################################################################## */
@@ -808,7 +454,7 @@ extension VMF_MainSearchViewController {
 /* ###################################################################################################################################### */
 // MARK: Static Functions
 /* ###################################################################################################################################### */
-extension VMF_MainSearchViewController {
+extension VMF_MainSearchTableController {
     /* ################################################################## */
     /**
      This converts the selected weekday into the 1 == Sun format needed for the meeting data.
@@ -855,101 +501,8 @@ extension VMF_MainSearchViewController {
 /* ###################################################################################################################################### */
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
-extension VMF_MainSearchViewController {
-    /* ################################################################## */
-    /**
-     This sets the proper days into the weekday control.
-     */
-    func setUpWeekdayControl() {
-        for index in 0..<7 {
-            var currentDay = index + Calendar.current.firstWeekday
-            
-            if 7 < currentDay {
-                currentDay -= 7
-            }
-            
-            let weekdaySymbols = Calendar.current.veryShortStandaloneWeekdaySymbols
-            let weekdayName = weekdaySymbols[currentDay - 1]
+extension VMF_MainSearchTableController {
 
-            weekdaySegmentedSwitch?.setTitle(weekdayName, forSegmentAt: index)
-        }
-        
-        weekdaySegmentedSwitch?.setTitle(weekdaySegmentedSwitch?.titleForSegment(at: 7)?.localizedVariant, forSegmentAt: 7)
-    }
-    
-    /* ################################################################## */
-    /**
-     This applies the selected days meetings to the slider, in a form it understands.
-     */
-    func setTimeSlider(forceNow inForceNow: Bool = false) {
-        guard let weekdaySwitch = self.weekdaySegmentedSwitch else { return }
-        
-        let selectedWeekdayIndex = Self.unMapWeekday(weekdaySwitch.selectedSegmentIndex + 1) - 1
-
-        guard let timeSlider = timeSlider,
-              (0..<_mappedDataset.count).contains(selectedWeekdayIndex)
-        else { return }
-        
-        var oldTimeAsTime = -1
-        var oldTimeForcedValue = -1
-        
-        if !timeSlider.meetings.isEmpty {
-            let oldValue = Int(timeSlider.value)
-            if oldValue == 0 || oldValue == (timeSlider.meetings.count - 1) {
-                oldTimeForcedValue = oldValue
-            }
-            oldTimeAsTime = timeSlider.meetings[oldValue].meetings.first?.adjustedIntegerStartTime ?? -1
-        }
-        
-        timeSlider.meetings = _mappedDataset[selectedWeekdayIndex]
-        
-        // All the funkiness below, is trying to keep the slider pointed to the correct time, or, just above it.
-        
-        guard -1 == oldTimeForcedValue else {
-            timeSlider.value = Float(0 == oldTimeForcedValue ? 0 : timeSlider.maximumValue)
-            timeSlider.sendActions(for: .valueChanged)
-            return
-        }
-        
-        let hour = Calendar.current.component(.hour, from: .now)
-        let minute = Calendar.current.component(.minute, from: .now)
-
-        guard 0 <= oldTimeAsTime else { return }
-        
-        if inForceNow {
-            oldTimeAsTime = hour * 100 + minute
-        }
-        
-        var newValue = 0
-        var index = 0
-        var newTime = -1
-        
-        timeSlider.meetings.forEach {
-            if $0.meetings.first?.adjustedIntegerStartTime == oldTimeAsTime {
-                newTime = $0.meetings.first?.adjustedIntegerStartTime ?? -1
-                newValue = index
-            }
-            
-            index += 1
-        }
-        
-        if newTime != oldTimeAsTime,
-           0 < oldTimeAsTime {
-            index = 0
-            newValue = 0
-            timeSlider.meetings.forEach {
-                if 0 == newValue,
-                   ($0.meetings.first?.adjustedIntegerStartTime ?? -1) >= oldTimeAsTime {
-                    newValue = index
-                }
-                index += 1
-            }
-        }
-        
-        timeSlider.value = Float (newValue)
-        timeSlider.sendActions(for: .valueChanged)
-    }
-    
     /* ################################################################## */
     /**
      This maps the times for the selected day.
@@ -994,55 +547,6 @@ extension VMF_MainSearchViewController {
     
     /* ################################################################## */
     /**
-     Sets the day and time to our current day/time.
-     */
-    func setToNow() {
-        _firstTime = false
-        let day = Calendar.current.component(.weekday, from: .now)
-        let hour = Calendar.current.component(.hour, from: .now)
-        let minute = Calendar.current.component(.minute, from: .now)
-        let firstWeekday = Calendar.current.firstWeekday
-        var currentDay =  (day - firstWeekday)
-        
-        if 0 > currentDay {
-            currentDay += 7
-        }
-        
-        guard (0..<7).contains(currentDay) else { return }
-        
-        weekdaySegmentedSwitch?.selectedSegmentIndex = currentDay
-        weekdaySegmentedSwitch?.sendActions(for: .valueChanged)
-        
-        guard !_mappedDataset.isEmpty,
-              let timeSlider = timeSlider,
-              (1..._mappedDataset.count).contains(day)
-        else { return }
-
-        let todaysMeetings = _mappedDataset[day - 1]
-        
-        timeSlider.setNeedsLayout()
-        timeSlider.meetings = todaysMeetings
-        
-        var index = -1
-        var counter = 0
-        let compTime = (hour * 100) + minute
-        
-        timeSlider.meetings.forEach {
-            if let time = $0.meetings.first?.adjustedIntegerStartTime,
-               -1 == index,
-               time >= compTime {
-                index = counter
-            }
-            
-            counter += 1
-        }
-        
-        timeSlider.setValue(Float(index), animated: true)
-        timeSlider.sendActions(for: .valueChanged)
-    }
-    
-    /* ################################################################## */
-    /**
      Called to set up the sort button.
      */
     func setSortButton() {
@@ -1057,19 +561,7 @@ extension VMF_MainSearchViewController {
 /* ###################################################################################################################################### */
 // MARK: Callbacks
 /* ###################################################################################################################################### */
-extension VMF_MainSearchViewController {
-    /* ################################################################## */
-    /**
-     Called when the user selects a time slot for the meetings.
-     
-     - parameter inTimeSlider: The time control slider.
-     */
-    @IBAction func sliderChanged(_ inTimeSlider: VMF_TimeSlider) {
-        _meetings = inTimeSlider.selectedMeetings
-        _cachedTableFood = []
-        valueTable?.reloadData()
-    }
-    
+extension VMF_MainSearchTableController {
     /* ################################################################## */
     /**
      Called to show a meeting details page.
@@ -1079,118 +571,15 @@ extension VMF_MainSearchViewController {
     func selectMeeting(_ inMeeting: MeetingInstance) {
         performSegue(withIdentifier: Self._inspectMeetingSegueID, sender: inMeeting)
     }
-
-    /* ################################################################## */
-    /**
-     Fetches all of the virtual meetings (hybrid and pure virtual).
-     
-     Marked ObjC, with an ignored parameter, so it can be called from pull to refresh.
-     
-     - parameter: ignored
-     */
-    @objc func findMeetings(_: Any! = nil) {
-        guard !isNameSearchMode else {
-            _refreshControl?.endRefreshing()
-            return
-        }
-        isThrobbing = true
-        _virtualService = nil
-        _ = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: Self._queryInstance) { inCollection in
-            DispatchQueue.main.async {
-                self._virtualService = inCollection
-                self._cachedSearchMeetings = inCollection.meetings.map{ $0.meeting }.sorted { a, b in a.name.lowercased() < b.name.lowercased() }
-                self.isThrobbing = false
-                if self._firstTime {
-                    self.setToNow()
-                }
-            }
-        }
-    }
     
     /* ################################################################## */
     /**
-     This is called just before the keyboard shows. We use this to "nudge" the display items up.
+     The refresh has been triggered.
      
-     - parameter notification: The notification being passed in.
+     - parameter: Ignored (and can be omitted).
      */
-    @objc func keyboardWillShow(notification inNotification: NSNotification) {
-        DispatchQueue.main.async { [weak self] in
-            if let keyboardSize = (inNotification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                let newPosition = (keyboardSize.size.height - (self?.view?.safeAreaInsets.bottom ?? 0))
-                self?.bottomConstraint?.constant = newPosition
-            }
-        }
-    }
-
-    /* ################################################################## */
-    /**
-     This is called just before the keyboard shows. We use this to return the login items to their original position.
-     
-     - parameter notification: The notification being passed in.
-     */
-    @objc func keyboardWillHide(notification: NSNotification) {
-        DispatchQueue.main.async { [weak self] in
-            self?.bottomConstraint?.constant = self?._atRestConstant ?? 0
-        }
-    }
-
-    /* ################################################################## */
-    /**
-     Called when the user taps on the search button.
-     
-     - parameter: ignored
-     */
-    @IBAction func searchButtonHit(_: Any) {
-        isNameSearchMode = !isNameSearchMode
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when the user taps on the control.
-     
-     - parameter inTapGestureRecognizer: The tap gesture
-     */
-    @IBAction func weekdayTapped(_ inTapGestureRecognizer: UITapGestureRecognizer) {
-        guard let weekdaySwitch = weekdaySegmentedSwitch else { return }
-        let pointTapped: CGPoint = inTapGestureRecognizer.location(in: weekdaySwitch)
-        let lastx = weekdaySwitch.bounds.width - (weekdaySwitch.bounds.width / CGFloat(weekdaySwitch.numberOfSegments))
+    @objc func refreshPulled(_: Any) {
         
-        if (weekdaySwitch.numberOfSegments - 1) == weekdaySwitch.selectedSegmentIndex,
-           pointTapped.x >= lastx {
-            inTapGestureRecognizer.cancelsTouchesInView = true
-            setToNow()
-        } else {
-            inTapGestureRecognizer.cancelsTouchesInView = false
-        }
-    }
-
-    /* ################################################################## */
-    /**
-     Called when the user selects a particular weekday.
-     
-     - parameter inWeekdaySegmentedControl: The segmented control that was changed.
-     */
-    @IBAction func weekdaySelected(_ inWeekdaySegmentedControl: UISegmentedControl) {
-        if 7 == inWeekdaySegmentedControl.selectedSegmentIndex {
-            timeSlider?.isHidden = true
-            _wasNow = true
-            guard let virtualService = _virtualService else { return }
-
-            _meetings = virtualService.meetings.filter { $0.isInProgress }.map { $0.meeting }
-            sortSegmentedSwitch?.setEnabled(true, forSegmentAt: SortType.time.rawValue)
-            sortSegmentedSwitch?.selectedSegmentIndex = SortType.time.rawValue
-            sortSegmentedSwitch?.sendActions(for: .valueChanged)
-            _cachedTableFood = []
-            valueTable?.reloadData()
-        } else {
-            timeSlider?.isHidden = false
-            setTimeSlider(forceNow: _wasNow)
-            _wasNow = false
-            if 3 == sortSegmentedSwitch?.selectedSegmentIndex {
-                sortSegmentedSwitch?.selectedSegmentIndex = SortType.timeZone.rawValue
-            }
-            sortSegmentedSwitch?.setEnabled(false, forSegmentAt: SortType.time.rawValue)
-        }
     }
     
     /* ################################################################## */
@@ -1225,36 +614,12 @@ extension VMF_MainSearchViewController {
         guard isNameSearchMode else { return }
         valueTable?.reloadData()
     }
-    
-    /* ################################################################## */
-    /**
-     The swipe rcognizer for increasing time was executed.
-     
-     - parameter: Ignored
-     */
-    @IBAction func leftSwipeRecognizerHit(_: UISwipeGestureRecognizer) {
-        guard !(timeSlider?.isHidden ?? true) else { return }
-        
-        timeSlider?.value += 1
-    }
-
-    /* ################################################################## */
-    /**
-     The swipe rcognizer for decreasing time was executed.
-     
-     - parameter: Ignored
-     */
-    @IBAction func rightSwipeRecognizerHit(_: UISwipeGestureRecognizer) {
-        guard !(timeSlider?.isHidden ?? true) else { return }
-        
-        timeSlider?.value -= 1
-    }
 }
 
 /* ###################################################################################################################################### */
 // MARK: UITableViewDataSource Conformance
 /* ###################################################################################################################################### */
-extension VMF_MainSearchViewController: UITableViewDataSource {
+extension VMF_MainSearchTableController: UITableViewDataSource {
     /* ################################################################## */
     /**
      Returns the number of sections to display.
@@ -1337,7 +702,7 @@ extension VMF_MainSearchViewController: UITableViewDataSource {
 /* ###################################################################################################################################### */
 // MARK: UITableViewDelegate Conformance
 /* ###################################################################################################################################### */
-extension VMF_MainSearchViewController: UITableViewDelegate {
+extension VMF_MainSearchTableController: UITableViewDelegate {
     /* ################################################################## */
     /**
      Called when a cell is selected. We will use this to open the user viewer.

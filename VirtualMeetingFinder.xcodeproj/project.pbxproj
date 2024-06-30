@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D40133672C320BB30018076B /* VMF_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40133662C320BB30018076B /* VMF_Extensions.swift */; };
+		D40133692C320C070018076B /* VMF_DayTimeSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40133682C320C070018076B /* VMF_DayTimeSearchViewController.swift */; };
+		D401336B2C320D520018076B /* VMF_MainSearchTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D401336A2C320D520018076B /* VMF_MainSearchTableController.swift */; };
 		D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */; };
 		D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */; };
 		D4523A0F2C31D18300BAE330 /* SwiftBMLSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D4523A0E2C31D18300BAE330 /* SwiftBMLSDK */; };
@@ -22,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D40133662C320BB30018076B /* VMF_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VMF_Extensions.swift; path = Sources/VirtualMeetingFinder/ViewControllers/VMF_Extensions.swift; sourceTree = SOURCE_ROOT; };
+		D40133682C320C070018076B /* VMF_DayTimeSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_DayTimeSearchViewController.swift; sourceTree = "<group>"; };
+		D401336A2C320D520018076B /* VMF_MainSearchTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MainSearchTableController.swift; sourceTree = "<group>"; };
 		D4398E6B2C2892BD0001FAE3 /* jazzy.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = jazzy.command; sourceTree = "<group>"; };
 		D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_BaseViewController.swift; sourceTree = "<group>"; };
 		D47FBFA92C28CE5600C62945 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -71,6 +77,7 @@
 			children = (
 				D49393342C2616C7006438AE /* VMF_AppDelegate.swift */,
 				D49393362C2616C7006438AE /* VMF_SceneDelegate.swift */,
+				D40133662C320BB30018076B /* VMF_Extensions.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -80,6 +87,8 @@
 			children = (
 				D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */,
 				D49393382C2616C7006438AE /* VMF_MainSearchViewController.swift */,
+				D40133682C320C070018076B /* VMF_DayTimeSearchViewController.swift */,
+				D401336A2C320D520018076B /* VMF_MainSearchTableController.swift */,
 				D4B69A332C2B162800D24DA6 /* VMF_MeetingViewController.swift */,
 			);
 			path = ViewControllers;
@@ -239,9 +248,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D49393392C2616C7006438AE /* VMF_MainSearchViewController.swift in Sources */,
+				D40133672C320BB30018076B /* VMF_Extensions.swift in Sources */,
 				D49393352C2616C7006438AE /* VMF_AppDelegate.swift in Sources */,
 				D47C2F0E2C2C5E6A0048C91C /* VMF_BaseViewController.swift in Sources */,
 				D4B69A342C2B162900D24DA6 /* VMF_MeetingViewController.swift in Sources */,
+				D401336B2C320D520018076B /* VMF_MainSearchTableController.swift in Sources */,
+				D40133692C320C070018076B /* VMF_DayTimeSearchViewController.swift in Sources */,
 				D49393372C2616C7006438AE /* VMF_SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

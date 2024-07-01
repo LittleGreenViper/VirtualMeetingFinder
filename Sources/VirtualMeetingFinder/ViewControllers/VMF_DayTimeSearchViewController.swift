@@ -255,6 +255,7 @@ extension VMF_DayTimeSearchViewController {
     override func prepare(for inSegue: UIStoryboardSegue, sender: Any?) {
         if let destination = inSegue.destination as? VMF_DayTimeSearchPageViewController {
             destination.delegate = self
+            destination.dataSource = self
             pageViewController = destination
         }
     }
@@ -266,6 +267,7 @@ extension VMF_DayTimeSearchViewController {
         guard (-1...organizedMeetings.count).contains(inDayIndex),
               let newViewController = storyboard?.instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController else { return nil }
         newViewController.myController = self
+        newViewController.index = inDayIndex
         newViewController.meetings = -1 == inDayIndex ? searchMeetings : 0 == inDayIndex ? inProgressMeetings : organizedMeetings[inDayIndex - 1]
         return newViewController
     }
@@ -283,7 +285,7 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
         var index = oldViewController.index + 1
         
         if index > organizedMeetings.count {
-            index = 1
+            index = 0
         }
         
         guard let newViewController = getTableDisplay(for: index) else { return nil }
@@ -297,7 +299,7 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
         guard let oldViewController = inAfterViewController as? VMF_EmbeddedTableController else { return nil }
         var index = oldViewController.index - 1
         
-        if index < 1 {
+        if index < 0 {
             index = organizedMeetings.count
         }
         

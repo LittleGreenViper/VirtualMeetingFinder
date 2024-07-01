@@ -26,7 +26,9 @@ import SwiftBMLSDK
 /**
  This is the main view controller for the weekday/time selector tab.
  */
-class VMF_DayTimeSearchViewController: VMF_TabBaseViewController {
+class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTableControllerProtocol {
+    var myController: (any VMF_MasterTableControllerProtocol)?
+    
     /* ################################################################## */
     /**
      This handles the server data.
@@ -35,15 +37,15 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController {
     
     /* ################################################################## */
     /**
-     This is an array of the time-mapped meeting data.
+     This tracks the current embedded table controller.
      */
-    var mappedDataset = [[VMF_EmbeddedTableControllerProtocol.MappedSet]]()
+    var tableDisplayController: VMF_EmbeddedTableControllerProtocol?
     
     /* ################################################################## */
     /**
-     This tracks the embedded table controller.
+     This is our page view controller.
      */
-    var tableDisplayController: VMF_EmbeddedTableControllerProtocol?
+    weak var pageViewController: VMF_DayTimeSearchPageViewController?
     
     /* ################################################################## */
     /**
@@ -235,13 +237,79 @@ extension VMF_DayTimeSearchViewController {
 // MARK: Base Class Overrides
 /* ###################################################################################################################################### */
 extension VMF_DayTimeSearchViewController {
+    /* ################################################################## */
+    /**
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
     
         loadMeetings {
-            print(String(describing: self.organizedMeetings))
+            guard let newViewController = self.getTableDisplay(for: 0) else { return }
+            self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
         }
     }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func prepare(for inSegue: UIStoryboardSegue, sender: Any?) {
+        if let destination = inSegue.destination as? VMF_DayTimeSearchPageViewController {
+            destination.delegate = self
+            pageViewController = destination
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func getTableDisplay(for inDayIndex: Int) -> VMF_EmbeddedTableController? {
+        guard (-1...organizedMeetings.count).contains(inDayIndex),
+              let newViewController = storyboard?.instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController else { return nil }
+        newViewController.myController = self
+        newViewController.meetings = -1 == inDayIndex ? searchMeetings : 0 == inDayIndex ? inProgressMeetings : organizedMeetings[inDayIndex - 1]
+        return newViewController
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: UIPageViewControllerDataSource Conformance
+/* ###################################################################################################################################### */
+extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
+    /* ################################################################## */
+    /**
+     */
+    func pageViewController(_ inPageViewController: UIPageViewController, viewControllerBefore inBeforeViewController: UIViewController) -> UIViewController? {
+        guard let oldViewController = inBeforeViewController as? VMF_EmbeddedTableController else { return nil }
+        var index = oldViewController.index + 1
+        
+        if index > organizedMeetings.count {
+            index = 1
+        }
+        
+        guard let newViewController = getTableDisplay(for: index) else { return nil }
+        return newViewController
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func pageViewController(_ inPageViewController: UIPageViewController, viewControllerAfter inAfterViewController: UIViewController) -> UIViewController? {
+        guard let oldViewController = inAfterViewController as? VMF_EmbeddedTableController else { return nil }
+        var index = oldViewController.index - 1
+        
+        if index < 1 {
+            index = organizedMeetings.count
+        }
+        
+        guard let newViewController = getTableDisplay(for: index) else { return nil }
+        return newViewController
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: UIPageViewControllerDelegate Conformance
+/* ###################################################################################################################################### */
+extension VMF_DayTimeSearchViewController: UIPageViewControllerDelegate {
 }
 
 /* ###################################################################################################################################### */
@@ -251,5 +319,4 @@ extension VMF_DayTimeSearchViewController {
  This is the page controller that embeds our tables.
  */
 class VMF_DayTimeSearchPageViewController: UIPageViewController {
-    
 }

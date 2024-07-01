@@ -21,86 +21,6 @@ import UIKit
 import SwiftBMLSDK
 
 /* ###################################################################################################################################### */
-// MARK: - Image Assignment Enum, for Meeting Access Types -
-/* ###################################################################################################################################### */
-extension SwiftBMLSDK_Parser.Meeting.SortableMeetingType {
-    /* ################################################################## */
-    /**
-     Returns the correct image to use, for the type. Returns nil, if no image available.
-     */
-    var image: UIImage? {
-        var imageName = "G" // Generic Web
-        
-        switch self {
-        case .inPerson: // We don't do in-person, alone
-            break
-        case .virtual:  // Virtual, and has both video and phone
-            imageName = "V-P"
-        case .virtual_phone:    // Virtual, phone-only
-            imageName = "P"
-        case .virtual_video:    // Virtual, video-only
-            imageName = "V"
-        case .hybrid:           // Hybrid, with both video and phone virtual options
-            imageName = "V-P-M"
-        case .hybrid_phone:     // Hybrid, with only a phone dial-in option
-            imageName = "P-M"
-        case .hybrid_video:     // Hybrid, with only a video option
-            imageName = "V-M"
-        }
-        
-        return UIImage(named: imageName)
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Date Extension for Localized Strings -
-/* ###################################################################################################################################### */
-extension Date {
-    /* ################################################################## */
-    /**
-     Localizes the time (not the date).
-     */
-    var localizedTime: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.current
-        dateFormatter.timeStyle = .short
-        dateFormatter.dateStyle = .none
-
-        var ret = ""
-        
-        let hour = Calendar.current.component(.hour, from: self)
-        let minute = Calendar.current.component(.minute, from: self)
-
-        if let am = dateFormatter.amSymbol {
-            if 23 == hour {
-                if 59 == minute {
-                    ret = "SLUG-MIDNIGHT-TIME".localizedVariant
-                } else {
-                    ret = String(format: "12:%02d %@", minute, am)
-                }
-            } else if 12 == hour,
-                      0 == minute {
-                ret = "SLUG-NOON-TIME".localizedVariant
-            } else {
-                ret = dateFormatter.string(from: self)
-            }
-        } else {
-            if 12 == hour,
-               0 == minute {
-                ret = "SLUG-NOON-TIME".localizedVariant
-            } else if 23 == hour,
-                      59 == minute {
-                ret = "SLUG-MIDNIGHT-TIME".localizedVariant
-            } else {
-                ret = String(format: "%d:%02d", hour, minute)
-            }
-        }
-        
-        return ret
-    }
-}
-
-/* ###################################################################################################################################### */
 // MARK: - Main App Delegate -
 /* ###################################################################################################################################### */
 /**
@@ -110,10 +30,24 @@ extension Date {
 class VMF_AppDelegate: UIResponder {
     /* ################################################################## */
     /**
+     This is our query instance.
+     */
+    private static var _queryInstance = SwiftBMLSDK_Query(serverBaseURI: URL(string: "https://littlegreenviper.com/LGV_MeetingServer/Tests/entrypoint.php"))
+
+    /* ################################################################## */
+    /**
      This is set to the open meeting, if we have one we are looking at.
      */
     static var openMeeting: VMF_MeetingViewController?
     
+    /* ################################################################## */
+    /**
+     This handles the server data. This is the main container. All others reference this weakly.
+     
+     "There can only be one." - Connor MacLeod
+     */
+    static var virtualService: SwiftBMLSDK_MeetingLocalTimezoneCollection?
+
     /* ################################################################## */
     /**
      This is set to the open search tab, if it is selected.
@@ -121,6 +55,28 @@ class VMF_AppDelegate: UIResponder {
      We do this, so we can exit name search mode, if we go into the background.
      */
     static var searchController: VMF_MainSearchViewController?
+}
+
+/* ###################################################################################################################################### */
+// MARK: Static Functions
+/* ###################################################################################################################################### */
+extension VMF_AppDelegate {
+    /* ################################################################## */
+    /**
+     Fetches all of the virtual meetings (hybrid and pure virtual).
+     
+     - parameter completion: A tail completion handler. One parameter, with the virtual service (nil, if error). May be called in any thread.
+     */
+    static func findMeetings(completion inCompletion: @escaping (SwiftBMLSDK_MeetingLocalTimezoneCollection?) -> Void) {
+        virtualService = nil
+        
+        _ = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: _queryInstance) { inCollection in
+            DispatchQueue.main.async {
+                virtualService = inCollection
+                inCompletion(virtualService)
+            }
+        }
+    }
 }
 
 /* ###################################################################################################################################### */

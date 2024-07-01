@@ -26,6 +26,7 @@
 "SLUG-NOW"                                      =   "Now";
 "SLUG-RESET"                                    =   "Reset";
 "SLUG-WEEKDAY-SEARCH"                           =   "Find";
+"SLUG-WEEKDAY-TIME-SEARCH"                      =   "Time Search";
 "SLUG-TYPE"                                     =   "Type";
 "SLUG-TIMEZONE"                                 =   "Timezone";
 "SLUG-NAME"                                     =   "Name";

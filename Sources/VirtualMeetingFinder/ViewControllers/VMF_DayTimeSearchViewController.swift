@@ -29,17 +29,92 @@ import SwiftBMLSDK
 class VMF_DayTimeSearchViewController: VMF_TabBaseViewController {
     /* ################################################################## */
     /**
+     This handles the server data.
+     */
+    weak var virtualService: SwiftBMLSDK_MeetingLocalTimezoneCollection?
+
+    /* ################################################################## */
+    /**
+     This is an array of the time-mapped meeting data.
+     */
+    var mappedDataset = [[VMF_EmbeddedTableControllerProtocol.MappedSet]]()
+
+    /* ################################################################## */
+    /**
      This tracks the embedded table controller.
      */
     var tableDisplayController: VMF_EmbeddedTableControllerProtocol?
-    
+
     /* ################################################################## */
     /**
-     Called when a refresh is needed.
+     This is set to true, if we are in name search mode.
+     */
+    var isNameSearchMode: Bool = false
+
+    /* ################################################################## */
+    /**
+     Contains the search text filter.
+     */
+    var searchText: String = "" { didSet { } }
+
+    /* ################################################################## */
+    /**
+     Storage for our search meeting source
+     */
+    var searchMeetings: [MeetingInstance] = []
+
+    /* ################################################################## */
+    /**
+     Called to load the meetings from the server.
      
      - parameter completion: A simple, no-parameter completion. It is always called in the main thread.
      */
-    func refreshCalled(completion inCompletion: @escaping () -> Void) {
-        DispatchQueue.main.async { inCompletion() }
+    func loadMeetings(completion inCompletion: @escaping () -> Void) {
+        /* ############################################################## */
+        /**
+         Callback for the meting search.
+         
+         - parameter inVirtualService: A reference to the search results.
+         */
+        func meetingCallback(_ inVirtualService: SwiftBMLSDK_MeetingLocalTimezoneCollection?) {
+            virtualService = inVirtualService
+            searchMeetings = inVirtualService?.meetings.map { $0.meeting }.sorted { a, b in a.name.lowercased() < b.name.lowercased() } ?? []
+            DispatchQueue.main.async { inCompletion() }
+        }
+        virtualService = nil
+        searchMeetings = []
+        VMF_AppDelegate.findMeetings(completion: meetingCallback)
     }
+    
+    /* ################################################################## */
+    /**
+     Sets the day and time to our current day/time.
+     */
+    func setToNow() {
+//        let day = Calendar.current.component(.weekday, from: .now)
+//        let hour = Calendar.current.component(.hour, from: .now)
+//        let minute = Calendar.current.component(.minute, from: .now)
+//        let firstWeekday = Calendar.current.firstWeekday
+//        var currentDay =  (day - firstWeekday)
+//        
+//        if 0 > currentDay {
+//            currentDay += 7
+//        }
+//        
+//        guard (0..<7).contains(currentDay),
+//              (1...mappedDataset.count).contains(day)
+//        else { return }
+//        
+//        let todaysMeetings = mappedDataset[day - 1]
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Page View Controller -
+/* ###################################################################################################################################### */
+/**
+ This is the page controller that embeds our tables.
+ */
+class VMF_DayTimeSearchPageViewController: UIPageViewController {
+    
 }

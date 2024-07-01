@@ -21,6 +21,70 @@ import UIKit
 import SwiftBMLSDK
 
 /* ###################################################################################################################################### */
+// MARK: - Image Assignment Enum, for Meeting Access Types -
+/* ###################################################################################################################################### */
+extension SwiftBMLSDK_Parser.Meeting.SortableMeetingType {
+    /* ################################################################## */
+    /**
+     Returns the correct image to use, for the type. Returns nil, if no image available.
+     */
+    var image: UIImage? {
+        var imageName = "G" // Generic Web
+        
+        switch self {
+        case .inPerson: // We don't do in-person, alone
+            break
+        case .virtual:  // Virtual, and has both video and phone
+            imageName = "V-P"
+        case .virtual_phone:    // Virtual, phone-only
+            imageName = "P"
+        case .virtual_video:    // Virtual, video-only
+            imageName = "V"
+        case .hybrid:           // Hybrid, with both video and phone virtual options
+            imageName = "V-P-M"
+        case .hybrid_phone:     // Hybrid, with only a phone dial-in option
+            imageName = "P-M"
+        case .hybrid_video:     // Hybrid, with only a video option
+            imageName = "V-M"
+        }
+        
+        return UIImage(named: imageName)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Date Extension for Localized Strings -
+/* ###################################################################################################################################### */
+extension Date {
+    /* ################################################################## */
+    /**
+     Localizes the time (not the date).
+     */
+    var localizedTime: String {
+        var ret = ""
+        
+        let hour = Calendar.current.component(.hour, from: self)
+        let minute = Calendar.current.component(.minute, from: self)
+        let integerTime = hour * 100 + minute
+        
+        if 2359 == integerTime {
+            ret = "SLUG-MIDNIGHT-TIME".localizedVariant
+        } else if 1200 == integerTime {
+            ret = "SLUG-NOON-TIME".localizedVariant
+        }
+        
+        if ret.isEmpty {
+            let formatter = DateFormatter()
+            formatter.dateFormat = .none
+            formatter.timeStyle = .short
+            ret = formatter.string(from: self)
+        }
+        
+        return ret
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Abstraction for the Meeting Type -
 /* ###################################################################################################################################### */
 /* ###################################################################### */
@@ -92,16 +156,8 @@ extension MeetingInstance {
      This allows us to return a string for the meeting time. The return is localized, with our strings for noon and midnight.
      */
     var timeString: String {
-        let integerTime = integerStartIme
-        
-        guard 1200 != integerTime else { return "SLUG-NOON-TIME".localizedVariant }
-        guard 1159 != integerTime else { return "SLUG-MIDNIGHT-TIME".localizedVariant }
-
         var mutableSelf = self
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = .none
-        formatter.timeStyle = .short
-        return formatter.string(from: mutableSelf.getNextStartDate(isAdjusted: true))
+        return mutableSelf.getNextStartDate(isAdjusted: true).localizedTime
     }
 }

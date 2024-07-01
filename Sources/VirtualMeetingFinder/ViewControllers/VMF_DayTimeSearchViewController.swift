@@ -244,7 +244,7 @@ extension VMF_DayTimeSearchViewController {
         super.viewDidLoad()
     
         loadMeetings {
-            guard let newViewController = self.getTableDisplay(for: 0) else { return }
+            guard let newViewController = self.getTableDisplay(for: 0, time: 0) else { return }
             self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
         }
     }
@@ -263,12 +263,23 @@ extension VMF_DayTimeSearchViewController {
     /* ################################################################## */
     /**
      */
-    func getTableDisplay(for inDayIndex: Int) -> VMF_EmbeddedTableController? {
+    func getTableDisplay(for inDayIndex: Int, time inTimeIndex: Int) -> VMF_EmbeddedTableController? {
         guard (-1...organizedMeetings.count).contains(inDayIndex),
               let newViewController = storyboard?.instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController else { return nil }
         newViewController.myController = self
-        newViewController.index = inDayIndex
-        newViewController.meetings = -1 == inDayIndex ? searchMeetings : 0 == inDayIndex ? inProgressMeetings : organizedMeetings[inDayIndex - 1]
+        newViewController.timeIndex = inTimeIndex
+        newViewController.dayIndex = inDayIndex
+        var meetings = [MeetingInstance]()
+        
+        if -1 == inDayIndex {
+            meetings = searchMeetings
+        } else if 0 == inDayIndex {
+            meetings = inProgressMeetings
+        } else {
+            meetings = getDailyMeetings(for: inDayIndex)[inTimeIndex] ?? []
+        }
+        
+        newViewController.meetings = meetings
         return newViewController
     }
 }
@@ -282,13 +293,29 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
      */
     func pageViewController(_ inPageViewController: UIPageViewController, viewControllerBefore inBeforeViewController: UIViewController) -> UIViewController? {
         guard let oldViewController = inBeforeViewController as? VMF_EmbeddedTableController else { return nil }
-        var index = oldViewController.index + 1
         
-        if index > organizedMeetings.count {
-            index = 0
+        var timeIndex = oldViewController.timeIndex + 1
+        var dayIndex = oldViewController.dayIndex
+
+        var meetings = [MeetingInstance]()
+        if -1 == dayIndex {
+            meetings = searchMeetings
+        } else if 0 == dayIndex {
+            meetings = inProgressMeetings
+        } else {
+            meetings = getDailyMeetings(for: dayIndex)[timeIndex] ?? []
+        }
+
+        if timeIndex > meetings.count {
+            timeIndex = 0
+            dayIndex += 1
+            
+            if 7 < dayIndex {
+                dayIndex = 1
+            }
         }
         
-        guard let newViewController = getTableDisplay(for: index) else { return nil }
+        guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return nil }
         return newViewController
     }
     
@@ -297,13 +324,21 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
      */
     func pageViewController(_ inPageViewController: UIPageViewController, viewControllerAfter inAfterViewController: UIViewController) -> UIViewController? {
         guard let oldViewController = inAfterViewController as? VMF_EmbeddedTableController else { return nil }
-        var index = oldViewController.index - 1
-        
-        if index < 0 {
-            index = organizedMeetings.count
+        var timeIndex = oldViewController.timeIndex - 1
+        var dayIndex = oldViewController.dayIndex
+
+        if timeIndex < 0 {
+            timeIndex = organizedMeetings.count
+            dayIndex -= 1
+            
+            if 1 > dayIndex {
+                dayIndex = 7
+            }
+            
+            timeIndex = organizedMeetings[dayIndex - 1].count - 1
         }
         
-        guard let newViewController = getTableDisplay(for: index) else { return nil }
+        guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return nil }
         return newViewController
     }
 }

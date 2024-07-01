@@ -57,7 +57,7 @@ protocol VMF_EmbeddedTableControllerProtocol: VMF_BaseProtocol {
     /**
      The index for this table.
      */
-    var index: Int { get set }
+    var timeIndex: Int { get set }
 
     /* ################################################################## */
     /**
@@ -314,9 +314,15 @@ class VMF_EmbeddedTableController: VMF_TabBaseViewController, VMF_EmbeddedTableC
 
     /* ################################################################## */
     /**
-     The index for this table.
+     The time index for this table.
      */
-    var index: Int = 0
+    var timeIndex: Int = 0
+
+    /* ################################################################## */
+    /**
+     The day index for this table.
+     */
+    var dayIndex: Int = 0
 
     /* ################################################################## */
     /**

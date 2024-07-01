@@ -344,17 +344,39 @@
                                     <segue destination="bxe-Jd-mqJ" kind="embed" id="PRK-8l-msD"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yRJ-fe-3Cl">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="AbN-2w-dzJ">
+                                        <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                        <color key="color" systemColor="labelColor"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.49689382529999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="AbN-2w-dzJ" firstAttribute="centerX" secondItem="yRJ-fe-3Cl" secondAttribute="centerX" id="5ce-lw-VZE"/>
+                                    <constraint firstItem="AbN-2w-dzJ" firstAttribute="centerY" secondItem="yRJ-fe-3Cl" secondAttribute="centerY" id="nXO-ZI-IsF"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pPU-8y-L0V"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="yRJ-fe-3Cl" secondAttribute="bottom" id="9dr-6v-74U"/>
+                            <constraint firstItem="yRJ-fe-3Cl" firstAttribute="leading" secondItem="sFK-py-g0o" secondAttribute="leading" id="I2a-CP-Zfj"/>
                             <constraint firstItem="Zdh-eu-ih1" firstAttribute="leading" secondItem="pPU-8y-L0V" secondAttribute="leading" constant="16" id="J9t-bp-sYV"/>
                             <constraint firstItem="pPU-8y-L0V" firstAttribute="trailing" secondItem="Zdh-eu-ih1" secondAttribute="trailing" constant="16" id="JlR-Jz-wHy"/>
                             <constraint firstItem="Zdh-eu-ih1" firstAttribute="top" secondItem="pPU-8y-L0V" secondAttribute="top" id="PvD-w7-bDg"/>
+                            <constraint firstAttribute="trailing" secondItem="yRJ-fe-3Cl" secondAttribute="trailing" id="eGN-f0-8fH"/>
                             <constraint firstItem="pPU-8y-L0V" firstAttribute="bottom" secondItem="Zdh-eu-ih1" secondAttribute="bottom" id="jzp-y2-Q6P"/>
+                            <constraint firstItem="yRJ-fe-3Cl" firstAttribute="top" secondItem="sFK-py-g0o" secondAttribute="top" id="l9h-PB-NGL"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="SLUG-WEEKDAY-TIME-SEARCH" image="clock" catalog="system" id="b6y-1v-hE7"/>
+                    <connections>
+                        <outlet property="tableContainerView" destination="Zdh-eu-ih1" id="JTb-KD-iZG"/>
+                        <outlet property="throbber" destination="yRJ-fe-3Cl" id="Y5J-9Q-wAi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fOD-Yg-Xwv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

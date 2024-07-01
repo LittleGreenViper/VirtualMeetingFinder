@@ -160,4 +160,16 @@ extension MeetingInstance {
         
         return mutableSelf.getNextStartDate(isAdjusted: true).localizedTime
     }
+    
+    /* ################################################################## */
+    /**
+     This returns the start weekday. It is localized, so may sometimes be different from the one specified by the meeting.
+     */
+    var adjustedWeekday: Int {
+        var mutableSelf = self
+        
+        let startDate = mutableSelf.getNextStartDate(isAdjusted: true)
+        
+        return Calendar.current.component(.weekday, from: startDate)
+    }
 }

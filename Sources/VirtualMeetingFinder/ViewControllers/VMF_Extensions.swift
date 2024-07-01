@@ -23,13 +23,20 @@ import SwiftBMLSDK
 /* ###################################################################################################################################### */
 // MARK: - Abstraction for the Meeting Type -
 /* ###################################################################################################################################### */
-public typealias MeetingInstance = SwiftBMLSDK_Parser.Meeting
-
 /* ###################################################################### */
 /**
- This adds various functionality to the String class.
+ This allows us to play around with the SDK.
  */
-extension String {
+public typealias MeetingInstance = SwiftBMLSDK_Parser.Meeting
+
+/* ###################################################################################################################################### */
+// MARK: - String Extension -
+/* ###################################################################################################################################### */
+/* ###################################################################### */
+/**
+ This adds various functionality to Strings
+ */
+extension StringProtocol {
     /* ################################################################## */
     /**
      This tests a string to see if a given substring is present at the start.
@@ -38,12 +45,41 @@ extension String {
      
      - returns: true, if the string begins with the given substring.
      */
-    func beginsWith (_ inSubstring: String) -> Bool {
-        var ret: Bool = false
-        if let range = self.range(of: inSubstring) {
-            ret = (range.lowerBound == self.startIndex)
-        }
-        return ret
+    func beginsWith(_ inSubstring: String) -> Bool {
+        guard let range = range(of: inSubstring),
+              range.lowerBound == startIndex
+        else { return false }
+        return true
+    }
+    
+    /* ################################################################## */
+    /**
+     This tests a string to see if a given substring is present at the end.
+     
+     - parameter inSubstring: The substring to test.
+     
+     - returns: true, if the string ends with the given substring.
+     */
+    func endsWith(_ inSubstring: String) -> Bool {
+        guard let range = range(of: inSubstring),
+              range.upperBound == endIndex
+        else { return false }
+        return true
+    }
+    
+    /* ################################################################## */
+    /**
+     This tests a string to see if a given substring is present anywhere
+     
+     - parameter inSubstring: The substring to test.
+     
+     - returns: true, if the string contains the given substring.
+     */
+    func contains(_ inSubstring: String) -> Bool {
+        guard let range = range(of: inSubstring),
+              !range.isEmpty
+        else { return false }
+        return true
     }
 }
 
@@ -53,14 +89,19 @@ extension String {
 extension MeetingInstance {
     /* ################################################################## */
     /**
-     This allows us to return a string for the meeting time.
+     This allows us to return a string for the meeting time. The return is localized, with our strings for noon and midnight.
      */
     var timeString: String {
+        let integerTime = integerStartIme
+        
+        guard 1200 != integerTime else { return "SLUG-NOON-TIME".localizedVariant }
+        guard 1159 != integerTime else { return "SLUG-MIDNIGHT-TIME".localizedVariant }
+
         var mutableSelf = self
-        let nextDate = mutableSelf.getNextStartDate(isAdjusted: true)
+        
         let formatter = DateFormatter()
         formatter.dateFormat = .none
         formatter.timeStyle = .short
-        return formatter.string(from: nextDate)
+        return formatter.string(from: mutableSelf.getNextStartDate(isAdjusted: true))
     }
 }

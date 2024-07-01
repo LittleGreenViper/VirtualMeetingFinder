@@ -26,13 +26,20 @@ import SwiftBMLSDK
 /**
  This is the main view controller for the weekday/time selector tab.
  */
-class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTableController {
-    var searchedMeetings: [MeetingInstance] = []
+class VMF_DayTimeSearchViewController: VMF_TabBaseViewController {
+    /* ################################################################## */
+    /**
+     This tracks the embedded table controller.
+     */
+    var tableDisplayController: VMF_EmbeddedTableControllerProtocol?
     
-    var isNameSearchMode: Bool = false
-    
-    var tableDisplayController: VMF_MainSearchTableController?
-    
-    func findMeetings() {
+    /* ################################################################## */
+    /**
+     Called when a refresh is needed.
+     
+     - parameter completion: A simple, no-parameter completion. It is always called in the main thread.
+     */
+    func refreshCalled(completion inCompletion: @escaping () -> Void) {
+        DispatchQueue.main.async { inCompletion() }
     }
 }

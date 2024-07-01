@@ -25,34 +25,78 @@ import RVS_Generic_Swift_Toolbox
 // MARK: - Protocol for "Owners" of This Class -
 /* ###################################################################################################################################### */
 /**
- This provides one table cell for the main table of meetings.
+ Protocol for embedded tables.
  */
-protocol VMF_MasterTableController: NSObjectProtocol {
+protocol VMF_EmbeddedTableControllerProtocol: NSObjectProtocol {
     /* ################################################################## */
     /**
-     Returns meetings with names that begin with the text entered.
+     This is an alias for the tuple type we use for time-mapped meeting data.
      */
-    var searchedMeetings: [MeetingInstance] { get }
+    typealias MappedSet = (time: String, meetings: [MeetingInstance])
+
+    /* ################################################################## */
+    /**
+     The controller that "owns" this instance.
+     */
+    var myController: VMF_MasterTableController? { get set }
     
+    /* ################################################################## */
+    /**
+     Contains the search text filter.
+     */
+    var searchText: String { get set }
+    
+    /* ################################################################## */
+    /**
+     Contains the weekday selected (0 - 7, with 1 => Sunday, 7 => Saturday, and 0 in-progress).
+     */
+    var weekday: Int { get set }
+    
+    /* ################################################################## */
+    /**
+     Contains the time selected. This is an index of times (MappedSet times).
+     */
+    var timeIndex: Int { get set }
+    
+    /* ################################################################## */
+    /**
+     This handles the server data.
+     */
+    var virtualService: SwiftBMLSDK_MeetingLocalTimezoneCollection? { get set }
+    
+    /* ################################################################## */
+    /**
+     This is an array of the time-mapped meeting data.
+     */
+    var mappedDataset: [[MappedSet]] { get set }
+
     /* ################################################################## */
     /**
      This is set to true, if we are in name search mode.
      */
-    var isNameSearchMode: Bool { get }
-    
+    var isNameSearchMode: Bool { get set }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Protocol for "Owners" of This Class -
+/* ###################################################################################################################################### */
+/**
+ Protocol for owners
+ */
+protocol VMF_MasterTableController: NSObjectProtocol {
     /* ################################################################## */
     /**
      This tracks embedded table controllers.
      */
-    var tableDisplayController: VMF_MainSearchTableController? { get set }
-
+    var tableDisplayController: VMF_EmbeddedTableControllerProtocol? { get set }
+    
     /* ################################################################## */
     /**
-     Fetches all of the virtual meetings (hybrid and pure virtual).
+     Called when a refresh is needed.
      
-     - parameter: ignored
+     - parameter completion: A simple, no-parameter completion. It is always called in the main thread.
      */
-    func findMeetings()
+    func refreshCalled(completion: @escaping () -> Void)
 }
 
 /* ###################################################################################################################################### */
@@ -94,12 +138,12 @@ class VMF_TableCell: UITableViewCell {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Main View Controller -
+// MARK: - Embedded Table View Controller -
 /* ###################################################################################################################################### */
 /**
- This is the main view controller for the weekday/time selector tab.
+ This presents a simple view controller, with a table of meetings.
  */
-class VMF_MainSearchTableController: VMF_TabBaseViewController {
+class VMF_EmbeddedTableController: VMF_TabBaseViewController, VMF_EmbeddedTableControllerProtocol {
     /* ################################################################################################################################## */
     // MARK: Meeting Table Sort Types
     /* ################################################################################################################################## */
@@ -131,12 +175,6 @@ class VMF_MainSearchTableController: VMF_TabBaseViewController {
          */
         case time = 3
     }
-    
-    /* ################################################################## */
-    /**
-     This is an alias for the tuple type we use for time-mapped meeting data.
-     */
-    typealias MappedSet = (time: String, meetings: [MeetingInstance])
     
     /* ################################################################## */
     /**
@@ -207,16 +245,16 @@ class VMF_MainSearchTableController: VMF_TabBaseViewController {
 
     /* ################################################################## */
     /**
-     This handles the server data.
+     This is an array of the time-mapped meeting data.
      */
-    private var _virtualService: SwiftBMLSDK_MeetingLocalTimezoneCollection? { didSet { mapData() } }
+    var mappedDataset = [[MappedSet]]()
 
     /* ################################################################## */
     /**
-     This is an array of the time-mapped meeting data.
+     This is set to true, if we are in name search mode.
      */
-    private var _mappedDataset = [[MappedSet]]()
-
+    var isNameSearchMode: Bool = false
+    
     /* ################################################################## */
     /**
      This is set to true, if the "now" segment is selected.
@@ -258,7 +296,41 @@ class VMF_MainSearchTableController: VMF_TabBaseViewController {
      The controller that "owns" this instance.
      */
     weak var myController: VMF_MasterTableController?
+
+    /* ################################################################## */
+    /**
+     Contains the search text filter.
+     */
+    var searchText: String = "" { didSet { } }
     
+    /* ################################################################## */
+    /**
+     This handles the server data.
+     */
+    var virtualService: SwiftBMLSDK_MeetingLocalTimezoneCollection? { didSet { mapData() } }
+
+    /* ################################################################## */
+    /**
+     Returns meetings with names that begin with the text entered.
+     */
+    var searchedMeetings: [MeetingInstance] {
+        guard !searchText.isEmpty else { return _cachedSearchMeetings }
+        let lcText = searchText.lowercased()
+        return (_cachedSearchMeetings.filter { $0.name.lowercased().beginsWith(lcText) })
+    }
+    
+    /* ################################################################## */
+    /**
+     Contains the weekday selected (0 - 7, with 1 => Sunday, 7 => Saturday, and 0 in-progress).
+     */
+    var weekday: Int = 0
+    
+    /* ################################################################## */
+    /**
+     Contains the time selected. This is an index of times (MappedSet times).
+     */
+    var timeIndex: Int = 0
+
     /* ################################################################## */
     /**
      This contains all the visible items.
@@ -294,36 +366,12 @@ class VMF_MainSearchTableController: VMF_TabBaseViewController {
      The ascending/descending sort button.
      */
     @IBOutlet weak var sortButton: UIButton?
-    
-    /* ################################################################## */
-    /**
-     The swipe rcognizer for increasing time.
-     */
-    @IBOutlet weak var leftSwipeRecognizer: UISwipeGestureRecognizer?
-
-    /* ################################################################## */
-    /**
-     The swipe rcognizer for decreasing time.
-     */
-    @IBOutlet weak var rightSwipeRecognizer: UISwipeGestureRecognizer?
 }
 
 /* ###################################################################################################################################### */
 // MARK: Computed Properties
 /* ###################################################################################################################################### */
-extension VMF_MainSearchTableController {
-    /* ################################################################## */
-    /**
-     Returns meetings with names that begin with the text entered.
-     */
-    var searchedMeetings: [MeetingInstance] { myController?.searchedMeetings ?? [] }
-    
-    /* ################################################################## */
-    /**
-     This is set to true, if we are in name search mode.
-     */
-    var isNameSearchMode: Bool { myController?.isNameSearchMode ?? false }
-
+extension VMF_EmbeddedTableController {
     /* ################################################################## */
     /**
      The data for display in the table.
@@ -405,7 +453,7 @@ extension VMF_MainSearchTableController {
 /* ###################################################################################################################################### */
 // MARK: Base Class Overrides
 /* ###################################################################################################################################### */
-extension VMF_MainSearchTableController {
+extension VMF_EmbeddedTableController {
     /* ################################################################## */
     /**
      Called when the view hierarchy has loaded.
@@ -454,10 +502,30 @@ extension VMF_MainSearchTableController {
 /* ###################################################################################################################################### */
 // MARK: Static Functions
 /* ###################################################################################################################################### */
-extension VMF_MainSearchTableController {
+extension VMF_EmbeddedTableController {
     /* ################################################################## */
     /**
-     This converts the selected weekday into the 1 == Sun format needed for the meeting data.
+     This converts a 1 == Sun format into a localized weekday index (1 ... 7)
+     
+     - parameter: An integer (1 = Sunday), with the unlocalized index.
+     - returns: The 1-based weekday index for the local system.
+     */
+    static func mapWeekday(_ inWeekdayIndex: Int) -> Int {
+        var weekdayIndex = (inWeekdayIndex - Calendar.current.firstWeekday)
+        
+        if 0 > weekdayIndex {
+            weekdayIndex += 7
+        }
+
+        return weekdayIndex + 1
+    }
+
+    /* ################################################################## */
+    /**
+     This converts the selected localized weekday into the 1 == Sun format needed for the meeting data.
+     
+     - parameter: An integer (1 -> 7), with the localized weekday.
+     - returns: The 1-based weekday index for 1 = Sunday
      */
     static func unMapWeekday(_ inWeekdayIndex: Int) -> Int {
         guard (1..<8).contains(inWeekdayIndex) else { return 0 }
@@ -501,16 +569,29 @@ extension VMF_MainSearchTableController {
 /* ###################################################################################################################################### */
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
-extension VMF_MainSearchTableController {
-
+extension VMF_EmbeddedTableController {
+    /* ################################################################## */
+    /**
+     */
+    func setUpTable() {
+        
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func setUpSortHeader() {
+        
+    }
+    
     /* ################################################################## */
     /**
      This maps the times for the selected day.
      */
     func mapData() {
-        _mappedDataset = []
+        mappedDataset = []
         
-        guard let virtualService = _virtualService else { return }
+        guard let virtualService = virtualService else { return }
 
         var daySet = [MappedSet]()
         
@@ -541,7 +622,7 @@ extension VMF_MainSearchTableController {
                 daySet.append(MappedSet(time: string, meetings: meetings))
             }
             
-            _mappedDataset.append(daySet)
+            mappedDataset.append(daySet)
         }
     }
     
@@ -561,7 +642,7 @@ extension VMF_MainSearchTableController {
 /* ###################################################################################################################################### */
 // MARK: Callbacks
 /* ###################################################################################################################################### */
-extension VMF_MainSearchTableController {
+extension VMF_EmbeddedTableController {
     /* ################################################################## */
     /**
      Called to show a meeting details page.
@@ -619,7 +700,7 @@ extension VMF_MainSearchTableController {
 /* ###################################################################################################################################### */
 // MARK: UITableViewDataSource Conformance
 /* ###################################################################################################################################### */
-extension VMF_MainSearchTableController: UITableViewDataSource {
+extension VMF_EmbeddedTableController: UITableViewDataSource {
     /* ################################################################## */
     /**
      Returns the number of sections to display.
@@ -702,7 +783,7 @@ extension VMF_MainSearchTableController: UITableViewDataSource {
 /* ###################################################################################################################################### */
 // MARK: UITableViewDelegate Conformance
 /* ###################################################################################################################################### */
-extension VMF_MainSearchTableController: UITableViewDelegate {
+extension VMF_EmbeddedTableController: UITableViewDelegate {
     /* ################################################################## */
     /**
      Called when a cell is selected. We will use this to open the user viewer.

@@ -140,7 +140,6 @@ extension VMF_MeetingViewController {
      Called when the view hierarchy has loaded.
      */
     override func viewDidLoad() {
-
         /* ################################################################## */
         /**
          This simply strips out all non-decimal characters in the string, leaving only valid decimal digits.
@@ -226,7 +225,7 @@ extension VMF_MeetingViewController {
               (1..<8).contains(meeting.weekday)
         else { return }
         
-        let weekday = Calendar.current.weekdaySymbols[meeting.weekday - 1]
+        let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
         let timeInst = meeting.adjustedIntegerStartTime
         let time = (1200 == timeInst) ? "SLUG-NOON-TIME".localizedVariant : (2359 == timeInst) ? "SLUG-MIDNIGHT-TIME".localizedVariant : meeting.timeString
 

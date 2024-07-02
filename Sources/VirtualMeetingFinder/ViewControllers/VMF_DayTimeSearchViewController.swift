@@ -27,6 +27,22 @@ import SwiftBMLSDK
  This is the main view controller for the weekday/time selector tab.
  */
 class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTableControllerProtocol {
+    /* ################################################################## */
+    /**
+     Used to prevent duplication of controllers.
+     */
+    private var _transitionFromController: UIViewController?
+    
+    /* ################################################################## */
+    /**
+     Used to prevent duplication of controllers.
+     */
+    private var _transitionToController: UIViewController?
+    
+    /* ################################################################## */
+    /**
+     The main controller (ignored -just here for the protocol).
+     */
     var myController: (any VMF_MasterTableControllerProtocol)?
     
     /* ################################################################## */
@@ -40,7 +56,7 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
      This tracks the current embedded table controller.
      */
     var tableDisplayController: VMF_EmbeddedTableControllerProtocol?
-    
+
     /* ################################################################## */
     /**
      This is our page view controller.
@@ -245,6 +261,8 @@ extension VMF_DayTimeSearchViewController {
     
         loadMeetings {
             guard let newViewController = self.getTableDisplay(for: 0, time: 0) else { return }
+            self._transitionFromController = nil
+            self._transitionToController = nil
             self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
         }
     }
@@ -263,23 +281,32 @@ extension VMF_DayTimeSearchViewController {
     /* ################################################################## */
     /**
      */
-    func getTableDisplay(for inDayIndex: Int, time inTimeIndex: Int) -> VMF_EmbeddedTableController? {
-        guard (-1...organizedMeetings.count).contains(inDayIndex),
-              let newViewController = storyboard?.instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController else { return nil }
-        newViewController.myController = self
-        newViewController.timeIndex = inTimeIndex
-        newViewController.dayIndex = inDayIndex
+    func getTableDisplay(for inDayIndex: Int, time inTimeIndex: Int) -> UIViewController? {
+        guard nil == _transitionToController else { return _transitionToController }
+        let dayIndex = max(0, min(organizedMeetings.count, inDayIndex))
+        var timeIndex = inTimeIndex
         var meetings = [MeetingInstance]()
-        
-        if -1 == inDayIndex {
+
+        if isNameSearchMode {
             meetings = searchMeetings
-        } else if 0 == inDayIndex {
+        } else if 0 == dayIndex {
             meetings = inProgressMeetings
         } else {
-            meetings = getDailyMeetings(for: inDayIndex)[inTimeIndex] ?? []
+            let tempMeetings = getDailyMeetings(for: dayIndex)
+            let keys = tempMeetings.keys.sorted()
+            timeIndex = max(0, min(timeIndex, keys.count - 1))
+            let key = keys[timeIndex]
+            meetings = tempMeetings[key] ?? []
         }
+
+        guard let newViewController = storyboard?.instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController else { return nil }
         
+        newViewController.myController = self
+        newViewController.timeIndex = timeIndex
+        newViewController.dayIndex = dayIndex
         newViewController.meetings = meetings
+        
+        _transitionToController = newViewController
         return newViewController
     }
 }
@@ -292,54 +319,58 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
     /**
      */
     func pageViewController(_ inPageViewController: UIPageViewController, viewControllerBefore inBeforeViewController: UIViewController) -> UIViewController? {
-        guard let oldViewController = inBeforeViewController as? VMF_EmbeddedTableController else { return nil }
+        guard !isNameSearchMode,
+              let oldViewController = inBeforeViewController as? VMF_EmbeddedTableController
+        else { return nil }
         
-        var timeIndex = oldViewController.timeIndex + 1
-        var dayIndex = oldViewController.dayIndex
+        _transitionFromController = oldViewController
 
-        var meetings = [MeetingInstance]()
-        if -1 == dayIndex {
-            meetings = searchMeetings
-        } else if 0 == dayIndex {
-            meetings = inProgressMeetings
+        var timeIndex = oldViewController.timeIndex
+        var dayIndex = max(0, min(organizedMeetings.count, oldViewController.dayIndex))
+        
+        if 0 == dayIndex {
+            timeIndex = Int.max
+            dayIndex = organizedMeetings.count
         } else {
-            meetings = getDailyMeetings(for: dayIndex)[timeIndex] ?? []
-        }
-
-        if timeIndex > meetings.count {
-            timeIndex = 0
-            dayIndex += 1
+            timeIndex -= 1
             
-            if 7 < dayIndex {
-                dayIndex = 1
+            if 0 > timeIndex {
+                dayIndex -= 1
+                timeIndex = Int.max
+            }
+            
+            if 0 < dayIndex {
+                let tempMeetings = getDailyMeetings(for: dayIndex)
+                timeIndex = max(0, min(timeIndex, tempMeetings.keys.count - 1))
             }
         }
         
-        guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return nil }
-        return newViewController
+        return getTableDisplay(for: dayIndex, time: timeIndex)
     }
     
     /* ################################################################## */
     /**
      */
     func pageViewController(_ inPageViewController: UIPageViewController, viewControllerAfter inAfterViewController: UIViewController) -> UIViewController? {
-        guard let oldViewController = inAfterViewController as? VMF_EmbeddedTableController else { return nil }
-        var timeIndex = oldViewController.timeIndex - 1
-        var dayIndex = oldViewController.dayIndex
+        guard !isNameSearchMode,
+              let oldViewController = inAfterViewController as? VMF_EmbeddedTableController
+        else { return nil }
+        
+        _transitionFromController = oldViewController
 
-        if timeIndex < 0 {
-            timeIndex = organizedMeetings.count
-            dayIndex -= 1
-            
-            if 1 > dayIndex {
-                dayIndex = 7
-            }
-            
-            timeIndex = organizedMeetings[dayIndex - 1].count - 1
+        var timeIndex = oldViewController.timeIndex + 1
+        var dayIndex = oldViewController.dayIndex
+        
+        if 7 == dayIndex,
+           timeIndex >= getDailyMeetings(for: dayIndex).count {
+            timeIndex = 0
+            dayIndex = 0
+        } else if 0 == dayIndex {
+            timeIndex = 0
+            dayIndex = 1
         }
         
-        guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return nil }
-        return newViewController
+        return getTableDisplay(for: dayIndex, time: timeIndex)
     }
 }
 
@@ -347,6 +378,18 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
 // MARK: UIPageViewControllerDelegate Conformance
 /* ###################################################################################################################################### */
 extension VMF_DayTimeSearchViewController: UIPageViewControllerDelegate {
+    func pageViewController(_: UIPageViewController, willTransitionTo inPendingViewControllers: [UIViewController]) {
+        guard !inPendingViewControllers.isEmpty else { return }
+        _transitionToController = inPendingViewControllers[0]
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func pageViewController(_: UIPageViewController, didFinishAnimating: Bool, previousViewControllers: [UIViewController], transitionCompleted inCompleted: Bool) {
+        _transitionFromController = nil
+        _transitionToController = nil
+    }
 }
 
 /* ###################################################################################################################################### */

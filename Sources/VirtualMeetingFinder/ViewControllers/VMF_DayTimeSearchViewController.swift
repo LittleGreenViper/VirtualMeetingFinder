@@ -29,12 +29,6 @@ import SwiftBMLSDK
 class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTableControllerProtocol {
     /* ################################################################## */
     /**
-     Used to prevent duplication of controllers.
-     */
-    private var _transitionToController: UIViewController?
-    
-    /* ################################################################## */
-    /**
      The main controller (ignored -just here for the protocol).
      */
     var myController: (any VMF_MasterTableControllerProtocol)?
@@ -259,7 +253,6 @@ extension VMF_DayTimeSearchViewController {
      - returns: A new (or reused) view controller, for the destination of the transition.
      */
     func getTableDisplay(for inDayIndex: Int, time inTimeIndex: Int) -> UIViewController? {
-        guard nil == _transitionToController else { return _transitionToController }
         let dayIndex = max(0, min(organizedMeetings.count, inDayIndex))
         var timeIndex = max(0, min(inTimeIndex, Int.max - 1))
         var meetings = [MeetingInstance]()
@@ -295,7 +288,6 @@ extension VMF_DayTimeSearchViewController {
             newViewController.title = "SLUG-IN-PROGRESS".localizedVariant
         }
         
-        _transitionToController = newViewController
         return newViewController
     }
 }
@@ -316,7 +308,8 @@ extension VMF_DayTimeSearchViewController {
         if selectedIndex == (inSwitch.numberOfSegments - 1) {
             isNameSearchMode = true
             let dayIndex = tableDisplayController?.dayIndex ?? 0
-            guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
+            guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex)
+            else { return }
             self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
         } else {
             isNameSearchMode = false
@@ -327,8 +320,6 @@ extension VMF_DayTimeSearchViewController {
             guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
             self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
         }
-        
-        self._transitionToController = nil
     }
 }
 
@@ -357,7 +348,6 @@ extension VMF_DayTimeSearchViewController {
         
         loadMeetings {
             guard let newViewController = self.getTableDisplay(for: 0, time: 0) else { return }
-            self._transitionToController = nil
             self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
         }
     }
@@ -459,8 +449,6 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDelegate {
      - parameter transitionCompleted: True, if the transition completed, and was not aborted.
      */
     func pageViewController(_: UIPageViewController, didFinishAnimating: Bool, previousViewControllers: [UIViewController], transitionCompleted inIsDone: Bool) {
-        _transitionToController = nil
-        
         if inIsDone {
             if isNameSearchMode {
                 weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = (weekdayModeSelectorSegmentedSwitch?.numberOfSegments ?? 1) - 1

@@ -255,6 +255,7 @@ extension VMF_DayTimeSearchViewController {
 extension VMF_DayTimeSearchViewController {
     /* ################################################################## */
     /**
+     Called when the view hierarchy loads.
      */
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -269,6 +270,10 @@ extension VMF_DayTimeSearchViewController {
     
     /* ################################################################## */
     /**
+     Called before transitioning to another view controller.
+     
+     - parameter for: The segue instance.
+     - parameter sender: ignored.
      */
     override func prepare(for inSegue: UIStoryboardSegue, sender: Any?) {
         if let destination = inSegue.destination as? VMF_DayTimeSearchPageViewController {
@@ -280,6 +285,13 @@ extension VMF_DayTimeSearchViewController {
     
     /* ################################################################## */
     /**
+     This returns a new destination controller to use for transitions.
+     
+     NOTE: If the controller is in text search mode, then the name search controller is returned. If the destination has already been created, it is returned.
+     
+     - parameter for: The 0-based "day index." If it is 0, though, it is the "in-progress" display.
+     - parameter time: The 0-based time index. This is the index of the currently selected time slot.
+     - returns: A new (or reused) view controller, for the destination of the transition.
      */
     func getTableDisplay(for inDayIndex: Int, time inTimeIndex: Int) -> UIViewController? {
         guard nil == _transitionToController else { return _transitionToController }
@@ -317,8 +329,13 @@ extension VMF_DayTimeSearchViewController {
 extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
     /* ################################################################## */
     /**
+     Called to fetch the view controller before the current one.
+     
+     - parameter: The page view controller (ignored).
+     - parameter viewControllerBefore: The view controller after (to the right of) the one we want.
+     - returns: A new (or reused) view controller to appear before (to the left of) the "before" controller.
      */
-    func pageViewController(_ inPageViewController: UIPageViewController, viewControllerBefore inBeforeViewController: UIViewController) -> UIViewController? {
+    func pageViewController(_: UIPageViewController, viewControllerBefore inBeforeViewController: UIViewController) -> UIViewController? {
         guard !isNameSearchMode,
               let oldViewController = inBeforeViewController as? VMF_EmbeddedTableController
         else { return nil }
@@ -350,8 +367,13 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
     
     /* ################################################################## */
     /**
+     Called to fetch the view controller after the current one.
+     
+     - parameter: The page view controller (ignored).
+     - parameter viewControllerBefore: The view controller before (to the left of) the one we want.
+     - returns: A new (or reused) view controller to appear after (to the right of) the "before" controller.
      */
-    func pageViewController(_ inPageViewController: UIPageViewController, viewControllerAfter inAfterViewController: UIViewController) -> UIViewController? {
+    func pageViewController(_: UIPageViewController, viewControllerAfter inAfterViewController: UIViewController) -> UIViewController? {
         guard !isNameSearchMode,
               let oldViewController = inAfterViewController as? VMF_EmbeddedTableController
         else { return nil }
@@ -378,11 +400,6 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
 // MARK: UIPageViewControllerDelegate Conformance
 /* ###################################################################################################################################### */
 extension VMF_DayTimeSearchViewController: UIPageViewControllerDelegate {
-    func pageViewController(_: UIPageViewController, willTransitionTo inPendingViewControllers: [UIViewController]) {
-        guard !inPendingViewControllers.isEmpty else { return }
-        _transitionToController = inPendingViewControllers[0]
-    }
-    
     /* ################################################################## */
     /**
      */

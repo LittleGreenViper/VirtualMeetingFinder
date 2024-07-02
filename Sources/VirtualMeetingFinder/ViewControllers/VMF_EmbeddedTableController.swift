@@ -240,37 +240,6 @@ class VMF_TableCell: UITableViewCell {
  This presents a simple view controller, with a table of meetings.
  */
 class VMF_EmbeddedTableController: VMF_TabBaseViewController, VMF_EmbeddedTableControllerProtocol {
-//    /* ################################################################## */
-//    /**
-//     The image to use for our ascending sort.
-//     */
-//    private class var _sortButtonASCImage: UIImage? {
-//        guard let image = _sortButtonDESCImage else { return nil }
-//        
-//        UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
-//        defer { UIGraphicsEndImageContext() }
-//
-//        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-//        
-//        context.translateBy(x: image.size.width/2, y: image.size.height/2)
-//        context.scaleBy(x: 1.0, y: -1.0)
-//        context.translateBy(x: -image.size.width/2, y: -image.size.height/2)
-//        
-//        image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
-//        
-//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-//        
-//        return newImage?.withRenderingMode(.alwaysTemplate)
-//    }
-//    
-//    /* ################################################################## */
-//    /**
-//     The image to use for our ascending sort.
-//     */
-//    private class var _sortButtonDESCImage: UIImage? {
-//        UIImage(systemName: "line.3.horizontal.decrease.circle")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))
-//    }
-    
     /* ################################################################## */
     /**
      The storyboard ID, for instantiating this class
@@ -329,7 +298,7 @@ class VMF_EmbeddedTableController: VMF_TabBaseViewController, VMF_EmbeddedTableC
     /**
      This handles the meeting collection for this.
      */
-    var meetings: [MeetingInstance] = [] { didSet { valueTable?.reloadData() }}
+    var meetings: [MeetingInstance] = []
 
     /* ################################################################## */
     /**
@@ -356,17 +325,6 @@ extension VMF_EmbeddedTableController {
     
     /* ################################################################## */
     /**
-     Called just before the view is to appear.
-     
-     - parameter inIsAnimated: True, if the appearance is animated.
-     */
-    override func viewWillAppear(_ inIsAnimated: Bool) {
-        super.viewWillAppear(inIsAnimated)
-        valueTable?.reloadData()
-    }
-    
-    /* ################################################################## */
-    /**
      Called just after the view appeared
      
      - parameter inIsAnimated: True, if the appearance is animated.
@@ -374,6 +332,15 @@ extension VMF_EmbeddedTableController {
     override func viewDidAppear(_ inIsAnimated: Bool) {
         super.viewDidAppear(inIsAnimated)
         myController?.tableDisplayController = self
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the view has laid out its subviews.
+     */
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        valueTable?.reloadData()
     }
     
     /* ################################################################## */

@@ -85,9 +85,11 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
         didSet {
             if isThrobbing {
                 tableContainerView?.isHidden = true
+                weekdayModeSelectorSegmentedSwitch?.isHidden = true
                 throbber?.isHidden = false
             } else {
                 throbber?.isHidden = true
+                weekdayModeSelectorSegmentedSwitch?.isHidden = false
                 tableContainerView?.isHidden = false
             }
         }

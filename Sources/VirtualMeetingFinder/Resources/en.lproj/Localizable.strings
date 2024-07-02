@@ -20,6 +20,7 @@
 "SLUG-VIRTUAL-SWITCH-0"                         =   "All";
 "SLUG-VIRTUAL-SWITCH-1"                         =   "Hybrid";
 "SLUG-VIRTUAL-SWITCH-2"                         =   "Virtual";
+"SLUG-IN-PROGRESS"                              =   "In Progress";
 "SLUG-IN-PROGRESS-FORMAT"                       =   "In Progress Since %@";
 "SLUG-NOON-TIME"                                =   "Noon";
 "SLUG-MIDNIGHT-TIME"                            =   "Midnight";

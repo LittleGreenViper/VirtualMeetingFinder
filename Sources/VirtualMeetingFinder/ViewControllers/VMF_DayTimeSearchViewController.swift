@@ -107,6 +107,12 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
 
     /* ################################################################## */
     /**
+     The segmented switch that controls the mode.
+     */
+    @IBOutlet weak var weekdayModeSelectorSegmentedSwitch: UISegmentedControl?
+    
+    /* ################################################################## */
+    /**
      The embedded table controller container view.
      */
     @IBOutlet weak var tableContainerView: UIView!
@@ -261,7 +267,7 @@ extension VMF_DayTimeSearchViewController {
     func getTableDisplay(for inDayIndex: Int, time inTimeIndex: Int) -> UIViewController? {
         guard nil == _transitionToController else { return _transitionToController }
         let dayIndex = max(0, min(organizedMeetings.count, inDayIndex))
-        var timeIndex = inTimeIndex
+        var timeIndex = max(0, min(inTimeIndex, Int.max - 1))
         var meetings = [MeetingInstance]()
 
         if isNameSearchMode {
@@ -283,8 +289,34 @@ extension VMF_DayTimeSearchViewController {
         newViewController.dayIndex = dayIndex
         newViewController.meetings = meetings
         
+        if !isNameSearchMode,
+           0 < dayIndex {
+            guard (0..<7).contains(mapWeekday(dayIndex) - 1) else { return nil }
+            let weekdayString = Calendar.current.weekdaySymbols[mapWeekday(dayIndex) - 1]
+            let timeString = meetings.first?.timeString ?? "ERROR"
+            newViewController.title = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekdayString, timeString)
+        } else if isNameSearchMode {
+            newViewController.title = "SLUG-WEEKDAY-SEARCH".localizedVariant
+        } else if 0 == dayIndex {
+            newViewController.title = "SLUG-IN-PROGRESS".localizedVariant
+        }
+        
         _transitionToController = newViewController
         return newViewController
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Callbacks
+/* ###################################################################################################################################### */
+extension VMF_DayTimeSearchViewController {
+    /* ################################################################## */
+    /**
+     The segmented switch that controls the mode was hit.
+     
+     - parameter inSwitch: The segmented switch.
+     */
+    @IBAction func weekdayModeSelectorSegmentedSwitchHit(_ inSwitch: UISegmentedControl) {
     }
 }
 
@@ -299,6 +331,18 @@ extension VMF_DayTimeSearchViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        guard let maxIndex = weekdayModeSelectorSegmentedSwitch?.numberOfSegments else { return }
+        
+        for index in (0..<maxIndex) {
+            if 0 == index {
+                weekdayModeSelectorSegmentedSwitch?.setTitle("SLUG-NOW".localizedVariant, forSegmentAt: index)
+            } else if index == (maxIndex - 1) {
+                weekdayModeSelectorSegmentedSwitch?.setImage(UIImage(systemName: "magnifyingglass"), forSegmentAt: index)
+            } else {
+                weekdayModeSelectorSegmentedSwitch?.setTitle(Calendar.current.veryShortStandaloneWeekdaySymbols[index - 1], forSegmentAt: index)
+            }
+        }
+        
         loadMeetings {
             guard let newViewController = self.getTableDisplay(for: 0, time: 0) else { return }
             self._transitionFromController = nil
@@ -410,8 +454,22 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDelegate {
      - parameter transitionCompleted: True, if the transition completed, and was not aborted (again, ignored).
      */
     func pageViewController(_: UIPageViewController, didFinishAnimating: Bool, previousViewControllers: [UIViewController], transitionCompleted: Bool) {
+        let oldToController = _transitionToController as? VMF_EmbeddedTableController
         _transitionFromController = nil
         _transitionToController = nil
+        
+        guard !isNameSearchMode,
+              let dayIndex = oldToController?.dayIndex
+        else {
+            if isNameSearchMode,
+             let weekdayModeSelectorSegmentedSwitch = weekdayModeSelectorSegmentedSwitch {
+                weekdayModeSelectorSegmentedSwitch.selectedSegmentIndex = (weekdayModeSelectorSegmentedSwitch.numberOfSegments - 1)
+            }
+            
+            return
+        }
+        
+        weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = dayIndex
     }
 }
 

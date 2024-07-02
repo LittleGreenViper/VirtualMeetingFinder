@@ -467,16 +467,23 @@ extension VMF_DayTimeSearchViewController {
            var dayIndex = tableDisplayController?.dayIndex,
            var timeIndex = tableDisplayController?.timeIndex {
             timeIndex -= 1
-            if 0 > timeIndex || 0 == dayIndex {
-                dayIndex -= 1
-                if 0 > dayIndex {
+
+            if 0 == dayIndex || 0 > timeIndex {
+                if 0 == dayIndex {
                     dayIndex = 7
+                } else {
+                    dayIndex -= 1
+                    if 0 > dayIndex {
+                        dayIndex = 7
+                    }
                 }
                 timeIndex = getDailyMeetings(for: mapWeekday(dayIndex)).keys.count - 1
             }
             
             guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
             pageViewController?.setViewControllers([newViewController], direction: .reverse, animated: false)
+            timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
+            weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = dayIndex
             timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
         }
     }
@@ -501,6 +508,7 @@ extension VMF_DayTimeSearchViewController {
             }
             guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
             pageViewController?.setViewControllers([newViewController], direction: .reverse, animated: false)
+            weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = dayIndex
             timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
         }
     }

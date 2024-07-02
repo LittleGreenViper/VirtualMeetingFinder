@@ -71,16 +71,20 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
                     guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
                     pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
                     searchTextField?.becomeFirstResponder()
+                    timeSelectorContainerView?.isHidden = true
                 } else {
                     searchTextField?.resignFirstResponder()
                     if oldValue != isNameSearchMode {
                         weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = dayIndex
                         tableDisplayController?.meetings = getCurentMeetings(for: dayIndex, time: timeIndex)
                     }
+                    timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
+                    timeSelectorContainerView?.isHidden = false
                 }
                 
                 tableDisplayController?.meetings = getCurentMeetings(for: dayIndex, time: timeIndex)
             }
+            
         }
     }
     
@@ -125,11 +129,13 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
                 tableContainerView?.isHidden = true
                 searchItemsContainerView?.isHidden = true
                 weekdayModeSelectorSegmentedSwitch?.isHidden = true
+                timeSelectorContainerView?.isHidden = true
                 throbber?.isHidden = false
             } else {
                 throbber?.isHidden = true
                 searchItemsContainerView?.isHidden = !isNameSearchMode
                 weekdayModeSelectorSegmentedSwitch?.isHidden = isNameSearchMode
+                timeSelectorContainerView?.isHidden = isNameSearchMode
                 tableContainerView?.isHidden = false
             }
         }
@@ -165,6 +171,30 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
      */
     @IBOutlet weak var searchCloseButton: UIButton?
 
+    /* ################################################################## */
+    /**
+     This contains the time selector items.
+     */
+    @IBOutlet weak var timeSelectorContainerView: UIStackView?
+    
+    /* ################################################################## */
+    /**
+     The decrement time button
+     */
+    @IBOutlet weak var leftButton: UIButton?
+    
+    /* ################################################################## */
+    /**
+     The increment time button
+     */
+    @IBOutlet weak var rightButton: UIButton?
+    
+    /* ################################################################## */
+    /**
+     This displays the current time and day.
+     */
+    @IBOutlet weak var timeDayDisplayLabel: UILabel?
+    
     /* ################################################################## */
     /**
      The bottom constraint of the table display area. We use this to shrink the table area, when the keyboard is shown.
@@ -338,11 +368,11 @@ extension VMF_DayTimeSearchViewController {
             let timeString = meetings.first?.timeString ?? "ERROR"
             newViewController.title = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekdayString, timeString)
         } else if isNameSearchMode {
-            newViewController.title = "SLUG-WEEKDAY-SEARCH".localizedVariant
+            newViewController.title = (tableDisplayController as? UIViewController)?.title
         } else if 0 == dayIndex {
             newViewController.title = "SLUG-IN-PROGRESS".localizedVariant
         }
-        
+
         return newViewController
     }
     
@@ -406,6 +436,8 @@ extension VMF_DayTimeSearchViewController {
             guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
             self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
         }
+        
+        timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
     }
     
     /* ################################################################## */
@@ -424,6 +456,55 @@ extension VMF_DayTimeSearchViewController {
         isNameSearchMode = false
     }
     
+    /* ################################################################## */
+    /**
+     The decrement time button was hit.
+     
+     - parameter: ignored
+     */
+    @IBAction func leftButtonHit(_: Any) {
+        if !isNameSearchMode,
+           var dayIndex = tableDisplayController?.dayIndex,
+           var timeIndex = tableDisplayController?.timeIndex {
+            timeIndex -= 1
+            if 0 > timeIndex || 0 == dayIndex {
+                dayIndex -= 1
+                if 0 > dayIndex {
+                    dayIndex = 7
+                }
+                timeIndex = getDailyMeetings(for: mapWeekday(dayIndex)).keys.count - 1
+            }
+            
+            guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
+            pageViewController?.setViewControllers([newViewController], direction: .reverse, animated: false)
+            timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     The increment time button was hit.
+     
+     - parameter: ignored
+     */
+    @IBAction func rightButtonHit(_: Any) {
+        if !isNameSearchMode,
+           var dayIndex = tableDisplayController?.dayIndex,
+           var timeIndex = tableDisplayController?.timeIndex {
+            timeIndex += 1
+            if 0 == dayIndex || timeIndex >= getDailyMeetings(for: mapWeekday(dayIndex)).keys.count {
+                timeIndex = 0
+                dayIndex += 1
+                if 7 < dayIndex {
+                    dayIndex = 0
+                }
+            }
+            guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
+            pageViewController?.setViewControllers([newViewController], direction: .reverse, animated: false)
+            timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
+        }
+    }
+
     /* ################################################################## */
     /**
      This is called just before the keyboard shows. We use this to "nudge" the table bottom up.
@@ -481,6 +562,7 @@ extension VMF_DayTimeSearchViewController {
         loadMeetings {
             guard let newViewController = self.getTableDisplay(for: 0, time: 0) else { return }
             self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
+            self.timeDayDisplayLabel?.text = (self.tableDisplayController as? UIViewController)?.title
         }
     }
     
@@ -640,6 +722,8 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDelegate {
             } else {
                 weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = tableDisplayController?.dayIndex ?? 0
             }
+            
+            timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
         }
     }
 }

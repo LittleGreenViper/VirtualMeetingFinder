@@ -38,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1R3-iR-Giq">
-                                <rect key="frame" x="16" y="103" width="361" height="61"/>
+                                <rect key="frame" x="16" y="103" width="361" height="101"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Hjc-M6-UmS">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="32"/>
@@ -92,10 +92,53 @@
                                             <constraint firstAttribute="bottom" secondItem="p2c-SZ-uyw" secondAttribute="bottom" id="pYt-Da-o5l"/>
                                         </constraints>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KQJ-Ms-OjD">
+                                        <rect key="frame" x="0.0" y="61" width="361" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucm-eu-WGo">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="ucm-eu-WGo" secondAttribute="height" multiplier="1:1" id="R1N-cB-3EQ"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="arrowtriangle.left.fill" catalog="system"/>
+                                                <connections>
+                                                    <action selector="leftButtonHit:" destination="Avq-Pc-erz" eventType="touchUpInside" id="k4T-rg-nnU"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3d-iJ-1Id">
+                                                <rect key="frame" x="40" y="0.0" width="281" height="40"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORb-08-gJs">
+                                                <rect key="frame" x="321" y="0.0" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="ORb-08-gJs" secondAttribute="height" multiplier="1:1" id="O7j-fp-pf4"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="arrowtriangle.right.fill" catalog="system"/>
+                                                <connections>
+                                                    <action selector="rightButtonHit:" destination="Avq-Pc-erz" eventType="touchUpInside" id="F1B-Ha-zo3"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="ORb-08-gJs" secondAttribute="bottom" id="CML-jW-8cu"/>
+                                            <constraint firstAttribute="bottom" secondItem="ucm-eu-WGo" secondAttribute="bottom" id="OuL-8F-UiU"/>
+                                            <constraint firstItem="ucm-eu-WGo" firstAttribute="top" secondItem="KQJ-Ms-OjD" secondAttribute="top" id="R7c-jb-fgT"/>
+                                            <constraint firstAttribute="bottom" secondItem="X3d-iJ-1Id" secondAttribute="bottom" id="drz-qU-Dsd"/>
+                                            <constraint firstItem="ORb-08-gJs" firstAttribute="top" secondItem="KQJ-Ms-OjD" secondAttribute="top" id="f0H-eS-g4A"/>
+                                            <constraint firstItem="X3d-iJ-1Id" firstAttribute="top" secondItem="KQJ-Ms-OjD" secondAttribute="top" id="fDq-FC-xy9"/>
+                                            <constraint firstItem="ORb-08-gJs" firstAttribute="width" secondItem="ORb-08-gJs" secondAttribute="height" multiplier="1:1" id="gd1-8x-NxY"/>
+                                            <constraint firstAttribute="height" constant="40" id="qhr-BZ-Lph"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zdh-eu-ih1">
-                                <rect key="frame" x="16" y="172" width="361" height="597"/>
+                                <rect key="frame" x="16" y="212" width="361" height="557"/>
                                 <connections>
                                     <segue destination="bxe-Jd-mqJ" kind="embed" id="PRK-8l-msD"/>
                                 </connections>
@@ -134,11 +177,15 @@
                     <tabBarItem key="tabBarItem" title="SLUG-WEEKDAY-TIME-SEARCH" image="clock" catalog="system" id="b6y-1v-hE7"/>
                     <connections>
                         <outlet property="bottomConstraint" destination="jzp-y2-Q6P" id="X2a-Df-9Hp"/>
+                        <outlet property="leftButton" destination="ucm-eu-WGo" id="Icj-u2-gfC"/>
+                        <outlet property="rightButton" destination="ORb-08-gJs" id="V6i-RL-xYC"/>
                         <outlet property="searchCloseButton" destination="Yr2-tI-yOo" id="fdC-8t-139"/>
                         <outlet property="searchItemsContainerView" destination="Uw7-7n-oJo" id="KkA-Fc-FOu"/>
                         <outlet property="searchTextField" destination="p2c-SZ-uyw" id="C6N-3J-n8I"/>
                         <outlet property="tableContainerView" destination="Zdh-eu-ih1" id="JTb-KD-iZG"/>
                         <outlet property="throbber" destination="yRJ-fe-3Cl" id="Y5J-9Q-wAi"/>
+                        <outlet property="timeDayDisplayLabel" destination="X3d-iJ-1Id" id="3id-EB-8MS"/>
+                        <outlet property="timeSelectorContainerView" destination="KQJ-Ms-OjD" id="bNc-Th-K2e"/>
                         <outlet property="weekdayModeSelectorSegmentedSwitch" destination="Hjc-M6-UmS" id="N00-Cz-Zb6"/>
                     </connections>
                 </viewController>
@@ -302,10 +349,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="hZz-Uk-7C5">
-                                                <rect key="frame" x="44.666666666666657" y="55.999999999999993" width="272" height="75.333333333333314"/>
+                                                <rect key="frame" x="44.666666666666657" y="56" width="272" height="65"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iiY-EJ-6gz">
-                                                        <rect key="frame" x="0.0" y="5.6666666666666643" width="64" height="63.999999999999993"/>
+                                                        <rect key="frame" x="0.0" y="0.3333333333333357" width="64" height="64"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="64" id="A8T-C1-2PG"/>
                                                             <constraint firstAttribute="width" secondItem="iiY-EJ-6gz" secondAttribute="height" multiplier="1:1" id="NNH-47-f8p"/>
@@ -317,7 +364,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csv-V3-CFc">
-                                                        <rect key="frame" x="104" y="5.6666666666666643" width="64" height="63.999999999999993"/>
+                                                        <rect key="frame" x="104" y="0.3333333333333357" width="64" height="64"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" image="Globe"/>
                                                         <connections>
@@ -325,7 +372,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZf-jJ-gKs">
-                                                        <rect key="frame" x="208.00000000000003" y="5.6666666666666643" width="63.999999999999972" height="63.999999999999993"/>
+                                                        <rect key="frame" x="208.00000000000003" y="0.3333333333333357" width="63.999999999999972" height="64"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" image="Video"/>
                                                         <connections>
@@ -341,7 +388,7 @@
                                                 </constraints>
                                             </stackView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GER-7R-iCr">
-                                                <rect key="frame" x="0.0" y="139.33333333333334" width="361" height="40"/>
+                                                <rect key="frame" x="0.0" y="129" width="361" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -349,7 +396,7 @@
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                             </textView>
                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uzn-9H-qzY">
-                                                <rect key="frame" x="70.333333333333329" y="187.33333333333334" width="220.66666666666669" height="56.666666666666657"/>
+                                                <rect key="frame" x="70.333333333333329" y="177" width="220.66666666666669" height="56.666666666666657"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-IN-PERSON-HEADER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFw-NF-FXN">
                                                         <rect key="frame" x="0.0" y="0.0" width="220.66666666666666" height="20.333333333333332"/>
@@ -368,7 +415,7 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wIx-9C-qJ9" userLabel="FillerView">
-                                                <rect key="frame" x="155.66666666666666" y="252" width="50" height="590"/>
+                                                <rect key="frame" x="155.66666666666666" y="241.66666666666669" width="50" height="600.33333333333326"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -427,6 +474,8 @@
         <image name="Globe" width="612" height="612"/>
         <image name="Phone" width="612" height="612"/>
         <image name="Video" width="612" height="612"/>
+        <image name="arrowtriangle.left.fill" catalog="system" width="128" height="113"/>
+        <image name="arrowtriangle.right.fill" catalog="system" width="128" height="113"/>
         <image name="clock" catalog="system" width="128" height="123"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="x.circle" catalog="system" width="128" height="123"/>

@@ -247,6 +247,45 @@ extension VMF_DayTimeSearchViewController {
         
         return ret
     }
+    
+    /* ################################################################## */
+    /**
+     This returns a new destination controller to use for transitions.
+     
+     NOTE: If the controller is in text search mode, then the name search controller is returned. If the destination has already been created, it is returned.
+     
+     - parameter for: The 0-based "day index." If it is 0, though, it is the "in-progress" display.
+     - parameter time: The 0-based time index. This is the index of the currently selected time slot.
+     - returns: A new (or reused) view controller, for the destination of the transition.
+     */
+    func getTableDisplay(for inDayIndex: Int, time inTimeIndex: Int) -> UIViewController? {
+        guard nil == _transitionToController else { return _transitionToController }
+        let dayIndex = max(0, min(organizedMeetings.count, inDayIndex))
+        var timeIndex = inTimeIndex
+        var meetings = [MeetingInstance]()
+
+        if isNameSearchMode {
+            meetings = searchMeetings
+        } else if 0 == dayIndex {
+            meetings = inProgressMeetings
+        } else {
+            let tempMeetings = getDailyMeetings(for: mapWeekday(dayIndex))
+            let keys = tempMeetings.keys.sorted()
+            timeIndex = max(0, min(timeIndex, keys.count - 1))
+            let key = keys[timeIndex]
+            meetings = tempMeetings[key] ?? []
+        }
+
+        guard let newViewController = storyboard?.instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController else { return nil }
+        
+        newViewController.myController = self
+        newViewController.timeIndex = timeIndex
+        newViewController.dayIndex = dayIndex
+        newViewController.meetings = meetings
+        
+        _transitionToController = newViewController
+        return newViewController
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -281,45 +320,6 @@ extension VMF_DayTimeSearchViewController {
             destination.dataSource = self
             pageViewController = destination
         }
-    }
-    
-    /* ################################################################## */
-    /**
-     This returns a new destination controller to use for transitions.
-     
-     NOTE: If the controller is in text search mode, then the name search controller is returned. If the destination has already been created, it is returned.
-     
-     - parameter for: The 0-based "day index." If it is 0, though, it is the "in-progress" display.
-     - parameter time: The 0-based time index. This is the index of the currently selected time slot.
-     - returns: A new (or reused) view controller, for the destination of the transition.
-     */
-    func getTableDisplay(for inDayIndex: Int, time inTimeIndex: Int) -> UIViewController? {
-        guard nil == _transitionToController else { return _transitionToController }
-        let dayIndex = max(0, min(organizedMeetings.count, inDayIndex))
-        var timeIndex = inTimeIndex
-        var meetings = [MeetingInstance]()
-
-        if isNameSearchMode {
-            meetings = searchMeetings
-        } else if 0 == dayIndex {
-            meetings = inProgressMeetings
-        } else {
-            let tempMeetings = getDailyMeetings(for: dayIndex)
-            let keys = tempMeetings.keys.sorted()
-            timeIndex = max(0, min(timeIndex, keys.count - 1))
-            let key = keys[timeIndex]
-            meetings = tempMeetings[key] ?? []
-        }
-
-        guard let newViewController = storyboard?.instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController else { return nil }
-        
-        newViewController.myController = self
-        newViewController.timeIndex = timeIndex
-        newViewController.dayIndex = dayIndex
-        newViewController.meetings = meetings
-        
-        _transitionToController = newViewController
-        return newViewController
     }
 }
 
@@ -357,7 +357,7 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
             }
             
             if 0 < dayIndex {
-                let tempMeetings = getDailyMeetings(for: dayIndex)
+                let tempMeetings = getDailyMeetings(for: mapWeekday(dayIndex))
                 timeIndex = max(0, min(timeIndex, tempMeetings.keys.count - 1))
             }
         }
@@ -384,7 +384,7 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
         var dayIndex = oldViewController.dayIndex
         
         if 7 == dayIndex,
-           timeIndex >= getDailyMeetings(for: dayIndex).count {
+           timeIndex >= getDailyMeetings(for: mapWeekday(dayIndex)).count {
             timeIndex = 0
             dayIndex = 0
         } else if 0 == dayIndex {
@@ -402,8 +402,14 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
 extension VMF_DayTimeSearchViewController: UIPageViewControllerDelegate {
     /* ################################################################## */
     /**
+     Called when a swipe transition is done. The only thing we do here, is reset our trackers.
+     
+     - parameter: The page view controller (ignored).
+     - parameter didFinishAnimating: The animation is complete (ignored)
+     - parameter previousViewControllers: A list of previous view controllers (also ignored)
+     - parameter transitionCompleted: True, if the transition completed, and was not aborted (again, ignored).
      */
-    func pageViewController(_: UIPageViewController, didFinishAnimating: Bool, previousViewControllers: [UIViewController], transitionCompleted inCompleted: Bool) {
+    func pageViewController(_: UIPageViewController, didFinishAnimating: Bool, previousViewControllers: [UIViewController], transitionCompleted: Bool) {
         _transitionFromController = nil
         _transitionToController = nil
     }

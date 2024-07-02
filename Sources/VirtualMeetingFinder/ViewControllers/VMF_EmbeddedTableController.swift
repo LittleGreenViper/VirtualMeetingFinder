@@ -33,37 +33,6 @@ protocol VMF_BaseProtocol: NSObjectProtocol {
      The controller that "owns" this instance.
      */
     var myController: (any VMF_MasterTableControllerProtocol)? { get set }
-}
-
-/* ###################################################################################################################################### */
-// MARK: Defaults
-/* ###################################################################################################################################### */
-extension VMF_BaseProtocol {
-    /* ################################################################## */
-    /**
-     Default is nil
-     */
-    var myController: (any VMF_MasterTableControllerProtocol)? { nil }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Protocol for "Owners" of This Class -
-/* ###################################################################################################################################### */
-/**
- Protocol for embedded tables.
- */
-protocol VMF_EmbeddedTableControllerProtocol: VMF_BaseProtocol {
-    /* ################################################################## */
-    /**
-     The index for this table.
-     */
-    var timeIndex: Int { get set }
-
-    /* ################################################################## */
-    /**
-     This handles the meeting collection for this.
-     */
-    var meetings: [MeetingInstance] { get set }
 
     /* ################################################################## */
     /**
@@ -97,7 +66,13 @@ protocol VMF_EmbeddedTableControllerProtocol: VMF_BaseProtocol {
 /* ###################################################################################################################################### */
 // MARK: Defaults
 /* ###################################################################################################################################### */
-extension VMF_EmbeddedTableControllerProtocol {
+extension VMF_BaseProtocol {
+    /* ################################################################## */
+    /**
+     Default is nil
+     */
+    var myController: (any VMF_MasterTableControllerProtocol)? { nil }
+    
     /* ################################################################## */
     /**
      This converts a 1 == Sun format into a localized weekday index (1 ... 7)
@@ -159,6 +134,26 @@ extension VMF_EmbeddedTableControllerProtocol {
         
         return ret
     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Protocol for "Owners" of This Class -
+/* ###################################################################################################################################### */
+/**
+ Protocol for embedded tables.
+ */
+protocol VMF_EmbeddedTableControllerProtocol: VMF_BaseProtocol {
+    /* ################################################################## */
+    /**
+     The index for this table.
+     */
+    var timeIndex: Int { get set }
+
+    /* ################################################################## */
+    /**
+     This handles the meeting collection for this.
+     */
+    var meetings: [MeetingInstance] { get set }
 }
 
 /* ###################################################################################################################################### */

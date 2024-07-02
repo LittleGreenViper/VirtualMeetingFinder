@@ -145,6 +145,12 @@ extension VMF_BaseProtocol {
 protocol VMF_EmbeddedTableControllerProtocol: VMF_BaseProtocol {
     /* ################################################################## */
     /**
+     The day index for this table.
+     */
+    var dayIndex: Int { get set }
+
+    /* ################################################################## */
+    /**
      The index for this table.
      */
     var timeIndex: Int { get set }
@@ -357,6 +363,16 @@ extension VMF_EmbeddedTableController {
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
         valueTable?.reloadData()
+    }
+    
+    /* ################################################################## */
+    /**
+     Called just after the view appeared
+     
+     - parameter inIsAnimated: True, if the appearance is animated.
+     */
+    override func viewDidAppear(_ inIsAnimated: Bool) {
+        super.viewDidAppear(inIsAnimated)
         myController?.tableDisplayController = self
     }
     

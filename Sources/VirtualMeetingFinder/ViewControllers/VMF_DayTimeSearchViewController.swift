@@ -31,12 +31,6 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
     /**
      Used to prevent duplication of controllers.
      */
-    private var _transitionFromController: UIViewController?
-    
-    /* ################################################################## */
-    /**
-     Used to prevent duplication of controllers.
-     */
     private var _transitionToController: UIViewController?
     
     /* ################################################################## */
@@ -317,6 +311,24 @@ extension VMF_DayTimeSearchViewController {
      - parameter inSwitch: The segmented switch.
      */
     @IBAction func weekdayModeSelectorSegmentedSwitchHit(_ inSwitch: UISegmentedControl) {
+        let selectedIndex = inSwitch.selectedSegmentIndex
+        let timeIndex = tableDisplayController?.timeIndex ?? 0
+        if selectedIndex == (inSwitch.numberOfSegments - 1) {
+            isNameSearchMode = true
+            let dayIndex = tableDisplayController?.dayIndex ?? 0
+            guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
+            self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
+        } else {
+            isNameSearchMode = false
+            var dayIndex = selectedIndex
+            if 0 < selectedIndex {
+                dayIndex = unMapWeekday(selectedIndex)
+            }
+            guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
+            self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
+        }
+        
+        self._transitionToController = nil
     }
 }
 
@@ -345,7 +357,6 @@ extension VMF_DayTimeSearchViewController {
         
         loadMeetings {
             guard let newViewController = self.getTableDisplay(for: 0, time: 0) else { return }
-            self._transitionFromController = nil
             self._transitionToController = nil
             self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
         }
@@ -384,25 +395,18 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
               let oldViewController = inBeforeViewController as? VMF_EmbeddedTableController
         else { return nil }
         
-        _transitionFromController = oldViewController
-
         var timeIndex = oldViewController.timeIndex
         var dayIndex = max(0, min(organizedMeetings.count, oldViewController.dayIndex))
         
         if 0 == dayIndex {
-            timeIndex = Int.max
+            timeIndex = Int.max - 1
             dayIndex = organizedMeetings.count
         } else {
             timeIndex -= 1
             
             if 0 > timeIndex {
                 dayIndex -= 1
-                timeIndex = Int.max
-            }
-            
-            if 0 < dayIndex {
-                let tempMeetings = getDailyMeetings(for: mapWeekday(dayIndex))
-                timeIndex = max(0, min(timeIndex, tempMeetings.keys.count - 1))
+                timeIndex = Int.max - 1
             }
         }
         
@@ -422,18 +426,19 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
               let oldViewController = inAfterViewController as? VMF_EmbeddedTableController
         else { return nil }
         
-        _transitionFromController = oldViewController
-
         var timeIndex = oldViewController.timeIndex + 1
         var dayIndex = oldViewController.dayIndex
         
-        if 7 == dayIndex,
-           timeIndex >= getDailyMeetings(for: mapWeekday(dayIndex)).count {
-            timeIndex = 0
-            dayIndex = 0
-        } else if 0 == dayIndex {
+        if 0 == dayIndex {
             timeIndex = 0
             dayIndex = 1
+        } else if timeIndex >= getDailyMeetings(for: mapWeekday(dayIndex)).count {
+            dayIndex += 1
+            timeIndex = 0
+
+            if 7 < dayIndex {
+                dayIndex = 0
+            }
         }
         
         return getTableDisplay(for: dayIndex, time: timeIndex)
@@ -451,25 +456,18 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDelegate {
      - parameter: The page view controller (ignored).
      - parameter didFinishAnimating: The animation is complete (ignored)
      - parameter previousViewControllers: A list of previous view controllers (also ignored)
-     - parameter transitionCompleted: True, if the transition completed, and was not aborted (again, ignored).
+     - parameter transitionCompleted: True, if the transition completed, and was not aborted.
      */
-    func pageViewController(_: UIPageViewController, didFinishAnimating: Bool, previousViewControllers: [UIViewController], transitionCompleted: Bool) {
-        let oldToController = _transitionToController as? VMF_EmbeddedTableController
-        _transitionFromController = nil
+    func pageViewController(_: UIPageViewController, didFinishAnimating: Bool, previousViewControllers: [UIViewController], transitionCompleted inIsDone: Bool) {
         _transitionToController = nil
         
-        guard !isNameSearchMode,
-              let dayIndex = oldToController?.dayIndex
-        else {
-            if isNameSearchMode,
-             let weekdayModeSelectorSegmentedSwitch = weekdayModeSelectorSegmentedSwitch {
-                weekdayModeSelectorSegmentedSwitch.selectedSegmentIndex = (weekdayModeSelectorSegmentedSwitch.numberOfSegments - 1)
+        if inIsDone {
+            if isNameSearchMode {
+                weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = (weekdayModeSelectorSegmentedSwitch?.numberOfSegments ?? 1) - 1
+            } else {
+                weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = tableDisplayController?.dayIndex ?? 0
             }
-            
-            return
         }
-        
-        weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = dayIndex
     }
 }
 

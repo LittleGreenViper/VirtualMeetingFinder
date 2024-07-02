@@ -47,14 +47,6 @@ class VMF_AppDelegate: UIResponder {
      "There can only be one." - Connor MacLeod
      */
     static var virtualService: SwiftBMLSDK_MeetingLocalTimezoneCollection?
-
-    /* ################################################################## */
-    /**
-     This is set to the open search tab, if it is selected.
-     
-     We do this, so we can exit name search mode, if we go into the background.
-     */
-    static var searchController: VMF_MainSearchViewController?
 }
 
 /* ###################################################################################################################################### */

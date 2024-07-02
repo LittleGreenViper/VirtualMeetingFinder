@@ -33,34 +33,6 @@ protocol VMF_BaseProtocol: NSObjectProtocol {
      The controller that "owns" this instance.
      */
     var myController: (any VMF_MasterTableControllerProtocol)? { get set }
-
-    /* ################################################################## */
-    /**
-     This converts a 1 == Sun format into a localized weekday index (1 ... 7)
-     
-     - parameter: An integer (1 = Sunday), with the unlocalized index.
-     - returns: The 1-based weekday index for the local system.
-     */
-    func mapWeekday(_ inWeekdayIndex: Int) -> Int
-
-    /* ################################################################## */
-    /**
-     This converts the selected localized weekday into the 1 == Sun format needed for the meeting data.
-     
-     - parameter: An integer (1 -> 7), with the localized weekday.
-     - returns: The 1-based weekday index for 1 = Sunday
-     */
-    func unMapWeekday(_ inWeekdayIndex: Int) -> Int
-
-    /* ################################################################## */
-    /**
-     This returns a string, with the localized timezone name for the meeting.
-     It is not set, if the timezone is ours.
-     
-     - parameter inMeeting: The meeting instance.
-     - returns: The timezone string.
-     */
-    func getMeetingTimeZone(_ inMeeting: MeetingInstance) -> String
 }
 
 /* ###################################################################################################################################### */
@@ -72,68 +44,6 @@ extension VMF_BaseProtocol {
      Default is nil
      */
     var myController: (any VMF_MasterTableControllerProtocol)? { nil }
-    
-    /* ################################################################## */
-    /**
-     This converts a 1 == Sun format into a localized weekday index (1 ... 7)
-     
-     - parameter: An integer (1 = Sunday), with the unlocalized index.
-     - returns: The 1-based weekday index for the local system.
-     */
-    func mapWeekday(_ inWeekdayIndex: Int) -> Int {
-        var weekdayIndex = (inWeekdayIndex - Calendar.current.firstWeekday)
-        
-        if 0 > weekdayIndex {
-            weekdayIndex += 7
-        }
-        
-        return weekdayIndex + 1
-    }
-    
-    /* ################################################################## */
-    /**
-     This converts the selected localized weekday into the 1 == Sun format needed for the meeting data.
-     
-     - parameter: An integer (1 -> 7), with the localized weekday.
-     - returns: The 1-based weekday index for 1 = Sunday
-     */
-    func unMapWeekday(_ inWeekdayIndex: Int) -> Int {
-        guard (1..<8).contains(inWeekdayIndex) else { return 0 }
-        
-        let firstDay = Calendar.current.firstWeekday
-        
-        var weekdayIndex = (firstDay + inWeekdayIndex) - 1
-        
-        if 7 < weekdayIndex {
-            weekdayIndex -= 7
-        }
-        
-        return weekdayIndex
-    }
-    
-    /* ################################################################## */
-    /**
-     This returns a string, with the localized timezone name for the meeting.
-     It is not set, if the timezone is ours.
-     
-     - parameter inMeeting: The meeting instance.
-     - returns: The timezone string.
-     */
-    func getMeetingTimeZone(_ inMeeting: MeetingInstance) -> String {
-        var ret = ""
-        
-        var meeting = inMeeting
-        let nativeTime = meeting.getNextStartDate(isAdjusted: false)
-        
-        if let myCurrentTimezoneName = TimeZone.current.localizedName(for: .standard, locale: .current),
-           let zoneName = meeting.timeZone.localizedName(for: .standard, locale: .current),
-           !zoneName.isEmpty,
-           myCurrentTimezoneName != zoneName {
-            ret = String(format: "SLUG-TIMEZONE-FORMAT".localizedVariant, zoneName, nativeTime.localizedTime)
-        }
-        
-        return ret
-    }
 }
 
 /* ###################################################################################################################################### */
@@ -298,7 +208,7 @@ class VMF_EmbeddedTableController: VMF_TabBaseViewController, VMF_EmbeddedTableC
     /**
      This handles the meeting collection for this.
      */
-    var meetings: [MeetingInstance] = []
+    var meetings: [MeetingInstance] = [] { didSet { valueTable?.reloadData() }}
 
     /* ################################################################## */
     /**

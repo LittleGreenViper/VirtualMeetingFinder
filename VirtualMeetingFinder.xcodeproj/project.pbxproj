@@ -17,7 +17,6 @@
 		D49349722C29A6D100C58390 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D49349702C29A6D100C58390 /* Localizable.strings */; };
 		D49393352C2616C7006438AE /* VMF_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49393342C2616C7006438AE /* VMF_AppDelegate.swift */; };
 		D49393372C2616C7006438AE /* VMF_SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49393362C2616C7006438AE /* VMF_SceneDelegate.swift */; };
-		D49393392C2616C7006438AE /* VMF_MainSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49393382C2616C7006438AE /* VMF_MainSearchViewController.swift */; };
 		D493933C2C2616C7006438AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D493933B2C2616C7006438AE /* Base */; };
 		D493933E2C2616C8006438AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D493933D2C2616C8006438AE /* Assets.xcassets */; };
 		D49393412C2616C8006438AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D49393402C2616C8006438AE /* Base */; };
@@ -35,7 +34,6 @@
 		D49393312C2616C7006438AE /* VirtualMeetingFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualMeetingFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49393342C2616C7006438AE /* VMF_AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_AppDelegate.swift; sourceTree = "<group>"; };
 		D49393362C2616C7006438AE /* VMF_SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_SceneDelegate.swift; sourceTree = "<group>"; };
-		D49393382C2616C7006438AE /* VMF_MainSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_MainSearchViewController.swift; sourceTree = "<group>"; };
 		D493933B2C2616C7006438AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/VMF.storyboard; sourceTree = "<group>"; };
 		D493933D2C2616C8006438AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D49393402C2616C8006438AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/VMF_LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -87,7 +85,6 @@
 			children = (
 				D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */,
 				D4B69A332C2B162800D24DA6 /* VMF_MeetingViewController.swift */,
-				D49393382C2616C7006438AE /* VMF_MainSearchViewController.swift */,
 				D40133682C320C070018076B /* VMF_DayTimeSearchViewController.swift */,
 				D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */,
 			);
@@ -247,7 +244,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D49393392C2616C7006438AE /* VMF_MainSearchViewController.swift in Sources */,
 				D40133672C320BB30018076B /* VMF_Extensions.swift in Sources */,
 				D49393352C2616C7006438AE /* VMF_AppDelegate.swift in Sources */,
 				D47C2F0E2C2C5E6A0048C91C /* VMF_BaseViewController.swift in Sources */,

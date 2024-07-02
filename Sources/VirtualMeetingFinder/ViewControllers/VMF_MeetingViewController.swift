@@ -239,7 +239,7 @@ extension VMF_MeetingViewController {
     func setTimeZone() {
         guard let meeting = meeting else { return }
         
-        let timeZoneString = VMF_MainSearchViewController.getMeetingTimeZone(meeting)
+        let timeZoneString = getMeetingTimeZone(meeting)
         if !timeZoneString.isEmpty {
             timeZoneLabel?.text = timeZoneString
         } else {

@@ -29,6 +29,12 @@ import SwiftBMLSDK
 class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTableControllerProtocol {
     /* ################################################################## */
     /**
+     This is used to restore the bottom of the stack view, when the keyboard is hidden.
+     */
+    private var _atRestConstant: CGFloat = 0
+
+    /* ################################################################## */
+    /**
      The main controller (ignored -just here for the protocol).
      */
     var myController: (any VMF_MasterTableControllerProtocol)?
@@ -55,13 +61,45 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
     /**
      This is set to true, if we are in name search mode.
      */
-    var isNameSearchMode: Bool = false
+    var isNameSearchMode: Bool = false {
+        didSet {
+            searchItemsContainerView?.isHidden = !isNameSearchMode
+            weekdayModeSelectorSegmentedSwitch?.isHidden = isNameSearchMode
+            if let dayIndex = tableDisplayController?.dayIndex,
+               let timeIndex = tableDisplayController?.timeIndex {
+                if isNameSearchMode {
+                    guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
+                    pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
+                    searchTextField?.becomeFirstResponder()
+                } else {
+                    searchTextField?.resignFirstResponder()
+                    if oldValue != isNameSearchMode {
+                        weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = dayIndex
+                        tableDisplayController?.meetings = getCurentMeetings(for: dayIndex, time: timeIndex)
+                    }
+                }
+                
+                tableDisplayController?.meetings = getCurentMeetings(for: dayIndex, time: timeIndex)
+            }
+        }
+    }
     
     /* ################################################################## */
     /**
      Contains the search text filter.
      */
-    var searchText: String = "" { didSet { } }
+    var searchText: String = "" {
+        didSet {
+            if isNameSearchMode {
+                if searchText.isEmpty {
+                    tableDisplayController?.meetings = searchMeetings
+                } else {
+                    let searchM = getCurentMeetings()
+                    tableDisplayController?.meetings = searchM
+                }
+            }
+        }
+    }
     
     /* ################################################################## */
     /**
@@ -85,11 +123,13 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
         didSet {
             if isThrobbing {
                 tableContainerView?.isHidden = true
+                searchItemsContainerView?.isHidden = true
                 weekdayModeSelectorSegmentedSwitch?.isHidden = true
                 throbber?.isHidden = false
             } else {
                 throbber?.isHidden = true
-                weekdayModeSelectorSegmentedSwitch?.isHidden = false
+                searchItemsContainerView?.isHidden = !isNameSearchMode
+                weekdayModeSelectorSegmentedSwitch?.isHidden = isNameSearchMode
                 tableContainerView?.isHidden = false
             }
         }
@@ -105,8 +145,32 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
     /**
      The embedded table controller container view.
      */
-    @IBOutlet weak var tableContainerView: UIView!
+    @IBOutlet weak var tableContainerView: UIView?
     
+    /* ################################################################## */
+    /**
+     This contains the search items.
+     */
+    @IBOutlet weak var searchItemsContainerView: UIStackView?
+    
+    /* ################################################################## */
+    /**
+     The text field for entering a search.
+     */
+    @IBOutlet weak var searchTextField: UITextField?
+    
+    /* ################################################################## */
+    /**
+     The button to close the search mode.
+     */
+    @IBOutlet weak var searchCloseButton: UIButton?
+
+    /* ################################################################## */
+    /**
+     The bottom constraint of the table display area. We use this to shrink the table area, when the keyboard is shown.
+     */
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint?
+
     /* ################################################################## */
     /**
      The "Throbber" view
@@ -248,7 +312,7 @@ extension VMF_DayTimeSearchViewController {
     /**
      This returns a new destination controller to use for transitions.
      
-     NOTE: If the controller is in text search mode, then the name search controller is returned. If the destination has already been created, it is returned.
+     NOTE: If the controller is in text search mode, then the name search controller is returned.
      
      - parameter for: The 0-based "day index." If it is 0, though, it is the "in-progress" display.
      - parameter time: The 0-based time index. This is the index of the currently selected time slot.
@@ -256,21 +320,10 @@ extension VMF_DayTimeSearchViewController {
      */
     func getTableDisplay(for inDayIndex: Int, time inTimeIndex: Int) -> UIViewController? {
         let dayIndex = max(0, min(organizedMeetings.count, inDayIndex))
-        var timeIndex = max(0, min(inTimeIndex, Int.max - 1))
-        var meetings = [MeetingInstance]()
-
-        if isNameSearchMode {
-            meetings = searchMeetings
-        } else if 0 == dayIndex {
-            meetings = inProgressMeetings
-        } else {
-            let tempMeetings = getDailyMeetings(for: mapWeekday(dayIndex))
-            let keys = tempMeetings.keys.sorted()
-            timeIndex = max(0, min(timeIndex, keys.count - 1))
-            let key = keys[timeIndex]
-            meetings = tempMeetings[key] ?? []
-        }
-
+        let timeIndex = max(0, min(inTimeIndex, Int.max - 1))
+        
+        let meetings = getCurentMeetings(for: dayIndex, time: timeIndex)
+        
         guard let newViewController = storyboard?.instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController else { return nil }
         
         newViewController.myController = self
@@ -292,6 +345,38 @@ extension VMF_DayTimeSearchViewController {
         
         return newViewController
     }
+    
+    /* ################################################################## */
+    /**
+     This returns a the meetings we should display, given the day and time.
+     
+     NOTE: If the controller is in text search mode, then the search set is returned.
+     
+     - parameter for: The 0-based "day index." If it is 0, though, it is the "in-progress" display.
+     - parameter time: The 0-based time index. This is the index of the currently selected time slot.
+     - returns: A new (or reused) view controller, for the destination of the transition.
+     */
+    func getCurentMeetings(for inDayIndex: Int = 0, time inTimeIndex: Int = 0) -> [MeetingInstance] {
+        var meetings = [MeetingInstance]()
+
+        if isNameSearchMode {
+            if searchText.isEmpty {
+                meetings = searchMeetings
+            } else {
+                meetings = searchMeetings.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+            }
+        } else if 0 == inDayIndex {
+            meetings = inProgressMeetings
+        } else {
+            let tempMeetings = getDailyMeetings(for: mapWeekday(inDayIndex))
+            let keys = tempMeetings.keys.sorted()
+            let timeIndex = max(0, min(inTimeIndex, keys.count - 1))
+            let key = keys[timeIndex]
+            meetings = tempMeetings[key] ?? []
+        }
+        
+        return meetings
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -310,8 +395,7 @@ extension VMF_DayTimeSearchViewController {
         if selectedIndex == (inSwitch.numberOfSegments - 1) {
             isNameSearchMode = true
             let dayIndex = tableDisplayController?.dayIndex ?? 0
-            guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex)
-            else { return }
+            guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
             self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
         } else {
             isNameSearchMode = false
@@ -321,6 +405,49 @@ extension VMF_DayTimeSearchViewController {
             }
             guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
             self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when something changes in the search text field.
+     */
+    @IBAction func searchTextChanged(_ inTextField: UITextField) {
+        searchText = inTextField.text ?? ""
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the search close button is hit.
+     */
+    @IBAction func searchCloseHit(_: Any) {
+        isNameSearchMode = false
+    }
+    
+    /* ################################################################## */
+    /**
+     This is called just before the keyboard shows. We use this to "nudge" the table bottom up.
+     
+     - parameter notification: The notification being passed in.
+     */
+    @objc func keyboardWillShow(notification inNotification: NSNotification) {
+        DispatchQueue.main.async { [weak self] in
+            if let keyboardSize = (inNotification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                let newPosition = (keyboardSize.size.height - (self?.view?.safeAreaInsets.bottom ?? 0))
+                self?.bottomConstraint?.constant = newPosition
+            }
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     This is called just before the keyboard shows. We use this to return the table bottom to its original position.
+     
+     - parameter notification: The notification being passed in.
+     */
+    @objc func keyboardWillHide(notification: NSNotification) {
+        DispatchQueue.main.async { [weak self] in
+            self?.bottomConstraint?.constant = self?._atRestConstant ?? 0
         }
     }
 }
@@ -336,6 +463,9 @@ extension VMF_DayTimeSearchViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
+        _atRestConstant = bottomConstraint?.constant ?? 0
+
         guard let maxIndex = weekdayModeSelectorSegmentedSwitch?.numberOfSegments else { return }
         
         for index in (0..<maxIndex) {
@@ -354,6 +484,59 @@ extension VMF_DayTimeSearchViewController {
         }
     }
     
+    /* ################################################################## */
+    /**
+     Called just before the view is to appear.
+     
+     - parameter inIsAnimated: True, if the appearance is animated.
+     */
+    override func viewWillAppear(_ inIsAnimated: Bool) {
+        super.viewWillAppear(inIsAnimated)
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+        
+        if isNameSearchMode {
+            searchTextField?.becomeFirstResponder()
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called just before the view disappears.
+     
+     - parameter inIsAnimated: True, if the disappearance is animated.
+     */
+    override func viewWillDisappear(_ inIsAnimated: Bool) {
+        super.viewWillDisappear(inIsAnimated)
+        
+        searchTextField?.resignFirstResponder()
+        bottomConstraint?.constant = _atRestConstant
+        
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+
     /* ################################################################## */
     /**
      Called before transitioning to another view controller.

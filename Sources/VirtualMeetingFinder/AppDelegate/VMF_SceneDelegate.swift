@@ -53,8 +53,6 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
         #if DEBUG
             print("\n#### Scene Entered the Background.\n####\n")
         #endif
-        
-        VMF_AppDelegate.searchController?.isNameSearchMode = false
     }
 }
 

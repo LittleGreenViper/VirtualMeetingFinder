@@ -549,17 +549,47 @@ extension VMF_DayTimeSearchViewController {
         let weekday = (0..<8).contains(inDayIndex) ? inDayIndex : -1 == inDayIndex ? nowIs.weekday : 0
         let time = (0..<8).contains(inDayIndex) && (0..<2400).contains(inMilitaryTime) ? inMilitaryTime : -1 == inDayIndex ? nowIs.currentIntegerTime : 0
         
-        let dailyMeetings = getDailyMeetings(for: weekday)
-        let nextTimeKey = dailyMeetings.getKey(onOrAfter: time)
-        let dailyKeys = dailyMeetings.keys.sorted()
-        guard let nextIndex = dailyKeys.firstIndex(of: nextTimeKey),
-              let newViewController = getTableDisplay(for: weekday, time: nextIndex)
-        else { return }
+        let nextIndex = getNextIndexAfter(dayIndex: weekday, time: time)
+        guard let newViewController = getTableDisplay(for: weekday, time: nextIndex) else { return }
         
         pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
         weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = weekday
         
         timeDayDisplayLabel?.text = newViewController.title
+    }
+    
+    /* ################################################################## */
+    /**
+     This returns the index, of the time just after (or at) the given time and day.
+     
+     - parameter dayIndex: The 1-based day index. If omitted, then today/now is selected, and time is ignored.
+     - parameter time: The military time (HHMM), as an integer. If omitted, 12AM (0000) is assumed.
+     - returns: The index of the next time slot after (or at the same time as) the given time.
+     */
+    func getNextIndexAfter(dayIndex inDayIndex: Int = -1, time inMilitaryTime: Int = 0) -> Int {
+        let weekday = (1..<8).contains(inDayIndex) ? inDayIndex : -1 == inDayIndex ? nowIs.weekday : 0
+        let time = (1..<8).contains(inDayIndex) && (0..<2400).contains(inMilitaryTime) ? inMilitaryTime : -1 == inDayIndex ? nowIs.currentIntegerTime : 0
+
+        let dailyMeetings = getDailyMeetings(for: weekday)
+        let nextTimeKey = dailyMeetings.getKey(onOrAfter: time)
+        let dailyKeys = dailyMeetings.keys.sorted()
+        guard let nextIndex = dailyKeys.firstIndex(of: nextTimeKey) else { return 0 }
+        return nextIndex
+    }
+    
+    /* ################################################################## */
+    /**
+     This returns the time that corresponds to the day and time presented.
+     
+     - parameter dayIndex: The 1-based day index.
+     - parameter timeIndex: The index, as a 0-based integer.
+     - returns: The time, as a military time integer, of the time slot for the given time. Returns nil, if the time can't be found.
+     */
+    func getTimeOf(dayIndex inDayIndex: Int = -1, timeIndex inTimeIndex: Int = 0) -> Int? {
+        guard (1..<8).contains(inDayIndex) else { return nil }
+        let dailyKeys = getDailyMeetings(for: inDayIndex).keys.sorted()
+        guard (0..<dailyKeys.count).contains(inTimeIndex) else { return nil }
+        return dailyKeys[inTimeIndex]
     }
 }
 

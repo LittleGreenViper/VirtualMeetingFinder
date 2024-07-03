@@ -261,14 +261,14 @@ extension VMF_MeetingViewController {
         let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
         let prevTime = meeting.getPreviousStartDate(isAdjusted: true)
         let startTime = meeting.getNextStartDate(isAdjusted: true)
-        let endTime = startTime.addingTimeInterval(meeting.duration)
+
         if 0 < meeting.duration {
-            timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant, weekday, startTime.localizedTime, endTime.localizedTime)
+            timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant, weekday, startTime.localizedTime, startTime.addingTimeInterval(meeting.duration).localizedTime)
+            inProgressLabel?.isHidden = !(prevTime...prevTime.addingTimeInterval(meeting.duration)).contains(.now)
         } else {
             timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, startTime.localizedTime)
+            inProgressLabel?.isHidden = true
         }
-        
-        inProgressLabel?.isHidden = !(prevTime...prevTime.addingTimeInterval(meeting.duration)).contains(.now)
     }
     
     /* ################################################################## */

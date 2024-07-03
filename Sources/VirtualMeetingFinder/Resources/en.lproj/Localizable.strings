@@ -22,6 +22,7 @@
 "SLUG-VIRTUAL-SWITCH-2"                         =   "Virtual";
 "SLUG-IN-PROGRESS"                              =   "In Progress";
 "SLUG-IN-PROGRESS-FORMAT"                       =   "In Progress Since %@";
+"SLUG-IN-PROGRESS-YESTERDAY-FORMAT"             =   "In Progress Since %@ Yesterday";
 "SLUG-NOON-TIME"                                =   "Noon";
 "SLUG-MIDNIGHT-TIME"                            =   "Midnight";
 "SLUG-NOW"                                      =   "Now";
@@ -36,6 +37,7 @@
 "SLUG-SORT"                                     =   "Sort:";
 "SLUG-SEARCH-PLACEHOLDER"                       =   "Enter A Meeting Name";
 "SLUG-WEEKDAY-TIME-FORMAT"                      =   "%@s, at %@";
+"SLUG-WEEKDAY-TIME-DURATION-FORMAT"             =   "%@s, %@ - %@";
 "SLUG-PHONE-NUMBER-FORMAT"                      =   "Phone: %@";
 "SLUG-IN-PERSON-HEADER"                         =   "In-Person Meeting Address:";
 "SLUG-DIRECT-URI-ZOOM"                          =   "Zoom";

@@ -253,8 +253,8 @@
                                                         <constraint firstAttribute="height" constant="48" id="Pjw-qw-umz"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="5hj-cI-Pii">
-                                                    <rect key="frame" x="56" y="4" width="337" height="48.333333333333336"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="5hj-cI-Pii" userLabel="Text Container">
+                                                    <rect key="frame" x="56" y="4" width="333" height="48.333333333333336"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IX8-yL-BLd">
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -281,7 +281,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="5hj-cI-Pii" firstAttribute="top" secondItem="E3R-WY-hTi" secondAttribute="top" constant="4" id="8Cm-i7-PYN"/>
-                                                <constraint firstAttribute="trailing" secondItem="5hj-cI-Pii" secondAttribute="trailing" id="KKs-e3-QCy"/>
+                                                <constraint firstAttribute="trailing" secondItem="5hj-cI-Pii" secondAttribute="trailing" constant="4" id="KKs-e3-QCy"/>
                                                 <constraint firstAttribute="bottom" secondItem="5hj-cI-Pii" secondAttribute="bottom" constant="4" id="Mvh-Yw-sL8"/>
                                                 <constraint firstItem="qrv-id-0qa" firstAttribute="top" secondItem="E3R-WY-hTi" secondAttribute="top" constant="4" id="c2I-bw-muZ"/>
                                                 <constraint firstItem="5hj-cI-Pii" firstAttribute="leading" secondItem="qrv-id-0qa" secondAttribute="trailing" constant="4" id="dJs-hI-4Yu"/>

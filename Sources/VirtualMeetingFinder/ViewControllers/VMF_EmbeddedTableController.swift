@@ -321,11 +321,12 @@ extension VMF_EmbeddedTableController: UITableViewDataSource {
         var meeting = meetings[inIndexPath.row]
     
         let inProgress = meeting.isMeetingInProgress()
-        let startTime = meeting.getPreviousStartDate(isAdjusted: true).localizedTime
-
+        let startDate = meeting.getPreviousStartDate(isAdjusted: true)
+        let startTime = startDate.localizedTime
+        
         let meetingName = meeting.name
         let timeZoneString = getMeetingTimeZone(meeting)
-        let inProgressString = String(format: "SLUG-IN-PROGRESS-FORMAT".localizedVariant, startTime)
+        let inProgressString = String(format: (Calendar.current.startOfDay(for: .now) > startDate ? "SLUG-IN-PROGRESS-YESTERDAY-FORMAT" : "SLUG-IN-PROGRESS-FORMAT").localizedVariant, startTime)
         
         ret.nameLabel?.text = meetingName
         

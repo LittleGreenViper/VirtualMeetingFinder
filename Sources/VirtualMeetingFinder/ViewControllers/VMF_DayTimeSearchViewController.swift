@@ -341,9 +341,15 @@ extension VMF_DayTimeSearchViewController {
      */
     var inProgressMeetings: [MeetingInstance] {
         self.virtualService?.meetings.compactMap { $0.isInProgress ? $0.meeting : nil }.sorted { a, b in
-            if a.adjustedIntegerStartTime < b.adjustedIntegerStartTime {
+            var mutableA = a
+            var mutableB = b
+            
+            let aDate = mutableA.getPreviousStartDate(isAdjusted: true)
+            let bDate = mutableB.getPreviousStartDate(isAdjusted: true)
+
+            if aDate < bDate {
                 return true
-            } else if a.adjustedIntegerStartTime > b.adjustedIntegerStartTime {
+            } else if aDate > bDate {
                 return false
             } else if a.timeZone.identifier < b.timeZone.identifier {
                 return true

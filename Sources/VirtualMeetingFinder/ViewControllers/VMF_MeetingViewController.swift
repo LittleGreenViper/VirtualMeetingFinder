@@ -248,15 +248,18 @@ extension VMF_MeetingViewController {
      Sets the time and weekday (local) for the meeting.
      */
     func setTimeAndWeekday() {
-        guard let meeting = meeting,
+        guard var meeting = meeting,
               (1..<8).contains(meeting.weekday)
         else { return }
         
         let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
-        let timeInst = meeting.adjustedIntegerStartTime
-        let time = (1200 == timeInst) ? "SLUG-NOON-TIME".localizedVariant : (2359 == timeInst) ? "SLUG-MIDNIGHT-TIME".localizedVariant : meeting.timeString
-
-        timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, time)
+        let startTime = meeting.getNextStartDate(isAdjusted: true)
+        let endTime = startTime.addingTimeInterval(meeting.duration)
+        if 0 < meeting.duration {
+            timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant, weekday, startTime.localizedTime, endTime.localizedTime)
+        } else {
+            timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, startTime.localizedTime)
+        }
     }
     
     /* ################################################################## */

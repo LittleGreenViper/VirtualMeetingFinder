@@ -36,15 +36,21 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     
     /* ################################################################## */
     /**
-     The label that displays the meeting timezone.
-     */
-    @IBOutlet weak var timeZoneLabel: UILabel?
-    
-    /* ################################################################## */
-    /**
      The label that displays the meeting start time and weekday.
      */
     @IBOutlet weak var timeAndDayLabel: UILabel?
+
+    /* ################################################################## */
+    /**
+     This label is displayed if the meeting is in progress.
+     */
+    @IBOutlet weak var inProgressLabel: UILabel?
+
+    /* ################################################################## */
+    /**
+     The label that displays the meeting timezone.
+     */
+    @IBOutlet weak var timeZoneLabel: UILabel?
     
     /* ################################################################## */
     /**
@@ -163,7 +169,7 @@ extension VMF_MeetingViewController {
         setScreenTitle()
         setTimeZone()
         setTimeAndWeekday()
-        
+        inProgressLabel?.text = inProgressLabel?.text?.localizedVariant
         phoneButton?.isHidden = true
         videoButton?.isHidden = true
         globeButton?.isHidden = true
@@ -253,6 +259,7 @@ extension VMF_MeetingViewController {
         else { return }
         
         let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
+        let prevTime = meeting.getPreviousStartDate(isAdjusted: true)
         let startTime = meeting.getNextStartDate(isAdjusted: true)
         let endTime = startTime.addingTimeInterval(meeting.duration)
         if 0 < meeting.duration {
@@ -260,6 +267,8 @@ extension VMF_MeetingViewController {
         } else {
             timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, startTime.localizedTime)
         }
+        
+        inProgressLabel?.isHidden = !(prevTime...prevTime.addingTimeInterval(meeting.duration)).contains(.now)
     }
     
     /* ################################################################## */

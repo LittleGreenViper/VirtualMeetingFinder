@@ -19,6 +19,7 @@
 
 import UIKit
 import SwiftBMLSDK
+import RVS_BasicGCDTimer
 
 /* ###################################################################################################################################### */
 // MARK: - Special Button for "Tap and Hold" -
@@ -29,19 +30,32 @@ import SwiftBMLSDK
 class TapHoldButton: UIControl {
     /* ################################################################## */
     /**
+     The gesture recognizer for single taps.
      */
     private weak var _tapGestureRecognizer: UITapGestureRecognizer?
     
     /* ################################################################## */
     /**
+     The gesture recognizer for long-press repeat.
      */
     private weak var _longHoldGestureRecognizer: UILongPressGestureRecognizer?
     
     /* ################################################################## */
     /**
      */
+    private var _repeater: RVS_BasicGCDTimer?
+    
+    /* ################################################################## */
+    /**
+     */
     private weak var _displayImageView: UIImageView?
 
+    /* ################################################################## */
+    /**
+     This is how often we repeat, when long-pressing.
+     */
+    @IBInspectable var repeatFrequencyInSeconds = TimeInterval(0.2)
+    
     /* ################################################################## */
     /**
      */
@@ -63,7 +77,18 @@ extension TapHoldButton {
     /**
      */
     @objc func longPressGesture(_ inGesture: UILongPressGestureRecognizer) {
-        
+        switch inGesture.state {
+        case .began:
+            _repeater = RVS_BasicGCDTimer(timeIntervalInSeconds: repeatFrequencyInSeconds, onlyFireOnce: false, queue: .main) { _, _ in self.sendActions(for: .primaryActionTriggered) }
+            _repeater?.resume()
+            
+        case .ended, .cancelled:
+            _repeater?.invalidate()
+            _repeater = nil
+            
+        default:
+            break
+        }
     }
 }
 
@@ -217,9 +242,11 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
                 searchItemsContainerView?.isHidden = true
                 weekdayModeSelectorSegmentedSwitch?.isHidden = true
                 timeSelectorContainerView?.isHidden = true
+                tabBarController?.tabBar.isHidden = true
                 throbber?.isHidden = false
             } else {
                 throbber?.isHidden = true
+                tabBarController?.tabBar.isHidden = false
                 searchItemsContainerView?.isHidden = !isNameSearchMode
                 weekdayModeSelectorSegmentedSwitch?.isHidden = isNameSearchMode
                 timeSelectorContainerView?.isHidden = isNameSearchMode
@@ -262,7 +289,7 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
     /**
      This contains the time selector items.
      */
-    @IBOutlet weak var timeSelectorContainerView: UIStackView?
+    @IBOutlet weak var timeSelectorContainerView: UIView?
     
     /* ################################################################## */
     /**
@@ -650,6 +677,17 @@ extension VMF_DayTimeSearchViewController {
         DispatchQueue.main.async { [weak self] in
             self?.bottomConstraint?.constant = self?._atRestConstant ?? 0
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     Reloads all the meetings.
+     
+     - parameter completion: A simple empty callback. Always called in the main thread.
+     */
+    func refreshCalled(completion inCompletion: @escaping () -> Void) {
+        guard !isNameSearchMode else { return }
+        loadMeetings(completion: inCompletion)
     }
 }
 

@@ -289,7 +289,10 @@ extension VMF_EmbeddedTableController {
      - parameter: Ignored (and can be omitted).
      */
     @objc func refreshPulled(_: Any) {
-        myController?.refreshCalled { self.valueTable?.reloadData() }
+        _refreshControl?.endRefreshing()
+        myController?.refreshCalled {
+            self.valueTable?.reloadData()
+        }
     }
 }
 

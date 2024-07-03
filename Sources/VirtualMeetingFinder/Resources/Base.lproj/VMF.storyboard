@@ -92,7 +92,7 @@
                                             <constraint firstAttribute="bottom" secondItem="p2c-SZ-uyw" secondAttribute="bottom" id="pYt-Da-o5l"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KQJ-Ms-OjD">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JrU-ny-TZt">
                                         <rect key="frame" x="0.0" y="61" width="361" height="40"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tD-DB-oEW" customClass="TapHoldButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
@@ -110,8 +110,8 @@
                                                     <action selector="leftButtonHit:" destination="Avq-Pc-erz" eventType="primaryActionTriggered" id="caf-73-WNk"/>
                                                 </connections>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3d-iJ-1Id">
-                                                <rect key="frame" x="40" y="0.0" width="281" height="40"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3d-iJ-1Id">
+                                                <rect key="frame" x="40" y="10" width="281" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -129,19 +129,28 @@
                                                 </connections>
                                             </view>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="yQn-b0-JfM" secondAttribute="bottom" id="4DD-eT-p7Z"/>
-                                            <constraint firstItem="yQn-b0-JfM" firstAttribute="top" secondItem="KQJ-Ms-OjD" secondAttribute="top" id="OZm-Jb-Drr"/>
-                                            <constraint firstItem="yQn-b0-JfM" firstAttribute="width" secondItem="5tD-DB-oEW" secondAttribute="width" id="ZbB-3y-i8F"/>
-                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="X3d-iJ-1Id" secondAttribute="bottom" id="drz-qU-Dsd"/>
-                                            <constraint firstItem="X3d-iJ-1Id" firstAttribute="top" relation="greaterThanOrEqual" secondItem="KQJ-Ms-OjD" secondAttribute="top" id="fDq-FC-xy9"/>
-                                            <constraint firstItem="yQn-b0-JfM" firstAttribute="height" secondItem="5tD-DB-oEW" secondAttribute="height" id="fDs-xh-R5P"/>
-                                            <constraint firstItem="5tD-DB-oEW" firstAttribute="top" secondItem="KQJ-Ms-OjD" secondAttribute="top" id="k78-MH-mBY"/>
-                                            <constraint firstAttribute="bottom" secondItem="5tD-DB-oEW" secondAttribute="bottom" id="pSk-WR-ghe"/>
-                                            <constraint firstAttribute="height" constant="40" id="qhr-BZ-Lph"/>
+                                            <constraint firstItem="5tD-DB-oEW" firstAttribute="leading" secondItem="JrU-ny-TZt" secondAttribute="leading" id="7qL-lW-D7f"/>
+                                            <constraint firstItem="yQn-b0-JfM" firstAttribute="width" secondItem="5tD-DB-oEW" secondAttribute="width" id="Few-bu-XhM"/>
+                                            <constraint firstAttribute="bottom" secondItem="X3d-iJ-1Id" secondAttribute="bottom" id="Fli-Fc-Egz"/>
+                                            <constraint firstItem="X3d-iJ-1Id" firstAttribute="trailing" secondItem="yQn-b0-JfM" secondAttribute="leading" id="GeI-w8-RFM"/>
+                                            <constraint firstItem="yQn-b0-JfM" firstAttribute="top" secondItem="JrU-ny-TZt" secondAttribute="top" id="K7N-WS-nbz"/>
+                                            <constraint firstItem="yQn-b0-JfM" firstAttribute="height" secondItem="5tD-DB-oEW" secondAttribute="height" id="hEV-U8-dCU"/>
+                                            <constraint firstAttribute="bottom" secondItem="yQn-b0-JfM" secondAttribute="bottom" id="j3e-2M-K0X"/>
+                                            <constraint firstItem="X3d-iJ-1Id" firstAttribute="leading" secondItem="5tD-DB-oEW" secondAttribute="trailing" id="k1T-eQ-38K"/>
+                                            <constraint firstAttribute="height" constant="40" id="lzM-Am-ZOz"/>
+                                            <constraint firstAttribute="bottom" secondItem="5tD-DB-oEW" secondAttribute="bottom" id="tUD-0C-efL"/>
+                                            <constraint firstItem="5tD-DB-oEW" firstAttribute="top" secondItem="JrU-ny-TZt" secondAttribute="top" id="umm-Fl-Csh"/>
+                                            <constraint firstItem="X3d-iJ-1Id" firstAttribute="top" secondItem="JrU-ny-TZt" secondAttribute="top" constant="10" id="v7i-UZ-uZ8"/>
+                                            <constraint firstAttribute="trailing" secondItem="yQn-b0-JfM" secondAttribute="trailing" id="xE0-pY-Tqz"/>
                                         </constraints>
-                                    </stackView>
+                                    </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="JrU-ny-TZt" secondAttribute="trailing" id="CRs-UW-Gzj"/>
+                                    <constraint firstItem="JrU-ny-TZt" firstAttribute="leading" secondItem="1R3-iR-Giq" secondAttribute="leading" id="HUm-Oa-uXU"/>
+                                </constraints>
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zdh-eu-ih1">
                                 <rect key="frame" x="16" y="212" width="361" height="557"/>
@@ -193,7 +202,7 @@
                         <outlet property="tableContainerView" destination="Zdh-eu-ih1" id="JTb-KD-iZG"/>
                         <outlet property="throbber" destination="yRJ-fe-3Cl" id="Y5J-9Q-wAi"/>
                         <outlet property="timeDayDisplayLabel" destination="X3d-iJ-1Id" id="3id-EB-8MS"/>
-                        <outlet property="timeSelectorContainerView" destination="KQJ-Ms-OjD" id="bNc-Th-K2e"/>
+                        <outlet property="timeSelectorContainerView" destination="JrU-ny-TZt" id="HCc-kX-2CF"/>
                         <outlet property="weekdayModeSelectorSegmentedSwitch" destination="Hjc-M6-UmS" id="N00-Cz-Zb6"/>
                     </connections>
                 </viewController>

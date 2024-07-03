@@ -39,7 +39,13 @@ class VMF_AppDelegate: UIResponder {
      This is set to the open meeting, if we have one we are looking at.
      */
     static var openMeeting: VMF_MeetingViewController?
-    
+
+    /* ################################################################## */
+    /**
+     This is set to the search controller
+     */
+    static var searchController: VMF_DayTimeSearchViewController?
+
     /* ################################################################## */
     /**
      This handles the server data. This is the main container. All others reference this weakly.

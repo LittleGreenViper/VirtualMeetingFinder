@@ -45,14 +45,16 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     /* ################################################################## */
     /**
-     Called after the scene has gone into the background.
+     Called after the scene is entering into the foreground.
+     
+     We use this to set the search screen to today/now.
      
      - parameter: The scene instance (ignored).
      */
-    func sceneDidEnterBackground(_: UIScene) {
-        #if DEBUG
-            print("\n#### Scene Entered the Background.\n####\n")
-        #endif
+    func sceneWillEnterForeground(_: UIScene) {
+        if nil == VMF_AppDelegate.openMeeting {
+            VMF_AppDelegate.searchController?.openTo()
+        }
     }
 }
 

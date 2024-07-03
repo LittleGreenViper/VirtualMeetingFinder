@@ -68,6 +68,9 @@ class TapHoldButton: UIControl {
 extension TapHoldButton {
     /* ################################################################## */
     /**
+     Called for a single tap
+     
+     - parameter: The recognizer (ignored).
      */
     @objc func tapGesture(_: UITapGestureRecognizer) {
         sendActions(for: .primaryActionTriggered)
@@ -75,6 +78,9 @@ extension TapHoldButton {
     
     /* ################################################################## */
     /**
+     Called for a long-press. The action will be repeated at a regular interval.
+     
+     - parameter inGesture: The gesture recognizer instance.
      */
     @objc func longPressGesture(_ inGesture: UILongPressGestureRecognizer) {
         switch inGesture.state {
@@ -98,6 +104,9 @@ extension TapHoldButton {
 extension TapHoldButton {
     /* ################################################################## */
     /**
+     Called when the views are laid out.
+     
+     We use this to initialize the object.
      */
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -651,6 +660,18 @@ extension VMF_DayTimeSearchViewController {
             timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
         }
     }
+    
+    /* ################################################################## */
+    /**
+     The long-press gesture recognizer on the weekday switch was triggered.
+     
+     This resets the screen to today/now.
+     
+     - parameter: ignored
+     */
+    @IBAction func longPressOnWeekdayBar(_: Any) {
+        openTo()
+    }
 
     /* ################################################################## */
     /**
@@ -701,7 +722,7 @@ extension VMF_DayTimeSearchViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        VMF_AppDelegate.searchController = self
         searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
         _atRestConstant = bottomConstraint?.constant ?? 0
 

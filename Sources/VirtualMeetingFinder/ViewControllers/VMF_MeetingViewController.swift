@@ -25,6 +25,7 @@ import RVS_Generic_Swift_Toolbox
 // MARK: - Meeting Inspector View Controller -
 /* ###################################################################################################################################### */
 /**
+ This displays one meeting.
  */
 class VMF_MeetingViewController: VMF_BaseViewController {
     /* ################################################################## */
@@ -209,6 +210,32 @@ extension VMF_MeetingViewController {
             inPersonHeader?.text = inPersonHeader?.text?.localizedVariant
             inPersonAddressTextView?.text = basicAddress
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called before the screen appears.
+     
+     Let the app know that we're here.
+     
+     - parameter inIsAnimated: True, if the appearance is animated.
+     */
+    override func viewWillAppear(_ inIsAnimated: Bool) {
+        super.viewWillAppear(inIsAnimated)
+        VMF_AppDelegate.openMeeting = self
+    }
+    
+    /* ################################################################## */
+    /**
+     Called before the screen disappears.
+     
+     Let the app know that we're done.
+     
+     - parameter inIsAnimated: True, if the disappearance is animated.
+     */
+    override func viewWillDisappear(_ inIsAnimated: Bool) {
+        super.viewWillDisappear(inIsAnimated)
+        VMF_AppDelegate.openMeeting = nil
     }
 }
 

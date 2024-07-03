@@ -42,6 +42,7 @@
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Hjc-M6-UmS">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="32"/>
+                                        <gestureRecognizers/>
                                         <segments>
                                             <segment title="First"/>
                                             <segment title="Second"/>
@@ -55,6 +56,7 @@
                                         </segments>
                                         <connections>
                                             <action selector="weekdayModeSelectorSegmentedSwitchHit:" destination="Avq-Pc-erz" eventType="valueChanged" id="dBt-WK-rt6"/>
+                                            <outletCollection property="gestureRecognizers" destination="NKX-5L-RGa" appends="YES" id="2jz-va-Yco"/>
                                         </connections>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uw7-7n-oJo">
@@ -207,6 +209,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fOD-Yg-Xwv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="1" id="NKX-5L-RGa" userLabel="Weekday Bar Long Press">
+                    <connections>
+                        <action selector="longPressOnWeekdayBar:" destination="Avq-Pc-erz" id="1Nw-13-sOl"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="110.68702290076335" y="-27.464788732394368"/>
         </scene>

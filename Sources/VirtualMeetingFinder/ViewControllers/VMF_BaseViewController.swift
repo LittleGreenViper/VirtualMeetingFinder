@@ -40,6 +40,7 @@ extension VMF_BaseViewController {
      - returns: The 1-based weekday index for the local system.
      */
     func mapWeekday(_ inWeekdayIndex: Int) -> Int {
+        guard (1..<8).contains(inWeekdayIndex) else { return 0 }
         var weekdayIndex = (inWeekdayIndex - Calendar.current.firstWeekday)
         
         if 0 > weekdayIndex {

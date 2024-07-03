@@ -372,16 +372,10 @@ extension VMF_DayTimeSearchViewController {
         let day = Calendar.current.component(.weekday, from: .now)
         let hour = Calendar.current.component(.hour, from: .now)
         let minute = Calendar.current.component(.minute, from: .now)
-        let firstWeekday = Calendar.current.firstWeekday
-        var currentDay =  (day - firstWeekday)
         
-        if 0 > currentDay {
-            currentDay += 7
-        }
+        guard (1..<8).contains(day) else { return (weekday: 0, currentIntegerTime: 0) }
         
-        guard (0..<7).contains(currentDay) else { return (weekday: 0, currentIntegerTime: 0) }
-        
-        return (weekday: currentDay + 1, currentIntegerTime: hour * 100 + minute)
+        return (weekday: day, currentIntegerTime: hour * 100 + minute)
     }
 }
 
@@ -492,8 +486,8 @@ extension VMF_DayTimeSearchViewController {
         
         if !isNameSearchMode,
            0 < dayIndex {
-            guard (0..<7).contains(mapWeekday(dayIndex) - 1) else { return nil }
-            let weekdayString = Calendar.current.weekdaySymbols[mapWeekday(dayIndex) - 1]
+            guard (1..<8).contains(dayIndex) else { return nil }
+            let weekdayString = Calendar.current.weekdaySymbols[dayIndex - 1]
             let timeString = meetings.first?.timeString ?? "ERROR"
             newViewController.title = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekdayString, timeString)
         } else if isNameSearchMode {
@@ -527,7 +521,7 @@ extension VMF_DayTimeSearchViewController {
         } else if 0 == inDayIndex {
             meetings = inProgressMeetings
         } else {
-            let tempMeetings = getDailyMeetings(for: mapWeekday(inDayIndex))
+            let tempMeetings = getDailyMeetings(for: unMapWeekday(inDayIndex))
             let keys = tempMeetings.keys.sorted()
             let timeIndex = max(0, min(inTimeIndex, keys.count - 1))
             let key = keys[timeIndex]
@@ -541,7 +535,7 @@ extension VMF_DayTimeSearchViewController {
     /**
      This opens the screen to a certain day index, and time index.
      
-     - parameter dayIndex: The 1-based (but 0 is in progress) day index. If omitted, then today/now is selected, and time is ignored.
+     - parameter dayIndex: The 1-based (but 0 is in progress, 1-7 is Sunday through Saturday) day index. If omitted, then today/now is selected, and time is ignored.
      - parameter time: The military time (HHMM), as an integer. If omitted, 12AM is assumed.
      */
     func openTo(dayIndex inDayIndex: Int = -1, time inMilitaryTime: Int = 0) {
@@ -549,11 +543,11 @@ extension VMF_DayTimeSearchViewController {
         let weekday = (0..<8).contains(inDayIndex) ? inDayIndex : -1 == inDayIndex ? nowIs.weekday : 0
         let time = (0..<8).contains(inDayIndex) && (0..<2400).contains(inMilitaryTime) ? inMilitaryTime : -1 == inDayIndex ? nowIs.currentIntegerTime : 0
         
-        let nextIndex = getNextIndexAfter(dayIndex: weekday, time: time)
+        let nextIndex = getNearestIndex(dayIndex: weekday, time: time)
         guard let newViewController = getTableDisplay(for: weekday, time: nextIndex) else { return }
         
         pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
-        weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = weekday
+        weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = mapWeekday(weekday)
         
         timeDayDisplayLabel?.text = newViewController.title
     }
@@ -566,14 +560,30 @@ extension VMF_DayTimeSearchViewController {
      - parameter time: The military time (HHMM), as an integer. If omitted, 12AM (0000) is assumed.
      - returns: The index of the next time slot after (or at the same time as) the given time.
      */
-    func getNextIndexAfter(dayIndex inDayIndex: Int = -1, time inMilitaryTime: Int = 0) -> Int {
+    func getNearestIndex(dayIndex inDayIndex: Int = -1, time inMilitaryTime: Int = 0) -> Int {
         let weekday = (1..<8).contains(inDayIndex) ? inDayIndex : -1 == inDayIndex ? nowIs.weekday : 0
         let time = (1..<8).contains(inDayIndex) && (0..<2400).contains(inMilitaryTime) ? inMilitaryTime : -1 == inDayIndex ? nowIs.currentIntegerTime : 0
 
         let dailyMeetings = getDailyMeetings(for: weekday)
-        let nextTimeKey = dailyMeetings.getKey(onOrAfter: time)
         let dailyKeys = dailyMeetings.keys.sorted()
-        guard let nextIndex = dailyKeys.firstIndex(of: nextTimeKey) else { return 0 }
+        var nextIndex = 0
+        
+        for index in (0..<max(0, dailyKeys.count - 1)) {
+            let before = dailyKeys[index]
+            let after = dailyKeys[index + 1]
+            
+            if (before...after).contains(time) {
+                nextIndex = (time - before) <= (after - time) ? index : index + 1
+                break
+            } else if before >= time {
+                nextIndex = max(0, index - 1)
+                break
+            } else if after >= time {
+                nextIndex = min(dailyKeys.count - 1, index + 1)
+                break
+            }
+        }
+        
         return nextIndex
     }
     
@@ -605,7 +615,8 @@ extension VMF_DayTimeSearchViewController {
      */
     @IBAction func weekdayModeSelectorSegmentedSwitchHit(_ inSwitch: UISegmentedControl) {
         let selectedIndex = inSwitch.selectedSegmentIndex
-        let timeIndex = tableDisplayController?.timeIndex ?? 0
+        let originalDayIndex = tableDisplayController?.dayIndex ?? 0
+        var timeIndex = tableDisplayController?.timeIndex ?? 0
         if selectedIndex == (inSwitch.numberOfSegments - 1) {
             isNameSearchMode = true
             let dayIndex = tableDisplayController?.dayIndex ?? 0
@@ -613,10 +624,14 @@ extension VMF_DayTimeSearchViewController {
             self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
         } else {
             isNameSearchMode = false
-            var dayIndex = selectedIndex
-            if 0 < selectedIndex {
-                dayIndex = unMapWeekday(selectedIndex)
+            let dayIndex = unMapWeekday(selectedIndex)
+            
+            if 0 < originalDayIndex,
+               0 < timeIndex,
+               let originalTime = getTimeOf(dayIndex: originalDayIndex, timeIndex: timeIndex) {
+                timeIndex = getNearestIndex(dayIndex: dayIndex, time: originalTime)
             }
+            
             guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
             self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
         }
@@ -654,20 +669,19 @@ extension VMF_DayTimeSearchViewController {
 
             if 0 == dayIndex || 0 > timeIndex {
                 if 0 == dayIndex {
-                    dayIndex = 7
+                    dayIndex = unMapWeekday(7)
+                } else if unMapWeekday(1) == dayIndex {
+                    dayIndex = 0
                 } else {
                     dayIndex -= 1
-                    if 0 > dayIndex {
-                        dayIndex = 7
-                    }
                 }
-                timeIndex = getDailyMeetings(for: mapWeekday(dayIndex)).keys.count - 1
+                timeIndex = getDailyMeetings(for: dayIndex).keys.count - 1
             }
             
             guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
             pageViewController?.setViewControllers([newViewController], direction: .reverse, animated: false)
             timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
-            weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = dayIndex
+            weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = mapWeekday(dayIndex)
             timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
         }
     }
@@ -683,16 +697,19 @@ extension VMF_DayTimeSearchViewController {
            var dayIndex = tableDisplayController?.dayIndex,
            var timeIndex = tableDisplayController?.timeIndex {
             timeIndex += 1
-            if 0 == dayIndex || timeIndex >= getDailyMeetings(for: mapWeekday(dayIndex)).keys.count {
+            if 0 == dayIndex || timeIndex >= getDailyMeetings(for: dayIndex).keys.count {
                 timeIndex = 0
-                dayIndex += 1
-                if 7 < dayIndex {
+                if 0 == dayIndex {
+                    dayIndex = unMapWeekday(1)
+                } else if unMapWeekday(7) == dayIndex {
                     dayIndex = 0
+                } else {
+                    dayIndex += 1
                 }
             }
             guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
             pageViewController?.setViewControllers([newViewController], direction: .reverse, animated: false)
-            weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = dayIndex
+            weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = mapWeekday(dayIndex)
             timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
         }
     }
@@ -770,7 +787,10 @@ extension VMF_DayTimeSearchViewController {
             } else if index == (maxIndex - 1) {
                 weekdayModeSelectorSegmentedSwitch?.setImage(UIImage(systemName: "magnifyingglass"), forSegmentAt: index)
             } else {
-                weekdayModeSelectorSegmentedSwitch?.setTitle(Calendar.current.veryShortStandaloneWeekdaySymbols[index - 1], forSegmentAt: index)
+                let mappedIndex = unMapWeekday(index) - 1
+                let symbols = Calendar.current.veryShortStandaloneWeekdaySymbols
+                let weekdayName = symbols[mappedIndex]
+                weekdayModeSelectorSegmentedSwitch?.setTitle(weekdayName, forSegmentAt: index)
             }
         }
         

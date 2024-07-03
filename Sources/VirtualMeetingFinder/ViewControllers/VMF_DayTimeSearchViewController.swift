@@ -21,6 +21,93 @@ import UIKit
 import SwiftBMLSDK
 
 /* ###################################################################################################################################### */
+// MARK: - Special Button for "Tap and Hold" -
+/* ###################################################################################################################################### */
+/**
+ This allows single taps, or hold to repeat (like steppers).
+ */
+class TapHoldButton: UIControl {
+    /* ################################################################## */
+    /**
+     */
+    private weak var _tapGestureRecognizer: UITapGestureRecognizer?
+    
+    /* ################################################################## */
+    /**
+     */
+    private weak var _longHoldGestureRecognizer: UILongPressGestureRecognizer?
+    
+    /* ################################################################## */
+    /**
+     */
+    private weak var _displayImageView: UIImageView?
+
+    /* ################################################################## */
+    /**
+     */
+    @IBInspectable var displayImage: UIImage? { didSet { setNeedsLayout() } }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Callbacks
+/* ###################################################################################################################################### */
+extension TapHoldButton {
+    /* ################################################################## */
+    /**
+     */
+    @objc func tapGesture(_: UITapGestureRecognizer) {
+        sendActions(for: .primaryActionTriggered)
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    @objc func longPressGesture(_ inGesture: UILongPressGestureRecognizer) {
+        
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension TapHoldButton {
+    /* ################################################################## */
+    /**
+     */
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        _displayImageView?.removeFromSuperview()
+        
+        if let displayImage = displayImage {
+            let tempView = UIImageView(image: displayImage)
+            tempView.contentMode = .scaleAspectFit
+            addSubview(tempView)
+            _displayImageView = tempView
+            tempView.translatesAutoresizingMaskIntoConstraints = false
+            tempView.topAnchor.constraint(equalTo: topAnchor, constant: 4).isActive = true
+            tempView.leftAnchor.constraint(equalTo: leftAnchor, constant: 4).isActive = true
+            tempView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 4).isActive = true
+            tempView.rightAnchor.constraint(equalTo: rightAnchor, constant: 4).isActive = true
+        }
+        
+        if nil == _longHoldGestureRecognizer {
+            let tempGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressGesture))
+            addGestureRecognizer(tempGesture)
+            _longHoldGestureRecognizer = tempGesture
+        }
+
+        if nil == _tapGestureRecognizer,
+           let lp = _longHoldGestureRecognizer {
+            let tempGesture = UITapGestureRecognizer(target: self, action: #selector(tapGesture))
+            tempGesture.require(toFail: lp)
+            addGestureRecognizer(tempGesture)
+            _tapGestureRecognizer = tempGesture
+        }
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Main View Controller -
 /* ###################################################################################################################################### */
 /**
@@ -181,13 +268,13 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
     /**
      The decrement time button
      */
-    @IBOutlet weak var leftButton: UIButton?
+    @IBOutlet weak var leftButton: TapHoldButton?
     
     /* ################################################################## */
     /**
      The increment time button
      */
-    @IBOutlet weak var rightButton: UIButton?
+    @IBOutlet weak var rightButton: TapHoldButton?
     
     /* ################################################################## */
     /**
@@ -407,6 +494,31 @@ extension VMF_DayTimeSearchViewController {
         
         return meetings
     }
+    
+    /* ################################################################## */
+    /**
+     This opens the screen to a certain day index, and time index.
+     
+     - parameter dayIndex: The 1-based (but 0 is in progress) day index. If omitted, then today/now is selected, and time is ignored.
+     - parameter time: The military time (HHMM), as an integer. If omitted, 12AM is assumed.
+     */
+    func openTo(dayIndex inDayIndex: Int = -1, time inMilitaryTime: Int = 0) {
+        isNameSearchMode = false
+        let weekday = (0..<8).contains(inDayIndex) ? inDayIndex : -1 == inDayIndex ? nowIs.weekday : 0
+        let time = (0..<8).contains(inDayIndex) && (0..<2400).contains(inMilitaryTime) ? inMilitaryTime : -1 == inDayIndex ? nowIs.currentIntegerTime : 0
+        
+        let dailyMeetings = getDailyMeetings(for: weekday)
+        let nextTimeKey = dailyMeetings.getKey(onOrAfter: time)
+        let dailyKeys = dailyMeetings.keys.sorted()
+        guard let nextIndex = dailyKeys.firstIndex(of: nextTimeKey),
+              let newViewController = getTableDisplay(for: weekday, time: nextIndex)
+        else { return }
+        
+        pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
+        weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = weekday
+        
+        timeDayDisplayLabel?.text = newViewController.title
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -567,24 +679,7 @@ extension VMF_DayTimeSearchViewController {
             }
         }
         
-        loadMeetings {
-            let now = self.nowIs
-            let dailyMeetings = self.getDailyMeetings(for: now.weekday)
-            let nextTimeKey = dailyMeetings.getKey(onOrAfter: now.currentIntegerTime)
-            let dailyKeys = dailyMeetings.keys.sorted()
-            guard let nextIndex = dailyKeys.firstIndex(of: nextTimeKey),
-                  let newViewController = self.getTableDisplay(for: now.weekday, time: nextIndex)
-            else { return }
-            self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
-            self.timeDayDisplayLabel?.text = (self.tableDisplayController as? UIViewController)?.title
-            if self.isNameSearchMode {
-                self.weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = (self.weekdayModeSelectorSegmentedSwitch?.numberOfSegments ?? 1) - 1
-            } else {
-                self.weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = now.weekday
-            }
-            
-            self.timeDayDisplayLabel?.text = newViewController.title
-        }
+        loadMeetings { self.openTo() }
     }
     
     /* ################################################################## */

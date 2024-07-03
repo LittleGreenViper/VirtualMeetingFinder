@@ -343,7 +343,7 @@ extension VMF_DayTimeSearchViewController {
         self.virtualService?.meetings.compactMap { $0.isInProgress ? $0.meeting : nil }.sorted { a, b in
             if a.adjustedIntegerStartTime < b.adjustedIntegerStartTime {
                 return true
-            } else if a.adjustedIntegerStartTime < b.adjustedIntegerStartTime {
+            } else if a.adjustedIntegerStartTime > b.adjustedIntegerStartTime {
                 return false
             } else if a.timeZone.identifier < b.timeZone.identifier {
                 return true

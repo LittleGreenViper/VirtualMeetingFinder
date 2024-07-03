@@ -568,9 +568,22 @@ extension VMF_DayTimeSearchViewController {
         }
         
         loadMeetings {
-            guard let newViewController = self.getTableDisplay(for: 0, time: 0) else { return }
+            let now = self.nowIs
+            let dailyMeetings = self.getDailyMeetings(for: now.weekday)
+            let nextTimeKey = dailyMeetings.getKey(onOrAfter: now.currentIntegerTime)
+            let dailyKeys = dailyMeetings.keys.sorted()
+            guard let nextIndex = dailyKeys.firstIndex(of: nextTimeKey),
+                  let newViewController = self.getTableDisplay(for: now.weekday, time: nextIndex)
+            else { return }
             self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
             self.timeDayDisplayLabel?.text = (self.tableDisplayController as? UIViewController)?.title
+            if self.isNameSearchMode {
+                self.weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = (self.weekdayModeSelectorSegmentedSwitch?.numberOfSegments ?? 1) - 1
+            } else {
+                self.weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = now.weekday
+            }
+            
+            self.timeDayDisplayLabel?.text = newViewController.title
         }
     }
     
@@ -660,19 +673,20 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
               let oldViewController = inBeforeViewController as? VMF_EmbeddedTableController
         else { return nil }
         
+        var dayIndex = oldViewController.dayIndex
         var timeIndex = oldViewController.timeIndex
-        var dayIndex = max(0, min(organizedMeetings.count, oldViewController.dayIndex))
-        
-        if 0 == dayIndex {
-            timeIndex = Int.max - 1
-            dayIndex = organizedMeetings.count
-        } else {
-            timeIndex -= 1
-            
-            if 0 > timeIndex {
+        timeIndex -= 1
+
+        if 0 == dayIndex || 0 > timeIndex {
+            if 0 == dayIndex {
+                dayIndex = 7
+            } else {
                 dayIndex -= 1
-                timeIndex = Int.max - 1
+                if 0 > dayIndex {
+                    dayIndex = 7
+                }
             }
+            timeIndex = getDailyMeetings(for: mapWeekday(dayIndex)).keys.count - 1
         }
         
         return getTableDisplay(for: dayIndex, time: timeIndex)

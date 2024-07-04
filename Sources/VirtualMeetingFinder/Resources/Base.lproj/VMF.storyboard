@@ -57,7 +57,6 @@
                                         </segments>
                                         <connections>
                                             <action selector="weekdayModeSelectorSegmentedSwitchHit:" destination="Avq-Pc-erz" eventType="valueChanged" id="dBt-WK-rt6"/>
-                                            <outletCollection property="gestureRecognizers" destination="NKX-5L-RGa" appends="YES" id="2jz-va-Yco"/>
                                         </connections>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uw7-7n-oJo">
@@ -113,7 +112,7 @@
                                                     <action selector="leftButtonHit:" destination="Avq-Pc-erz" eventType="primaryActionTriggered" id="caf-73-WNk"/>
                                                 </connections>
                                             </view>
-                                            <label opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3d-iJ-1Id">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3d-iJ-1Id">
                                                 <rect key="frame" x="40" y="10" width="281" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
@@ -150,10 +149,14 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="JrU-ny-TZt" secondAttribute="trailing" id="CRs-UW-Gzj"/>
                                     <constraint firstItem="JrU-ny-TZt" firstAttribute="leading" secondItem="1R3-iR-Giq" secondAttribute="leading" id="HUm-Oa-uXU"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="NKX-5L-RGa" appends="YES" id="HEO-Bc-Pme"/>
+                                </connections>
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zdh-eu-ih1">
                                 <rect key="frame" x="16" y="220" width="361" height="549"/>
@@ -542,10 +545,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

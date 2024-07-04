@@ -738,7 +738,9 @@ extension VMF_DayTimeSearchViewController {
      - parameter: ignored
      */
     @IBAction func longPressOnWeekdayBar(_: Any) {
-        openTo()
+        if !isNameSearchMode {
+            openTo()
+        }
     }
 
     /* ################################################################## */
@@ -793,7 +795,6 @@ extension VMF_DayTimeSearchViewController {
         VMF_AppDelegate.searchController = self
         searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
         _atRestConstant = bottomConstraint?.constant ?? 0
-        timeDayDisplayLabel?.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPressOnWeekdayBar)))
         loadMeetings { self.openTo() }
     }
     

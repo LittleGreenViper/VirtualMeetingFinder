@@ -31,6 +31,36 @@ import RVS_Generic_Swift_Toolbox
 class VMF_MeetingViewController: VMF_BaseViewController {
     /* ################################################################## */
     /**
+     */
+    private static let _formatKeyFont: UIFont? = .boldSystemFont(ofSize: 24)
+    
+    /* ################################################################## */
+    /**
+     */
+    private static let _formatNameFont: UIFont? = .boldSystemFont(ofSize: 20)
+    
+    /* ################################################################## */
+    /**
+     */
+    private static let _formatDescriptionFont: UIFont? = .italicSystemFont(ofSize: 17)
+
+    /* ################################################################## */
+    /**
+     */
+    private static let _formatKeyWidth = CGFloat(50)
+    
+    /* ################################################################## */
+    /**
+     */
+    private static let _formatSeparatorSpace = CGFloat(8)
+    
+    /* ################################################################## */
+    /**
+     */
+    private static let _formatInternalSeparatorSpace = CGFloat(4)
+    
+    /* ################################################################## */
+    /**
      The meeting that this screen is displaying.
      */
     var meeting: MeetingInstance?
@@ -106,6 +136,18 @@ class VMF_MeetingViewController: VMF_BaseViewController {
      The map view that displays the meeting location (if it has an in-person component).
      */
     @IBOutlet weak var locationMapView: MKMapView?
+    
+    /* ################################################################## */
+    /**
+     The heading for the format section.
+     */
+    @IBOutlet weak var formatHeaderLabel: UILabel?
+    
+    /* ################################################################## */
+    /**
+     This contains individual formats.
+     */
+    @IBOutlet weak var formatContainerView: UIView?
 }
 
 /* ###################################################################################################################################### */
@@ -183,6 +225,8 @@ extension VMF_MeetingViewController {
         phoneInfoTextView?.isHidden = true
         inPersonContainer?.isHidden = true
         locationMapView?.isHidden = true
+        formatHeaderLabel?.isHidden = true
+        formatContainerView?.isHidden = true
         
         var directPhoneNumberString = meeting?.directPhoneURI?.absoluteString.replacingOccurrences(of: "https://", with: "tel:") ?? ""
         
@@ -228,6 +272,11 @@ extension VMF_MeetingViewController {
         if let coords = meeting?.coords,
            CLLocationCoordinate2DIsValid(coords) {
             setUpMap(coords)
+        }
+        
+        if let formats = meeting?.formats,
+           !formats.isEmpty {
+            setUpFormats(formats)
         }
     }
     
@@ -320,6 +369,78 @@ extension VMF_MeetingViewController {
         if let initialRegion = locationMapView?.regionThatFits(MKCoordinateRegion(center: inCoords, span: MKCoordinateSpan(latitudeDelta: 0.25, longitudeDelta: 0.25))) {
             locationMapView?.region = initialRegion
             locationMapView?.addAnnotation(VMF_MapAnnotation(coordinate: inCoords))
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Populates the formats section.
+     
+     - parameter inFormats: An array of format instances.
+     */
+    func setUpFormats(_ inFormats: [SwiftBMLSDK_Parser.Meeting.Format]) {
+        formatHeaderLabel?.text = formatHeaderLabel?.text?.localizedVariant
+        formatHeaderLabel?.isHidden = false
+        formatContainerView?.isHidden = false
+        
+        guard let formatContainerView = formatContainerView else { return }
+
+        var lastTopAnchor = formatContainerView.topAnchor
+        
+        for format in inFormats.enumerated() {
+            let key = format.element.key
+            let name = format.element.name
+            let description = format.element.description
+            
+            let container = UIView()
+
+            let keyLabel = UILabel()
+            keyLabel.font = Self._formatKeyFont
+            keyLabel.adjustsFontSizeToFitWidth = true
+            keyLabel.minimumScaleFactor = 0.75
+            keyLabel.text = key
+            container.addSubview(keyLabel)
+            keyLabel.translatesAutoresizingMaskIntoConstraints = false
+            keyLabel.leftAnchor.constraint(equalTo: container.leftAnchor).isActive = true
+            keyLabel.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
+            keyLabel.widthAnchor.constraint(equalToConstant: Self._formatKeyWidth).isActive = true
+            
+            let nameLabel = UILabel()
+            nameLabel.font = Self._formatNameFont
+            nameLabel.adjustsFontSizeToFitWidth = true
+            nameLabel.numberOfLines = 0
+            nameLabel.minimumScaleFactor = 0.5
+            nameLabel.lineBreakMode = .byWordWrapping
+            nameLabel.text = name
+            container.addSubview(nameLabel)
+            nameLabel.translatesAutoresizingMaskIntoConstraints = false
+            nameLabel.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
+            nameLabel.rightAnchor.constraint(equalTo: container.rightAnchor).isActive = true
+            nameLabel.leftAnchor.constraint(equalTo: keyLabel.rightAnchor, constant: Self._formatInternalSeparatorSpace).isActive = true
+            
+            let descriptionLabel = UILabel()
+            descriptionLabel.font = Self._formatDescriptionFont
+            descriptionLabel.text = description
+            descriptionLabel.numberOfLines = 0
+            descriptionLabel.lineBreakMode = .byWordWrapping
+            container.addSubview(descriptionLabel)
+            descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+            descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: Self._formatInternalSeparatorSpace).isActive = true
+            descriptionLabel.rightAnchor.constraint(equalTo: container.rightAnchor).isActive = true
+            descriptionLabel.leftAnchor.constraint(equalTo: keyLabel.rightAnchor, constant: Self._formatInternalSeparatorSpace).isActive = true
+            descriptionLabel.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
+
+            formatContainerView.addSubview(container)
+            container.translatesAutoresizingMaskIntoConstraints = false
+            container.topAnchor.constraint(equalTo: lastTopAnchor, constant: Self._formatSeparatorSpace).isActive = true
+            container.leftAnchor.constraint(equalTo: formatContainerView.leftAnchor).isActive = true
+            container.rightAnchor.constraint(equalTo: formatContainerView.rightAnchor).isActive = true
+
+            if format.offset == (inFormats.count - 1) {
+                container.bottomAnchor.constraint(equalTo: formatContainerView.bottomAnchor).isActive = true
+            } else {
+                lastTopAnchor = container.bottomAnchor
+            }
         }
     }
 }

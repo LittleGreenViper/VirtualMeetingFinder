@@ -32,6 +32,7 @@
 "SLUG-TAB-0-TITLE"                              =   "Search";
 "SLUG-TYPE"                                     =   "Type";
 "SLUG-TIMEZONE"                                 =   "Timezone";
+"SLUG-FORMATS-HEADER"                           =   "Formats:";
 "SLUG-NAME"                                     =   "Name";
 "SLUG-TIME"                                     =   "Time";
 "SLUG-TIMEZONE-FORMAT"                          =   "Time Zone: %@ (%@)";

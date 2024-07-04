@@ -18,6 +18,7 @@
  */
 
 import UIKit
+import MapKit
 import SwiftBMLSDK
 import RVS_Generic_Swift_Toolbox
 
@@ -99,6 +100,12 @@ class VMF_MeetingViewController: VMF_BaseViewController {
      The text view that displays an address for in-person meetings.
      */
     @IBOutlet weak var inPersonAddressTextView: UITextView?
+
+    /* ################################################################## */
+    /**
+     The map view that displays the meeting location (if it has an in-person component).
+     */
+    @IBOutlet weak var locationMapView: MKMapView?
 }
 
 /* ###################################################################################################################################### */
@@ -175,6 +182,7 @@ extension VMF_MeetingViewController {
         globeButton?.isHidden = true
         phoneInfoTextView?.isHidden = true
         inPersonContainer?.isHidden = true
+        locationMapView?.isHidden = true
         
         var directPhoneNumberString = meeting?.directPhoneURI?.absoluteString.replacingOccurrences(of: "https://", with: "tel:") ?? ""
         
@@ -215,6 +223,11 @@ extension VMF_MeetingViewController {
             inPersonContainer?.isHidden = false
             inPersonHeader?.text = inPersonHeader?.text?.localizedVariant
             inPersonAddressTextView?.text = basicAddress
+        }
+        
+        if let coords = meeting?.coords,
+           CLLocationCoordinate2DIsValid(coords) {
+            setUpMap(coords)
         }
     }
     
@@ -297,6 +310,18 @@ extension VMF_MeetingViewController {
         topLabel.lineBreakMode = .byWordWrapping
         navigationItem.titleView = topLabel
     }
+    
+    /* ################################################################## */
+    /**
+     Initializes the map view.
+     */
+    func setUpMap(_ inCoords: CLLocationCoordinate2D) {
+        locationMapView?.isHidden = false
+        if let initialRegion = locationMapView?.regionThatFits(MKCoordinateRegion(center: inCoords, span: MKCoordinateSpan(latitudeDelta: 0.25, longitudeDelta: 0.25))) {
+            locationMapView?.region = initialRegion
+            locationMapView?.addAnnotation(VMF_MapAnnotation(coordinate: inCoords))
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -348,5 +373,28 @@ extension VMF_MeetingViewController {
         if let videoLinkURL = meeting?.directAppURI {
             VMF_AppDelegate.open(url: videoLinkURL)
         }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: MKMapViewDelegate Conformance
+/* ###################################################################################################################################### */
+extension VMF_MeetingViewController: MKMapViewDelegate {
+    /* ################################################################## */
+    /**
+     This is called to fetch an annotation (marker) for the map.
+     
+     - parameter: The map view (ignored)
+     - parameter viewFor: The annotation we're getting the marker for.
+     - returns: The marker view for the annotation.
+     */
+    func mapView(_: MKMapView, viewFor inAnnotation: MKAnnotation) -> MKAnnotationView? {
+        var ret: MKAnnotationView?
+        
+        if let myAnnotation = inAnnotation as? VMF_MapAnnotation {
+            ret = VMF_MapMarker(annotation: myAnnotation, reuseIdentifier: VMF_MapMarker.reuseID)
+        }
+        
+        return ret
     }
 }

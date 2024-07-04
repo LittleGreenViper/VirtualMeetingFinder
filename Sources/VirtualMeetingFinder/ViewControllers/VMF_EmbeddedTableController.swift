@@ -316,7 +316,7 @@ extension VMF_EmbeddedTableController: UITableViewDataSource {
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         guard let ret = inTableView.dequeueReusableCell(withIdentifier: VMF_TableCell.reuseID, for: inIndexPath) as? VMF_TableCell else { return UITableViewCell() }
         
-        var backgroundColorToUse: UIColor? = (1 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : .clear
+        let backgroundColorToUse: UIColor? = (1 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : .clear
 
         var meeting = meetings[inIndexPath.row]
     
@@ -346,11 +346,13 @@ extension VMF_EmbeddedTableController: UITableViewDataSource {
         }
         
         if inProgress {
-            backgroundColorToUse = UIColor(named: "InProgress")
-            
-            if (0 == inIndexPath.row % 2) {
-                backgroundColorToUse = backgroundColorToUse?.withAlphaComponent(Self._alternateRowOpacityIP)
-            }
+            ret.borderColor = UIColor(named: "InProgress")
+            ret.borderWidth = 2
+            ret.cornerRadius = 8
+        } else {
+            ret.borderColor = nil
+            ret.borderWidth = 0
+            ret.cornerRadius = 0
         }
         
         ret.typeImage?.image = meeting.sortableMeetingType.image

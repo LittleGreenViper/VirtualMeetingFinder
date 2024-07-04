@@ -55,6 +55,8 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if nil == VMF_AppDelegate.openMeeting {
             VMF_AppDelegate.searchController?.openTo()
         }
+        
+        window?.setNeedsLayout()
     }
 }
 

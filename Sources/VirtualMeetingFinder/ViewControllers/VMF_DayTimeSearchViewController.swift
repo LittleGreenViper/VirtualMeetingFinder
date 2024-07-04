@@ -4,7 +4,7 @@
  
  MIT License
  
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentationmap
  files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
  modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
  Software is furnished to do so, subject to the following conditions:
@@ -150,6 +150,12 @@ extension TapHoldButton {
 class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTableControllerProtocol {
     /* ################################################################## */
     /**
+     The image that we use for search mode.
+     */
+    private static let _searchImage = UIImage(systemName: "magnifyingglass")
+    
+    /* ################################################################## */
+    /**
      This is used to restore the bottom of the stack view, when the keyboard is hidden.
      */
     private var _atRestConstant: CGFloat = 0
@@ -196,7 +202,7 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
                 } else {
                     searchTextField?.resignFirstResponder()
                     if oldValue != isNameSearchMode {
-                        weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = dayIndex
+                        weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = mapWeekday(dayIndex)
                         tableDisplayController?.meetings = getCurentMeetings(for: dayIndex, time: timeIndex)
                     }
                     timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
@@ -473,10 +479,11 @@ extension VMF_DayTimeSearchViewController {
      */
     func getTableDisplay(for inDayIndex: Int, time inTimeIndex: Int) -> UIViewController? {
         let dayIndex = max(0, min(organizedMeetings.count, inDayIndex))
-        let timeIndex = max(0, min(inTimeIndex, Int.max - 1))
         
+        let dailyMeetings = getDailyMeetings(for: dayIndex)
+        let timeIndex = max(0, min(inTimeIndex, dailyMeetings.keys.count - 1))
         let meetings = getCurentMeetings(for: dayIndex, time: timeIndex)
-        
+
         guard let newViewController = storyboard?.instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController else { return nil }
         
         newViewController.myController = self
@@ -487,8 +494,9 @@ extension VMF_DayTimeSearchViewController {
         if !isNameSearchMode,
            0 < dayIndex {
             guard (1..<8).contains(dayIndex) else { return nil }
+            var testMeeting = meetings.first
+            let timeString = testMeeting?.getNextStartDate(isAdjusted: true).localizedTime ?? "ERROR"
             let weekdayString = Calendar.current.weekdaySymbols[dayIndex - 1]
-            let timeString = meetings.first?.timeString ?? "ERROR"
             newViewController.title = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekdayString, timeString)
         } else if isNameSearchMode {
             newViewController.title = (tableDisplayController as? UIViewController)?.title
@@ -521,7 +529,7 @@ extension VMF_DayTimeSearchViewController {
         } else if 0 == inDayIndex {
             meetings = inProgressMeetings
         } else {
-            let tempMeetings = getDailyMeetings(for: unMapWeekday(inDayIndex))
+            let tempMeetings = getDailyMeetings(for: inDayIndex)
             let keys = tempMeetings.keys.sorted()
             let timeIndex = max(0, min(inTimeIndex, keys.count - 1))
             let key = keys[timeIndex]
@@ -627,6 +635,7 @@ extension VMF_DayTimeSearchViewController {
             let dayIndex = unMapWeekday(selectedIndex)
             
             if 0 < originalDayIndex,
+               0 < dayIndex,
                0 < timeIndex,
                let originalTime = getTimeOf(dayIndex: originalDayIndex, timeIndex: timeIndex) {
                 timeIndex = getNearestIndex(dayIndex: dayIndex, time: originalTime)
@@ -670,12 +679,14 @@ extension VMF_DayTimeSearchViewController {
             if 0 == dayIndex || 0 > timeIndex {
                 if 0 == dayIndex {
                     dayIndex = unMapWeekday(7)
+                    timeIndex = getDailyMeetings(for: dayIndex).keys.count - 1
                 } else if unMapWeekday(1) == dayIndex {
                     dayIndex = 0
+                    timeIndex += 1
                 } else {
                     dayIndex -= 1
+                    timeIndex = getDailyMeetings(for: dayIndex).keys.count - 1
                 }
-                timeIndex = getDailyMeetings(for: dayIndex).keys.count - 1
             }
             
             guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
@@ -698,13 +709,15 @@ extension VMF_DayTimeSearchViewController {
            var timeIndex = tableDisplayController?.timeIndex {
             timeIndex += 1
             if 0 == dayIndex || timeIndex >= getDailyMeetings(for: dayIndex).keys.count {
-                timeIndex = 0
                 if 0 == dayIndex {
                     dayIndex = unMapWeekday(1)
+                    timeIndex = 0
                 } else if unMapWeekday(7) == dayIndex {
                     dayIndex = 0
+                    timeIndex -= 1
                 } else {
                     dayIndex += 1
+                    timeIndex = 0
                 }
             }
             guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
@@ -778,21 +791,6 @@ extension VMF_DayTimeSearchViewController {
         VMF_AppDelegate.searchController = self
         searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
         _atRestConstant = bottomConstraint?.constant ?? 0
-
-        guard let maxIndex = weekdayModeSelectorSegmentedSwitch?.numberOfSegments else { return }
-        
-        for index in (0..<maxIndex) {
-            if 0 == index {
-                weekdayModeSelectorSegmentedSwitch?.setTitle("SLUG-NOW".localizedVariant, forSegmentAt: index)
-            } else if index == (maxIndex - 1) {
-                weekdayModeSelectorSegmentedSwitch?.setImage(UIImage(systemName: "magnifyingglass"), forSegmentAt: index)
-            } else {
-                let mappedIndex = unMapWeekday(index) - 1
-                let symbols = Calendar.current.veryShortStandaloneWeekdaySymbols
-                let weekdayName = symbols[mappedIndex]
-                weekdayModeSelectorSegmentedSwitch?.setTitle(weekdayName, forSegmentAt: index)
-            }
-        }
         
         loadMeetings { self.openTo() }
     }
@@ -805,14 +803,14 @@ extension VMF_DayTimeSearchViewController {
      */
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
-
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow),
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
-
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide),
@@ -820,6 +818,29 @@ extension VMF_DayTimeSearchViewController {
             object: nil
         )
         
+        view?.setNeedsLayout()
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the subviews are laid out. We use this to ensure that our segmented switch is set up correctly.
+     */
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        guard let maxIndex = weekdayModeSelectorSegmentedSwitch?.numberOfSegments else { return }
+        
+        for index in (0..<maxIndex) {
+            if 0 == index {
+                weekdayModeSelectorSegmentedSwitch?.setTitle("SLUG-NOW".localizedVariant, forSegmentAt: index)
+            } else if index == (maxIndex - 1) {
+                weekdayModeSelectorSegmentedSwitch?.setImage(Self._searchImage, forSegmentAt: index)
+            } else {
+                let weekdayName = Calendar.current.veryShortStandaloneWeekdaySymbols[unMapWeekday(index) - 1]
+                weekdayModeSelectorSegmentedSwitch?.setTitle(weekdayName, forSegmentAt: index)
+            }
+        }
+
         if isNameSearchMode {
             searchTextField?.becomeFirstResponder()
         }

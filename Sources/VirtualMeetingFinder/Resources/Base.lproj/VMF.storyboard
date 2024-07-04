@@ -38,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1R3-iR-Giq">
-                                <rect key="frame" x="16" y="103" width="361" height="101"/>
+                                <rect key="frame" x="16" y="111" width="361" height="101"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Hjc-M6-UmS">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="32"/>
@@ -112,7 +112,7 @@
                                                     <action selector="leftButtonHit:" destination="Avq-Pc-erz" eventType="primaryActionTriggered" id="caf-73-WNk"/>
                                                 </connections>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3d-iJ-1Id">
+                                            <label opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3d-iJ-1Id">
                                                 <rect key="frame" x="40" y="10" width="281" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
@@ -155,7 +155,7 @@
                                 </constraints>
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zdh-eu-ih1">
-                                <rect key="frame" x="16" y="212" width="361" height="557"/>
+                                <rect key="frame" x="16" y="220" width="361" height="549"/>
                                 <connections>
                                     <segue destination="bxe-Jd-mqJ" kind="embed" id="PRK-8l-msD"/>
                                 </connections>
@@ -178,7 +178,7 @@
                         <viewLayoutGuide key="safeArea" id="pPU-8y-L0V"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="1R3-iR-Giq" firstAttribute="top" secondItem="pPU-8y-L0V" secondAttribute="top" id="5d3-Vh-DeJ"/>
+                            <constraint firstItem="1R3-iR-Giq" firstAttribute="top" secondItem="pPU-8y-L0V" secondAttribute="top" constant="8" id="5d3-Vh-DeJ"/>
                             <constraint firstItem="1R3-iR-Giq" firstAttribute="leading" secondItem="pPU-8y-L0V" secondAttribute="leading" constant="16" id="7G7-Wm-z5w"/>
                             <constraint firstAttribute="bottom" secondItem="yRJ-fe-3Cl" secondAttribute="bottom" id="9dr-6v-74U"/>
                             <constraint firstItem="yRJ-fe-3Cl" firstAttribute="leading" secondItem="sFK-py-g0o" secondAttribute="leading" id="I2a-CP-Zfj"/>

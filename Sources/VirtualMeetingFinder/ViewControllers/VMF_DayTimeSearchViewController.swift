@@ -42,11 +42,13 @@ class TapHoldButton: UIControl {
     
     /* ################################################################## */
     /**
+     This manages the repeated calls.
      */
     private var _repeater: RVS_BasicGCDTimer?
     
     /* ################################################################## */
     /**
+     The view that contains the button image.
      */
     private weak var _displayImageView: UIImageView?
 
@@ -54,7 +56,7 @@ class TapHoldButton: UIControl {
     /**
      This is how often we repeat, when long-pressing.
      */
-    @IBInspectable var repeatFrequencyInSeconds = TimeInterval(0.2)
+    @IBInspectable var repeatFrequencyInSeconds = TimeInterval(0.15)
     
     /* ################################################################## */
     /**
@@ -791,7 +793,7 @@ extension VMF_DayTimeSearchViewController {
         VMF_AppDelegate.searchController = self
         searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
         _atRestConstant = bottomConstraint?.constant ?? 0
-        
+        timeDayDisplayLabel?.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPressOnWeekdayBar)))
         loadMeetings { self.openTo() }
     }
     

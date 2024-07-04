@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D40133672C320BB30018076B /* VMF_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40133662C320BB30018076B /* VMF_Extensions.swift */; };
 		D40133692C320C070018076B /* VMF_DayTimeSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40133682C320C070018076B /* VMF_DayTimeSearchViewController.swift */; };
 		D401336B2C320D520018076B /* VMF_EmbeddedTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */; };
 		D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */; };
 		D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */; };
+		D43A9C132C373F67001285FC /* RVS_Persistent_Prefs in Frameworks */ = {isa = PBXBuildFile; productRef = D43A9C122C373F67001285FC /* RVS_Persistent_Prefs */; };
+		D43A9C192C374198001285FC /* VMF_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A9C172C374198001285FC /* VMF_Prefs.swift */; };
+		D43A9C1A2C374198001285FC /* VMF_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A9C182C374198001285FC /* VMF_Extensions.swift */; };
 		D4523A0F2C31D18300BAE330 /* SwiftBMLSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D4523A0E2C31D18300BAE330 /* SwiftBMLSDK */; };
 		D47C2F0E2C2C5E6A0048C91C /* VMF_BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */; };
 		D48816152C35860F008DF936 /* RVS_BasicGCDTimer in Frameworks */ = {isa = PBXBuildFile; productRef = D48816142C35860F008DF936 /* RVS_BasicGCDTimer */; };
@@ -26,10 +28,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D40133662C320BB30018076B /* VMF_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VMF_Extensions.swift; path = Sources/VirtualMeetingFinder/ViewControllers/VMF_Extensions.swift; sourceTree = SOURCE_ROOT; };
 		D40133682C320C070018076B /* VMF_DayTimeSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_DayTimeSearchViewController.swift; sourceTree = "<group>"; };
 		D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_EmbeddedTableController.swift; sourceTree = "<group>"; };
 		D4398E6B2C2892BD0001FAE3 /* jazzy.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = jazzy.command; sourceTree = "<group>"; };
+		D43A9C172C374198001285FC /* VMF_Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Prefs.swift; sourceTree = "<group>"; };
+		D43A9C182C374198001285FC /* VMF_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Extensions.swift; sourceTree = "<group>"; };
 		D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_BaseViewController.swift; sourceTree = "<group>"; };
 		D47FBFA92C28CE5600C62945 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		D49349712C29A6D100C58390 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -60,6 +63,7 @@
 				D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */,
 				D4523A0F2C31D18300BAE330 /* SwiftBMLSDK in Frameworks */,
 				D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */,
+				D43A9C132C373F67001285FC /* RVS_Persistent_Prefs in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +78,16 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		D43A9C162C37416E001285FC /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				D43A9C172C374198001285FC /* VMF_Prefs.swift */,
+				D43A9C182C374198001285FC /* VMF_Extensions.swift */,
+				D4F4BCEC2C36DAFC0023C21B /* VMF_MapMarker.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 		D47C2F0F2C2C5E750048C91C /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,8 +100,6 @@
 		D47C2F102C2C5E860048C91C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D4F4BCEC2C36DAFC0023C21B /* VMF_MapMarker.swift */,
-				D40133662C320BB30018076B /* VMF_Extensions.swift */,
 				D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */,
 				D4B69A332C2B162800D24DA6 /* VMF_MeetingViewController.swift */,
 				D40133682C320C070018076B /* VMF_DayTimeSearchViewController.swift */,
@@ -119,6 +131,7 @@
 			children = (
 				D47C2F0F2C2C5E750048C91C /* AppDelegate */,
 				D47C2F102C2C5E860048C91C /* ViewControllers */,
+				D43A9C162C37416E001285FC /* Support */,
 				D4AD6A0F2C261AB7002E37F3 /* Resources */,
 				D4AD6A102C261ACB002E37F3 /* Meta */,
 			);
@@ -188,6 +201,7 @@
 				D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */,
 				D4523A0E2C31D18300BAE330 /* SwiftBMLSDK */,
 				D48816142C35860F008DF936 /* RVS_BasicGCDTimer */,
+				D43A9C122C373F67001285FC /* RVS_Persistent_Prefs */,
 			);
 			productName = VirtualMeetingFinder;
 			productReference = D49393312C2616C7006438AE /* VirtualMeetingFinder.app */;
@@ -222,6 +236,7 @@
 				D4398E682C2892830001FAE3 /* XCRemoteSwiftPackageReference "RVS_UIKit_Toolbox" */,
 				D4523A0D2C31D18300BAE330 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */,
 				D48816132C35860F008DF936 /* XCRemoteSwiftPackageReference "RVS_BasicGCDTimer" */,
+				D43A9C112C373F67001285FC /* XCRemoteSwiftPackageReference "RVS_PersistentPrefs" */,
 			);
 			productRefGroup = D49393322C2616C7006438AE /* Products */;
 			projectDirPath = "";
@@ -251,9 +266,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D40133672C320BB30018076B /* VMF_Extensions.swift in Sources */,
 				D49393352C2616C7006438AE /* VMF_AppDelegate.swift in Sources */,
+				D43A9C1A2C374198001285FC /* VMF_Extensions.swift in Sources */,
 				D47C2F0E2C2C5E6A0048C91C /* VMF_BaseViewController.swift in Sources */,
+				D43A9C192C374198001285FC /* VMF_Prefs.swift in Sources */,
 				D4B69A342C2B162900D24DA6 /* VMF_MeetingViewController.swift in Sources */,
 				D401336B2C320D520018076B /* VMF_EmbeddedTableController.swift in Sources */,
 				D40133692C320C070018076B /* VMF_DayTimeSearchViewController.swift in Sources */,
@@ -509,6 +525,14 @@
 				minimumVersion = 1.6.1;
 			};
 		};
+		D43A9C112C373F67001285FC /* XCRemoteSwiftPackageReference "RVS_PersistentPrefs" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RiftValleySoftware/RVS_PersistentPrefs";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.9;
+			};
+		};
 		D4523A0D2C31D18300BAE330 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/LittleGreenViper/SwiftBMLSDK";
@@ -537,6 +561,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D4398E682C2892830001FAE3 /* XCRemoteSwiftPackageReference "RVS_UIKit_Toolbox" */;
 			productName = RVS_UIKit_Toolbox;
+		};
+		D43A9C122C373F67001285FC /* RVS_Persistent_Prefs */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D43A9C112C373F67001285FC /* XCRemoteSwiftPackageReference "RVS_PersistentPrefs" */;
+			productName = RVS_Persistent_Prefs;
 		};
 		D4523A0E2C31D18300BAE330 /* SwiftBMLSDK */ = {
 			isa = XCSwiftPackageProductDependency;

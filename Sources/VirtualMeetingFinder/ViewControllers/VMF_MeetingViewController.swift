@@ -32,17 +32,17 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     /* ################################################################## */
     /**
      */
-    private static let _formatKeyFont: UIFont? = .boldSystemFont(ofSize: 24)
+    private static let _formatKeyFont: UIFont? = .boldSystemFont(ofSize: 20)
     
     /* ################################################################## */
     /**
      */
-    private static let _formatNameFont: UIFont? = .boldSystemFont(ofSize: 20)
+    private static let _formatNameFont: UIFont? = .boldSystemFont(ofSize: 17)
     
     /* ################################################################## */
     /**
      */
-    private static let _formatDescriptionFont: UIFont? = .italicSystemFont(ofSize: 17)
+    private static let _formatDescriptionFont: UIFont? = .italicSystemFont(ofSize: 15)
 
     /* ################################################################## */
     /**
@@ -397,7 +397,7 @@ extension VMF_MeetingViewController {
             let keyLabel = UILabel()
             keyLabel.font = Self._formatKeyFont
             keyLabel.adjustsFontSizeToFitWidth = true
-            keyLabel.minimumScaleFactor = 0.75
+            keyLabel.minimumScaleFactor = 0.5
             keyLabel.text = key
             container.addSubview(keyLabel)
             keyLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -407,9 +407,7 @@ extension VMF_MeetingViewController {
             
             let nameLabel = UILabel()
             nameLabel.font = Self._formatNameFont
-            nameLabel.adjustsFontSizeToFitWidth = true
             nameLabel.numberOfLines = 0
-            nameLabel.minimumScaleFactor = 0.5
             nameLabel.lineBreakMode = .byWordWrapping
             nameLabel.text = name
             container.addSubview(nameLabel)

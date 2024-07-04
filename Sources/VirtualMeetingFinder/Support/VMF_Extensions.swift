@@ -21,6 +21,15 @@ import UIKit
 import SwiftBMLSDK
 
 /* ###################################################################################################################################### */
+// MARK: - Abstraction for the Meeting Type -
+/* ###################################################################################################################################### */
+/* ###################################################################### */
+/**
+ This allows us to play around with the SDK.
+ */
+public typealias MeetingInstance = SwiftBMLSDK_Parser.Meeting
+
+/* ###################################################################################################################################### */
 // MARK: - Image Assignment Enum, for Meeting Access Types -
 /* ###################################################################################################################################### */
 extension SwiftBMLSDK_Parser.Meeting.SortableMeetingType {
@@ -85,15 +94,6 @@ extension Date {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Abstraction for the Meeting Type -
-/* ###################################################################################################################################### */
-/* ###################################################################### */
-/**
- This allows us to play around with the SDK.
- */
-public typealias MeetingInstance = SwiftBMLSDK_Parser.Meeting
-
-/* ###################################################################################################################################### */
 // MARK: - String Extension -
 /* ###################################################################################################################################### */
 /* ###################################################################### */
@@ -153,7 +153,7 @@ extension StringProtocol {
 extension MeetingInstance {
     /* ################################################################## */
     /**
-     This allows us to return a string for the meeting time. The return is localized, with our strings for noon and midnight.
+     This allows us to return a string for the meeting time. The return is adjusted and localized, with our strings for noon and midnight.
      */
     var timeString: String {
         var mutableSelf = self
@@ -163,7 +163,7 @@ extension MeetingInstance {
     
     /* ################################################################## */
     /**
-     This returns the start weekday. It is localized, so may sometimes be different from the one specified by the meeting.
+     This returns the start weekday. It is adjusted, so may sometimes be different from the one specified by the meeting. It is always in 1 = Sunday space.
      */
     var adjustedWeekday: Int {
         var mutableSelf = self
@@ -200,4 +200,18 @@ extension Dictionary where Key == Int, Value == [MeetingInstance] {
      - returns: An array of meetings that correspond to the time.
      */
     func getMeetings(on inTimeAsInteger: Int) -> [MeetingInstance] { self[inTimeAsInteger] ?? [] }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Bundle Extension -
+/* ###################################################################################################################################### */
+/**
+ This extension adds a simple accessor to access the URL.
+ */
+public extension Bundle {
+    /* ################################################################## */
+    /**
+     The root server URI as a string.
+     */
+    var rootServerURI: String? { object(forInfoDictionaryKey: "VMF_BaseServerURI") as? String }
 }

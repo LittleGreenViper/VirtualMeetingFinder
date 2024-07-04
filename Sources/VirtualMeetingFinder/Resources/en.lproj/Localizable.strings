@@ -42,8 +42,10 @@
 "SLUG-WEEKDAY-TIME-DURATION-FORMAT"             =   "%@s, %@ - %@";
 "SLUG-PHONE-NUMBER-FORMAT"                      =   "Phone: %@";
 "SLUG-IN-PERSON-HEADER"                         =   "In-Person Meeting Address:";
+
 "SLUG-DIRECT-URI-ZOOM"                          =   "Zoom";
-"SLUG-DIRECT-URI-GOTOMEETING"                   =   "GoToMeeting";
+"SLUG-DIRECT-URI-GOTOMEETING"                   =   "GotoMeeting";
 "SLUG-DIRECT-URI-SKYPE"                         =   "Skype";
 "SLUG-DIRECT-URI-MEET"                          =   "Google Meet";
 "SLUG-DIRECT-URI-DISCORD"                       =   "Discord";
+"SLUG-DIRECT-URI-JITSI"                         =   "Jitsi Meet";

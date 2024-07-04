@@ -33,5 +33,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>VMF_BaseServerURI</key>
+	<string>https://littlegreenviper.com/LGV_MeetingServer/Tests/entrypoint.php</string>
 </dict>
 </plist>

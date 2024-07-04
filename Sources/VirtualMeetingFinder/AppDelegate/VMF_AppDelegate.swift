@@ -19,6 +19,21 @@
 
 import UIKit
 import SwiftBMLSDK
+import RVS_Generic_Swift_Toolbox
+
+/* ###################################################################################################################################### */
+// MARK: - Bundle Extension -
+/* ###################################################################################################################################### */
+/**
+ This extension adds a few simple accessors for some of the more common bundle items.
+ */
+public extension Bundle {
+    /* ################################################################## */
+    /**
+     The root server URI as a string.
+     */
+    var rootServerURI: String? { object(forInfoDictionaryKey: "VMF_BaseServerURI") as? String }
+}
 
 /* ###################################################################################################################################### */
 // MARK: - Main App Delegate -
@@ -32,7 +47,13 @@ class VMF_AppDelegate: UIResponder {
     /**
      This is our query instance.
      */
-    private static var _queryInstance = SwiftBMLSDK_Query(serverBaseURI: URL(string: "https://littlegreenviper.com/LGV_MeetingServer/Tests/entrypoint.php"))
+    private class var _queryInstance: SwiftBMLSDK_Query? {
+        guard let bundleURIString = Bundle.main.rootServerURI,
+              let rootURI = URL(string: bundleURIString)
+        else { return nil }
+        
+        return SwiftBMLSDK_Query(serverBaseURI: rootURI)
+    }
 
     /* ################################################################## */
     /**
@@ -68,7 +89,12 @@ extension VMF_AppDelegate {
     static func findMeetings(completion inCompletion: @escaping (SwiftBMLSDK_MeetingLocalTimezoneCollection?) -> Void) {
         virtualService = nil
         
-        _ = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: _queryInstance) { inCollection in
+        guard let queryInstance = Self._queryInstance else {
+            inCompletion(nil)
+            return
+        }
+        
+        _ = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: queryInstance) { inCollection in
             DispatchQueue.main.async {
                 virtualService = inCollection
                 inCompletion(virtualService)

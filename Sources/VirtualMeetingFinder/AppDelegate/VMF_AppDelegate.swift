@@ -25,7 +25,7 @@ import RVS_Generic_Swift_Toolbox
 // MARK: - Bundle Extension -
 /* ###################################################################################################################################### */
 /**
- This extension adds a few simple accessors for some of the more common bundle items.
+ This extension adds a simple accessor to access the URL.
  */
 public extension Bundle {
     /* ################################################################## */

@@ -340,12 +340,6 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
     
     /* ################################################################## */
     /**
-     This is the "mercury" in the "thermometer."
-     */
-    @IBOutlet weak var mercury: UIView?
-    
-    /* ################################################################## */
-    /**
      The "Throbber" view
      */
     @IBOutlet weak var throbber: UIView?
@@ -632,7 +626,7 @@ extension VMF_DayTimeSearchViewController {
         guard let tablePage = inTablePage,
               let prevPage = tableDisplayController,
               let completionBar = completionBar,
-              let mercury = mercury,
+              let repeatDuration = leftButton?.repeatFrequencyInSeconds,
               !isNameSearchMode
         else {
             completionBar?.isHidden = true
@@ -640,11 +634,15 @@ extension VMF_DayTimeSearchViewController {
         }
         
         completionBar.isHidden = false
+        completionBar.subviews.forEach { $0.removeFromSuperview() }
+        
         let dayIndex = tablePage.dayIndex
+        let prevTimeIndex = prevPage.timeIndex
         var timeIndex = tablePage.timeIndex
 
         var dailyMeetings = [Int: [MeetingInstance]]()
-        
+        var prevDailyMeetings = [Int: [MeetingInstance]]()
+
         if 0 < dayIndex,
            0 != prevPage.dayIndex {
             dailyMeetings = getDailyMeetings(for: dayIndex)
@@ -661,10 +659,24 @@ extension VMF_DayTimeSearchViewController {
             timeIndex = dailyMeetings.count - 1
         }
         
-        let newWidth = CGFloat(timeIndex + 1) / max(1, CGFloat(dailyMeetings.count))
+        prevDailyMeetings = getDailyMeetings(for: prevPage.dayIndex)
 
-        mercury.widthAnchor.constraint(equalTo: completionBar.widthAnchor, multiplier: newWidth).isActive = true
-        completionBar.layoutIfNeeded()
+        let oldWidth = CGFloat(prevTimeIndex + 1) / max(1, CGFloat(prevDailyMeetings.count))
+        let newWidth = CGFloat(timeIndex + 1) / max(1, CGFloat(dailyMeetings.count))
+        let mercury = UIView()
+        mercury.backgroundColor = .systemRed
+        mercury.cornerRadius = 2
+        completionBar.addSubview(mercury)
+        mercury.translatesAutoresizingMaskIntoConstraints = false
+        mercury.topAnchor.constraint(equalTo: completionBar.topAnchor).isActive = true
+        mercury.leftAnchor.constraint(equalTo: completionBar.leftAnchor).isActive = true
+        mercury.bottomAnchor.constraint(equalTo: completionBar.bottomAnchor).isActive = true
+        mercury.widthAnchor.constraint(equalTo: completionBar.widthAnchor, multiplier: oldWidth).isActive = true
+        mercury.layoutIfNeeded()
+        UIView.animate(withDuration: repeatDuration) {
+            mercury.widthAnchor.constraint(equalTo: completionBar.widthAnchor, multiplier: newWidth).isActive = true
+            mercury.layoutIfNeeded()
+        }
     }
 }
 

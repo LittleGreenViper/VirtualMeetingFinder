@@ -184,6 +184,12 @@ class VMF_MeetingViewController: VMF_BaseViewController {
      This contains individual formats.
      */
     @IBOutlet weak var formatContainerView: UIView?
+    
+    /* ################################################################## */
+    /**
+     The navbar button to mark attendance.
+     */
+    @IBOutlet weak var iAttendBarButton: UIBarButtonItem?
 }
 
 /* ###################################################################################################################################### */
@@ -250,6 +256,7 @@ extension VMF_MeetingViewController {
             return inString.decimalOnly
         }
         
+        iAttendBarButton?.title = iAttendBarButton?.title?.localizedVariant
         phoneLabelButton?.text = phoneLabelButton?.text?.localizedVariant
         globeLabelButton?.text = globeLabelButton?.text?.localizedVariant
         videoLabelButton?.text = videoLabelButton?.text?.localizedVariant

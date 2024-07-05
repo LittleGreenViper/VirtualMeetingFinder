@@ -42,6 +42,7 @@
 "SLUG-WEEKDAY-TIME-DURATION-FORMAT"             =   "%@s, %@ - %@";
 "SLUG-PHONE-NUMBER-FORMAT"                      =   "Phone: %@";
 "SLUG-IN-PERSON-HEADER"                         =   "In-Person Meeting Address:";
+"SLUG-I-ATTEND"                                 =   "I Attend";
 
 "SLUG-PHONE-BUTTON"                             =   "Phone";
 "SLUG-GLOBE-BUTTON"                             =   "Web";

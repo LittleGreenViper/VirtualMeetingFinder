@@ -256,7 +256,6 @@ extension VMF_MeetingViewController {
             return inString.decimalOnly
         }
         
-        iAttendBarButton?.title = iAttendBarButton?.title?.localizedVariant
         phoneLabelButton?.text = phoneLabelButton?.text?.localizedVariant
         globeLabelButton?.text = globeLabelButton?.text?.localizedVariant
         videoLabelButton?.text = videoLabelButton?.text?.localizedVariant
@@ -348,6 +347,8 @@ extension VMF_MeetingViewController {
            !formats.isEmpty {
             setUpFormats(formats)
         }
+        
+        setBarButton()
     }
     
     /* ################################################################## */
@@ -511,6 +512,40 @@ extension VMF_MeetingViewController {
             }
         }
     }
+    
+    /* ################################################################## */
+    /**
+     Sets up the bar button item, with the state of attendance.
+     */
+    func setBarButton() {
+        let barButtonView = UIView()
+        barButtonView.isUserInteractionEnabled = true
+        barButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(iAttendHit)))
+        let checkedImage = UIImage(systemName: "checkmark.square.fill")
+        let uncheckedImage = UIImage(systemName: "square")
+        let useThisImage = (meeting?.iAttend ?? false) ? checkedImage : uncheckedImage
+        let barButtonImage = UIImageView(image: useThisImage?.withRenderingMode(.alwaysTemplate).withTintColor(view.tintColor))
+        let barButtonLabel = UILabel()
+        barButtonLabel.text = "SLUG-I-ATTEND".localizedVariant
+        barButtonLabel.font = .systemFont(ofSize: 14)
+        barButtonLabel.textColor = view.tintColor
+        barButtonView.addSubview(barButtonLabel)
+        barButtonLabel.translatesAutoresizingMaskIntoConstraints = false
+        barButtonLabel.leftAnchor.constraint(equalTo: barButtonView.leftAnchor).isActive = true
+        barButtonLabel.topAnchor.constraint(equalTo: barButtonView.topAnchor).isActive = true
+        barButtonLabel.bottomAnchor.constraint(equalTo: barButtonView.bottomAnchor).isActive = true
+        barButtonView.addSubview(barButtonImage)
+        barButtonImage.translatesAutoresizingMaskIntoConstraints = false
+        barButtonImage.widthAnchor.constraint(equalTo: barButtonImage.heightAnchor).isActive = true
+        barButtonImage.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        barButtonImage.leftAnchor.constraint(equalTo: barButtonLabel.rightAnchor, constant: 4).isActive = true
+        barButtonImage.rightAnchor.constraint(equalTo: barButtonView.rightAnchor).isActive = true
+        barButtonImage.topAnchor.constraint(equalTo: barButtonView.topAnchor).isActive = true
+        barButtonImage.bottomAnchor.constraint(equalTo: barButtonView.bottomAnchor).isActive = true
+        iAttendBarButton?.customView = barButtonView
+        iAttendBarButton?.target = self
+        iAttendBarButton?.action = #selector(iAttendHit)
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -562,6 +597,19 @@ extension VMF_MeetingViewController {
         if let videoLinkURL = meeting?.directAppURI {
             VMF_AppDelegate.open(url: videoLinkURL)
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     The "I Attend" bar button item was hit.
+     
+     - parameter: ignored
+     */
+    @objc func iAttendHit(_: Any) {
+        guard var meeting = meeting else { return }
+        let originalState = meeting.iAttend
+        meeting.iAttend = !originalState
+        setBarButton()
     }
 }
 

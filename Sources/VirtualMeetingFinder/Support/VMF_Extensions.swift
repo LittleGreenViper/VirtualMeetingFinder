@@ -172,6 +172,24 @@ extension MeetingInstance {
         
         return Calendar.current.component(.weekday, from: startDate)
     }
+    
+    /* ################################################################## */
+    /**
+     This marks our attendance in the app local preferences.
+     */
+    var iAttend: Bool {
+        get { VMF_Prefs().attendance.contains(Int(id)) }
+        set {
+            let id = Int(id)
+            if VMF_Prefs().attendance.contains(id),
+               !newValue {
+                VMF_Prefs().attendance.removeAll { $0 == id }
+            } else if newValue,
+                      !VMF_Prefs().attendance.contains(id) {
+                VMF_Prefs().attendance.append(id)
+            }
+        }
+    }
 }
 
 /* ###################################################################################################################################### */

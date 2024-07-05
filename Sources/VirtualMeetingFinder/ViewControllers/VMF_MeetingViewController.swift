@@ -67,6 +67,12 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     
     /* ################################################################## */
     /**
+     The label that displays the meeting name.
+     */
+    @IBOutlet weak var meetingNameLabel: UILabel?
+    
+    /* ################################################################## */
+    /**
      The label that displays the meeting start time and weekday.
      */
     @IBOutlet weak var timeAndDayLabel: UILabel?
@@ -256,12 +262,15 @@ extension VMF_MeetingViewController {
             return inString.decimalOnly
         }
         
+        meetingNameLabel?.text = meeting?.name
         phoneLabelButton?.text = phoneLabelButton?.text?.localizedVariant
         globeLabelButton?.text = globeLabelButton?.text?.localizedVariant
         videoLabelButton?.text = videoLabelButton?.text?.localizedVariant
 
         super.viewDidLoad()
-        setScreenTitle()
+        
+        navigationItem.title = ((.hybrid == meeting?.meetingType) ? "SLUG-HYBRID-MEETING" : "SLUG-VIRTUAL-MEETING").localizedVariant
+        
         setTimeZone()
         setTimeAndWeekday()
         inProgressLabel?.text = inProgressLabel?.text?.localizedVariant
@@ -321,6 +330,7 @@ extension VMF_MeetingViewController {
         }
         
         if let extraInfo = meeting?.virtualInfo,
+           meeting?.comments?.lowercased() != extraInfo.lowercased(),
            !extraInfo.isEmpty {
             virtualExtraInfoLabel?.isHidden = false
             virtualExtraInfoLabel?.text = extraInfo
@@ -332,6 +342,7 @@ extension VMF_MeetingViewController {
             inPersonHeader?.text = inPersonHeader?.text?.localizedVariant
             inPersonAddressTextView?.text = basicAddress
             if let extraInfo = meeting?.locationInfo,
+               meeting?.comments?.lowercased() != extraInfo.lowercased(),
                !extraInfo.isEmpty {
                 inPersonExtraInfoLabel?.isHidden = false
                 inPersonExtraInfoLabel?.text = extraInfo
@@ -417,18 +428,6 @@ extension VMF_MeetingViewController {
         } else {
             timeZoneLabel?.isHidden = true
         }
-    }
-    
-    /* ################################################################## */
-    /**
-     Sets the title of the screen -the meeting name.
-     */
-    func setScreenTitle() {
-        let topLabel = UILabel()
-        topLabel.text = meeting?.name
-        topLabel.numberOfLines = 0
-        topLabel.lineBreakMode = .byWordWrapping
-        navigationItem.titleView = topLabel
     }
     
     /* ################################################################## */

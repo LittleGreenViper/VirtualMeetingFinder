@@ -17,9 +17,8 @@
  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-"SLUG-VIRTUAL-SWITCH-0"                         =   "All";
-"SLUG-VIRTUAL-SWITCH-1"                         =   "Hybrid";
-"SLUG-VIRTUAL-SWITCH-2"                         =   "Virtual";
+"SLUG-HYBRID-MEETING"                           =   "Hybrid Meeting";
+"SLUG-VIRTUAL-MEETING"                          =   "Virtual Meeting";
 "SLUG-IN-PROGRESS-STANDALONE"                   =   "This Meeting Is In Progress";
 "SLUG-IN-PROGRESS"                              =   "In Progress";
 "SLUG-IN-PROGRESS-FORMAT"                       =   "In Progress Since %@";

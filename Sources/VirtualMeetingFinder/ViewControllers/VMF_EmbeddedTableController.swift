@@ -236,6 +236,7 @@ extension VMF_EmbeddedTableController {
     override func viewDidAppear(_ inIsAnimated: Bool) {
         super.viewDidAppear(inIsAnimated)
         myController?.tableDisplayController = self
+        valueTable?.reloadData()
     }
     
     /* ################################################################## */
@@ -318,6 +319,12 @@ extension VMF_EmbeddedTableController: UITableViewDataSource {
         let startDate = meeting.getPreviousStartDate(isAdjusted: true)
         let startTime = startDate.localizedTime
         
+        if meeting.iAttend {
+            ret.typeImage?.image = UIImage(systemName: "checkmark.square.fill")
+        } else {
+            ret.typeImage?.image = nil
+        }
+
         let meetingName = meeting.name
         let timeZoneString = getMeetingTimeZone(meeting)
         let inProgressString = String(format: (Calendar.current.startOfDay(for: .now) > startDate ? "SLUG-IN-PROGRESS-YESTERDAY-FORMAT" : "SLUG-IN-PROGRESS-FORMAT").localizedVariant, startTime)
@@ -348,8 +355,6 @@ extension VMF_EmbeddedTableController: UITableViewDataSource {
             ret.borderWidth = 0
             ret.cornerRadius = 0
         }
-        
-//        ret.typeImage?.image = meeting.sortableMeetingType.image
         
         ret.backgroundColor = backgroundColorToUse
 

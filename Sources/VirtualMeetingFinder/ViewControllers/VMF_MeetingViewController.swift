@@ -139,6 +139,12 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     
     /* ################################################################## */
     /**
+     This has any extra info for virtual meetings.
+     */
+    @IBOutlet weak var virtualExtraInfoLabel: UILabel?
+    
+    /* ################################################################## */
+    /**
      Contains the in-person meeting stuff.
      */
     @IBOutlet weak var inPersonContainer: UIStackView?
@@ -155,6 +161,12 @@ class VMF_MeetingViewController: VMF_BaseViewController {
      */
     @IBOutlet weak var inPersonAddressTextView: UITextView?
 
+    /* ################################################################## */
+    /**
+     This has any extra info for in-person meetings.
+     */
+    @IBOutlet weak var inPersonExtraInfoLabel: UILabel?
+    
     /* ################################################################## */
     /**
      The map view that displays the meeting location (if it has an in-person component).
@@ -257,6 +269,8 @@ extension VMF_MeetingViewController {
         locationMapView?.isHidden = true
         formatHeaderLabel?.isHidden = true
         formatContainerView?.isHidden = true
+        inPersonExtraInfoLabel?.isHidden = true
+        virtualExtraInfoLabel?.isHidden = true
         
         if let comments = meeting?.comments,
            !comments.isEmpty {
@@ -300,11 +314,22 @@ extension VMF_MeetingViewController {
             phoneInfoTextView?.text = String(format: "SLUG-PHONE-NUMBER-FORMAT".localizedVariant, vPhone)
         }
         
+        if let extraInfo = meeting?.virtualInfo,
+           !extraInfo.isEmpty {
+            virtualExtraInfoLabel?.isHidden = false
+            virtualExtraInfoLabel?.text = extraInfo
+        }
+
         if let basicAddress = meeting?.basicInPersonAddress,
            !basicAddress.isEmpty {
             inPersonContainer?.isHidden = false
             inPersonHeader?.text = inPersonHeader?.text?.localizedVariant
             inPersonAddressTextView?.text = basicAddress
+            if let extraInfo = meeting?.locationInfo,
+               !extraInfo.isEmpty {
+                inPersonExtraInfoLabel?.isHidden = false
+                inPersonExtraInfoLabel?.text = extraInfo
+            }
         }
         
         if let coords = meeting?.coords,

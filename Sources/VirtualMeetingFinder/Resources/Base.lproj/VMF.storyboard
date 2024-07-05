@@ -501,34 +501,50 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                             </textView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4D-4k-g66">
+                                                <rect key="frame" x="180.66666666666666" y="208.33333333333331" width="0.0" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-FORMATS-HEADER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ml1-yq-PeL">
-                                                <rect key="frame" x="76.666666666666686" y="208.33333333333331" width="208" height="0.0"/>
+                                                <rect key="frame" x="76.666666666666686" y="220.33333333333331" width="208" height="0.0"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-er-i3Z">
-                                                <rect key="frame" x="65.666666666666686" y="220.33333333333331" width="230" height="128"/>
+                                                <rect key="frame" x="65.666666666666686" y="232.33333333333331" width="230" height="128"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uzn-9H-qzY">
-                                                <rect key="frame" x="70.333333333333329" y="360.33333333333331" width="220.66666666666669" height="44.666666666666686"/>
+                                                <rect key="frame" x="70.333333333333329" y="372.33333333333331" width="220.66666666666669" height="32.666666666666686"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-IN-PERSON-HEADER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFw-NF-FXN">
-                                                        <rect key="frame" x="0.0" y="0.0" width="220.66666666666666" height="8.3333333333333339"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="220.66666666666666" height="0.0"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1E1-F8-ND2">
-                                                        <rect key="frame" x="0.0" y="8.3333333333333712" width="220.66666666666666" height="36.333333333333336"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="220.66666666666666" height="32.666666666666664"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         <dataDetectorType key="dataDetectorTypes" address="YES"/>
                                                     </textView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gel-fq-Thu">
+                                                        <rect key="frame" x="110.33333333333333" y="32.666666666666686" width="0.0" height="0.0"/>
+                                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gel-fq-Thu" secondAttribute="trailing" id="HvK-8Y-NJr"/>
+                                                    <constraint firstItem="gel-fq-Thu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uzn-9H-qzY" secondAttribute="leading" id="v16-fO-d2x"/>
+                                                </constraints>
                                             </stackView>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" rotateEnabled="NO" pitchEnabled="NO" showsCompass="NO" showsPointsOfInterest="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bIq-s0-xoL">
                                                 <rect key="frame" x="0.0" y="417" width="361" height="361"/>
@@ -559,6 +575,8 @@
                                             <constraint firstItem="GER-7R-iCr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="7x0-3G-B7q"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="uzn-9H-qzY" secondAttribute="trailing" id="9iv-mp-BMk"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hZz-Uk-7C5" secondAttribute="trailing" id="BVw-KU-d4h"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="G4D-4k-g66" secondAttribute="trailing" id="SjV-zJ-wuQ"/>
+                                            <constraint firstItem="G4D-4k-g66" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="W78-Sy-XXa"/>
                                             <constraint firstItem="uzn-9H-qzY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="Wj4-eO-dgG"/>
                                             <constraint firstItem="hZz-Uk-7C5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="bJE-vW-BlO"/>
                                             <constraint firstAttribute="trailing" secondItem="bIq-s0-xoL" secondAttribute="trailing" id="gux-gH-ra6"/>
@@ -600,6 +618,7 @@
                         <outlet property="globeLabelButton" destination="GfA-yJ-CNW" id="L4Z-lU-Gv7"/>
                         <outlet property="inPersonAddressTextView" destination="1E1-F8-ND2" id="bcw-IJ-BSH"/>
                         <outlet property="inPersonContainer" destination="uzn-9H-qzY" id="SQo-5k-JL1"/>
+                        <outlet property="inPersonExtraInfoLabel" destination="gel-fq-Thu" id="AAi-iR-sBN"/>
                         <outlet property="inPersonHeader" destination="QFw-NF-FXN" id="Su8-Q8-3LB"/>
                         <outlet property="inProgressLabel" destination="7tx-Jg-onI" id="TQb-JS-utp"/>
                         <outlet property="linkContainer" destination="hZz-Uk-7C5" id="TgN-KP-Y0k"/>
@@ -611,6 +630,7 @@
                         <outlet property="timeZoneLabel" destination="JRB-g7-5Qt" id="EPy-5X-PrG"/>
                         <outlet property="videoButtonContainer" destination="kmx-b1-5vF" id="LRP-QG-sch"/>
                         <outlet property="videoLabelButton" destination="j9t-Ie-UNe" id="k6w-QF-B9w"/>
+                        <outlet property="virtualExtraInfoLabel" destination="G4D-4k-g66" id="fhQ-Gy-mKp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wxd-ro-Xyx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

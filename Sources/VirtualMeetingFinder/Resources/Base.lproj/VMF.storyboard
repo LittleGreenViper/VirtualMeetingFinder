@@ -419,6 +419,9 @@
                                                             <constraint firstItem="8HS-i2-77k" firstAttribute="centerX" secondItem="19P-e9-Hru" secondAttribute="centerX" id="mgK-7l-ETh"/>
                                                             <constraint firstItem="8HS-i2-77k" firstAttribute="top" secondItem="19P-e9-Hru" secondAttribute="top" id="vIY-VI-GYB"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="gv2-Fa-aaE" appends="YES" id="HPO-Z0-qme"/>
+                                                        </connections>
                                                     </view>
                                                     <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="zgI-lN-ptg">
                                                         <rect key="frame" x="156" y="0.0" width="44.666666666666657" height="56.333333333333336"/>
@@ -444,6 +447,9 @@
                                                             <constraint firstItem="xxJ-Ri-d4y" firstAttribute="top" secondItem="zgI-lN-ptg" secondAttribute="top" id="miT-bw-MHK"/>
                                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="GfA-yJ-CNW" secondAttribute="bottom" id="n6A-2y-QmU"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="pWp-Sv-bjz" appends="YES" id="hrC-YU-PBQ"/>
+                                                        </connections>
                                                     </view>
                                                     <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="kmx-b1-5vF">
                                                         <rect key="frame" x="244.66666666666666" y="0.0" width="107.66666666666666" height="56.333333333333336"/>
@@ -469,6 +475,9 @@
                                                             <constraint firstItem="j9t-Ie-UNe" firstAttribute="top" secondItem="IOc-dH-mgm" secondAttribute="bottom" constant="4" id="iFS-kv-aeD"/>
                                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="j9t-Ie-UNe" secondAttribute="bottom" id="qJ2-tW-5Ye"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="v97-bq-EPh" appends="YES" id="d95-Ny-OwV"/>
+                                                        </connections>
                                                     </view>
                                                 </subviews>
                                                 <constraints>

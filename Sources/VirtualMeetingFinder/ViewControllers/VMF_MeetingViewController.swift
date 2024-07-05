@@ -91,21 +91,39 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     
     /* ################################################################## */
     /**
-     This is the phone in button.
+     The vertical container for the phone button.
      */
-    @IBOutlet weak var phoneButton: UIButton?
+    @IBOutlet weak var phoneButtonContainer: UIStackView?
+
+    /* ################################################################## */
+    /**
+     This is the phone in button's label.
+     */
+    @IBOutlet weak var phoneLabelButton: UILabel?
+
+    /* ################################################################## */
+    /**
+     The vertical container for the globe button.
+     */
+    @IBOutlet weak var globeButtonContainer: UIStackView?
     
     /* ################################################################## */
     /**
-     This is the video link button.
+     This is the Web link button's label.
      */
-    @IBOutlet weak var videoButton: UIButton?
+    @IBOutlet weak var globeLabelButton: UILabel?
+
+    /* ################################################################## */
+    /**
+     The vertical container for the video button.
+     */
+    @IBOutlet weak var videoButtonContainer: UIStackView?
     
     /* ################################################################## */
     /**
-     This is the Web link button.
+     This is the video link button's label.
      */
-    @IBOutlet weak var globeButton: UIButton?
+    @IBOutlet weak var videoLabelButton: UILabel?
     
     /* ################################################################## */
     /**
@@ -214,15 +232,20 @@ extension VMF_MeetingViewController {
             return inString.decimalOnly
         }
         
+        phoneLabelButton?.text = phoneLabelButton?.text?.localizedVariant
+        globeLabelButton?.text = globeLabelButton?.text?.localizedVariant
+        videoLabelButton?.text = videoLabelButton?.text?.localizedVariant
+
         super.viewDidLoad()
         setScreenTitle()
         setTimeZone()
         setTimeAndWeekday()
         inProgressLabel?.text = inProgressLabel?.text?.localizedVariant
-        phoneButton?.isHidden = true
-        videoButton?.isHidden = true
-        globeButton?.isHidden = true
+        phoneButtonContainer?.isHidden = true
+        videoButtonContainer?.isHidden = true
+        globeButtonContainer?.isHidden = true
         phoneInfoTextView?.isHidden = true
+        linkContainer?.isHidden = true
         inPersonContainer?.isHidden = true
         locationMapView?.isHidden = true
         formatHeaderLabel?.isHidden = true
@@ -241,21 +264,24 @@ extension VMF_MeetingViewController {
         if !directPhoneNumberString.isEmpty,
            let directURI = URL(string: directPhoneNumberString),
            UIApplication.shared.canOpenURL(directURI) {
-            phoneButton?.isHidden = false
+            linkContainer?.isHidden = false
+            phoneButtonContainer?.isHidden = false
         }
         
         if nil != meeting?.directAppURI {
-            videoButton?.isHidden = false
+            linkContainer?.isHidden = false
+            videoButtonContainer?.isHidden = false
         }
         
         if nil == meeting?.directAppURI,
            nil == meeting?.directPhoneURI,
            let webLinkURL = meeting?.virtualURL,
            UIApplication.shared.canOpenURL(webLinkURL) {
-            globeButton?.isHidden = false
-        } 
+            linkContainer?.isHidden = false
+            globeButtonContainer?.isHidden = false
+        }
         
-        if (phoneButton?.isHidden ?? true),
+        if (phoneButtonContainer?.isHidden ?? true),
            let vPhone = meeting?.virtualPhoneNumber,
            !vPhone.isEmpty {
             phoneInfoTextView?.isHidden = false

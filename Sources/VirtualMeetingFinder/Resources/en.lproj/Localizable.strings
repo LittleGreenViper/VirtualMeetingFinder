@@ -43,6 +43,10 @@
 "SLUG-PHONE-NUMBER-FORMAT"                      =   "Phone: %@";
 "SLUG-IN-PERSON-HEADER"                         =   "In-Person Meeting Address:";
 
+"SLUG-PHONE-BUTTON"                             =   "Phone";
+"SLUG-GLOBE-BUTTON"                             =   "Web";
+"SLUG-VIDEO-BUTTON"                             =   "Video";
+
 "SLUG-DIRECT-URI-ZOOM"                          =   "Zoom";
 "SLUG-DIRECT-URI-GOTOMEETING"                   =   "GotoMeeting";
 "SLUG-DIRECT-URI-SKYPE"                         =   "Skype";

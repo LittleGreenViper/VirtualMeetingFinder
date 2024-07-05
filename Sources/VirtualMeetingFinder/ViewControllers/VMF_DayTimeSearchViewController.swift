@@ -629,32 +629,42 @@ extension VMF_DayTimeSearchViewController {
      This updates the "thermometer" display, in the time selector.
      */
     func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol?) {
-        guard let tablePage = inTablePage ?? tableDisplayController,
+        guard let tablePage = inTablePage,
+              let prevPage = tableDisplayController,
               let completionBar = completionBar,
               let mercury = mercury,
-              !isNameSearchMode,
-              0 != tablePage.dayIndex
+              !isNameSearchMode
         else {
             completionBar?.isHidden = true
             return
         }
         
+        completionBar.isHidden = false
         let dayIndex = tablePage.dayIndex
-        let timeIndex = tablePage.timeIndex
+        var timeIndex = tablePage.timeIndex
 
-        let dailyMeetings = getDailyMeetings(for: dayIndex)
+        var dailyMeetings = [Int: [MeetingInstance]]()
         
-        guard (0..<dailyMeetings.count).contains(timeIndex)
-        else {
-            completionBar.isHidden = true
-            return
+        if 0 < dayIndex,
+           0 != prevPage.dayIndex {
+            dailyMeetings = getDailyMeetings(for: dayIndex)
+        
+            guard (0..<dailyMeetings.count).contains(timeIndex)
+            else {
+                completionBar.isHidden = true
+                return
+            }
+        } else if (1 == dayIndex && 0 == prevPage.dayIndex) || 0 == dayIndex {
+            timeIndex = 0
+        } else if 7 == dayIndex,
+                  0 == prevPage.dayIndex {
+            timeIndex = dailyMeetings.count - 1
         }
         
-        let newWidth = CGFloat(timeIndex + 1) / CGFloat(dailyMeetings.count)
+        let newWidth = CGFloat(timeIndex + 1) / max(1, CGFloat(dailyMeetings.count))
 
-        completionBar.isHidden = false
         mercury.widthAnchor.constraint(equalTo: completionBar.widthAnchor, multiplier: newWidth).isActive = true
-        mercury.layoutIfNeeded()
+        completionBar.layoutIfNeeded()
     }
 }
 

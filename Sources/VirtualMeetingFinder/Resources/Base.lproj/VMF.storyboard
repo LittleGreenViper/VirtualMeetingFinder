@@ -39,7 +39,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1R3-iR-Giq">
-                                <rect key="frame" x="16" y="111" width="361" height="101"/>
+                                <rect key="frame" x="16" y="111" width="361" height="105"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Hjc-M6-UmS">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="32"/>
@@ -94,8 +94,30 @@
                                             <constraint firstAttribute="bottom" secondItem="p2c-SZ-uyw" secondAttribute="bottom" id="pYt-Da-o5l"/>
                                         </constraints>
                                     </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BMR-eh-nTU">
+                                        <rect key="frame" x="0.0" y="61" width="361" height="4"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0x-m8-I3w">
+                                                <rect key="frame" x="0.0" y="0.0" width="361" height="4"/>
+                                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="N0x-m8-I3w" firstAttribute="leading" secondItem="BMR-eh-nTU" secondAttribute="leading" id="BR7-mY-Tzz"/>
+                                            <constraint firstItem="N0x-m8-I3w" firstAttribute="width" secondItem="BMR-eh-nTU" secondAttribute="width" placeholder="YES" id="HhN-hB-ggw"/>
+                                            <constraint firstItem="N0x-m8-I3w" firstAttribute="top" secondItem="BMR-eh-nTU" secondAttribute="top" id="bBh-4p-pEH"/>
+                                            <constraint firstAttribute="height" constant="4" id="cix-dX-3Te"/>
+                                            <constraint firstAttribute="bottom" secondItem="N0x-m8-I3w" secondAttribute="bottom" id="rZb-l8-hXX"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JrU-ny-TZt">
-                                        <rect key="frame" x="0.0" y="61" width="361" height="40"/>
+                                        <rect key="frame" x="0.0" y="65" width="361" height="40"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tD-DB-oEW" customClass="TapHoldButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -113,7 +135,7 @@
                                                 </connections>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3d-iJ-1Id">
-                                                <rect key="frame" x="40" y="10" width="281" height="30"/>
+                                                <rect key="frame" x="40" y="16" width="281" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -144,7 +166,7 @@
                                             <constraint firstAttribute="height" constant="40" id="lzM-Am-ZOz"/>
                                             <constraint firstAttribute="bottom" secondItem="5tD-DB-oEW" secondAttribute="bottom" id="tUD-0C-efL"/>
                                             <constraint firstItem="5tD-DB-oEW" firstAttribute="top" secondItem="JrU-ny-TZt" secondAttribute="top" id="umm-Fl-Csh"/>
-                                            <constraint firstItem="X3d-iJ-1Id" firstAttribute="top" secondItem="JrU-ny-TZt" secondAttribute="top" constant="10" id="v7i-UZ-uZ8"/>
+                                            <constraint firstItem="X3d-iJ-1Id" firstAttribute="top" secondItem="JrU-ny-TZt" secondAttribute="top" constant="16" id="v7i-UZ-uZ8"/>
                                             <constraint firstAttribute="trailing" secondItem="yQn-b0-JfM" secondAttribute="trailing" id="xE0-pY-Tqz"/>
                                         </constraints>
                                     </view>
@@ -159,7 +181,7 @@
                                 </connections>
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zdh-eu-ih1">
-                                <rect key="frame" x="16" y="220" width="361" height="549"/>
+                                <rect key="frame" x="16" y="232" width="361" height="537"/>
                                 <connections>
                                     <segue destination="bxe-Jd-mqJ" kind="embed" id="PRK-8l-msD"/>
                                 </connections>
@@ -189,7 +211,7 @@
                             <constraint firstItem="pPU-8y-L0V" firstAttribute="trailing" secondItem="1R3-iR-Giq" secondAttribute="trailing" constant="16" id="IMk-SD-qF4"/>
                             <constraint firstItem="Zdh-eu-ih1" firstAttribute="leading" secondItem="pPU-8y-L0V" secondAttribute="leading" constant="16" id="J9t-bp-sYV"/>
                             <constraint firstItem="pPU-8y-L0V" firstAttribute="trailing" secondItem="Zdh-eu-ih1" secondAttribute="trailing" constant="16" id="JlR-Jz-wHy"/>
-                            <constraint firstItem="Zdh-eu-ih1" firstAttribute="top" secondItem="1R3-iR-Giq" secondAttribute="bottom" constant="8" id="RAN-d7-98l"/>
+                            <constraint firstItem="Zdh-eu-ih1" firstAttribute="top" secondItem="1R3-iR-Giq" secondAttribute="bottom" constant="16" id="RAN-d7-98l"/>
                             <constraint firstAttribute="trailing" secondItem="yRJ-fe-3Cl" secondAttribute="trailing" id="eGN-f0-8fH"/>
                             <constraint firstItem="pPU-8y-L0V" firstAttribute="bottom" secondItem="Zdh-eu-ih1" secondAttribute="bottom" id="jzp-y2-Q6P"/>
                             <constraint firstItem="yRJ-fe-3Cl" firstAttribute="top" secondItem="sFK-py-g0o" secondAttribute="top" id="l9h-PB-NGL"/>
@@ -200,7 +222,9 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="bottomConstraint" destination="jzp-y2-Q6P" id="X2a-Df-9Hp"/>
+                        <outlet property="completionBar" destination="BMR-eh-nTU" id="uBd-rR-Q0l"/>
                         <outlet property="leftButton" destination="5tD-DB-oEW" id="dXW-Id-7fa"/>
+                        <outlet property="mercury" destination="N0x-m8-I3w" id="mQV-Ns-YKs"/>
                         <outlet property="rightButton" destination="yQn-b0-JfM" id="HKG-Gq-vvt"/>
                         <outlet property="searchCloseButton" destination="Yr2-tI-yOo" id="fdC-8t-139"/>
                         <outlet property="searchItemsContainerView" destination="Uw7-7n-oJo" id="KkA-Fc-FOu"/>
@@ -688,10 +712,13 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

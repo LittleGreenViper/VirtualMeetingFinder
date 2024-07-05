@@ -92,6 +92,12 @@ protocol VMF_MasterTableControllerProtocol: VMF_BaseProtocol {
      - parameter completion: A simple, no-parameter completion. It is always called in the main thread.
      */
     func refreshCalled(completion: @escaping () -> Void)
+    
+    /* ################################################################## */
+    /**
+     This updates the "thermometer" display, in the time selector.
+     */
+    func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol?)
 }
 
 /* ###################################################################################################################################### */
@@ -103,6 +109,12 @@ extension VMF_MasterTableControllerProtocol {
      Default does nothing
      */
     func refreshCalled(completion inCompletion: @escaping () -> Void) { inCompletion() }
+    
+    /* ################################################################## */
+    /**
+     Default does nothing
+     */
+    func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol? = nil) { }
 }
 
 /* ###################################################################################################################################### */
@@ -246,6 +258,7 @@ extension VMF_EmbeddedTableController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         valueTable?.reloadData()
+        myController?.updateThermometer(self)
     }
     
     /* ################################################################## */

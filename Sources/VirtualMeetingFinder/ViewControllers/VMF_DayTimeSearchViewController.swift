@@ -334,6 +334,18 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
 
     /* ################################################################## */
     /**
+     This is a narrow bar, along the top, that shows how far into the day we are.
+     */
+    @IBOutlet weak var completionBar: UIView?
+    
+    /* ################################################################## */
+    /**
+     This is the "mercury" in the "thermometer."
+     */
+    @IBOutlet weak var mercury: UIView?
+    
+    /* ################################################################## */
+    /**
      The "Throbber" view
      */
     @IBOutlet weak var throbber: UIView?
@@ -479,7 +491,7 @@ extension VMF_DayTimeSearchViewController {
      - parameter time: The 0-based time index. This is the index of the currently selected time slot.
      - returns: A new (or reused) view controller, for the destination of the transition.
      */
-    func getTableDisplay(for inDayIndex: Int, time inTimeIndex: Int) -> UIViewController? {
+    func getTableDisplay(for inDayIndex: Int, time inTimeIndex: Int) -> VMF_EmbeddedTableController? {
         let dayIndex = max(0, min(organizedMeetings.count, inDayIndex))
         
         let dailyMeetings = getDailyMeetings(for: dayIndex)
@@ -610,6 +622,39 @@ extension VMF_DayTimeSearchViewController {
         let dailyKeys = getDailyMeetings(for: inDayIndex).keys.sorted()
         guard (0..<dailyKeys.count).contains(inTimeIndex) else { return nil }
         return dailyKeys[inTimeIndex]
+    }
+    
+    /* ################################################################## */
+    /**
+     This updates the "thermometer" display, in the time selector.
+     */
+    func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol?) {
+        guard let tablePage = inTablePage ?? tableDisplayController,
+              let completionBar = completionBar,
+              let mercury = mercury,
+              !isNameSearchMode,
+              0 != tablePage.dayIndex
+        else {
+            completionBar?.isHidden = true
+            return
+        }
+        
+        let dayIndex = tablePage.dayIndex
+        let timeIndex = tablePage.timeIndex
+
+        let dailyMeetings = getDailyMeetings(for: dayIndex)
+        
+        guard (0..<dailyMeetings.count).contains(timeIndex)
+        else {
+            completionBar.isHidden = true
+            return
+        }
+        
+        let newWidth = CGFloat(timeIndex + 1) / CGFloat(dailyMeetings.count)
+
+        completionBar.isHidden = false
+        mercury.widthAnchor.constraint(equalTo: completionBar.widthAnchor, multiplier: newWidth).isActive = true
+        mercury.layoutIfNeeded()
     }
 }
 

@@ -85,6 +85,12 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     
     /* ################################################################## */
     /**
+     This contains any additional comments.
+     */
+    @IBOutlet weak var commentsLabel: UILabel?
+    
+    /* ################################################################## */
+    /**
      This contains the tappable links.
      */
     @IBOutlet weak var linkContainer: UIStackView?
@@ -93,7 +99,7 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     /**
      The vertical container for the phone button.
      */
-    @IBOutlet weak var phoneButtonContainer: UIStackView?
+    @IBOutlet weak var phoneButtonContainer: UIView?
 
     /* ################################################################## */
     /**
@@ -105,7 +111,7 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     /**
      The vertical container for the globe button.
      */
-    @IBOutlet weak var globeButtonContainer: UIStackView?
+    @IBOutlet weak var globeButtonContainer: UIView?
     
     /* ################################################################## */
     /**
@@ -117,7 +123,7 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     /**
      The vertical container for the video button.
      */
-    @IBOutlet weak var videoButtonContainer: UIStackView?
+    @IBOutlet weak var videoButtonContainer: UIView?
     
     /* ################################################################## */
     /**
@@ -245,11 +251,18 @@ extension VMF_MeetingViewController {
         videoButtonContainer?.isHidden = true
         globeButtonContainer?.isHidden = true
         phoneInfoTextView?.isHidden = true
+        commentsLabel?.isHidden = true
         linkContainer?.isHidden = true
         inPersonContainer?.isHidden = true
         locationMapView?.isHidden = true
         formatHeaderLabel?.isHidden = true
         formatContainerView?.isHidden = true
+        
+        if let comments = meeting?.comments,
+           !comments.isEmpty {
+            commentsLabel?.isHidden = false
+            commentsLabel?.text = comments
+        }
         
         var directPhoneNumberString = meeting?.directPhoneURI?.absoluteString.replacingOccurrences(of: "https://", with: "tel:") ?? ""
         
@@ -268,14 +281,13 @@ extension VMF_MeetingViewController {
             phoneButtonContainer?.isHidden = false
         }
         
-        if nil != meeting?.directAppURI {
+        if let directApp = meeting?.directApp {
             linkContainer?.isHidden = false
             videoButtonContainer?.isHidden = false
+            videoLabelButton?.text = directApp.appName.localizedVariant
         }
         
-        if nil == meeting?.directAppURI,
-           nil == meeting?.directPhoneURI,
-           let webLinkURL = meeting?.virtualURL,
+        if let webLinkURL = meeting?.virtualURL,
            UIApplication.shared.canOpenURL(webLinkURL) {
             linkContainer?.isHidden = false
             globeButtonContainer?.isHidden = false

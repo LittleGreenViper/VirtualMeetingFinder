@@ -160,13 +160,7 @@ class VMF_EmbeddedTableController: VMF_TabBaseViewController, VMF_EmbeddedTableC
     /**
      The background transparency, for alternating rows.
      */
-    private static let _alternateRowOpacity = CGFloat(0.05)
-
-    /* ################################################################## */
-    /**
-     The background transparency, for alternating rows (In progress).
-     */
-    private static let _alternateRowOpacityIP = CGFloat(0.5)
+    private static let _alternateRowOpacity = CGFloat(0.1)
 
     /* ################################################################## */
     /**
@@ -355,7 +349,7 @@ extension VMF_EmbeddedTableController: UITableViewDataSource {
             ret.cornerRadius = 0
         }
         
-        ret.typeImage?.image = meeting.sortableMeetingType.image
+//        ret.typeImage?.image = meeting.sortableMeetingType.image
         
         ret.backgroundColor = backgroundColorToUse
 

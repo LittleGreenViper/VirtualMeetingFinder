@@ -17,36 +17,34 @@
  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-"SLUG-HYBRID-MEETING"                           =   "Hybrid Meeting";
-"SLUG-VIRTUAL-MEETING"                          =   "Virtual Meeting";
-"SLUG-IN-PROGRESS-STANDALONE"                   =   "This Meeting Is In Progress";
+"SLUG-TAB-0-TITLE"                              =   "Search";
+"SLUG-TAB-1-TITLE"                              =   "Attendance";
+
+"SLUG-NOON-TIME"                                =   "Noon";
+"SLUG-MIDNIGHT-TIME"                            =   "Midnight";
+
 "SLUG-IN-PROGRESS"                              =   "In Progress";
 "SLUG-IN-PROGRESS-FORMAT"                       =   "In Progress Since %@";
 "SLUG-IN-PROGRESS-YESTERDAY-FORMAT"             =   "In Progress Since %@ Yesterday";
-"SLUG-NOON-TIME"                                =   "Noon";
-"SLUG-MIDNIGHT-TIME"                            =   "Midnight";
 "SLUG-NOW"                                      =   "Now";
-"SLUG-RESET"                                    =   "Reset";
+
+"SLUG-HYBRID-MEETING"                           =   "Hybrid Meeting";
+"SLUG-VIRTUAL-MEETING"                          =   "Virtual Meeting";
+
+"SLUG-I-ATTEND"                                 =   "I Attend";
+
+"SLUG-IN-PROGRESS-STANDALONE"                   =   "This Meeting Is In Progress";
 "SLUG-WEEKDAY-SEARCH"                           =   "Find";
-"SLUG-TAB-0-TITLE"                              =   "Search";
-"SLUG-TYPE"                                     =   "Type";
-"SLUG-TIMEZONE"                                 =   "Timezone";
 "SLUG-FORMATS-HEADER"                           =   "Formats:";
-"SLUG-NAME"                                     =   "Name";
-"SLUG-TIME"                                     =   "Time";
 "SLUG-TIMEZONE-FORMAT"                          =   "Time Zone: %@ (%@)";
-"SLUG-SORT"                                     =   "Sort:";
 "SLUG-SEARCH-PLACEHOLDER"                       =   "Enter A Meeting Name";
 "SLUG-WEEKDAY-TIME-FORMAT"                      =   "%@s, at %@";
 "SLUG-WEEKDAY-TIME-DURATION-FORMAT"             =   "%@s, %@ - %@";
 "SLUG-PHONE-NUMBER-FORMAT"                      =   "Phone: %@";
 "SLUG-IN-PERSON-HEADER"                         =   "In-Person Meeting Address:";
-"SLUG-I-ATTEND"                                 =   "I Attend";
 
 "SLUG-PHONE-BUTTON"                             =   "Phone";
 "SLUG-GLOBE-BUTTON"                             =   "Web";
-"SLUG-VIDEO-BUTTON"                             =   "Video";
-
 "SLUG-DIRECT-URI-ZOOM"                          =   "Zoom";
 "SLUG-DIRECT-URI-GOTOMEETING"                   =   "GotoMeeting";
 "SLUG-DIRECT-URI-SKYPE"                         =   "Skype";

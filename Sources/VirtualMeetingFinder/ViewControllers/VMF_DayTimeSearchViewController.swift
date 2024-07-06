@@ -144,7 +144,7 @@ extension TapHoldButton {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Main View Controller -
+// MARK: - Search View Controller -
 /* ###################################################################################################################################### */
 /**
  This is the main view controller for the weekday/time selector tab.
@@ -155,6 +155,12 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
      The image that we use for search mode.
      */
     private static let _searchImage = UIImage(systemName: "magnifyingglass")
+    
+    /* ################################################################## */
+    /**
+     The color of the "mercury" in our "thermometer."
+     */
+    private static let _mercuryColor = UIColor.systemRed
     
     /* ################################################################## */
     /**
@@ -676,8 +682,8 @@ extension VMF_DayTimeSearchViewController {
         let oldWidth = CGFloat(prevTimeIndex + 1) / max(1, CGFloat(prevDailyMeetings.count))
         let newWidth = CGFloat(timeIndex + 1) / max(1, CGFloat(dailyMeetings.count))
         let mercury = UIView()
-        mercury.backgroundColor = .systemRed
-        mercury.cornerRadius = 2
+        mercury.backgroundColor = Self._mercuryColor
+        mercury.cornerRadius = completionBar.bounds.size.height / 2
         completionBar.addSubview(mercury)
         mercury.translatesAutoresizingMaskIntoConstraints = false
         mercury.topAnchor.constraint(equalTo: completionBar.topAnchor).isActive = true

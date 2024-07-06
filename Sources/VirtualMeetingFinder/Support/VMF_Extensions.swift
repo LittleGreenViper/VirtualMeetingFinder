@@ -270,3 +270,14 @@ extension NSLayoutConstraint {
         return newConstraint
     }
 }
+
+/* ###################################################################################################################################### */
+// MARK: Add Stuff We Want
+/* ###################################################################################################################################### */
+extension SwiftBMLSDK_MeetingLocalTimezoneCollection {
+    /* ################################################################## */
+    /**
+     These are the meetings that the user has marked as ones that they attend.
+     */
+    var meetingsThatIAttend: [CachedMeeting] { meetings.filter { $0.meeting.iAttend } }
+}

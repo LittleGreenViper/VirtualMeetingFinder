@@ -11,11 +11,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--SLUG-WEEKDAY-SEARCH-->
+        <!--Main Navigation-->
         <scene sceneID="QCo-5c-Mxs">
             <objects>
                 <navigationController id="U2c-9b-Eip" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="SLUG-WEEKDAY-SEARCH" id="Tdm-it-zYg">
+                    <tabBarItem key="tabBarItem" title="Main Navigation" id="Tdm-it-zYg">
                         <imageReference key="image" image="magnifyingglass" catalog="system" symbolScale="large"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YqT-VR-VmE">
@@ -28,7 +28,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tEA-xe-YZP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1595" y="-27"/>
+            <point key="canvasLocation" x="-1511" y="-27"/>
         </scene>
         <!--SLUG-TAB-0-TITLE-->
         <scene sceneID="475-3F-L6b">
@@ -236,6 +236,24 @@
             </objects>
             <point key="canvasLocation" x="110.68702290076335" y="-27.464788732394368"/>
         </scene>
+        <!--SLUG-TAB-1-TITLE-->
+        <scene sceneID="DtG-X1-Oac">
+            <objects>
+                <viewController id="h2L-IG-jx9" customClass="VMF_AttendanceViewController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ik6-Qe-rFZ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="p86-ha-lDg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="SLUG-TAB-1-TITLE" id="rhZ-Kh-WgT">
+                        <imageReference key="image" image="checkmark.square.fill" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZHS-o9-5Di" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="106" y="-711"/>
+        </scene>
         <!--Day Time Search Page View Controller-->
         <scene sceneID="JrL-tg-Smc">
             <objects>
@@ -354,11 +372,12 @@
                     </tabBar>
                     <connections>
                         <segue destination="Avq-Pc-erz" kind="relationship" relationship="viewControllers" id="vIY-XF-UBP"/>
+                        <segue destination="h2L-IG-jx9" kind="relationship" relationship="viewControllers" id="h5h-Uf-5id"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uNQ-6W-t3u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-761" y="-27"/>
+            <point key="canvasLocation" x="-666" y="-27"/>
         </scene>
         <!--Meeting View Controller-->
         <scene sceneID="Uwk-Hi-8Do">
@@ -414,13 +433,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="hZz-Uk-7C5">
-                                                <rect key="frame" x="4.3333333333333428" y="119.99999999999999" width="352.33333333333326" height="56.333333333333329"/>
+                                                <rect key="frame" x="31.333333333333343" y="119.99999999999999" width="298.66666666666663" height="56.333333333333329"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="19P-e9-Hru">
                                                         <rect key="frame" x="0.0" y="0.0" width="116" height="56.333333333333336"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Phone" translatesAutoresizingMaskIntoConstraints="NO" id="8HS-i2-77k">
-                                                                <rect key="frame" x="33" y="0.0" width="50" height="50"/>
+                                                                <rect key="frame" x="32.999999999999993" y="0.0" width="50.000000000000007" height="50"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="8HS-i2-77k" secondAttribute="height" multiplier="1:1" id="Bg5-js-5yO"/>
@@ -477,14 +496,14 @@
                                                         </connections>
                                                     </view>
                                                     <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="kmx-b1-5vF">
-                                                        <rect key="frame" x="244.66666666666666" y="0.0" width="107.66666666666666" height="56.333333333333336"/>
+                                                        <rect key="frame" x="298.66666666666669" y="0.0" width="0.0" height="56.333333333333336"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Video" translatesAutoresizingMaskIntoConstraints="NO" id="IOc-dH-mgm">
-                                                                <rect key="frame" x="29" y="0.0" width="50" height="50"/>
+                                                                <rect key="frame" x="-25" y="0.0" width="50" height="50"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </imageView>
-                                                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="SLUG-VIDEO-BUTTON" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="j9t-Ie-UNe">
-                                                                <rect key="frame" x="0.0" y="54.000000000000028" width="107.66666666666667" height="2.3333333333333357"/>
+                                                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="j9t-Ie-UNe">
+                                                                <rect key="frame" x="0.0" y="54.000000000000028" width="0.0" height="0.0"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>

@@ -608,6 +608,9 @@ extension VMF_MeetingViewController {
         guard var meeting = meeting else { return }
         let originalState = meeting.iAttend
         meeting.iAttend = !originalState
+        // HACK ALERT!
+        // This actually prevents that momentary delay, as the table recalculates, when we go back.
+        (VMF_AppDelegate.searchController?.tableDisplayController as? VMF_EmbeddedTableController)?.valueTable?.reloadData()
         setBarButton()
     }
 }

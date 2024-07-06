@@ -27,6 +27,18 @@ import UIKit
 class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
     /* ################################################################## */
     /**
+     If it's been over this many seconds since our last load, we force a new load, the next time we open.
+     */
+    static let forceReloadDelayInSeconds = TimeInterval(60 * 60 * 4)
+    
+    /* ################################################################## */
+    /**
+     This is set to the last time we loaded.
+     */
+    static var lastReloadTime = Date.distantPast
+    
+    /* ################################################################## */
+    /**
      The window object for this scene.
      */
     var window: UIWindow?

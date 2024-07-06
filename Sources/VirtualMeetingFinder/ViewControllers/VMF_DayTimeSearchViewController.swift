@@ -418,7 +418,10 @@ extension VMF_DayTimeSearchViewController {
         virtualService = nil
         searchMeetings = []
         organizedMeetings = []
+        
         VMF_AppDelegate.findMeetings { [weak self] inVirtualService in
+            VMF_SceneDelegate.lastReloadTime = .now
+            
             self?.virtualService = inVirtualService
             
             self?.searchMeetings = inVirtualService?.meetings.map { $0.meeting }.sorted { a, b in
@@ -910,7 +913,10 @@ extension VMF_DayTimeSearchViewController {
         )
         
         view?.setNeedsLayout()
-        loadMeetings { self.openTo() }
+        
+        if VMF_SceneDelegate.forceReloadDelayInSeconds < -VMF_SceneDelegate.lastReloadTime.timeIntervalSinceNow {
+            loadMeetings { self.openTo() }
+        }
     }
     
     /* ################################################################## */

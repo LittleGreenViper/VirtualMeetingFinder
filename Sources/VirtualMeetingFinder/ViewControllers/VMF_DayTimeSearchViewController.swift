@@ -173,12 +173,6 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
      This holds the last time of the selected page. We use this to set the time, when directly navigating away from Now.
      */
     private var _lastTime: Int = 0
-
-    /* ################################################################## */
-    /**
-     The main controller (ignored -just here for the protocol).
-     */
-    var myController: (any VMF_MasterTableControllerProtocol)?
     
     /* ################################################################## */
     /**
@@ -226,6 +220,7 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
                 tableDisplayController?.meetings = getCurentMeetings(for: dayIndex, time: timeIndex)
             }
             
+            (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = isNameSearchMode
         }
     }
     
@@ -267,6 +262,7 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
     var isThrobbing: Bool = false {
         didSet {
             if isThrobbing {
+                navigationController?.isNavigationBarHidden = true
                 tableContainerView?.isHidden = true
                 searchItemsContainerView?.isHidden = true
                 weekdayModeSelectorSegmentedSwitch?.isHidden = true
@@ -276,10 +272,12 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
             } else {
                 throbber?.isHidden = true
                 tabBarController?.tabBar.isHidden = false
+                myTabController?.checkAttendance()
                 searchItemsContainerView?.isHidden = !isNameSearchMode
                 weekdayModeSelectorSegmentedSwitch?.isHidden = isNameSearchMode
                 timeSelectorContainerView?.isHidden = isNameSearchMode
                 tableContainerView?.isHidden = false
+                navigationController?.isNavigationBarHidden = false
             }
         }
     }
@@ -524,6 +522,8 @@ extension VMF_DayTimeSearchViewController {
             newViewController.title = "SLUG-IN-PROGRESS".localizedVariant
         }
         
+        newViewController.noRefresh = isNameSearchMode
+
         if (1..<8).contains(dayIndex) {
             _lastTime = getTimeOf(dayIndex: dayIndex, timeIndex: timeIndex) ?? 0
         }
@@ -880,10 +880,10 @@ extension VMF_DayTimeSearchViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "SLUG-TAB-0-TITLE".localizedVariant
         VMF_AppDelegate.searchController = self
         searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
         _atRestConstant = bottomConstraint?.constant ?? 0
-        loadMeetings { self.openTo() }
     }
     
     /* ################################################################## */
@@ -910,6 +910,7 @@ extension VMF_DayTimeSearchViewController {
         )
         
         view?.setNeedsLayout()
+        loadMeetings { self.openTo() }
     }
     
     /* ################################################################## */

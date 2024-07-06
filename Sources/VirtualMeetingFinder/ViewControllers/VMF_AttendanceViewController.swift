@@ -26,5 +26,65 @@ import SwiftBMLSDK
 /**
  This is the main view controller for the attended meetings tab.
  */
-class VMF_AttendanceViewController: VMF_TabBaseViewController {
+class VMF_AttendanceViewController: VMF_TabBaseViewController, VMF_MasterTableControllerProtocol {
+    /* ################################################################## */
+    /**
+     This tracks the current embedded table controller.
+     */
+    var tableDisplayController: VMF_EmbeddedTableControllerProtocol?
+}
+
+/* ###################################################################################################################################### */
+// MARK: Computed Properties
+/* ###################################################################################################################################### */
+extension VMF_AttendanceViewController {
+    /* ################################################################## */
+    /**
+     The meetings we are tracking.
+     */
+    var meetings: [MeetingInstance] {
+        VMF_AppDelegate.virtualService?.meetingsThatIAttend.sorted { a, b in
+            if a.isInProgress,
+               !b.isInProgress {
+                return true
+            } else if b.isInProgress,
+                      !a.isInProgress {
+                return false
+            } else if a.nextDate < b.nextDate {
+                return true
+            } else if b.nextDate < a.nextDate {
+                return false
+            } else {
+                return a.meeting.name < b.meeting.name
+            }
+        }.map { $0.meeting } ?? []
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension VMF_AttendanceViewController {
+    /* ################################################################## */
+    /**
+     Called when the view hierarchy loads.
+     */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.title = "SLUG-TAB-1-TITLE".localizedVariant
+    }
+    
+    /* ################################################################## */
+    /**
+     Called before populating the table
+     
+     - parameter for: The segue object being executed.
+     - parameter sender: Any associated data (ignored).
+     */
+    override func prepare(for inSegue: UIStoryboardSegue, sender: Any?) {
+        guard let destination = inSegue.destination as? VMF_EmbeddedTableController else { return }
+        tableDisplayController = destination
+        destination.myController = self
+        destination.meetings = meetings
+    }
 }

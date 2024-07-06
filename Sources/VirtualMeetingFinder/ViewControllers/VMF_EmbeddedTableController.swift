@@ -43,7 +43,7 @@ extension VMF_BaseProtocol {
     /**
      Default is nil
      */
-    var myController: (any VMF_MasterTableControllerProtocol)? { nil }
+    var myController: (any VMF_MasterTableControllerProtocol)? { get { nil } set { _ = newValue } }
 }
 
 /* ###################################################################################################################################### */
@@ -70,6 +70,12 @@ protocol VMF_EmbeddedTableControllerProtocol: VMF_BaseProtocol {
      This handles the meeting collection for this.
      */
     var meetings: [MeetingInstance] { get set }
+
+    /* ################################################################## */
+    /**
+     The table that shows the meetings for the current selection.
+     */
+    var valueTable: UITableView? { get }
 }
 
 /* ###################################################################################################################################### */
@@ -142,6 +148,8 @@ class VMF_TableCell: UITableViewCell {
      */
     @IBOutlet weak var nameLabel: UILabel?
 
+    @IBOutlet weak var timeAndDayLabel: UILabel?
+    
     /* ################################################################## */
     /**
      The label that displays the timezone.
@@ -161,7 +169,7 @@ class VMF_TableCell: UITableViewCell {
 /**
  This presents a simple view controller, with a table of meetings.
  */
-class VMF_EmbeddedTableController: VMF_TabBaseViewController, VMF_EmbeddedTableControllerProtocol {
+class VMF_EmbeddedTableController: VMF_BaseViewController, VMF_EmbeddedTableControllerProtocol {
     /* ################################################################## */
     /**
      The storyboard ID, for instantiating this class
@@ -200,6 +208,25 @@ class VMF_EmbeddedTableController: VMF_TabBaseViewController, VMF_EmbeddedTableC
 
     /* ################################################################## */
     /**
+     If true (default), then we will not set up a refresh.
+     */
+    var noRefresh: Bool = true {
+        didSet {
+            if !noRefresh,
+               nil == _refreshControl {
+                let refresh = UIRefreshControl()
+                refresh.addTarget(self, action: #selector(refreshPulled), for: .valueChanged)
+                _refreshControl = refresh
+                valueTable?.refreshControl = refresh
+            } else {
+                _refreshControl = nil
+                valueTable?.refreshControl = nil
+            }
+        }
+    }
+
+    /* ################################################################## */
+    /**
      The time index for this table.
      */
     var timeIndex: Int = 0
@@ -233,10 +260,12 @@ extension VMF_EmbeddedTableController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        let refresh = UIRefreshControl()
-        refresh.addTarget(self, action: #selector(refreshPulled), for: .valueChanged)
-        _refreshControl = refresh
-        valueTable?.refreshControl = refresh
+        if !noRefresh {
+            let refresh = UIRefreshControl()
+            refresh.addTarget(self, action: #selector(refreshPulled), for: .valueChanged)
+            _refreshControl = refresh
+            valueTable?.refreshControl = refresh
+        }
     }
     
     /* ################################################################## */
@@ -271,6 +300,7 @@ extension VMF_EmbeddedTableController {
     override func prepare(for inSegue: UIStoryboardSegue, sender inData: Any?) {
         if let destination = inSegue.destination as? VMF_MeetingViewController,
            let meetingInstance = inData as? MeetingInstance {
+            destination.myController = self
             destination.meeting = meetingInstance
         }
     }
@@ -371,6 +401,22 @@ extension VMF_EmbeddedTableController: UITableViewDataSource {
         
         ret.backgroundColor = backgroundColorToUse
 
+        if 0 == dayIndex,
+           0 == timeIndex,
+           myController is VMF_AttendanceViewController {
+            ret.timeAndDayLabel?.isHidden = false
+            let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
+            let startTime = meeting.getNextStartDate(isAdjusted: true)
+
+            if 0 < meeting.duration {
+                ret.timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant, weekday, startTime.localizedTime, startTime.addingTimeInterval(meeting.duration).localizedTime)
+            } else {
+                ret.timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, startTime.localizedTime)
+            }
+        } else {
+            ret.timeAndDayLabel?.isHidden = true
+        }
+        
         return ret
     }
 }

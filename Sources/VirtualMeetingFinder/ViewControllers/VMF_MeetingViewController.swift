@@ -67,6 +67,12 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     
     /* ################################################################## */
     /**
+     The controller that "owns" this instance.
+     */
+    var myController: (any VMF_EmbeddedTableControllerProtocol)?
+
+    /* ################################################################## */
+    /**
      The label that displays the meeting name.
      */
     @IBOutlet weak var meetingNameLabel: UILabel?
@@ -610,7 +616,7 @@ extension VMF_MeetingViewController {
         meeting.iAttend = !originalState
         // HACK ALERT!
         // This actually prevents that momentary delay, as the table recalculates, when we go back.
-        (VMF_AppDelegate.searchController?.tableDisplayController as? VMF_EmbeddedTableController)?.valueTable?.reloadData()
+        myController?.valueTable?.reloadData()
         setBarButton()
     }
 }

@@ -29,6 +29,13 @@ import RVS_Generic_Swift_Toolbox
 class VMF_BaseViewController: UIViewController { }
 
 /* ###################################################################################################################################### */
+// MARK: Computed Properties
+/* ###################################################################################################################################### */
+extension VMF_BaseViewController {
+    var myTabController: VMF_TabBarController? { tabBarController as? VMF_TabBarController }
+}
+
+/* ###################################################################################################################################### */
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
 extension VMF_BaseViewController {
@@ -108,7 +115,7 @@ extension VMF_BaseViewController {
      */
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
-        navigationController?.isNavigationBarHidden = false
+        navigationItem.title = navigationItem.title?.localizedVariant
     }
 }
 
@@ -126,13 +133,10 @@ class VMF_TabBaseViewController: VMF_BaseViewController { }
 extension VMF_TabBaseViewController {
     /* ################################################################## */
     /**
-     Called just before the view is to appear.
-     
-     - parameter inIsAnimated: True, if the appearance is animated.
+     Called after the resources have been loaded and resolved.
      */
-    override func viewWillAppear(_ inIsAnimated: Bool) {
-        super.viewWillAppear(inIsAnimated)
-        navigationController?.isNavigationBarHidden = true
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
 }
 
@@ -153,7 +157,52 @@ extension VMF_TabBarController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        delegate = self
         tabBar.items?.forEach { $0.title = $0.title?.localizedVariant }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called just before the view is to appear.
+     
+     - parameter inIsAnimated: True, if the appearance is animated.
+     */
+    override func viewWillAppear(_ inIsAnimated: Bool) {
+        super.viewWillAppear(inIsAnimated)
+        navigationItem.title = selectedViewController?.navigationItem.title
+        navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = false
+        checkAttendance()
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Instance Methods
+/* ###################################################################################################################################### */
+extension VMF_TabBarController {
+    /* ################################################################## */
+    /**
+     Enables or disables the attendance tab, if no meetings are marked for attendance.
+     */
+    func checkAttendance() {
+        guard let count = tabBar.items?.count,
+              1 < count
+        else { return }
+        
+        tabBar.items?[1].isEnabled = !(VMF_AppDelegate.virtualService?.meetingsThatIAttend.isEmpty ?? true)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: UITabBarControllerDelegate Conformance
+/* ###################################################################################################################################### */
+extension VMF_TabBarController: UITabBarControllerDelegate {
+    /* ################################################################## */
+    /**
+     */
+    func tabBarController(_: UITabBarController, didSelect inNewViewController: UIViewController) {
+        if let destination = inNewViewController as? VMF_AttendanceViewController {
+            destination.tableDisplayController?.meetings = destination.meetings
+        }
     }
 }

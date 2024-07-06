@@ -161,6 +161,12 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
      This is used to restore the bottom of the stack view, when the keyboard is hidden.
      */
     private var _atRestConstant: CGFloat = 0
+    
+    /* ################################################################## */
+    /**
+     This holds the last time of the selected page. We use this to set the time, when directly navigating away from Now.
+     */
+    private var _lastTime: Int = 0
 
     /* ################################################################## */
     /**
@@ -511,7 +517,11 @@ extension VMF_DayTimeSearchViewController {
         } else if 0 == dayIndex {
             newViewController.title = "SLUG-IN-PROGRESS".localizedVariant
         }
-
+        
+        if (1..<8).contains(dayIndex) {
+            _lastTime = getTimeOf(dayIndex: dayIndex, timeIndex: timeIndex) ?? 0
+        }
+        
         return newViewController
     }
     
@@ -643,7 +653,9 @@ extension VMF_DayTimeSearchViewController {
         var dailyMeetings = [Int: [MeetingInstance]]()
         var prevDailyMeetings = [Int: [MeetingInstance]]()
 
-        if 0 < dayIndex,
+        if 0 == dayIndex {
+            return
+        } else if 0 < dayIndex,
            0 != prevPage.dayIndex {
             dailyMeetings = getDailyMeetings(for: dayIndex)
         
@@ -703,7 +715,10 @@ extension VMF_DayTimeSearchViewController {
             isNameSearchMode = false
             let dayIndex = unMapWeekday(selectedIndex)
             
-            if 0 < originalDayIndex,
+            if (1..<8).contains(dayIndex),
+               0 < _lastTime {
+                timeIndex = getNearestIndex(dayIndex: dayIndex, time: _lastTime)
+            } else if 0 < originalDayIndex,
                0 < dayIndex,
                0 < timeIndex,
                let originalTime = getTimeOf(dayIndex: originalDayIndex, timeIndex: timeIndex) {

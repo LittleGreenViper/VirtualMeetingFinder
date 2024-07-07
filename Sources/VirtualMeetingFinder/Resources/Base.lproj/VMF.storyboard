@@ -329,7 +329,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="tkP-Od-MGn"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>

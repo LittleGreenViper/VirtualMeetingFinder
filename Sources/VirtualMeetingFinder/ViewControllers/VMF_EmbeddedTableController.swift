@@ -399,20 +399,13 @@ extension VMF_EmbeddedTableController: UITableViewDataSource {
         
         ret.backgroundColor = backgroundColorToUse
 
-        if 0 == dayIndex,
-           0 == timeIndex,
-           myController is VMF_AttendanceViewController {
-            ret.timeAndDayLabel?.isHidden = false
-            let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
-            let startTime = meeting.getNextStartDate(isAdjusted: true)
+        let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
+        let nextStart = meeting.getNextStartDate(isAdjusted: true)
 
-            if 0 < meeting.duration {
-                ret.timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant, weekday, startTime.localizedTime, startTime.addingTimeInterval(meeting.duration).localizedTime)
-            } else {
-                ret.timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, startTime.localizedTime)
-            }
+        if 0 < meeting.duration {
+            ret.timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant, weekday, nextStart.localizedTime, nextStart.addingTimeInterval(meeting.duration).localizedTime)
         } else {
-            ret.timeAndDayLabel?.isHidden = true
+            ret.timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, nextStart.localizedTime)
         }
         
         return ret

@@ -72,7 +72,7 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     /* ################################################################## */
     /**
      */
-    private static let _barButtonLabelFont = UIFont.systemFont(ofSize: 15)
+    private static let _barButtonLabelFont = UIFont.systemFont(ofSize: 17)
 
     /* ################################################################## */
     /**

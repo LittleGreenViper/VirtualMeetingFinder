@@ -19,6 +19,7 @@
 
 "SLUG-TAB-0-TITLE"                              =   "Find Meetings";
 "SLUG-TAB-1-TITLE"                              =   "My Attendance";
+"SLUG-TAB-1-BUTTON"                             =   "Attendance";
 
 "SLUG-NOON-TIME"                                =   "Noon";
 "SLUG-MIDNIGHT-TIME"                            =   "Midnight";

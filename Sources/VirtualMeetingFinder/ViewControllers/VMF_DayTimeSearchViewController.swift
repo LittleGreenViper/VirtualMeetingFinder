@@ -161,7 +161,22 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
      The color of the "mercury" in our "thermometer."
      */
     private static let _mercuryColor = UIColor.systemRed
+
+    /* ################################################################## */
+    /**
+     */
+    private static let _checkedImage = UIImage(systemName: "checkmark.square.fill")
+
+    /* ################################################################## */
+    /**
+     */
+    private static let _uncheckedImage = UIImage(systemName: "square")
     
+    /* ################################################################## */
+    /**
+     */
+    private static let _barButtonLabelFont = UIFont.systemFont(ofSize: 15)
+
     /* ################################################################## */
     /**
      This is used to restore the bottom of the stack view, when the keyboard is hidden.
@@ -194,6 +209,12 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
     
     /* ################################################################## */
     /**
+     This is set to true, if we were (past tense) in name search mode.
+     */
+    var wasNameSearchMode: Bool = false
+
+    /* ################################################################## */
+    /**
      This is set to true, if we are in name search mode.
      */
     var isNameSearchMode: Bool = false {
@@ -203,11 +224,16 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
             if let dayIndex = tableDisplayController?.dayIndex,
                let timeIndex = tableDisplayController?.timeIndex {
                 if isNameSearchMode {
-                    guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
-                    pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
+                    if !wasNameSearchMode {
+                        guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
+                        pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
+                    }
+                    wasNameSearchMode = false
                     searchTextField?.becomeFirstResponder()
+                    searchTextField?.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
                     timeSelectorContainerView?.isHidden = true
                 } else {
+                    searchTextField?.removeTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
                     searchTextField?.resignFirstResponder()
                     if oldValue != isNameSearchMode {
                         weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = mapWeekday(dayIndex)
@@ -272,7 +298,6 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
             } else {
                 throbber?.isHidden = true
                 tabBarController?.tabBar.isHidden = false
-                myTabController?.checkAttendance()
                 searchItemsContainerView?.isHidden = !isNameSearchMode
                 weekdayModeSelectorSegmentedSwitch?.isHidden = isNameSearchMode
                 timeSelectorContainerView?.isHidden = isNameSearchMode
@@ -282,6 +307,12 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
         }
     }
 
+    /* ################################################################## */
+    /**
+     The bar button item that brings in the My Attendance Screen.
+     */
+    @IBOutlet weak var myAttendanceBarButtonItem: UIBarButtonItem?
+    
     /* ################################################################## */
     /**
      The segmented switch that controls the mode.
@@ -574,7 +605,6 @@ extension VMF_DayTimeSearchViewController {
      - parameter time: The military time (HHMM), as an integer. If omitted, 12AM is assumed.
      */
     func openTo(dayIndex inDayIndex: Int = -1, time inMilitaryTime: Int = 0) {
-        isNameSearchMode = false
         let weekday = (0..<8).contains(inDayIndex) ? inDayIndex : -1 == inDayIndex ? nowIs.weekday : 0
         let time = (0..<8).contains(inDayIndex) && (0..<2400).contains(inMilitaryTime) ? inMilitaryTime : -1 == inDayIndex ? nowIs.currentIntegerTime : 0
         
@@ -716,10 +746,12 @@ extension VMF_DayTimeSearchViewController {
         let originalDayIndex = tableDisplayController?.dayIndex ?? 0
         var timeIndex = tableDisplayController?.timeIndex ?? 0
         if selectedIndex == (inSwitch.numberOfSegments - 1) {
-            isNameSearchMode = true
             let dayIndex = tableDisplayController?.dayIndex ?? 0
-            guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
-            self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
+            if !wasNameSearchMode {
+                guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
+                self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
+            }
+            isNameSearchMode = true
         } else {
             isNameSearchMode = false
             let dayIndex = unMapWeekday(selectedIndex)
@@ -886,6 +918,7 @@ extension VMF_DayTimeSearchViewController {
         navigationItem.title = "SLUG-TAB-0-TITLE".localizedVariant
         VMF_AppDelegate.searchController = self
         searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
+        myAttendanceBarButtonItem?.title = myAttendanceBarButtonItem?.title?.localizedVariant
         _atRestConstant = bottomConstraint?.constant ?? 0
     }
     
@@ -914,8 +947,13 @@ extension VMF_DayTimeSearchViewController {
         
         view?.setNeedsLayout()
         
+        myAttendanceBarButtonItem?.isEnabled = !(virtualService?.meetingsThatIAttend.isEmpty ?? true)
+        
         if VMF_SceneDelegate.forceReloadDelayInSeconds < -VMF_SceneDelegate.lastReloadTime.timeIntervalSinceNow {
+            isNameSearchMode = false
             loadMeetings { self.openTo() }
+        } else {
+            isNameSearchMode = wasNameSearchMode
         }
     }
     
@@ -938,10 +976,6 @@ extension VMF_DayTimeSearchViewController {
                 weekdayModeSelectorSegmentedSwitch?.setTitle(weekdayName, forSegmentAt: index)
             }
         }
-
-        if isNameSearchMode {
-            searchTextField?.becomeFirstResponder()
-        }
     }
     
     /* ################################################################## */
@@ -952,7 +986,8 @@ extension VMF_DayTimeSearchViewController {
      */
     override func viewWillDisappear(_ inIsAnimated: Bool) {
         super.viewWillDisappear(inIsAnimated)
-        
+        wasNameSearchMode = isNameSearchMode
+
         searchTextField?.resignFirstResponder()
         bottomConstraint?.constant = _atRestConstant
         

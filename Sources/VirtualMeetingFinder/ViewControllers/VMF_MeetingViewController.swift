@@ -58,7 +58,22 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     /**
      */
     private static let _formatInternalSeparatorSpace = CGFloat(4)
+
+    /* ################################################################## */
+    /**
+     */
+    private static let _checkedImage = UIImage(systemName: "checkmark.square.fill")
+
+    /* ################################################################## */
+    /**
+     */
+    private static let _uncheckedImage = UIImage(systemName: "square")
     
+    /* ################################################################## */
+    /**
+     */
+    private static let _barButtonLabelFont = UIFont.systemFont(ofSize: 15)
+
     /* ################################################################## */
     /**
      The meeting that this screen is displaying.
@@ -526,13 +541,11 @@ extension VMF_MeetingViewController {
         let barButtonView = UIView()
         barButtonView.isUserInteractionEnabled = true
         barButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(iAttendHit)))
-        let checkedImage = UIImage(systemName: "checkmark.square.fill")
-        let uncheckedImage = UIImage(systemName: "square")
-        let useThisImage = (meeting?.iAttend ?? false) ? checkedImage : uncheckedImage
+        let useThisImage = (meeting?.iAttend ?? false) ? Self._checkedImage : Self._uncheckedImage
         let barButtonImage = UIImageView(image: useThisImage?.withRenderingMode(.alwaysTemplate).withTintColor(view.tintColor))
         let barButtonLabel = UILabel()
         barButtonLabel.text = "SLUG-I-ATTEND".localizedVariant
-        barButtonLabel.font = .systemFont(ofSize: 14)
+        barButtonLabel.font = Self._barButtonLabelFont
         barButtonLabel.textColor = view.tintColor
         barButtonView.addSubview(barButtonLabel)
         barButtonLabel.translatesAutoresizingMaskIntoConstraints = false

@@ -277,7 +277,6 @@ extension VMF_EmbeddedTableController {
     override func viewDidAppear(_ inIsAnimated: Bool) {
         super.viewDidAppear(inIsAnimated)
         myController?.tableDisplayController = self
-        valueTable?.reloadData()
     }
     
     /* ################################################################## */
@@ -286,7 +285,6 @@ extension VMF_EmbeddedTableController {
      */
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        valueTable?.reloadData()
         myController?.updateThermometer(self)
     }
     
@@ -354,7 +352,7 @@ extension VMF_EmbeddedTableController: UITableViewDataSource {
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         guard let ret = inTableView.dequeueReusableCell(withIdentifier: VMF_TableCell.reuseID, for: inIndexPath) as? VMF_TableCell else { return UITableViewCell() }
         
-        let backgroundColorToUse: UIColor? = (1 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : .clear
+        let backgroundColorToUse: UIColor? = (0 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : .clear
 
         var meeting = meetings[inIndexPath.row]
     

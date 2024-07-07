@@ -565,7 +565,7 @@ extension VMF_DayTimeSearchViewController {
         if (1..<8).contains(dayIndex) {
             _lastTime = getTimeOf(dayIndex: dayIndex, timeIndex: timeIndex) ?? 0
         }
-        
+
         return newViewController
     }
     

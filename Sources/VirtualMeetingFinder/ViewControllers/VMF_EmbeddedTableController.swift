@@ -366,7 +366,11 @@ extension VMF_EmbeddedTableController: UITableViewDataSource {
         
         if meeting.iAttend {
             ret.typeImage?.image = UIImage(systemName: "checkmark.square.fill")
+            ret.typeImage?.isAccessibilityElement = true
+            ret.typeImage?.accessibilityLabel = "SLUG-ACC-ATTEND-IMAGE-ON-LABEL".accessibilityLocalizedVariant
+            ret.typeImage?.accessibilityHint = "SLUG-ACC-ATTEND-IMAGE-ON-HINT".accessibilityLocalizedVariant
         } else {
+            ret.typeImage?.isAccessibilityElement = false
             ret.typeImage?.image = nil
         }
 

@@ -17,34 +17,61 @@
  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+// ************************************************        ***********************************************************
+// * -------------------------------------------- *        * ------------------------------------------------------- *
+// *|  DO NOT MODIFY ON THIS SIDE OF THE EQUALS  |*        *|   MODIFY THE TEXT ON THIS SIDE TO THE LOCAL LANGUAGE  |*
+// * -------------------------------------------- *        * ------------------------------------------------------- *
+// ************************************************        ***********************************************************
+
+/* The Title of the main "Find Meetings" Screen */
 "SLUG-TAB-0-TITLE"                              =   "Find Meetings";
+/* The title of the secondary "List My Attendance" Screen */
 "SLUG-TAB-1-TITLE"                              =   "My Attendance";
+/* The title for the bar button in the main screen, that links to the "List My Attendance" Screen */
 "SLUG-TAB-1-BUTTON"                             =   "Attendance";
 
+/* We replace 1200 with the word "Noon" */
 "SLUG-NOON-TIME"                                =   "Noon";
+/* We replace 2359 with the word "Midnight" */
 "SLUG-MIDNIGHT-TIME"                            =   "Midnight";
 
+/* This is the Title for the time display, when we have selected the "Now" segmented switch item. */
 "SLUG-IN-PROGRESS"                              =   "In Progress";
+/* This is the Text Field "placeholder" text, for when the Main Screen is in Text Search Mode. */
+"SLUG-SEARCH-PLACEHOLDER"                       =   "Enter A Meeting Name";
+/* This is the string that we display in the list, for in-progress meetings. The placeholder (%@) is replaced by the time, in localized form. */
 "SLUG-IN-PROGRESS-FORMAT"                       =   "In Progress Since %@";
+/* This is the string that we display in the list, for in-progress meetings that have been going since yesterday. The placeholder is replaced by the time, in localized form. */
 "SLUG-IN-PROGRESS-YESTERDAY-FORMAT"             =   "In Progress Since %@ Yesterday";
+/* This is the title for the segmented switch segment, for in-progress meetings. */
 "SLUG-NOW"                                      =   "Now";
 
+/* The title for the Meeting Inspector Screen, when it is displaying a hybrid meeting (meets both virtually, and in-person). */
 "SLUG-HYBRID-MEETING"                           =   "Hybrid Meeting";
+/* The title for the Meeting Inspector Screen, when it is displaying a fully virtual meeting. */
 "SLUG-VIRTUAL-MEETING"                          =   "Virtual Meeting";
 
+/* The title for the "I Attend This Meeting" bar button item in the navigation bar of the Meeting Inspector Screen. */
 "SLUG-I-ATTEND"                                 =   "I Attend";
-
+/* This is displayed, if the meeting Inspector is showing a meeting that is currently in progress. */
 "SLUG-IN-PROGRESS-STANDALONE"                   =   "This Meeting Is In Progress";
-"SLUG-FORMATS-HEADER"                           =   "Formats:";
+/* This is displayed in the Meeting Inspector, if the meeting has a timezone different from ours. The first placeholder has the timezone name, and the second has the meeting start time, in that timezone (as opposed to local, for most other times). */
 "SLUG-TIMEZONE-FORMAT"                          =   "Time Zone: %@ (%@)";
-"SLUG-SEARCH-PLACEHOLDER"                       =   "Enter A Meeting Name";
+/* This displays the meeting start time, and weekday, but no duration. It is displayed in both the Main Screen, and the Meeting Inspector Screen. The first placeholder has the weekday, and the second, the start time, in localized format. */
 "SLUG-WEEKDAY-TIME-FORMAT"                      =   "%@s, at %@";
+/* This displays the meeting start time, and weekday, with duration. It is displayed in both the Main Screen, and the Meeting Inspector Screen. The first placeholder has the weekday, the second, the start time, in localized format, and the third, the end time (also localized format). */
 "SLUG-WEEKDAY-TIME-DURATION-FORMAT"             =   "%@s, %@ - %@";
+/* This displays the phone extra information. The placeholder is replaced with the extra information (like passwords, etc.), in the Meeting Inspector. */
 "SLUG-PHONE-NUMBER-FORMAT"                      =   "Phone: %@";
+/* This is the header, over the Formats display, in the Meeting Inspector. */
+"SLUG-FORMATS-HEADER"                           =   "Formats:";
+/* This is the header, over the in-person meeting address, in the Meeting Inspector. */
 "SLUG-IN-PERSON-HEADER"                         =   "In-Person Meeting Address:";
-
+/* This is displayed under the phone icon, in the Meeting Inspector. */
 "SLUG-PHONE-BUTTON"                             =   "Phone";
+/* This is displayed under the globe icon, in the Meeting Inspector. */
 "SLUG-GLOBE-BUTTON"                             =   "Web";
+/* One of these is displayed under the video icon, in the Meeting Inspector. They denote the particular app that will be opened, by selecting the icon. */
 "SLUG-DIRECT-URI-ZOOM"                          =   "Zoom";
 "SLUG-DIRECT-URI-GOTOMEETING"                   =   "GotoMeeting";
 "SLUG-DIRECT-URI-SKYPE"                         =   "Skype";

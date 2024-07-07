@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D40133692C320C070018076B /* VMF_DayTimeSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40133682C320C070018076B /* VMF_DayTimeSearchViewController.swift */; };
 		D401336B2C320D520018076B /* VMF_EmbeddedTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */; };
+		D40EB4DE2C3B142B00AAE33B /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = D40EB4DC2C3B142B00AAE33B /* Accessibility.strings */; };
 		D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */; };
 		D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */; };
 		D43A9C132C373F67001285FC /* RVS_Persistent_Prefs in Frameworks */ = {isa = PBXBuildFile; productRef = D43A9C122C373F67001285FC /* RVS_Persistent_Prefs */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		D40133682C320C070018076B /* VMF_DayTimeSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_DayTimeSearchViewController.swift; sourceTree = "<group>"; };
 		D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_EmbeddedTableController.swift; sourceTree = "<group>"; };
+		D40EB4DD2C3B142B00AAE33B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		D4398E6B2C2892BD0001FAE3 /* jazzy.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = jazzy.command; sourceTree = "<group>"; };
 		D43A9C172C374198001285FC /* VMF_Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Prefs.swift; sourceTree = "<group>"; };
 		D43A9C182C374198001285FC /* VMF_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Extensions.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				D493933A2C2616C7006438AE /* VMF.storyboard */,
 				D493933F2C2616C8006438AE /* VMF_LaunchScreen.storyboard */,
 				D49349702C29A6D100C58390 /* Localizable.strings */,
+				D40EB4DC2C3B142B00AAE33B /* Accessibility.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				D49349722C29A6D100C58390 /* Localizable.strings in Resources */,
 				D49393412C2616C8006438AE /* Base in Resources */,
 				D493933C2C2616C7006438AE /* Base in Resources */,
+				D40EB4DE2C3B142B00AAE33B /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +289,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		D40EB4DC2C3B142B00AAE33B /* Accessibility.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D40EB4DD2C3B142B00AAE33B /* en */,
+			);
+			name = Accessibility.strings;
+			sourceTree = "<group>";
+		};
 		D49349702C29A6D100C58390 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -103,6 +103,16 @@ extension VMF_BaseViewController {
 extension VMF_BaseViewController {
     /* ################################################################## */
     /**
+     Called after the view hierarchy layout is complete.
+     We use this to enforce localized accessibility.
+     */
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        accessorizer()
+    }
+    
+    /* ################################################################## */
+    /**
      Called just before the view is to appear.
      
      - parameter inIsAnimated: True, if the appearance is animated.
@@ -110,5 +120,63 @@ extension VMF_BaseViewController {
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
         navigationItem.title = navigationItem.title?.localizedVariant
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Instance Methods
+/* ###################################################################################################################################### */
+extension VMF_BaseViewController {
+    /* ################################################################## */
+    /**
+     This travels around the whole view hierarchy, and resolves accessibility tokens.
+     */
+    func accessorizer() {
+        /* ############################################################## */
+        /**
+         This recursively resolves the accessibility tokens for the given view, and its subviews.
+         
+         - parameter me: The view to "accessorize."
+         */
+        func accessorize(me inView: UIView) {
+            inView.subviews.forEach { accessorize(me: $0) }
+            inView.accessibilityLabel = inView.accessibilityLabel?.accessibilityLocalizedVariant
+            inView.accessibilityHint = inView.accessibilityHint?.accessibilityLocalizedVariant
+        }
+        
+        if let tabBar = tabBarController?.tabBar {
+            accessorize(me: tabBar)
+        }
+        
+        navigationItem.rightBarButtonItems?.forEach {
+            if let view = $0.customView {
+                accessorize(me: view)
+            }
+            $0.accessibilityLabel = $0.accessibilityLabel?.accessibilityLocalizedVariant
+            $0.accessibilityHint = $0.accessibilityHint?.accessibilityLocalizedVariant
+        }
+        
+        navigationItem.leftBarButtonItems?.forEach {
+            if let view = $0.customView {
+                accessorize(me: view)
+            }
+            $0.accessibilityLabel = $0.accessibilityLabel?.accessibilityLocalizedVariant
+            $0.accessibilityHint = $0.accessibilityHint?.accessibilityLocalizedVariant
+        }
+        
+        navigationItem.centerItemGroups.forEach { item in
+            item.barButtonItems.forEach {
+                if let view = $0.customView {
+                    accessorize(me: view)
+                }
+                $0.accessibilityLabel = $0.accessibilityLabel?.accessibilityLocalizedVariant
+                $0.accessibilityHint = $0.accessibilityHint?.accessibilityLocalizedVariant
+            }
+            item.accessibilityLabel = item.accessibilityLabel?.accessibilityLocalizedVariant
+            item.accessibilityHint = item.accessibilityHint?.accessibilityLocalizedVariant
+        }
+        
+        guard let view = view else { return }
+        accessorize(me: view)
     }
 }

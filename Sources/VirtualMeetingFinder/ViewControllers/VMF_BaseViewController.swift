@@ -25,13 +25,9 @@ import RVS_Generic_Swift_Toolbox
 // MARK: - Base View Controller for All Views -
 /* ###################################################################################################################################### */
 /**
+ The base class for all our view controllers.
  */
 class VMF_BaseViewController: UIViewController { }
-
-/* ###################################################################################################################################### */
-// MARK: Computed Properties
-/* ###################################################################################################################################### */
-extension VMF_BaseViewController { }
 
 /* ###################################################################################################################################### */
 // MARK: Instance Methods
@@ -114,26 +110,5 @@ extension VMF_BaseViewController {
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
         navigationItem.title = navigationItem.title?.localizedVariant
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Base View Controller for Tab Roots -
-/* ###################################################################################################################################### */
-/**
- This class should be used as the base class for the "root" view controller for each tab.
- */
-class VMF_TabBaseViewController: VMF_BaseViewController { }
-
-/* ###################################################################################################################################### */
-// MARK: Base Class Overrides
-/* ###################################################################################################################################### */
-extension VMF_TabBaseViewController {
-    /* ################################################################## */
-    /**
-     Called after the resources have been loaded and resolved.
-     */
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
 }

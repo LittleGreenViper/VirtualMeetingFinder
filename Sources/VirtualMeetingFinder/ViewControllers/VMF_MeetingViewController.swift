@@ -31,46 +31,55 @@ import RVS_Generic_Swift_Toolbox
 class VMF_MeetingViewController: VMF_BaseViewController {
     /* ################################################################## */
     /**
+     This is the font to use for the format item key.
      */
     private static let _formatKeyFont: UIFont? = .boldSystemFont(ofSize: 20)
     
     /* ################################################################## */
     /**
+     This is the font to use for the format item name.
      */
     private static let _formatNameFont: UIFont? = .boldSystemFont(ofSize: 17)
     
     /* ################################################################## */
     /**
+     This is the font to use for the format item description.
      */
     private static let _formatDescriptionFont: UIFont? = .italicSystemFont(ofSize: 15)
 
     /* ################################################################## */
     /**
+     This is how many display units wide, we make the format key column.
      */
     private static let _formatKeyWidth = CGFloat(50)
     
     /* ################################################################## */
     /**
+     This is how many display units, vertically, will separate the top of a format item, with its predecessor.
      */
     private static let _formatSeparatorSpace = CGFloat(8)
     
     /* ################################################################## */
     /**
+     This is how much "breathing room" we give stuff in a format item (display units).
      */
     private static let _formatInternalSeparatorSpace = CGFloat(4)
 
     /* ################################################################## */
     /**
+     The image to use, for the bar button item, of a meeting that is selected for attendance.
      */
     private static let _checkedImage = UIImage(systemName: "checkmark.square.fill")
 
     /* ################################################################## */
     /**
+     The image to use, for the bar button item, of a meeting that is not selected for attendance.
      */
     private static let _uncheckedImage = UIImage(systemName: "square")
     
     /* ################################################################## */
     /**
+     The font to use for the "I Attend" bar button item.
      */
     private static let _barButtonLabelFont = UIFont.systemFont(ofSize: 17)
 
@@ -168,7 +177,7 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     /**
      This has any extra info for virtual meetings.
      */
-    @IBOutlet weak var virtualExtraInfoLabel: UILabel?
+    @IBOutlet weak var virtualExtraInfoTextView: UITextView?
     
     /* ################################################################## */
     /**
@@ -265,9 +274,11 @@ extension VMF_MeetingViewController {
      Called when the view hierarchy has loaded.
      */
     override func viewDidLoad() {
-        /* ################################################################## */
+        /* ############################################################## */
         /**
          This simply strips out all non-decimal characters in the string, leaving only valid decimal digits.
+         - parameter from: The string to be stripped.
+         - returns: The stripped string.
          */
         func stripPhoneNumber(from inString: String) -> String {
             let allowedChars = CharacterSet(charactersIn: "0123456789 ()-+")
@@ -306,7 +317,7 @@ extension VMF_MeetingViewController {
         formatHeaderLabel?.isHidden = true
         formatContainerView?.isHidden = true
         inPersonExtraInfoLabel?.isHidden = true
-        virtualExtraInfoLabel?.isHidden = true
+        virtualExtraInfoTextView?.isHidden = true
         
         if let comments = meeting?.comments,
            !comments.isEmpty {
@@ -353,8 +364,8 @@ extension VMF_MeetingViewController {
         if let extraInfo = meeting?.virtualInfo,
            meeting?.comments?.lowercased() != extraInfo.lowercased(),
            !extraInfo.isEmpty {
-            virtualExtraInfoLabel?.isHidden = false
-            virtualExtraInfoLabel?.text = extraInfo
+            virtualExtraInfoTextView?.isHidden = false
+            virtualExtraInfoTextView?.text = extraInfo
         }
 
         if let basicAddress = meeting?.basicInPersonAddress,

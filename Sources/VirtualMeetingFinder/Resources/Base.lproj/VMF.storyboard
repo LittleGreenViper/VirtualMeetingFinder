@@ -565,12 +565,13 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                             </textView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4D-4k-g66">
-                                                <rect key="frame" x="164.66666666666666" y="240" width="0.0" height="0.0"/>
-                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="748" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EZk-ly-NJg">
+                                                <rect key="frame" x="44.666666666666657" y="240" width="239.99999999999997" height="0.0"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-FORMATS-HEADER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ml1-yq-PeL">
                                                 <rect key="frame" x="60.666666666666686" y="252.00000000000003" width="208" height="20.333333333333343"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
@@ -591,7 +592,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1E1-F8-ND2">
-                                                        <rect key="frame" x="0.0" y="20.333333333333318" width="220.66666666666666" height="36.333333333333343"/>
+                                                        <rect key="frame" x="0.0" y="20.333333333333375" width="220.66666666666666" height="36.333333333333343"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -640,8 +641,6 @@
                                             <constraint firstItem="P0x-Y5-plm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="91z-VW-KPF"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="uzn-9H-qzY" secondAttribute="trailing" id="9iv-mp-BMk"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hZz-Uk-7C5" secondAttribute="trailing" id="BVw-KU-d4h"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="G4D-4k-g66" secondAttribute="trailing" id="SjV-zJ-wuQ"/>
-                                            <constraint firstItem="G4D-4k-g66" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="W78-Sy-XXa"/>
                                             <constraint firstItem="uzn-9H-qzY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="Wj4-eO-dgG"/>
                                             <constraint firstItem="hZz-Uk-7C5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="bJE-vW-BlO"/>
                                             <constraint firstAttribute="trailing" secondItem="bIq-s0-xoL" secondAttribute="trailing" id="gux-gH-ra6"/>
@@ -702,7 +701,7 @@
                         <outlet property="timeZoneLabel" destination="JRB-g7-5Qt" id="EPy-5X-PrG"/>
                         <outlet property="videoButtonContainer" destination="kmx-b1-5vF" id="LRP-QG-sch"/>
                         <outlet property="videoLabelButton" destination="j9t-Ie-UNe" id="k6w-QF-B9w"/>
-                        <outlet property="virtualExtraInfoLabel" destination="G4D-4k-g66" id="fhQ-Gy-mKp"/>
+                        <outlet property="virtualExtraInfoTextView" destination="EZk-ly-NJg" id="jmF-pP-38T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wxd-ro-Xyx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -30,38 +30,6 @@ import SwiftBMLSDK
 public typealias MeetingInstance = SwiftBMLSDK_Parser.Meeting
 
 /* ###################################################################################################################################### */
-// MARK: - Image Assignment Enum, for Meeting Access Types -
-/* ###################################################################################################################################### */
-extension SwiftBMLSDK_Parser.Meeting.SortableMeetingType {
-    /* ################################################################## */
-    /**
-     Returns the correct image to use, for the type. Returns nil, if no image available.
-     */
-    var image: UIImage? {
-        var imageName = "G" // Generic Web
-        
-        switch self {
-        case .inPerson: // We don't do in-person, alone
-            break
-        case .virtual:  // Virtual, and has both video and phone
-            imageName = "V-P"
-        case .virtual_phone:    // Virtual, phone-only
-            imageName = "P"
-        case .virtual_video:    // Virtual, video-only
-            imageName = "V"
-        case .hybrid:           // Hybrid, with both video and phone virtual options
-            imageName = "V-P-M"
-        case .hybrid_phone:     // Hybrid, with only a phone dial-in option
-            imageName = "P-M"
-        case .hybrid_video:     // Hybrid, with only a video option
-            imageName = "V-M"
-        }
-        
-        return UIImage(named: imageName)
-    }
-}
-
-/* ###################################################################################################################################### */
 // MARK: - Date Extension for Localized Strings -
 /* ###################################################################################################################################### */
 extension Date {
@@ -232,43 +200,6 @@ public extension Bundle {
      The root server URI as a string.
      */
     var rootServerURI: String? { object(forInfoDictionaryKey: "VMF_BaseServerURI") as? String }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - NSLayoutConstraint Extension -
-/* ###################################################################################################################################### */
-/**
- This is pretty much verbatim, from [this excellent answer](https://stackoverflow.com/a/33003217/879365)
- */
-extension NSLayoutConstraint {
-    /* ################################################################## */
-    /**
-     Change multiplier constraint
-
-     - parameter multiplier: CGFloat
-     - returns: NSLayoutConstraint
-    */
-    func setMultiplier(multiplier: CGFloat) -> NSLayoutConstraint {
-        guard let firstItem = firstItem else { return self }
-        
-        NSLayoutConstraint.deactivate([self])
-
-        let newConstraint = NSLayoutConstraint(
-            item: firstItem,
-            attribute: firstAttribute,
-            relatedBy: relation,
-            toItem: secondItem,
-            attribute: secondAttribute,
-            multiplier: multiplier,
-            constant: constant)
-
-        newConstraint.priority = priority
-        newConstraint.shouldBeArchived = shouldBeArchived
-        newConstraint.identifier = identifier
-
-        NSLayoutConstraint.activate([newConstraint])
-        return newConstraint
-    }
 }
 
 /* ###################################################################################################################################### */

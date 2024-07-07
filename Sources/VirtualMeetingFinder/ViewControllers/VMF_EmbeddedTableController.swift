@@ -148,6 +148,10 @@ class VMF_TableCell: UITableViewCell {
      */
     @IBOutlet weak var nameLabel: UILabel?
 
+    /* ################################################################## */
+    /**
+     This displays the weekday, start time, and end time.
+     */
     @IBOutlet weak var timeAndDayLabel: UILabel?
     
     /* ################################################################## */

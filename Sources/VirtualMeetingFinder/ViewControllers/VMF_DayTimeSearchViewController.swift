@@ -60,6 +60,7 @@ class TapHoldButton: UIControl {
     
     /* ################################################################## */
     /**
+     This is the image that is displayed in the button.
      */
     @IBInspectable var displayImage: UIImage? { didSet { setNeedsLayout() } }
 }
@@ -149,7 +150,7 @@ extension TapHoldButton {
 /**
  This is the main view controller for the weekday/time selector tab.
  */
-class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTableControllerProtocol {
+class VMF_DayTimeSearchViewController: VMF_BaseViewController, VMF_MasterTableControllerProtocol {
     /* ################################################################## */
     /**
      The image that we use for search mode.
@@ -164,16 +165,19 @@ class VMF_DayTimeSearchViewController: VMF_TabBaseViewController, VMF_MasterTabl
 
     /* ################################################################## */
     /**
+     The image to use, when attendance is selected.
      */
     private static let _checkedImage = UIImage(systemName: "checkmark.square.fill")
 
     /* ################################################################## */
     /**
+     The image to use, when we do not attend.
      */
     private static let _uncheckedImage = UIImage(systemName: "square")
     
     /* ################################################################## */
     /**
+     The font for the "I Attend" button.
      */
     private static let _barButtonLabelFont = UIFont.systemFont(ofSize: 15)
 
@@ -619,7 +623,7 @@ extension VMF_DayTimeSearchViewController {
     
     /* ################################################################## */
     /**
-     This returns the index, of the time just after (or at) the given time and day.
+     This returns the index, of the time slot that is closest (before or after) to the given time and day.
      
      - parameter dayIndex: The 1-based day index. If omitted, then today/now is selected, and time is ignored.
      - parameter time: The military time (HHMM), as an integer. If omitted, 12AM (0000) is assumed.
@@ -756,6 +760,7 @@ extension VMF_DayTimeSearchViewController {
             isNameSearchMode = false
             let dayIndex = unMapWeekday(selectedIndex)
             
+            // This whackiness, is because we want to try to set the time index to be as close as possible to the last one.
             if (1..<8).contains(dayIndex),
                0 < _lastTime {
                 timeIndex = getNearestIndex(dayIndex: dayIndex, time: _lastTime)

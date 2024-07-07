@@ -35,7 +35,6 @@
 "SLUG-I-ATTEND"                                 =   "I Attend";
 
 "SLUG-IN-PROGRESS-STANDALONE"                   =   "This Meeting Is In Progress";
-"SLUG-WEEKDAY-SEARCH"                           =   "Find";
 "SLUG-FORMATS-HEADER"                           =   "Formats:";
 "SLUG-TIMEZONE-FORMAT"                          =   "Time Zone: %@ (%@)";
 "SLUG-SEARCH-PLACEHOLDER"                       =   "Enter A Meeting Name";

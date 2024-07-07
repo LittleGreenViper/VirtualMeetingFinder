@@ -33,6 +33,21 @@
 /* This is the hint for the segmented switch at the top of the Main Screen. */
 "SLUG-ACC-WEEKDAY-SWITCH-HINT"                  =   "With this segmented switch, you can see in-progress meetings, choose a weekday in which to show meetings, or select meeting name search mode.";
 
+/* The individual segment label for the in-progress (Now) segment */
+"SLUG-ACC-WEEKDAY-SWITCH-0-LABEL"               =   "View Meetings In Progress Now";
+/* The individual segment hint for the in-progress (Now) segment */
+"SLUG-ACC-WEEKDAY-SWITCH-0-HINT"                =   "If you select this, the table below will show meetings that are happening now.";
+
+/* The label for each weekday segment. The placeholder (%@) is replaced by the weekday represented by that segment. */
+"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-LABEL-FORMAT"  =   "View Meetings On %@s.";
+/* The hint for each weekday segment. The placeholder is replaced by the weekday represented by that segment. */
+"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-HINT-FORMAT"   =   "If you select this, you will see meetings that gather every %@.";
+
+/* The individual segment label for the search segment */
+"SLUG-ACC-WEEKDAY-SWITCH-8-LABEL"               =   "Search For Meetings By Name";
+/* The individual segment hint for the search segment */
+"SLUG-ACC-WEEKDAY-SWITCH-8-HINT"                =   "If you select this, you will enter Text Search Mode, where you can find meetings by name.";
+
 /* This is the label for the enter search text text field. */
 "SLUG-ACC-ENTER-SEARCH-TEXT-LABEL"              =   "Enter Text To Find";
 /* This is the hint for the enter search text text field. */

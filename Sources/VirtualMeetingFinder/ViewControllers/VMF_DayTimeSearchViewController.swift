@@ -928,7 +928,25 @@ extension VMF_DayTimeSearchViewController {
         myAttendanceBarButtonItem?.accessibilityHint = "SLUG-ACC-TAB-1-BUTTON-HINT"
         weekdayModeSelectorSegmentedSwitch?.accessibilityLabel = "SLUG-ACC-WEEKDAY-SWITCH-LABEL"
         weekdayModeSelectorSegmentedSwitch?.accessibilityHint = "SLUG-ACC-WEEKDAY-SWITCH-HINT"
+
         _atRestConstant = bottomConstraint?.constant ?? 0
+
+        guard let numberOfSegments = weekdayModeSelectorSegmentedSwitch?.numberOfSegments,
+              0 < numberOfSegments,
+              8 < numberOfSegments
+        else { return }
+
+        (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: 0) as? UIView)?.accessibilityLabel = "SLUG-ACC-WEEKDAY-SWITCH-0-LABEL"
+        (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: 0) as? UIView)?.accessibilityHint = "SLUG-ACC-WEEKDAY-SWITCH-0-HINT"
+
+        for index in (1..<(numberOfSegments - 1)) {
+            let weekday = Calendar.current.standaloneWeekdaySymbols[mapWeekday(index) - 1]
+            (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: index) as? UIView)?.accessibilityLabel = String(format: "SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-LABEL-FORMAT".accessibilityLocalizedVariant, weekday)
+            (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: index) as? UIView)?.accessibilityHint = String(format: "SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-HINT-FORMAT".accessibilityLocalizedVariant, weekday)
+        }
+
+        (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: 8) as? UIView)?.accessibilityLabel = "SLUG-ACC-WEEKDAY-SWITCH-8-LABEL"
+        (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: 8) as? UIView)?.accessibilityHint = "SLUG-ACC-WEEKDAY-SWITCH-8-HINT"
     }
     
     /* ################################################################## */

@@ -924,6 +924,10 @@ extension VMF_DayTimeSearchViewController {
         VMF_AppDelegate.searchController = self
         searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
         myAttendanceBarButtonItem?.title = myAttendanceBarButtonItem?.title?.localizedVariant
+        myAttendanceBarButtonItem?.accessibilityLabel = "SLUG-ACC-TAB-1-BUTTON-LABEL"
+        myAttendanceBarButtonItem?.accessibilityHint = "SLUG-ACC-TAB-1-BUTTON-HINT"
+        weekdayModeSelectorSegmentedSwitch?.accessibilityLabel = "SLUG-ACC-WEEKDAY-SWITCH-LABEL"
+        weekdayModeSelectorSegmentedSwitch?.accessibilityHint = "SLUG-ACC-WEEKDAY-SWITCH-HINT"
         _atRestConstant = bottomConstraint?.constant ?? 0
     }
     

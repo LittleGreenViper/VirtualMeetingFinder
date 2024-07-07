@@ -22,3 +22,43 @@
 // *|  DO NOT MODIFY ON THIS SIDE OF THE EQUALS  |*        *|   MODIFY THE TEXT ON THIS SIDE TO THE LOCAL LANGUAGE  |*
 // * -------------------------------------------- *        * ------------------------------------------------------- *
 // ************************************************        ***********************************************************
+
+/* This is the label for the Bar Button item that selects the "I Attend" Screen. */
+"SLUG-ACC-TAB-1-BUTTON-LABEL"                   =   "My Attendance";
+/* This is the hint for the Bar Button item that selects the "I Attend" Screen. */
+"SLUG-ACC-TAB-1-BUTTON-HINT"                    =   "This opens another screen, with only the meetings that you have marked as ones that you attend.";
+
+/* This is the label for the segmented switch at the top of the Main Screen. */
+"SLUG-ACC-WEEKDAY-SWITCH-LABEL"                 =   "Select the Weekday";
+/* This is the hint for the segmented switch at the top of the Main Screen. */
+"SLUG-ACC-WEEKDAY-SWITCH-HINT"                  =   "With this segmented switch, you can see in-progress meetings, choose a weekday in which to show meetings, or select meeting name search mode.";
+
+/* This is the label for the enter search text text field. */
+"SLUG-ACC-ENTER-SEARCH-TEXT-LABEL"              =   "Enter Text To Find";
+/* This is the hint for the enter search text text field. */
+"SLUG-ACC-ENTER-SEARCH-TEXT-HINT"               =   "Any text that you enter here, will be used to filter out meetings that have that text in their meeting name.";
+
+/* This is the label for the close search mode button. */
+"SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL"            =   "Leave Text Search Mode";
+/* This is the label for the close search mode button. */
+"SLUG-ACC-CLOSE-SEARCH-BUTTON-HINT"             =   "Selecting this button leaves text search mode, and returns you to the regular weekday selection mode.";
+
+/* This is the label for the decrement (left) time button. */
+"SLUG-ACC-LEFT-BUTTON-LABEL"                    =   "Go To The Time Slot Before This One";
+/* This is the hint for the decrement (left) time button. */
+"SLUG-ACC-LEFT-BUTTON-HINT"                     =   "If you select this, the table will show meetings that start at the time slot before this one.";
+
+/* This is the label for the increment (right) time button. */
+"SLUG-ACC-RIGHT-BUTTON-LABEL"                   =   "Go To The Time Slot After This One";
+/* This is the hint for the increment (right) time button. */
+"SLUG-ACC-RIGHT-BUTTON-HINT"                    =   "If you select this, the table will show meetings that start at the time slot after this one.";
+
+/* This is the label for the weekday/time label. */
+"SLUG-ACC-TIME-DISPLAY-LABEL"                   =   "The Weekday and Time For the Displayed Data";
+/* This is the hint for the weekday/time label. */
+"SLUG-ACC-TIME-DISPLAY-HINT"                    =   "This shows the selected weekday and time slot for the meetings listed below.";
+
+/* This is the label for the "thermometer" completion bar, below the segmented switch. */
+"SLUG-ACC-COMPLETION-DISPLAY-LABEL"             =   "How Far Through the Day We Are";
+/* This is the hint for the "thermometer" completion bar, below the segmented switch. */
+"SLUG-ACC-COMPLETION-DISPLAY-HINT"              =   "This indicates what part of the day, the time slot shown below is in. Left is towards 12AM, and right is towards midnight.";

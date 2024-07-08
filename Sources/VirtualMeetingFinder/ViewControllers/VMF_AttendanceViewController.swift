@@ -76,6 +76,21 @@ extension VMF_AttendanceViewController {
     
     /* ################################################################## */
     /**
+     Called just before the view is to disappear.
+     
+     - parameter inIsAnimated: True, if the disappearance is animated.
+     */
+    override func viewWillDisappear(_ inIsAnimated: Bool) {
+        super.viewWillDisappear(inIsAnimated)
+        
+        if isMovingFromParent {
+            feedbackGenerator?.impactOccurred(intensity: 1)
+            feedbackGenerator?.prepare()
+        }
+    }
+
+    /* ################################################################## */
+    /**
      Called before populating the table
      
      - parameter for: The segue object being executed.

@@ -120,7 +120,7 @@ extension VMF_BaseViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+        feedbackGenerator = UIImpactFeedbackGenerator(style: .rigid)
         feedbackGenerator?.prepare()
         selectionGenerator = UISelectionFeedbackGenerator()
         selectionGenerator?.prepare()
@@ -145,21 +145,6 @@ extension VMF_BaseViewController {
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
         navigationItem.title = navigationItem.title?.localizedVariant
-    }
-    
-    /* ################################################################## */
-    /**
-     Called just before the view is to disappear.
-     
-     - parameter inIsAnimated: True, if the disappearance is animated.
-     */
-    override func viewWillDisappear(_ inIsAnimated: Bool) {
-        super.viewWillDisappear(inIsAnimated)
-        
-        if isMovingFromParent {
-            feedbackGenerator?.impactOccurred(intensity: 1)
-            feedbackGenerator?.prepare()
-        }
     }
 }
 

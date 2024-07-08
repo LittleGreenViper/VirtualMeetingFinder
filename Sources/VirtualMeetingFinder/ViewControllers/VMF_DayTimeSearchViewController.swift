@@ -560,10 +560,13 @@ extension VMF_DayTimeSearchViewController {
             let timeString = testMeeting?.getNextStartDate(isAdjusted: true).localizedTime ?? "ERROR"
             let weekdayString = Calendar.current.weekdaySymbols[dayIndex - 1]
             newViewController.title = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekdayString, timeString)
+            newViewController.noRefresh = false
         } else if isNameSearchMode {
             newViewController.title = (tableDisplayController as? UIViewController)?.title
+            newViewController.noRefresh = true
         } else if 0 == dayIndex {
             newViewController.title = "SLUG-IN-PROGRESS".localizedVariant
+            newViewController.noRefresh = false
         }
         
         newViewController.noRefresh = isNameSearchMode
@@ -572,9 +575,6 @@ extension VMF_DayTimeSearchViewController {
             _lastTime = getTimeOf(dayIndex: dayIndex, timeIndex: timeIndex) ?? 0
         }
 
-        selectionGenerator?.selectionChanged()
-        selectionGenerator?.prepare()
-        
         return newViewController
     }
     
@@ -925,6 +925,8 @@ extension VMF_DayTimeSearchViewController {
      */
     func refreshCalled(completion inCompletion: @escaping () -> Void) {
         guard !isNameSearchMode else { return }
+        feedbackGenerator?.impactOccurred(intensity: 1)
+        feedbackGenerator?.prepare()
         loadMeetings(completion: inCompletion)
     }
 }
@@ -996,6 +998,8 @@ extension VMF_DayTimeSearchViewController {
         
         myAttendanceBarButtonItem?.isEnabled = !(virtualService?.meetingsThatIAttend.isEmpty ?? true)
         
+        (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = !isNameSearchMode
+
         if VMF_SceneDelegate.forceReloadDelayInSeconds < -VMF_SceneDelegate.lastReloadTime.timeIntervalSinceNow {
             isNameSearchMode = false
             loadMeetings { self.openTo() }
@@ -1156,7 +1160,13 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDelegate {
             if isNameSearchMode {
                 weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = (weekdayModeSelectorSegmentedSwitch?.numberOfSegments ?? 1) - 1
             } else {
+                let newIndex = tableDisplayController?.dayIndex ?? 0
+                let oldIndex = weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex ?? 0
                 weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = tableDisplayController?.dayIndex ?? 0
+                if oldIndex != newIndex {
+                    feedbackGenerator?.impactOccurred(intensity: 1)
+                    feedbackGenerator?.prepare()
+                }
             }
             
             timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title

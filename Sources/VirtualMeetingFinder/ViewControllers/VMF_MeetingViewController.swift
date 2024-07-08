@@ -424,6 +424,11 @@ extension VMF_MeetingViewController {
     override func viewWillDisappear(_ inIsAnimated: Bool) {
         super.viewWillDisappear(inIsAnimated)
         VMF_AppDelegate.openMeeting = nil
+        
+        if isMovingFromParent {
+            feedbackGenerator?.impactOccurred(intensity: 1)
+            feedbackGenerator?.prepare()
+        }
     }
 }
 

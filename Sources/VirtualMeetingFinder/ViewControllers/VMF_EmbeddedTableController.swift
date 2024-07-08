@@ -281,6 +281,8 @@ extension VMF_EmbeddedTableController {
     override func viewDidAppear(_ inIsAnimated: Bool) {
         super.viewDidAppear(inIsAnimated)
         myController?.tableDisplayController = self
+        selectionGenerator?.selectionChanged()
+        selectionGenerator?.prepare()
     }
     
     /* ################################################################## */

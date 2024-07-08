@@ -427,6 +427,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meeting Name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0x-Y5-plm">
                                                 <rect key="frame" x="76" y="0.0" width="177" height="22"/>
+                                                <accessibility key="accessibilityConfiguration" hint="SLUG-MEETING-NAME-MI-HINT" label="SLUG-MEETING-NAME-MI-LABEL"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="hgJ-HO-w5f"/>
                                                 </constraints>
@@ -436,6 +437,7 @@
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time And Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEd-7M-M7Z">
                                                 <rect key="frame" x="99.666666666666686" y="34" width="130" height="20"/>
+                                                <accessibility key="accessibilityConfiguration" hint="SLUG-TIME-DAY-MI-HINT" label="SLUG-TIME-DAY-MI-LABEL"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="8AU-3P-9li"/>
                                                 </constraints>
@@ -445,12 +447,14 @@
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="SLUG-IN-PROGRESS-STANDALONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7tx-Jg-onI">
                                                 <rect key="frame" x="0.0" y="66" width="329" height="0.0"/>
+                                                <accessibility key="accessibilityConfiguration" hint="SLUG-IN-PROGRESS-MI-HINT" label="SLUG-IN-PROGRESS-MI-LABEL"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <color key="textColor" systemColor="systemGreenColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Zone" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JRB-g7-5Qt">
                                                 <rect key="frame" x="128" y="78" width="73" height="20"/>
+                                                <accessibility key="accessibilityConfiguration" hint="SLUG-TZ-MI-HINT" label="SLUG-TZ-MI-LABEL"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="gkH-oV-ao4"/>
                                                 </constraints>
@@ -460,6 +464,7 @@
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7lo-54-meG">
                                                 <rect key="frame" x="164.66666666666666" y="110" width="0.0" height="0.0"/>
+                                                <accessibility key="accessibilityConfiguration" hint="SLUG-COMMENTS-MI-HINT" label="SLUG-COMMENTS-MI-LABEL"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -487,6 +492,9 @@
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <accessibility key="accessibilityConfiguration" hint="SLUG-PHONE-MI-HINT" label="SLUG-PHONE-MI-LABEL">
+                                                            <bool key="isElement" value="YES"/>
+                                                        </accessibility>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="PSg-x1-MbA" secondAttribute="bottom" id="aqr-AC-f1H"/>
                                                             <constraint firstItem="PSg-x1-MbA" firstAttribute="leading" secondItem="19P-e9-Hru" secondAttribute="leading" id="gHG-1d-7mb"/>
@@ -515,6 +523,9 @@
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <accessibility key="accessibilityConfiguration" hint="SLUG-WEB-MI-HINT" label="SLUG-WEB-MI-LABEL">
+                                                            <bool key="isElement" value="YES"/>
+                                                        </accessibility>
                                                         <constraints>
                                                             <constraint firstItem="GfA-yJ-CNW" firstAttribute="top" secondItem="xxJ-Ri-d4y" secondAttribute="bottom" constant="4" id="FR5-Jp-Wzt"/>
                                                             <constraint firstItem="xxJ-Ri-d4y" firstAttribute="centerX" secondItem="zgI-lN-ptg" secondAttribute="centerX" id="ZOu-TI-yNf"/>
@@ -543,6 +554,9 @@
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <bool key="isElement" value="YES"/>
+                                                        </accessibility>
                                                         <constraints>
                                                             <constraint firstItem="IOc-dH-mgm" firstAttribute="centerX" secondItem="kmx-b1-5vF" secondAttribute="centerX" id="4ju-ZC-C3D"/>
                                                             <constraint firstItem="IOc-dH-mgm" firstAttribute="top" secondItem="kmx-b1-5vF" secondAttribute="top" id="GYa-fL-cnS"/>
@@ -572,6 +586,7 @@
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GER-7R-iCr">
                                                 <rect key="frame" x="49.666666666666686" y="188" width="230" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <accessibility key="accessibilityConfiguration" hint="SLUG-PHONE-INFO-MI-HINT" label="SLUG-PHONE-INFO-MI-LABEL"/>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

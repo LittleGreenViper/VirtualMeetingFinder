@@ -346,6 +346,8 @@ extension VMF_MeetingViewController {
             linkContainer?.isHidden = false
             videoButtonContainer?.isHidden = false
             videoLabelButton?.text = directApp.appName.localizedVariant
+            videoButtonContainer?.accessibilityLabel = String(format: "SLUG-VIDEO-MI-LABEL-FORMAT".accessibilityLocalizedVariant, directApp.appName.localizedVariant)
+            videoButtonContainer?.accessibilityHint = String(format: "SLUG-VIDEO-MI-HINT-FORMAT".accessibilityLocalizedVariant, directApp.appName.localizedVariant)
         }
         
         if let webLinkURL = meeting?.virtualURL,

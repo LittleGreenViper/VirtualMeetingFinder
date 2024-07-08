@@ -23,6 +23,8 @@
 // * -------------------------------------------- *        * ------------------------------------------------------- *
 // ************************************************        ***********************************************************
 
+// MARK: - MAIN SCREEN -
+
 /* This is the label for the Bar Button item that selects the "I Attend" Screen. */
 "SLUG-ACC-TAB-1-BUTTON-LABEL"                   =   "My Attendance";
 /* This is the hint for the Bar Button item that selects the "I Attend" Screen. */
@@ -76,4 +78,51 @@
 /* This is the label for the "thermometer" completion bar, below the segmented switch. */
 "SLUG-ACC-COMPLETION-DISPLAY-LABEL"             =   "How Far Through the Day We Are";
 /* This is the hint for the "thermometer" completion bar, below the segmented switch. */
-"SLUG-ACC-COMPLETION-DISPLAY-HINT"              =   "This indicates what part of the day, the time slot shown below is in. Left is towards 12AM, and right is towards midnight.";
+"SLUG-ACC-COMPLETION-DISPLAY-HINT"              =   "This indicates which time slot the table represents. Left is towards 12AM, and right is towards midnight.";
+
+// MARK: - MEETING INSPECTOR SCREEN -
+
+/* This label is applied to the meeting name text label in the Meeting Inspector Screen */
+"SLUG-MEETING-NAME-MI-LABEL"                    =   "Meeting Name";
+/* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
+"SLUG-MEETING-NAME-MI-HINT"                     =   "This is the name of the meeting.";
+
+/* This label is applied to the meeting start time/day text label in the Meeting Inspector Screen */
+"SLUG-TIME-DAY-MI-LABEL"                        =   "Meeting Time";
+/* This hint is applied to the meeting start time/day text label in the Meeting Inspector Screen */
+"SLUG-TIME-DAY-MI-HINT"                         =   "This displays the weekday, start time, and end time, of the meeting.";
+
+/* This label is applied to the meeting "in progress" text label in the Meeting Inspector Screen */
+"SLUG-IN-PROGRESS-MI-LABEL"                     =   "Meeting Is In Progress";
+/* This hint is applied to the meeting "in progress" text label in the Meeting Inspector Screen */
+"SLUG-IN-PROGRESS-MI-HINT"                      =   "This means that the meeting is currently under way.";
+
+/* This label is applied to the meeting time zone text label in the Meeting Inspector Screen */
+"SLUG-TZ-MI-LABEL"                              =   "Time Zone";
+/* This hint is applied to the meeting time zone text label in the Meeting Inspector Screen */
+"SLUG-TZ-MI-HINT"                               =   "The meeting originates in a different timezone from the one we are in. This is that timezone, and when the meeting starts, in that zone.";
+
+/* This label is applied to the meeting comments text label in the Meeting Inspector Screen */
+"SLUG-COMMENTS-MI-LABEL"                        =   "Extra Information";
+/* This hint is applied to the meeting comments text label in the Meeting Inspector Screen */
+"SLUG-COMMENTS-MI-HINT"                         =   "This has any extra information about the meeting.";
+
+/* This label is applied to the phone icon button in the Meeting Inspector Screen */
+"SLUG-PHONE-MI-LABEL"                           =   "Call Into the Meeting";
+/* This hint is applied to the phone icon button in the Meeting Inspector Screen */
+"SLUG-PHONE-MI-HINT"                            =   "If you select this, the phone will attempt to call directly into the meeting.";
+
+/* This label is applied to the Web icon button in the Meeting Inspector Screen */
+"SLUG-WEB-MI-LABEL"                             =   "Web Site";
+/* This hint is applied to the Web icon button in the Meeting Inspector Screen */
+"SLUG-WEB-MI-HINT"                              =   "If you select this, Safari will be opened, and take you to the Web site. It is possible that an app may be directly opened.";
+
+/* This label is applied to the video icon button in the Meeting Inspector Screen */
+"SLUG-VIDEO-MI-LABEL-FORMAT"                    =   "Open %@";
+/* This hint is applied to the video icon button in the Meeting Inspector Screen */
+"SLUG-VIDEO-MI-HINT-FORMAT"                     =   "If you select this, the %@ app will be opened to the meeting.";
+
+/* This label is applied to the phone extra info text view in the Meeting Inspector Screen */
+"SLUG-PHONE-INFO-MI-LABEL"                      =   "Extra Phone Information";
+/* This hint is applied to the phone extra info text view in the Meeting Inspector Screen */
+"SLUG-PHONE-INFO-MI-HINT"                       =   "This contains additional phone information.";

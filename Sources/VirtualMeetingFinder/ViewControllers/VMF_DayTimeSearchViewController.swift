@@ -250,6 +250,11 @@ class VMF_DayTimeSearchViewController: VMF_BaseViewController, VMF_MasterTableCo
                 tableDisplayController?.meetings = getCurentMeetings(for: dayIndex, time: timeIndex)
             }
             
+            if isNameSearchMode != oldValue {
+                feedbackGenerator?.impactOccurred(intensity: 1)
+                feedbackGenerator?.prepare()
+            }
+            
             (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = isNameSearchMode
         }
     }
@@ -567,6 +572,9 @@ extension VMF_DayTimeSearchViewController {
             _lastTime = getTimeOf(dayIndex: dayIndex, timeIndex: timeIndex) ?? 0
         }
 
+        selectionGenerator?.selectionChanged()
+        selectionGenerator?.prepare()
+        
         return newViewController
     }
     
@@ -774,6 +782,9 @@ extension VMF_DayTimeSearchViewController {
             
             guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
             self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
+
+            feedbackGenerator?.impactOccurred()
+            feedbackGenerator?.prepare()
         }
         
         timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
@@ -818,6 +829,8 @@ extension VMF_DayTimeSearchViewController {
                     dayIndex -= 1
                     timeIndex = getDailyMeetings(for: dayIndex).keys.count - 1
                 }
+                feedbackGenerator?.impactOccurred()
+                feedbackGenerator?.prepare()
             }
             
             guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
@@ -850,7 +863,10 @@ extension VMF_DayTimeSearchViewController {
                     dayIndex += 1
                     timeIndex = 0
                 }
+                feedbackGenerator?.impactOccurred()
+                feedbackGenerator?.prepare()
             }
+            
             guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
             pageViewController?.setViewControllers([newViewController], direction: .reverse, animated: false)
             weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = mapWeekday(dayIndex)
@@ -868,6 +884,8 @@ extension VMF_DayTimeSearchViewController {
      */
     @IBAction func longPressOnWeekdayBar(_: Any) {
         if !isNameSearchMode {
+            feedbackGenerator?.impactOccurred(intensity: 1)
+            feedbackGenerator?.prepare()
             openTo()
         }
     }
@@ -1045,6 +1063,9 @@ extension VMF_DayTimeSearchViewController {
             destination.delegate = self
             destination.dataSource = self
             pageViewController = destination
+        } else if inSegue.destination is VMF_AttendanceViewController {
+            feedbackGenerator?.impactOccurred(intensity: 1)
+            feedbackGenerator?.prepare()
         }
     }
 }

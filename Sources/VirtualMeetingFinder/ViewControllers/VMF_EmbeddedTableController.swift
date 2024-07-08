@@ -304,6 +304,8 @@ extension VMF_EmbeddedTableController {
            let meetingInstance = inData as? MeetingInstance {
             destination.myController = self
             destination.meeting = meetingInstance
+            feedbackGenerator?.impactOccurred(intensity: 1)
+            feedbackGenerator?.prepare()
         }
     }
 }

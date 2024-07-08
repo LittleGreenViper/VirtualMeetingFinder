@@ -605,6 +605,8 @@ extension VMF_MeetingViewController {
         if !directPhoneNumberString.isEmpty,
            let directURI = URL(string: directPhoneNumberString),
            UIApplication.shared.canOpenURL(directURI) {
+            feedbackGenerator?.impactOccurred(intensity: 1)
+            feedbackGenerator?.prepare()
             VMF_AppDelegate.open(url: directURI)
         }
     }
@@ -618,6 +620,8 @@ extension VMF_MeetingViewController {
     @IBAction func globeButtonHit(_: Any) {
         if let webLinkURL = meeting?.virtualURL,
            UIApplication.shared.canOpenURL(webLinkURL) {
+            feedbackGenerator?.impactOccurred(intensity: 1)
+            feedbackGenerator?.prepare()
             VMF_AppDelegate.open(url: webLinkURL)
         }
     }
@@ -630,6 +634,8 @@ extension VMF_MeetingViewController {
      */
     @IBAction func videoButtonHit(_: Any) {
         if let videoLinkURL = meeting?.directAppURI {
+            feedbackGenerator?.impactOccurred(intensity: 1)
+            feedbackGenerator?.prepare()
             VMF_AppDelegate.open(url: videoLinkURL)
         }
     }
@@ -648,6 +654,9 @@ extension VMF_MeetingViewController {
         iAttendBarButton?.accessibilityLabel = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-LABEL".accessibilityLocalizedVariant
         iAttendBarButton?.accessibilityHint = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-HINT".accessibilityLocalizedVariant
 
+        selectionGenerator?.selectionChanged()
+        selectionGenerator?.prepare()
+        
         // HACK ALERT!
         // This actually prevents that momentary delay, as the table recalculates, when we go back.
         myController?.valueTable?.reloadData()

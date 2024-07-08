@@ -27,7 +27,19 @@ import RVS_Generic_Swift_Toolbox
 /**
  The base class for all our view controllers.
  */
-class VMF_BaseViewController: UIViewController { }
+class VMF_BaseViewController: UIViewController {
+    /* ################################################################## */
+    /**
+     This will provide haptic/audio feedback, in general.
+     */
+    var feedbackGenerator: UIImpactFeedbackGenerator?
+
+    /* ################################################################## */
+    /**
+     This will provide subtle haptic/audio feedback for selections.
+     */
+    var selectionGenerator: UISelectionFeedbackGenerator?
+}
 
 /* ###################################################################################################################################### */
 // MARK: Instance Methods
@@ -103,6 +115,19 @@ extension VMF_BaseViewController {
 extension VMF_BaseViewController {
     /* ################################################################## */
     /**
+     Called when the view hierarchy is complete.
+     We use this to prep our haptics.
+     */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+        feedbackGenerator?.prepare()
+        selectionGenerator = UISelectionFeedbackGenerator()
+        selectionGenerator?.prepare()
+    }
+    
+    /* ################################################################## */
+    /**
      Called after the view hierarchy layout is complete.
      We use this to enforce localized accessibility.
      */
@@ -120,6 +145,21 @@ extension VMF_BaseViewController {
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
         navigationItem.title = navigationItem.title?.localizedVariant
+    }
+    
+    /* ################################################################## */
+    /**
+     Called just before the view is to disappear.
+     
+     - parameter inIsAnimated: True, if the disappearance is animated.
+     */
+    override func viewWillDisappear(_ inIsAnimated: Bool) {
+        super.viewWillDisappear(inIsAnimated)
+        
+        if isMovingFromParent {
+            feedbackGenerator?.impactOccurred(intensity: 1)
+            feedbackGenerator?.prepare()
+        }
     }
 }
 

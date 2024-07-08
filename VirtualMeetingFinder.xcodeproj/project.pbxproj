@@ -57,6 +57,7 @@
 		D4AD6A182C261BCA002E37F3 /* CODEOWNERS */ = {isa = PBXFileReference; lastKnownFileType = text; path = CODEOWNERS; sourceTree = "<group>"; };
 		D4AD6A192C261BCA002E37F3 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D4B69A332C2B162800D24DA6 /* VMF_MeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MeetingViewController.swift; sourceTree = "<group>"; };
+		D4C74C242C3C2AB1008F3498 /* VirtualMeetingFinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VirtualMeetingFinder.entitlements; sourceTree = "<group>"; };
 		D4F4BCEC2C36DAFC0023C21B /* VMF_MapMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MapMarker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +120,7 @@
 		D49393282C2616C7006438AE = {
 			isa = PBXGroup;
 			children = (
+				D4C74C242C3C2AB1008F3498 /* VirtualMeetingFinder.entitlements */,
 				D4AD6A112C261B1D002E37F3 /* Meta */,
 				D419F3102C261762001EE006 /* Sources */,
 				D49393322C2616C7006438AE /* Products */,
@@ -476,6 +478,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = VirtualMeetingFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0059;
 				DEVELOPMENT_TEAM = P53V4JS928;
@@ -495,6 +498,9 @@
 				MARKETING_VERSION = 0.9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -506,6 +512,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = VirtualMeetingFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0059;
 				DEVELOPMENT_TEAM = P53V4JS928;
@@ -525,6 +532,9 @@
 				MARKETING_VERSION = 0.9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -407,6 +407,10 @@ extension VMF_MeetingViewController {
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
         VMF_AppDelegate.openMeeting = self
+        guard let meeting = meeting else { return }
+        iAttendBarButton?.isAccessibilityElement = true
+        iAttendBarButton?.accessibilityLabel = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-LABEL".accessibilityLocalizedVariant
+        iAttendBarButton?.accessibilityHint = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-HINT".accessibilityLocalizedVariant
     }
     
     /* ################################################################## */
@@ -640,6 +644,10 @@ extension VMF_MeetingViewController {
         guard var meeting = meeting else { return }
         let originalState = meeting.iAttend
         meeting.iAttend = !originalState
+        
+        iAttendBarButton?.accessibilityLabel = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-LABEL".accessibilityLocalizedVariant
+        iAttendBarButton?.accessibilityHint = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-HINT".accessibilityLocalizedVariant
+
         // HACK ALERT!
         // This actually prevents that momentary delay, as the table recalculates, when we go back.
         myController?.valueTable?.reloadData()

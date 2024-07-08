@@ -83,6 +83,16 @@
 // MARK: - MEETING INSPECTOR SCREEN -
 
 /* This label is applied to the meeting name text label in the Meeting Inspector Screen */
+"SLUG-I-ATTEND-BAR-BUTTON-LABEL"                =   "I Attend This Meeting";
+/* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
+"SLUG-I-ATTEND-BAR-BUTTON-HINT"                 =   "This button indicates whetrher or not we attend this meeting. Since we are attending, we can view this meeting separately, in the Attendance Screen.";
+
+/* This label is applied to the meeting name text label in the Meeting Inspector Screen */
+"SLUG-I-DO-NOT-ATTEND-BAR-BUTTON-LABEL"         =   "I Do Not Attend This Meeting";
+/* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
+"SLUG-I-DO-NOT-ATTEND-BAR-BUTTON-HINT"          =   "This button indicates whetrher or not we attend this meeting. We currently do not attend this meeting.";
+
+/* This label is applied to the meeting name text label in the Meeting Inspector Screen */
 "SLUG-MEETING-NAME-MI-LABEL"                    =   "Meeting Name";
 /* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
 "SLUG-MEETING-NAME-MI-HINT"                     =   "This is the name of the meeting.";
@@ -126,3 +136,18 @@
 "SLUG-PHONE-INFO-MI-LABEL"                      =   "Extra Phone Information";
 /* This hint is applied to the phone extra info text view in the Meeting Inspector Screen */
 "SLUG-PHONE-INFO-MI-HINT"                       =   "This contains additional phone information.";
+
+/* This label is applied to the phone extra info text view in the Meeting Inspector Screen */
+"SLUG-XTRA-INFO-MI-LABEL"                       =   "Extra Virtual Information";
+/* This hint is applied to the phone extra info text view in the Meeting Inspector Screen */
+"SLUG-XTRA-INFO-MI-HINT"                        =   "This contains additional information about the virtual meeting.";
+
+/* This label is applied to the in-person address text view in the Meeting Inspector Screen */
+"SLUG-IN-PERSON-ADDRESS-MI-LABEL"               =   "In-Person Address";
+/* This hint is applied to the in-person address text view in the Meeting Inspector Screen */
+"SLUG-IN-PERSON-ADDRESS-MI-HINT"                =   "This is the address of the in-person meeting.";
+
+/* This label is applied to the in-person extra information label in the Meeting Inspector Screen */
+"SLUG-XTRA-IN-PERSON-ADDRESS-MI-LABEL"          =   "In-Person Address";
+/* This hint is applied to the in-person extra information label in the Meeting Inspector Screen */
+"SLUG-XTRA-IN-PERSON-ADDRESS-MI-HINT"           =   "This is the address of the in-person meeting.";

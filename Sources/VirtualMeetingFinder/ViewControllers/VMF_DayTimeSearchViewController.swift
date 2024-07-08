@@ -301,6 +301,7 @@ class VMF_DayTimeSearchViewController: VMF_BaseViewController, VMF_MasterTableCo
                 throbber?.isHidden = false
             } else {
                 throbber?.isHidden = true
+                myAttendanceBarButtonItem?.isEnabled = !(virtualService?.meetingsThatIAttend.isEmpty ?? true)
                 tabBarController?.tabBar.isHidden = false
                 searchItemsContainerView?.isHidden = !isNameSearchMode
                 weekdayModeSelectorSegmentedSwitch?.isHidden = isNameSearchMode
@@ -924,6 +925,7 @@ extension VMF_DayTimeSearchViewController {
         VMF_AppDelegate.searchController = self
         searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
         myAttendanceBarButtonItem?.title = myAttendanceBarButtonItem?.title?.localizedVariant
+        myAttendanceBarButtonItem?.isAccessibilityElement = true
         myAttendanceBarButtonItem?.accessibilityLabel = "SLUG-ACC-TAB-1-BUTTON-LABEL"
         myAttendanceBarButtonItem?.accessibilityHint = "SLUG-ACC-TAB-1-BUTTON-HINT"
         weekdayModeSelectorSegmentedSwitch?.accessibilityLabel = "SLUG-ACC-WEEKDAY-SWITCH-LABEL"

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D40133692C320C070018076B /* VMF_DayTimeSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40133682C320C070018076B /* VMF_DayTimeSearchViewController.swift */; };
+		D40133692C320C070018076B /* VMF_MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40133682C320C070018076B /* VMF_MainViewController.swift */; };
 		D401336B2C320D520018076B /* VMF_EmbeddedTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */; };
 		D40EB4DE2C3B142B00AAE33B /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = D40EB4DC2C3B142B00AAE33B /* Accessibility.strings */; };
 		D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */; };
@@ -31,7 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D40133682C320C070018076B /* VMF_DayTimeSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_DayTimeSearchViewController.swift; sourceTree = "<group>"; };
+		D40133682C320C070018076B /* VMF_MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MainViewController.swift; sourceTree = "<group>"; };
 		D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_EmbeddedTableController.swift; sourceTree = "<group>"; };
 		D40EB4DD2C3B142B00AAE33B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		D40EB4DF2C3B272300AAE33B /* RevealServer.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:2V82U7HN27:Itty Bitty Labs Pty Ltd"; lastKnownFileType = wrapper.xcframework; name = RevealServer.xcframework; path = Sources/VirtualMeetingFinder/Meta/RevealServer.xcframework; sourceTree = "<group>"; };
@@ -109,10 +109,10 @@
 			isa = PBXGroup;
 			children = (
 				D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */,
-				D4B69A332C2B162800D24DA6 /* VMF_MeetingViewController.swift */,
-				D40133682C320C070018076B /* VMF_DayTimeSearchViewController.swift */,
-				D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */,
+				D40133682C320C070018076B /* VMF_MainViewController.swift */,
 				D455E5662C396F3A00246848 /* VMF_AttendanceViewController.swift */,
+				D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */,
+				D4B69A332C2B162800D24DA6 /* VMF_MeetingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -308,7 +308,7 @@
 				D43A9C192C374198001285FC /* VMF_Prefs.swift in Sources */,
 				D4B69A342C2B162900D24DA6 /* VMF_MeetingViewController.swift in Sources */,
 				D401336B2C320D520018076B /* VMF_EmbeddedTableController.swift in Sources */,
-				D40133692C320C070018076B /* VMF_DayTimeSearchViewController.swift in Sources */,
+				D40133692C320C070018076B /* VMF_MainViewController.swift in Sources */,
 				D455E5672C396F3A00246848 /* VMF_AttendanceViewController.swift in Sources */,
 				D4F4BCED2C36DAFC0023C21B /* VMF_MapMarker.swift in Sources */,
 				D49393372C2616C7006438AE /* VMF_SceneDelegate.swift in Sources */,

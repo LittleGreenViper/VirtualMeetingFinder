@@ -150,7 +150,7 @@ extension TapHoldButton {
 /**
  This is the main view controller for the weekday/time selector tab.
  */
-class VMF_DayTimeSearchViewController: VMF_BaseViewController, VMF_MasterTableControllerProtocol {
+class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerProtocol {
     /* ################################################################## */
     /**
      The image that we use for search mode.
@@ -237,6 +237,9 @@ class VMF_DayTimeSearchViewController: VMF_BaseViewController, VMF_MasterTableCo
                     searchTextField?.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
                     timeSelectorContainerView?.isHidden = true
                 } else {
+                    // The reason for this, is an internal cache reset: https://stackoverflow.com/a/25016836/879365
+                    pageViewController?.dataSource = nil
+                    pageViewController?.dataSource = self
                     searchTextField?.removeTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
                     searchTextField?.resignFirstResponder()
                     if oldValue != isNameSearchMode {
@@ -399,7 +402,7 @@ class VMF_DayTimeSearchViewController: VMF_BaseViewController, VMF_MasterTableCo
 /* ###################################################################################################################################### */
 // MARK: Computed Properties
 /* ###################################################################################################################################### */
-extension VMF_DayTimeSearchViewController {
+extension VMF_MainViewController {
     /* ################################################################## */
     /**
      These are the meetings that are currently in progress. They are sorted in ascending local start time.
@@ -447,7 +450,7 @@ extension VMF_DayTimeSearchViewController {
 /* ###################################################################################################################################### */
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
-extension VMF_DayTimeSearchViewController {
+extension VMF_MainViewController {
     /* ################################################################## */
     /**
      Called to load the meetings from the server.
@@ -747,7 +750,7 @@ extension VMF_DayTimeSearchViewController {
 /* ###################################################################################################################################### */
 // MARK: Callbacks
 /* ###################################################################################################################################### */
-extension VMF_DayTimeSearchViewController {
+extension VMF_MainViewController {
     /* ################################################################## */
     /**
      The segmented switch that controls the mode was hit.
@@ -882,7 +885,7 @@ extension VMF_DayTimeSearchViewController {
      
      - parameter: ignored
      */
-    @IBAction func longPressOnWeekdayBar(_: Any) {
+    @IBAction func doubleTapOnDayTimeLabel(_: Any) {
         if !isNameSearchMode {
             feedbackGenerator?.impactOccurred(intensity: 1)
             feedbackGenerator?.prepare()
@@ -934,7 +937,7 @@ extension VMF_DayTimeSearchViewController {
 /* ###################################################################################################################################### */
 // MARK: Base Class Overrides
 /* ###################################################################################################################################### */
-extension VMF_DayTimeSearchViewController {
+extension VMF_MainViewController {
     /* ################################################################## */
     /**
      Called when the view hierarchy loads.
@@ -1077,7 +1080,7 @@ extension VMF_DayTimeSearchViewController {
 /* ###################################################################################################################################### */
 // MARK: UIPageViewControllerDataSource Conformance
 /* ###################################################################################################################################### */
-extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
+extension VMF_MainViewController: UIPageViewControllerDataSource {
     /* ################################################################## */
     /**
      Called to fetch the view controller before the current one.
@@ -1145,7 +1148,7 @@ extension VMF_DayTimeSearchViewController: UIPageViewControllerDataSource {
 /* ###################################################################################################################################### */
 // MARK: UIPageViewControllerDelegate Conformance
 /* ###################################################################################################################################### */
-extension VMF_DayTimeSearchViewController: UIPageViewControllerDelegate {
+extension VMF_MainViewController: UIPageViewControllerDelegate {
     /* ################################################################## */
     /**
      Called when a swipe transition is done. The only thing we do here, is reset our trackers.

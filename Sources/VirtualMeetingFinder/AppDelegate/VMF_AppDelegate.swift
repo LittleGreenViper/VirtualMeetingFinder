@@ -51,7 +51,7 @@ class VMF_AppDelegate: UIResponder {
     /**
      This is set to the search controller
      */
-    static var searchController: VMF_DayTimeSearchViewController?
+    static var searchController: VMF_MainViewController?
 
     /* ################################################################## */
     /**

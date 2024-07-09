@@ -129,7 +129,7 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     /**
      This contains the tappable links.
      */
-    @IBOutlet weak var linkContainer: UIStackView?
+    @IBOutlet weak var linkContainer: UIView?
     
     /* ################################################################## */
     /**

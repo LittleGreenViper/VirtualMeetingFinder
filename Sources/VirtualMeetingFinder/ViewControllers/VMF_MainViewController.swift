@@ -934,6 +934,11 @@ extension VMF_MainViewController {
         case .began, .changed:
             if timeSlot != Int(_oldLocation),
                let time = getTimeOf(dayIndex: dayIndex, timeIndex: timeSlot) {
+                if .began == inGestureRecognizer.state {
+                    feedbackGenerator?.impactOccurred(intensity: 1)
+                    feedbackGenerator?.prepare()
+                }
+                
                 openTo(dayIndex: dayIndex, time: time)
             }
             _oldLocation = CGFloat(timeSlot)
@@ -962,6 +967,11 @@ extension VMF_MainViewController {
         switch inGestureRecognizer.state {
         case .began, .changed:
             if location != _oldLocation {
+                if .began == inGestureRecognizer.state {
+                    feedbackGenerator?.impactOccurred(intensity: 1)
+                    feedbackGenerator?.prepare()
+                }
+                
                 var segment = 0
                 var lastEnd = CGFloat(0)
                 for index in (0..<numberOfSegments) {

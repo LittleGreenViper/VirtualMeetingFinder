@@ -195,6 +195,13 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
     
     /* ################################################################## */
     /**
+     This is used during the long-press slide. It holds the previous location of the gesture.
+     We use it to determine if the finger has moved.
+     */
+    private var _oldLocation: CGFloat = 0
+
+    /* ################################################################## */
+    /**
      This handles the server data.
      */
     weak var virtualService: SwiftBMLSDK_MeetingLocalTimezoneCollection?
@@ -912,6 +919,29 @@ extension VMF_MainViewController {
      - parameter inGestureRecognizer: The gesture recognizer that was triggered.
      */
     @IBAction func longPressGestureInDisplayLabelDetected(_ inGestureRecognizer: UILongPressGestureRecognizer) {
+        guard let view = view,
+              let dayIndex = tableDisplayController?.dayIndex,
+              (1..<8).contains(dayIndex),
+              0 < view.bounds.size.width
+        else { return }
+        
+        let timeSlots = getDailyMeetings(for: dayIndex)
+        let gestureLocation = inGestureRecognizer.location(ofTouch: 0, in: view)
+        let fraction = gestureLocation.x / view.bounds.size.width
+        let timeSlot = max(0, min(timeSlots.count - 1, Int(round(fraction * CGFloat(timeSlots.count)))))
+        
+        switch inGestureRecognizer.state {
+        case .began, .changed:
+            if timeSlot != Int(_oldLocation),
+               let time = getTimeOf(dayIndex: dayIndex, timeIndex: timeSlot) {
+                openTo(dayIndex: dayIndex, time: time)
+            }
+            _oldLocation = CGFloat(timeSlot)
+
+        default:
+            _oldLocation = 0
+        }
+        
     }
     
     /* ############################################################## */
@@ -921,75 +951,39 @@ extension VMF_MainViewController {
      - parameter inGestureRecognizer: The gesture recognizer that was triggered.
      */
     @IBAction func longPressGestureInWeekdaySwitchDetected(_ inGestureRecognizer: UILongPressGestureRecognizer) {
-//        /* ########################################################## */
-//        /**
-//         Sets the timer to the given percentage.
-//         
-//         - parameter location: The 0 -> 1 location.
-//         */
-//        func setTimerTo(location inLocation: Float) {
-//            _timeSetSlider?.value = inLocation
-//            _tickTimeInSeconds = min(RVS_AmbiaMara_Settings().currentTimer.startTime - 1, Int(Float(RVS_AmbiaMara_Settings().currentTimer.startTime) * inLocation))
-//            
-//            if let color = UIColor(named: "\(_isFinal ? "Final" : _isWarning ? "Warn" : "Start")-Color") {
-//                _timeSetSlider?.minimumTrackTintColor = color
-//                _timeSetSlider?.maximumTrackTintColor = color
-//                _timeSetSlider?.thumbTintColor = color
-//            }
-//
-//            self.setTimerDisplay()
-//        }
-//        
-//        setAutoHide()
-//
-//        guard !(timeSetSwipeDetectorView?.isHidden ?? true) else {
-//            inGestureRecognizer.state = .cancelled
-//            return
-//        }
-//        
-//        if _isAlarming {
-//            stopAlarm()
-//        } else if _isTimerRunning {
-//            pauseTimer()
-//        }
-//        
-//        guard let width = timeSetSwipeDetectorView?.bounds.size.width else { return }
-//        let gestureLocation = inGestureRecognizer.location(ofTouch: 0, in: timeSetSwipeDetectorView)
-//        let location = Float(max(0, min(1, gestureLocation.x / width)))
-//        
-//        switch inGestureRecognizer.state {
-//        case .began:
-//            prepareSlider(atThisLocation: location)
-//            setTimerTo(location: location)
-//
-//        case .changed:
-//            if location != _timeSetSlider?.value ?? -1 {
-//                if hapticsAreAvailable {
-//                    _selectionFeedbackGenerator?.selectionChanged()
-//                    _selectionFeedbackGenerator?.prepare()
-//                }
-//
-//                setTimerTo(location: location)
-//            }
-//        
-//        default:
-//            if hapticsAreAvailable {
-//                _feedbackGenerator?.impactOccurred(intensity: CGFloat(UIImpactFeedbackGenerator.FeedbackStyle.rigid.rawValue))
-//                _feedbackGenerator?.prepare()
-//            }
-//            _timeSetSlider?.removeFromSuperview()
-//            _timeSetSlider = nil
-//            
-//            if RVS_AmbiaMara_Settings().startTimerImmediately {
-//                if !_isFinal,
-//                   !_isWarning {
-//                    flashGreen()
-//                }
-//                continueTimer()
-//            } else {
-//                showToolbar()
-//            }
-//        }
+        guard let width = weekdayModeSelectorSegmentedSwitch?.bounds.size.width,
+              let numberOfSegments = weekdayModeSelectorSegmentedSwitch?.numberOfSegments
+        else { return }
+        
+        let gestureLocation = inGestureRecognizer.location(ofTouch: 0, in: weekdayModeSelectorSegmentedSwitch)
+        var location = gestureLocation.x
+        let stepSize = width / CGFloat(numberOfSegments)
+        
+        switch inGestureRecognizer.state {
+        case .began, .changed:
+            if location != _oldLocation {
+                var segment = 0
+                var lastEnd = CGFloat(0)
+                for index in (0..<numberOfSegments) {
+                    let testRange = (lastEnd..<(lastEnd + stepSize))
+                    if testRange.contains(location) {
+                        if index < (numberOfSegments - 1) {
+                            segment = index
+                        }
+                        break
+                    } else {
+                        lastEnd = lastEnd + stepSize
+                    }
+                }
+                weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = segment
+                weekdayModeSelectorSegmentedSwitch?.sendActions(for: .valueChanged)
+            }
+        
+        default:
+            location = 0
+        }
+        
+        _oldLocation = location
     }
 
     /* ################################################################## */

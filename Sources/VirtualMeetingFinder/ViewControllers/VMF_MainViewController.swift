@@ -397,6 +397,24 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
      The "Throbber" view
      */
     @IBOutlet weak var throbber: UIView?
+
+    /* ################################################################## */
+    /**
+     The double-tap gesture for bring us back to today.
+     */
+    @IBOutlet weak var labelDoubleTapGesture: UITapGestureRecognizer?
+
+    /* ################################################################## */
+    /**
+     The long-press gesture for selecting a weekday.
+     */
+    @IBOutlet weak var weekdayLongPressGesture: UILongPressGestureRecognizer?
+
+    /* ################################################################## */
+    /**
+     The long-press gesture for selecting a time.
+     */
+    @IBOutlet weak var timeDayLongPressGesture: UILongPressGestureRecognizer?
 }
 
 /* ###################################################################################################################################### */
@@ -892,6 +910,93 @@ extension VMF_MainViewController {
             openTo()
         }
     }
+    
+    /* ############################################################## */
+    /**
+     A long-press on the day/time display label switch was detected.
+     
+     - parameter inGestureRecognizer: The gesture recognizer that was triggered.
+     */
+    @IBAction func longPressGestureInDisplayLabelDetected(_ inGestureRecognizer: UILongPressGestureRecognizer) {
+    }
+    
+    /* ############################################################## */
+    /**
+     A long-press on the weekday switch was detected.
+     
+     - parameter inGestureRecognizer: The gesture recognizer that was triggered.
+     */
+    @IBAction func longPressGestureInWeekdaySwitchDetected(_ inGestureRecognizer: UILongPressGestureRecognizer) {
+//        /* ########################################################## */
+//        /**
+//         Sets the timer to the given percentage.
+//         
+//         - parameter location: The 0 -> 1 location.
+//         */
+//        func setTimerTo(location inLocation: Float) {
+//            _timeSetSlider?.value = inLocation
+//            _tickTimeInSeconds = min(RVS_AmbiaMara_Settings().currentTimer.startTime - 1, Int(Float(RVS_AmbiaMara_Settings().currentTimer.startTime) * inLocation))
+//            
+//            if let color = UIColor(named: "\(_isFinal ? "Final" : _isWarning ? "Warn" : "Start")-Color") {
+//                _timeSetSlider?.minimumTrackTintColor = color
+//                _timeSetSlider?.maximumTrackTintColor = color
+//                _timeSetSlider?.thumbTintColor = color
+//            }
+//
+//            self.setTimerDisplay()
+//        }
+//        
+//        setAutoHide()
+//
+//        guard !(timeSetSwipeDetectorView?.isHidden ?? true) else {
+//            inGestureRecognizer.state = .cancelled
+//            return
+//        }
+//        
+//        if _isAlarming {
+//            stopAlarm()
+//        } else if _isTimerRunning {
+//            pauseTimer()
+//        }
+//        
+//        guard let width = timeSetSwipeDetectorView?.bounds.size.width else { return }
+//        let gestureLocation = inGestureRecognizer.location(ofTouch: 0, in: timeSetSwipeDetectorView)
+//        let location = Float(max(0, min(1, gestureLocation.x / width)))
+//        
+//        switch inGestureRecognizer.state {
+//        case .began:
+//            prepareSlider(atThisLocation: location)
+//            setTimerTo(location: location)
+//
+//        case .changed:
+//            if location != _timeSetSlider?.value ?? -1 {
+//                if hapticsAreAvailable {
+//                    _selectionFeedbackGenerator?.selectionChanged()
+//                    _selectionFeedbackGenerator?.prepare()
+//                }
+//
+//                setTimerTo(location: location)
+//            }
+//        
+//        default:
+//            if hapticsAreAvailable {
+//                _feedbackGenerator?.impactOccurred(intensity: CGFloat(UIImpactFeedbackGenerator.FeedbackStyle.rigid.rawValue))
+//                _feedbackGenerator?.prepare()
+//            }
+//            _timeSetSlider?.removeFromSuperview()
+//            _timeSetSlider = nil
+//            
+//            if RVS_AmbiaMara_Settings().startTimerImmediately {
+//                if !_isFinal,
+//                   !_isWarning {
+//                    flashGreen()
+//                }
+//                continueTimer()
+//            } else {
+//                showToolbar()
+//            }
+//        }
+    }
 
     /* ################################################################## */
     /**
@@ -1169,6 +1274,10 @@ extension VMF_MainViewController: UIPageViewControllerDelegate {
                 if oldIndex != newIndex {
                     feedbackGenerator?.impactOccurred(intensity: 1)
                     feedbackGenerator?.prepare()
+                }
+                
+                if let tableDisplayController = tableDisplayController {
+                    updateThermometer(tableDisplayController)
                 }
             }
             

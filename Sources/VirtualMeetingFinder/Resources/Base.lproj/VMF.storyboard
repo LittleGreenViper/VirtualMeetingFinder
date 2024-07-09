@@ -57,6 +57,7 @@
                                         </segments>
                                         <connections>
                                             <action selector="weekdayModeSelectorSegmentedSwitchHit:" destination="Avq-Pc-erz" eventType="valueChanged" id="dBt-WK-rt6"/>
+                                            <outletCollection property="gestureRecognizers" destination="DWr-SK-AeP" appends="YES" id="aIC-vg-k1i"/>
                                         </connections>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uw7-7n-oJo">
@@ -139,6 +140,7 @@
                                                 <nil key="highlightedColor"/>
                                                 <connections>
                                                     <outletCollection property="gestureRecognizers" destination="nQ2-7G-llt" appends="YES" id="n5E-SS-Gaq"/>
+                                                    <outletCollection property="gestureRecognizers" destination="HBo-bh-E1k" appends="YES" id="teW-lD-upw"/>
                                                 </connections>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQn-b0-JfM" customClass="TapHoldButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
@@ -241,6 +243,7 @@
                     <connections>
                         <outlet property="bottomConstraint" destination="jzp-y2-Q6P" id="X2a-Df-9Hp"/>
                         <outlet property="completionBar" destination="BMR-eh-nTU" id="uBd-rR-Q0l"/>
+                        <outlet property="labelDoubleTapGesture" destination="nQ2-7G-llt" id="ctA-aQ-PSH"/>
                         <outlet property="leftButton" destination="5tD-DB-oEW" id="dXW-Id-7fa"/>
                         <outlet property="myAttendanceBarButtonItem" destination="apy-uC-OrG" id="Yy4-fa-dtQ"/>
                         <outlet property="rightButton" destination="yQn-b0-JfM" id="HKG-Gq-vvt"/>
@@ -250,7 +253,9 @@
                         <outlet property="tableContainerView" destination="Zdh-eu-ih1" id="JTb-KD-iZG"/>
                         <outlet property="throbber" destination="yRJ-fe-3Cl" id="Y5J-9Q-wAi"/>
                         <outlet property="timeDayDisplayLabel" destination="X3d-iJ-1Id" id="3id-EB-8MS"/>
+                        <outlet property="timeDayLongPressGesture" destination="HBo-bh-E1k" id="kpq-TP-LUy"/>
                         <outlet property="timeSelectorContainerView" destination="JrU-ny-TZt" id="HCc-kX-2CF"/>
+                        <outlet property="weekdayLongPressGesture" destination="DWr-SK-AeP" id="0bb-oD-xl5"/>
                         <outlet property="weekdayModeSelectorSegmentedSwitch" destination="Hjc-M6-UmS" id="N00-Cz-Zb6"/>
                     </connections>
                 </viewController>
@@ -260,6 +265,16 @@
                         <action selector="doubleTapOnDayTimeLabel:" destination="Avq-Pc-erz" id="2mw-UI-bMl"/>
                     </connections>
                 </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="DWr-SK-AeP" userLabel="Weekday Button Long Press Gesture Recognizer">
+                    <connections>
+                        <action selector="longPressGestureInWeekdaySwitchDetected:" destination="Avq-Pc-erz" id="e9M-Zw-iQn"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="HBo-bh-E1k" userLabel="Time Day Long Press Gesture Recognizer">
+                    <connections>
+                        <action selector="longPressGestureInDisplayLabelDetected:" destination="Avq-Pc-erz" id="sFs-Rn-cCK"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="110.68702290076335" y="-27.464788732394368"/>
         </scene>

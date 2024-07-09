@@ -261,8 +261,8 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
             }
             
             if isNameSearchMode != oldValue {
-                feedbackGenerator?.impactOccurred(intensity: 1)
-                feedbackGenerator?.prepare()
+                notificationGenerator?.notificationOccurred(.success)
+                notificationGenerator?.prepare()
             }
             
             (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = isNameSearchMode
@@ -804,9 +804,6 @@ extension VMF_MainViewController {
             
             guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
             self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
-
-            feedbackGenerator?.impactOccurred()
-            feedbackGenerator?.prepare()
         }
         
         timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
@@ -851,8 +848,8 @@ extension VMF_MainViewController {
                     dayIndex -= 1
                     timeIndex = getDailyMeetings(for: dayIndex).keys.count - 1
                 }
-                feedbackGenerator?.impactOccurred()
-                feedbackGenerator?.prepare()
+                notificationGenerator?.notificationOccurred(.success)
+                notificationGenerator?.prepare()
             }
             
             guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
@@ -885,8 +882,8 @@ extension VMF_MainViewController {
                     dayIndex += 1
                     timeIndex = 0
                 }
-                feedbackGenerator?.impactOccurred()
-                feedbackGenerator?.prepare()
+                notificationGenerator?.notificationOccurred(.success)
+                notificationGenerator?.prepare()
             }
             
             guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
@@ -912,6 +909,51 @@ extension VMF_MainViewController {
         }
     }
     
+    /* ############################################################## */
+    /**
+     A long-press on the weekday switch was detected.
+     
+     - parameter inGestureRecognizer: The gesture recognizer that was triggered.
+     */
+    @IBAction func longPressGestureInWeekdaySwitchDetected(_ inGestureRecognizer: UILongPressGestureRecognizer) {
+        guard let width = weekdayModeSelectorSegmentedSwitch?.bounds.size.width,
+              let selectedSegment = weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex,
+              let numberOfSegments = weekdayModeSelectorSegmentedSwitch?.numberOfSegments
+        else { return }
+        
+        let gestureLocation = inGestureRecognizer.location(ofTouch: 0, in: weekdayModeSelectorSegmentedSwitch)
+        var location = gestureLocation.x
+        let stepSize = width / CGFloat(numberOfSegments)
+        
+        switch inGestureRecognizer.state {
+        case .began, .changed:
+            if location != _oldLocation {
+                var segment = 0
+                var lastEnd = CGFloat(0)
+                for index in 1..<(numberOfSegments - 1) {
+                    let testRange = (lastEnd..<(stepSize + lastEnd))
+                    if testRange.contains(location),
+                       index != selectedSegment {
+                        segment = index
+                        break
+                    } else {
+                        lastEnd = lastEnd + stepSize
+                    }
+                }
+                if (1..<(numberOfSegments - 1)).contains(segment),
+                   segment != selectedSegment {
+                    weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = segment
+                    weekdayModeSelectorSegmentedSwitch?.sendActions(for: .valueChanged)
+                }
+            }
+        
+        default:
+            location = 0
+        }
+        
+        _oldLocation = location
+    }
+
     /* ############################################################## */
     /**
      A long-press on the day/time display label switch was detected.
@@ -947,53 +989,6 @@ extension VMF_MainViewController {
             _oldLocation = 0
         }
         
-    }
-    
-    /* ############################################################## */
-    /**
-     A long-press on the weekday switch was detected.
-     
-     - parameter inGestureRecognizer: The gesture recognizer that was triggered.
-     */
-    @IBAction func longPressGestureInWeekdaySwitchDetected(_ inGestureRecognizer: UILongPressGestureRecognizer) {
-        guard let width = weekdayModeSelectorSegmentedSwitch?.bounds.size.width,
-              let numberOfSegments = weekdayModeSelectorSegmentedSwitch?.numberOfSegments
-        else { return }
-        
-        let gestureLocation = inGestureRecognizer.location(ofTouch: 0, in: weekdayModeSelectorSegmentedSwitch)
-        var location = gestureLocation.x
-        let stepSize = width / CGFloat(numberOfSegments)
-        
-        switch inGestureRecognizer.state {
-        case .began, .changed:
-            if location != _oldLocation {
-                if .began == inGestureRecognizer.state {
-                    feedbackGenerator?.impactOccurred(intensity: 1)
-                    feedbackGenerator?.prepare()
-                }
-                
-                var segment = 0
-                var lastEnd = CGFloat(0)
-                for index in 1..<(numberOfSegments - 1) {
-                    let testRange = (lastEnd..<(stepSize + lastEnd))
-                    if testRange.contains(location) {
-                        segment = index
-                        break
-                    } else {
-                        lastEnd = lastEnd + stepSize
-                    }
-                }
-                if (1..<(numberOfSegments - 1)).contains(segment) {
-                    weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = segment
-                    weekdayModeSelectorSegmentedSwitch?.sendActions(for: .valueChanged)
-                }
-            }
-        
-        default:
-            location = 0
-        }
-        
-        _oldLocation = location
     }
 
     /* ################################################################## */
@@ -1270,8 +1265,8 @@ extension VMF_MainViewController: UIPageViewControllerDelegate {
                 let oldIndex = weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex ?? 0
                 weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = tableDisplayController?.dayIndex ?? 0
                 if oldIndex != newIndex {
-                    feedbackGenerator?.impactOccurred(intensity: 1)
-                    feedbackGenerator?.prepare()
+                    notificationGenerator?.notificationOccurred(.success)
+                    notificationGenerator?.prepare()
                 }
                 
                 if let tableDisplayController = tableDisplayController {

@@ -36,6 +36,12 @@ class VMF_BaseViewController: UIViewController {
 
     /* ################################################################## */
     /**
+     This will provide haptic/audio feedback, in general.
+     */
+    var notificationGenerator: UINotificationFeedbackGenerator?
+
+    /* ################################################################## */
+    /**
      This will provide subtle haptic/audio feedback for selections.
      */
     var selectionGenerator: UISelectionFeedbackGenerator?
@@ -124,6 +130,8 @@ extension VMF_BaseViewController {
         feedbackGenerator?.prepare()
         selectionGenerator = UISelectionFeedbackGenerator()
         selectionGenerator?.prepare()
+        notificationGenerator = UINotificationFeedbackGenerator()
+        notificationGenerator?.prepare()
     }
     
     /* ################################################################## */

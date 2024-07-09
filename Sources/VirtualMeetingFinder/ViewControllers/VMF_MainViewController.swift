@@ -974,19 +974,19 @@ extension VMF_MainViewController {
                 
                 var segment = 0
                 var lastEnd = CGFloat(0)
-                for index in (0..<numberOfSegments) {
-                    let testRange = (lastEnd..<(lastEnd + stepSize))
+                for index in 1..<(numberOfSegments - 1) {
+                    let testRange = (lastEnd..<(stepSize + lastEnd))
                     if testRange.contains(location) {
-                        if index < (numberOfSegments - 1) {
-                            segment = index
-                        }
+                        segment = index
                         break
                     } else {
                         lastEnd = lastEnd + stepSize
                     }
                 }
-                weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = segment
-                weekdayModeSelectorSegmentedSwitch?.sendActions(for: .valueChanged)
+                if (1..<(numberOfSegments - 1)).contains(segment) {
+                    weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = segment
+                    weekdayModeSelectorSegmentedSwitch?.sendActions(for: .valueChanged)
+                }
             }
         
         default:

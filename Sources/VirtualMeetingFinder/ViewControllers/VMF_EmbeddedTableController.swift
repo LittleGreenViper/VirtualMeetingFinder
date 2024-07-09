@@ -283,14 +283,6 @@ extension VMF_EmbeddedTableController {
         myController?.tableDisplayController = self
         selectionGenerator?.selectionChanged()
         selectionGenerator?.prepare()
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when the view has laid out its subviews.
-     */
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         myController?.updateThermometer(self)
     }
     

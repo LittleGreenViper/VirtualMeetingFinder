@@ -706,18 +706,16 @@ extension VMF_MainViewController {
      This updates the "thermometer" display, in the time selector.
      */
     func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol?) {
+        completionBar?.subviews.forEach { $0.removeFromSuperview() }
+        
         guard let tablePage = inTablePage,
               let prevPage = tableDisplayController,
               let completionBar = completionBar,
               let repeatDuration = leftButton?.repeatFrequencyInSeconds,
               !isNameSearchMode
         else {
-            completionBar?.isHidden = true
             return
         }
-        
-        completionBar.isHidden = false
-        completionBar.subviews.forEach { $0.removeFromSuperview() }
         
         let dayIndex = tablePage.dayIndex
         let prevTimeIndex = prevPage.timeIndex
@@ -728,23 +726,19 @@ extension VMF_MainViewController {
 
         if 0 == dayIndex {
             return
-        } else if 0 < dayIndex,
-           0 != prevPage.dayIndex {
+        } else if 0 != prevPage.dayIndex {
             dailyMeetings = getDailyMeetings(for: dayIndex)
         
-            guard (0..<dailyMeetings.count).contains(timeIndex)
-            else {
-                completionBar.isHidden = true
-                return
-            }
-        } else if (1 == dayIndex && 0 == prevPage.dayIndex) || 0 == dayIndex {
+            guard (0..<dailyMeetings.count).contains(timeIndex) else { return }
+        } else if 1 == dayIndex,
+                  0 == prevPage.dayIndex {
             timeIndex = 0
         } else if 7 == dayIndex,
                   0 == prevPage.dayIndex {
             timeIndex = dailyMeetings.count - 1
         }
         
-        prevDailyMeetings = getDailyMeetings(for: prevPage.dayIndex)
+        prevDailyMeetings = 0 == prevPage.dayIndex ? [:] : getDailyMeetings(for: prevPage.dayIndex)
 
         let oldWidth = CGFloat(prevTimeIndex + 1) / max(1, CGFloat(prevDailyMeetings.count))
         let newWidth = CGFloat(timeIndex + 1) / max(1, CGFloat(dailyMeetings.count))

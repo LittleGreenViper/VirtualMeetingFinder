@@ -102,7 +102,7 @@
                                             <constraint firstAttribute="bottom" secondItem="p2c-SZ-uyw" secondAttribute="bottom" id="pYt-Da-o5l"/>
                                         </constraints>
                                     </stackView>
-                                    <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BMR-eh-nTU">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BMR-eh-nTU">
                                         <rect key="frame" x="0.0" y="74" width="361" height="4"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-COMPLETION-DISPLAY-HINT" label="SLUG-ACC-COMPLETION-DISPLAY-LABEL">

@@ -1176,6 +1176,8 @@ extension VMF_MainViewController {
         guard let labelDoubleTapGesture = labelDoubleTapGesture else { return }
         directSelectionTapRecognizer?.require(toFail: labelDoubleTapGesture)
         
+        timeDayDisplayLabel?.textColor = .tintColor
+        
         isDirectSelectionMode = false
     }
     

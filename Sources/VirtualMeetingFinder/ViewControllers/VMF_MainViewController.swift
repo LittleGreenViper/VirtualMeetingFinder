@@ -243,6 +243,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                     searchTextField?.becomeFirstResponder()
                     searchTextField?.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
                     timeSelectorContainerView?.isHidden = true
+                    directSelectionItemsContainer?.isHidden = true
                 } else {
                     // The reason for this, is an internal cache reset: https://stackoverflow.com/a/25016836/879365
                     pageViewController?.dataSource = nil
@@ -275,7 +276,6 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
      */
     var isDirectSelectionMode: Bool = false {
         didSet {
-            guard let tableDisplayController = tableDisplayController else { return }
             isNameSearchMode = false
             if isDirectSelectionMode {
                 completionBar?.isHidden = true
@@ -283,16 +283,16 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                 timeSelectorContainerView?.isHidden = true
                 directSelectionItemsContainer?.isHidden = false
                 directSelectionPickerView?.reloadAllComponents()
-                let dayIndex = max(1, min(8, tableDisplayController.dayIndex)) - 1
-                let timeIndex = tableDisplayController.timeIndex
-                directSelectionPickerView?.selectRow(dayIndex, inComponent: 0, animated: false)
-                directSelectionPickerView?.selectRow(timeIndex, inComponent: 1, animated: true)
+                setDayPicker()
             } else {
                 directSelectionItemsContainer?.isHidden = true
                 completionBar?.isHidden = false
                 weekdayModeSelectorSegmentedSwitch?.isHidden = false
                 timeSelectorContainerView?.isHidden = false
             }
+            
+            notificationGenerator?.notificationOccurred(.success)
+            notificationGenerator?.prepare()
         }
     }
     
@@ -332,9 +332,12 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
      */
     var isThrobbing: Bool = false {
         didSet {
+            isDirectSelectionMode = false
             if isThrobbing {
                 navigationController?.isNavigationBarHidden = true
+                directSelectionItemsContainer?.isHidden = true
                 tableContainerView?.isHidden = true
+                completionBar?.isHidden = true
                 searchItemsContainerView?.isHidden = true
                 weekdayModeSelectorSegmentedSwitch?.isHidden = true
                 timeSelectorContainerView?.isHidden = true
@@ -347,6 +350,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                 searchItemsContainerView?.isHidden = !isNameSearchMode
                 weekdayModeSelectorSegmentedSwitch?.isHidden = isNameSearchMode
                 timeSelectorContainerView?.isHidden = isNameSearchMode
+                completionBar?.isHidden = false
                 tableContainerView?.isHidden = false
                 navigationController?.isNavigationBarHidden = false
             }
@@ -647,7 +651,7 @@ extension VMF_MainViewController {
             newViewController.noRefresh = false
         }
         
-        newViewController.noRefresh = isNameSearchMode
+        newViewController.noRefresh = isNameSearchMode || isDirectSelectionMode
 
         if (1..<8).contains(dayIndex) {
             _lastTime = getTimeOf(dayIndex: dayIndex, timeIndex: timeIndex) ?? 0
@@ -813,6 +817,18 @@ extension VMF_MainViewController {
             mercury.widthAnchor.constraint(equalTo: completionBar.widthAnchor, multiplier: newWidth).isActive = true
             mercury.layoutIfNeeded()
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     Sets the day picker to whatever the current day/time is.
+     */
+    func setDayPicker() {
+        guard let tableDisplayController = tableDisplayController else { return }
+        let dayIndex = max(1, min(8, tableDisplayController.dayIndex)) - 1
+        let timeIndex = tableDisplayController.timeIndex
+        directSelectionPickerView?.selectRow(dayIndex, inComponent: 0, animated: false)
+        directSelectionPickerView?.selectRow(timeIndex, inComponent: 1, animated: true)
     }
 }
 
@@ -1159,6 +1175,7 @@ extension VMF_MainViewController {
         
         guard let labelDoubleTapGesture = labelDoubleTapGesture else { return }
         directSelectionTapRecognizer?.require(toFail: labelDoubleTapGesture)
+        
         isDirectSelectionMode = false
     }
     
@@ -1185,8 +1202,10 @@ extension VMF_MainViewController {
             object: nil
         )
         
+        isDirectSelectionMode = false
+
         view?.setNeedsLayout()
-        
+
         myAttendanceBarButtonItem?.isEnabled = !(virtualService?.meetingsThatIAttend.isEmpty ?? true)
         
         (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = !isNameSearchMode

@@ -104,6 +104,12 @@ protocol VMF_MasterTableControllerProtocol: VMF_BaseProtocol {
      This updates the "thermometer" display, in the time selector.
      */
     func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol?)
+    
+    /* ################################################################## */
+    /**
+     This sets the day picker, if we have one.
+     */
+    func setDayPicker()
 }
 
 /* ###################################################################################################################################### */
@@ -121,6 +127,12 @@ extension VMF_MasterTableControllerProtocol {
      Default does nothing
      */
     func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol? = nil) { }
+    
+    /* ################################################################## */
+    /**
+     Default does nothing
+     */
+    func setDayPicker() { }
 }
 
 /* ###################################################################################################################################### */
@@ -280,10 +292,13 @@ extension VMF_EmbeddedTableController {
      */
     override func viewDidAppear(_ inIsAnimated: Bool) {
         super.viewDidAppear(inIsAnimated)
+        valueTable?.reloadData()
+        valueTable?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         myController?.tableDisplayController = self
         selectionGenerator?.selectionChanged()
         selectionGenerator?.prepare()
         myController?.updateThermometer(self)
+        myController?.setDayPicker()
     }
     
     /* ################################################################## */
@@ -328,6 +343,7 @@ extension VMF_EmbeddedTableController {
         _refreshControl?.endRefreshing()
         myController?.refreshCalled {
             self.valueTable?.reloadData()
+            self.valueTable?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
 }

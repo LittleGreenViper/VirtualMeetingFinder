@@ -195,6 +195,9 @@
                                             <constraint firstItem="5tD-DB-oEW" firstAttribute="top" secondItem="JrU-ny-TZt" secondAttribute="top" id="umm-Fl-Csh"/>
                                             <constraint firstAttribute="trailing" secondItem="yQn-b0-JfM" secondAttribute="trailing" id="xE0-pY-Tqz"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="tZV-WQ-Mpq" appends="YES" id="gri-Iz-wCX"/>
+                                        </connections>
                                     </view>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4zE-zm-UoW">
                                         <rect key="frame" x="0.0" y="122" width="361" height="80"/>

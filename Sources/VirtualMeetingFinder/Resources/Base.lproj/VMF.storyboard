@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Map view configurations" minToolsVersion="14.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -139,11 +140,12 @@
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-TIME-DISPLAY-HINT" label="SLUG-ACC-TIME-DISPLAY-LABEL"/>
                                                 <gestureRecognizers/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" name="AccentColor"/>
                                                 <nil key="highlightedColor"/>
                                                 <connections>
                                                     <outletCollection property="gestureRecognizers" destination="nQ2-7G-llt" appends="YES" id="n5E-SS-Gaq"/>
                                                     <outletCollection property="gestureRecognizers" destination="HBo-bh-E1k" appends="YES" id="teW-lD-upw"/>
+                                                    <outletCollection property="gestureRecognizers" destination="tZV-WQ-Mpq" appends="YES" id="Dnd-Af-NmJ"/>
                                                 </connections>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQn-b0-JfM" customClass="TapHoldButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
@@ -179,6 +181,43 @@
                                             <constraint firstAttribute="trailing" secondItem="yQn-b0-JfM" secondAttribute="trailing" id="xE0-pY-Tqz"/>
                                         </constraints>
                                     </view>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4zE-zm-UoW">
+                                        <rect key="frame" x="0.0" y="114" width="361" height="80"/>
+                                        <subviews>
+                                            <pickerView contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="stC-p8-nOr">
+                                                <rect key="frame" x="0.0" y="0.0" width="331" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="80" id="0pc-rD-60B"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="Avq-Pc-erz" id="3kp-tn-8uA"/>
+                                                    <outlet property="delegate" destination="Avq-Pc-erz" id="EG0-F9-SLC"/>
+                                                </connections>
+                                            </pickerView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4k-eR-coX" userLabel="Direct Selection Close Button">
+                                                <rect key="frame" x="331" y="25" width="30" height="30"/>
+                                                <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-CLOSE-SEARCH-BUTTON-HINT" label="SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="Wb6-e8-p0b"/>
+                                                    <constraint firstAttribute="width" secondItem="E4k-eR-coX" secondAttribute="height" multiplier="1:1" id="tuF-38-qJS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal">
+                                                    <imageReference key="image" image="x.circle" catalog="system" symbolScale="large"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="directSelectionCloseButtonHit:" destination="Avq-Pc-erz" eventType="touchUpInside" id="E2z-ep-KLg"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="E4k-eR-coX" firstAttribute="width" secondItem="E4k-eR-coX" secondAttribute="height" multiplier="1:1" id="89N-nk-MWS"/>
+                                            <constraint firstItem="stC-p8-nOr" firstAttribute="top" secondItem="4zE-zm-UoW" secondAttribute="top" id="lJ2-R1-IGR"/>
+                                            <constraint firstAttribute="bottom" secondItem="stC-p8-nOr" secondAttribute="bottom" id="tpq-XO-jcL"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -246,6 +285,10 @@
                     <connections>
                         <outlet property="bottomConstraint" destination="jzp-y2-Q6P" id="X2a-Df-9Hp"/>
                         <outlet property="completionBar" destination="BMR-eh-nTU" id="uBd-rR-Q0l"/>
+                        <outlet property="directSelectionCloseButton" destination="E4k-eR-coX" id="el8-UA-cGk"/>
+                        <outlet property="directSelectionItemsContainer" destination="4zE-zm-UoW" id="BP4-vo-mdG"/>
+                        <outlet property="directSelectionPickerView" destination="stC-p8-nOr" id="IvL-Lg-Cu3"/>
+                        <outlet property="directSelectionTapRecognizer" destination="tZV-WQ-Mpq" id="XSl-Vd-nte"/>
                         <outlet property="labelDoubleTapGesture" destination="nQ2-7G-llt" id="ctA-aQ-PSH"/>
                         <outlet property="leftButton" destination="5tD-DB-oEW" id="dXW-Id-7fa"/>
                         <outlet property="myAttendanceBarButtonItem" destination="apy-uC-OrG" id="Yy4-fa-dtQ"/>
@@ -278,6 +321,11 @@
                         <action selector="longPressGestureInDisplayLabelDetected:" destination="Avq-Pc-erz" id="sFs-Rn-cCK"/>
                     </connections>
                 </pongPressGestureRecognizer>
+                <tapGestureRecognizer id="tZV-WQ-Mpq" userLabel="Display Selector Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="directSelectionOpen:" destination="Avq-Pc-erz" id="XSp-Js-i41"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="110.68702290076335" y="-27.464788732394368"/>
         </scene>
@@ -802,6 +850,9 @@
         <image name="checkmark.square.fill" catalog="system" width="128" height="114"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="x.circle" catalog="system" width="128" height="123"/>
+        <namedColor name="AccentColor">
+            <color red="0.31400001049041748" green="0.37999999523162842" blue="0.89399999380111694" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -271,6 +271,33 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
     
     /* ################################################################## */
     /**
+     True, if this is the direct weekday/time selection mode.
+     */
+    var isDirectSelectionMode: Bool = false {
+        didSet {
+            guard let tableDisplayController = tableDisplayController else { return }
+            isNameSearchMode = false
+            if isDirectSelectionMode {
+                completionBar?.isHidden = true
+                weekdayModeSelectorSegmentedSwitch?.isHidden = true
+                timeSelectorContainerView?.isHidden = true
+                directSelectionItemsContainer?.isHidden = false
+                directSelectionPickerView?.reloadAllComponents()
+                let dayIndex = max(1, min(8, tableDisplayController.dayIndex)) - 1
+                let timeIndex = tableDisplayController.timeIndex
+                directSelectionPickerView?.selectRow(dayIndex, inComponent: 0, animated: false)
+                directSelectionPickerView?.selectRow(timeIndex, inComponent: 1, animated: true)
+            } else {
+                directSelectionItemsContainer?.isHidden = true
+                completionBar?.isHidden = false
+                weekdayModeSelectorSegmentedSwitch?.isHidden = false
+                timeSelectorContainerView?.isHidden = false
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
      Contains the search text filter.
      */
     var searchText: String = "" {
@@ -279,8 +306,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                 if searchText.isEmpty {
                     tableDisplayController?.meetings = searchMeetings
                 } else {
-                    let searchM = getCurentMeetings()
-                    tableDisplayController?.meetings = searchM
+                    tableDisplayController?.meetings = getCurentMeetings()
                 }
             }
         }
@@ -422,6 +448,30 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
      The long-press gesture for selecting a time.
      */
     @IBOutlet weak var timeDayLongPressGesture: UILongPressGestureRecognizer?
+
+    /* ################################################################## */
+    /**
+     The tap recognizer for entering direct selection mode.
+     */
+    @IBOutlet weak var directSelectionTapRecognizer: UITapGestureRecognizer?
+    
+    /* ################################################################## */
+    /**
+     The container, for the Direct Selection Mode items.
+     */
+    @IBOutlet weak var directSelectionItemsContainer: UIView?
+    
+    /* ################################################################## */
+    /**
+     The picker view, for the Direct Selection Mode.
+     */
+    @IBOutlet weak var directSelectionPickerView: UIPickerView?
+
+    /* ################################################################## */
+    /**
+     The button to exit Direct Selection Mode.
+     */
+    @IBOutlet weak var directSelectionCloseButton: UIButton?
 }
 
 /* ###################################################################################################################################### */
@@ -1000,6 +1050,35 @@ extension VMF_MainViewController {
 
     /* ################################################################## */
     /**
+     This is called, when selecting the weekday/time label. It puts us into Direct Selection Mode.
+     
+     - parameter: ignored.
+     */
+    @IBAction func enterDirectSelectionMode(_: Any) {
+    }
+
+    /* ################################################################## */
+    /**
+     The weekday/time label was touched.
+     
+     - parameter: ignored.
+     */
+    @IBAction func directSelectionOpen(_: Any) {
+        isDirectSelectionMode = true
+    }
+
+    /* ################################################################## */
+    /**
+     The close button for the direct selection mode was hit.
+     
+     - parameter: ignored.
+     */
+    @IBAction func directSelectionCloseButtonHit(_: Any) {
+        isDirectSelectionMode = false
+    }
+
+    /* ################################################################## */
+    /**
      This is called just before the keyboard shows. We use this to "nudge" the table bottom up.
      
      - parameter notification: The notification being passed in.
@@ -1077,6 +1156,10 @@ extension VMF_MainViewController {
 
         (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: 8) as? UIView)?.accessibilityLabel = "SLUG-ACC-WEEKDAY-SWITCH-8-LABEL"
         (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: 8) as? UIView)?.accessibilityHint = "SLUG-ACC-WEEKDAY-SWITCH-8-HINT"
+        
+        guard let labelDoubleTapGesture = labelDoubleTapGesture else { return }
+        directSelectionTapRecognizer?.require(toFail: labelDoubleTapGesture)
+        isDirectSelectionMode = false
     }
     
     /* ################################################################## */
@@ -1282,6 +1365,98 @@ extension VMF_MainViewController: UIPageViewControllerDelegate {
             }
             
             timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
+        }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: UIPickerViewDataSource Conformance
+/* ###################################################################################################################################### */
+extension VMF_MainViewController: UIPickerViewDataSource {
+    /* ################################################################## */
+    /**
+     This returns the number of components in the picker view.
+     
+     - parameter in: The picker view (ignored).
+     - returns: 2 (always)
+     */
+    func numberOfComponents(in: UIPickerView) -> Int { 2 }
+    
+    /* ################################################################## */
+    /**
+     This returns the number of rows in each component.
+     
+     - parameter: The picker view.
+     - parameter numberOfRowsInComponent: The 0-based component index. Component 0 is the weekday, and Component 1, is the time slots for that weekday.
+     
+     - returns: 7 (Component 0), or the number of time slots for the selected weekday (usually around 70).
+     */
+    func pickerView(_ inPickerView: UIPickerView, numberOfRowsInComponent inComponent: Int) -> Int {
+        guard !isNameSearchMode else { return 0 }
+        
+        let ret = 1 == inComponent ? getDailyMeetings(for: unMapWeekday(inPickerView.selectedRow(inComponent: 0) + 1)).count : 7
+        
+        return ret
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: UIPickerViewDelegate Conformance
+/* ###################################################################################################################################### */
+extension VMF_MainViewController: UIPickerViewDelegate {
+    /* ################################################################## */
+    /**
+     This returns the title for the selected row.
+     
+     - parameter inPickerView: The picker view.
+     - parameter titleForRow: The 0-based row index.
+     - parameter forComponent: The 0-based component index.
+
+     - returns: a string, with the title for the indicated row.
+     */
+    func pickerView(_ inPickerView: UIPickerView, titleForRow inRow: Int, forComponent inComponent: Int) -> String? {
+        guard !isNameSearchMode else { return nil }
+
+        if 0 == inComponent {
+            return Calendar.current.standaloneWeekdaySymbols[unMapWeekday(inRow + 1) - 1]
+        } else {
+            let dayIndex = unMapWeekday(inPickerView.selectedRow(inComponent: 0) + 1)
+            guard let time = getTimeOf(dayIndex: dayIndex, timeIndex: inRow) else { return nil }
+            let hour = time / 100
+            let minute = time - (hour * 100)
+            let dateComponents = DateComponents(hour: hour, minute: minute)
+            let date = Calendar.current.date(from: dateComponents)
+            let string = date?.localizedTime
+            return string
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a row is selected in the picker.
+     
+     - parameter inPickerView: The picker view.
+     - parameter didSelectRow: The 0-based row index.
+     - parameter inComponent: The 0-based component index.
+     */
+    func pickerView(_ inPickerView: UIPickerView, didSelectRow inRow: Int, inComponent: Int) {
+        if 0 == inComponent {
+            // This whackiness, is because we want to try to set the time index to be as close as possible to the last one.
+            guard let originalDayIndex = tableDisplayController?.dayIndex,
+                  var timeIndex = tableDisplayController?.timeIndex,
+                  let originalTime = getTimeOf(dayIndex: originalDayIndex, timeIndex: timeIndex)
+            else { return }
+         
+            timeIndex = getNearestIndex(dayIndex: inRow + 1, time: originalTime)
+            guard let time = getTimeOf(dayIndex: inRow + 1, timeIndex: timeIndex) else { return }
+            
+            inPickerView.reloadComponent(1)
+            inPickerView.selectRow(timeIndex, inComponent: 1, animated: false)
+            openTo(dayIndex: inRow + 1, time: time)
+        } else {
+            let dayIndex = unMapWeekday(inPickerView.selectedRow(inComponent: 0) + 1)
+            guard let time = getTimeOf(dayIndex: dayIndex, timeIndex: inRow) else { return }
+            openTo(dayIndex: dayIndex, time: time)
         }
     }
 }

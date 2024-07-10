@@ -39,11 +39,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1R3-iR-Giq">
-                                <rect key="frame" x="16" y="103" width="361" height="105"/>
+                                <rect key="frame" x="16" y="103" width="361" height="114"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Hjc-M6-UmS">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="41"/>
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="fbi-Vz-Znd"/>
+                                        </constraints>
                                         <segments>
                                             <segment title="First"/>
                                             <segment title="Second"/>
@@ -61,7 +64,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uw7-7n-oJo">
-                                        <rect key="frame" x="0.0" y="31" width="361" height="30"/>
+                                        <rect key="frame" x="0.0" y="40" width="361" height="30"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="SLUG-SEARCH-PLACEHOLDER" textAlignment="natural" minimumFontSize="14" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="p2c-SZ-uyw">
                                                 <rect key="frame" x="0.0" y="0.0" width="331" height="30"/>
@@ -95,7 +98,7 @@
                                         </constraints>
                                     </stackView>
                                     <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BMR-eh-nTU">
-                                        <rect key="frame" x="0.0" y="61" width="361" height="4"/>
+                                        <rect key="frame" x="0.0" y="70" width="361" height="4"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-COMPLETION-DISPLAY-HINT" label="SLUG-ACC-COMPLETION-DISPLAY-LABEL">
                                             <bool key="isElement" value="YES"/>
@@ -110,7 +113,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JrU-ny-TZt">
-                                        <rect key="frame" x="0.0" y="65" width="361" height="40"/>
+                                        <rect key="frame" x="0.0" y="74" width="361" height="40"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tD-DB-oEW" customClass="TapHoldButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -186,7 +189,7 @@
                                 </constraints>
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zdh-eu-ih1">
-                                <rect key="frame" x="16" y="224" width="361" height="594"/>
+                                <rect key="frame" x="16" y="233" width="361" height="585"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="8"/>

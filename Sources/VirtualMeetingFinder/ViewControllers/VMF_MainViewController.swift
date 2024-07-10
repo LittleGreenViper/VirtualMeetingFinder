@@ -916,34 +916,41 @@ extension VMF_MainViewController {
      - parameter inGestureRecognizer: The gesture recognizer that was triggered.
      */
     @IBAction func longPressGestureInWeekdaySwitchDetected(_ inGestureRecognizer: UILongPressGestureRecognizer) {
-        guard let width = weekdayModeSelectorSegmentedSwitch?.bounds.size.width,
-              let selectedSegment = weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex,
-              let numberOfSegments = weekdayModeSelectorSegmentedSwitch?.numberOfSegments
-        else { return }
+        guard let weekdayModeSelectorSegmentedSwitch = weekdayModeSelectorSegmentedSwitch else { return }
         
+        let width = weekdayModeSelectorSegmentedSwitch.bounds.size.width
+        let selectedSegment = weekdayModeSelectorSegmentedSwitch.selectedSegmentIndex
+        let numberOfSegments = weekdayModeSelectorSegmentedSwitch.numberOfSegments
         let gestureLocation = inGestureRecognizer.location(ofTouch: 0, in: weekdayModeSelectorSegmentedSwitch)
         var location = gestureLocation.x
         let stepSize = width / CGFloat(numberOfSegments)
+        var steps = [(start: CGFloat, end: CGFloat)]()
+        for index in 1..<(numberOfSegments - 1) {
+            let start = CGFloat(index) * stepSize
+            let end = start + stepSize
+            steps.append((start: start, end: end))
+        }
         
         switch inGestureRecognizer.state {
         case .began, .changed:
-            if location != _oldLocation {
-                var segment = 0
-                var lastEnd = CGFloat(0)
-                for index in 1..<(numberOfSegments - 1) {
-                    let testRange = (lastEnd..<(stepSize + lastEnd))
-                    if testRange.contains(location),
-                       index != selectedSegment {
-                        segment = index
+            if .began == inGestureRecognizer.state || location != _oldLocation {
+                var selectedIndex = -1
+                for enumeration in steps.enumerated() {
+                    let testRange = enumeration.element.start..<enumeration.element.end
+                    if testRange.contains(location) {
+                        selectedIndex = enumeration.offset + 1
                         break
-                    } else {
-                        lastEnd = lastEnd + stepSize
                     }
                 }
-                if (1..<(numberOfSegments - 1)).contains(segment),
-                   segment != selectedSegment {
-                    weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = segment
-                    weekdayModeSelectorSegmentedSwitch?.sendActions(for: .valueChanged)
+                
+                if .began == inGestureRecognizer.state || selectedIndex != selectedSegment,
+                   (1..<(numberOfSegments - 1)).contains(selectedIndex) {
+                    if .began == inGestureRecognizer.state {
+                        feedbackGenerator?.impactOccurred(intensity: 1)
+                        feedbackGenerator?.prepare()
+                    }
+                    weekdayModeSelectorSegmentedSwitch.selectedSegmentIndex = selectedIndex
+                    weekdayModeSelectorSegmentedSwitch.sendActions(for: .valueChanged)
                 }
             }
         

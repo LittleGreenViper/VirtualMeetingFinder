@@ -180,6 +180,12 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
      The font for the "I Attend" button.
      */
     private static let _barButtonLabelFont = UIFont.systemFont(ofSize: 15)
+    
+    /* ################################################################## */
+    /**
+     The width of each of the components of our direct picker view.
+     */
+    private static let _pickerViewComponentWidthInDisplayUnits: CGFloat = 140
 
     /* ################################################################## */
     /**
@@ -276,8 +282,11 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
      */
     var isDirectSelectionMode: Bool = false {
         didSet {
-            isNameSearchMode = false
+            notificationGenerator?.notificationOccurred(.success)
+            notificationGenerator?.prepare()
+            
             if isDirectSelectionMode {
+                isNameSearchMode = false
                 completionBar?.isHidden = true
                 weekdayModeSelectorSegmentedSwitch?.isHidden = true
                 timeSelectorContainerView?.isHidden = true
@@ -290,9 +299,6 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                 weekdayModeSelectorSegmentedSwitch?.isHidden = false
                 timeSelectorContainerView?.isHidden = false
             }
-            
-            notificationGenerator?.notificationOccurred(.success)
-            notificationGenerator?.prepare()
         }
     }
     
@@ -1427,30 +1433,58 @@ extension VMF_MainViewController: UIPickerViewDataSource {
 extension VMF_MainViewController: UIPickerViewDelegate {
     /* ################################################################## */
     /**
-     This returns the title for the selected row.
+     This returns the title for the selected row, as a label.
      
      - parameter inPickerView: The picker view.
      - parameter titleForRow: The 0-based row index.
      - parameter forComponent: The 0-based component index.
-
-     - returns: a string, with the title for the indicated row.
+     - parameter reusing: Any previously allocated view, to be reused.
+     
+     - returns: a view (a label), with the title for the indicated row.
      */
-    func pickerView(_ inPickerView: UIPickerView, titleForRow inRow: Int, forComponent inComponent: Int) -> String? {
-        guard !isNameSearchMode else { return nil }
-
-        if 0 == inComponent {
-            return Calendar.current.standaloneWeekdaySymbols[unMapWeekday(inRow + 1) - 1]
-        } else {
-            let dayIndex = unMapWeekday(inPickerView.selectedRow(inComponent: 0) + 1)
-            guard let time = getTimeOf(dayIndex: dayIndex, timeIndex: inRow) else { return nil }
-            let hour = time / 100
-            let minute = time - (hour * 100)
-            let dateComponents = DateComponents(hour: hour, minute: minute)
-            let date = Calendar.current.date(from: dateComponents)
-            let string = date?.localizedTime
-            return string
+    func pickerView(_ inPickerView: UIPickerView, viewForRow inRow: Int, forComponent inComponent: Int, reusing inReusing: UIView?) -> UIView {
+        let ret = inReusing as? UILabel ?? UILabel()
+        ret.adjustsFontSizeToFitWidth = true
+        ret.minimumScaleFactor = 0.5
+        
+        if !isNameSearchMode {
+            if 0 == inComponent {
+                ret.text = Calendar.current.standaloneWeekdaySymbols[unMapWeekday(inRow + 1) - 1]
+            } else {
+                let dayIndex = unMapWeekday(inPickerView.selectedRow(inComponent: 0) + 1)
+                if let time = getTimeOf(dayIndex: dayIndex, timeIndex: inRow) {
+                    let hour = time / 100
+                    let minute = time - (hour * 100)
+                    let dateComponents = DateComponents(hour: hour, minute: minute)
+                    let date = Calendar.current.date(from: dateComponents)
+                    let string = date?.localizedTime
+                    ret.text = string
+                }
+            }
         }
+        
+        if inRow == inPickerView.selectedRow(inComponent: inComponent) {
+            ret.textColor = .systemBackground
+            ret.backgroundColor = .label
+        } else {
+            ret.backgroundColor = .clear
+            ret.textColor = .tintColor
+        }
+        
+        ret.textAlignment = .center
+
+        return ret
     }
+    
+    /* ################################################################## */
+    /**
+     Get the width of a component.
+     
+     - parameter: The picker view.
+     - parameter widthForComponent: The 0-based component index.
+     - returns: The width, in display units, of the component.
+     */
+    func pickerView(_: UIPickerView, widthForComponent: Int) -> CGFloat { Self._pickerViewComponentWidthInDisplayUnits }
     
     /* ################################################################## */
     /**
@@ -1479,6 +1513,8 @@ extension VMF_MainViewController: UIPickerViewDelegate {
             guard let time = getTimeOf(dayIndex: dayIndex, timeIndex: inRow) else { return }
             openTo(dayIndex: dayIndex, time: time)
         }
+        
+        inPickerView.reloadAllComponents()
     }
 }
 

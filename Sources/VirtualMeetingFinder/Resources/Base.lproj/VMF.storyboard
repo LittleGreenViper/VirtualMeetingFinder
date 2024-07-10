@@ -14,7 +14,7 @@
         <!--Main Navigation-->
         <scene sceneID="QCo-5c-Mxs">
             <objects>
-                <navigationController id="U2c-9b-Eip" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="U2c-9b-Eip" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Main Navigation" id="Tdm-it-zYg">
                         <imageReference key="image" image="magnifyingglass" catalog="system" symbolScale="large"/>
                     </tabBarItem>
@@ -22,6 +22,10 @@
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ySH-EU-5I0">
+                        <rect key="frame" x="0.0" y="769" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="Avq-Pc-erz" kind="relationship" relationship="rootViewController" id="UsF-sL-VUu"/>
                     </connections>
@@ -114,6 +118,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="XBh-6R-4Kd" appends="YES" id="Cbo-VD-POL"/>
+                                            <outletCollection property="gestureRecognizers" destination="gBh-iG-N9Q" appends="YES" id="Jf1-If-dzE"/>
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JrU-ny-TZt">
@@ -199,13 +204,13 @@
                                             <outletCollection property="gestureRecognizers" destination="tZV-WQ-Mpq" appends="YES" id="gri-Iz-wCX"/>
                                         </connections>
                                     </view>
-                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4zE-zm-UoW">
-                                        <rect key="frame" x="0.0" y="122" width="361" height="80"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4zE-zm-UoW">
+                                        <rect key="frame" x="0.0" y="122" width="361" height="100"/>
                                         <subviews>
                                             <pickerView contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="stC-p8-nOr">
-                                                <rect key="frame" x="0.0" y="0.0" width="331" height="80"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="331" height="100"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="80" id="0pc-rD-60B"/>
+                                                    <constraint firstAttribute="height" constant="100" id="0pc-rD-60B"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="dataSource" destination="Avq-Pc-erz" id="3kp-tn-8uA"/>
@@ -213,7 +218,7 @@
                                                 </connections>
                                             </pickerView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4k-eR-coX" userLabel="Direct Selection Close Button">
-                                                <rect key="frame" x="331" y="25" width="30" height="30"/>
+                                                <rect key="frame" x="331" y="35" width="30" height="30"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-CLOSE-SEARCH-BUTTON-HINT" label="SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="E4k-eR-coX" secondAttribute="height" multiplier="1:1" id="89N-nk-MWS"/>
@@ -246,7 +251,7 @@
                                 </constraints>
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zdh-eu-ih1">
-                                <rect key="frame" x="16" y="241" width="361" height="577"/>
+                                <rect key="frame" x="16" y="241" width="361" height="528"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="8"/>
@@ -354,6 +359,11 @@
                         <action selector="longPressGestureInDisplayLabelDetected:" destination="Avq-Pc-erz" id="sFs-Rn-cCK"/>
                     </connections>
                 </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="gBh-iG-N9Q" userLabel="Completion Bar Long Press Gesture Recognizer">
+                    <connections>
+                        <action selector="longPressGestureInDisplayLabelDetected:" destination="Avq-Pc-erz" id="mr6-pz-AqQ"/>
+                    </connections>
+                </pongPressGestureRecognizer>
                 <tapGestureRecognizer id="tZV-WQ-Mpq" userLabel="Display Selector Tap Gesture Recognizer">
                     <connections>
                         <action selector="directSelectionOpen:" destination="Avq-Pc-erz" id="XSp-Js-i41"/>
@@ -371,7 +381,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2bI-if-D6f">
-                                <rect key="frame" x="16" y="0.0" width="361" height="818"/>
+                                <rect key="frame" x="16" y="0.0" width="361" height="769"/>
                                 <connections>
                                     <segue destination="t0l-fQ-nL3" kind="embed" id="bet-Cm-ofo"/>
                                 </connections>
@@ -517,14 +527,14 @@
             <objects>
                 <viewController id="P9w-wB-EO1" customClass="VMF_MeetingViewController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BVJ-y8-8wb">
-                        <rect key="frame" x="0.0" y="0.0" width="361" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="759"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="US5-g0-fUz">
-                                <rect key="frame" x="0.0" y="64" width="361" height="744"/>
+                                <rect key="frame" x="0.0" y="64" width="361" height="695"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="X4o-s5-Dmh" userLabel="Container Vertical Stack View">
-                                        <rect key="frame" x="16" y="0.0" width="329" height="744"/>
+                                        <rect key="frame" x="16" y="0.0" width="329" height="695"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="747" text="Meeting Name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0x-Y5-plm">
                                                 <rect key="frame" x="76" y="0.0" width="177" height="20"/>
@@ -547,14 +557,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="SLUG-IN-PROGRESS-STANDALONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7tx-Jg-onI">
-                                                <rect key="frame" x="0.0" y="64" width="329" height="2"/>
+                                                <rect key="frame" x="0.0" y="64" width="329" height="0.0"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-IN-PROGRESS-MI-HINT" label="SLUG-IN-PROGRESS-MI-LABEL"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <color key="textColor" systemColor="systemGreenColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Zone" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JRB-g7-5Qt">
-                                                <rect key="frame" x="128" y="78" width="73" height="20"/>
+                                                <rect key="frame" x="128" y="76" width="73" height="20"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-TZ-MI-HINT" label="SLUG-TZ-MI-LABEL"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="gkH-oV-ao4"/>
@@ -564,14 +574,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7lo-54-meG">
-                                                <rect key="frame" x="164.66666666666666" y="110" width="0.0" height="0.0"/>
+                                                <rect key="frame" x="164.66666666666666" y="108" width="0.0" height="0.0"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-COMMENTS-MI-HINT" label="SLUG-COMMENTS-MI-LABEL"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="odu-fY-u8h">
-                                                <rect key="frame" x="0.0" y="122" width="329" height="54"/>
+                                                <rect key="frame" x="0.0" y="120" width="329" height="54"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" distribution="fillEqually" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="hZz-Uk-7C5">
                                                         <rect key="frame" x="0.0" y="0.0" width="329" height="54"/>
@@ -706,7 +716,7 @@
                                                 </constraints>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GER-7R-iCr">
-                                                <rect key="frame" x="49.666666666666686" y="188" width="230" height="40"/>
+                                                <rect key="frame" x="49.666666666666686" y="186" width="230" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-PHONE-INFO-MI-HINT" label="SLUG-PHONE-INFO-MI-LABEL"/>
                                                 <color key="textColor" systemColor="labelColor"/>
@@ -715,7 +725,7 @@
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                             </textView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="748" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EZk-ly-NJg">
-                                                <rect key="frame" x="44.666666666666657" y="240" width="239.99999999999997" height="0.0"/>
+                                                <rect key="frame" x="44.666666666666657" y="238" width="239.99999999999997" height="0.0"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <accessibility key="accessibilityConfiguration" label="SLUG-XTRA-INFO-MI-LABEL"/>
                                                 <color key="textColor" systemColor="labelColor"/>
@@ -723,26 +733,26 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-FORMATS-HEADER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ml1-yq-PeL">
-                                                <rect key="frame" x="60.666666666666686" y="252.00000000000003" width="208" height="20.333333333333343"/>
+                                                <rect key="frame" x="60.666666666666686" y="250" width="208" height="0.0"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-er-i3Z">
-                                                <rect key="frame" x="49.666666666666686" y="284.33333333333331" width="230" height="50"/>
+                                                <rect key="frame" x="49.666666666666686" y="262" width="230" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uzn-9H-qzY">
-                                                <rect key="frame" x="54.333333333333329" y="346.33333333333331" width="220.66666666666669" height="56.666666666666686"/>
+                                                <rect key="frame" x="54.333333333333329" y="324" width="220.66666666666669" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-IN-PERSON-HEADER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFw-NF-FXN">
-                                                        <rect key="frame" x="0.0" y="0.0" width="220.66666666666666" height="20.333333333333332"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="220.66666666666666" height="0.0"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1E1-F8-ND2">
-                                                        <rect key="frame" x="0.0" y="20.333333333333375" width="220.66666666666666" height="36.333333333333343"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="220.66666666666666" height="30"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -750,7 +760,7 @@
                                                         <dataDetectorType key="dataDetectorTypes" address="YES"/>
                                                     </textView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gel-fq-Thu">
-                                                        <rect key="frame" x="110.33333333333333" y="56.666666666666686" width="0.0" height="0.0"/>
+                                                        <rect key="frame" x="110.33333333333333" y="30" width="0.0" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -762,7 +772,7 @@
                                                 </constraints>
                                             </stackView>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" rotateEnabled="NO" pitchEnabled="NO" showsCompass="NO" showsPointsOfInterest="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bIq-s0-xoL">
-                                                <rect key="frame" x="0.0" y="415" width="329" height="329"/>
+                                                <rect key="frame" x="0.0" y="366" width="329" height="329"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="bIq-s0-xoL" secondAttribute="height" multiplier="1:1" id="aIo-6j-deK"/>
                                                 </constraints>

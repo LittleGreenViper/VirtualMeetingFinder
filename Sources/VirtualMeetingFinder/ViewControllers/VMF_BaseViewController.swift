@@ -126,6 +126,7 @@ extension VMF_BaseViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.isToolbarHidden = true
         feedbackGenerator = UIImpactFeedbackGenerator(style: .rigid)
         feedbackGenerator?.prepare()
         selectionGenerator = UISelectionFeedbackGenerator()

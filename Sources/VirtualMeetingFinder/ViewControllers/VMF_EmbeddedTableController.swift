@@ -110,6 +110,12 @@ protocol VMF_MasterTableControllerProtocol: VMF_BaseProtocol {
      This sets the day picker, if we have one.
      */
     func setDayPicker()
+    
+    /* ################################################################## */
+    /**
+     This enables or disables the attendance item.
+     */
+    func setAttendance()
 }
 
 /* ###################################################################################################################################### */
@@ -133,6 +139,12 @@ extension VMF_MasterTableControllerProtocol {
      Default does nothing
      */
     func setDayPicker() { }
+    
+    /* ################################################################## */
+    /**
+     Default does nothing
+     */
+    func setAttendance() { }
 }
 
 /* ###################################################################################################################################### */
@@ -148,6 +160,30 @@ class VMF_TableCell: UITableViewCell {
      */
     static let reuseID = "VirtualMeetingFinderTableCell"
 
+    /* ################################################################## */
+    /**
+     The table controller that "owns" this cell.
+     */
+    weak var myController: VMF_EmbeddedTableController?
+    
+    /* ################################################################## */
+    /**
+     The single-tap gesture recognizer (select meeting).
+     */
+    private weak var _mySingleTapGesture: UITapGestureRecognizer?
+    
+    /* ################################################################## */
+    /**
+     The double-tap gesture recognizer (change attendance).
+     */
+    private weak var _myDoubleTapGesture: UITapGestureRecognizer?
+
+    /* ################################################################## */
+    /**
+     The meeting instance associated with this.
+     */
+    var myMeeting: MeetingInstance?
+    
     /* ################################################################## */
     /**
      This has an image that denotes what type of meeting we have.
@@ -177,6 +213,107 @@ class VMF_TableCell: UITableViewCell {
      The label that displays an in-progress message.
      */
     @IBOutlet weak var inProgressLabel: UILabel?
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        guard var meeting = myMeeting,
+              let myController = myController
+        else { return }
+        
+        if nil == _myDoubleTapGesture {
+            let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
+            doubleTap.numberOfTapsRequired = 2
+            addGestureRecognizer(doubleTap)
+            _myDoubleTapGesture = doubleTap
+        }
+        
+        if nil == _mySingleTapGesture,
+           let doubleTap = _myDoubleTapGesture {
+            let singleTap = UITapGestureRecognizer(target: self, action: #selector(singleTapped))
+            singleTap.require(toFail: doubleTap)
+            addGestureRecognizer(singleTap)
+            _mySingleTapGesture = singleTap
+        }
+
+        let inProgress = meeting.isMeetingInProgress()
+        let startDate = meeting.getPreviousStartDate(isAdjusted: true)
+        let startTime = startDate.localizedTime
+        
+        if meeting.iAttend {
+            typeImage?.image = UIImage(systemName: "checkmark.square.fill")
+            typeImage?.isAccessibilityElement = true
+            typeImage?.accessibilityLabel = "SLUG-ACC-ATTEND-IMAGE-ON-LABEL".accessibilityLocalizedVariant
+            typeImage?.accessibilityHint = "SLUG-ACC-ATTEND-IMAGE-ON-HINT".accessibilityLocalizedVariant
+        } else {
+            typeImage?.isAccessibilityElement = false
+            typeImage?.image = nil
+        }
+
+        let meetingName = meeting.name
+        let timeZoneString = myController.getMeetingTimeZone(meeting)
+        let inProgressString = String(format: (Calendar.current.startOfDay(for: .now) > startDate ? "SLUG-IN-PROGRESS-YESTERDAY-FORMAT" : "SLUG-IN-PROGRESS-FORMAT").localizedVariant, startTime)
+        
+        nameLabel?.text = meetingName
+        
+        if !timeZoneString.isEmpty {
+            timeZoneLabel?.isHidden = false
+            timeZoneLabel?.text = timeZoneString
+        } else {
+            timeZoneLabel?.isHidden = true
+        }
+        
+        if inProgress,
+           !inProgressString.isEmpty {
+            inProgressLabel?.isHidden = false
+            inProgressLabel?.text = inProgressString
+        } else {
+            inProgressLabel?.isHidden = true
+        }
+        
+        if inProgress {
+            borderColor = UIColor(named: "InProgress")
+            borderWidth = 2
+            cornerRadius = 8
+        } else {
+            borderColor = nil
+            borderWidth = 0
+            cornerRadius = 0
+        }
+        
+        let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
+        let nextStart = meeting.getNextStartDate(isAdjusted: true)
+
+        if 0 < meeting.duration {
+            timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant, weekday, nextStart.localizedTime, nextStart.addingTimeInterval(meeting.duration).localizedTime)
+        } else {
+            timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, nextStart.localizedTime)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when someone double-taps on the row.
+     */
+    @IBAction func doubleTapped(_ inTapGesture: UITapGestureRecognizer) {
+        guard let myController = myController,
+              let myMeeting = myMeeting
+        else { return }
+        
+        myController.attendanceChanged(myMeeting)
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when someone single-taps on the row.
+     */
+    @IBAction func singleTapped(_ inTapGesture: UITapGestureRecognizer) {
+        guard let myController = myController,
+              let myMeeting = myMeeting
+        else { return }
+        
+        myController.selectMeeting(myMeeting)
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -329,6 +466,19 @@ extension VMF_EmbeddedTableController {
      
      - parameter inMeeting: The meeting instance.
      */
+    func attendanceChanged(_ inMeeting: MeetingInstance) {
+        var mutableMeeting = inMeeting
+        mutableMeeting.iAttend = !inMeeting.iAttend
+        valueTable?.reloadData()
+        myController?.setAttendance()
+    }
+    
+    /* ################################################################## */
+    /**
+     Called to show a meeting details page.
+     
+     - parameter inMeeting: The meeting instance.
+     */
     func selectMeeting(_ inMeeting: MeetingInstance) {
         performSegue(withIdentifier: Self._inspectMeetingSegueID, sender: inMeeting)
     }
@@ -368,85 +518,10 @@ extension VMF_EmbeddedTableController: UITableViewDataSource {
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         guard let ret = inTableView.dequeueReusableCell(withIdentifier: VMF_TableCell.reuseID, for: inIndexPath) as? VMF_TableCell else { return UITableViewCell() }
         
-        let backgroundColorToUse: UIColor? = (0 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : .clear
-
-        var meeting = meetings[inIndexPath.row]
-    
-        let inProgress = meeting.isMeetingInProgress()
-        let startDate = meeting.getPreviousStartDate(isAdjusted: true)
-        let startTime = startDate.localizedTime
-        
-        if meeting.iAttend {
-            ret.typeImage?.image = UIImage(systemName: "checkmark.square.fill")
-            ret.typeImage?.isAccessibilityElement = true
-            ret.typeImage?.accessibilityLabel = "SLUG-ACC-ATTEND-IMAGE-ON-LABEL".accessibilityLocalizedVariant
-            ret.typeImage?.accessibilityHint = "SLUG-ACC-ATTEND-IMAGE-ON-HINT".accessibilityLocalizedVariant
-        } else {
-            ret.typeImage?.isAccessibilityElement = false
-            ret.typeImage?.image = nil
-        }
-
-        let meetingName = meeting.name
-        let timeZoneString = getMeetingTimeZone(meeting)
-        let inProgressString = String(format: (Calendar.current.startOfDay(for: .now) > startDate ? "SLUG-IN-PROGRESS-YESTERDAY-FORMAT" : "SLUG-IN-PROGRESS-FORMAT").localizedVariant, startTime)
-        
-        ret.nameLabel?.text = meetingName
-        
-        if !timeZoneString.isEmpty {
-            ret.timeZoneLabel?.isHidden = false
-            ret.timeZoneLabel?.text = timeZoneString
-        } else {
-            ret.timeZoneLabel?.isHidden = true
-        }
-        
-        if inProgress,
-           !inProgressString.isEmpty {
-            ret.inProgressLabel?.isHidden = false
-            ret.inProgressLabel?.text = inProgressString
-        } else {
-            ret.inProgressLabel?.isHidden = true
-        }
-        
-        if inProgress {
-            ret.borderColor = UIColor(named: "InProgress")
-            ret.borderWidth = 2
-            ret.cornerRadius = 8
-        } else {
-            ret.borderColor = nil
-            ret.borderWidth = 0
-            ret.cornerRadius = 0
-        }
-        
-        ret.backgroundColor = backgroundColorToUse
-
-        let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
-        let nextStart = meeting.getNextStartDate(isAdjusted: true)
-
-        if 0 < meeting.duration {
-            ret.timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant, weekday, nextStart.localizedTime, nextStart.addingTimeInterval(meeting.duration).localizedTime)
-        } else {
-            ret.timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, nextStart.localizedTime)
-        }
+        ret.backgroundColor = (0 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : .clear
+        ret.myMeeting = meetings[inIndexPath.row]
+        ret.myController = self
         
         return ret
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: UITableViewDelegate Conformance
-/* ###################################################################################################################################### */
-extension VMF_EmbeddedTableController: UITableViewDelegate {
-    /* ################################################################## */
-    /**
-     Called when a cell is selected. We will use this to open the user viewer.
-     
-     - parameter: The table view (ignored)
-     - parameter willSelectRowAt: The index path of the cell we are selecting.
-     - returns: nil (all the time).
-     */
-    func tableView(_: UITableView, willSelectRowAt inIndexPath: IndexPath) -> IndexPath? {
-        let meeting = meetings[inIndexPath.row]
-        selectMeeting(meeting)
-        return nil
     }
 }

@@ -78,3 +78,5 @@
 "SLUG-DIRECT-URI-MEET"                          =   "Google Meet";
 "SLUG-DIRECT-URI-DISCORD"                       =   "Discord";
 "SLUG-DIRECT-URI-JITSI"                         =   "Jitsi Meet";
+
+"SLUG-SETTINGS-TITLE"                           =   "Settings";

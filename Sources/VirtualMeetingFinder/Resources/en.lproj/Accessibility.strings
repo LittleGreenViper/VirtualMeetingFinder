@@ -30,6 +30,11 @@
 /* This is the hint for the Bar Button item that selects the "I Attend" Screen. */
 "SLUG-ACC-TAB-1-BUTTON-HINT"                    =   "This opens another screen, with only the meetings that you have marked as ones that you attend.";
 
+/* This is the label for the Bar Button item that selects the Settings Screen. */
+"SLUG-ACC-SETTINGS-BUTTON-LABEL"                =   "App Settings";
+/* This is the hint for the Bar Button item that selects the Settings Screen. */
+"SLUG-ACC-SETTINGS-BUTTON-HINT"                 =   "This will open a screen, with various app settings.";
+
 /* This is the label for the segmented switch at the top of the Main Screen. */
 "SLUG-ACC-WEEKDAY-SWITCH-LABEL"                 =   "Select the Weekday";
 /* This is the hint for the segmented switch at the top of the Main Screen. */

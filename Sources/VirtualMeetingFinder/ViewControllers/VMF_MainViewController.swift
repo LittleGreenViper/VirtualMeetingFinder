@@ -365,6 +365,12 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
 
     /* ################################################################## */
     /**
+     The bar button item that brings in the Settings Screen.
+     */
+    @IBOutlet weak var settingsBarButtonItem: UIBarButtonItem?
+    
+    /* ################################################################## */
+    /**
      The bar button item that brings in the My Attendance Screen.
      */
     @IBOutlet weak var myAttendanceBarButtonItem: UIBarButtonItem?
@@ -836,6 +842,14 @@ extension VMF_MainViewController {
         directSelectionPickerView?.selectRow(dayIndex, inComponent: 0, animated: false)
         directSelectionPickerView?.selectRow(timeIndex, inComponent: 1, animated: true)
     }
+    
+    /* ################################################################## */
+    /**
+     This enables or disables the attendance item.
+     */
+    func setAttendance() {
+        myAttendanceBarButtonItem?.isEnabled = !(virtualService?.meetingsThatIAttend.isEmpty ?? true)
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -1153,10 +1167,12 @@ extension VMF_MainViewController {
         navigationItem.title = "SLUG-TAB-0-TITLE".localizedVariant
         VMF_AppDelegate.searchController = self
         searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
-        myAttendanceBarButtonItem?.title = myAttendanceBarButtonItem?.title?.localizedVariant
         myAttendanceBarButtonItem?.isAccessibilityElement = true
         myAttendanceBarButtonItem?.accessibilityLabel = "SLUG-ACC-TAB-1-BUTTON-LABEL"
         myAttendanceBarButtonItem?.accessibilityHint = "SLUG-ACC-TAB-1-BUTTON-HINT"
+        settingsBarButtonItem?.isAccessibilityElement = true
+        settingsBarButtonItem?.accessibilityLabel = "SLUG-ACC-SETTINGS-BUTTON-LABEL"
+        settingsBarButtonItem?.accessibilityHint = "SLUG-ACC-SETTINGS-BUTTON-HINT"
         weekdayModeSelectorSegmentedSwitch?.accessibilityLabel = "SLUG-ACC-WEEKDAY-SWITCH-LABEL"
         weekdayModeSelectorSegmentedSwitch?.accessibilityHint = "SLUG-ACC-WEEKDAY-SWITCH-HINT"
 
@@ -1214,8 +1230,6 @@ extension VMF_MainViewController {
 
         view?.setNeedsLayout()
 
-        myAttendanceBarButtonItem?.isEnabled = !(virtualService?.meetingsThatIAttend.isEmpty ?? true)
-        
         (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = !isNameSearchMode
 
         if VMF_SceneDelegate.forceReloadDelayInSeconds < -VMF_SceneDelegate.lastReloadTime.timeIntervalSinceNow {
@@ -1232,6 +1246,7 @@ extension VMF_MainViewController {
      */
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        setAttendance()
         
         guard let maxIndex = weekdayModeSelectorSegmentedSwitch?.numberOfSegments else { return }
         

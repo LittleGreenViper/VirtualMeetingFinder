@@ -34,6 +34,22 @@
             </objects>
             <point key="canvasLocation" x="-860" y="-27"/>
         </scene>
+        <!--SLUG-SETTINGS-TITLE-->
+        <scene sceneID="ooK-Vu-ggX">
+            <objects>
+                <viewController title="SLUG-SETTINGS-TITLE" id="XMo-Ja-Ohb" customClass="VMF_SettingsViewController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h03-aE-qcW">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="eH8-aw-8mG"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Qnu-js-FBD"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qzb-WU-C37" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="894" y="-718"/>
+        </scene>
         <!--SLUG-TAB-0-TITLE-->
         <scene sceneID="475-3F-L6b">
             <objects>
@@ -299,7 +315,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SLUG-TAB-0-TITLE" id="88p-ma-gyu">
-                        <barButtonItem key="rightBarButtonItem" title="SLUG-TAB-1-BUTTON" id="apy-uC-OrG">
+                        <barButtonItem key="leftBarButtonItem" id="3tP-yY-Fhw">
+                            <imageReference key="image" image="gear.circle" catalog="system" symbolScale="large"/>
+                            <connections>
+                                <segue destination="XMo-Ja-Ohb" kind="show" id="xkf-XT-c6Q"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" id="apy-uC-OrG">
+                            <imageReference key="image" image="checkmark.square.fill" catalog="system" symbolScale="large"/>
                             <connections>
                                 <segue destination="h2L-IG-jx9" kind="show" id="1dM-eQ-05b"/>
                             </connections>
@@ -319,6 +342,7 @@
                         <outlet property="searchCloseButton" destination="Yr2-tI-yOo" id="fdC-8t-139"/>
                         <outlet property="searchItemsContainerView" destination="Uw7-7n-oJo" id="KkA-Fc-FOu"/>
                         <outlet property="searchTextField" destination="p2c-SZ-uyw" id="C6N-3J-n8I"/>
+                        <outlet property="settingsBarButtonItem" destination="3tP-yY-Fhw" id="C2d-H7-CZn"/>
                         <outlet property="tableContainerView" destination="Zdh-eu-ih1" id="JTb-KD-iZG"/>
                         <outlet property="throbber" destination="yRJ-fe-3Cl" id="Y5J-9Q-wAi"/>
                         <outlet property="timeDayDisplayLabel" destination="X3d-iJ-1Id" id="3id-EB-8MS"/>
@@ -400,7 +424,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZHS-o9-5Di" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1053" y="-27"/>
+            <point key="canvasLocation" x="894" y="-27"/>
         </scene>
         <!--Day Time Search Page View Controller-->
         <scene sceneID="JrL-tg-Smc">
@@ -420,7 +444,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqV-aM-ZDe">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqV-aM-ZDe">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -478,6 +502,7 @@
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstItem="5hj-cI-Pii" firstAttribute="top" secondItem="E3R-WY-hTi" secondAttribute="top" constant="8" id="8Cm-i7-PYN"/>
                                                 <constraint firstAttribute="trailing" secondItem="5hj-cI-Pii" secondAttribute="trailing" constant="4" id="KKs-e3-QCy"/>
@@ -520,7 +545,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oIp-Mc-hd6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054" y="835"/>
+            <point key="canvasLocation" x="895" y="835"/>
         </scene>
         <!--Meeting View Controller-->
         <scene sceneID="Uwk-Hi-8Do">
@@ -881,7 +906,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1876" y="835"/>
+            <point key="canvasLocation" x="1697" y="835"/>
         </scene>
     </scenes>
     <resources>
@@ -891,6 +916,7 @@
         <image name="arrowtriangle.left.fill" catalog="system" width="128" height="113"/>
         <image name="arrowtriangle.right.fill" catalog="system" width="128" height="113"/>
         <image name="checkmark.square.fill" catalog="system" width="128" height="114"/>
+        <image name="gear.circle" catalog="system" width="128" height="123"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="x.circle" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">

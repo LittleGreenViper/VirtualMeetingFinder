@@ -153,7 +153,7 @@ extension VMF_BaseViewController {
      */
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
-        navigationItem.title = navigationItem.title?.localizedVariant
+        navigationItem.title = navigationItem.title?.localizedVariant ?? title?.localizedVariant
     }
 }
 

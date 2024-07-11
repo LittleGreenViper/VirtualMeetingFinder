@@ -95,4 +95,41 @@
 "SLUG-FILTER-SERVICE-MEETINGS"                  =   "Reduce Service Meetings";
 
 // MARK: - ABOUT SCREEN -
+/* The name of the screen */
 "SLUG-ABOUT-SCREEN-TITLE"                       =   "About This App";
+/* The complete version */
+"SLUG-VERSION-FORMAT"                           =   "Version: %@ (%@)";
+/* The text of the "Presented By" button. */
+"SLUG-PRESENTED-BY"                             =   "Presented By Little Green Viper Software Development LLC";
+/* The URL to the site. */
+"SLUG-PRESENTED-BY-URL"                         =   "https://littlegreenviper.com";
+/* The header for the dependency list. */
+"SLUG-DEPENDENCY-HEADER-LABEL"                  =   "Software Dependencies:";
+/* The button string for the Basic GCD Timer button */
+"SLUG-BGCD-LABEL"                               =   "RVS_BasicGCDTimer";
+/* The URL string for the Basic GCD Timer button */
+"SLUG-BGCD-URL"                                 =   "https://github.com/RiftValleySoftware/RVS_BasicGCDTimer";
+/* The button string for the Generic Swift Toolbox button */
+"SLUG-GSWT-LABEL"                               =   "RVS_Generic_Swift_Toolbox";
+/* The URL string for the Generic Swift Toolbox button */
+"SLUG-GSWT-URL"                                 =   "https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox";
+/* The button string for the Persistent Prefs button */
+"SLUG-PP-LABEL"                                 =   "RVS_PersistentPrefs";
+/* The URL string for the Persistent Prefs button */
+"SLUG-PP-URL"                                   =   "https://github.com/RiftValleySoftware/RVS_PersistentPrefs";
+/* The button string for the UIKit Toolbox button */
+"SLUG-UIKTB-LABEL"                              =   "RVS_UIKit_Toolbox";
+/* The URL string for the UIKit Toolbox button */
+"SLUG-UIKTB-URL"                                =   "https://github.com/RiftValleySoftware/RVS_UIKit_Toolbox";
+/* The button string for the SwiftBMLSDK button */
+"SLUG-SWBMLSDK-LABEL"                           =   "SwiftBMLSDK";
+/* The URL string for the SwiftBMLSDK button */
+"SLUG-SWBMLSDK-URL"                             =   "https://github.com/LittleGreenViper/SwiftBMLSDK";
+/* The button string for the Meeting Server button */
+"SLUG-ML-LABEL"                                 =   "LGV_MeetingServer";
+/* The URL string for the Meeting Server button */
+"SLUG-ML-URL"                                   =   "https://github.com/LittleGreenViper/LGV_MeetingServer";
+/* The button string for the BMLT button */
+"SLUG-BMLT-LABEL"                               =   "The Basic Meeting List Toolbox";
+/* The URL string for the BMLT button */
+"SLUG-BMLT-URL"                                 =   "https://bmlt.app";

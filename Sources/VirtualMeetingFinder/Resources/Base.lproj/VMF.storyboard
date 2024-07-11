@@ -132,14 +132,169 @@
                     <view key="view" contentMode="scaleToFill" id="FGS-8R-yXk">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yeg-ff-4AE">
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WRy-bi-C9o">
+                                        <rect key="frame" x="16" y="0.0" width="361" height="666"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoMask" translatesAutoresizingMaskIntoConstraints="NO" id="R9r-NT-2KG">
+                                                <rect key="frame" x="148.66666666666666" y="0.0" width="64" height="64"/>
+                                                <color key="tintColor" systemColor="labelColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="R9r-NT-2KG" secondAttribute="height" multiplier="1:1" id="GbJ-lL-d4M"/>
+                                                    <constraint firstAttribute="height" constant="64" id="mln-va-uMz"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xh0-44-RVJ">
+                                                <rect key="frame" x="131.66666666666666" y="72" width="98" height="24"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Slk-3y-QNF">
+                                                <rect key="frame" x="154.66666666666666" y="104" width="51.666666666666657" height="18"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="but-8i-P6u" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                                <rect key="frame" x="102" y="130" width="157" height="241.66666666666663"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="SLUG-PRESENTED-BY"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="urlString" value="SLUG-PRESENTED-BY-URL"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="nPR-b3-Vgu"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SLUG-DEPENDENCY-HEADER-LABEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uLW-2E-rrI">
+                                                <rect key="frame" x="31" y="379.66666666666669" width="299" height="20.333333333333314"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cz-VL-ZHr" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                                <rect key="frame" x="111" y="408" width="139" height="30"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="SLUG-BGCD-LABEL"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="urlString" value="SLUG-BGCD-URL"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="PDM-Nb-6Gk"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lB7-t4-4AI" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                                <rect key="frame" x="110.66666666666669" y="446" width="140" height="30"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="SLUG-GSWT-LABEL"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="urlString" value="SLUG-GSWT-URL"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="dwD-9t-EOm"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQF-Hl-TYC" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                                <rect key="frame" x="122.66666666666666" y="484" width="116" height="30"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="SLUG-PP-LABEL"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="urlString" value="SLUG-PP-URL"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="OMD-nA-eCV"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6E-27-5lY" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                                <rect key="frame" x="110" y="522" width="141" height="30"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="SLUG-UIKTB-LABEL"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="urlString" value="SLUG-UIKTB-URL"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="Jzr-tW-5Sn"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ad-HR-0Ir" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                                <rect key="frame" x="90.666666666666686" y="560" width="180" height="30"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="SLUG-SWBMLSDK-LABEL"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="urlString" value="SLUG-SWBMLSDK-URL"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="Ata-o8-uFz"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2WV-WB-GuG" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                                <rect key="frame" x="121.66666666666666" y="598" width="118" height="30"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="SLUG-ML-LABEL"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="urlString" value="SLUG-ML-URL"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="Ruf-Pj-RNJ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytT-1n-OTi" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                                <rect key="frame" x="113" y="636" width="135" height="30"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="SLUG-BMLT-LABEL"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="urlString" value="SLUG-BMLT-URL"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="VQc-8e-TLK"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="zaV-jr-mWm" firstAttribute="bottom" secondItem="WRy-bi-C9o" secondAttribute="bottom" placeholder="YES" id="6Ps-QN-ZIg"/>
+                                    <constraint firstItem="WRy-bi-C9o" firstAttribute="bottom" secondItem="vtR-Xs-RsT" secondAttribute="bottom" id="6RY-93-6Zr"/>
+                                    <constraint firstItem="WRy-bi-C9o" firstAttribute="top" secondItem="vtR-Xs-RsT" secondAttribute="top" id="BkQ-UG-SvM"/>
+                                    <constraint firstItem="WRy-bi-C9o" firstAttribute="trailing" secondItem="vtR-Xs-RsT" secondAttribute="trailing" constant="-16" id="TDF-9o-885"/>
+                                    <constraint firstItem="WRy-bi-C9o" firstAttribute="leading" secondItem="vtR-Xs-RsT" secondAttribute="leading" constant="16" id="a2h-3n-XXM"/>
+                                    <constraint firstItem="WRy-bi-C9o" firstAttribute="width" secondItem="Yeg-ff-4AE" secondAttribute="width" constant="-32" id="qPv-ys-nn1"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="vtR-Xs-RsT"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="zaV-jr-mWm"/>
+                            </scrollView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="gHp-rl-cgk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Yeg-ff-4AE" firstAttribute="top" secondItem="gHp-rl-cgk" secondAttribute="top" id="OhX-8G-lnt"/>
+                            <constraint firstItem="Yeg-ff-4AE" firstAttribute="leading" secondItem="gHp-rl-cgk" secondAttribute="leading" id="f7O-8a-Zdy"/>
+                            <constraint firstItem="Yeg-ff-4AE" firstAttribute="bottom" secondItem="gHp-rl-cgk" secondAttribute="bottom" id="kbz-cd-ymy"/>
+                            <constraint firstItem="Yeg-ff-4AE" firstAttribute="trailing" secondItem="gHp-rl-cgk" secondAttribute="trailing" id="lpi-la-Cuc"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SLUG-ABOUT-SCREEN-TITLE" id="id6-4S-Lko"/>
+                    <connections>
+                        <outlet property="appNameLabel" destination="xh0-44-RVJ" id="mv4-1X-YDi"/>
+                        <outlet property="dependencySectionHeader" destination="uLW-2E-rrI" id="45q-nM-WlI"/>
+                        <outlet property="versionLabel" destination="Slk-3y-QNF" id="r22-qs-7pt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fKB-pg-f9x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1697" y="-718"/>
+            <point key="canvasLocation" x="1696.9465648854962" y="-718.30985915492965"/>
         </scene>
         <!--SLUG-TAB-0-TITLE-->
         <scene sceneID="475-3F-L6b">
@@ -1013,6 +1168,7 @@
     </scenes>
     <resources>
         <image name="Globe" width="612" height="612"/>
+        <image name="LogoMask" width="612" height="612"/>
         <image name="Phone" width="612" height="612"/>
         <image name="Video" width="612" height="612"/>
         <image name="arrowtriangle.left.fill" catalog="system" width="128" height="113"/>

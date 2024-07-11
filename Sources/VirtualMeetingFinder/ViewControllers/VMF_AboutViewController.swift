@@ -21,6 +21,41 @@ import UIKit
 import RVS_Generic_Swift_Toolbox
 
 /* ###################################################################################################################################### */
+// MARK: - The URL Button Class -
+/* ###################################################################################################################################### */
+/**
+ This is a special button that has a string and a URL.
+ */
+class VMF_URLButton: UIButton {
+    /* ################################################################## */
+    /**
+     This is the URL that is associated with this button.
+     */
+    @IBInspectable var urlString: String?
+    
+    /* ################################################################## */
+    /**
+     The string, as a URL.
+     */
+    var url: URL? { URL(string: (urlString ?? "").localizedVariant) }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension VMF_URLButton {
+    /* ################################################################## */
+    /**
+     Called when the subviews are being laid out.
+     */
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        titleLabel?.numberOfLines = 0
+        setTitle(title(for: .normal)?.localizedVariant, for: .normal)
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - About View Controller -
 /* ###################################################################################################################################### */
 /**
@@ -29,5 +64,58 @@ import RVS_Generic_Swift_Toolbox
 class VMF_AboutViewController: VMF_BaseViewController {
     /* ################################################################## */
     /**
+     This displays the app name.
      */
+    @IBOutlet weak var appNameLabel: UILabel?
+    
+    /* ################################################################## */
+    /**
+     This displays the full version of the app.
+     */
+    @IBOutlet weak var versionLabel: UILabel?
+    
+    /* ################################################################## */
+    /**
+     The header for the dependency list
+     */
+    @IBOutlet weak var dependencySectionHeader: UILabel?
+}
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension VMF_AboutViewController {
+    /* ################################################################## */
+    /**
+     Called when the view has completed loading.
+     */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        appNameLabel?.text = Bundle.main.appDisplayName
+        
+        let mainVersion = Bundle.main.appVersionString
+        let buildVersion = Bundle.main.appVersionBuildString
+        
+        versionLabel?.text = String(format: "SLUG-VERSION-FORMAT".localizedVariant, mainVersion, buildVersion)
+        
+        dependencySectionHeader?.text = dependencySectionHeader?.text?.localizedVariant
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Callbacks
+/* ###################################################################################################################################### */
+extension VMF_AboutViewController {
+    /* ################################################################## */
+    /**
+     This is called when one of the URL buttons is hit, and takes us to the site.
+     
+     - parameter: the button.
+     */
+    @IBAction func urlButtonHit(_ inButton: VMF_URLButton) {
+        guard let url = inButton.url else { return }
+        UIApplication.shared.open(url)
+        hardImpactHaptic()
+    }
 }

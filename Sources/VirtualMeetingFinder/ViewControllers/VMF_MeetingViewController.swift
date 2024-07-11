@@ -123,7 +123,7 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     /**
      This contains any additional comments.
      */
-    @IBOutlet weak var commentsLabel: UILabel?
+    @IBOutlet weak var commentsTextView: UITextView?
     
     /* ################################################################## */
     /**
@@ -310,7 +310,7 @@ extension VMF_MeetingViewController {
         videoButtonContainer?.isHidden = true
         globeButtonContainer?.isHidden = true
         phoneInfoTextView?.isHidden = true
-        commentsLabel?.isHidden = true
+        commentsTextView?.isHidden = true
         linkContainer?.isHidden = true
         inPersonContainer?.isHidden = true
         locationMapView?.isHidden = true
@@ -321,8 +321,8 @@ extension VMF_MeetingViewController {
         
         if let comments = meeting?.comments,
            !comments.isEmpty {
-            commentsLabel?.isHidden = false
-            commentsLabel?.text = comments
+            commentsTextView?.isHidden = false
+            commentsTextView?.text = comments
         }
         
         var directPhoneNumberString = meeting?.directPhoneURI?.absoluteString.replacingOccurrences(of: "https://", with: "tel:") ?? ""

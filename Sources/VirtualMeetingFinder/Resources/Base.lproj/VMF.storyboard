@@ -45,11 +45,11 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajV-cl-aJm">
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qPV-d8-WEJ">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qPV-d8-WEJ">
                                         <rect key="frame" x="16" y="0.0" width="361" height="666"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ecF-pT-urt">
-                                                <rect key="frame" x="0.0" y="0.0" width="361" height="666"/>
+                                                <rect key="frame" x="20" y="0.0" width="321.33333333333331" height="666"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-FILTER-SERVICE-MEETINGS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hYF-E7-WBK">
                                                         <rect key="frame" x="0.0" y="323" width="268.33333333333331" height="20.333333333333314"/>
@@ -61,7 +61,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUr-un-v6W">
-                                                        <rect key="frame" x="272.33333333333331" y="317.66666666666669" width="90.666666666666686" height="31"/>
+                                                        <rect key="frame" x="272.33333333333331" y="317.66666666666669" width="51" height="31"/>
                                                         <accessibility key="accessibilityConfiguration" hint="SLUG-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-FILTER-SERVICE-MEETINGS-LABEL"/>
                                                         <connections>
                                                             <action selector="filterServiceMeetingsHit:" destination="XMo-Ja-Ohb" eventType="valueChanged" id="Zmb-Ws-ZxK"/>

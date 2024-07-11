@@ -29,6 +29,8 @@
 "SLUG-NOON-TIME"                                =   "Noon";
 /* We replace 2359 with the word "Midnight" */
 "SLUG-MIDNIGHT-TIME"                            =   "Midnight";
+/* General-Purpose Back Button */
+"SLUG-BACK"                                     =   "Back";
 
 // MARK: - MAIN SCREEN -
 

@@ -142,6 +142,7 @@ extension VMF_BaseViewController {
      */
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        navigationItem.backButtonTitle = "SLUG-BACK".localizedVariant
         accessorizer()
     }
     

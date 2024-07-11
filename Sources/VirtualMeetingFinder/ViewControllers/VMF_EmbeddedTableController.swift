@@ -412,7 +412,12 @@ class VMF_EmbeddedTableController: VMF_BaseViewController, VMF_EmbeddedTableCont
     /**
      This handles the meeting collection for this.
      */
-    var meetings: [MeetingInstance] = [] { didSet { valueTable?.reloadData() }}
+    var meetings: [MeetingInstance] = [] {
+        didSet {
+            _cachedFiltered = nil
+            valueTable?.reloadData()
+        }
+    }
 
     /* ################################################################## */
     /**
@@ -420,7 +425,8 @@ class VMF_EmbeddedTableController: VMF_BaseViewController, VMF_EmbeddedTableCont
      */
     var filteredMeetings: [MeetingInstance] {
         guard nil == _cachedFiltered else { return _cachedFiltered ?? [] }
-        _cachedFiltered = meetings.filter { VMF_Prefs().excludeServiceMeetings ? !$0.isServiceMeeting : true }
+        let exclude = VMF_Prefs().excludeServiceMeetings
+        _cachedFiltered = meetings.filter { exclude ? !$0.isServiceMeeting : true }
         
         return _cachedFiltered ?? []
     }

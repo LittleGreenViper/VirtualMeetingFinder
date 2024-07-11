@@ -31,6 +31,11 @@ class VMF_SettingsViewController: VMF_BaseViewController {
     /* ################################################################## */
     /**
      */
+    @IBOutlet weak var infoBarButtonItem: UIBarButtonItem?
+    
+    /* ################################################################## */
+    /**
+     */
     @IBOutlet weak var filterServiceMeetingsLabel: UILabel?
     
     /* ################################################################## */

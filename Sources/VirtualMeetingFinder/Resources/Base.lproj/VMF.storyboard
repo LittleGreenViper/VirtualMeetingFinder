@@ -102,10 +102,18 @@
                             <constraint firstItem="ajV-cl-aJm" firstAttribute="bottom" secondItem="eH8-aw-8mG" secondAttribute="bottom" id="jve-fM-xFJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Qnu-js-FBD"/>
+                    <navigationItem key="navigationItem" id="Qnu-js-FBD">
+                        <barButtonItem key="rightBarButtonItem" id="Yoa-G1-2C2">
+                            <imageReference key="image" image="info.circle.fill" catalog="system" symbolScale="large"/>
+                            <connections>
+                                <segue destination="njl-CG-MJ9" kind="show" id="sjv-98-xPF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="filterServiceMeetingsLabel" destination="hYF-E7-WBK" id="dkR-bL-nJL"/>
                         <outlet property="filterServiceMeetingsSwitch" destination="bUr-un-v6W" id="hkg-CO-kd5"/>
+                        <outlet property="infoBarButtonItem" destination="Yoa-G1-2C2" id="KxB-sa-ggP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qzb-WU-C37" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -116,6 +124,22 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="893.89312977099235" y="-718.30985915492965"/>
+        </scene>
+        <!--SLUG-ABOUT-SCREEN-TITLE-->
+        <scene sceneID="Mrg-o4-W18">
+            <objects>
+                <viewController id="njl-CG-MJ9" customClass="VMF_AboutViewController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FGS-8R-yXk">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="gHp-rl-cgk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="SLUG-ABOUT-SCREEN-TITLE" id="id6-4S-Lko"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fKB-pg-f9x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1697" y="-718"/>
         </scene>
         <!--SLUG-TAB-0-TITLE-->
         <scene sceneID="475-3F-L6b">
@@ -504,7 +528,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xVo-uf-z8W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="109" y="835"/>
+            <point key="canvasLocation" x="111" y="683"/>
         </scene>
         <!--Embedded Table Controller-->
         <scene sceneID="ofD-gu-h4c">
@@ -622,7 +646,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oIp-Mc-hd6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="895" y="835"/>
+            <point key="canvasLocation" x="894" y="682"/>
         </scene>
         <!--Meeting View Controller-->
         <scene sceneID="Uwk-Hi-8Do">
@@ -983,7 +1007,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1697" y="835"/>
+            <point key="canvasLocation" x="1697" y="682"/>
         </scene>
     </scenes>
     <resources>
@@ -994,6 +1018,7 @@
         <image name="arrowtriangle.right.fill" catalog="system" width="128" height="113"/>
         <image name="checkmark.square.fill" catalog="system" width="128" height="114"/>
         <image name="gear.circle" catalog="system" width="128" height="123"/>
+        <image name="info.circle.fill" catalog="system" width="128" height="123"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="x.circle" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">

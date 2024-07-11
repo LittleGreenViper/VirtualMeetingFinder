@@ -93,3 +93,6 @@
 "SLUG-SETTINGS-TITLE"                           =   "Settings";
 /* The text for the label for the Reduce Service Meetings switch. */
 "SLUG-FILTER-SERVICE-MEETINGS"                  =   "Reduce Service Meetings";
+
+// MARK: - ABOUT SCREEN -
+"SLUG-ABOUT-SCREEN-TITLE"                       =   "About This App";

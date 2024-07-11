@@ -225,10 +225,16 @@ extension VMF_TableCell {
      */
     override func layoutSubviews() {
         super.layoutSubviews()
-        guard var meeting = myMeeting,
-              let myController = myController
-        else { return }
-        
+        if myMeeting?.isMeetingInProgress() ?? false {
+            borderColor = UIColor(named: "InProgress")
+            borderWidth = 2
+            cornerRadius = 8
+        } else {
+            borderColor = nil
+            borderWidth = 0
+            cornerRadius = 0
+        }
+
         if nil == _myDoubleTapGesture {
             let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
             doubleTap.numberOfTapsRequired = 2
@@ -243,61 +249,6 @@ extension VMF_TableCell {
             addGestureRecognizer(singleTap)
             _mySingleTapGesture = singleTap
         }
-
-        let inProgress = meeting.isMeetingInProgress()
-        let startDate = meeting.getPreviousStartDate(isAdjusted: true)
-        let startTime = startDate.localizedTime
-        
-        if meeting.iAttend {
-            typeImage?.image = UIImage(systemName: "checkmark.square.fill")
-            typeImage?.isAccessibilityElement = true
-            typeImage?.accessibilityLabel = "SLUG-ACC-ATTEND-IMAGE-ON-LABEL".accessibilityLocalizedVariant
-            typeImage?.accessibilityHint = "SLUG-ACC-ATTEND-IMAGE-ON-HINT".accessibilityLocalizedVariant
-        } else {
-            typeImage?.isAccessibilityElement = false
-            typeImage?.image = nil
-        }
-
-        let meetingName = meeting.name
-        let timeZoneString = myController.getMeetingTimeZone(meeting)
-        let inProgressString = String(format: (Calendar.current.startOfDay(for: .now) > startDate ? "SLUG-IN-PROGRESS-YESTERDAY-FORMAT" : "SLUG-IN-PROGRESS-FORMAT").localizedVariant, startTime)
-        
-        nameLabel?.text = meetingName
-        
-        if !timeZoneString.isEmpty {
-            timeZoneLabel?.isHidden = false
-            timeZoneLabel?.text = timeZoneString
-        } else {
-            timeZoneLabel?.isHidden = true
-        }
-        
-        if inProgress,
-           !inProgressString.isEmpty {
-            inProgressLabel?.isHidden = false
-            inProgressLabel?.text = inProgressString
-        } else {
-            inProgressLabel?.isHidden = true
-        }
-        
-        if inProgress {
-            borderColor = UIColor(named: "InProgress")
-            borderWidth = 2
-            cornerRadius = 8
-        } else {
-            borderColor = nil
-            borderWidth = 0
-            cornerRadius = 0
-        }
-        
-        let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
-        let nextStart = meeting.getNextStartDate(isAdjusted: true)
-
-        if 0 < meeting.duration {
-            timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant, weekday, nextStart.localizedTime, nextStart.addingTimeInterval(meeting.duration).localizedTime)
-        } else {
-            timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, nextStart.localizedTime)
-        }
-        layoutIfNeeded()
     }
 }
 
@@ -529,12 +480,59 @@ extension VMF_EmbeddedTableController: UITableViewDataSource {
      - parameter numberOfRowsInSection: The index path of the cell we want.
      */
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
-        guard let ret = inTableView.dequeueReusableCell(withIdentifier: VMF_TableCell.reuseID, for: inIndexPath) as? VMF_TableCell else { return UITableViewCell() }
+        guard let ret = inTableView.dequeueReusableCell(withIdentifier: VMF_TableCell.reuseID) as? VMF_TableCell else { return UITableViewCell() }
         
-        ret.backgroundColor = (0 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : .clear
-        ret.myMeeting = meetings[inIndexPath.row]
+        // NB: I have to assign all the table element values here, because if I don't, the table gets all confused in its layout calculations.
+        
+        var meeting = meetings[inIndexPath.row]
+        
         ret.myController = self
+        ret.backgroundColor = (0 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : .clear
+        ret.myMeeting = meeting
+
+        let inProgress = meeting.isMeetingInProgress()
+        let startDate = meeting.getPreviousStartDate(isAdjusted: true)
+        let startTime = startDate.localizedTime
         
+        if meeting.iAttend {
+            ret.typeImage?.image = UIImage(systemName: "checkmark.square.fill")
+            ret.typeImage?.isAccessibilityElement = true
+            ret.typeImage?.accessibilityLabel = "SLUG-ACC-ATTEND-IMAGE-ON-LABEL".accessibilityLocalizedVariant
+            ret.typeImage?.accessibilityHint = "SLUG-ACC-ATTEND-IMAGE-ON-HINT".accessibilityLocalizedVariant
+        } else {
+            ret.typeImage?.isAccessibilityElement = false
+            ret.typeImage?.image = nil
+        }
+
+        let meetingName = meeting.name
+        let timeZoneString = getMeetingTimeZone(meeting)
+        let inProgressString = String(format: (Calendar.current.startOfDay(for: .now) > startDate ? "SLUG-IN-PROGRESS-YESTERDAY-FORMAT" : "SLUG-IN-PROGRESS-FORMAT").localizedVariant, startTime)
+        
+        ret.nameLabel?.text = meetingName
+        
+        if !timeZoneString.isEmpty {
+            ret.timeZoneLabel?.isHidden = false
+            ret.timeZoneLabel?.text = timeZoneString
+        } else {
+            ret.timeZoneLabel?.isHidden = true
+        }
+        
+        if inProgress {
+            ret.inProgressLabel?.isHidden = false
+            ret.inProgressLabel?.text = inProgressString
+        } else {
+            ret.inProgressLabel?.isHidden = true
+        }
+        
+        let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
+        let nextStart = meeting.getNextStartDate(isAdjusted: true)
+
+        if 0 < meeting.duration {
+            ret.timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant, weekday, nextStart.localizedTime, nextStart.addingTimeInterval(meeting.duration).localizedTime)
+        } else {
+            ret.timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, nextStart.localizedTime)
+        }
+
         return ret
     }
 }

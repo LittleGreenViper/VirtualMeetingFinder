@@ -159,7 +159,7 @@ class VMF_TableCell: UITableViewCell {
      This is the reuse ID for the table cell.
      */
     static let reuseID = "VirtualMeetingFinderTableCell"
-
+    
     /* ################################################################## */
     /**
      The table controller that "owns" this cell.
@@ -177,7 +177,7 @@ class VMF_TableCell: UITableViewCell {
      The double-tap gesture recognizer (change attendance).
      */
     private weak var _myDoubleTapGesture: UITapGestureRecognizer?
-
+    
     /* ################################################################## */
     /**
      The meeting instance associated with this.
@@ -189,13 +189,13 @@ class VMF_TableCell: UITableViewCell {
      This has an image that denotes what type of meeting we have.
      */
     @IBOutlet weak var typeImage: UIImageView?
-
+    
     /* ################################################################## */
     /**
      This is the meeting name.
      */
     @IBOutlet weak var nameLabel: UILabel?
-
+    
     /* ################################################################## */
     /**
      This displays the weekday, start time, and end time.
@@ -207,16 +207,24 @@ class VMF_TableCell: UITableViewCell {
      The label that displays the timezone.
      */
     @IBOutlet weak var timeZoneLabel: UILabel?
-
+    
     /* ################################################################## */
     /**
      The label that displays an in-progress message.
      */
     @IBOutlet weak var inProgressLabel: UILabel?
-    
+}
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension VMF_TableCell {
+    /* ################################################################## */
+    /**
+     Called when the view is laid out.
+     */
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         guard var meeting = myMeeting,
               let myController = myController
         else { return }
@@ -289,8 +297,14 @@ class VMF_TableCell: UITableViewCell {
         } else {
             timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, nextStart.localizedTime)
         }
+        layoutIfNeeded()
     }
-    
+}
+
+/* ###################################################################################################################################### */
+// MARK: Callbacks
+/* ###################################################################################################################################### */
+extension VMF_TableCell {
     /* ################################################################## */
     /**
      Called when someone double-taps on the row.

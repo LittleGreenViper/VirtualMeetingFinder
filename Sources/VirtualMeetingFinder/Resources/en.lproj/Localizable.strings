@@ -82,10 +82,12 @@
 
 // MARK: - ATTENDANCE SCREEN -
 
-/* The title of the secondary "List My Attendance" Screen */
+/* The title of the "My Attendance" Screen */
 "SLUG-TAB-1-TITLE"                              =   "My Attendance";
 
 // MARK: - SETTINGS SCREEN -
 
+/* The title of the Settings Screen. */
 "SLUG-SETTINGS-TITLE"                           =   "Settings";
+/* The text for the label for the Reduce Service Meetings switch. */
 "SLUG-FILTER-SERVICE-MEETINGS"                  =   "Reduce Service Meetings";

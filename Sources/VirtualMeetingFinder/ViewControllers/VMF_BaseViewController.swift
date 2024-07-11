@@ -213,4 +213,31 @@ extension VMF_BaseViewController {
         guard let view = view else { return }
         accessorize(me: view)
     }
+    
+    /* ################################################################## */
+    /**
+     Triggers a subtle success haptic.
+     */
+    func selectionHaptic() {
+        selectionGenerator?.selectionChanged()
+        selectionGenerator?.prepare()
+    }
+    
+    /* ################################################################## */
+    /**
+     Triggers a "success" haptic.
+     */
+    func successHaptic() {
+        notificationGenerator?.notificationOccurred(.success)
+        notificationGenerator?.prepare()
+    }
+    
+    /* ################################################################## */
+    /**
+     Triggers a "hard impact" haptic.
+     */
+    func hardImpactHaptic() {
+        feedbackGenerator?.impactOccurred(intensity: 1)
+        feedbackGenerator?.prepare()
+    }
 }

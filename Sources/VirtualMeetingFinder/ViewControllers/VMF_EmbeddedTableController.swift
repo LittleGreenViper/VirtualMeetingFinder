@@ -404,8 +404,7 @@ extension VMF_EmbeddedTableController {
         super.viewDidAppear(inIsAnimated)
         valueTable?.reloadData()
         myController?.tableDisplayController = self
-        selectionGenerator?.selectionChanged()
-        selectionGenerator?.prepare()
+        selectionHaptic()
         myController?.updateThermometer(self)
         myController?.setDayPicker()
     }
@@ -422,8 +421,7 @@ extension VMF_EmbeddedTableController {
            let meetingInstance = inData as? MeetingInstance {
             destination.myController = self
             destination.meeting = meetingInstance
-            feedbackGenerator?.impactOccurred(intensity: 1)
-            feedbackGenerator?.prepare()
+            hardImpactHaptic()
         }
     }
 }

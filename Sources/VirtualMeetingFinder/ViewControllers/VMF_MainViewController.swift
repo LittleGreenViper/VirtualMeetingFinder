@@ -268,8 +268,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
             }
             
             if isNameSearchMode != oldValue {
-                notificationGenerator?.notificationOccurred(.success)
-                notificationGenerator?.prepare()
+                successHaptic()
             }
             
             (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = isNameSearchMode
@@ -282,8 +281,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
      */
     var isDirectSelectionMode: Bool = false {
         didSet {
-            notificationGenerator?.notificationOccurred(.success)
-            notificationGenerator?.prepare()
+            successHaptic()
             
             if isDirectSelectionMode {
                 isNameSearchMode = false
@@ -934,8 +932,7 @@ extension VMF_MainViewController {
                     dayIndex -= 1
                     timeIndex = getDailyMeetings(for: dayIndex).keys.count - 1
                 }
-                notificationGenerator?.notificationOccurred(.success)
-                notificationGenerator?.prepare()
+                successHaptic()
             }
             
             guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
@@ -968,8 +965,7 @@ extension VMF_MainViewController {
                     dayIndex += 1
                     timeIndex = 0
                 }
-                notificationGenerator?.notificationOccurred(.success)
-                notificationGenerator?.prepare()
+                successHaptic()
             }
             
             guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
@@ -989,8 +985,7 @@ extension VMF_MainViewController {
      */
     @IBAction func doubleTapOnDayTimeLabel(_: Any) {
         if !isNameSearchMode {
-            feedbackGenerator?.impactOccurred(intensity: 1)
-            feedbackGenerator?.prepare()
+            hardImpactHaptic()
             openTo()
         }
     }
@@ -1032,8 +1027,7 @@ extension VMF_MainViewController {
                 if .began == inGestureRecognizer.state || selectedIndex != selectedSegment,
                    (1..<(numberOfSegments - 1)).contains(selectedIndex) {
                     if .began == inGestureRecognizer.state {
-                        feedbackGenerator?.impactOccurred(intensity: 1)
-                        feedbackGenerator?.prepare()
+                        hardImpactHaptic()
                     }
                     weekdayModeSelectorSegmentedSwitch.selectedSegmentIndex = selectedIndex
                     weekdayModeSelectorSegmentedSwitch.sendActions(for: .valueChanged)
@@ -1070,8 +1064,7 @@ extension VMF_MainViewController {
             if timeSlot != Int(_oldLocation),
                let time = getTimeOf(dayIndex: dayIndex, timeIndex: timeSlot) {
                 if .began == inGestureRecognizer.state {
-                    feedbackGenerator?.impactOccurred(intensity: 1)
-                    feedbackGenerator?.prepare()
+                    hardImpactHaptic()
                 }
                 
                 openTo(dayIndex: dayIndex, time: time)
@@ -1148,8 +1141,7 @@ extension VMF_MainViewController {
      */
     func refreshCalled(completion inCompletion: @escaping () -> Void) {
         guard !isNameSearchMode else { return }
-        feedbackGenerator?.impactOccurred(intensity: 1)
-        feedbackGenerator?.prepare()
+        hardImpactHaptic()
         loadMeetings(completion: inCompletion)
     }
 }
@@ -1301,8 +1293,7 @@ extension VMF_MainViewController {
             destination.dataSource = self
             pageViewController = destination
         } else if inSegue.destination is VMF_AttendanceViewController || inSegue.destination is VMF_SettingsViewController {
-            feedbackGenerator?.impactOccurred(intensity: 1)
-            feedbackGenerator?.prepare()
+            hardImpactHaptic()
         }
     }
 }
@@ -1397,8 +1388,7 @@ extension VMF_MainViewController: UIPageViewControllerDelegate {
                 let oldIndex = weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex ?? 0
                 weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = tableDisplayController?.dayIndex ?? 0
                 if oldIndex != newIndex {
-                    notificationGenerator?.notificationOccurred(.success)
-                    notificationGenerator?.prepare()
+                    successHaptic()
                 }
                 
                 if let tableDisplayController = tableDisplayController {

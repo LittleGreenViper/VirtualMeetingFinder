@@ -52,6 +52,7 @@ extension VMF_SettingsViewController {
         } else {
             filterServiceMeetingsSwitch?.setOn(!(filterServiceMeetingsSwitch?.isOn ?? true), animated: true)
             filterServiceMeetingsSwitch?.sendActions(for: .valueChanged)
+            selectionHaptic()
         }
     }
 }

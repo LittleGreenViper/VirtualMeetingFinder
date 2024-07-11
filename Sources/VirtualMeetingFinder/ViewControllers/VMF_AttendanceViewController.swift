@@ -84,8 +84,7 @@ extension VMF_AttendanceViewController {
         super.viewWillDisappear(inIsAnimated)
         
         if isMovingFromParent {
-            feedbackGenerator?.impactOccurred(intensity: 1)
-            feedbackGenerator?.prepare()
+            hardImpactHaptic()
         }
     }
 

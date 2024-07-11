@@ -26,7 +26,7 @@ import SwiftBMLSDK
 /**
  This is the main view controller for the attended meetings tab.
  */
-class VMF_AttendanceViewController: VMF_BaseViewController, VMF_MasterTableControllerProtocol {
+class VMF_AttendanceViewController: VMF_BaseViewController {
     /* ################################################################## */
     /**
      This tracks the current embedded table controller.
@@ -101,4 +101,15 @@ extension VMF_AttendanceViewController {
         destination.myController = self
         destination.meetings = meetings
     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension VMF_AttendanceViewController: VMF_MasterTableControllerProtocol {
+    /* ################################################################## */
+    /**
+     This does nothing
+     */
+    func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol? = nil) { }
 }

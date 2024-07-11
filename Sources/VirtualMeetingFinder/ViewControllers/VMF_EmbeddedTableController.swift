@@ -132,12 +132,6 @@ extension VMF_MasterTableControllerProtocol {
     /**
      Default does nothing
      */
-    func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol? = nil) { }
-    
-    /* ################################################################## */
-    /**
-     Default does nothing
-     */
     func setDayPicker() { }
     
     /* ################################################################## */
@@ -182,7 +176,7 @@ class VMF_TableCell: UITableViewCell {
     /**
      The meeting instance associated with this.
      */
-    var myMeeting: MeetingInstance?
+    var myMeeting: MeetingInstance? { didSet { setUpTextItems() } }
     
     /* ################################################################## */
     /**
@@ -279,6 +273,59 @@ extension VMF_TableCell {
         
         myController.selectMeeting(myMeeting)
     }
+    
+    /* ################################################################## */
+    /**
+     Sets all the items up.
+     */
+    func setUpTextItems() {
+        guard let myController = myController,
+              var meeting = myMeeting
+        else { return }
+        
+        let inProgress = meeting.isMeetingInProgress()
+        let startDate = meeting.getPreviousStartDate(isAdjusted: true)
+        let startTime = startDate.localizedTime
+        
+        if meeting.iAttend {
+            typeImage?.image = UIImage(systemName: "checkmark.square.fill")
+            typeImage?.isAccessibilityElement = true
+            typeImage?.accessibilityLabel = "SLUG-ACC-ATTEND-IMAGE-ON-LABEL".accessibilityLocalizedVariant
+            typeImage?.accessibilityHint = "SLUG-ACC-ATTEND-IMAGE-ON-HINT".accessibilityLocalizedVariant
+        } else {
+            typeImage?.isAccessibilityElement = false
+            typeImage?.image = nil
+        }
+
+        let meetingName = meeting.name
+        let timeZoneString = myController.getMeetingTimeZone(meeting)
+        let inProgressString = String(format: (Calendar.current.startOfDay(for: .now) > startDate ? "SLUG-IN-PROGRESS-YESTERDAY-FORMAT" : "SLUG-IN-PROGRESS-FORMAT").localizedVariant, startTime)
+        
+        nameLabel?.text = meetingName
+        
+        if !timeZoneString.isEmpty {
+            timeZoneLabel?.isHidden = false
+            timeZoneLabel?.text = timeZoneString
+        } else {
+            timeZoneLabel?.isHidden = true
+        }
+        
+        if inProgress {
+            inProgressLabel?.isHidden = false
+            inProgressLabel?.text = inProgressString
+        } else {
+            inProgressLabel?.isHidden = true
+        }
+        
+        let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
+        let nextStart = meeting.getNextStartDate(isAdjusted: true)
+
+        if 0 < meeting.duration {
+            timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant, weekday, nextStart.localizedTime, nextStart.addingTimeInterval(meeting.duration).localizedTime)
+        } else {
+            timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, nextStart.localizedTime)
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -317,6 +364,12 @@ class VMF_EmbeddedTableController: VMF_BaseViewController, VMF_EmbeddedTableCont
      Used for the "Pull to Refresh"
      */
     private weak var _refreshControl: UIRefreshControl?
+    
+    /* ################################################################## */
+    /**
+     This caches the filtered meetings.
+     */
+    private var _cachedFiltered: [MeetingInstance]?
     
     /* ################################################################## */
     /**
@@ -366,7 +419,10 @@ class VMF_EmbeddedTableController: VMF_BaseViewController, VMF_EmbeddedTableCont
      This applies any filters to the list.
      */
     var filteredMeetings: [MeetingInstance] {
-        meetings.filter { VMF_Prefs().excludeServiceMeetings ? !$0.isServiceMeeting : true }
+        guard nil == _cachedFiltered else { return _cachedFiltered ?? [] }
+        _cachedFiltered = meetings.filter { VMF_Prefs().excludeServiceMeetings ? !$0.isServiceMeeting : true }
+        
+        return _cachedFiltered ?? []
     }
     
     /* ################################################################## */
@@ -402,6 +458,7 @@ extension VMF_EmbeddedTableController {
      */
     override func viewDidAppear(_ inIsAnimated: Bool) {
         super.viewDidAppear(inIsAnimated)
+        _cachedFiltered = nil
         valueTable?.reloadData()
         myController?.tableDisplayController = self
         selectionHaptic()
@@ -439,6 +496,7 @@ extension VMF_EmbeddedTableController {
     func attendanceChanged(_ inMeeting: MeetingInstance) {
         var mutableMeeting = inMeeting
         mutableMeeting.iAttend = !inMeeting.iAttend
+        _cachedFiltered = nil
         valueTable?.reloadData()
         myController?.setAttendance()
     }
@@ -461,6 +519,7 @@ extension VMF_EmbeddedTableController {
      */
     @objc func refreshPulled(_: Any) {
         _refreshControl?.endRefreshing()
+        _cachedFiltered = nil
         myController?.refreshCalled {
             self.valueTable?.reloadData()
             self.valueTable?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
@@ -488,56 +547,9 @@ extension VMF_EmbeddedTableController: UITableViewDataSource {
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         guard let ret = inTableView.dequeueReusableCell(withIdentifier: VMF_TableCell.reuseID) as? VMF_TableCell else { return UITableViewCell() }
         
-        // NB: I have to assign all the table element values here, because if I don't, the table gets all confused in its layout calculations.
-        
-        var meeting = filteredMeetings[inIndexPath.row]
-        
         ret.myController = self
         ret.backgroundColor = (0 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : .clear
-        ret.myMeeting = meeting
-
-        let inProgress = meeting.isMeetingInProgress()
-        let startDate = meeting.getPreviousStartDate(isAdjusted: true)
-        let startTime = startDate.localizedTime
-        
-        if meeting.iAttend {
-            ret.typeImage?.image = UIImage(systemName: "checkmark.square.fill")
-            ret.typeImage?.isAccessibilityElement = true
-            ret.typeImage?.accessibilityLabel = "SLUG-ACC-ATTEND-IMAGE-ON-LABEL".accessibilityLocalizedVariant
-            ret.typeImage?.accessibilityHint = "SLUG-ACC-ATTEND-IMAGE-ON-HINT".accessibilityLocalizedVariant
-        } else {
-            ret.typeImage?.isAccessibilityElement = false
-            ret.typeImage?.image = nil
-        }
-
-        let meetingName = meeting.name
-        let timeZoneString = getMeetingTimeZone(meeting)
-        let inProgressString = String(format: (Calendar.current.startOfDay(for: .now) > startDate ? "SLUG-IN-PROGRESS-YESTERDAY-FORMAT" : "SLUG-IN-PROGRESS-FORMAT").localizedVariant, startTime)
-        
-        ret.nameLabel?.text = meetingName
-        
-        if !timeZoneString.isEmpty {
-            ret.timeZoneLabel?.isHidden = false
-            ret.timeZoneLabel?.text = timeZoneString
-        } else {
-            ret.timeZoneLabel?.isHidden = true
-        }
-        
-        if inProgress {
-            ret.inProgressLabel?.isHidden = false
-            ret.inProgressLabel?.text = inProgressString
-        } else {
-            ret.inProgressLabel?.isHidden = true
-        }
-        
-        let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
-        let nextStart = meeting.getNextStartDate(isAdjusted: true)
-
-        if 0 < meeting.duration {
-            ret.timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant, weekday, nextStart.localizedTime, nextStart.addingTimeInterval(meeting.duration).localizedTime)
-        } else {
-            ret.timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, nextStart.localizedTime)
-        }
+        ret.myMeeting = filteredMeetings[inIndexPath.row]
 
         return ret
     }

@@ -260,7 +260,12 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                         weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = mapWeekday(dayIndex)
                         tableDisplayController?.meetings = getCurentMeetings(for: dayIndex, time: timeIndex)
                     }
-                    timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
+                    
+                    if let ctrl = tableDisplayController as? VMF_EmbeddedTableController {
+                        updateThermometer(ctrl)
+                        timeDayDisplayLabel?.text = ctrl.title
+                    }
+                    
                     timeSelectorContainerView?.isHidden = false
                 }
                 

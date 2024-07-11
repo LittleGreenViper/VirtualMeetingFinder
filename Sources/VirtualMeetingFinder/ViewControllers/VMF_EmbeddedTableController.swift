@@ -430,7 +430,6 @@ extension VMF_EmbeddedTableController {
     override func viewDidAppear(_ inIsAnimated: Bool) {
         super.viewDidAppear(inIsAnimated)
         valueTable?.reloadData()
-        valueTable?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         myController?.tableDisplayController = self
         selectionGenerator?.selectionChanged()
         selectionGenerator?.prepare()

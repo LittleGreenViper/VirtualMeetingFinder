@@ -41,14 +41,85 @@
                     <view key="view" contentMode="scaleToFill" id="h03-aE-qcW">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajV-cl-aJm">
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qPV-d8-WEJ">
+                                        <rect key="frame" x="32" y="0.0" width="361" height="666"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ecF-pT-urt">
+                                                <rect key="frame" x="0.0" y="0.0" width="361" height="666"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SLUG-FILTER-SERVICE-MEETINGS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYF-E7-WBK">
+                                                        <rect key="frame" x="0.0" y="323" width="308" height="20.333333333333314"/>
+                                                        <accessibility key="accessibilityConfiguration" hint="SLUG-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-FILTER-SERVICE-MEETINGS-LABEL">
+                                                            <accessibilityTraits key="traits" button="YES"/>
+                                                        </accessibility>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUr-un-v6W">
+                                                        <rect key="frame" x="312" y="317.66666666666669" width="51" height="31"/>
+                                                        <accessibility key="accessibilityConfiguration" hint="SLUG-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-FILTER-SERVICE-MEETINGS-LABEL"/>
+                                                        <connections>
+                                                            <action selector="filterServiceMeetingsHit:" destination="XMo-Ja-Ohb" eventType="valueChanged" id="Zmb-Ws-ZxK"/>
+                                                        </connections>
+                                                    </switch>
+                                                </subviews>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="gIT-WS-xeD"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="3yv-XV-WKn" appends="YES" id="Ssr-tK-P6z"/>
+                                                </connections>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="ecF-pT-urt" firstAttribute="leading" secondItem="qPV-d8-WEJ" secondAttribute="leading" id="2DB-hf-rH1"/>
+                                            <constraint firstAttribute="trailing" secondItem="ecF-pT-urt" secondAttribute="trailing" id="bVU-Y3-VAg"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="qPV-d8-WEJ" firstAttribute="bottom" secondItem="CCh-20-qQT" secondAttribute="bottom" id="8oG-og-V23"/>
+                                    <constraint firstAttribute="trailing" secondItem="qPV-d8-WEJ" secondAttribute="trailing" constant="16" id="EQZ-Fn-eFe"/>
+                                    <constraint firstItem="qPV-d8-WEJ" firstAttribute="leading" secondItem="CCh-20-qQT" secondAttribute="leading" constant="16" id="Fdv-4p-MnM"/>
+                                    <constraint firstItem="qPV-d8-WEJ" firstAttribute="width" secondItem="ajV-cl-aJm" secondAttribute="width" constant="-32" id="GFQ-5B-JZq"/>
+                                    <constraint firstItem="qPV-d8-WEJ" firstAttribute="top" secondItem="CCh-20-qQT" secondAttribute="top" id="OIw-PU-OU9"/>
+                                    <constraint firstItem="qPV-d8-WEJ" firstAttribute="bottom" secondItem="2Fs-Pl-9Fs" secondAttribute="bottom" placeholder="YES" id="fvF-D7-ysT"/>
+                                    <constraint firstItem="qPV-d8-WEJ" firstAttribute="trailing" secondItem="CCh-20-qQT" secondAttribute="trailing" constant="-16" id="s9L-JK-bZi"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="CCh-20-qQT"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="2Fs-Pl-9Fs"/>
+                            </scrollView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="eH8-aw-8mG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ajV-cl-aJm" firstAttribute="leading" secondItem="eH8-aw-8mG" secondAttribute="leading" id="8As-er-4Ji"/>
+                            <constraint firstItem="qPV-d8-WEJ" firstAttribute="centerX" secondItem="h03-aE-qcW" secondAttribute="centerX" id="C9l-kp-2ZZ"/>
+                            <constraint firstItem="ajV-cl-aJm" firstAttribute="trailing" secondItem="eH8-aw-8mG" secondAttribute="trailing" id="QmS-IN-Z5Q"/>
+                            <constraint firstItem="ajV-cl-aJm" firstAttribute="top" secondItem="eH8-aw-8mG" secondAttribute="top" id="aBf-Qj-Pvd"/>
+                            <constraint firstItem="ajV-cl-aJm" firstAttribute="bottom" secondItem="eH8-aw-8mG" secondAttribute="bottom" id="jve-fM-xFJ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Qnu-js-FBD"/>
+                    <connections>
+                        <outlet property="filterServiceMeetingsLabel" destination="hYF-E7-WBK" id="dkR-bL-nJL"/>
+                        <outlet property="filterServiceMeetingsSwitch" destination="bUr-un-v6W" id="hkg-CO-kd5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qzb-WU-C37" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="3yv-XV-WKn" userLabel="Service Filter Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="filterServiceMeetingsHit:" destination="XMo-Ja-Ohb" id="5mA-XE-lgy"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="894" y="-718"/>
+            <point key="canvasLocation" x="893.89312977099235" y="-718.30985915492965"/>
         </scene>
         <!--SLUG-TAB-0-TITLE-->
         <scene sceneID="475-3F-L6b">
@@ -225,6 +296,9 @@
                                         <subviews>
                                             <pickerView contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="stC-p8-nOr">
                                                 <rect key="frame" x="0.0" y="0.0" width="331" height="100"/>
+                                                <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-DIRECT-PICKER-HINT" label="SLUG-ACC-DIRECT-PICKER-LABEL">
+                                                    <bool key="isElement" value="YES"/>
+                                                </accessibility>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="0pc-rD-60B"/>
                                                 </constraints>
@@ -235,7 +309,7 @@
                                             </pickerView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4k-eR-coX" userLabel="Direct Selection Close Button">
                                                 <rect key="frame" x="331" y="35" width="30" height="30"/>
-                                                <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-CLOSE-SEARCH-BUTTON-HINT" label="SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL"/>
+                                                <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-DIRECT-EXIT-HINT" label="SLUG-ACC-DIRECT-EXIT-LABEL"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="E4k-eR-coX" secondAttribute="height" multiplier="1:1" id="89N-nk-MWS"/>
                                                     <constraint firstAttribute="height" constant="30" id="Wb6-e8-p0b"/>

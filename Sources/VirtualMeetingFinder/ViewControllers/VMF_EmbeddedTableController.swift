@@ -363,6 +363,14 @@ class VMF_EmbeddedTableController: VMF_BaseViewController, VMF_EmbeddedTableCont
 
     /* ################################################################## */
     /**
+     This applies any filters to the list.
+     */
+    var filteredMeetings: [MeetingInstance] {
+        meetings.filter { VMF_Prefs().excludeServiceMeetings ? !$0.isServiceMeeting : true }
+    }
+    
+    /* ################################################################## */
+    /**
      The table that shows the meetings for the current time.
      */
     @IBOutlet weak var valueTable: UITableView?
@@ -472,7 +480,7 @@ extension VMF_EmbeddedTableController: UITableViewDataSource {
      - parameter numberOfRowsInSection: The 0-based section index.
      - returns: The number of meetings to display.
      */
-    func tableView(_: UITableView, numberOfRowsInSection : Int) -> Int { meetings.count }
+    func tableView(_: UITableView, numberOfRowsInSection : Int) -> Int { filteredMeetings.count }
     
     /* ################################################################## */
     /**
@@ -484,7 +492,7 @@ extension VMF_EmbeddedTableController: UITableViewDataSource {
         
         // NB: I have to assign all the table element values here, because if I don't, the table gets all confused in its layout calculations.
         
-        var meeting = meetings[inIndexPath.row]
+        var meeting = filteredMeetings[inIndexPath.row]
         
         ret.myController = self
         ret.backgroundColor = (0 == inIndexPath.row % 2) ? UIColor.label.withAlphaComponent(Self._alternateRowOpacity) : .clear

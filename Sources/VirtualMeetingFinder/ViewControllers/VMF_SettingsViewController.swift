@@ -28,4 +28,45 @@ import RVS_Generic_Swift_Toolbox
  This displays the settings screen.
  */
 class VMF_SettingsViewController: VMF_BaseViewController {
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var filterServiceMeetingsLabel: UILabel?
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var filterServiceMeetingsSwitch: UISwitch?
+}
+
+/* ###################################################################################################################################### */
+// MARK: Callbacks
+/* ###################################################################################################################################### */
+extension VMF_SettingsViewController {
+    /* ################################################################## */
+    /**
+     */
+    @IBAction func filterServiceMeetingsHit(_ inSender: NSObjectProtocol) {
+        if let switcher = inSender as? UISwitch {
+            VMF_Prefs().excludeServiceMeetings = switcher.isOn
+        } else {
+            filterServiceMeetingsSwitch?.setOn(!(filterServiceMeetingsSwitch?.isOn ?? true), animated: true)
+            filterServiceMeetingsSwitch?.sendActions(for: .valueChanged)
+        }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension VMF_SettingsViewController {
+    /* ################################################################## */
+    /**
+     */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        filterServiceMeetingsLabel?.textColor = .tintColor
+        filterServiceMeetingsLabel?.text = filterServiceMeetingsLabel?.text?.localizedVariant
+        filterServiceMeetingsSwitch?.isOn = VMF_Prefs().excludeServiceMeetings
+    }
 }

@@ -1300,7 +1300,7 @@ extension VMF_MainViewController {
             destination.delegate = self
             destination.dataSource = self
             pageViewController = destination
-        } else if inSegue.destination is VMF_AttendanceViewController {
+        } else if inSegue.destination is VMF_AttendanceViewController || inSegue.destination is VMF_SettingsViewController {
             feedbackGenerator?.impactOccurred(intensity: 1)
             feedbackGenerator?.prepare()
         }

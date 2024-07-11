@@ -23,18 +23,17 @@
 // * -------------------------------------------- *        * ------------------------------------------------------- *
 // ************************************************        ***********************************************************
 
-/* The Title of the main "Find Meetings" Screen */
-"SLUG-TAB-0-TITLE"                              =   "Find Meetings";
-/* The title of the secondary "List My Attendance" Screen */
-"SLUG-TAB-1-TITLE"                              =   "My Attendance";
-/* The title for the bar button in the main screen, that links to the "List My Attendance" Screen */
-"SLUG-TAB-1-BUTTON"                             =   "Attendance";
+// MARK: - COMMON -
 
 /* We replace 1200 with the word "Noon" */
 "SLUG-NOON-TIME"                                =   "Noon";
 /* We replace 2359 with the word "Midnight" */
 "SLUG-MIDNIGHT-TIME"                            =   "Midnight";
 
+// MARK: - MAIN SCREEN -
+
+/* The Title of the main "Find Meetings" Screen */
+"SLUG-TAB-0-TITLE"                              =   "Find Meetings";
 /* This is the Title for the time display, when we have selected the "Now" segmented switch item. */
 "SLUG-IN-PROGRESS"                              =   "In Progress";
 /* This is the Text Field "placeholder" text, for when the Main Screen is in Text Search Mode. */
@@ -45,6 +44,8 @@
 "SLUG-IN-PROGRESS-YESTERDAY-FORMAT"             =   "In Progress Since %@ Yesterday";
 /* This is the title for the segmented switch segment, for in-progress meetings. */
 "SLUG-NOW"                                      =   "Now";
+
+// MARK: - MEETING INSPECTOR SCREEN -
 
 /* The title for the Meeting Inspector Screen, when it is displaying a hybrid meeting (meets both virtually, and in-person). */
 "SLUG-HYBRID-MEETING"                           =   "Hybrid Meeting";
@@ -79,4 +80,12 @@
 "SLUG-DIRECT-URI-DISCORD"                       =   "Discord";
 "SLUG-DIRECT-URI-JITSI"                         =   "Jitsi Meet";
 
+// MARK: - ATTENDANCE SCREEN -
+
+/* The title of the secondary "List My Attendance" Screen */
+"SLUG-TAB-1-TITLE"                              =   "My Attendance";
+
+// MARK: - SETTINGS SCREEN -
+
 "SLUG-SETTINGS-TITLE"                           =   "Settings";
+"SLUG-FILTER-SERVICE-MEETINGS"                  =   "Reduce Service Meetings";

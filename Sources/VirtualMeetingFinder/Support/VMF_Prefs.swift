@@ -42,11 +42,18 @@ class VMF_Prefs: RVS_PersistentPrefs {
         
         /* ############################################################## */
         /**
+         If we want to exclude Service meetings from the displayed results, this Boolean is true.
+         */
+        case excludeServiceMeetings = "excludeServiceMeetings"
+        
+        /* ############################################################## */
+        /**
          These are all the keys, in an Array of String.
          */
         static var allKeys: [String] {
             [
-                attendance.rawValue
+                attendance.rawValue,
+                excludeServiceMeetings.rawValue
             ]
         }
     }
@@ -70,5 +77,14 @@ extension VMF_Prefs {
     var attendance: [Int] {
         get { values[Keys.attendance.rawValue] as? [Int] ?? [] }
         set { values[Keys.attendance.rawValue] = newValue }
+    }
+    
+    /* ################################################################## */
+    /**
+     If we want to exclude Service meetings from the displayed results, this Boolean is true.
+     */
+    var excludeServiceMeetings: Bool {
+        get { values[Keys.excludeServiceMeetings.rawValue] as? Bool ?? true }
+        set { values[Keys.excludeServiceMeetings.rawValue] = newValue }
     }
 }

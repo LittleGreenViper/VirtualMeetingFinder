@@ -158,6 +158,26 @@ extension MeetingInstance {
             }
         }
     }
+    
+    /* ################################################################## */
+    /**
+     If this meeting has a format code for a Service meeting, this returns true.
+     */
+    var isServiceMeeting: Bool {
+        formats.reduce(false) { current, next in
+            if !current {
+                switch next.key.lowercased() {
+                case "asm":
+                    return true
+                    
+                default:
+                    return false
+                }
+            }
+            
+            return current
+        }
+    }
 }
 
 /* ###################################################################################################################################### */

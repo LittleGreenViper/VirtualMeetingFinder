@@ -112,6 +112,17 @@ extension VMF_AboutViewController {
         super.viewWillAppear(inIsAnimated)
         successHaptic()
     }
+    
+    /* ################################################################## */
+    /**
+     Called when the view is about to disappear.
+     
+     - parameter inIsAnimated: True, if the disappearance is animated.
+     */
+    override func viewWillDisappear(_ inIsAnimated: Bool) {
+        super.viewWillDisappear(inIsAnimated)
+        successHaptic()
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -127,6 +138,5 @@ extension VMF_AboutViewController {
     @IBAction func urlButtonHit(_ inButton: VMF_URLButton) {
         guard let url = inButton.url else { return }
         UIApplication.shared.open(url)
-        hardImpactHaptic()
     }
 }

@@ -149,19 +149,57 @@ extension TapHoldButton {
 /* ###################################################################################################################################### */
 /**
  This is the main view controller for the weekday/time selector tab.
+ 
+ ## QUICK OVERVIEW
+ 
+ The way that the data is set up, we have "day indexes (1-7), and "time slots" (varies, per day).
+ 
+ All times are mapped to the user's local timezone, regardless of the start time in the meeting's "native" timezone.
+ 
+ ### DAY INDEXES
+ 
+ These represent 0 (In Progress), 1 (Sunday), through 7 (Saturday), or 8 (Search Mode).
+ 
+ #### Mode 0 (In Progress)
+ 
+ In this mode, there is no "time index," and the screen displays all meetings that are in progress, regardless of when they started.
+
+ #### Mode 1 -> 7
+ 
+ If the day index is 1 -> 7, the screen displays whatever time index, within that day, is selected.
+ 
+ The day index is stored in Sunday -> Saturday (the database native scheme), but are mapped to the local week, upon display.
+ 
+ #### Mode 8 (Search)
+ 
+ In this mode, the day index and time index are irrelevant. All possible meetings are displayed, then are filtered, "live," as text is entered into the text entry field.
+ 
+ ### TIME INDEXES
+ 
+ Each day has "time slots." These are groupings of times, where meetings start (1 or more). Each "time slot" is a separate group of meetings that all begin at the same time.
+ 
+ In regular weekdays (day index 1 -> 7), only one "time slot" is shown at a time. Only the meetings that begin at the same time are shown.
+ 
+ If possible, the user's currently selected time index is honored, and we try to match the time, when changing selected days. It is also preserved, when entering Mode 0 or Mode 8.
+ 
+ ### SELECTING FOR ATTENDANCE
+ 
+ It is possible for a user to indicate that they attend a meeting, by double-tapping on the meeting, or by selecting "I Attend," in the meeting inspector screen.
+ 
+ You can bring in a separate screen, that contains only the meetings that you attend.
  */
 class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerProtocol {
+    /* ################################################################## */
+    /**
+     The segue ID of our open attendance.
+     */
+    private static let _openAttendanceSegueID = "open-attendance"
+    
     /* ################################################################## */
     /**
      The image that we use for search mode.
      */
     private static let _searchImage = UIImage(systemName: "magnifyingglass")
-    
-    /* ################################################################## */
-    /**
-     The color of the "mercury" in our "thermometer."
-     */
-    private static let _mercuryColor = UIColor.systemRed
 
     /* ################################################################## */
     /**
@@ -177,6 +215,12 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
     
     /* ################################################################## */
     /**
+     The color of the "mercury" in our "thermometer."
+     */
+    private static let _mercuryColor = UIColor.systemRed
+
+    /* ################################################################## */
+    /**
      The font for the "I Attend" button.
      */
     private static let _barButtonLabelFont = UIFont.systemFont(ofSize: 15)
@@ -185,26 +229,26 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
     /**
      The width of each of the components of our direct picker view.
      */
-    private static let _pickerViewComponentWidthInDisplayUnits: CGFloat = 140
+    private static let _pickerViewComponentWidthInDisplayUnits = CGFloat(140)
 
     /* ################################################################## */
     /**
      This is used to restore the bottom of the stack view, when the keyboard is hidden.
      */
-    private var _atRestConstant: CGFloat = 0
-    
-    /* ################################################################## */
-    /**
-     This holds the last time of the selected page. We use this to set the time, when directly navigating away from Now.
-     */
-    private var _lastTime: Int = 0
+    private var _atRestConstant = CGFloat(0)
     
     /* ################################################################## */
     /**
      This is used during the long-press slide. It holds the previous location of the gesture.
      We use it to determine if the finger has moved.
      */
-    private var _oldLocation: CGFloat = 0
+    private var _oldLocation = CGFloat(0)
+
+    /* ################################################################## */
+    /**
+     This holds the last time of the selected page. We use this to set the time, when directly navigating away from Now.
+     */
+    private var _lastTime = Int(0)
 
     /* ################################################################## */
     /**
@@ -229,6 +273,20 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
      This is set to true, if we were (past tense) in name search mode.
      */
     var wasNameSearchMode: Bool = false
+    
+    /* ################################################################## */
+    /**
+     Storage for our search meeting source
+     */
+    var searchMeetings: [MeetingInstance] = []
+    
+    /* ################################################################## */
+    /**
+     This has the "mostly organized" meeting data.
+     
+     The meetings are organized in ascending local time, arranged by weekday, with [0] being Sunday.
+     */
+    var organizedMeetings: [[MeetingInstance]] = []
 
     /* ################################################################## */
     /**
@@ -320,20 +378,6 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
             }
         }
     }
-    
-    /* ################################################################## */
-    /**
-     Storage for our search meeting source
-     */
-    var searchMeetings: [MeetingInstance] = []
-    
-    /* ################################################################## */
-    /**
-     This has the "mostly organized" meeting data.
-     
-     The meetings are organized in ascending local time, arranged by weekday, with [0] being Sunday.
-     */
-    var organizedMeetings: [[MeetingInstance]] = []
 
     /* ################################################################## */
     /**

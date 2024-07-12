@@ -135,3 +135,7 @@
 "SLUG-BMLT-LABEL"                               =   "The Basic Meeting List Toolbox";
 /* The URL string for the BMLT button */
 "SLUG-BMLT-URL"                                 =   "https://bmlt.app";
+/* The button string for the Privacy button */
+"SLUG-PRIVACY-LABEL"                            =   "Privacy";
+/* The URL string for the Privacy button */
+"SLUG-PRIVACY-URL"                              =   "https://littlegreenviper.com/welcome-to-little-green-viper/privacy/app-privacy/";

@@ -502,6 +502,7 @@ extension VMF_EmbeddedTableController {
     func attendanceChanged(_ inMeeting: MeetingInstance) {
         var mutableMeeting = inMeeting
         mutableMeeting.iAttend = !inMeeting.iAttend
+        successHaptic()
         _cachedFiltered = nil
         valueTable?.reloadData()
         myController?.setAttendance()

@@ -45,17 +45,17 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajV-cl-aJm">
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qPV-d8-WEJ">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="qPV-d8-WEJ">
                                         <rect key="frame" x="16" y="0.0" width="361" height="666"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hdC-dV-Pyg">
-                                                <rect key="frame" x="20" y="0.0" width="321.33333333333331" height="666"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hdC-dV-Pyg" userLabel="Filter Service Meetings Container">
+                                                <rect key="frame" x="0.0" y="0.0" width="361" height="666"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ecF-pT-urt">
-                                                        <rect key="frame" x="0.0" y="0.0" width="321.33333333333331" height="40"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ecF-pT-urt" userLabel="Filter Service Meetings Switch Container">
+                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="40"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-FILTER-SERVICE-MEETINGS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hYF-E7-WBK">
-                                                                <rect key="frame" x="0.0" y="9.9999999999999982" width="268.33333333333331" height="20.333333333333329"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-FILTER-SERVICE-MEETINGS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hYF-E7-WBK">
+                                                                <rect key="frame" x="0.0" y="9.9999999999999982" width="308" height="20.333333333333329"/>
                                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-FILTER-SERVICE-MEETINGS-LABEL">
                                                                     <accessibilityTraits key="traits" button="YES"/>
                                                                 </accessibility>
@@ -63,8 +63,8 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUr-un-v6W">
-                                                                <rect key="frame" x="272.33333333333331" y="4.6666666666666714" width="51" height="31"/>
+                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUr-un-v6W">
+                                                                <rect key="frame" x="312" y="4.6666666666666714" width="51" height="31"/>
                                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-FILTER-SERVICE-MEETINGS-LABEL"/>
                                                                 <connections>
                                                                     <action selector="filterServiceMeetingsHit:" destination="XMo-Ja-Ohb" eventType="valueChanged" id="Zmb-Ws-ZxK"/>
@@ -79,21 +79,24 @@
                                                             <outletCollection property="gestureRecognizers" destination="3yv-XV-WKn" appends="YES" id="Ssr-tK-P6z"/>
                                                         </connections>
                                                     </stackView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SLUG-FILTER-SERVICE-MEETINGS-EXPLAIN" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ayw-H0-aQQ">
-                                                        <rect key="frame" x="0.0" y="40" width="321.33333333333331" height="626"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="SLUG-FILTER-SERVICE-MEETINGS-EXPLAIN" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ayw-H0-aQQ">
+                                                        <rect key="frame" x="0.0" y="40" width="361" height="626"/>
                                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="Ayw-H0-aQQ" secondAttribute="trailing" id="WXg-3B-eNS"/>
-                                                    <constraint firstItem="ecF-pT-urt" firstAttribute="leading" secondItem="hdC-dV-Pyg" secondAttribute="leading" id="lVt-Po-RU7"/>
-                                                    <constraint firstItem="Ayw-H0-aQQ" firstAttribute="leading" secondItem="hdC-dV-Pyg" secondAttribute="leading" id="sTE-56-dva"/>
-                                                    <constraint firstAttribute="trailing" secondItem="ecF-pT-urt" secondAttribute="trailing" id="zc6-JO-TNQ"/>
+                                                    <constraint firstItem="ecF-pT-urt" firstAttribute="leading" secondItem="hdC-dV-Pyg" secondAttribute="leading" id="1lq-xy-ypr"/>
+                                                    <constraint firstItem="Ayw-H0-aQQ" firstAttribute="width" secondItem="ecF-pT-urt" secondAttribute="width" id="aJv-cI-OIt"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ecF-pT-urt" secondAttribute="trailing" id="cEo-T1-scS"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="hdC-dV-Pyg" secondAttribute="trailing" id="3Ul-ca-EhD"/>
+                                            <constraint firstItem="hdC-dV-Pyg" firstAttribute="leading" secondItem="qPV-d8-WEJ" secondAttribute="leading" id="w3o-Zp-UpQ"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -140,6 +143,11 @@
                         <action selector="filterServiceMeetingsHit:" destination="XMo-Ja-Ohb" id="5mA-XE-lgy"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="MHx-AL-mmP" userLabel="Open to Attendance Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="openToAttendanceHit:" destination="XMo-Ja-Ohb" id="hLL-Uz-T4N"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="893.89312977099235" y="-718.30985915492965"/>
         </scene>
@@ -177,8 +185,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="but-8i-P6u" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
-                                                <rect key="frame" x="102" y="130" width="157" height="229.66666666666663"/>
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="but-8i-P6u" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                                <rect key="frame" x="102" y="130" width="157" height="179.66666666666663"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="SLUG-PRESENTED-BY"/>
@@ -187,6 +195,30 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="nPR-b3-Vgu"/>
+                                                </connections>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fXx-9U-d8T">
+                                                <rect key="frame" x="0.0" y="317.66666666666669" width="361" height="4"/>
+                                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="4" id="q4t-h1-1ZO"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKA-Ef-Oeq" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                                <rect key="frame" x="101.66666666666669" y="329.66666666666669" width="158" height="30"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="SLUG-PRIVACY-LABEL"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="urlString" value="SLUG-PRIVACY-URL"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="qaD-0d-wxF"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEt-0e-hIf">
@@ -293,7 +325,9 @@
                                             </button>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="fXx-9U-d8T" secondAttribute="trailing" id="6tp-EN-geK"/>
                                             <constraint firstItem="tEt-0e-hIf" firstAttribute="leading" secondItem="WRy-bi-C9o" secondAttribute="leading" id="IDw-eG-HZD"/>
+                                            <constraint firstItem="fXx-9U-d8T" firstAttribute="leading" secondItem="WRy-bi-C9o" secondAttribute="leading" id="JeL-pO-OOD"/>
                                             <constraint firstAttribute="trailing" secondItem="tEt-0e-hIf" secondAttribute="trailing" id="aqk-Ir-hTX"/>
                                         </constraints>
                                     </stackView>
@@ -607,7 +641,7 @@
                         <barButtonItem key="rightBarButtonItem" id="apy-uC-OrG">
                             <imageReference key="image" image="checkmark.square.fill" catalog="system" symbolScale="large"/>
                             <connections>
-                                <segue destination="h2L-IG-jx9" kind="show" id="1dM-eQ-05b"/>
+                                <segue destination="h2L-IG-jx9" kind="show" identifier="open-attendance" id="1dM-eQ-05b"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

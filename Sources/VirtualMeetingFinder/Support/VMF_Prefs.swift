@@ -38,14 +38,14 @@ class VMF_Prefs: RVS_PersistentPrefs {
         /**
          We save a list of the IDs of meetings we attend, here.
          */
-        case attendance = "attendance"
+        case attendance
         
         /* ############################################################## */
         /**
          If we want to exclude Service meetings from the displayed results, this Boolean is true.
          */
-        case excludeServiceMeetings = "excludeServiceMeetings"
-        
+        case excludeServiceMeetings
+
         /* ############################################################## */
         /**
          These are all the keys, in an Array of String.

@@ -66,12 +66,10 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_: UIScene) {
         if nil == VMF_AppDelegate.openMeeting {
             VMF_AppDelegate.searchController?.isThrobbing = true
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.milliseconds(20)) {
-                VMF_AppDelegate.virtualService?.refreshCaches() { _ in
-                    VMF_AppDelegate.searchController?.isThrobbing = false
-                    VMF_AppDelegate.searchController?.openTo()
-                    self.window?.setNeedsLayout()
-                }
+            VMF_AppDelegate.virtualService?.refreshCaches() { _ in
+                VMF_AppDelegate.searchController?.isThrobbing = false
+                VMF_AppDelegate.searchController?.openTo()
+                self.window?.setNeedsLayout()
             }
         } else {
             self.window?.setNeedsLayout()

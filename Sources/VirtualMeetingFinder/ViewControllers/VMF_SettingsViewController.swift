@@ -85,8 +85,8 @@ extension VMF_SettingsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        infoBarButtonItem?.accessibilityLabel = "SLUG-ABOUT-BUTTON-LABEL".accessibilityLocalizedVariant
-        infoBarButtonItem?.accessibilityHint = "SLUG-ABOUT-BUTTON-HINT".accessibilityLocalizedVariant
+        infoBarButtonItem?.accessibilityLabel = "SLUG-ACC-ABOUT-BUTTON-LABEL".accessibilityLocalizedVariant
+        infoBarButtonItem?.accessibilityHint = "SLUG-ACC-ABOUT-BUTTON-HINT".accessibilityLocalizedVariant
 
         filterServiceMeetingsLabel?.textColor = .tintColor
         filterServiceMeetingsLabel?.text = filterServiceMeetingsLabel?.text?.localizedVariant

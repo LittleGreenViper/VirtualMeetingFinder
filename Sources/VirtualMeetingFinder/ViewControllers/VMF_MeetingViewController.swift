@@ -346,8 +346,8 @@ extension VMF_MeetingViewController {
             linkContainer?.isHidden = false
             videoButtonContainer?.isHidden = false
             videoLabelButton?.text = directApp.appName.localizedVariant
-            videoButtonContainer?.accessibilityLabel = String(format: "SLUG-VIDEO-MI-LABEL-FORMAT".accessibilityLocalizedVariant, directApp.appName.localizedVariant)
-            videoButtonContainer?.accessibilityHint = String(format: "SLUG-VIDEO-MI-HINT-FORMAT".accessibilityLocalizedVariant, directApp.appName.localizedVariant)
+            videoButtonContainer?.accessibilityLabel = String(format: "SLUG-ACC-VIDEO-MI-LABEL-FORMAT".accessibilityLocalizedVariant, directApp.appName.localizedVariant)
+            videoButtonContainer?.accessibilityHint = String(format: "SLUG-ACC-VIDEO-MI-HINT-FORMAT".accessibilityLocalizedVariant, directApp.appName.localizedVariant)
         }
         
         if let webLinkURL = meeting?.virtualURL,
@@ -409,8 +409,8 @@ extension VMF_MeetingViewController {
         VMF_AppDelegate.openMeeting = self
         guard let meeting = meeting else { return }
         iAttendBarButton?.isAccessibilityElement = true
-        iAttendBarButton?.accessibilityLabel = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-LABEL".accessibilityLocalizedVariant
-        iAttendBarButton?.accessibilityHint = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-HINT".accessibilityLocalizedVariant
+        iAttendBarButton?.accessibilityLabel = "SLUG-ACC-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-LABEL".accessibilityLocalizedVariant
+        iAttendBarButton?.accessibilityHint = "SLUG-ACC-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-HINT".accessibilityLocalizedVariant
     }
     
     /* ################################################################## */

@@ -1,10 +1,14 @@
+# ``VirtualMeetingFinder`
+
+An app that makes it simple to discover and attend virtual (and hybrid) NA meetings.
+
+## Overview
+
 ![Icon](icon.png)
 
-# VirtualMeetingFinder
+This app works by downloading a large list of virtual (and hybrid) meetings from a worldwide database, then presents them to the user, in a form that is directly useful to the user.
 
-This is an app that makes it simple to discover and attend virtual (and hybrid) NA meetings.
-
-## THE BASICS
+## Usage
 
 This app connects to an instance of [`LGV_MeetingServer`](https://github.com/LittleGreenViper/LGV_MeetingServer), and downloads the entire dataset for all meetings that have a virtual component (Either full virtual, or hybrid Virtual/in-Person). It either does this, when starting "cold," after 4 hours have passed, or at the user's behest (by doing a "pull-to refresh" on the table).
 
@@ -14,9 +18,9 @@ Each meeting can be inspected individually, in order to see things like formats,
 
 Users can select a meeting as one they attend, which allows those meetings to be grouped into a separate screen.
 
-## THE SPECIFICS
+## The Specifics
 
-### THE SCREENS
+### The Screens
 
 #### The Main Screen
 
@@ -38,7 +42,7 @@ This is a screen that is brought in from the Main Screen, that allows the user t
 
 This is another scren that is brought in from the Settings Screen, that has information about the app, such as its specific version, and links to dependencies.
 
-## THE DEPENDENCIES
+## Dependencies
 
 - [`RVS_BasicGCDTimer`](https://github.com/RiftValleySoftware/RVS_BasicGCDTimer)
 
@@ -54,6 +58,6 @@ This is another scren that is brought in from the Settings Screen, that has info
 
 - [The Basic Meeting List Toolbox (BMLT)](https://bmlt.app)
 
-## PRIVACY
+## Privacy
 
 [The Privacy Policy](https://littlegreenviper.com/welcome-to-little-green-viper/privacy/app-privacy/)

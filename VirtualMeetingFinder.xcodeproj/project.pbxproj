@@ -27,6 +27,7 @@
 		D493933C2C2616C7006438AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D493933B2C2616C7006438AE /* Base */; };
 		D493933E2C2616C8006438AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D493933D2C2616C8006438AE /* Assets.xcassets */; };
 		D49393412C2616C8006438AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D49393402C2616C8006438AE /* Base */; };
+		D4B3E2B42C41B6CE00CD672E /* VirtualMeetingFinder.docc in Sources */ = {isa = PBXBuildFile; fileRef = D4B3E2B32C41B6CE00CD672E /* VirtualMeetingFinder.docc */; };
 		D4B69A342C2B162900D24DA6 /* VMF_MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B69A332C2B162800D24DA6 /* VMF_MeetingViewController.swift */; };
 		D4DDAB822C4039570018944E /* VMF_AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DDAB812C4039570018944E /* VMF_AboutViewController.swift */; };
 		D4F4BCED2C36DAFC0023C21B /* VMF_MapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4BCEC2C36DAFC0023C21B /* VMF_MapMarker.swift */; };
@@ -60,6 +61,7 @@
 		D4AD6A172C261BCA002E37F3 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		D4AD6A182C261BCA002E37F3 /* CODEOWNERS */ = {isa = PBXFileReference; lastKnownFileType = text; path = CODEOWNERS; sourceTree = "<group>"; };
 		D4AD6A192C261BCA002E37F3 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D4B3E2B32C41B6CE00CD672E /* VirtualMeetingFinder.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = VirtualMeetingFinder.docc; sourceTree = "<group>"; };
 		D4B69A332C2B162800D24DA6 /* VMF_MeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MeetingViewController.swift; sourceTree = "<group>"; };
 		D4DDAB812C4039570018944E /* VMF_AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_AboutViewController.swift; sourceTree = "<group>"; };
 		D4F4BCEC2C36DAFC0023C21B /* VMF_MapMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MapMarker.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				D43A9C162C37416E001285FC /* Support */,
 				D4AD6A0F2C261AB7002E37F3 /* Resources */,
 				D4AD6A102C261ACB002E37F3 /* Meta */,
+				D4B3E2B32C41B6CE00CD672E /* VirtualMeetingFinder.docc */,
 			);
 			path = VirtualMeetingFinder;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				D455E5672C396F3A00246848 /* VMF_AttendanceViewController.swift in Sources */,
 				D4F4BCED2C36DAFC0023C21B /* VMF_MapMarker.swift in Sources */,
 				D49393372C2616C7006438AE /* VMF_SceneDelegate.swift in Sources */,
+				D4B3E2B42C41B6CE00CD672E /* VirtualMeetingFinder.docc in Sources */,
 				D45E42022C3F2BA7006578F6 /* VMF_SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

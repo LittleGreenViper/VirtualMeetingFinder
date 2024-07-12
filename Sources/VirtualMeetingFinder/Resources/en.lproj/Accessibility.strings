@@ -98,83 +98,83 @@
 // MARK: - MEETING INSPECTOR SCREEN -
 
 /* This label is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-I-ATTEND-BAR-BUTTON-LABEL"                =   "I Attend This Meeting";
+"SLUG-ACC-I-ATTEND-BAR-BUTTON-LABEL"            =   "I Attend This Meeting";
 /* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-I-ATTEND-BAR-BUTTON-HINT"                 =   "This button indicates whetrher or not we attend this meeting. Since we are attending, we can view this meeting separately, in the Attendance Screen.";
+"SLUG-ACC-I-ATTEND-BAR-BUTTON-HINT"             =   "This button indicates whetrher or not we attend this meeting. Since we are attending, we can view this meeting separately, in the Attendance Screen.";
 
 /* This label is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-I-DO-NOT-ATTEND-BAR-BUTTON-LABEL"         =   "I Do Not Attend This Meeting";
+"SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-LABEL"     =   "I Do Not Attend This Meeting";
 /* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-I-DO-NOT-ATTEND-BAR-BUTTON-HINT"          =   "This button indicates whetrher or not we attend this meeting. We currently do not attend this meeting.";
+"SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-HINT"      =   "This button indicates whetrher or not we attend this meeting. We currently do not attend this meeting.";
 
 /* This label is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-MEETING-NAME-MI-LABEL"                    =   "Meeting Name";
+"SLUG-ACC-MEETING-NAME-MI-LABEL"                =   "Meeting Name";
 /* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-MEETING-NAME-MI-HINT"                     =   "This is the name of the meeting.";
+"SLUG-ACC-MEETING-NAME-MI-HINT"                 =   "This is the name of the meeting.";
 
 /* This label is applied to the meeting start time/day text label in the Meeting Inspector Screen */
-"SLUG-TIME-DAY-MI-LABEL"                        =   "Meeting Time";
+"SLUG-ACC-TIME-DAY-MI-LABEL"                    =   "Meeting Time";
 /* This hint is applied to the meeting start time/day text label in the Meeting Inspector Screen */
-"SLUG-TIME-DAY-MI-HINT"                         =   "This displays the weekday, start time, and end time, of the meeting.";
+"SLUG-ACC-TIME-DAY-MI-HINT"                     =   "This displays the weekday, start time, and end time, of the meeting.";
 
 /* This label is applied to the meeting "in progress" text label in the Meeting Inspector Screen */
-"SLUG-IN-PROGRESS-MI-LABEL"                     =   "Meeting Is In Progress";
+"SLUG-ACC-IN-PROGRESS-MI-LABEL"                 =   "Meeting Is In Progress";
 /* This hint is applied to the meeting "in progress" text label in the Meeting Inspector Screen */
-"SLUG-IN-PROGRESS-MI-HINT"                      =   "This means that the meeting is currently under way.";
+"SLUG-ACC-IN-PROGRESS-MI-HINT"                  =   "This means that the meeting is currently under way.";
 
 /* This label is applied to the meeting time zone text label in the Meeting Inspector Screen */
-"SLUG-TZ-MI-LABEL"                              =   "Time Zone";
+"SLUG-ACC-TZ-MI-LABEL"                          =   "Time Zone";
 /* This hint is applied to the meeting time zone text label in the Meeting Inspector Screen */
-"SLUG-TZ-MI-HINT"                               =   "The meeting originates in a different timezone from the one we are in. This is that timezone, and when the meeting starts, in that zone.";
+"SLUG-ACC-TZ-MI-HINT"                           =   "The meeting originates in a different timezone from the one we are in. This is that timezone, and when the meeting starts, in that zone.";
 
 /* This label is applied to the meeting comments text label in the Meeting Inspector Screen */
-"SLUG-COMMENTS-MI-LABEL"                        =   "Extra Information";
+"SLUG-ACC-COMMENTS-MI-LABEL"                    =   "Extra Information";
 /* This hint is applied to the meeting comments text label in the Meeting Inspector Screen */
-"SLUG-COMMENTS-MI-HINT"                         =   "This has any extra information about the meeting.";
+"SLUG-ACC-COMMENTS-MI-HINT"                     =   "This has any extra information about the meeting.";
 
 /* This label is applied to the phone icon button in the Meeting Inspector Screen */
-"SLUG-PHONE-MI-LABEL"                           =   "Call Into the Meeting";
+"SLUG-ACC-PHONE-MI-LABEL"                       =   "Call Into the Meeting";
 /* This hint is applied to the phone icon button in the Meeting Inspector Screen */
-"SLUG-PHONE-MI-HINT"                            =   "If you select this, the phone will attempt to call directly into the meeting.";
+"SLUG-ACC-PHONE-MI-HINT"                        =   "If you select this, the phone will attempt to call directly into the meeting.";
 
 /* This label is applied to the Web icon button in the Meeting Inspector Screen */
-"SLUG-WEB-MI-LABEL"                             =   "Web Site";
+"SLUG-ACC-WEB-MI-LABEL"                         =   "Web Site";
 /* This hint is applied to the Web icon button in the Meeting Inspector Screen */
-"SLUG-WEB-MI-HINT"                              =   "If you select this, Safari will be opened, and take you to the Web site. It is possible that an app may be directly opened.";
+"SLUG-ACC-WEB-MI-HINT"                          =   "If you select this, Safari will be opened, and take you to the Web site. It is possible that an app may be directly opened.";
 
 /* This label is applied to the video icon button in the Meeting Inspector Screen */
-"SLUG-VIDEO-MI-LABEL-FORMAT"                    =   "Open %@";
+"SLUG-ACC-VIDEO-MI-LABEL-FORMAT"                =   "Open %@";
 /* This hint is applied to the video icon button in the Meeting Inspector Screen */
-"SLUG-VIDEO-MI-HINT-FORMAT"                     =   "If you select this, the %@ app will be opened to the meeting.";
+"SLUG-ACC-VIDEO-MI-HINT-FORMAT"                 =   "If you select this, the %@ app will be opened to the meeting.";
 
 /* This label is applied to the phone extra info text view in the Meeting Inspector Screen */
-"SLUG-PHONE-INFO-MI-LABEL"                      =   "Extra Phone Information";
+"SLUG-ACC-PHONE-INFO-MI-LABEL"                  =   "Extra Phone Information";
 /* This hint is applied to the phone extra info text view in the Meeting Inspector Screen */
-"SLUG-PHONE-INFO-MI-HINT"                       =   "This contains additional phone information.";
+"SLUG-ACC-PHONE-INFO-MI-HINT"                   =   "This contains additional phone information.";
 
 /* This label is applied to the phone extra info text view in the Meeting Inspector Screen */
-"SLUG-XTRA-INFO-MI-LABEL"                       =   "Extra Virtual Information";
+"SLUG-ACC-XTRA-INFO-MI-LABEL"                   =   "Extra Virtual Information";
 /* This hint is applied to the phone extra info text view in the Meeting Inspector Screen */
-"SLUG-XTRA-INFO-MI-HINT"                        =   "This contains additional information about the virtual meeting.";
+"SLUG-ACC-XTRA-INFO-MI-HINT"                    =   "This contains additional information about the virtual meeting.";
 
 /* This label is applied to the in-person address text view in the Meeting Inspector Screen */
-"SLUG-IN-PERSON-ADDRESS-MI-LABEL"               =   "In-Person Address";
+"SLUG-ACC-IN-PERSON-ADDRESS-MI-LABEL"           =   "In-Person Address";
 /* This hint is applied to the in-person address text view in the Meeting Inspector Screen */
-"SLUG-IN-PERSON-ADDRESS-MI-HINT"                =   "This is the address of the in-person meeting.";
+"SLUG-ACC-IN-PERSON-ADDRESS-MI-HINT"            =   "This is the address of the in-person meeting.";
 
 /* This label is applied to the in-person extra information label in the Meeting Inspector Screen */
-"SLUG-XTRA-IN-PERSON-ADDRESS-MI-LABEL"          =   "In-Person Address";
+"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-LABEL"      =   "Extra Information";
 /* This hint is applied to the in-person extra information label in the Meeting Inspector Screen */
-"SLUG-XTRA-IN-PERSON-ADDRESS-MI-HINT"           =   "This is the address of the in-person meeting.";
+"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-HINT"       =   "This is the address of the in-person meeting.";
 
 // MARK: - SETTINGS SCREEN -
 
 /* This is the label for the switch to enable/disable Service meeting filtering. */
-"SLUG-FILTER-SERVICE-MEETINGS-LABEL"            =   "Reduce Service Meetings";
+"SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL"        =   "Reduce Service Meetings";
 /* This is the hint for the switch to enable/disable Service meeting filtering. */
-"SLUG-FILTER-SERVICE-MEETINGS-HINT"             =   "If this switch is on, the app will not display any Service (non-Recovery) meetings that it finds.";
+"SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT"         =   "If this switch is on, the app will not display any Service (non-Recovery) meetings that it finds.";
 
 /* This is the label for the "About This App" button. */
-"SLUG-ABOUT-BUTTON-LABEL"                       =   "About This App";
+"SLUG-ACC-ABOUT-BUTTON-LABEL"                   =   "About This App";
 /* This is the hint for the "About This App" button. */
-"SLUG-ABOUT-BUTTON-HINT"                        =   "Selecting this, will open another screen, with information about this app.";
+"SLUG-ACC-ABOUT-BUTTON-HINT"                    =   "Selecting this, will open another screen, with information about this app.";

@@ -173,3 +173,8 @@
 "SLUG-FILTER-SERVICE-MEETINGS-LABEL"            =   "Reduce Service Meetings";
 /* This is the hint for the switch to enable/disable Service meeting filtering. */
 "SLUG-FILTER-SERVICE-MEETINGS-HINT"             =   "If this switch is on, the app will not display any Service (non-Recovery) meetings that it finds.";
+
+/* This is the label for the "About This App" button. */
+"SLUG-ABOUT-BUTTON-LABEL"                       =   "About This App";
+/* This is the hint for the "About This App" button. */
+"SLUG-ABOUT-BUTTON-HINT"                        =   "Selecting this, will open another screen, with information about this app.";

@@ -30,16 +30,19 @@ import RVS_Generic_Swift_Toolbox
 class VMF_SettingsViewController: VMF_BaseViewController {
     /* ################################################################## */
     /**
+     The bar button item that takes you to the about screen.
      */
     @IBOutlet weak var infoBarButtonItem: UIBarButtonItem?
     
     /* ################################################################## */
     /**
+     The label for the filter Service meetings switch.
      */
     @IBOutlet weak var filterServiceMeetingsLabel: UILabel?
     
     /* ################################################################## */
     /**
+     The switch, that, if on, means that Service meetings will be removed from the data.
      */
     @IBOutlet weak var filterServiceMeetingsSwitch: UISwitch?
 }
@@ -50,6 +53,9 @@ class VMF_SettingsViewController: VMF_BaseViewController {
 extension VMF_SettingsViewController {
     /* ################################################################## */
     /**
+     Called when either the label or switch to filter Service meetings is hit.
+     
+     - parameter inSender: The gesture recognizer or switch.
      */
     @IBAction func filterServiceMeetingsHit(_ inSender: NSObjectProtocol) {
         if let switcher = inSender as? UISwitch {
@@ -68,11 +74,14 @@ extension VMF_SettingsViewController {
 extension VMF_SettingsViewController {
     /* ################################################################## */
     /**
+     Called when the view hierarchy has loaded and initialized.
      */
     override func viewDidLoad() {
         super.viewDidLoad()
         filterServiceMeetingsLabel?.textColor = .tintColor
         filterServiceMeetingsLabel?.text = filterServiceMeetingsLabel?.text?.localizedVariant
         filterServiceMeetingsSwitch?.isOn = VMF_Prefs().excludeServiceMeetings
+        infoBarButtonItem?.accessibilityLabel = "SLUG-ABOUT-BUTTON-LABEL".accessibilityLocalizedVariant
+        infoBarButtonItem?.accessibilityHint = "SLUG-ABOUT-BUTTON-HINT".accessibilityLocalizedVariant
     }
 }

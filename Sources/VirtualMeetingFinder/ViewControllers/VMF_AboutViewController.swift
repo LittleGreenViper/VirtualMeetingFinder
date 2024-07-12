@@ -101,6 +101,17 @@ extension VMF_AboutViewController {
         
         dependencySectionHeader?.text = dependencySectionHeader?.text?.localizedVariant
     }
+    
+    /* ################################################################## */
+    /**
+     Called when the view is about to appear.
+     
+     - parameter inIsAnimated: True, if the appearance is animated.
+     */
+    override func viewWillAppear(_ inIsAnimated: Bool) {
+        super.viewWillAppear(inIsAnimated)
+        successHaptic()
+    }
 }
 
 /* ###################################################################################################################################### */

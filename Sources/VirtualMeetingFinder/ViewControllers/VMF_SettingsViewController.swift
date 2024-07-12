@@ -45,6 +45,12 @@ class VMF_SettingsViewController: VMF_BaseViewController {
      The switch, that, if on, means that Service meetings will be removed from the data.
      */
     @IBOutlet weak var filterServiceMeetingsSwitch: UISwitch?
+    
+    /* ################################################################## */
+    /**
+     This is displayed below the switch, and explains its utility.
+     */
+    @IBOutlet weak var filterServiceMeetingsExplainLabel: UILabel?
 }
 
 /* ###################################################################################################################################### */
@@ -78,10 +84,14 @@ extension VMF_SettingsViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        infoBarButtonItem?.accessibilityLabel = "SLUG-ABOUT-BUTTON-LABEL".accessibilityLocalizedVariant
+        infoBarButtonItem?.accessibilityHint = "SLUG-ABOUT-BUTTON-HINT".accessibilityLocalizedVariant
+
         filterServiceMeetingsLabel?.textColor = .tintColor
         filterServiceMeetingsLabel?.text = filterServiceMeetingsLabel?.text?.localizedVariant
         filterServiceMeetingsSwitch?.isOn = prefs.excludeServiceMeetings
-        infoBarButtonItem?.accessibilityLabel = "SLUG-ABOUT-BUTTON-LABEL".accessibilityLocalizedVariant
-        infoBarButtonItem?.accessibilityHint = "SLUG-ABOUT-BUTTON-HINT".accessibilityLocalizedVariant
+        
+        filterServiceMeetingsExplainLabel?.text = filterServiceMeetingsExplainLabel?.text?.localizedVariant
     }
 }

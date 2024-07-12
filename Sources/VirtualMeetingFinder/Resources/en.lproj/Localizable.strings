@@ -93,6 +93,8 @@
 "SLUG-SETTINGS-TITLE"                           =   "Settings";
 /* The text for the label for the Reduce Service Meetings switch. */
 "SLUG-FILTER-SERVICE-MEETINGS"                  =   "Reduce Service Meetings";
+/* This is displayed under the switch, and explains its utility. */
+"SLUG-FILTER-SERVICE-MEETINGS-EXPLAIN"          =   "If this switch is on, the app will attempt to remove meetings that are not Recovery meetings, but are \"business meetings,\" related to NA Service.";
 
 // MARK: - ABOUT SCREEN -
 /* The name of the screen */

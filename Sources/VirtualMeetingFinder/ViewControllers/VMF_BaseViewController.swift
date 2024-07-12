@@ -30,6 +30,12 @@ import RVS_Generic_Swift_Toolbox
 class VMF_BaseViewController: UIViewController {
     /* ################################################################## */
     /**
+     Convenient prefs instance.
+     */
+    let prefs = VMF_Prefs()
+    
+    /* ################################################################## */
+    /**
      This will provide haptic/audio feedback, in general.
      */
     var feedbackGenerator: UIImpactFeedbackGenerator?

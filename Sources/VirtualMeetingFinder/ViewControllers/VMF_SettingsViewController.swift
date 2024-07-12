@@ -59,7 +59,7 @@ extension VMF_SettingsViewController {
      */
     @IBAction func filterServiceMeetingsHit(_ inSender: NSObjectProtocol) {
         if let switcher = inSender as? UISwitch {
-            VMF_Prefs().excludeServiceMeetings = switcher.isOn
+            prefs.excludeServiceMeetings = switcher.isOn
         } else {
             filterServiceMeetingsSwitch?.setOn(!(filterServiceMeetingsSwitch?.isOn ?? true), animated: true)
             filterServiceMeetingsSwitch?.sendActions(for: .valueChanged)
@@ -80,7 +80,7 @@ extension VMF_SettingsViewController {
         super.viewDidLoad()
         filterServiceMeetingsLabel?.textColor = .tintColor
         filterServiceMeetingsLabel?.text = filterServiceMeetingsLabel?.text?.localizedVariant
-        filterServiceMeetingsSwitch?.isOn = VMF_Prefs().excludeServiceMeetings
+        filterServiceMeetingsSwitch?.isOn = prefs.excludeServiceMeetings
         infoBarButtonItem?.accessibilityLabel = "SLUG-ABOUT-BUTTON-LABEL".accessibilityLocalizedVariant
         infoBarButtonItem?.accessibilityHint = "SLUG-ABOUT-BUTTON-HINT".accessibilityLocalizedVariant
     }

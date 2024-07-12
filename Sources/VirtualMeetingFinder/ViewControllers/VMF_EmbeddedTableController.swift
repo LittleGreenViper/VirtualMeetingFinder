@@ -425,7 +425,7 @@ class VMF_EmbeddedTableController: VMF_BaseViewController, VMF_EmbeddedTableCont
      */
     var filteredMeetings: [MeetingInstance] {
         guard nil == _cachedFiltered else { return _cachedFiltered ?? [] }
-        let exclude = VMF_Prefs().excludeServiceMeetings
+        let exclude = prefs.excludeServiceMeetings
         _cachedFiltered = meetings.filter { exclude ? !$0.isServiceMeeting : true }
         
         return _cachedFiltered ?? []

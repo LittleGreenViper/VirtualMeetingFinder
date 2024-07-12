@@ -23,6 +23,7 @@
 // * -------------------------------------------- *        * ------------------------------------------------------- *
 // ************************************************        ***********************************************************
 
+// MARK: -
 // MARK: - MAIN SCREEN -
 
 /* This is the label for the Bar Button item that selects the "I Attend" Screen. */
@@ -178,3 +179,5 @@
 "SLUG-ACC-ABOUT-BUTTON-LABEL"                   =   "About This App";
 /* This is the hint for the "About This App" button. */
 "SLUG-ACC-ABOUT-BUTTON-HINT"                    =   "Selecting this, will open another screen, with information about this app.";
+
+// MARK: -

@@ -20,6 +20,7 @@
 import UIKit
 import SwiftBMLSDK
 import RVS_Generic_Swift_Toolbox
+import RVS_BasicGCDTimer
 
 /* ###################################################################################################################################### */
 // MARK: - Main App Delegate -
@@ -40,6 +41,18 @@ class VMF_AppDelegate: UIResponder {
         
         return SwiftBMLSDK_Query(serverBaseURI: rootURI)
     }
+
+    /* ################################################################## */
+    /**
+     The number of seconds that we put aside for fetching the data.
+     */
+    private static let _fetchTimeoutInSeconds = TimeInterval(30)
+    
+    /* ################################################################## */
+    /**
+     The timer for fetching data.
+     */
+    private static var _timer: RVS_BasicGCDTimer?
 
     /* ################################################################## */
     /**
@@ -72,7 +85,7 @@ extension VMF_AppDelegate {
      
      - parameter completion: A tail completion handler. One parameter, with the virtual service (nil, if error). May be called in any thread.
      */
-    static func findMeetings(completion inCompletion: @escaping (SwiftBMLSDK_MeetingLocalTimezoneCollection?) -> Void) {
+    class func findMeetings(completion inCompletion: @escaping (SwiftBMLSDK_MeetingLocalTimezoneCollection?) -> Void) {
         virtualService = nil
         
         guard let queryInstance = Self._queryInstance else {
@@ -80,10 +93,48 @@ extension VMF_AppDelegate {
             return
         }
         
+        virtualService = nil
+        
+        Self._timer = RVS_BasicGCDTimer(Self._fetchTimeoutInSeconds) { inTimer, inComplete in
+            Self._timer = nil
+            guard inComplete else { return }
+            DispatchQueue.main.async {
+                inCompletion(nil)
+            }
+        }
+        
+        Self._timer?.isRunning = true
+        
         _ = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: queryInstance) { inCollection in
+            Self._timer?.isRunning = false
+            Self._timer = nil
             DispatchQueue.main.async {
                 virtualService = inCollection
                 inCompletion(virtualService)
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Displays the given message and title in an alert with an "OK" button.
+     
+     - parameter header: a string to be displayed as the title of the alert. It is localized by this method.
+     - parameter message: a string to be displayed as the message of the alert. It is localized by this method.
+     - parameter presentedBy: An optional UIViewController object that is acting as the presenter context for the alert. If nil, we use the top controller of the Navigation stack.
+     */
+    class func displayAlert(header inHeader: String, message inMessage: String = "", presentedBy inPresentingViewController: UIViewController! = nil) {
+        // This ensures that we are on the main thread.
+        DispatchQueue.main.async {
+            if let presentedBy = inPresentingViewController {
+                let style: UIAlertController.Style = .alert
+                let alertController = UIAlertController(title: inHeader, message: inMessage, preferredStyle: style)
+                alertController.overrideUserInterfaceStyle = .light
+                let okAction = UIAlertAction(title: "SLUG-OK-BUTTON-TEXT".localizedVariant, style: .cancel, handler: nil)
+                
+                alertController.addAction(okAction)
+                
+                presentedBy.present(alertController, animated: true, completion: nil)
             }
         }
     }

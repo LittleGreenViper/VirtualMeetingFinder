@@ -602,6 +602,12 @@ extension VMF_MainViewController {
         organizedMeetings = []
         
         VMF_AppDelegate.findMeetings { [weak self] inVirtualService in
+            guard !(inVirtualService?.meetings.isEmpty ?? true)
+            else {
+                inCompletion()
+                VMF_AppDelegate.displayAlert(header: "SLUG-ALERT-ERROR-HEADER", message: "SLUG-ALERT-ERROR-BODY", presentedBy: self)
+                return
+            }
             VMF_SceneDelegate.lastReloadTime = .now
             
             self?.virtualService = inVirtualService

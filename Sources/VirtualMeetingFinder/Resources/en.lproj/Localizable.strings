@@ -23,6 +23,7 @@
 // * -------------------------------------------- *        * ------------------------------------------------------- *
 // ************************************************        ***********************************************************
 
+// MARK: -
 // MARK: - COMMON -
 
 /* We replace 1200 with the word "Noon" */
@@ -31,6 +32,15 @@
 "SLUG-MIDNIGHT-TIME"                            =   "Midnight";
 /* General-Purpose Back Button */
 "SLUG-BACK"                                     =   "Back";
+
+// MARK: - ALERTS -
+
+/* OK Button for alerts */
+"SLUG-OK-BUTTON-TEXT"                           =   "OK";
+/* Header for Fetch Error Message */
+"SLUG-ALERT-ERROR-HEADER"                       =   "ERROR";
+/* Body for Fetch Error Message */
+"SLUG-ALERT-ERROR-BODY"                         =   "There was an error fetching the data. The app will not work, until we can fetch the data.";
 
 // MARK: - MAIN SCREEN -
 
@@ -106,8 +116,15 @@
 "SLUG-PRESENTED-BY"                             =   "Presented By Little Green Viper Software Development LLC";
 /* The URL to the site. */
 "SLUG-PRESENTED-BY-URL"                         =   "https://littlegreenviper.com";
+/* The button string for the Privacy button */
+"SLUG-PRIVACY-LABEL"                            =   "Privacy";
+/* The URL string for the Privacy button */
+"SLUG-PRIVACY-URL"                              =   "https://littlegreenviper.com/welcome-to-little-green-viper/privacy/app-privacy/";
 /* The header for the dependency list. */
 "SLUG-DEPENDENCY-HEADER-LABEL"                  =   "Software Dependencies:";
+
+// MARK: - DO NOT TRANSLATE BELOW THIS LINE -
+
 /* The button string for the Basic GCD Timer button */
 "SLUG-BGCD-LABEL"                               =   "RVS_BasicGCDTimer";
 /* The URL string for the Basic GCD Timer button */
@@ -136,7 +153,5 @@
 "SLUG-BMLT-LABEL"                               =   "The Basic Meeting List Toolbox";
 /* The URL string for the BMLT button */
 "SLUG-BMLT-URL"                                 =   "https://bmlt.app";
-/* The button string for the Privacy button */
-"SLUG-PRIVACY-LABEL"                            =   "Privacy";
-/* The URL string for the Privacy button */
-"SLUG-PRIVACY-URL"                              =   "https://littlegreenviper.com/welcome-to-little-green-viper/privacy/app-privacy/";
+
+// MARK: -

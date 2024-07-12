@@ -49,13 +49,13 @@
                                         <rect key="frame" x="16" y="0.0" width="361" height="666"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hdC-dV-Pyg" userLabel="Filter Service Meetings Container">
-                                                <rect key="frame" x="0.0" y="0.0" width="361" height="666"/>
+                                                <rect key="frame" x="20" y="0.0" width="321.33333333333331" height="666"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ecF-pT-urt" userLabel="Filter Service Meetings Switch Container">
-                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="40"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" distribution="fillProportionally" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ecF-pT-urt" userLabel="Filter Service Meetings Switch Container">
+                                                        <rect key="frame" x="0.0" y="0.0" width="321.33333333333331" height="40"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-FILTER-SERVICE-MEETINGS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hYF-E7-WBK">
-                                                                <rect key="frame" x="0.0" y="9.9999999999999982" width="308" height="20.333333333333329"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-FILTER-SERVICE-MEETINGS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hYF-E7-WBK">
+                                                                <rect key="frame" x="0.0" y="9.9999999999999982" width="268.33333333333331" height="20.333333333333329"/>
                                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-FILTER-SERVICE-MEETINGS-LABEL">
                                                                     <accessibilityTraits key="traits" button="YES"/>
                                                                 </accessibility>
@@ -64,7 +64,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUr-un-v6W">
-                                                                <rect key="frame" x="312" y="4.6666666666666714" width="51" height="31"/>
+                                                                <rect key="frame" x="272.33333333333331" y="4.6666666666666714" width="51" height="31"/>
                                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-FILTER-SERVICE-MEETINGS-LABEL"/>
                                                                 <connections>
                                                                     <action selector="filterServiceMeetingsHit:" destination="XMo-Ja-Ohb" eventType="valueChanged" id="Zmb-Ws-ZxK"/>
@@ -80,7 +80,7 @@
                                                         </connections>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="SLUG-FILTER-SERVICE-MEETINGS-EXPLAIN" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ayw-H0-aQQ">
-                                                        <rect key="frame" x="0.0" y="40" width="361" height="626"/>
+                                                        <rect key="frame" x="6.6666666666666572" y="40" width="308" height="626"/>
                                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -88,15 +88,10 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="ecF-pT-urt" firstAttribute="leading" secondItem="hdC-dV-Pyg" secondAttribute="leading" id="1lq-xy-ypr"/>
-                                                    <constraint firstItem="Ayw-H0-aQQ" firstAttribute="width" secondItem="ecF-pT-urt" secondAttribute="width" id="aJv-cI-OIt"/>
                                                     <constraint firstAttribute="trailing" secondItem="ecF-pT-urt" secondAttribute="trailing" id="cEo-T1-scS"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="hdC-dV-Pyg" secondAttribute="trailing" id="3Ul-ca-EhD"/>
-                                            <constraint firstItem="hdC-dV-Pyg" firstAttribute="leading" secondItem="qPV-d8-WEJ" secondAttribute="leading" id="w3o-Zp-UpQ"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>

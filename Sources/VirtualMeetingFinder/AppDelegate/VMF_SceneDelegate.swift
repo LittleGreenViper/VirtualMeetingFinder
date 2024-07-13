@@ -23,6 +23,7 @@ import UIKit
 // MARK: - Main Scene Delegate -
 /* ###################################################################################################################################### */
 /**
+ This class has the Scene Delegate functionality.
  */
 class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
     /* ################################################################## */

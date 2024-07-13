@@ -367,12 +367,6 @@ class VMF_EmbeddedTableController: VMF_BaseViewController, VMF_EmbeddedTableCont
     
     /* ################################################################## */
     /**
-     This caches the filtered meetings.
-     */
-    private var _cachedFiltered: [MeetingInstance]?
-    
-    /* ################################################################## */
-    /**
      The controller that "owns" this instance.
      */
     weak var myController: VMF_MasterTableControllerProtocol?
@@ -412,22 +406,13 @@ class VMF_EmbeddedTableController: VMF_BaseViewController, VMF_EmbeddedTableCont
     /**
      This handles the meeting collection for this.
      */
-    var meetings: [MeetingInstance] = [] {
-        didSet {
-            _cachedFiltered = nil
-            valueTable?.reloadData()
-        }
-    }
+    var meetings: [MeetingInstance] = [] { didSet { valueTable?.reloadData() } }
 
     /* ################################################################## */
     /**
      This applies any filters to the list.
      */
-    var filteredMeetings: [MeetingInstance] {
-        guard nil == _cachedFiltered else { return _cachedFiltered ?? [] }
-        _cachedFiltered = meetings
-        return _cachedFiltered ?? []
-    }
+    var filteredMeetings: [MeetingInstance] { meetings }
     
     /* ################################################################## */
     /**
@@ -462,7 +447,6 @@ extension VMF_EmbeddedTableController {
      */
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
-        _cachedFiltered = nil
         valueTable?.reloadData()
     }
     
@@ -511,7 +495,6 @@ extension VMF_EmbeddedTableController {
         var mutableMeeting = inMeeting
         mutableMeeting.iAttend = !inMeeting.iAttend
         successHaptic()
-        _cachedFiltered = nil
         valueTable?.reloadData()
         myController?.setAttendance()
     }
@@ -534,7 +517,6 @@ extension VMF_EmbeddedTableController {
      */
     @objc func refreshPulled(_: Any) {
         _refreshControl?.endRefreshing()
-        _cachedFiltered = nil
         myController?.refreshCalled {
             self.valueTable?.reloadData()
             if !self.filteredMeetings.isEmpty {

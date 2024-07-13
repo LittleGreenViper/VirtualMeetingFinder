@@ -19,6 +19,7 @@
 
 import UIKit
 import SwiftBMLSDK
+import RVS_BasicGCDTimer
 
 /* ###################################################################################################################################### */
 // MARK: - Abstraction for the Meeting Type -
@@ -28,6 +29,137 @@ import SwiftBMLSDK
  This allows us to play around with the SDK.
  */
 public typealias MeetingInstance = SwiftBMLSDK_Parser.Meeting
+
+/* ###################################################################################################################################### */
+// MARK: - Page View Controller -
+/* ###################################################################################################################################### */
+/**
+ This is the page controller that embeds our tables.
+ */
+class VMF_DayTimeSearchPageViewController: UIPageViewController { }
+
+/* ###################################################################################################################################### */
+// MARK: - Special Button for "Tap and Hold" -
+/* ###################################################################################################################################### */
+/**
+ This allows single taps, or hold to repeat (like steppers).
+ */
+class TapHoldButton: UIControl {
+    /* ################################################################## */
+    /**
+     The gesture recognizer for single taps.
+     */
+    private weak var _tapGestureRecognizer: UITapGestureRecognizer?
+    
+    /* ################################################################## */
+    /**
+     The gesture recognizer for long-press repeat.
+     */
+    private weak var _longHoldGestureRecognizer: UILongPressGestureRecognizer?
+    
+    /* ################################################################## */
+    /**
+     This manages the repeated calls.
+     */
+    private var _repeater: RVS_BasicGCDTimer?
+    
+    /* ################################################################## */
+    /**
+     The view that contains the button image.
+     */
+    private weak var _displayImageView: UIImageView?
+
+    /* ################################################################## */
+    /**
+     This is how often we repeat, when long-pressing.
+     */
+    @IBInspectable var repeatFrequencyInSeconds = TimeInterval(0.15)
+    
+    /* ################################################################## */
+    /**
+     This is the image that is displayed in the button.
+     */
+    @IBInspectable var displayImage: UIImage? { didSet { setNeedsLayout() } }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Callbacks
+/* ###################################################################################################################################### */
+extension TapHoldButton {
+    /* ################################################################## */
+    /**
+     Called for a single tap
+     
+     - parameter: The recognizer (ignored).
+     */
+    @objc func tapGesture(_: UITapGestureRecognizer) {
+        sendActions(for: .primaryActionTriggered)
+    }
+    
+    /* ################################################################## */
+    /**
+     Called for a long-press. The action will be repeated at a regular interval.
+     
+     - parameter inGesture: The gesture recognizer instance.
+     */
+    @objc func longPressGesture(_ inGesture: UILongPressGestureRecognizer) {
+        switch inGesture.state {
+        case .began:
+            _repeater = RVS_BasicGCDTimer(timeIntervalInSeconds: repeatFrequencyInSeconds, onlyFireOnce: false, queue: .main) { _, _ in self.sendActions(for: .primaryActionTriggered) }
+            _repeater?.resume()
+            
+        case .ended, .cancelled:
+            _repeater?.invalidate()
+            _repeater = nil
+            
+        default:
+            break
+        }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension TapHoldButton {
+    /* ################################################################## */
+    /**
+     Called when the views are laid out.
+     
+     We use this to initialize the object.
+     */
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        _displayImageView?.removeFromSuperview()
+        
+        if let displayImage = displayImage {
+            let tempView = UIImageView(image: displayImage)
+            tempView.contentMode = .scaleAspectFit
+            addSubview(tempView)
+            _displayImageView = tempView
+            tempView.translatesAutoresizingMaskIntoConstraints = false
+            tempView.topAnchor.constraint(equalTo: topAnchor, constant: 4).isActive = true
+            tempView.leftAnchor.constraint(equalTo: leftAnchor, constant: 4).isActive = true
+            tempView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 4).isActive = true
+            tempView.rightAnchor.constraint(equalTo: rightAnchor, constant: 4).isActive = true
+        }
+        
+        if nil == _longHoldGestureRecognizer {
+            let tempGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressGesture))
+            addGestureRecognizer(tempGesture)
+            _longHoldGestureRecognizer = tempGesture
+        }
+
+        if nil == _tapGestureRecognizer,
+           let lp = _longHoldGestureRecognizer {
+            let tempGesture = UITapGestureRecognizer(target: self, action: #selector(tapGesture))
+            tempGesture.require(toFail: lp)
+            addGestureRecognizer(tempGesture)
+            _tapGestureRecognizer = tempGesture
+        }
+    }
+}
 
 /* ###################################################################################################################################### */
 // MARK: - Date Extension for Localized Strings -

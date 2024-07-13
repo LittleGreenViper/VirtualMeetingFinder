@@ -34,6 +34,7 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
     /* ################################################################## */
     /**
      This is set to the last time we loaded.
+     While the app is up in the foreground, we won't be forcing a reload, but we will, if it enters the background, then comes back.
      */
     static var lastReloadTime = Date.distantPast
     

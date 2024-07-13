@@ -153,5 +153,13 @@
 "SLUG-BMLT-LABEL"                               =   "The Basic Meeting List Toolbox";
 /* The URL string for the BMLT button */
 "SLUG-BMLT-URL"                                 =   "https://bmlt.app";
+/* The button string for the TZ Lookup button */
+"SLUG-TZ-LABEL"                                 =   "LGV_TZ_Lookup";
+/* The URL string for the TZ button. */
+"SLUG-TZ-URL"                                   =   "https://github.com/LittleGreenViper/LGV_TZ_Lookup";
+/* The button string for the GitHub button */
+"SLUG-GH-LABEL"                                 =   "The Source Code for This App";
+/* The URL string for the GitHub Button */
+"SLUG-GH-URL"                                   =   "https://github.com/LittleGreenViper/VirtualMeetingFinder";
 
 // MARK: -

@@ -180,4 +180,14 @@ extension VMF_AppDelegate: UIApplicationDelegate {
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: inConnectingSceneSession.role)
     }
+    
+    /* ################################################################## */
+    /**
+     Called when the application goes into the background.
+     
+     - parameter: The application (ignored)
+     */
+    func applicationDidEnterBackground(_: UIApplication) {
+        VMF_SceneDelegate.lastReloadTime = .now
+    }
 }

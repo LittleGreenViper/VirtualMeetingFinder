@@ -25,6 +25,45 @@ import UIKit
 extension VMF_MainViewController {
     /* ################################################################## */
     /**
+     */
+    func reorganizeMeetings() {
+        organizedMeetings = []
+        searchMeetings = []
+        searchMeetings = virtualService?.meetings.map { $0.meeting }.sorted { a, b in
+            let aLower = a.name.lowercased()
+            let bLower = b.name.lowercased()
+            
+            if aLower < bLower {
+                return true
+            } else if aLower > bLower {
+                return false
+            } else if a.timeZone.identifier < b.timeZone.identifier {
+                return true
+            } else if a.timeZone.identifier > b.timeZone.identifier {
+                return false
+            } else {
+                return a.adjustedIntegerStartTime < b.adjustedIntegerStartTime
+            }
+        } ?? []
+        for index in 1..<8 {
+            organizedMeetings.append(searchMeetings.compactMap { (index == $0.adjustedWeekday) ? $0 : nil }.sorted { a, b in
+                if a.adjustedIntegerStartTime < b.adjustedIntegerStartTime {
+                    return true
+                } else if a.adjustedIntegerStartTime < b.adjustedIntegerStartTime {
+                    return false
+                } else if a.timeZone.identifier < b.timeZone.identifier {
+                    return true
+                } else if a.timeZone.identifier > b.timeZone.identifier {
+                    return false
+                } else {
+                    return a.name.lowercased() < b.name.lowercased()
+                }
+            })
+        }
+    }
+    
+    /* ################################################################## */
+    /**
      Called to load the meetings from the server.
      
      - parameter completion: A simple, no-parameter completion. It is always called in the main thread.
@@ -32,8 +71,6 @@ extension VMF_MainViewController {
     func loadMeetings(completion inCompletion: @escaping () -> Void) {
         isThrobbing = true
         virtualService = nil
-        searchMeetings = []
-        organizedMeetings = []
         
         VMF_AppDelegate.findMeetings { [weak self] inVirtualService in
             guard !(inVirtualService?.meetings.isEmpty ?? true)
@@ -47,37 +84,7 @@ extension VMF_MainViewController {
 
             self?.virtualService = inVirtualService
             
-            self?.searchMeetings = inVirtualService?.meetings.map { $0.meeting }.sorted { a, b in
-                let aLower = a.name.lowercased()
-                let bLower = b.name.lowercased()
-                
-                if aLower < bLower {
-                    return true
-                } else if aLower > bLower {
-                    return false
-                } else if a.timeZone.identifier < b.timeZone.identifier {
-                    return true
-                } else if a.timeZone.identifier > b.timeZone.identifier {
-                    return false
-                } else {
-                    return a.adjustedIntegerStartTime < b.adjustedIntegerStartTime
-                }
-            } ?? []
-            for index in 1..<8 {
-                self?.organizedMeetings.append(self?.searchMeetings.compactMap { (index == $0.adjustedWeekday) ? $0 : nil }.sorted { a, b in
-                    if a.adjustedIntegerStartTime < b.adjustedIntegerStartTime {
-                        return true
-                    } else if a.adjustedIntegerStartTime < b.adjustedIntegerStartTime {
-                        return false
-                    } else if a.timeZone.identifier < b.timeZone.identifier {
-                        return true
-                    } else if a.timeZone.identifier > b.timeZone.identifier {
-                        return false
-                    } else {
-                        return a.name.lowercased() < b.name.lowercased()
-                    }
-                } ?? [])
-            }
+            self?.reorganizeMeetings()
             
             DispatchQueue.main.async {
                 self?.isThrobbing = false
@@ -705,9 +712,8 @@ extension VMF_MainViewController {
         )
         
         isDirectSelectionMode = false
-
+        reorganizeMeetings()
         view?.setNeedsLayout()
-
         (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = !isNameSearchMode
     }
     

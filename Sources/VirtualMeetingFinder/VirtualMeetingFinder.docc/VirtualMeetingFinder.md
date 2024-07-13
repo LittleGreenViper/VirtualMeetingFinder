@@ -67,3 +67,9 @@ This is another scren that is brought in from the Settings Screen, that has info
 ## Source Code
 
 [The GitHub Repository with the Source Code for This App](https://github.com/LittleGreenViper/VirtualMeetingFinder)
+
+## Presented By
+
+[![LGV Icon](LGV.png)](https://littlegreenviper.com)
+
+[Little Green Viper Software Development LLC](https://littlegreenviper.com)

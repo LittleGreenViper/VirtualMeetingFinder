@@ -18,7 +18,6 @@
  */
 
 import UIKit
-import SwiftBMLSDK
 
 /* ###################################################################################################################################### */
 // MARK: UIPageViewControllerDataSource Conformance

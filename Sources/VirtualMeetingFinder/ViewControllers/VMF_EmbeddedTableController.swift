@@ -539,7 +539,9 @@ extension VMF_EmbeddedTableController {
         _cachedFiltered = nil
         myController?.refreshCalled {
             self.valueTable?.reloadData()
-            self.valueTable?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+            if !self.filteredMeetings.isEmpty {
+                self.valueTable?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+            }
         }
     }
 }

@@ -44,7 +44,7 @@ class VMF_DayTimeSearchPageViewController: UIPageViewController { }
 /**
  This allows single taps, or hold to repeat (like steppers).
  */
-class TapHoldButton: UIControl {
+class VMF_TapHoldButton: UIControl {
     /* ################################################################## */
     /**
      The gesture recognizer for single taps.
@@ -85,7 +85,7 @@ class TapHoldButton: UIControl {
 /* ###################################################################################################################################### */
 // MARK: Callbacks
 /* ###################################################################################################################################### */
-extension TapHoldButton {
+extension VMF_TapHoldButton {
     /* ################################################################## */
     /**
      Called for a single tap
@@ -121,7 +121,7 @@ extension TapHoldButton {
 /* ###################################################################################################################################### */
 // MARK: Base Class Overrides
 /* ###################################################################################################################################### */
-extension TapHoldButton {
+extension VMF_TapHoldButton {
     /* ################################################################## */
     /**
      Called when the views are laid out.

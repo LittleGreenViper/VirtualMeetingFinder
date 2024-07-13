@@ -47,7 +47,7 @@
 		D45E42012C3F2BA7006578F6 /* VMF_SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_SettingsViewController.swift; sourceTree = "<group>"; };
 		D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_BaseViewController.swift; sourceTree = "<group>"; };
 		D49349712C29A6D100C58390 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D49393312C2616C7006438AE /* VirtualMeetingFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualMeetingFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D49393312C2616C7006438AE /* Virtual Meeting Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Virtual Meeting Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49393342C2616C7006438AE /* VMF_AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_AppDelegate.swift; sourceTree = "<group>"; };
 		D49393362C2616C7006438AE /* VMF_SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_SceneDelegate.swift; sourceTree = "<group>"; };
 		D493933B2C2616C7006438AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/VMF.storyboard; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 		D49393322C2616C7006438AE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D49393312C2616C7006438AE /* VirtualMeetingFinder.app */,
+				D49393312C2616C7006438AE /* Virtual Meeting Finder.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -212,9 +212,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D49393302C2616C7006438AE /* VirtualMeetingFinder */ = {
+		D49393302C2616C7006438AE /* Virtual Meeting Finder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D49393452C2616C8006438AE /* Build configuration list for PBXNativeTarget "VirtualMeetingFinder" */;
+			buildConfigurationList = D49393452C2616C8006438AE /* Build configuration list for PBXNativeTarget "Virtual Meeting Finder" */;
 			buildPhases = (
 				D493932D2C2616C7006438AE /* Sources */,
 				D493932E2C2616C7006438AE /* Frameworks */,
@@ -225,7 +225,7 @@
 			);
 			dependencies = (
 			);
-			name = VirtualMeetingFinder;
+			name = "Virtual Meeting Finder";
 			packageProductDependencies = (
 				D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */,
 				D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */,
@@ -234,7 +234,7 @@
 				D43A9C122C373F67001285FC /* RVS_Persistent_Prefs */,
 			);
 			productName = VirtualMeetingFinder;
-			productReference = D49393312C2616C7006438AE /* VirtualMeetingFinder.app */;
+			productReference = D49393312C2616C7006438AE /* Virtual Meeting Finder.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -272,7 +272,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D49393302C2616C7006438AE /* VirtualMeetingFinder */,
+				D49393302C2616C7006438AE /* Virtual Meeting Finder */,
 			);
 		};
 /* End PBXProject section */
@@ -576,7 +576,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D49393452C2616C8006438AE /* Build configuration list for PBXNativeTarget "VirtualMeetingFinder" */ = {
+		D49393452C2616C8006438AE /* Build configuration list for PBXNativeTarget "Virtual Meeting Finder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D49393462C2616C8006438AE /* Debug */,

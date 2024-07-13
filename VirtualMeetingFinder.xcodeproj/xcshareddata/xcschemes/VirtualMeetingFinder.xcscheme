@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D49393302C2616C7006438AE"
-               BuildableName = "VirtualMeetingFinder.app"
-               BlueprintName = "VirtualMeetingFinder"
+               BuildableName = "Virtual Meeting Finder.app"
+               BlueprintName = "Virtual Meeting Finder"
                ReferencedContainer = "container:VirtualMeetingFinder.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D49393302C2616C7006438AE"
-            BuildableName = "VirtualMeetingFinder.app"
-            BlueprintName = "VirtualMeetingFinder"
+            BuildableName = "Virtual Meeting Finder.app"
+            BlueprintName = "Virtual Meeting Finder"
             ReferencedContainer = "container:VirtualMeetingFinder.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D49393302C2616C7006438AE"
-            BuildableName = "VirtualMeetingFinder.app"
-            BlueprintName = "VirtualMeetingFinder"
+            BuildableName = "Virtual Meeting Finder.app"
+            BlueprintName = "Virtual Meeting Finder"
             ReferencedContainer = "container:VirtualMeetingFinder.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

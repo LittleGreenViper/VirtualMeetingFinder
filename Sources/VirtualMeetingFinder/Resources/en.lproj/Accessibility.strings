@@ -17,6 +17,10 @@
  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+// NOTE:
+// "Labels" are short, simple titles. "Hints" are longer explanations. Labels should always be short and succinct, but hints can be a lot longer.
+// These are voiceover strings. Pronunciation and auditory clarity are important.
+
 // ************************************************        ***********************************************************
 // * -------------------------------------------- *        * ------------------------------------------------------- *
 // *|  DO NOT MODIFY ON THIS SIDE OF THE EQUALS  |*        *|   MODIFY THE TEXT ON THIS SIDE TO THE LOCAL LANGUAGE  |*
@@ -42,17 +46,17 @@
 "SLUG-ACC-WEEKDAY-SWITCH-HINT"                  =   "With this segmented switch, you can see in-progress meetings, choose a weekday in which to show meetings, or select meeting name search mode.";
 
 /* The individual segment label for the in-progress (Now) segment */
-"SLUG-ACC-WEEKDAY-SWITCH-0-LABEL"               =   "View Meetings In Progress Now";
+"SLUG-ACC-WEEKDAY-SWITCH-0-LABEL"               =   "Meetings In Progress";
 /* The individual segment hint for the in-progress (Now) segment */
 "SLUG-ACC-WEEKDAY-SWITCH-0-HINT"                =   "If you select this, the table below will show meetings that are happening now.";
 
 /* The label for each weekday segment. The placeholder (%@) is replaced by the weekday represented by that segment. */
-"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-LABEL-FORMAT"  =   "View Meetings On %@s.";
+"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-LABEL-FORMAT"  =   "Meetings On %@s.";
 /* The hint for each weekday segment. The placeholder is replaced by the weekday represented by that segment. */
 "SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-HINT-FORMAT"   =   "If you select this, you will see meetings that gather every %@.";
 
 /* The individual segment label for the search segment */
-"SLUG-ACC-WEEKDAY-SWITCH-8-LABEL"               =   "Search For Meetings By Name";
+"SLUG-ACC-WEEKDAY-SWITCH-8-LABEL"               =   "Search For Meetings";
 /* The individual segment hint for the search segment */
 "SLUG-ACC-WEEKDAY-SWITCH-8-HINT"                =   "If you select this, you will enter Text Search Mode, where you can find meetings by name.";
 
@@ -62,7 +66,7 @@
 "SLUG-ACC-ENTER-SEARCH-TEXT-HINT"               =   "Any text that you enter here, will be used to filter out meetings that have that text in their meeting name.";
 
 /* This is the label for the close search mode button. */
-"SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL"            =   "Leave Text Search Mode";
+"SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL"            =   "Leave Text Search";
 /* This is the label for the close search mode button. */
 "SLUG-ACC-CLOSE-SEARCH-BUTTON-HINT"             =   "Selecting this button leaves text search mode, and returns you to the regular weekday selection mode.";
 
@@ -77,14 +81,14 @@
 "SLUG-ACC-RIGHT-BUTTON-HINT"                    =   "If you select this, the table will show meetings that start at the time slot after this one.";
 
 /* This is the label for the weekday/time label. */
-"SLUG-ACC-TIME-DISPLAY-LABEL"                   =   "The Weekday and Time For the Displayed Data";
+"SLUG-ACC-TIME-DISPLAY-LABEL"                   =   "Weekday and Time";
 /* This is the hint for the weekday/time label. */
 "SLUG-ACC-TIME-DISPLAY-HINT"                    =   "This shows the selected weekday and time slot for the meetings listed below.";
 
 /* This is the label for the "thermometer" completion bar, below the segmented switch. */
-"SLUG-ACC-COMPLETION-DISPLAY-LABEL"             =   "How Far Through the Day We Are";
+"SLUG-ACC-COMPLETION-DISPLAY-LABEL"             =   "Current Time of Day";
 /* This is the hint for the "thermometer" completion bar, below the segmented switch. */
-"SLUG-ACC-COMPLETION-DISPLAY-HINT"              =   "This indicates which time slot the table represents. Left is towards 12AM, and right is towards midnight.";
+"SLUG-ACC-COMPLETION-DISPLAY-HINT"              =   "This indicates how far through the day we are. Left is towards 12AM, and right is towards midnight.";
 
 /* This is the label for the day/time picker. */
 "SLUG-ACC-DIRECT-PICKER-LABEL"                  =   "Pick A Day And Time";
@@ -144,7 +148,7 @@
 "SLUG-ACC-WEB-MI-HINT"                          =   "If you select this, Safari will be opened, and take you to the Web site. It is possible that an app may be directly opened.";
 
 /* This label is applied to the video icon button in the Meeting Inspector Screen */
-"SLUG-ACC-VIDEO-MI-LABEL-FORMAT"                =   "Open %@";
+"SLUG-ACC-VIDEO-MI-LABEL-FORMAT"                =   "Open in %@";
 /* This hint is applied to the video icon button in the Meeting Inspector Screen */
 "SLUG-ACC-VIDEO-MI-HINT-FORMAT"                 =   "If you select this, the %@ app will be opened to the meeting.";
 

@@ -458,14 +458,24 @@ extension VMF_EmbeddedTableController {
     
     /* ################################################################## */
     /**
+     Called just before the view appears
+     
+     - parameter inIsAnimated: True, if the appearance is animated.
+     */
+    override func viewWillAppear(_ inIsAnimated: Bool) {
+        super.viewWillAppear(inIsAnimated)
+        _cachedFiltered = nil
+        valueTable?.reloadData()
+    }
+    
+    /* ################################################################## */
+    /**
      Called just after the view appeared
      
      - parameter inIsAnimated: True, if the appearance is animated.
      */
     override func viewDidAppear(_ inIsAnimated: Bool) {
         super.viewDidAppear(inIsAnimated)
-        _cachedFiltered = nil
-        valueTable?.reloadData()
         myController?.tableDisplayController = self
         selectionHaptic()
         myController?.updateThermometer(self)

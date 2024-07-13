@@ -338,13 +338,13 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
     /**
      The decrement time button
      */
-    @IBOutlet weak var leftButton: TapHoldButton?
+    @IBOutlet weak var leftButton: VMF_TapHoldButton?
     
     /* ################################################################## */
     /**
      The increment time button
      */
-    @IBOutlet weak var rightButton: TapHoldButton?
+    @IBOutlet weak var rightButton: VMF_TapHoldButton?
     
     /* ################################################################## */
     /**

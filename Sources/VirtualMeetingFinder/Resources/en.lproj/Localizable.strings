@@ -114,52 +114,55 @@
 "SLUG-VERSION-FORMAT"                           =   "Version: %@ (%@)";
 /* The text of the "Presented By" button. */
 "SLUG-PRESENTED-BY"                             =   "Presented By Little Green Viper Software Development LLC";
-/* The URL to the site. */
-"SLUG-PRESENTED-BY-URL"                         =   "https://littlegreenviper.com";
 /* The button string for the Privacy button */
 "SLUG-PRIVACY-LABEL"                            =   "Privacy";
-/* The URL string for the Privacy button */
-"SLUG-PRIVACY-URL"                              =   "https://littlegreenviper.com/welcome-to-little-green-viper/privacy/app-privacy/";
 /* The header for the dependency list. */
 "SLUG-DEPENDENCY-HEADER-LABEL"                  =   "Software Dependencies:";
+/* The button string for the GitHub button */
+"SLUG-GH-LABEL"                                 =   "The Source Code for This App";
+/* The button string for the BMLT button */
+"SLUG-BMLT-LABEL"                               =   "The Basic Meeting List Toolbox (BMLT)";
 
+// ***********************************************************************************************************
 // MARK: - DO NOT TRANSLATE BELOW THIS LINE -
+// ***********************************************************************************************************
 
 /* The button string for the Basic GCD Timer button */
 "SLUG-BGCD-LABEL"                               =   "RVS_BasicGCDTimer";
-/* The URL string for the Basic GCD Timer button */
-"SLUG-BGCD-URL"                                 =   "https://github.com/RiftValleySoftware/RVS_BasicGCDTimer";
 /* The button string for the Generic Swift Toolbox button */
 "SLUG-GSWT-LABEL"                               =   "RVS_Generic_Swift_Toolbox";
-/* The URL string for the Generic Swift Toolbox button */
-"SLUG-GSWT-URL"                                 =   "https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox";
 /* The button string for the Persistent Prefs button */
 "SLUG-PP-LABEL"                                 =   "RVS_PersistentPrefs";
-/* The URL string for the Persistent Prefs button */
-"SLUG-PP-URL"                                   =   "https://github.com/RiftValleySoftware/RVS_PersistentPrefs";
 /* The button string for the UIKit Toolbox button */
 "SLUG-UIKTB-LABEL"                              =   "RVS_UIKit_Toolbox";
-/* The URL string for the UIKit Toolbox button */
-"SLUG-UIKTB-URL"                                =   "https://github.com/RiftValleySoftware/RVS_UIKit_Toolbox";
 /* The button string for the SwiftBMLSDK button */
 "SLUG-SWBMLSDK-LABEL"                           =   "SwiftBMLSDK";
-/* The URL string for the SwiftBMLSDK button */
-"SLUG-SWBMLSDK-URL"                             =   "https://github.com/LittleGreenViper/SwiftBMLSDK";
 /* The button string for the Meeting Server button */
 "SLUG-ML-LABEL"                                 =   "LGV_MeetingServer";
-/* The URL string for the Meeting Server button */
-"SLUG-ML-URL"                                   =   "https://github.com/LittleGreenViper/LGV_MeetingServer";
-/* The button string for the BMLT button */
-"SLUG-BMLT-LABEL"                               =   "The Basic Meeting List Toolbox";
-/* The URL string for the BMLT button */
-"SLUG-BMLT-URL"                                 =   "https://bmlt.app";
 /* The button string for the TZ Lookup button */
 "SLUG-TZ-LABEL"                                 =   "LGV_TZ_Lookup";
+
+/* The URL to the site. */
+"SLUG-PRESENTED-BY-URL"                         =   "https://littlegreenviper.com";
+/* The URL string for the Privacy button */
+"SLUG-PRIVACY-URL"                              =   "https://littlegreenviper.com/welcome-to-little-green-viper/privacy/app-privacy/";
+/* The URL string for the Basic GCD Timer button */
+"SLUG-BGCD-URL"                                 =   "https://github.com/RiftValleySoftware/RVS_BasicGCDTimer";
+/* The URL string for the Generic Swift Toolbox button */
+"SLUG-GSWT-URL"                                 =   "https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox";
+/* The URL string for the Persistent Prefs button */
+"SLUG-PP-URL"                                   =   "https://github.com/RiftValleySoftware/RVS_PersistentPrefs";
+/* The URL string for the UIKit Toolbox button */
+"SLUG-UIKTB-URL"                                =   "https://github.com/RiftValleySoftware/RVS_UIKit_Toolbox";
+/* The URL string for the SwiftBMLSDK button */
+"SLUG-SWBMLSDK-URL"                             =   "https://github.com/LittleGreenViper/SwiftBMLSDK";
+/* The URL string for the Meeting Server button */
+"SLUG-ML-URL"                                   =   "https://github.com/LittleGreenViper/LGV_MeetingServer";
 /* The URL string for the TZ button. */
 "SLUG-TZ-URL"                                   =   "https://github.com/LittleGreenViper/LGV_TZ_Lookup";
-/* The button string for the GitHub button */
-"SLUG-GH-LABEL"                                 =   "The Source Code for This App";
 /* The URL string for the GitHub Button */
 "SLUG-GH-URL"                                   =   "https://github.com/LittleGreenViper/VirtualMeetingFinder";
+/* The URL string for the BMLT button */
+"SLUG-BMLT-URL"                                 =   "https://bmlt.app";
 
 // MARK: -

@@ -85,17 +85,6 @@ extension VMF_Prefs {
      */
     var excludeServiceMeetings: Bool {
         get { values[Keys.excludeServiceMeetings.rawValue] as? Bool ?? true }
-        set {
-            values[Keys.excludeServiceMeetings.rawValue] = newValue
-            guard let searchController = VMF_AppDelegate.searchController,
-                  let tableDisplayController = searchController.tableDisplayController
-            else { return }
-            
-            let dayIndex = tableDisplayController.dayIndex
-            let timeIndex = tableDisplayController.timeIndex
-            guard let time = searchController.getTimeOf(dayIndex: dayIndex, timeIndex: timeIndex) else { return }
-            searchController.reorganizeMeetings()
-            searchController.openTo(dayIndex: dayIndex, time: time)
-        }
+        set { values[Keys.excludeServiceMeetings.rawValue] = newValue }
     }
 }

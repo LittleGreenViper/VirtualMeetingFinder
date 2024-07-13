@@ -66,6 +66,15 @@ extension VMF_SettingsViewController {
     @IBAction func filterServiceMeetingsHit(_ inSender: NSObjectProtocol) {
         if let switcher = inSender as? UISwitch {
             prefs.excludeServiceMeetings = switcher.isOn
+            guard let searchController = VMF_AppDelegate.searchController,
+                  let tableDisplayController = searchController.tableDisplayController
+            else { return }
+            
+            let dayIndex = tableDisplayController.dayIndex
+            let timeIndex = tableDisplayController.timeIndex
+            guard let time = searchController.getTimeOf(dayIndex: dayIndex, timeIndex: timeIndex) else { return }
+            searchController.reorganizeMeetings()
+            searchController.openTo(dayIndex: dayIndex, time: time)
         } else {
             filterServiceMeetingsSwitch?.setOn(!(filterServiceMeetingsSwitch?.isOn ?? true), animated: true)
             filterServiceMeetingsSwitch?.sendActions(for: .valueChanged)

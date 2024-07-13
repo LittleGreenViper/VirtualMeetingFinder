@@ -63,9 +63,8 @@ extension VMF_MainViewController {
                     return a.adjustedIntegerStartTime < b.adjustedIntegerStartTime
                 }
             } ?? []
-            
             for index in 1..<8 {
-                self?.organizedMeetings.append(self?.searchMeetings.compactMap { index == $0.adjustedWeekday ? $0 : nil }.sorted { a, b in
+                self?.organizedMeetings.append(self?.searchMeetings.compactMap { (index == $0.adjustedWeekday) ? $0 : nil }.sorted { a, b in
                     if a.adjustedIntegerStartTime < b.adjustedIntegerStartTime {
                         return true
                     } else if a.adjustedIntegerStartTime < b.adjustedIntegerStartTime {
@@ -99,12 +98,18 @@ extension VMF_MainViewController {
         
         var ret = [Int: [MeetingInstance]]()
         
+        let exclude = prefs.excludeServiceMeetings
+        
         organizedMeetings[inWeekdayIndex - 1].forEach {
             let key = $0.adjustedIntegerStartTime
-            if nil == ret[key] {
-                ret[key] = [$0]
-            } else {
-                ret[key]?.append($0)
+            let value = !(exclude && $0.isServiceMeeting) ? $0 : nil
+            
+            if let value = value {
+                if nil == ret[key] {
+                    ret[key] = [value]
+                } else {
+                    ret[key]?.append(value)
+                }
             }
         }
         

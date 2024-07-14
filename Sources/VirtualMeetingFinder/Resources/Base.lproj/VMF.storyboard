@@ -1197,6 +1197,8 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gel-fq-Thu" secondAttribute="trailing" id="HvK-8Y-NJr"/>
+                                                    <constraint firstItem="1E1-F8-ND2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uzn-9H-qzY" secondAttribute="leading" id="bwb-Di-dRJ"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1E1-F8-ND2" secondAttribute="trailing" id="gLr-9m-flB"/>
                                                     <constraint firstAttribute="height" placeholder="YES" id="lVp-oX-Gy9"/>
                                                     <constraint firstItem="gel-fq-Thu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uzn-9H-qzY" secondAttribute="leading" id="v16-fO-d2x"/>
                                                 </constraints>

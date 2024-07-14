@@ -127,6 +127,9 @@
 // MARK: - DO NOT TRANSLATE BELOW THIS LINE -
 // ***********************************************************************************************************
 
+/* The format for a universal meeting link. The placeholder is replaced with the meeting's ID */
+"SLUG-UNIVERSAL-LINK-FORMAT"                    =   "https://vmf.littlegreenviper.com?%lu";
+
 /* The button string for the Basic GCD Timer button */
 "SLUG-BGCD-LABEL"                               =   "RVS_BasicGCDTimer";
 /* The button string for the Generic Swift Toolbox button */

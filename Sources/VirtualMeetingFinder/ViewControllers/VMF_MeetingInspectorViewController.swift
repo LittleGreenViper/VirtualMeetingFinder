@@ -517,7 +517,7 @@ extension VMF_MeetingInspectorViewController {
         guard var meeting = meeting,
               (1..<8).contains(meeting.weekday)
         else { return }
-        
+
         let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
         let prevTime = meeting.getPreviousStartDate(isAdjusted: true)
         let startTime = meeting.getNextStartDate(isAdjusted: true)
@@ -736,6 +736,29 @@ extension VMF_MeetingInspectorViewController {
         isLocationOpen = !isLocationOpen
     }
 
+    /* ################################################################## */
+    /**
+     Called to handle action tasks.
+     
+     - parameter inButton: The action BarButtonItem
+     */
+    @IBAction func actionItemHit(_ inButton: UIBarButtonItem) {
+        guard let url = meeting?.linkURL else { return }
+        
+        let viewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        viewController.excludedActivityTypes = [.assignToContact, .openInIBooks, .print, .saveToCameraRoll, .addToReadingList]
+
+        if .pad == traitCollection.userInterfaceIdiom,
+           let size = view?.bounds.size {
+            viewController.modalPresentationStyle = .popover
+            viewController.preferredContentSize = CGSize(width: size.width, height: size.height / 2)
+            viewController.popoverPresentationController?.barButtonItem = inButton
+            viewController.popoverPresentationController?.permittedArrowDirections = [.up]
+        }
+
+        present(viewController, animated: true, completion: nil)
+    }
+    
     /* ################################################################## */
     /**
      The "I Attend" bar button item was hit.

@@ -462,6 +462,13 @@ extension VMF_EmbeddedTableController {
         selectionHaptic()
         myController?.updateThermometer(self)
         myController?.setDayPicker()
+        
+        if 0 < VMF_SceneDelegate.urlMeetingID,
+           let meeting = VMF_AppDelegate.virtualService?.meetings.first(where: { $0.meeting.id == VMF_SceneDelegate.urlMeetingID })?.meeting {
+            selectMeeting(meeting)
+        }
+        
+        VMF_SceneDelegate.urlMeetingID = 0
     }
     
     /* ################################################################## */

@@ -41,21 +41,14 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     /* ################################################################## */
     /**
+     */
+    static var urlMeetingID = Int(0)
+    
+    /* ################################################################## */
+    /**
      The window object for this scene.
      */
     var window: UIWindow?
-
-    /* ################################################################## */
-    /**
-     Called before a connection is made to this scene.
-     
-     - parameter inScene: The scene being connected.
-     - parameter willConnectTo: The session being connected (ignored).
-     - parameter options: The connection options (also ignored).
-     */
-    func scene(_ inScene: UIScene, willConnectTo: UISceneSession, options: UIScene.ConnectionOptions) {
-        _ = (inScene as? UIWindowScene) // Forces the window to be set.
-    }
     
     /* ################################################################## */
     /**
@@ -75,6 +68,61 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         } else {
             self.window?.setNeedsLayout()
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the app is foregrounded via a URL.
+     
+     - parameter: The scene instance (ignored).
+     - parameter openURLContexts: The Opening URL contexts (as a set).
+     */
+    func scene(_: UIScene, openURLContexts inURLContexts: Set<UIOpenURLContext>) {
+        inURLContexts.forEach { resolveURL($0.url) }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the app is opened via a URL from a "cold start."
+     - parameter: The scene instance.
+     - parameter willConnectTo: The session being connected (ignored).
+     - parameter options: This contains the options, among which, is the URL context.
+     */
+    func scene(_ inScene: UIScene, willConnectTo: UISceneSession, options inConnectionOptions: UIScene.ConnectionOptions) {
+        if let url = inConnectionOptions.userActivities.first?.webpageURL {
+            resolveURL(url)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the app is opened via a URL (and launched).
+     - parameter: The scene instance (ignored).
+     - parameter continue: The activity being continued.
+     */
+    func scene(_: UIScene, continue inUserActivity: NSUserActivity) {
+        guard let url = inUserActivity.webpageURL else { return }
+        
+        resolveURL(url)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Instance Methods
+/* ###################################################################################################################################### */
+extension VMF_SceneDelegate {
+    /* ################################################################## */
+    /**
+     This will set the static property to a given meeting ID, if it is provided in the URI.
+     
+     - parameter inURL: The URL to resolve.
+     */
+    func resolveURL(_ inURL: URL) {
+        if let statusString = inURL.query(),
+           let meetingID = Int(statusString),
+           0 < meetingID {
+            Self.urlMeetingID = meetingID
         }
     }
 }

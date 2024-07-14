@@ -310,6 +310,12 @@ extension MeetingInstance {
             return current
         }
     }
+    
+    /* ################################################################## */
+    /**
+     This is a universal link for this meeting, in this app.
+     */
+    var linkURL: URL? { URL(string: String(format: "SLUG-UNIVERSAL-LINK-FORMAT".localizedVariant, id)) }
 }
 
 /* ###################################################################################################################################### */

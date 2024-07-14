@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="U2c-9b-Eip">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Map view configurations" minToolsVersion="14.0"/>
@@ -36,7 +37,7 @@
         <!--SLUG-SETTINGS-TITLE-->
         <scene sceneID="ooK-Vu-ggX">
             <objects>
-                <viewController title="SLUG-SETTINGS-TITLE" id="XMo-Ja-Ohb" customClass="VMF_SettingsViewController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="SLUG-SETTINGS-TITLE" id="XMo-Ja-Ohb" customClass="VMF_SettingsViewController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h03-aE-qcW">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -148,7 +149,7 @@
         <!--SLUG-ABOUT-SCREEN-TITLE-->
         <scene sceneID="Mrg-o4-W18">
             <objects>
-                <viewController id="njl-CG-MJ9" customClass="VMF_AboutViewController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="njl-CG-MJ9" customClass="VMF_AboutViewController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FGS-8R-yXk">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -179,7 +180,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="but-8i-P6u" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="but-8i-P6u" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="102" y="130" width="157" height="103.66666666666669"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -203,7 +204,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKA-Ef-Oeq" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKA-Ef-Oeq" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="101.66666666666669" y="253.66666666666669" width="158" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -215,7 +216,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="qaD-0d-wxF"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqO-3Z-54c" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqO-3Z-54c" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="120.66666666666666" y="291.66666666666669" width="120" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -245,7 +246,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cz-VL-ZHr" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cz-VL-ZHr" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="111" y="370" width="139" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -257,7 +258,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="PDM-Nb-6Gk"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lB7-t4-4AI" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lB7-t4-4AI" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="110.66666666666669" y="408" width="140" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -269,7 +270,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="dwD-9t-EOm"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQF-Hl-TYC" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQF-Hl-TYC" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="122.66666666666666" y="446" width="116" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -281,7 +282,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="OMD-nA-eCV"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6E-27-5lY" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6E-27-5lY" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="110" y="484" width="141" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -293,7 +294,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="Jzr-tW-5Sn"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ad-HR-0Ir" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ad-HR-0Ir" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="90.666666666666686" y="522" width="180" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -305,7 +306,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="Ata-o8-uFz"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2WV-WB-GuG" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2WV-WB-GuG" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="121.66666666666666" y="560" width="118" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -317,7 +318,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="Ruf-Pj-RNJ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQ4-mD-52q" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQ4-mD-52q" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="123" y="598" width="115" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -329,7 +330,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="UXe-4H-ZLt"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytT-1n-OTi" customClass="VMF_URLButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytT-1n-OTi" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="113" y="636" width="135" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -385,7 +386,7 @@
         <!--SLUG-TAB-0-TITLE-->
         <scene sceneID="475-3F-L6b">
             <objects>
-                <viewController title="SLUG-TAB-0-TITLE" id="Avq-Pc-erz" customClass="VMF_MainViewController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="SLUG-TAB-0-TITLE" id="Avq-Pc-erz" customClass="VMF_MainViewController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sFK-py-g0o">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -472,7 +473,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JrU-ny-TZt">
                                         <rect key="frame" x="0.0" y="78" width="361" height="44"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tD-DB-oEW" customClass="VMF_TapHoldButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tD-DB-oEW" customClass="VMF_TapHoldButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-LEFT-BUTTON-HINT" label="SLUG-ACC-LEFT-BUTTON-LABEL">
@@ -516,7 +517,7 @@
                                                     <outletCollection property="gestureRecognizers" destination="03V-r6-dki" appends="YES" id="C5P-rZ-BO0"/>
                                                 </connections>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQn-b0-JfM" customClass="VMF_TapHoldButton" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQn-b0-JfM" customClass="VMF_TapHoldButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="317" y="0.0" width="44" height="44"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-RIGHT-BUTTON-HINT" label="SLUG-ACC-RIGHT-BUTTON-LABEL">
@@ -734,7 +735,7 @@
         <!--SLUG-TAB-1-TITLE-->
         <scene sceneID="DtG-X1-Oac">
             <objects>
-                <viewController id="h2L-IG-jx9" customClass="VMF_AttendanceViewController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="h2L-IG-jx9" customClass="VMF_AttendanceViewController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ik6-Qe-rFZ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -764,7 +765,7 @@
         <!--Day Time Search Page View Controller-->
         <scene sceneID="JrL-tg-Smc">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="bxe-Jd-mqJ" customClass="VMF_DayTimeSearchPageViewController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="bxe-Jd-mqJ" customClass="VMF_DayTimeSearchPageViewController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <size key="freeformSize" width="393" height="852"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xVo-uf-z8W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -774,7 +775,7 @@
         <!--Embedded Table Controller-->
         <scene sceneID="ofD-gu-h4c">
             <objects>
-                <viewController storyboardIdentifier="VMF_EmbeddedTableController" id="t0l-fQ-nL3" customClass="VMF_EmbeddedTableController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VMF_EmbeddedTableController" id="t0l-fQ-nL3" customClass="VMF_EmbeddedTableController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uYy-2i-2Ah">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -783,7 +784,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" translatesAutoresizingMaskIntoConstraints="NO" id="8L8-qW-vGE" customClass="VMF_TableCell" customModule="VirtualMeetingFinder" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" translatesAutoresizingMaskIntoConstraints="NO" id="8L8-qW-vGE" customClass="VMF_TableCell" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="108.33333587646484"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8L8-qW-vGE" id="E3R-WY-hTi">
@@ -892,16 +893,16 @@
         <!--Meeting View Controller-->
         <scene sceneID="Uwk-Hi-8Do">
             <objects>
-                <viewController id="P9w-wB-EO1" customClass="VMF_MeetingViewController" customModule="VirtualMeetingFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="P9w-wB-EO1" customClass="VMF_MeetingViewController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BVJ-y8-8wb">
-                        <rect key="frame" x="0.0" y="0.0" width="361" height="769"/>
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="759"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="US5-g0-fUz">
                                 <rect key="frame" x="0.0" y="64" width="361" height="695"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="X4o-s5-Dmh" userLabel="Container Vertical Stack View">
-                                        <rect key="frame" x="16" y="0.0" width="329" height="695"/>
+                                        <rect key="frame" x="16" y="0.0" width="329" height="706"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="747" text="Meeting Name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0x-Y5-plm">
                                                 <rect key="frame" x="76" y="0.0" width="177" height="20"/>
@@ -924,14 +925,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="SLUG-IN-PROGRESS-STANDALONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7tx-Jg-onI">
-                                                <rect key="frame" x="0.0" y="64" width="329" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="64" width="329" height="19"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-IN-PROGRESS-MI-HINT" label="SLUG-ACC-IN-PROGRESS-MI-LABEL"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <color key="textColor" systemColor="systemGreenColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Zone" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JRB-g7-5Qt">
-                                                <rect key="frame" x="128" y="76" width="73" height="20"/>
+                                                <rect key="frame" x="128" y="95" width="73" height="20"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-TZ-MI-HINT" label="SLUG-ACC-TZ-MI-LABEL"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="gkH-oV-ao4"/>
@@ -941,7 +942,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="749" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XiA-7C-mAM">
-                                                <rect key="frame" x="44.666666666666657" y="108" width="239.99999999999997" height="0.0"/>
+                                                <rect key="frame" x="44.666666666666657" y="127" width="239.99999999999997" height="0.0"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-COMMENTS-MI-HINT" label="SLUG-ACC-COMMENTS-MI-LABEL"/>
                                                 <color key="textColor" systemColor="labelColor"/>
@@ -950,7 +951,7 @@
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                             </textView>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="odu-fY-u8h">
-                                                <rect key="frame" x="0.0" y="120" width="329" height="54"/>
+                                                <rect key="frame" x="0.0" y="139" width="329" height="54"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" distribution="fillEqually" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="hZz-Uk-7C5">
                                                         <rect key="frame" x="0.0" y="0.0" width="329" height="54"/>
@@ -1085,7 +1086,7 @@
                                                 </constraints>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GER-7R-iCr">
-                                                <rect key="frame" x="49.666666666666686" y="186" width="230" height="40"/>
+                                                <rect key="frame" x="49.666666666666686" y="205" width="230" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-PHONE-INFO-MI-HINT" label="SLUG-ACC-PHONE-INFO-MI-LABEL"/>
                                                 <color key="textColor" systemColor="labelColor"/>
@@ -1094,34 +1095,83 @@
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                             </textView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="748" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EZk-ly-NJg">
-                                                <rect key="frame" x="44.666666666666657" y="238" width="239.99999999999997" height="0.0"/>
+                                                <rect key="frame" x="44.666666666666657" y="257" width="239.99999999999997" height="0.0"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <accessibility key="accessibilityConfiguration" label="SLUG-ACC-XTRA-INFO-MI-LABEL"/>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-FORMATS-HEADER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ml1-yq-PeL">
-                                                <rect key="frame" x="60.666666666666686" y="250" width="208" height="0.0"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-er-i3Z">
-                                                <rect key="frame" x="49.666666666666686" y="262" width="230" height="50"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uzn-9H-qzY">
-                                                <rect key="frame" x="54.333333333333329" y="324" width="220.66666666666669" height="30"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="64m-m1-rdV">
+                                                <rect key="frame" x="41.666666666666657" y="269" width="245.99999999999997" height="30"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-IN-PERSON-HEADER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFw-NF-FXN">
-                                                        <rect key="frame" x="0.0" y="0.0" width="220.66666666666666" height="0.0"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-FORMATS-HEADER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ml1-yq-PeL">
+                                                        <rect key="frame" x="0.0" y="0.0" width="208" height="30"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1E1-F8-ND2">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PK7-wR-Uc4">
+                                                        <rect key="frame" x="216.00000000000003" y="4" width="30" height="22.333333333333336"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="PK7-wR-Uc4" secondAttribute="height" multiplier="1:1" id="KqB-jf-SRV"/>
+                                                        </constraints>
+                                                        <imageReference key="image" image="arrowtriangle.right.fill" catalog="system" symbolScale="small"/>
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="Ml1-yq-PeL" secondAttribute="bottom" id="6Rn-Tw-YEM"/>
+                                                    <constraint firstAttribute="bottom" secondItem="PK7-wR-Uc4" secondAttribute="bottom" id="Ryz-mJ-qP1"/>
+                                                    <constraint firstItem="PK7-wR-Uc4" firstAttribute="top" secondItem="64m-m1-rdV" secondAttribute="top" id="eld-MT-DbC"/>
+                                                    <constraint firstItem="Ml1-yq-PeL" firstAttribute="top" secondItem="64m-m1-rdV" secondAttribute="top" id="mz5-d9-Gat"/>
+                                                    <constraint firstAttribute="height" constant="30" id="oYu-HP-6xt"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="xNC-Q9-4oh" appends="YES" id="Wc8-A2-UF7"/>
+                                                </connections>
+                                            </stackView>
+                                            <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-er-i3Z">
+                                                <rect key="frame" x="49.666666666666686" y="311" width="230" height="0.0"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" placeholder="YES" id="0N4-o7-kdM"/>
+                                                </constraints>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="byn-Ac-E0k">
+                                                <rect key="frame" x="35.333333333333343" y="323" width="258.66666666666663" height="30"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" text="SLUG-IN-PERSON-HEADER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFw-NF-FXN">
                                                         <rect key="frame" x="0.0" y="0.0" width="220.66666666666666" height="30"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6dc-OT-lnh">
+                                                        <rect key="frame" x="228.66666666666666" y="4" width="29.999999999999972" height="22.333333333333336"/>
+                                                        <imageReference key="image" image="arrowtriangle.right.fill" catalog="system" symbolScale="small"/>
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstItem="6dc-OT-lnh" firstAttribute="width" secondItem="6dc-OT-lnh" secondAttribute="height" multiplier="1:1" id="8rZ-eI-WsY"/>
+                                                    <constraint firstAttribute="bottom" secondItem="6dc-OT-lnh" secondAttribute="bottom" id="O6W-TE-26P"/>
+                                                    <constraint firstItem="QFw-NF-FXN" firstAttribute="top" secondItem="byn-Ac-E0k" secondAttribute="top" id="S6N-bG-Egn"/>
+                                                    <constraint firstAttribute="bottom" secondItem="QFw-NF-FXN" secondAttribute="bottom" id="TqD-Ay-HCt"/>
+                                                    <constraint firstItem="6dc-OT-lnh" firstAttribute="top" secondItem="byn-Ac-E0k" secondAttribute="top" id="eVB-Gt-4Zo"/>
+                                                    <constraint firstAttribute="height" constant="30" id="md1-nU-Oqw"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="nk1-LH-HAF" appends="YES" id="EJE-6R-7oO"/>
+                                                </connections>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uzn-9H-qzY">
+                                                <rect key="frame" x="54.333333333333329" y="365" width="220.66666666666669" height="0.0"/>
+                                                <subviews>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1E1-F8-ND2">
+                                                        <rect key="frame" x="0.0" y="0.0" width="220.66666666666666" height="0.0"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-IN-PERSON-ADDRESS-MI-HINT" label="SLUG-ACC-IN-PERSON-ADDRESS-MI-LABEL"/>
                                                         <color key="textColor" systemColor="labelColor"/>
@@ -1130,7 +1180,7 @@
                                                         <dataDetectorType key="dataDetectorTypes" address="YES"/>
                                                     </textView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gel-fq-Thu">
-                                                        <rect key="frame" x="110.33333333333333" y="30" width="0.0" height="0.0"/>
+                                                        <rect key="frame" x="110.33333333333333" y="0.0" width="0.0" height="0.0"/>
                                                         <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-HINT" label="SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-LABEL"/>
                                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                         <nil key="textColor"/>
@@ -1139,11 +1189,12 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gel-fq-Thu" secondAttribute="trailing" id="HvK-8Y-NJr"/>
+                                                    <constraint firstAttribute="height" placeholder="YES" id="lVp-oX-Gy9"/>
                                                     <constraint firstItem="gel-fq-Thu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uzn-9H-qzY" secondAttribute="leading" id="v16-fO-d2x"/>
                                                 </constraints>
                                             </stackView>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" rotateEnabled="NO" pitchEnabled="NO" showsCompass="NO" showsPointsOfInterest="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bIq-s0-xoL">
-                                                <rect key="frame" x="0.0" y="366" width="329" height="329"/>
+                                                <rect key="frame" x="0.0" y="377" width="329" height="329"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="bIq-s0-xoL" secondAttribute="height" multiplier="1:1" id="aIo-6j-deK"/>
                                                 </constraints>
@@ -1166,14 +1217,10 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GER-7R-iCr" secondAttribute="trailing" id="0gJ-uC-GSN"/>
-                                            <constraint firstItem="Ml1-yq-PeL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="1dG-wX-En4"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ml1-yq-PeL" secondAttribute="trailing" id="7DR-Vh-AWL"/>
                                             <constraint firstItem="GER-7R-iCr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="7x0-3G-B7q"/>
                                             <constraint firstItem="P0x-Y5-plm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="91z-VW-KPF"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="uzn-9H-qzY" secondAttribute="trailing" id="9iv-mp-BMk"/>
                                             <constraint firstItem="odu-fY-u8h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="NYm-73-ine"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="odu-fY-u8h" secondAttribute="trailing" id="Otq-CO-eqf"/>
-                                            <constraint firstItem="uzn-9H-qzY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="Wj4-eO-dgG"/>
                                             <constraint firstAttribute="trailing" secondItem="bIq-s0-xoL" secondAttribute="trailing" id="gux-gH-ra6"/>
                                             <constraint firstItem="bIq-s0-xoL" firstAttribute="leading" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="imA-rc-8hi"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P0x-Y5-plm" secondAttribute="trailing" id="mac-MC-CPJ"/>
@@ -1213,14 +1260,18 @@
                     <connections>
                         <outlet property="commentsTextView" destination="XiA-7C-mAM" id="krn-X9-JaP"/>
                         <outlet property="formatContainerView" destination="1Me-er-i3Z" id="fOm-S5-6fC"/>
+                        <outlet property="formatHeader" destination="64m-m1-rdV" id="meP-ss-d0k"/>
+                        <outlet property="formatHeaderDisclosureTriangle" destination="PK7-wR-Uc4" id="hzx-y2-VMw"/>
                         <outlet property="formatHeaderLabel" destination="Ml1-yq-PeL" id="1kf-lT-HR6"/>
                         <outlet property="globeButtonContainer" destination="zgI-lN-ptg" id="oO3-sV-Rs3"/>
                         <outlet property="globeLabelButton" destination="GfA-yJ-CNW" id="L4Z-lU-Gv7"/>
                         <outlet property="iAttendBarButton" destination="jby-C1-agm" id="7i9-ph-X7z"/>
                         <outlet property="inPersonAddressTextView" destination="1E1-F8-ND2" id="bcw-IJ-BSH"/>
                         <outlet property="inPersonContainer" destination="uzn-9H-qzY" id="SQo-5k-JL1"/>
+                        <outlet property="inPersonDisclosureTriangle" destination="6dc-OT-lnh" id="K6r-P6-lFS"/>
                         <outlet property="inPersonExtraInfoLabel" destination="gel-fq-Thu" id="AAi-iR-sBN"/>
-                        <outlet property="inPersonHeader" destination="QFw-NF-FXN" id="Su8-Q8-3LB"/>
+                        <outlet property="inPersonHeader" destination="byn-Ac-E0k" id="onD-G8-Hq3"/>
+                        <outlet property="inPersonHeaderLabel" destination="QFw-NF-FXN" id="Su8-Q8-3LB"/>
                         <outlet property="inProgressLabel" destination="7tx-Jg-onI" id="TQb-JS-utp"/>
                         <outlet property="linkContainer" destination="odu-fY-u8h" id="51P-kj-oGF"/>
                         <outlet property="locationMapView" destination="bIq-s0-xoL" id="pa5-eh-BtC"/>
@@ -1251,6 +1302,16 @@
                         <action selector="videoButtonHit:" destination="P9w-wB-EO1" id="ZQk-vq-OiA"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="xNC-Q9-4oh" userLabel="Formats Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="formatSectionHeaderHit:" destination="P9w-wB-EO1" id="ab1-W2-Fe4"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="nk1-LH-HAF" userLabel="In-Person Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="locationSectionHeaderHit:" destination="P9w-wB-EO1" id="Tzm-lL-4Fa"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1697" y="682"/>
         </scene>
@@ -1271,22 +1332,22 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

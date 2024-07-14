@@ -77,9 +77,9 @@
 /* This displays the phone extra information. The placeholder is replaced with the extra information (like passwords, etc.), in the Meeting Inspector. */
 "SLUG-PHONE-NUMBER-FORMAT"                      =   "Phone: %@";
 /* This is the header, over the Formats display, in the Meeting Inspector. */
-"SLUG-FORMATS-HEADER"                           =   "Formats:";
+"SLUG-FORMATS-HEADER"                           =   "Meeting Formats";
 /* This is the header, over the in-person meeting address, in the Meeting Inspector. */
-"SLUG-IN-PERSON-HEADER"                         =   "In-Person Meeting Address:";
+"SLUG-IN-PERSON-HEADER"                         =   "In-Person Meeting Location";
 /* This is displayed under the phone icon, in the Meeting Inspector. */
 "SLUG-PHONE-BUTTON"                             =   "Phone";
 /* This is displayed under the globe icon, in the Meeting Inspector. */

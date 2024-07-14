@@ -79,9 +79,44 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     
     /* ################################################################## */
     /**
+     The image used for a closed disclosure header
+     */
+    private static let _disclosureClosedImage = UIImage(systemName: "arrowtriangle.right.fill")
+    
+    /* ################################################################## */
+    /**
+     The image used for an open disclosure header
+     */
+    private static let _disclosureOpenImage = UIImage(systemName: "arrowtriangle.down.fill")
+
+    /* ################################################################## */
+    /**
      The font to use for the "I Attend" bar button item.
      */
     private static let _barButtonLabelFont = UIFont.systemFont(ofSize: 17)
+
+    /* ################################################################## */
+    /**
+     Set to true, to open the formats section.
+     */
+    var isFormatsOpen = false {
+        didSet {
+            formatHeaderDisclosureTriangle?.image = isFormatsOpen ? Self._disclosureOpenImage : Self._disclosureClosedImage
+            formatContainerView?.isHidden = !isFormatsOpen
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     Set to true, to open the formats section.
+     */
+    var isLocationOpen = false {
+        didSet {
+            inPersonDisclosureTriangle?.image = isLocationOpen ? Self._disclosureOpenImage : Self._disclosureClosedImage
+            inPersonContainer?.isHidden = !isLocationOpen
+            locationMapView?.isHidden = !isLocationOpen
+        }
+    }
 
     /* ################################################################## */
     /**
@@ -181,15 +216,27 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     
     /* ################################################################## */
     /**
+     This contains the header for the in-person location information.
+     */
+    @IBOutlet weak var inPersonHeader: UIView?
+    
+    /* ################################################################## */
+    /**
+     This is the disclosure triangle for the in-person section.
+     */
+    @IBOutlet weak var inPersonDisclosureTriangle: UIImageView?
+    
+    /* ################################################################## */
+    /**
      Contains the in-person meeting stuff.
      */
     @IBOutlet weak var inPersonContainer: UIStackView?
-    
+
     /* ################################################################## */
     /**
      The heading for the in-person meeting stuff.
      */
-    @IBOutlet weak var inPersonHeader: UILabel?
+    @IBOutlet weak var inPersonHeaderLabel: UILabel?
 
     /* ################################################################## */
     /**
@@ -211,9 +258,21 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     
     /* ################################################################## */
     /**
+     This contains the format header and disclosure triangle.
+     */
+    @IBOutlet weak var formatHeader: UIView?
+    
+    /* ################################################################## */
+    /**
      The heading for the format section.
      */
     @IBOutlet weak var formatHeaderLabel: UILabel?
+    
+    /* ################################################################## */
+    /**
+     The disclosure triangle for the format section.
+     */
+    @IBOutlet weak var formatHeaderDisclosureTriangle: UIImageView?
     
     /* ################################################################## */
     /**
@@ -312,9 +371,10 @@ extension VMF_MeetingViewController {
         phoneInfoTextView?.isHidden = true
         commentsTextView?.isHidden = true
         linkContainer?.isHidden = true
+        inPersonHeader?.isHidden = !(meeting?.hasInPerson ?? true)
         inPersonContainer?.isHidden = true
         locationMapView?.isHidden = true
-        formatHeaderLabel?.isHidden = true
+        formatHeader?.isHidden = true
         formatContainerView?.isHidden = true
         inPersonExtraInfoLabel?.isHidden = true
         virtualExtraInfoTextView?.isHidden = true
@@ -372,8 +432,8 @@ extension VMF_MeetingViewController {
 
         if let basicAddress = meeting?.basicInPersonAddress,
            !basicAddress.isEmpty {
-            inPersonContainer?.isHidden = false
-            inPersonHeader?.text = inPersonHeader?.text?.localizedVariant
+            inPersonHeaderLabel?.text = inPersonHeaderLabel?.text?.localizedVariant
+            inPersonHeaderLabel?.textColor = .tintColor
             inPersonAddressTextView?.text = basicAddress
             if let extraInfo = meeting?.locationInfo,
                meeting?.comments?.lowercased() != extraInfo.lowercased(),
@@ -411,6 +471,9 @@ extension VMF_MeetingViewController {
         iAttendBarButton?.isAccessibilityElement = true
         iAttendBarButton?.accessibilityLabel = "SLUG-ACC-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-LABEL".accessibilityLocalizedVariant
         iAttendBarButton?.accessibilityHint = "SLUG-ACC-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-HINT".accessibilityLocalizedVariant
+        
+        isFormatsOpen = false
+        isLocationOpen = false
     }
     
     /* ################################################################## */
@@ -477,7 +540,6 @@ extension VMF_MeetingViewController {
      Initializes the map view.
      */
     func setUpMap(_ inCoords: CLLocationCoordinate2D) {
-        locationMapView?.isHidden = false
         if let initialRegion = locationMapView?.regionThatFits(MKCoordinateRegion(center: inCoords, span: MKCoordinateSpan(latitudeDelta: 0.25, longitudeDelta: 0.25))) {
             locationMapView?.region = initialRegion
             locationMapView?.addAnnotation(VMF_MapAnnotation(coordinate: inCoords))
@@ -492,7 +554,8 @@ extension VMF_MeetingViewController {
      */
     func setUpFormats(_ inFormats: [SwiftBMLSDK_Parser.Meeting.Format]) {
         formatHeaderLabel?.text = formatHeaderLabel?.text?.localizedVariant
-        formatHeaderLabel?.isHidden = false
+        formatHeaderLabel?.textColor = .tintColor
+        formatHeader?.isHidden = false
         formatContainerView?.isHidden = false
         
         guard let formatContainerView = formatContainerView else { return }
@@ -641,6 +704,26 @@ extension VMF_MeetingViewController {
         }
     }
     
+    /* ################################################################## */
+    /**
+     The format header was hit (open or close the format section).
+     
+     - parameter: ignored
+     */
+    @IBAction func formatSectionHeaderHit(_: Any) {
+        isFormatsOpen = !isFormatsOpen
+    }
+    
+    /* ################################################################## */
+    /**
+     The in-person location header was hit (open or close the location section).
+     
+     - parameter: ignored
+     */
+    @IBAction func locationSectionHeaderHit(_: Any) {
+        isLocationOpen = !isLocationOpen
+    }
+
     /* ################################################################## */
     /**
      The "I Attend" bar button item was hit.

@@ -723,6 +723,7 @@ extension VMF_MeetingInspectorViewController {
      - parameter: ignored
      */
     @IBAction func formatSectionHeaderHit(_: Any) {
+        selectionHaptic()
         isFormatsOpen = !isFormatsOpen
     }
     
@@ -733,6 +734,7 @@ extension VMF_MeetingInspectorViewController {
      - parameter: ignored
      */
     @IBAction func locationSectionHeaderHit(_: Any) {
+        selectionHaptic()
         isLocationOpen = !isLocationOpen
     }
 
@@ -755,6 +757,8 @@ extension VMF_MeetingInspectorViewController {
             viewController.popoverPresentationController?.barButtonItem = inButton
             viewController.popoverPresentationController?.permittedArrowDirections = [.up]
         }
+        
+        selectionHaptic()
 
         present(viewController, animated: true, completion: nil)
     }

@@ -472,7 +472,7 @@ extension VMF_EmbeddedTableController {
      - parameter sender: Any associated data.
      */
     override func prepare(for inSegue: UIStoryboardSegue, sender inData: Any?) {
-        if let destination = inSegue.destination as? VMF_MeetingViewController,
+        if let destination = inSegue.destination as? VMF_MeetingInspectorViewController,
            let meetingInstance = inData as? MeetingInstance {
             destination.myController = self
             destination.meeting = meetingInstance

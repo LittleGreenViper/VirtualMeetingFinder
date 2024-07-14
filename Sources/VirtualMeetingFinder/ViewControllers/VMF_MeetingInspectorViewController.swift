@@ -28,7 +28,7 @@ import RVS_Generic_Swift_Toolbox
 /**
  This displays one meeting.
  */
-class VMF_MeetingViewController: VMF_BaseViewController {
+class VMF_MeetingInspectorViewController: VMF_BaseViewController {
     /* ################################################################## */
     /**
      This is the font to use for the format item key.
@@ -51,7 +51,7 @@ class VMF_MeetingViewController: VMF_BaseViewController {
     /**
      The duration of the open/close animation.
      */
-    private static let _openingAnimationPeriodInSeconds = TimeInterval(0.25)
+    private static let _openingAnimationPeriodInSeconds = TimeInterval(0.125)
 
     /* ################################################################## */
     /**
@@ -301,7 +301,7 @@ class VMF_MeetingViewController: VMF_BaseViewController {
 /* ###################################################################################################################################### */
 // MARK: Static Functions
 /* ###################################################################################################################################### */
-extension VMF_MeetingViewController {
+extension VMF_MeetingInspectorViewController {
     /* ################################################################## */
     /**
      "Cleans" a URI.
@@ -338,7 +338,7 @@ extension VMF_MeetingViewController {
 /* ###################################################################################################################################### */
 // MARK: Base Class Overrides
 /* ###################################################################################################################################### */
-extension VMF_MeetingViewController {
+extension VMF_MeetingInspectorViewController {
     /* ################################################################## */
     /**
      Called when the view hierarchy has loaded.
@@ -508,7 +508,7 @@ extension VMF_MeetingViewController {
 /* ###################################################################################################################################### */
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
-extension VMF_MeetingViewController {
+extension VMF_MeetingInspectorViewController {
     /* ################################################################## */
     /**
      Sets the time and weekday (local) for the meeting.
@@ -589,6 +589,7 @@ extension VMF_MeetingViewController {
             keyLabel.translatesAutoresizingMaskIntoConstraints = false
             keyLabel.leftAnchor.constraint(equalTo: container.leftAnchor).isActive = true
             keyLabel.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
+            keyLabel.bottomAnchor.constraint(lessThanOrEqualTo: container.bottomAnchor).isActive = true
             keyLabel.widthAnchor.constraint(equalToConstant: Self._formatKeyWidth).isActive = true
             
             let nameLabel = UILabel()
@@ -664,7 +665,7 @@ extension VMF_MeetingViewController {
 /* ###################################################################################################################################### */
 // MARK: Callbacks
 /* ###################################################################################################################################### */
-extension VMF_MeetingViewController {
+extension VMF_MeetingInspectorViewController {
     /* ################################################################## */
     /**
      The phone in button was hit.
@@ -761,7 +762,7 @@ extension VMF_MeetingViewController {
 /* ###################################################################################################################################### */
 // MARK: MKMapViewDelegate Conformance
 /* ###################################################################################################################################### */
-extension VMF_MeetingViewController: MKMapViewDelegate {
+extension VMF_MeetingInspectorViewController: MKMapViewDelegate {
     /* ################################################################## */
     /**
      This is called to fetch an annotation (marker) for the map.

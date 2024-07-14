@@ -58,7 +58,7 @@ class VMF_AppDelegate: UIResponder {
     /**
      This is set to the open meeting, if we have one we are looking at.
      */
-    static var openMeeting: VMF_MeetingViewController?
+    static var openMeeting: VMF_MeetingInspectorViewController?
 
     /* ################################################################## */
     /**

@@ -784,7 +784,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" translatesAutoresizingMaskIntoConstraints="NO" id="8L8-qW-vGE" customClass="VMF_TableCell" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" translatesAutoresizingMaskIntoConstraints="NO" id="8L8-qW-vGE" customClass="VMF_TableCell" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="108.33333587646484"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8L8-qW-vGE" id="E3R-WY-hTi">
@@ -896,10 +896,10 @@
             </objects>
             <point key="canvasLocation" x="894" y="682"/>
         </scene>
-        <!--Meeting View Controller-->
+        <!--Meeting Inspector View Controller-->
         <scene sceneID="Uwk-Hi-8Do">
             <objects>
-                <viewController id="P9w-wB-EO1" customClass="VMF_MeetingViewController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="P9w-wB-EO1" customClass="VMF_MeetingInspectorViewController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BVJ-y8-8wb">
                         <rect key="frame" x="0.0" y="0.0" width="361" height="759"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

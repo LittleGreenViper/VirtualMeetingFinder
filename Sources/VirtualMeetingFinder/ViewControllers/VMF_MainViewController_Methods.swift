@@ -712,8 +712,10 @@ extension VMF_MainViewController {
         )
         
         isDirectSelectionMode = false
-        reorganizeMeetings()
-        view?.setNeedsLayout()
+        if organizedMeetings.isEmpty {
+            reorganizeMeetings()
+            view?.setNeedsLayout()
+        }
         (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = !isNameSearchMode
     }
     

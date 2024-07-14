@@ -659,7 +659,7 @@ extension VMF_MeetingViewController {
         
         // HACK ALERT!
         // This actually prevents that momentary delay, as the table recalculates, when we go back.
-        myController?.valueTable?.reloadData()
+        (myController as? VMF_MainViewController)?.organizedMeetings = []
         setBarButton()
     }
 }

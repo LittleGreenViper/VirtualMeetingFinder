@@ -49,6 +49,12 @@ class VMF_MeetingViewController: VMF_BaseViewController {
 
     /* ################################################################## */
     /**
+     The duration of the open/close animation.
+     */
+    private static let _openingAnimationPeriodInSeconds = TimeInterval(0.25)
+
+    /* ################################################################## */
+    /**
      This is how many display units wide, we make the format key column.
      */
     private static let _formatKeyWidth = CGFloat(50)
@@ -76,18 +82,6 @@ class VMF_MeetingViewController: VMF_BaseViewController {
      The image to use, for the bar button item, of a meeting that is not selected for attendance.
      */
     private static let _uncheckedImage = UIImage(systemName: "square")
-    
-    /* ################################################################## */
-    /**
-     The image used for a closed disclosure header
-     */
-    private static let _disclosureClosedImage = UIImage(systemName: "arrowtriangle.right.fill")
-    
-    /* ################################################################## */
-    /**
-     The image used for an open disclosure header
-     */
-    private static let _disclosureOpenImage = UIImage(systemName: "arrowtriangle.down.fill")
 
     /* ################################################################## */
     /**
@@ -101,8 +95,16 @@ class VMF_MeetingViewController: VMF_BaseViewController {
      */
     var isFormatsOpen = false {
         didSet {
-            formatHeaderDisclosureTriangle?.image = isFormatsOpen ? Self._disclosureOpenImage : Self._disclosureClosedImage
-            formatContainerView?.isHidden = !isFormatsOpen
+            guard view.window != nil else {
+                formatContainerView?.isHidden = !isFormatsOpen
+                return
+            }
+            let imageRotation = isFormatsOpen ? Double.pi / 2 : 0
+            UIView.animate(withDuration: Self._openingAnimationPeriodInSeconds) {
+                self.formatHeaderDisclosureTriangle?.transform = CGAffineTransform(rotationAngle: CGFloat(imageRotation))
+                self.formatContainerView?.isHidden = !self.isFormatsOpen
+                self.view?.layoutIfNeeded()
+            }
         }
     }
 
@@ -112,9 +114,18 @@ class VMF_MeetingViewController: VMF_BaseViewController {
      */
     var isLocationOpen = false {
         didSet {
-            inPersonDisclosureTriangle?.image = isLocationOpen ? Self._disclosureOpenImage : Self._disclosureClosedImage
-            inPersonContainer?.isHidden = !isLocationOpen
-            locationMapView?.isHidden = !isLocationOpen
+            guard view.window != nil else {
+                inPersonContainer?.isHidden = !isLocationOpen
+                locationMapView?.isHidden = !isLocationOpen
+                return
+            }
+            let imageRotation = isLocationOpen ? Double.pi / 2 : 0
+            UIView.animate(withDuration: Self._openingAnimationPeriodInSeconds) {
+                self.inPersonDisclosureTriangle?.transform = CGAffineTransform(rotationAngle: CGFloat(imageRotation))
+                self.inPersonContainer?.isHidden = !self.isLocationOpen
+                self.locationMapView?.isHidden = !self.isLocationOpen
+                self.view?.layoutIfNeeded()
+            }
         }
     }
 

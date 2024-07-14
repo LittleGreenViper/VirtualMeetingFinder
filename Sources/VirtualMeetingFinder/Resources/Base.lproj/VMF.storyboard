@@ -802,10 +802,10 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" distribution="fillProportionally" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="5hj-cI-Pii" userLabel="Text Container">
                                                     <rect key="frame" x="32" y="8" width="357" height="92"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Meeting Name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IX8-yL-BLd">
-                                                            <rect key="frame" x="0.0" y="0.0" width="105.66666666666667" height="20"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Meeting Name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IX8-yL-BLd">
+                                                            <rect key="frame" x="0.0" y="0.0" width="357" height="20"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="20" id="z7c-tp-SeV"/>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="z7c-tp-SeV"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                             <nil key="textColor"/>
@@ -821,7 +821,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Zone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="obw-1f-cfK">
-                                                            <rect key="frame" x="0.0" y="48" width="64.333333333333329" height="20"/>
+                                                            <rect key="frame" x="0.0" y="48" width="357" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="p8w-Il-uRG"/>
                                                             </constraints>
@@ -830,7 +830,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="In Progress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aub-0n-yX8">
-                                                            <rect key="frame" x="0.0" y="72" width="77.333333333333329" height="20"/>
+                                                            <rect key="frame" x="0.0" y="72" width="357" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="ypH-MD-B51"/>
                                                             </constraints>
@@ -840,8 +840,14 @@
                                                         </label>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="IX8-yL-BLd" firstAttribute="leading" secondItem="5hj-cI-Pii" secondAttribute="leading" id="0JL-gB-lts"/>
+                                                        <constraint firstAttribute="trailing" secondItem="IX8-yL-BLd" secondAttribute="trailing" id="7sa-Oh-14s"/>
+                                                        <constraint firstAttribute="trailing" secondItem="aub-0n-yX8" secondAttribute="trailing" id="C3d-wH-s2g"/>
+                                                        <constraint firstItem="obw-1f-cfK" firstAttribute="leading" secondItem="5hj-cI-Pii" secondAttribute="leading" id="L2l-WB-r1C"/>
                                                         <constraint firstAttribute="trailing" secondItem="xgs-Bi-4LB" secondAttribute="trailing" id="fLr-Aw-6gM"/>
+                                                        <constraint firstItem="aub-0n-yX8" firstAttribute="leading" secondItem="5hj-cI-Pii" secondAttribute="leading" id="fee-EO-WXQ"/>
                                                         <constraint firstItem="xgs-Bi-4LB" firstAttribute="leading" secondItem="5hj-cI-Pii" secondAttribute="leading" id="gbE-I6-MAV"/>
+                                                        <constraint firstAttribute="trailing" secondItem="obw-1f-cfK" secondAttribute="trailing" id="sn4-I7-SGF"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>

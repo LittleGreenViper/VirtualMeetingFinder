@@ -717,6 +717,7 @@ extension VMF_MainViewController {
             view?.setNeedsLayout()
         }
         (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = !isNameSearchMode
+        setAttendance()
     }
     
     /* ################################################################## */
@@ -744,7 +745,7 @@ extension VMF_MainViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setAttendance()
-        
+
         guard let maxIndex = weekdayModeSelectorSegmentedSwitch?.numberOfSegments else { return }
         
         for index in (0..<maxIndex) {

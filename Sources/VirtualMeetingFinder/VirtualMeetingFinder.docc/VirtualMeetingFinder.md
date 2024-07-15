@@ -60,6 +60,10 @@ This is another screen that is brought in from the Settings Screen, that has inf
 
 - [The Basic Meeting List Toolbox (BMLT)](https://bmlt.app)
 
+## More Information
+
+[This is a page with a much more detailed explanation of the app.](https://littlegreenviper.com/the-virtual-na-meeting-finder-app/)
+
 ## Privacy
 
 [The Privacy Policy](https://littlegreenviper.com/welcome-to-little-green-viper/privacy/app-privacy/)

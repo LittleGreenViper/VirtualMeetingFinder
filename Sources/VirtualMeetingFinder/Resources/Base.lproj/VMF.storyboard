@@ -229,8 +229,20 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5O-wo-noS" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
+                                                <rect key="frame" x="90.666666666666686" y="190" width="180" height="55.666666666666657"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="SLUG-HELP-PAGE-LABEL"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="urlString" value="SLUG-HELP-PAGE-URL"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="UfV-Qd-XZx"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKA-Ef-Oeq" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
-                                                <rect key="frame" x="101.66666666666669" y="190" width="158" height="93.666666666666686"/>
+                                                <rect key="frame" x="101.66666666666669" y="253.66666666666669" width="158" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="SLUG-PRIVACY-LABEL"/>

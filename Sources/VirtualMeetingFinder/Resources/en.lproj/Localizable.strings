@@ -117,7 +117,7 @@
 /* The button string for the Privacy button */
 "SLUG-PRIVACY-LABEL"                            =   "Privacy";
 /* The header for the dependency list. */
-"SLUG-DEPENDENCY-HEADER-LABEL"                  =   "Software Dependencies:";
+"SLUG-DEPENDENCY-HEADER-LABEL"                  =   "App Dependencies:";
 /* The button string for the GitHub button */
 "SLUG-GH-LABEL"                                 =   "The Source Code for This App";
 /* The button string for the BMLT button */
@@ -144,6 +144,8 @@
 "SLUG-ML-LABEL"                                 =   "LGV_MeetingServer";
 /* The button string for the TZ Lookup button */
 "SLUG-TZ-LABEL"                                 =   "LGV_TZ_Lookup";
+/* The button string for the help page button. */
+"SLUG-HELP-PAGE-LABEL"                          =   "More Information";
 
 /* The URL to the site. */
 "SLUG-PRESENTED-BY-URL"                         =   "https://littlegreenviper.com";
@@ -167,5 +169,7 @@
 "SLUG-GH-URL"                                   =   "https://github.com/LittleGreenViper/VirtualMeetingFinder";
 /* The URL string for the BMLT button */
 "SLUG-BMLT-URL"                                 =   "https://bmlt.app";
+/* The URL string for the help page button. */
+"SLUG-HELP-PAGE-URL"                            =   "https://littlegreenviper.com/the-virtual-na-meeting-finder-app/";
 
 // MARK: -

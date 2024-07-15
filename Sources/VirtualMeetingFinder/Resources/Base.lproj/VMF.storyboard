@@ -400,7 +400,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1R3-iR-Giq">
                                 <rect key="frame" x="16" y="103" width="361" height="122"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Hjc-M6-UmS">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Hjc-M6-UmS">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="45"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -790,7 +790,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" translatesAutoresizingMaskIntoConstraints="NO" id="8L8-qW-vGE" customClass="VMF_TableCell" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" translatesAutoresizingMaskIntoConstraints="NO" id="8L8-qW-vGE" customClass="VMF_TableCell" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="108.33333587646484"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8L8-qW-vGE" id="E3R-WY-hTi">

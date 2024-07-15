@@ -667,7 +667,14 @@ extension VMF_MainViewController {
               0 < numberOfSegments,
               8 < numberOfSegments
         else { return }
+        
+        var titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.tintColor, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
+        UISegmentedControl.appearance().setTitleTextAttributes(titleTextAttributes, for: .normal)
+        
+        titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)]
+        UISegmentedControl.appearance().setTitleTextAttributes(titleTextAttributes, for: .selected)
 
+        weekdayModeSelectorSegmentedSwitch?.apportionsSegmentWidthsByContent = true
         (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: 0) as? UIView)?.accessibilityLabel = "SLUG-ACC-WEEKDAY-SWITCH-0-LABEL"
         (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: 0) as? UIView)?.accessibilityHint = "SLUG-ACC-WEEKDAY-SWITCH-0-HINT"
 

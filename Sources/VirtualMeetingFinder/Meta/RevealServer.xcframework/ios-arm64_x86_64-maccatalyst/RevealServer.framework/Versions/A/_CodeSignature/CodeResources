@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		xVqhEeRqsUso2+XrT1WzuWLi0WQ=
+		Rx9Fk6mvoLosjrCGgAA1JoyTYjY=
 		</data>
 		<key>Resources/Scripts/integrate_revealserver.sh</key>
 		<data>
@@ -15,6 +15,13 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Headers/RevealServer-Swift.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			4mkL7YgU/aEMWPedDdwQqLSIBwghLxdk1cVqgCltva4=
+			</data>
+		</dict>
 		<key>Headers/RevealServer.h</key>
 		<dict>
 			<key>hash2</key>
@@ -22,18 +29,74 @@
 			weLK/65HyV1EiL9dd4xoAqQhf0/0r/Oy6os2nXCA+Ew=
 			</data>
 		</dict>
+		<key>Modules/RevealServer.swiftmodule/arm64-apple-ios-macabi.abi.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			F6VZRagEajYASC2MDn/VdIqsVY4sgI4/gnhltIbboIk=
+			</data>
+		</dict>
+		<key>Modules/RevealServer.swiftmodule/arm64-apple-ios-macabi.private.swiftinterface</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ReJwENxQnRFLJpUcuFs30krn5reXL56o5mCOzrkdfNE=
+			</data>
+		</dict>
+		<key>Modules/RevealServer.swiftmodule/arm64-apple-ios-macabi.swiftdoc</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			MwONijQG5G76XBjQWFg/WejSbh4lxn7zjvHgUm4AGo0=
+			</data>
+		</dict>
+		<key>Modules/RevealServer.swiftmodule/arm64-apple-ios-macabi.swiftinterface</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ReJwENxQnRFLJpUcuFs30krn5reXL56o5mCOzrkdfNE=
+			</data>
+		</dict>
+		<key>Modules/RevealServer.swiftmodule/x86_64-apple-ios-macabi.abi.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			F6VZRagEajYASC2MDn/VdIqsVY4sgI4/gnhltIbboIk=
+			</data>
+		</dict>
+		<key>Modules/RevealServer.swiftmodule/x86_64-apple-ios-macabi.private.swiftinterface</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			xTX+KBM0hZUljG0KU7S1yFzN4wrlpdOJFFyFGqmCiPs=
+			</data>
+		</dict>
+		<key>Modules/RevealServer.swiftmodule/x86_64-apple-ios-macabi.swiftdoc</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			NE778dGIuT9OsQUUDbkdcvVN5sOhuLfATpXLbeZBA+Y=
+			</data>
+		</dict>
+		<key>Modules/RevealServer.swiftmodule/x86_64-apple-ios-macabi.swiftinterface</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			xTX+KBM0hZUljG0KU7S1yFzN4wrlpdOJFFyFGqmCiPs=
+			</data>
+		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			jhCUclbTwRZfHbZszJ50bh8L3Hh6OZ+iJUzXp3vSQ8I=
+			kJjvA00ec825fo6+YCStfKr+SSSv0UcB+3l2hARDl40=
 			</data>
 		</dict>
 		<key>Resources/Info.plist</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Urtgs3dRljwaSOqqYl5XXc6v3BDH/w2TwDRNmmoZOhc=
+			F0iYvfavg2Zgqn45NyEeu/pKAVRRmxMXCpjWiUeBMOs=
 			</data>
 		</dict>
 		<key>Resources/Scripts/integrate_revealserver.sh</key>

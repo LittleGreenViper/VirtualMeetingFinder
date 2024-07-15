@@ -37,7 +37,7 @@
         <!--SLUG-SETTINGS-TITLE-->
         <scene sceneID="ooK-Vu-ggX">
             <objects>
-                <viewController title="SLUG-SETTINGS-TITLE" id="XMo-Ja-Ohb" customClass="VMF_SettingsViewController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="SLUG-SETTINGS-TITLE" id="XMo-Ja-Ohb" customClass="VMF_SettingsViewController" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h03-aE-qcW">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,7 +149,7 @@
         <!--SLUG-ABOUT-SCREEN-TITLE-->
         <scene sceneID="Mrg-o4-W18">
             <objects>
-                <viewController id="njl-CG-MJ9" customClass="VMF_AboutViewController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="njl-CG-MJ9" customClass="VMF_AboutViewController" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FGS-8R-yXk">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -160,13 +160,18 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WRy-bi-C9o">
                                         <rect key="frame" x="16" y="0.0" width="361" height="666"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoMask" translatesAutoresizingMaskIntoConstraints="NO" id="R9r-NT-2KG">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R9r-NT-2KG">
                                                 <rect key="frame" x="148.66666666666666" y="0.0" width="64" height="64"/>
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="R9r-NT-2KG" secondAttribute="height" multiplier="1:1" id="GbJ-lL-d4M"/>
                                                     <constraint firstAttribute="height" constant="64" id="mln-va-uMz"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xh0-44-RVJ">
                                                 <rect key="frame" x="131.66666666666666" y="72" width="98" height="24"/>
@@ -180,7 +185,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="but-8i-P6u" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="but-8i-P6u" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="102" y="130" width="157" height="103.66666666666669"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -204,7 +209,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKA-Ef-Oeq" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKA-Ef-Oeq" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="101.66666666666669" y="253.66666666666669" width="158" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -216,7 +221,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="qaD-0d-wxF"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqO-3Z-54c" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqO-3Z-54c" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="120.66666666666666" y="291.66666666666669" width="120" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -246,7 +251,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cz-VL-ZHr" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cz-VL-ZHr" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="111" y="370" width="139" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -258,7 +263,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="PDM-Nb-6Gk"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lB7-t4-4AI" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lB7-t4-4AI" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="110.66666666666669" y="408" width="140" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -270,7 +275,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="dwD-9t-EOm"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQF-Hl-TYC" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQF-Hl-TYC" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="122.66666666666666" y="446" width="116" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -282,7 +287,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="OMD-nA-eCV"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6E-27-5lY" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6E-27-5lY" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="110" y="484" width="141" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -294,7 +299,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="Jzr-tW-5Sn"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ad-HR-0Ir" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ad-HR-0Ir" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="90.666666666666686" y="522" width="180" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -306,7 +311,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="Ata-o8-uFz"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2WV-WB-GuG" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2WV-WB-GuG" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="121.66666666666666" y="560" width="118" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -318,7 +323,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="Ruf-Pj-RNJ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQ4-mD-52q" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQ4-mD-52q" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="123" y="598" width="115" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -330,7 +335,7 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="UXe-4H-ZLt"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytT-1n-OTi" customClass="VMF_URLButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytT-1n-OTi" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="113" y="636" width="135" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -376,6 +381,7 @@
                     <connections>
                         <outlet property="appNameLabel" destination="xh0-44-RVJ" id="mv4-1X-YDi"/>
                         <outlet property="dependencySectionHeader" destination="uLW-2E-rrI" id="45q-nM-WlI"/>
+                        <outlet property="iconImage" destination="R9r-NT-2KG" id="tJx-wR-4Rt"/>
                         <outlet property="versionLabel" destination="Slk-3y-QNF" id="r22-qs-7pt"/>
                     </connections>
                 </viewController>
@@ -386,7 +392,7 @@
         <!--SLUG-TAB-0-TITLE-->
         <scene sceneID="475-3F-L6b">
             <objects>
-                <viewController title="SLUG-TAB-0-TITLE" id="Avq-Pc-erz" customClass="VMF_MainViewController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="SLUG-TAB-0-TITLE" id="Avq-Pc-erz" customClass="VMF_MainViewController" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sFK-py-g0o">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -473,7 +479,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JrU-ny-TZt">
                                         <rect key="frame" x="0.0" y="78" width="361" height="44"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tD-DB-oEW" customClass="VMF_TapHoldButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tD-DB-oEW" customClass="VMF_TapHoldButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-LEFT-BUTTON-HINT" label="SLUG-ACC-LEFT-BUTTON-LABEL">
@@ -517,7 +523,7 @@
                                                     <outletCollection property="gestureRecognizers" destination="03V-r6-dki" appends="YES" id="C5P-rZ-BO0"/>
                                                 </connections>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQn-b0-JfM" customClass="VMF_TapHoldButton" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQn-b0-JfM" customClass="VMF_TapHoldButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
                                                 <rect key="frame" x="317" y="0.0" width="44" height="44"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-RIGHT-BUTTON-HINT" label="SLUG-ACC-RIGHT-BUTTON-LABEL">
@@ -735,7 +741,7 @@
         <!--SLUG-TAB-1-TITLE-->
         <scene sceneID="DtG-X1-Oac">
             <objects>
-                <viewController id="h2L-IG-jx9" customClass="VMF_AttendanceViewController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="h2L-IG-jx9" customClass="VMF_AttendanceViewController" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ik6-Qe-rFZ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -765,7 +771,7 @@
         <!--Day Time Search Page View Controller-->
         <scene sceneID="JrL-tg-Smc">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="bxe-Jd-mqJ" customClass="VMF_DayTimeSearchPageViewController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="bxe-Jd-mqJ" customClass="VMF_DayTimeSearchPageViewController" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <size key="freeformSize" width="393" height="852"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xVo-uf-z8W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -775,7 +781,7 @@
         <!--Embedded Table Controller-->
         <scene sceneID="ofD-gu-h4c">
             <objects>
-                <viewController storyboardIdentifier="VMF_EmbeddedTableController" id="t0l-fQ-nL3" customClass="VMF_EmbeddedTableController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VMF_EmbeddedTableController" id="t0l-fQ-nL3" customClass="VMF_EmbeddedTableController" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uYy-2i-2Ah">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -784,7 +790,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" translatesAutoresizingMaskIntoConstraints="NO" id="8L8-qW-vGE" customClass="VMF_TableCell" customModule="Virtual_Meeting_Finder" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" translatesAutoresizingMaskIntoConstraints="NO" id="8L8-qW-vGE" customClass="VMF_TableCell" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="108.33333587646484"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8L8-qW-vGE" id="E3R-WY-hTi">
@@ -899,7 +905,7 @@
         <!--Meeting Inspector View Controller-->
         <scene sceneID="Uwk-Hi-8Do">
             <objects>
-                <viewController id="P9w-wB-EO1" customClass="VMF_MeetingInspectorViewController" customModule="Virtual_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="P9w-wB-EO1" customClass="VMF_MeetingInspectorViewController" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BVJ-y8-8wb">
                         <rect key="frame" x="0.0" y="0.0" width="361" height="759"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1273,6 +1279,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="actionBarButton" destination="mqY-PR-8LM" id="ixX-oN-i1Z"/>
                         <outlet property="commentsTextView" destination="XiA-7C-mAM" id="krn-X9-JaP"/>
                         <outlet property="formatContainerView" destination="1Me-er-i3Z" id="fOm-S5-6fC"/>
                         <outlet property="formatHeader" destination="64m-m1-rdV" id="meP-ss-d0k"/>
@@ -1333,7 +1340,6 @@
     </scenes>
     <resources>
         <image name="Globe" width="612" height="612"/>
-        <image name="LogoMask" width="612" height="612"/>
         <image name="Phone" width="612" height="612"/>
         <image name="Video" width="612" height="612"/>
         <image name="arrowtriangle.left.fill" catalog="system" width="128" height="113"/>
@@ -1347,22 +1353,22 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

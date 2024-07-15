@@ -4,17 +4,53 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Headers/RevealServer-Swift.h</key>
+		<data>
+		gED9jhhmBD3VMW+76wJ3Oy8VcZ0=
+		</data>
 		<key>Headers/RevealServer.h</key>
 		<data>
 		JavE2LI6bNGfH9W90/bDxwIxVlg=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		30O0lYmK+lv/FFMwIe3nicqwet4=
+		GfG4z4S3SK5xqDZDFxJUBOxAtLQ=
+		</data>
+		<key>Modules/RevealServer.swiftmodule/arm64-apple-tvos-simulator.abi.json</key>
+		<data>
+		djNw6lEgDc0WzbzdBr/nY3SH8zA=
+		</data>
+		<key>Modules/RevealServer.swiftmodule/arm64-apple-tvos-simulator.private.swiftinterface</key>
+		<data>
+		4UOxTLW6Qzzzo52QbNs7QNYjskg=
+		</data>
+		<key>Modules/RevealServer.swiftmodule/arm64-apple-tvos-simulator.swiftdoc</key>
+		<data>
+		mhpYpq/qgXixDW3xWBXUqWl0Kfg=
+		</data>
+		<key>Modules/RevealServer.swiftmodule/arm64-apple-tvos-simulator.swiftinterface</key>
+		<data>
+		4UOxTLW6Qzzzo52QbNs7QNYjskg=
+		</data>
+		<key>Modules/RevealServer.swiftmodule/x86_64-apple-tvos-simulator.abi.json</key>
+		<data>
+		djNw6lEgDc0WzbzdBr/nY3SH8zA=
+		</data>
+		<key>Modules/RevealServer.swiftmodule/x86_64-apple-tvos-simulator.private.swiftinterface</key>
+		<data>
+		JED5wUq/dyeEw1bq93sysJWtbN0=
+		</data>
+		<key>Modules/RevealServer.swiftmodule/x86_64-apple-tvos-simulator.swiftdoc</key>
+		<data>
+		K/tiU4f8gXvkQDRsAoWZAM8YSFE=
+		</data>
+		<key>Modules/RevealServer.swiftmodule/x86_64-apple-tvos-simulator.swiftinterface</key>
+		<data>
+		JED5wUq/dyeEw1bq93sysJWtbN0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		++4ILt01qhVYkiivRY9e1/vApMk=
+		W5Q122LAtjtguX+0GhA/6KdPVb8=
 		</data>
 		<key>Scripts/integrate_revealserver.sh</key>
 		<data>
@@ -23,6 +59,13 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Headers/RevealServer-Swift.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			4mkL7YgU/aEMWPedDdwQqLSIBwghLxdk1cVqgCltva4=
+			</data>
+		</dict>
 		<key>Headers/RevealServer.h</key>
 		<dict>
 			<key>hash2</key>
@@ -30,11 +73,67 @@
 			weLK/65HyV1EiL9dd4xoAqQhf0/0r/Oy6os2nXCA+Ew=
 			</data>
 		</dict>
+		<key>Modules/RevealServer.swiftmodule/arm64-apple-tvos-simulator.abi.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			F6VZRagEajYASC2MDn/VdIqsVY4sgI4/gnhltIbboIk=
+			</data>
+		</dict>
+		<key>Modules/RevealServer.swiftmodule/arm64-apple-tvos-simulator.private.swiftinterface</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			L7UWgYi5LT38wXnA+iAsTXO6MSLWiZ310E7YWwPvPNU=
+			</data>
+		</dict>
+		<key>Modules/RevealServer.swiftmodule/arm64-apple-tvos-simulator.swiftdoc</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			fXWdLz5ooVgTn+NQH7DLMrSoGQEdrAvF6avkynSfDHo=
+			</data>
+		</dict>
+		<key>Modules/RevealServer.swiftmodule/arm64-apple-tvos-simulator.swiftinterface</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			L7UWgYi5LT38wXnA+iAsTXO6MSLWiZ310E7YWwPvPNU=
+			</data>
+		</dict>
+		<key>Modules/RevealServer.swiftmodule/x86_64-apple-tvos-simulator.abi.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			F6VZRagEajYASC2MDn/VdIqsVY4sgI4/gnhltIbboIk=
+			</data>
+		</dict>
+		<key>Modules/RevealServer.swiftmodule/x86_64-apple-tvos-simulator.private.swiftinterface</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			56oyFCjE8X8B9wGzQkvlDmQLgDsZ3WJeSgguUnnBGlE=
+			</data>
+		</dict>
+		<key>Modules/RevealServer.swiftmodule/x86_64-apple-tvos-simulator.swiftdoc</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			f/9J1cu2y7v9ehdq6VM4ElwjJI/utMvXuuaODUzt0Mc=
+			</data>
+		</dict>
+		<key>Modules/RevealServer.swiftmodule/x86_64-apple-tvos-simulator.swiftinterface</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			56oyFCjE8X8B9wGzQkvlDmQLgDsZ3WJeSgguUnnBGlE=
+			</data>
+		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			jhCUclbTwRZfHbZszJ50bh8L3Hh6OZ+iJUzXp3vSQ8I=
+			kJjvA00ec825fo6+YCStfKr+SSSv0UcB+3l2hARDl40=
 			</data>
 		</dict>
 		<key>Scripts/integrate_revealserver.sh</key>

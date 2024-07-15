@@ -296,6 +296,8 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
      The navbar button to mark attendance.
      */
     @IBOutlet weak var iAttendBarButton: UIBarButtonItem?
+    
+    @IBOutlet weak var actionBarButton: UIBarButtonItem?
 }
 
 /* ###################################################################################################################################### */
@@ -363,14 +365,19 @@ extension VMF_MeetingInspectorViewController {
             
             return inString.decimalOnly
         }
-        
+
+        super.viewDidLoad()
+
         meetingNameLabel?.text = meeting?.name
         phoneLabelButton?.text = phoneLabelButton?.text?.localizedVariant
         globeLabelButton?.text = globeLabelButton?.text?.localizedVariant
         videoLabelButton?.text = videoLabelButton?.text?.localizedVariant
-
-        super.viewDidLoad()
         
+//        iAttendBarButton?.isAccessibilityElement = true
+//        actionBarButton?.isAccessibilityElement = true
+        actionBarButton?.accessibilityLabel = "SLUG-ACC-ACTION-BUTTON-LABEL".accessibilityLocalizedVariant
+        actionBarButton?.accessibilityHint = "SLUG-ACC-ACTION-BUTTON-HINT".accessibilityLocalizedVariant
+
         navigationItem.title = ((.hybrid == meeting?.meetingType) ? "SLUG-HYBRID-MEETING" : "SLUG-VIRTUAL-MEETING").localizedVariant
         
         setTimeZone()
@@ -463,8 +470,6 @@ extension VMF_MeetingInspectorViewController {
            !formats.isEmpty {
             setUpFormats(formats)
         }
-        
-        setBarButton()
     }
     
     /* ################################################################## */
@@ -478,13 +483,10 @@ extension VMF_MeetingInspectorViewController {
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
         VMF_AppDelegate.openMeeting = self
-        guard let meeting = meeting else { return }
-        iAttendBarButton?.isAccessibilityElement = true
-        iAttendBarButton?.accessibilityLabel = "SLUG-ACC-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-LABEL".accessibilityLocalizedVariant
-        iAttendBarButton?.accessibilityHint = "SLUG-ACC-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-HINT".accessibilityLocalizedVariant
-        
+
         isFormatsOpen = false
         isLocationOpen = false
+        setBarButton()
     }
     
     /* ################################################################## */
@@ -634,10 +636,12 @@ extension VMF_MeetingInspectorViewController {
      Sets up the bar button item, with the state of attendance.
      */
     func setBarButton() {
+        guard let meeting = meeting else { return }
+        
         let barButtonView = UIView()
         barButtonView.isUserInteractionEnabled = true
         barButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(iAttendHit)))
-        let useThisImage = (meeting?.iAttend ?? false) ? Self._checkedImage : Self._uncheckedImage
+        let useThisImage = meeting.iAttend ? Self._checkedImage : Self._uncheckedImage
         let barButtonImage = UIImageView(image: useThisImage?.withRenderingMode(.alwaysTemplate).withTintColor(view.tintColor))
         let barButtonLabel = UILabel()
         barButtonLabel.text = "SLUG-I-ATTEND".localizedVariant
@@ -659,6 +663,9 @@ extension VMF_MeetingInspectorViewController {
         iAttendBarButton?.customView = barButtonView
         iAttendBarButton?.target = self
         iAttendBarButton?.action = #selector(iAttendHit)
+        
+        iAttendBarButton?.accessibilityLabel = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-LABEL".accessibilityLocalizedVariant
+        iAttendBarButton?.accessibilityHint = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-HINT".accessibilityLocalizedVariant
     }
 }
 
@@ -773,9 +780,6 @@ extension VMF_MeetingInspectorViewController {
         guard var meeting = meeting else { return }
         let originalState = meeting.iAttend
         meeting.iAttend = !originalState
-        
-        iAttendBarButton?.accessibilityLabel = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-LABEL".accessibilityLocalizedVariant
-        iAttendBarButton?.accessibilityHint = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-HINT".accessibilityLocalizedVariant
 
         selectionHaptic()
         

@@ -358,6 +358,19 @@ public extension Bundle {
      The root server URI as a string.
      */
     var rootServerURI: String? { object(forInfoDictionaryKey: "VMF_BaseServerURI") as? String }
+    
+    /* ################################################################## */
+    /**
+     This returns the largest app icon from the bundle.
+     */
+    var largeAppIcon: UIImage? {
+        // Get the biggest image from our app bundle.
+        guard let appIconDictionary = (Bundle.main.infoDictionary?["CFBundleIcons"] as? NSDictionary)?["CFBundlePrimaryIcon"] as? NSDictionary,
+              let lastIconName = (appIconDictionary["CFBundleIconFiles"] as? Array<String>)?.last
+        else { return nil }
+        
+        return UIImage(named: lastIconName)
+    }
 }
 
 /* ###################################################################################################################################### */

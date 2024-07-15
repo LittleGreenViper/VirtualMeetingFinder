@@ -64,6 +64,12 @@ extension VMF_URLButton {
 class VMF_AboutViewController: VMF_BaseViewController {
     /* ################################################################## */
     /**
+     This displays the icon image.
+     */
+    @IBOutlet weak var iconImage: UIImageView?
+    
+    /* ################################################################## */
+    /**
      This displays the app name.
      */
     @IBOutlet weak var appNameLabel: UILabel?
@@ -91,7 +97,7 @@ extension VMF_AboutViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         appNameLabel?.text = Bundle.main.appDisplayName
         
         let mainVersion = Bundle.main.appVersionString
@@ -100,6 +106,8 @@ extension VMF_AboutViewController {
         versionLabel?.text = String(format: "SLUG-VERSION-FORMAT".localizedVariant, mainVersion, buildVersion)
         
         dependencySectionHeader?.text = dependencySectionHeader?.text?.localizedVariant
+        
+        iconImage?.image = Bundle.main.largeAppIcon
     }
     
     /* ################################################################## */

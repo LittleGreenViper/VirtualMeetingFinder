@@ -15,7 +15,6 @@
 		D43A9C132C373F67001285FC /* RVS_Persistent_Prefs in Frameworks */ = {isa = PBXBuildFile; productRef = D43A9C122C373F67001285FC /* RVS_Persistent_Prefs */; };
 		D43A9C192C374198001285FC /* VMF_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A9C172C374198001285FC /* VMF_Prefs.swift */; };
 		D43A9C1A2C374198001285FC /* VMF_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A9C182C374198001285FC /* VMF_Extensions.swift */; };
-		D4448E672C3C230C0067B500 /* RevealServer.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40EB4DF2C3B272300AAE33B /* RevealServer.xcframework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D4523A0F2C31D18300BAE330 /* SwiftBMLSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D4523A0E2C31D18300BAE330 /* SwiftBMLSDK */; };
 		D455E5672C396F3A00246848 /* VMF_AttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D455E5662C396F3A00246848 /* VMF_AttendanceViewController.swift */; };
 		D45E42022C3F2BA7006578F6 /* VMF_SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E42012C3F2BA7006578F6 /* VMF_SettingsViewController.swift */; };
@@ -82,7 +81,6 @@
 				D4523A0F2C31D18300BAE330 /* SwiftBMLSDK in Frameworks */,
 				D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */,
 				D43A9C132C373F67001285FC /* RVS_Persistent_Prefs in Frameworks */,
-				D4448E672C3C230C0067B500 /* RevealServer.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

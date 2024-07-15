@@ -172,6 +172,11 @@
 /* This hint is applied to the in-person extra information label in the Meeting Inspector Screen */
 "SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-HINT"       =   "This is the address of the in-person meeting.";
 
+/* This label is applied to the action button in the navbar of the Meeting Inspector Screen */
+"SLUG-ACC-ACTION-BUTTON-LABEL"                  =   "Share the URL";
+/* This hint is applied to the action button in the navbar of the Meeting Inspector Screen */
+"SLUG-ACC-ACTION-BUTTON-HINT"                   =   "If you select this, a sheet will be shown, allowing you to share a link to this meeting.";
+
 // MARK: - SETTINGS SCREEN -
 
 /* This is the label for the switch to enable/disable Service meeting filtering. */

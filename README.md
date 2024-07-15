@@ -1,4 +1,4 @@
-# VirtualMeetingFinder
+# Virtual NA Meeting Finder
 
 An app that makes it simple to discover and attend virtual (and hybrid) NA meetings.
 
@@ -38,9 +38,9 @@ If the user selects a single meeting from the list, another screen is brought in
 
 This is a screen that is brought in from the Main Screen, that allows the user to specify various settings.
 
-### The About This App Screen
+#### The About This App Screen
 
-This is another scren that is brought in from the Settings Screen, that has information about the app, such as its specific version, and links to dependencies.
+This is another screen that is brought in from the Settings Screen, that has information about the app, such as its specific version, and links to dependencies.
 
 ## Dependencies
 

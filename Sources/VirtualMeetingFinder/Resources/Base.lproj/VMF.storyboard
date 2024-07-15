@@ -185,20 +185,40 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="but-8i-P6u" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
-                                                <rect key="frame" x="102" y="130" width="157" height="103.66666666666669"/>
-                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" title="SLUG-PRESENTED-BY"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="urlString" value="SLUG-PRESENTED-BY-URL"/>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="nPR-b3-Vgu"/>
-                                                </connections>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3wO-o4-uab">
+                                                <rect key="frame" x="73.666666666666671" y="130" width="213.66666666666663" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="but-8i-P6u" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="157" height="40"/>
+                                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="SLUG-PRESENTED-BY"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="urlString" value="SLUG-PRESENTED-BY-URL"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="nPR-b3-Vgu"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTe-bb-f20" userLabel="LGV Logo Button" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
+                                                        <rect key="frame" x="157" y="0.0" width="56.666666666666657" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="AS8-Vh-Ubn"/>
+                                                            <constraint firstAttribute="width" secondItem="WTe-bb-f20" secondAttribute="height" multiplier="64:45" id="Q5f-tt-kpJ"/>
+                                                        </constraints>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" image="LGV"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="urlString" value="SLUG-PRESENTED-BY-URL"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="IZ7-qd-HaS"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fXx-9U-d8T">
-                                                <rect key="frame" x="0.0" y="241.66666666666669" width="361" height="4"/>
+                                                <rect key="frame" x="0.0" y="178" width="361" height="4"/>
                                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="4" id="q4t-h1-1ZO"/>
@@ -210,7 +230,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKA-Ef-Oeq" customClass="VMF_URLButton" customModule="Virtual_NA_Meeting_Finder" customModuleProvider="target">
-                                                <rect key="frame" x="101.66666666666669" y="253.66666666666669" width="158" height="30"/>
+                                                <rect key="frame" x="101.66666666666669" y="190" width="158" height="93.666666666666686"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="SLUG-PRIVACY-LABEL"/>
@@ -1340,6 +1360,7 @@
     </scenes>
     <resources>
         <image name="Globe" width="612" height="612"/>
+        <image name="LGV" width="128" height="90"/>
         <image name="Phone" width="612" height="612"/>
         <image name="Video" width="612" height="612"/>
         <image name="arrowtriangle.left.fill" catalog="system" width="128" height="113"/>
@@ -1353,22 +1374,22 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

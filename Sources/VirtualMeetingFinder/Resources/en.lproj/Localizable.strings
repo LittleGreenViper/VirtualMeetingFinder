@@ -170,6 +170,6 @@
 /* The URL string for the BMLT button */
 "SLUG-BMLT-URL"                                 =   "https://bmlt.app";
 /* The URL string for the help page button. */
-"SLUG-HELP-PAGE-URL"                            =   "https://littlegreenviper.com/the-virtual-na-meeting-finder-app/";
+"SLUG-HELP-PAGE-URL"                            =   "https://littlegreenviper.com/portfolio/the-virtual-na-meeting-finder-app/";
 
 // MARK: -

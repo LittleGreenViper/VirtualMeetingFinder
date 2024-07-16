@@ -32,6 +32,9 @@ import SwiftBMLSDK
  
  All times are mapped to the user's local timezone, regardless of the start time in the meeting's "native" timezone.
  
+ The instance of this class (and the ``VMF_AttendanceViewController`` class, but that one is disabled) will have a ``UIPageViewController`` embedded.
+ This allows the user to swipe-select pages of meetings.
+ 
  ### DAY INDEXES
  
  These represent 0 (In Progress), 1 (Sunday), through 7 (Saturday), or 8 (Search Mode).
@@ -60,9 +63,9 @@ import SwiftBMLSDK
  
  ### SELECTING FOR ATTENDANCE
  
- It is possible for a user to indicate that they attend a meeting, by double-tapping on the meeting, or by selecting "I Attend," in the meeting inspector screen.
+ It is possible for a user to indicate that they attend a meeting, by double-tapping on a meeting in the list, or by selecting "I Attend," in the meeting inspector screen.
  
- You can bring in a separate screen, that contains only the meetings that you attend.
+ You can bring in a separate screen, that contains only the meetings that you attend. This is accessed from the chackmark bar button item, in the upper right.
  */
 class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerProtocol {
     /* ################################################################## */

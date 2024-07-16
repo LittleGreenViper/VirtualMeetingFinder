@@ -763,11 +763,14 @@ extension VMF_MainViewController {
             } else if index == (maxIndex - 1) {
                 weekdayModeSelectorSegmentedSwitch?.setImage(Self.searchImage, forSegmentAt: index)
             } else {
+                let wdIndex = unMapWeekday(index) - 1
+                // We try to use the largest weekday indicator possible.
                 let weekdayName = Self.shortWidthThreshold > windowWidth
-                    ? Calendar.current.veryShortStandaloneWeekdaySymbols[unMapWeekday(index) - 1]
+                    ? Calendar.current.veryShortStandaloneWeekdaySymbols[wdIndex]   // Single letter
                     : Self.fullWidthThreshold > windowWidth
-                        ? Calendar.current.shortStandaloneWeekdaySymbols[unMapWeekday(index) - 1]
-                        : Calendar.current.standaloneWeekdaySymbols[unMapWeekday(index) - 1]
+                        ? Calendar.current.shortStandaloneWeekdaySymbols[wdIndex]   // Abbreviation
+                        : Calendar.current.standaloneWeekdaySymbols[wdIndex]        // Full word
+                
                 weekdayModeSelectorSegmentedSwitch?.setTitle(weekdayName, forSegmentAt: index)
             }
         }

@@ -55,6 +55,12 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
 
     /* ################################################################## */
     /**
+     The width and height of the map
+     */
+    private static let _mapRegionSizeInDegrees = CLLocationDegrees(0.25)
+
+    /* ################################################################## */
+    /**
      This is how many display units wide, we make the format key column.
      */
     private static let _formatKeyWidth = CGFloat(50)
@@ -373,8 +379,6 @@ extension VMF_MeetingInspectorViewController {
         globeLabelButton?.text = globeLabelButton?.text?.localizedVariant
         videoLabelButton?.text = videoLabelButton?.text?.localizedVariant
         
-//        iAttendBarButton?.isAccessibilityElement = true
-//        actionBarButton?.isAccessibilityElement = true
         actionBarButton?.accessibilityLabel = "SLUG-ACC-ACTION-BUTTON-LABEL".accessibilityLocalizedVariant
         actionBarButton?.accessibilityHint = "SLUG-ACC-ACTION-BUTTON-HINT".accessibilityLocalizedVariant
 
@@ -475,14 +479,12 @@ extension VMF_MeetingInspectorViewController {
     /* ################################################################## */
     /**
      Called before the screen appears.
-     
-     Let the app know that we're here.
-     
+          
      - parameter inIsAnimated: True, if the appearance is animated.
      */
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
-        VMF_AppDelegate.openMeeting = self
+        VMF_AppDelegate.openMeeting = self  // Let the app know that we're here.
 
         isFormatsOpen = false
         isLocationOpen = false
@@ -493,13 +495,11 @@ extension VMF_MeetingInspectorViewController {
     /**
      Called before the screen disappears.
      
-     Let the app know that we're done.
-     
      - parameter inIsAnimated: True, if the disappearance is animated.
      */
     override func viewWillDisappear(_ inIsAnimated: Bool) {
         super.viewWillDisappear(inIsAnimated)
-        VMF_AppDelegate.openMeeting = nil
+        VMF_AppDelegate.openMeeting = nil   // Let the app know that we're done.
         
         if isMovingFromParent {
             hardImpactHaptic()
@@ -551,9 +551,11 @@ extension VMF_MeetingInspectorViewController {
     /* ################################################################## */
     /**
      Initializes the map view.
+     
+     - parameter inCoords: The center coordinate for the map (the marker location).
      */
     func setUpMap(_ inCoords: CLLocationCoordinate2D) {
-        if let initialRegion = locationMapView?.regionThatFits(MKCoordinateRegion(center: inCoords, span: MKCoordinateSpan(latitudeDelta: 0.25, longitudeDelta: 0.25))) {
+        if let initialRegion = locationMapView?.regionThatFits(MKCoordinateRegion(center: inCoords, span: MKCoordinateSpan(latitudeDelta: Self._mapRegionSizeInDegrees, longitudeDelta: Self._mapRegionSizeInDegrees))) {
             locationMapView?.region = initialRegion
             locationMapView?.addAnnotation(VMF_MapAnnotation(coordinate: inCoords))
         }
@@ -757,6 +759,7 @@ extension VMF_MeetingInspectorViewController {
         let viewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         viewController.excludedActivityTypes = [.assignToContact, .openInIBooks, .print, .saveToCameraRoll, .addToReadingList]
 
+        // iPad uses a popover.
         if .pad == traitCollection.userInterfaceIdiom,
            let size = view?.bounds.size {
             viewController.modalPresentationStyle = .popover

@@ -25,6 +25,8 @@ import SwiftBMLSDK
 /* ###################################################################################################################################### */
 /**
  This is the main view controller for the attended meetings tab.
+ 
+ This is a very basic table display. It does not have any controls or filters.
  */
 class VMF_AttendanceViewController: VMF_BaseViewController {
     /* ################################################################## */

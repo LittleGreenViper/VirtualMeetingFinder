@@ -64,7 +64,7 @@ extension VMF_SettingsViewController {
      - parameter inSender: The gesture recognizer or switch.
      */
     @IBAction func filterServiceMeetingsHit(_ inSender: NSObjectProtocol) {
-        if let switcher = inSender as? UISwitch {
+        if let switcher = inSender as? UISwitch {   // If the switch, we execute it.
             prefs.excludeServiceMeetings = switcher.isOn
             guard let searchController = VMF_AppDelegate.searchController,
                   let tableDisplayController = searchController.tableDisplayController
@@ -75,7 +75,7 @@ extension VMF_SettingsViewController {
             guard let time = searchController.getTimeOf(dayIndex: dayIndex, timeIndex: timeIndex) else { return }
             searchController.reorganizeMeetings()
             searchController.openTo(dayIndex: dayIndex, time: time)
-        } else {
+        } else {    // If the label, we toggle the switch, and send the value changed message (which calls us again).
             filterServiceMeetingsSwitch?.setOn(!(filterServiceMeetingsSwitch?.isOn ?? true), animated: true)
             filterServiceMeetingsSwitch?.sendActions(for: .valueChanged)
             selectionHaptic()

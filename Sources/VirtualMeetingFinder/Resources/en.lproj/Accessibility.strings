@@ -17,9 +17,12 @@
  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-// NOTE:
-// "Labels" are short, simple titles. "Hints" are longer explanations. Labels should always be short and succinct, but hints can be a lot longer.
-// These are voiceover strings. Pronunciation and auditory clarity are important.
+/*  NOTE TO TRANSLATOR:
+ 
+    "Labels" are short, simple titles. "Hints" are longer explanations. Labels should always be short and succinct, but hints can be a lot longer.
+ 
+    These are voiceover strings. Pronunciation and auditory clarity are important.
+*/
 
 // ************************************************        ***********************************************************
 // * -------------------------------------------- *        * ------------------------------------------------------- *
@@ -41,7 +44,7 @@
 "SLUG-ACC-SETTINGS-BUTTON-HINT"                 =   "This will open a screen, with various app settings.";
 
 /* This is the label for the segmented switch at the top of the Main Screen. */
-"SLUG-ACC-WEEKDAY-SWITCH-LABEL"                 =   "Select the Weekday";
+"SLUG-ACC-WEEKDAY-SWITCH-LABEL"                 =   "Select Weekday";
 /* This is the hint for the segmented switch at the top of the Main Screen. */
 "SLUG-ACC-WEEKDAY-SWITCH-HINT"                  =   "With this segmented switch, you can see in-progress meetings, choose a weekday in which to show meetings, or select meeting name search mode.";
 
@@ -56,7 +59,7 @@
 "SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-HINT-FORMAT"   =   "If you select this, you will see meetings that gather every %@.";
 
 /* The individual segment label for the search segment */
-"SLUG-ACC-WEEKDAY-SWITCH-8-LABEL"               =   "Search For Meetings";
+"SLUG-ACC-WEEKDAY-SWITCH-8-LABEL"               =   "Meeting Name Search";
 /* The individual segment hint for the search segment */
 "SLUG-ACC-WEEKDAY-SWITCH-8-HINT"                =   "If you select this, you will enter Text Search Mode, where you can find meetings by name.";
 
@@ -66,17 +69,17 @@
 "SLUG-ACC-ENTER-SEARCH-TEXT-HINT"               =   "Any text that you enter here, will be used to filter out meetings that have that text in their meeting name.";
 
 /* This is the label for the close search mode button. */
-"SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL"            =   "Leave Text Search";
+"SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL"            =   "Exit Text Search";
 /* This is the label for the close search mode button. */
 "SLUG-ACC-CLOSE-SEARCH-BUTTON-HINT"             =   "Selecting this button leaves text search mode, and returns you to the regular weekday selection mode.";
 
 /* This is the label for the decrement (left) time button. */
-"SLUG-ACC-LEFT-BUTTON-LABEL"                    =   "Go To The Time Slot Before This One";
+"SLUG-ACC-LEFT-BUTTON-LABEL"                    =   "Go To Time Before";
 /* This is the hint for the decrement (left) time button. */
 "SLUG-ACC-LEFT-BUTTON-HINT"                     =   "If you select this, the table will show meetings that start at the time slot before this one.";
 
 /* This is the label for the increment (right) time button. */
-"SLUG-ACC-RIGHT-BUTTON-LABEL"                   =   "Go To The Time Slot After This One";
+"SLUG-ACC-RIGHT-BUTTON-LABEL"                   =   "Go To Time After";
 /* This is the hint for the increment (right) time button. */
 "SLUG-ACC-RIGHT-BUTTON-HINT"                    =   "If you select this, the table will show meetings that start at the time slot after this one.";
 
@@ -91,12 +94,12 @@
 "SLUG-ACC-COMPLETION-DISPLAY-HINT"              =   "This indicates how far through the day we are. Left is towards 12AM, and right is towards midnight.";
 
 /* This is the label for the day/time picker. */
-"SLUG-ACC-DIRECT-PICKER-LABEL"                  =   "Pick A Day And Time";
+"SLUG-ACC-DIRECT-PICKER-LABEL"                  =   "Select Day And Time";
 /* This is the hint for the day/time picker. */
-"SLUG-ACC-DIRECT-PICKER-HINT"                   =   "This allows you to directly go to a weekday and time.";
+"SLUG-ACC-DIRECT-PICKER-HINT"                   =   "This allows you to directly choose a weekday and time.";
 
 /* This is the label for the day/time picker. */
-"SLUG-ACC-DIRECT-EXIT-LABEL"                    =   "Return to the Normal Selector";
+"SLUG-ACC-DIRECT-EXIT-LABEL"                    =   "Go Back to Normal";
 /* This is the hint for the day/time picker. */
 "SLUG-ACC-DIRECT-EXIT-HINT"                     =   "Selecting this, returns you to the regular weekday/time selector.";
 
@@ -123,7 +126,7 @@
 "SLUG-ACC-TIME-DAY-MI-HINT"                     =   "This displays the weekday, start time, and end time, of the meeting.";
 
 /* This label is applied to the meeting "in progress" text label in the Meeting Inspector Screen */
-"SLUG-ACC-IN-PROGRESS-MI-LABEL"                 =   "Meeting Is In Progress";
+"SLUG-ACC-IN-PROGRESS-MI-LABEL"                 =   "Meeting In Progress";
 /* This hint is applied to the meeting "in progress" text label in the Meeting Inspector Screen */
 "SLUG-ACC-IN-PROGRESS-MI-HINT"                  =   "This means that the meeting is currently under way.";
 
@@ -138,7 +141,7 @@
 "SLUG-ACC-COMMENTS-MI-HINT"                     =   "This has any extra information about the meeting.";
 
 /* This label is applied to the phone icon button in the Meeting Inspector Screen */
-"SLUG-ACC-PHONE-MI-LABEL"                       =   "Call Into the Meeting";
+"SLUG-ACC-PHONE-MI-LABEL"                       =   "Call the Meeting";
 /* This hint is applied to the phone icon button in the Meeting Inspector Screen */
 "SLUG-ACC-PHONE-MI-HINT"                        =   "If you select this, the phone will attempt to call directly into the meeting.";
 
@@ -153,12 +156,12 @@
 "SLUG-ACC-VIDEO-MI-HINT-FORMAT"                 =   "If you select this, the %@ app will be opened to the meeting.";
 
 /* This label is applied to the phone extra info text view in the Meeting Inspector Screen */
-"SLUG-ACC-PHONE-INFO-MI-LABEL"                  =   "Extra Phone Information";
+"SLUG-ACC-PHONE-INFO-MI-LABEL"                  =   "Extra Phone Info";
 /* This hint is applied to the phone extra info text view in the Meeting Inspector Screen */
 "SLUG-ACC-PHONE-INFO-MI-HINT"                   =   "This contains additional phone information.";
 
 /* This label is applied to the phone extra info text view in the Meeting Inspector Screen */
-"SLUG-ACC-XTRA-INFO-MI-LABEL"                   =   "Extra Virtual Information";
+"SLUG-ACC-XTRA-INFO-MI-LABEL"                   =   "Extra Virtual Info";
 /* This hint is applied to the phone extra info text view in the Meeting Inspector Screen */
 "SLUG-ACC-XTRA-INFO-MI-HINT"                    =   "This contains additional information about the virtual meeting.";
 
@@ -168,12 +171,12 @@
 "SLUG-ACC-IN-PERSON-ADDRESS-MI-HINT"            =   "This is the address of the in-person meeting.";
 
 /* This label is applied to the in-person extra information label in the Meeting Inspector Screen */
-"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-LABEL"      =   "Extra Information";
+"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-LABEL"      =   "Extra Info";
 /* This hint is applied to the in-person extra information label in the Meeting Inspector Screen */
-"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-HINT"       =   "This is the address of the in-person meeting.";
+"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-HINT"       =   "This is extra information about the in-person meeting.";
 
 /* This label is applied to the action button in the navbar of the Meeting Inspector Screen */
-"SLUG-ACC-ACTION-BUTTON-LABEL"                  =   "Share the URL";
+"SLUG-ACC-ACTION-BUTTON-LABEL"                  =   "Share the Meeting";
 /* This hint is applied to the action button in the navbar of the Meeting Inspector Screen */
 "SLUG-ACC-ACTION-BUTTON-HINT"                   =   "If you select this, a sheet will be shown, allowing you to share a link to this meeting.";
 

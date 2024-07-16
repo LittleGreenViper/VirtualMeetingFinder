@@ -80,7 +80,7 @@ class VMF_MapMarker: MKAnnotationView {
 extension VMF_MapMarker {
     /* ################################################################## */
     /**
-     The annotation coordinate
+     The marker coordinate is the annotation coordinate
      */
     var coordinate: CLLocationCoordinate2D { annotation?.coordinate ?? kCLLocationCoordinate2DInvalid }
 }

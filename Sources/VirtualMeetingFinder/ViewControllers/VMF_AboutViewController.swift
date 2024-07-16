@@ -24,7 +24,7 @@ import RVS_Generic_Swift_Toolbox
 // MARK: - The URL Button Class -
 /* ###################################################################################################################################### */
 /**
- This is a special button that has a string and a URL.
+ This is a special button that has a string and a URL. This class lets us define them in IB.
  */
 class VMF_URLButton: UIButton {
     /* ################################################################## */

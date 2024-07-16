@@ -61,7 +61,7 @@ extension VMF_BaseViewController {
     /**
      This converts a 1 == Sun format into a localized weekday index (1 ... 7)
      
-     - parameter: An integer (1 = Sunday), with the unlocalized index.
+     - parameter: An integer (1 -> 7), with the unlocalized index (database native setup).
      - returns: The 1-based weekday index for the local system.
      */
     func mapWeekday(_ inWeekdayIndex: Int) -> Int {
@@ -79,7 +79,7 @@ extension VMF_BaseViewController {
     /**
      This converts the selected localized weekday into the 1 == Sun format needed for the meeting data.
      
-     - parameter: An integer (1 -> 7), with the localized weekday.
+     - parameter: An integer (1 -> 7), with the localized weekday (user's native setup).
      - returns: The 1-based weekday index for 1 = Sunday
      */
     func unMapWeekday(_ inWeekdayIndex: Int) -> Int {
@@ -223,7 +223,7 @@ extension VMF_BaseViewController {
     
     /* ################################################################## */
     /**
-     Triggers a subtle success haptic.
+     Triggers a subtle selection haptic.
      */
     func selectionHaptic() {
         selectionGenerator?.selectionChanged()
@@ -237,6 +237,15 @@ extension VMF_BaseViewController {
     func successHaptic() {
         notificationGenerator?.notificationOccurred(.success)
         notificationGenerator?.prepare()
+    }
+    
+    /* ################################################################## */
+    /**
+     Triggers a "soft impact" haptic.
+     */
+    func softImpactHaptic() {
+        feedbackGenerator?.impactOccurred(intensity: 0.25)
+        feedbackGenerator?.prepare()
     }
     
     /* ################################################################## */

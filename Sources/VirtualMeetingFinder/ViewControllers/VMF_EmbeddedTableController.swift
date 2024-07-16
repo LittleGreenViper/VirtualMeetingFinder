@@ -47,7 +47,7 @@ extension VMF_BaseProtocol {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Protocol for "Owners" of This Class -
+// MARK: - Protocol for Table Display -
 /* ###################################################################################################################################### */
 /**
  Protocol for embedded tables.
@@ -79,7 +79,7 @@ protocol VMF_EmbeddedTableControllerProtocol: VMF_BaseProtocol {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Protocol for "Owners" of This Class -
+// MARK: - Protocol for "Owners" of Table Display -
 /* ###################################################################################################################################### */
 /**
  Protocol for owners
@@ -253,8 +253,10 @@ extension VMF_TableCell {
     /* ################################################################## */
     /**
      Called when someone double-taps on the row.
+     
+     - parameter: ignored
      */
-    @IBAction func doubleTapped(_ inTapGesture: UITapGestureRecognizer) {
+    @IBAction func doubleTapped(_: Any) {
         guard let myController = myController,
               let myMeeting = myMeeting
         else { return }
@@ -265,18 +267,26 @@ extension VMF_TableCell {
     /* ################################################################## */
     /**
      Called when someone single-taps on the row.
+     
+     - parameter: ignored
      */
-    @IBAction func singleTapped(_ inTapGesture: UITapGestureRecognizer) {
+    @IBAction func singleTapped(_: Any) {
         guard let myController = myController,
               let myMeeting = myMeeting
         else { return }
         
         myController.selectMeeting(myMeeting)
     }
-    
+}
+
+/* ###################################################################################################################################### */
+// MARK: Instance Methods
+/* ###################################################################################################################################### */
+extension VMF_TableCell {
     /* ################################################################## */
     /**
-     Sets all the items up.
+     Sets all the items up. This is called when the meeting is changed.
+     We can't wait for layout. This stuff needs to be done in advance.
      */
     func setUpTextItems() {
         guard let myController = myController,
@@ -494,7 +504,7 @@ extension VMF_EmbeddedTableController {
 extension VMF_EmbeddedTableController {
     /* ################################################################## */
     /**
-     Called to show a meeting details page.
+     Called when attendance changes for a meeting.
      
      - parameter inMeeting: The meeting instance.
      */
@@ -503,7 +513,7 @@ extension VMF_EmbeddedTableController {
         mutableMeeting.iAttend = !inMeeting.iAttend
         successHaptic()
         valueTable?.reloadData()
-        myController?.setAttendance()
+        myController?.setAttendance()   // This tells the "owner" to update its table and bar button.
     }
     
     /* ################################################################## */

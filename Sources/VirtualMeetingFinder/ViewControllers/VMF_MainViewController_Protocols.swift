@@ -40,6 +40,7 @@ extension VMF_MainViewController: UIPageViewControllerDataSource {
         var timeIndex = oldViewController.timeIndex
         timeIndex -= 1
 
+        // Look for overflow.
         if 0 == dayIndex || 0 > timeIndex {
             if 0 == dayIndex {
                 dayIndex = 7
@@ -71,6 +72,7 @@ extension VMF_MainViewController: UIPageViewControllerDataSource {
         var timeIndex = oldViewController.timeIndex + 1
         var dayIndex = oldViewController.dayIndex
         
+        // Look for overflow.
         if 0 == dayIndex {
             timeIndex = 0
             dayIndex = 1

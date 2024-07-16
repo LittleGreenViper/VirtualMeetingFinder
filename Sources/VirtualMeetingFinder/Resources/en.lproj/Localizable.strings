@@ -54,7 +54,10 @@
 "SLUG-IN-PROGRESS-FORMAT"                       =   "In Progress Since %@";
 /* This is the string that we display in the list, for in-progress meetings that have been going since yesterday. The placeholder is replaced by the time, in localized form. */
 "SLUG-IN-PROGRESS-YESTERDAY-FORMAT"             =   "In Progress Since %@ Yesterday";
-/* This is the title for the segmented switch segment, for in-progress meetings. */
+/* This is the title for the segmented switch segment, for in-progress meetings.
+ 
+   NOTE TO TRANSLATOR: This needs to be very short. It will cause the segment it occupies to expand, horizontally. It is only one of nine, so it can't be too big.
+ */
 "SLUG-NOW"                                      =   "Now";
 
 // MARK: - MEETING INSPECTOR SCREEN -
@@ -84,13 +87,6 @@
 "SLUG-PHONE-BUTTON"                             =   "Phone";
 /* This is displayed under the globe icon, in the Meeting Inspector. */
 "SLUG-GLOBE-BUTTON"                             =   "Web";
-/* One of these is displayed under the video icon, in the Meeting Inspector. They denote the particular app that will be opened, by selecting the icon. */
-"SLUG-DIRECT-URI-ZOOM"                          =   "Zoom";
-"SLUG-DIRECT-URI-GOTOMEETING"                   =   "GotoMeeting";
-"SLUG-DIRECT-URI-SKYPE"                         =   "Skype";
-"SLUG-DIRECT-URI-MEET"                          =   "Google Meet";
-"SLUG-DIRECT-URI-DISCORD"                       =   "Discord";
-"SLUG-DIRECT-URI-JITSI"                         =   "Jitsi Meet";
 
 // MARK: - ATTENDANCE SCREEN -
 
@@ -123,13 +119,25 @@
 /* The button string for the BMLT button */
 "SLUG-BMLT-LABEL"                               =   "The Basic Meeting List Toolbox (BMLT)";
 
+// MARK: - APP NAMES -
+
+/* One of these is displayed under the video icon, in the Meeting Inspector. They denote the particular app that will be opened, by selecting the icon.
+ 
+   NOTE TO TRANSLATOR: These are corporate trade names. If there are no localized well-known substitutes, leave the English names.
+ */
+"SLUG-DIRECT-URI-ZOOM"                          =   "Zoom";
+"SLUG-DIRECT-URI-GOTOMEETING"                   =   "GotoMeeting";
+"SLUG-DIRECT-URI-SKYPE"                         =   "Skype";
+"SLUG-DIRECT-URI-MEET"                          =   "Google Meet";
+"SLUG-DIRECT-URI-DISCORD"                       =   "Discord";
+"SLUG-DIRECT-URI-JITSI"                         =   "Jitsi Meet";
+
 // ***********************************************************************************************************
 // MARK: - DO NOT TRANSLATE BELOW THIS LINE -
 // ***********************************************************************************************************
 
 /* The format for a universal meeting link. The placeholder is replaced with the meeting's ID */
 "SLUG-UNIVERSAL-LINK-FORMAT"                    =   "https://vmf.littlegreenviper.com?%lu";
-
 /* The button string for the Basic GCD Timer button */
 "SLUG-BGCD-LABEL"                               =   "RVS_BasicGCDTimer";
 /* The button string for the Generic Swift Toolbox button */
@@ -146,11 +154,10 @@
 "SLUG-TZ-LABEL"                                 =   "LGV_TZ_Lookup";
 /* The button string for the help page button. */
 "SLUG-HELP-PAGE-LABEL"                          =   "More Information";
-
 /* The URL to the site. */
 "SLUG-PRESENTED-BY-URL"                         =   "https://littlegreenviper.com";
 /* The URL string for the Privacy button */
-"SLUG-PRIVACY-URL"                              =   "https://littlegreenviper.com/welcome-to-little-green-viper/privacy/app-privacy/";
+"SLUG-PRIVACY-URL"                              =   "https://littlegreenviper.com/portfolio/the-virtual-na-meeting-finder-app/#privacy";
 /* The URL string for the Basic GCD Timer button */
 "SLUG-BGCD-URL"                                 =   "https://github.com/RiftValleySoftware/RVS_BasicGCDTimer";
 /* The URL string for the Generic Swift Toolbox button */

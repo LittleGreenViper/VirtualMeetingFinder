@@ -109,6 +109,18 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
 
     /* ################################################################## */
     /**
+     The container view needs to be wider than this, to show short (as opposed to "very" short) weekdays.
+     */
+    static let shortWidthThreshold = CGFloat(500)
+
+    /* ################################################################## */
+    /**
+     The container view needs to be wider than this, to show full (as opposed to short) weekdays.
+     */
+    static let fullWidthThreshold = CGFloat(1000)
+
+    /* ################################################################## */
+    /**
      This is used to restore the bottom of the stack view, when the keyboard is hidden.
      */
     var atRestConstant = CGFloat(0)

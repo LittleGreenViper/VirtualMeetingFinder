@@ -753,15 +753,21 @@ extension VMF_MainViewController {
         super.viewDidLayoutSubviews()
         setAttendance()
 
-        guard let maxIndex = weekdayModeSelectorSegmentedSwitch?.numberOfSegments else { return }
-        
+        guard let maxIndex = weekdayModeSelectorSegmentedSwitch?.numberOfSegments,
+              let windowWidth = view?.bounds.size.width
+        else { return }
+
         for index in (0..<maxIndex) {
             if 0 == index {
                 weekdayModeSelectorSegmentedSwitch?.setTitle("SLUG-NOW".localizedVariant, forSegmentAt: index)
             } else if index == (maxIndex - 1) {
                 weekdayModeSelectorSegmentedSwitch?.setImage(Self.searchImage, forSegmentAt: index)
             } else {
-                let weekdayName = Calendar.current.veryShortStandaloneWeekdaySymbols[unMapWeekday(index) - 1]
+                let weekdayName = Self.shortWidthThreshold > windowWidth
+                    ? Calendar.current.veryShortStandaloneWeekdaySymbols[unMapWeekday(index) - 1]
+                    : Self.fullWidthThreshold > windowWidth
+                        ? Calendar.current.shortStandaloneWeekdaySymbols[unMapWeekday(index) - 1]
+                        : Calendar.current.standaloneWeekdaySymbols[unMapWeekday(index) - 1]
                 weekdayModeSelectorSegmentedSwitch?.setTitle(weekdayName, forSegmentAt: index)
             }
         }

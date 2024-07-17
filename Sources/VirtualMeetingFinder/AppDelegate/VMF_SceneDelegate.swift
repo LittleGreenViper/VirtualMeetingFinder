@@ -90,7 +90,7 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
      - parameter options: This contains the options, among which, is the URL context.
      */
     func scene(_ inScene: UIScene, willConnectTo: UISceneSession, options inConnectionOptions: UIScene.ConnectionOptions) {
-        if let url = inConnectionOptions.userActivities.first?.webpageURL {
+        if let url = inConnectionOptions.userActivities.first?.webpageURL ?? inConnectionOptions.urlContexts.first?.url {
             resolveURL(url)
         }
     }

@@ -65,6 +65,9 @@
 		D4AD6A192C261BCA002E37F3 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D4B3E2B32C41B6CE00CD672E /* VirtualMeetingFinder.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = VirtualMeetingFinder.docc; sourceTree = "<group>"; };
 		D4B69A332C2B162800D24DA6 /* VMF_MeetingInspectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MeetingInspectorViewController.swift; sourceTree = "<group>"; };
+		D4BC72A62C4C85A600955DD8 /* Logo.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Logo.pdf; sourceTree = "<group>"; };
+		D4BC72A72C4C85A600955DD8 /* SocialPreview.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = SocialPreview.pdf; sourceTree = "<group>"; };
+		D4BC72A82C4C85A600955DD8 /* TypeIcons.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = TypeIcons.pdf; sourceTree = "<group>"; };
 		D4DDAB812C4039570018944E /* VMF_AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_AboutViewController.swift; sourceTree = "<group>"; };
 		D4E7C6C82C4293E10045ACE6 /* VMF_MainViewController_Methods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MainViewController_Methods.swift; sourceTree = "<group>"; };
 		D4E7C6CA2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MainViewController_Protocols.swift; sourceTree = "<group>"; };
@@ -203,8 +206,19 @@
 				D4AD6A172C261BCA002E37F3 /* PrivacyInfo.xcprivacy */,
 				D49EE49C2C42A2FC00BAD34A /* icon.png */,
 				D49EE49B2C42A2FC00BAD34A /* LGV.png */,
+				D4BC72A92C4C85A600955DD8 /* spec */,
 			);
 			name = Meta;
+			sourceTree = "<group>";
+		};
+		D4BC72A92C4C85A600955DD8 /* spec */ = {
+			isa = PBXGroup;
+			children = (
+				D4BC72A62C4C85A600955DD8 /* Logo.pdf */,
+				D4BC72A72C4C85A600955DD8 /* SocialPreview.pdf */,
+				D4BC72A82C4C85A600955DD8 /* TypeIcons.pdf */,
+			);
+			path = spec;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

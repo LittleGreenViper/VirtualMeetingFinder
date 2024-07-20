@@ -170,7 +170,7 @@ class VMF_TableCell: UITableViewCell {
     /**
      The double-tap gesture recognizer (change attendance).
      */
-    private weak var _myDoubleTapGesture: UITapGestureRecognizer?
+    private weak var _myDoubleTapGesture: UIGestureRecognizer?
     
     /* ################################################################## */
     /**

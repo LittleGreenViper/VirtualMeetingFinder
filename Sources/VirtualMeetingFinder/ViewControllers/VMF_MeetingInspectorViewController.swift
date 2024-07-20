@@ -97,11 +97,17 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
 
     /* ################################################################## */
     /**
+     Set to true, after our first layout. We use this to prevent unnecessary animation delays.
+     */
+    private var _openSezMe = false
+    
+    /* ################################################################## */
+    /**
      Set to true, to open the formats section.
      */
     var isFormatsOpen = false {
         didSet {
-            guard view.window != nil else {
+            guard _openSezMe else {
                 formatContainerView?.isHidden = !isFormatsOpen
                 return
             }
@@ -120,7 +126,7 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
      */
     var isLocationOpen = false {
         didSet {
-            guard view.window != nil else {
+            guard _openSezMe else {
                 inPersonContainer?.isHidden = !isLocationOpen
                 locationMapView?.isHidden = !isLocationOpen
                 return
@@ -303,6 +309,10 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
      */
     @IBOutlet weak var iAttendBarButton: UIBarButtonItem?
     
+    /* ################################################################## */
+    /**
+     The navbar button to copy the URI.
+     */
     @IBOutlet weak var actionBarButton: UIBarButtonItem?
 }
 
@@ -485,6 +495,7 @@ extension VMF_MeetingInspectorViewController {
     override func viewWillAppear(_ inIsAnimated: Bool) {
         super.viewWillAppear(inIsAnimated)
         VMF_AppDelegate.openMeeting = self  // Let the app know that we're here.
+        _openSezMe = false
 
         isFormatsOpen = false
         isLocationOpen = false
@@ -500,10 +511,19 @@ extension VMF_MeetingInspectorViewController {
     override func viewWillDisappear(_ inIsAnimated: Bool) {
         super.viewWillDisappear(inIsAnimated)
         VMF_AppDelegate.openMeeting = nil   // Let the app know that we're done.
-        
+
         if isMovingFromParent {
             hardImpactHaptic()
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the layout is done. We use this to set the "please animate" flag.
+     */
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        _openSezMe = true
     }
 }
 

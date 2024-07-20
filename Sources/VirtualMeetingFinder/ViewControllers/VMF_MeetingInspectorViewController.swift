@@ -112,6 +112,7 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
                 return
             }
             let imageRotation = isFormatsOpen ? Double.pi / 2 : 0
+            view?.layoutIfNeeded()
             UIView.animate(withDuration: Self._openingAnimationPeriodInSeconds) {
                 self.formatHeaderDisclosureTriangle?.transform = CGAffineTransform(rotationAngle: CGFloat(imageRotation))
                 self.formatContainerView?.isHidden = !self.isFormatsOpen
@@ -132,6 +133,7 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
                 return
             }
             let imageRotation = isLocationOpen ? Double.pi / 2 : 0
+            view?.layoutIfNeeded()
             UIView.animate(withDuration: Self._openingAnimationPeriodInSeconds) {
                 self.inPersonDisclosureTriangle?.transform = CGAffineTransform(rotationAngle: CGFloat(imageRotation))
                 self.inPersonContainer?.isHidden = !self.isLocationOpen
@@ -396,6 +398,7 @@ extension VMF_MeetingInspectorViewController {
         
         setTimeZone()
         setTimeAndWeekday()
+        
         inProgressLabel?.text = inProgressLabel?.text?.localizedVariant
         phoneButtonContainer?.isHidden = true
         videoButtonContainer?.isHidden = true
@@ -403,13 +406,26 @@ extension VMF_MeetingInspectorViewController {
         phoneInfoTextView?.isHidden = true
         commentsTextView?.isHidden = true
         linkContainer?.isHidden = true
-        inPersonHeader?.isHidden = !(meeting?.hasInPerson ?? true)
-        inPersonContainer?.isHidden = true
-        locationMapView?.isHidden = true
-        formatHeader?.isHidden = true
-        formatContainerView?.isHidden = true
         inPersonExtraInfoLabel?.isHidden = true
         virtualExtraInfoTextView?.isHidden = true
+        
+        if let formats = meeting?.formats,
+           !formats.isEmpty {
+            setUpFormats(formats)
+        } else {
+            formatHeader?.isHidden = true
+            formatContainerView?.isHidden = true
+        }
+
+        if meeting?.hasInPerson ?? false,
+           let coords = meeting?.coords,
+           CLLocationCoordinate2DIsValid(coords) {
+            inPersonHeader?.isHidden = false
+            setUpMap(coords)
+        } else {
+            inPersonHeader?.isHidden = true
+            inPersonContainer?.isHidden = true
+        }
         
         if let comments = meeting?.comments,
            !comments.isEmpty {
@@ -473,16 +489,6 @@ extension VMF_MeetingInspectorViewController {
                 inPersonExtraInfoLabel?.isHidden = false
                 inPersonExtraInfoLabel?.text = extraInfo
             }
-        }
-        
-        if let coords = meeting?.coords,
-           CLLocationCoordinate2DIsValid(coords) {
-            setUpMap(coords)
-        }
-        
-        if let formats = meeting?.formats,
-           !formats.isEmpty {
-            setUpFormats(formats)
         }
     }
     
@@ -591,10 +597,11 @@ extension VMF_MeetingInspectorViewController {
         formatHeaderLabel?.text = formatHeaderLabel?.text?.localizedVariant
         formatHeaderLabel?.textColor = .tintColor
         formatHeader?.isHidden = false
-        formatContainerView?.isHidden = false
         
         guard let formatContainerView = formatContainerView else { return }
 
+        formatContainerView.isHidden = false
+        
         var lastTopAnchor = formatContainerView.topAnchor
         
         for format in inFormats.enumerated() {

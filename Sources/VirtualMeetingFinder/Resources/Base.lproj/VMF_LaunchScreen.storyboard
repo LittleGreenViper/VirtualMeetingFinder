@@ -17,20 +17,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoMask" translatesAutoresizingMaskIntoConstraints="NO" id="Tyx-mX-GKa">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="LogoMask" translatesAutoresizingMaskIntoConstraints="NO" id="Tyx-mX-GKa">
                                 <rect key="frame" x="78.666666666666671" y="308" width="235.66666666666663" height="236"/>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Tyx-mX-GKa" secondAttribute="height" multiplier="1:1" id="pb5-Kb-DSF"/>
+                                    <constraint firstAttribute="width" secondItem="Tyx-mX-GKa" secondAttribute="height" multiplier="1:1" id="64I-N4-pBs"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Tyx-mX-GKa" firstAttribute="height" relation="lessThanOrEqual" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.6" id="1Il-ez-TW6"/>
+                            <constraint firstItem="Tyx-mX-GKa" firstAttribute="width" relation="lessThanOrEqual" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.6" id="Czi-dp-FSM"/>
                             <constraint firstItem="Tyx-mX-GKa" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="f7s-cY-sGT"/>
-                            <constraint firstItem="Tyx-mX-GKa" firstAttribute="height" relation="lessThanOrEqual" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.6" id="ljB-VM-Pj6"/>
-                            <constraint firstItem="Tyx-mX-GKa" firstAttribute="width" relation="lessThanOrEqual" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.6" id="wvc-c9-n8R"/>
                             <constraint firstItem="Tyx-mX-GKa" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="yvT-45-xHH"/>
                         </constraints>
                     </view>
@@ -41,7 +41,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LogoMask" width="612" height="612"/>
+        <image name="LogoMask" width="640" height="640"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

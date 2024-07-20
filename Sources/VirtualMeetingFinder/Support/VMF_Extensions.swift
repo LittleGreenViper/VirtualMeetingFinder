@@ -391,3 +391,54 @@ extension SwiftBMLSDK_MeetingLocalTimezoneCollection {
      */
     var meetingsThatIAttend: [CachedMeeting] { meetings.filter { $0.meeting.iAttend } }
 }
+
+/* ###################################################################################################################################### */
+// MARK: - Extremely Simple Vertical Gradient View -
+/* ###################################################################################################################################### */
+/**
+ This is a very simple vertical gradient view, to be used for backgrounds.
+ */
+class VMF_GradientBackGroundView: UIView {
+    /* ################################################################## */
+    /**
+     Keeps track of our gradient layer.
+     */
+    private weak var _backgroundGradientLayer: CALayer?
+    
+    /* ################################################################## */
+    /**
+     The top color
+     */
+    @IBInspectable var startColor: UIColor? { didSet { layoutSubviews() } }
+
+    /* ################################################################## */
+    /**
+     The bottom color
+     */
+    @IBInspectable var endColor: UIColor? { didSet { layoutSubviews() } }
+    
+    /* ################################################################## */
+    /**
+     Called when the view is laid out.
+     */
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        _backgroundGradientLayer?.removeFromSuperlayer()
+        
+        guard let startColor = startColor?.cgColor,
+              let endColor = endColor?.cgColor
+        else { return }
+
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [startColor, endColor]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.locations = [0, 1]
+        gradientLayer.frame = bounds
+
+        backgroundColor = .clear
+        layer.insertSublayer(gradientLayer, at: 0)
+        _backgroundGradientLayer = gradientLayer
+    }
+}

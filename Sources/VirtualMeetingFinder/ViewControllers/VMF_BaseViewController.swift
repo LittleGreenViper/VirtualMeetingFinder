@@ -30,6 +30,12 @@ import RVS_Generic_Swift_Toolbox
 class VMF_BaseViewController: UIViewController {
     /* ################################################################## */
     /**
+     Keeps track of our gradient layer.
+     */
+    private weak var _backgroundGradientLayer: CALayer?
+    
+    /* ################################################################## */
+    /**
      Convenient prefs instance.
      */
     let prefs = VMF_Prefs()
@@ -150,6 +156,22 @@ extension VMF_BaseViewController {
         super.viewDidLayoutSubviews()
         navigationItem.backButtonTitle = "SLUG-BACK".localizedVariant
         accessorizer()
+        _backgroundGradientLayer?.removeFromSuperlayer()
+        
+        guard let view = view,
+              let startColor = UIColor(named: "Background-Begin")?.cgColor,
+              let endColor = UIColor(named: "Background-End")?.cgColor
+        else { return }
+
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [startColor, endColor]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.locations = [0, 1]
+        gradientLayer.frame = view.bounds
+
+        view.layer.insertSublayer(gradientLayer, at: 0)
+        _backgroundGradientLayer = gradientLayer
     }
     
     /* ################################################################## */

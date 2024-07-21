@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -38,8 +38,6 @@
 		D40133682C320C070018076B /* VMF_MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MainViewController.swift; sourceTree = "<group>"; };
 		D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_EmbeddedTableController.swift; sourceTree = "<group>"; };
 		D40EB4DD2C3B142B00AAE33B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Accessibility.strings; sourceTree = "<group>"; };
-		D40EB4DF2C3B272300AAE33B /* RevealServer.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:2V82U7HN27:Itty Bitty Labs Pty Ltd"; lastKnownFileType = wrapper.xcframework; name = RevealServer.xcframework; path = Sources/VirtualMeetingFinder/Meta/RevealServer.xcframework; sourceTree = "<group>"; };
-		D4398E6B2C2892BD0001FAE3 /* jazzy.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = jazzy.command; sourceTree = "<group>"; };
 		D43A9C172C374198001285FC /* VMF_Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Prefs.swift; sourceTree = "<group>"; };
 		D43A9C182C374198001285FC /* VMF_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Extensions.swift; sourceTree = "<group>"; };
 		D455E5662C396F3A00246848 /* VMF_AttendanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_AttendanceViewController.swift; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 				D4AD6A112C261B1D002E37F3 /* Meta */,
 				D419F3102C261762001EE006 /* Sources */,
 				D49393322C2616C7006438AE /* Products */,
-				D4A5E4172C30B8EC00CF6068 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,14 +159,6 @@
 				D4B3E2B32C41B6CE00CD672E /* VirtualMeetingFinder.docc */,
 			);
 			path = VirtualMeetingFinder;
-			sourceTree = "<group>";
-		};
-		D4A5E4172C30B8EC00CF6068 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D40EB4DF2C3B272300AAE33B /* RevealServer.xcframework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		D4AD6A0F2C261AB7002E37F3 /* Resources */ = {
@@ -202,7 +191,6 @@
 				D4AD6A182C261BCA002E37F3 /* CODEOWNERS */,
 				D4AD6A192C261BCA002E37F3 /* LICENSE */,
 				D4AD6A142C261BCA002E37F3 /* PRIVACY.md */,
-				D4398E6B2C2892BD0001FAE3 /* jazzy.command */,
 				D4AD6A172C261BCA002E37F3 /* PrivacyInfo.xcprivacy */,
 				D49EE49C2C42A2FC00BAD34A /* icon.png */,
 				D49EE49B2C42A2FC00BAD34A /* LGV.png */,
@@ -231,7 +219,6 @@
 				D493932D2C2616C7006438AE /* Sources */,
 				D493932E2C2616C7006438AE /* Frameworks */,
 				D493932F2C2616C7006438AE /* Resources */,
-				D4448E6A2C3C23550067B500 /* Integrate Reveal */,
 			);
 			buildRules = (
 			);
@@ -303,27 +290,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		D4448E6A2C3C23550067B500 /* Integrate Reveal */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Integrate Reveal";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export REVEAL_SERVER_FILENAME=\"RevealServer.xcframework\"\n\n# Update this path to point to the location of RevealServer.xcframework in your project.\nexport REVEAL_SERVER_PATH=\"${SRCROOT}/Sources/VirtualMeetingFinder/Meta/${REVEAL_SERVER_FILENAME}\"\n\n# If RevealServer.xcframework exists at the specified path, run the integration script.\nif [ -d \"${REVEAL_SERVER_PATH}\" ]; then\n \"${REVEAL_SERVER_PATH}/Scripts/integrate_revealserver.sh\"\nelse\n echo \"Reveal Server not loaded into ${TARGET_NAME}: ${REVEAL_SERVER_FILENAME} could not be found.\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D493932D2C2616C7006438AE /* Sources */ = {

@@ -301,19 +301,18 @@ extension MeetingInstance {
      If this meeting has a format code for a Service meeting, this returns true.
      */
     var isServiceMeeting: Bool {
-        formats.reduce(false) { current, next in
-            if !current {
-                switch next.key.lowercased() {
-                case "asm":
-                    return true
-                    
-                default:
-                    return false
-                }
+        // I know, I know, I should use reduce(), or some other higher-order methodology, but the classic for loop is a lot faster.
+        for index in 0..<formats.count {
+            switch formats[index].key.lowercased() {
+            case "asm", "sub-rp":
+                return true
+                
+            default:
+                continue
             }
-            
-            return current
         }
+        
+        return false
     }
     
     /* ################################################################## */

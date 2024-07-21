@@ -196,6 +196,11 @@ extension VMF_MainViewController {
         } else {
             let tempMeetings = getDailyMeetings(for: inDayIndex)
             let keys = tempMeetings.keys.sorted()
+
+            guard !tempMeetings.isEmpty,
+                  !keys.isEmpty
+            else { return [] }
+            
             let timeIndex = max(0, min(inTimeIndex, keys.count - 1))
             let key = keys[timeIndex]
             meetings = tempMeetings[key] ?? []
@@ -723,6 +728,13 @@ extension VMF_MainViewController {
             reorganizeMeetings()
             view?.setNeedsLayout()
         }
+        
+        if VMF_SceneDelegate.forceReloadDelayInSeconds < -VMF_SceneDelegate.lastReloadTime.timeIntervalSinceNow {
+            isNameSearchMode = false
+        } else {
+            isNameSearchMode = wasNameSearchMode
+        }
+        
         (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = !isNameSearchMode
         setAttendance()
     }
@@ -735,12 +747,11 @@ extension VMF_MainViewController {
      */
     override func viewDidAppear(_ inIsAnimated: Bool) {
         super.viewDidAppear(inIsAnimated)
+        
         if VMF_SceneDelegate.forceReloadDelayInSeconds < -VMF_SceneDelegate.lastReloadTime.timeIntervalSinceNow {
-            isNameSearchMode = false
             loadMeetings { self.openTo() }
-        } else {
-            isNameSearchMode = wasNameSearchMode
         }
+        
         // This means that we won't arbitrarily reload.
         VMF_SceneDelegate.lastReloadTime = .distantFuture
     }

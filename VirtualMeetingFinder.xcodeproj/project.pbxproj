@@ -307,7 +307,6 @@
 /* Begin PBXShellScriptBuildPhase section */
 		D4448E6A2C3C23550067B500 /* Integrate Reveal */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
 			buildActionMask = 12;
 			files = (
 			);

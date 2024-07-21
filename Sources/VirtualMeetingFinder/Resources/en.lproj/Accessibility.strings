@@ -108,12 +108,12 @@
 /* This label is applied to the meeting name text label in the Meeting Inspector Screen */
 "SLUG-ACC-I-ATTEND-BAR-BUTTON-LABEL"            =   "I Attend This Meeting";
 /* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-ACC-I-ATTEND-BAR-BUTTON-HINT"             =   "This button indicates whetrher or not we attend this meeting. Since we are attending, we can view this meeting separately, in the Attendance Screen.";
+"SLUG-ACC-I-ATTEND-BAR-BUTTON-HINT"             =   "This button indicates whether or not we attend this meeting. Since we are attending, we can view this meeting separately, in the Attendance Screen.";
 
 /* This label is applied to the meeting name text label in the Meeting Inspector Screen */
 "SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-LABEL"     =   "I Do Not Attend This Meeting";
 /* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-HINT"      =   "This button indicates whetrher or not we attend this meeting. We currently do not attend this meeting.";
+"SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-HINT"      =   "This button indicates whether or not we attend this meeting. We currently do not attend this meeting.";
 
 /* This label is applied to the meeting name text label in the Meeting Inspector Screen */
 "SLUG-ACC-MEETING-NAME-MI-LABEL"                =   "Meeting Name";

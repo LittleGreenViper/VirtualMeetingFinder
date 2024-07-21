@@ -84,6 +84,9 @@
 "SLUG-FORMATS-HEADER"                           =   "Meeting Formats";
 /* This is the header, over the in-person meeting address, in the Meeting Inspector. */
 "SLUG-IN-PERSON-HEADER"                         =   "In-Person Meeting Location";
+
+// These are the row of three icons.
+
 /* This is displayed under the phone icon, in the Meeting Inspector. */
 "SLUG-PHONE-BUTTON"                             =   "Phone";
 /* This is displayed under the globe icon, in the Meeting Inspector. */
@@ -112,7 +115,7 @@
 /* The text for the label for the Reduce Service Meetings switch. */
 "SLUG-FILTER-SERVICE-MEETINGS"                  =   "Reduce Service Meetings";
 /* This is displayed under the switch, and explains its utility. */
-"SLUG-FILTER-SERVICE-MEETINGS-EXPLAIN"          =   "If this switch is on, the app will attempt to remove meetings that are not Recovery meetings, but are \"business meetings,\" related to NA Service.";
+"SLUG-FILTER-SERVICE-MEETINGS-EXPLAIN"          =   "If this switch is on, the app will attempt to remove meetings that are \"business meetings,\" related to NA Service (not Recovery Meetings).";
 
 // MARK: - ABOUT SCREEN -
 
@@ -120,21 +123,26 @@
 "SLUG-ABOUT-SCREEN-TITLE"                       =   "About This App";
 /* The complete version */
 "SLUG-VERSION-FORMAT"                           =   "Version: %@ (%@)";
-/* The text of the "Presented By" button. */
+/* The text of the "Presented By" button.
+ 
+   NOTE TO TRANSLATOR: Do not translate "Little Green Viper Software Development LLC". That is a corporate trade name.
+ */
 "SLUG-PRESENTED-BY"                             =   "Presented By Little Green Viper Software Development LLC";
 /* The button string for the Privacy button */
 "SLUG-PRIVACY-LABEL"                            =   "Privacy";
 /* The header for the dependency list. */
 "SLUG-DEPENDENCY-HEADER-LABEL"                  =   "App Dependencies:";
+/* The button string for the help page button. */
+"SLUG-HELP-PAGE-LABEL"                          =   "More Information";
 /* The button string for the GitHub button */
 "SLUG-GH-LABEL"                                 =   "The Source Code for This App";
-/* The button string for the BMLT button */
-"SLUG-BMLT-LABEL"                               =   "The Basic Meeting List Toolbox (BMLT)";
 
 // ***********************************************************************************************************
 // MARK: - DO NOT TRANSLATE BELOW THIS LINE -
 // ***********************************************************************************************************
 
+/* The button string for the BMLT button */
+"SLUG-BMLT-LABEL"                               =   "Basic Meeting List Toolbox (BMLT)";
 /* The format for a universal meeting link. The placeholder is replaced with the meeting's ID */
 "SLUG-UNIVERSAL-LINK-FORMAT"                    =   "https://vmf.littlegreenviper.com?%lu";
 /* The button string for the Basic GCD Timer button */
@@ -151,8 +159,6 @@
 "SLUG-ML-LABEL"                                 =   "LGV_MeetingServer";
 /* The button string for the TZ Lookup button */
 "SLUG-TZ-LABEL"                                 =   "LGV_TZ_Lookup";
-/* The button string for the help page button. */
-"SLUG-HELP-PAGE-LABEL"                          =   "More Information";
 /* The URL to the site. */
 "SLUG-PRESENTED-BY-URL"                         =   "https://littlegreenviper.com";
 /* The URL string for the Privacy button */

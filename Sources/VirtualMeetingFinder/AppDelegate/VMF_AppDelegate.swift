@@ -73,6 +73,12 @@ class VMF_AppDelegate: UIResponder {
      "There can only be one." - Connor MacLeod
      */
     static var virtualService: SwiftBMLSDK_MeetingLocalTimezoneCollection?
+
+    /* ################################################################## */
+    /**
+     This is the singleton for the prefs.
+     */
+    static var prefs = VMF_Prefs()
 }
 
 /* ###################################################################################################################################### */

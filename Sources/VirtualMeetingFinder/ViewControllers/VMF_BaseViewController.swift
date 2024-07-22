@@ -36,12 +36,6 @@ class VMF_BaseViewController: UIViewController {
     
     /* ################################################################## */
     /**
-     Convenient prefs instance.
-     */
-    let prefs = VMF_Prefs()
-    
-    /* ################################################################## */
-    /**
      This will provide haptic/audio feedback, in general.
      */
     var feedbackGenerator: UIImpactFeedbackGenerator?
@@ -57,6 +51,20 @@ class VMF_BaseViewController: UIViewController {
      This will provide subtle haptic/audio feedback for selections.
      */
     var selectionGenerator: UISelectionFeedbackGenerator?
+}
+
+/* ###################################################################################################################################### */
+// MARK: Computed Properties
+/* ###################################################################################################################################### */
+extension VMF_BaseViewController {
+    /* ################################################################## */
+    /**
+     Convenient prefs instance.
+     */
+    var prefs: VMF_Prefs {
+        get { VMF_AppDelegate.prefs }
+        set { VMF_AppDelegate.prefs = newValue }
+    }
 }
 
 /* ###################################################################################################################################### */

@@ -146,12 +146,6 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
      This holds the last time of the selected page. We use this to set the time, when directly navigating away from Now.
      */
     var lastTime = Int(0)
-
-    /* ################################################################## */
-    /**
-     This handles the server data.
-     */
-    weak var virtualService: SwiftBMLSDK_MeetingLocalTimezoneCollection?
     
     /* ################################################################## */
     /**
@@ -295,7 +289,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                 throbber?.isHidden = false
             } else {
                 throbber?.isHidden = true
-                myAttendanceBarButtonItem?.isEnabled = !(virtualService?.meetingsThatIAttend.isEmpty ?? true)
+                myAttendanceBarButtonItem?.isEnabled = !(VMF_AppDelegate.virtualService?.meetingsThatIAttend.isEmpty ?? true)
                 tabBarController?.tabBar.isHidden = false
                 searchItemsContainerView?.isHidden = !isNameSearchMode
                 weekdayModeSelectorSegmentedSwitch?.isHidden = isNameSearchMode
@@ -443,13 +437,13 @@ extension VMF_MainViewController {
      These are the meetings that are currently in progress. They are sorted in ascending local start time.
      */
     var inProgressMeetings: [MeetingInstance] {
-        self.virtualService?.meetings.compactMap { $0.isInProgress ? $0.meeting : nil }.sorted { a, b in
+        VMF_AppDelegate.virtualService?.meetings.compactMap { $0.isInProgress ? $0.meeting : nil }.sorted { a, b in
             var mutableA = a
             var mutableB = b
             
             let aDate = mutableA.getPreviousStartDate(isAdjusted: true)
             let bDate = mutableB.getPreviousStartDate(isAdjusted: true)
-
+            
             if aDate < bDate {
                 return true
             } else if aDate > bDate {

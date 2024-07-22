@@ -25,15 +25,17 @@ import UIKit
 extension VMF_MainViewController {
     /* ################################################################## */
     /**
+     This recalculates all the meeting data, breaking it into a couple of sorted arrays.
      */
     func reorganizeMeetings() {
         organizedMeetings = []
         searchMeetings = []
+        // First, we populate the search set, which a one-dimensional Array, sorted by meeting name, then timezone, then local start time.
         searchMeetings = virtualService?.meetings.map { $0.meeting }.sorted { a, b in
             let aLower = a.name.lowercased()
             let bLower = b.name.lowercased()
-            let aTZ = a.timeZone.identifier.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-            let bTZ = b.timeZone.identifier.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            let aTZ = a.timeZone.secondsFromGMT()
+            let bTZ = b.timeZone.secondsFromGMT()
             if aLower < bLower {
                 return true
             } else if aLower > bLower {
@@ -46,9 +48,13 @@ extension VMF_MainViewController {
                 return a.adjustedIntegerStartTime < b.adjustedIntegerStartTime
             }
         } ?? []
+        
+        // Next, we populate each weekday. This sorting is (local) weekday, local start time, then timezone, then meeting name. We sort into a two-dimensional Array, with the first dimension representing Sunday(0) -> Saturday(6).
         for index in 1..<8 {
+            // Filter out the meetings just for this weekday (we start at 1 for Sunday, because that is how they are specified in the data).
             let weekdayMeetings = virtualService?.meetings.compactMap { (index == $0.meeting.adjustedWeekday) ? $0 : nil } ?? []
             
+            // Then, we sort.
             let sortedWeekdayMeetings = weekdayMeetings.sorted { a, b in
                 let aTZ = a.meeting.timeZone.secondsFromGMT()
                 let bTZ = b.meeting.timeZone.secondsFromGMT()
@@ -64,7 +70,7 @@ extension VMF_MainViewController {
                 } else {
                     return a.meeting.name.lowercased() < b.meeting.name.lowercased()
                 }
-            }.map { $0.meeting }
+            }.map { $0.meeting }    // Finally, we extract just the meeting object.
             
             organizedMeetings.append(sortedWeekdayMeetings)
         }

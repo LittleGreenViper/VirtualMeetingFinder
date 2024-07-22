@@ -28,10 +28,11 @@ extension VMF_MainViewController {
      This recalculates all the meeting data, breaking it into a couple of sorted arrays.
      */
     func reorganizeMeetings() {
+        let exclude = VMF_AppDelegate.prefs.excludeServiceMeetings
         organizedMeetings = []
         searchMeetings = []
         // First, we populate the search set, which a one-dimensional Array, sorted by meeting name, then timezone, then local start time.
-        searchMeetings = VMF_AppDelegate.virtualService?.meetings.map { $0.meeting }.sorted { a, b in
+        searchMeetings = VMF_AppDelegate.virtualService?.meetings.compactMap { !(exclude && $0.meeting.isServiceMeeting) ? $0.meeting : nil }.sorted { a, b in
             let aLower = a.name.lowercased()
             let bLower = b.name.lowercased()
             let aTZ = a.timeZone.secondsFromGMT()
@@ -52,7 +53,7 @@ extension VMF_MainViewController {
         // Next, we populate each weekday. This sorting is (local) weekday, local start time, then timezone, then meeting name. We sort into a two-dimensional Array, with the first dimension representing weekdays (Sunday(0) -> Saturday(6)).
         for index in 1..<8 { // we start at 1 for Sunday, because that is how they are specified in the data.
             // Filter out the meetings just for this weekday.
-            let weekdayMeetings = VMF_AppDelegate.virtualService?.meetings.compactMap { (index == $0.meeting.adjustedWeekday) ? $0 : nil } ?? []
+            let weekdayMeetings = VMF_AppDelegate.virtualService?.meetings.compactMap { !(exclude && $0.meeting.isServiceMeeting) ? ((index == $0.meeting.adjustedWeekday) ? $0 : nil) : nil } ?? []
             
             // Then, we sort.
             let sortedWeekdayMeetings = weekdayMeetings.sorted { a, b in
@@ -119,18 +120,13 @@ extension VMF_MainViewController {
         
         var ret = [Int: [MeetingInstance]]()
         
-        let exclude = excludeServiceMeetings
-        
         organizedMeetings[inWeekdayIndex - 1].forEach {
             let key = $0.adjustedIntegerStartTime
-            let value = !(exclude && $0.isServiceMeeting) ? $0 : nil
-            
-            if let value = value {
-                if nil == ret[key] {
-                    ret[key] = [value]
-                } else {
-                    ret[key]?.append(value)
-                }
+
+            if nil == ret[key] {
+                ret[key] = [$0]
+            } else {
+                ret[key]?.append($0)
             }
         }
         

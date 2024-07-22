@@ -65,7 +65,7 @@ extension VMF_SettingsViewController {
      */
     @IBAction func filterServiceMeetingsHit(_ inSender: NSObjectProtocol) {
         if let switcher = inSender as? UISwitch {   // If the switch, we execute it.
-            prefs.excludeServiceMeetings = switcher.isOn
+            VMF_AppDelegate.prefs.excludeServiceMeetings = switcher.isOn
             guard let searchController = VMF_AppDelegate.searchController,
                   let tableDisplayController = searchController.tableDisplayController
             else { return }
@@ -99,7 +99,7 @@ extension VMF_SettingsViewController {
 
         filterServiceMeetingsLabel?.textColor = .tintColor
         filterServiceMeetingsLabel?.text = filterServiceMeetingsLabel?.text?.localizedVariant
-        filterServiceMeetingsSwitch?.isOn = prefs.excludeServiceMeetings
+        filterServiceMeetingsSwitch?.isOn = VMF_AppDelegate.prefs.excludeServiceMeetings
         
         filterServiceMeetingsExplainLabel?.text = filterServiceMeetingsExplainLabel?.text?.localizedVariant
     }

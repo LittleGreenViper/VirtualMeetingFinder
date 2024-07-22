@@ -32,33 +32,42 @@ extension VMF_MainViewController {
         searchMeetings = virtualService?.meetings.map { $0.meeting }.sorted { a, b in
             let aLower = a.name.lowercased()
             let bLower = b.name.lowercased()
-            
+            let aTZ = a.timeZone.identifier.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            let bTZ = b.timeZone.identifier.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
             if aLower < bLower {
                 return true
             } else if aLower > bLower {
                 return false
-            } else if a.timeZone.identifier < b.timeZone.identifier {
+            } else if aTZ < bTZ {
                 return true
-            } else if a.timeZone.identifier > b.timeZone.identifier {
+            } else if aTZ > bTZ {
                 return false
             } else {
                 return a.adjustedIntegerStartTime < b.adjustedIntegerStartTime
             }
         } ?? []
         for index in 1..<8 {
-            organizedMeetings.append(searchMeetings.compactMap { (index == $0.adjustedWeekday) ? $0 : nil }.sorted { a, b in
-                if a.adjustedIntegerStartTime < b.adjustedIntegerStartTime {
+            let weekdayMeetings = virtualService?.meetings.compactMap { (index == $0.meeting.adjustedWeekday) ? $0 : nil } ?? []
+            
+            let sortedWeekdayMeetings = weekdayMeetings.sorted { a, b in
+                let aStart = a.nextDate
+                let bStart = b.nextDate
+                let aTZ = a.meeting.timeZone.identifier.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+                let bTZ = b.meeting.timeZone.identifier.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+                if aStart < bStart {
                     return true
-                } else if a.adjustedIntegerStartTime < b.adjustedIntegerStartTime {
+                } else if aStart > bStart {
                     return false
-                } else if a.timeZone.identifier < b.timeZone.identifier {
+                } else if aTZ < bTZ {
+                    return false
+                } else if aTZ > bTZ {
                     return true
-                } else if a.timeZone.identifier > b.timeZone.identifier {
-                    return false
                 } else {
-                    return a.name.lowercased() < b.name.lowercased()
+                    return a.meeting.name.lowercased() < b.meeting.name.lowercased()
                 }
-            })
+            }.map { $0.meeting }
+            
+            organizedMeetings.append(sortedWeekdayMeetings)
         }
     }
     
@@ -105,7 +114,7 @@ extension VMF_MainViewController {
         
         var ret = [Int: [MeetingInstance]]()
         
-        let exclude = prefs.excludeServiceMeetings
+        let exclude = excludeServiceMeetings
         
         organizedMeetings[inWeekdayIndex - 1].forEach {
             let key = $0.adjustedIntegerStartTime

@@ -124,10 +124,16 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
 
     /* ################################################################## */
     /**
+     We use this to cache the prefs load.
+     */
+    private var _excludeServiceMeetings: Bool? = false
+
+    /* ################################################################## */
+    /**
      This is used to restore the bottom of the stack view, when the keyboard is hidden.
      */
     var atRestConstant = CGFloat(0)
-    
+
     /* ################################################################## */
     /**
      This is used during the long-press slide. It holds the previous location of the gesture.
@@ -473,5 +479,19 @@ extension VMF_MainViewController {
         guard (1..<8).contains(day) else { return (weekday: 0, currentIntegerTime: 0) }
         
         return (weekday: day, currentIntegerTime: hour * 100 + minute)
+    }
+    
+    /* ################################################################## */
+    /**
+     Returns true, if the user wants to exclude Service meetings.
+     */
+    var excludeServiceMeetings: Bool {
+        get {
+            let ret = _excludeServiceMeetings ?? prefs.excludeServiceMeetings
+            _excludeServiceMeetings = ret
+            return ret
+        }
+        
+        set { _excludeServiceMeetings = newValue }
     }
 }

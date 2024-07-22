@@ -50,13 +50,12 @@ extension VMF_MainViewController {
             let weekdayMeetings = virtualService?.meetings.compactMap { (index == $0.meeting.adjustedWeekday) ? $0 : nil } ?? []
             
             let sortedWeekdayMeetings = weekdayMeetings.sorted { a, b in
-                let aStart = a.nextDate
-                let bStart = b.nextDate
-                let aTZ = a.meeting.timeZone.identifier.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-                let bTZ = b.meeting.timeZone.identifier.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-                if aStart < bStart {
+                let aTZ = a.meeting.timeZone.secondsFromGMT()
+                let bTZ = b.meeting.timeZone.secondsFromGMT()
+                let timeComp = Calendar.current.compare(a.nextDate, to: b.nextDate, toGranularity: .minute)
+                if .orderedAscending == timeComp {
                     return true
-                } else if aStart > bStart {
+                } else if .orderedDescending == timeComp {
                     return false
                 } else if aTZ < bTZ {
                     return false

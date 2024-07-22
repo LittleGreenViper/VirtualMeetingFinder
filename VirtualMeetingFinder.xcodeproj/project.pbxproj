@@ -25,13 +25,13 @@
 		D493933C2C2616C7006438AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D493933B2C2616C7006438AE /* Base */; };
 		D493933E2C2616C8006438AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D493933D2C2616C8006438AE /* Assets.xcassets */; };
 		D49393412C2616C8006438AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D49393402C2616C8006438AE /* Base */; };
+		D4995E762C4F06CE00C6F27C /* SwiftBMLSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D4995E752C4F06CE00C6F27C /* SwiftBMLSDK */; };
 		D4B3E2B42C41B6CE00CD672E /* VirtualMeetingFinder.docc in Sources */ = {isa = PBXBuildFile; fileRef = D4B3E2B32C41B6CE00CD672E /* VirtualMeetingFinder.docc */; };
 		D4B69A342C2B162900D24DA6 /* VMF_MeetingInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B69A332C2B162800D24DA6 /* VMF_MeetingInspectorViewController.swift */; };
 		D4DDAB822C4039570018944E /* VMF_AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DDAB812C4039570018944E /* VMF_AboutViewController.swift */; };
 		D4E7C6C92C4293E10045ACE6 /* VMF_MainViewController_Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7C6C82C4293E10045ACE6 /* VMF_MainViewController_Methods.swift */; };
 		D4E7C6CB2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7C6CA2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift */; };
 		D4F4BCED2C36DAFC0023C21B /* VMF_MapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4BCEC2C36DAFC0023C21B /* VMF_MapMarker.swift */; };
-		D4FB82152C4D9C6D0069815A /* SwiftBMLSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D4FB82142C4D9C6D0069815A /* SwiftBMLSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,7 +79,7 @@
 			files = (
 				D48816152C35860F008DF936 /* RVS_BasicGCDTimer in Frameworks */,
 				D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */,
-				D4FB82152C4D9C6D0069815A /* SwiftBMLSDK in Frameworks */,
+				D4995E762C4F06CE00C6F27C /* SwiftBMLSDK in Frameworks */,
 				D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */,
 				D43A9C132C373F67001285FC /* RVS_Persistent_Prefs in Frameworks */,
 			);
@@ -238,7 +238,7 @@
 				D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */,
 				D48816142C35860F008DF936 /* RVS_BasicGCDTimer */,
 				D43A9C122C373F67001285FC /* RVS_Persistent_Prefs */,
-				D4FB82142C4D9C6D0069815A /* SwiftBMLSDK */,
+				D4995E752C4F06CE00C6F27C /* SwiftBMLSDK */,
 			);
 			productName = VirtualMeetingFinder;
 			productReference = D49393312C2616C7006438AE /* Virtual NA Meeting Finder.app */;
@@ -271,9 +271,9 @@
 			packageReferences = (
 				D4398E652C2892790001FAE3 /* XCRemoteSwiftPackageReference "RVS_Generic_Swift_Toolbox" */,
 				D4398E682C2892830001FAE3 /* XCRemoteSwiftPackageReference "RVS_UIKit_Toolbox" */,
-				D4523A0D2C31D18300BAE330 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */,
 				D48816132C35860F008DF936 /* XCRemoteSwiftPackageReference "RVS_BasicGCDTimer" */,
 				D43A9C112C373F67001285FC /* XCRemoteSwiftPackageReference "RVS_PersistentPrefs" */,
+				D4995E742C4F06CE00C6F27C /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */,
 			);
 			productRefGroup = D49393322C2616C7006438AE /* Products */;
 			projectDirPath = "";
@@ -597,20 +597,20 @@
 				minimumVersion = 1.3.9;
 			};
 		};
-		D4523A0D2C31D18300BAE330 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/LittleGreenViper/SwiftBMLSDK";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.11;
-			};
-		};
 		D48816132C35860F008DF936 /* XCRemoteSwiftPackageReference "RVS_BasicGCDTimer" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RiftValleySoftware/RVS_BasicGCDTimer";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.7.1;
+			};
+		};
+		D4995E742C4F06CE00C6F27C /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/LittleGreenViper/SwiftBMLSDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.12;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -636,9 +636,9 @@
 			package = D48816132C35860F008DF936 /* XCRemoteSwiftPackageReference "RVS_BasicGCDTimer" */;
 			productName = RVS_BasicGCDTimer;
 		};
-		D4FB82142C4D9C6D0069815A /* SwiftBMLSDK */ = {
+		D4995E752C4F06CE00C6F27C /* SwiftBMLSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D4523A0D2C31D18300BAE330 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */;
+			package = D4995E742C4F06CE00C6F27C /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */;
 			productName = SwiftBMLSDK;
 		};
 /* End XCSwiftPackageProductDependency section */

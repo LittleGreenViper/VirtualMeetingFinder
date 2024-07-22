@@ -443,9 +443,7 @@ extension VMF_MeetingInspectorViewController {
             }
         }
         
-        if !directPhoneNumberString.isEmpty,
-           let directURI = URL(string: directPhoneNumberString),
-           UIApplication.shared.canOpenURL(directURI) {
+        if !directPhoneNumberString.isEmpty {
             linkContainer?.isHidden = false
             phoneButtonContainer?.isHidden = false
         }

@@ -64,6 +64,18 @@ class VMF_Prefs: RVS_PersistentPrefs {
      We should use the enum for the keys (rawValue).
      */
     override var keys: [String] { Keys.allKeys }
+    
+    /* ################################################################## */
+    /**
+     We cache, to avoid the overhead of constantly reloading the prefs.
+     */
+    private var _cachedAttendance: [Int]?
+    
+    /* ################################################################## */
+    /**
+     We cache, to avoid the overhead of constantly reloading the prefs.
+     */
+    private var _cachedExcludeServiceMeetings: Bool?
 }
 
 /* ###################################################################################################################################### */
@@ -75,8 +87,16 @@ extension VMF_Prefs {
      This saves our meeting attendance, as a list of meeting IDs.
      */
     var attendance: [Int] {
-        get { values[Keys.attendance.rawValue] as? [Int] ?? [] }
-        set { values[Keys.attendance.rawValue] = newValue }
+        get {
+            guard nil == _cachedAttendance else { return _cachedAttendance! }
+            let ret = values[Keys.attendance.rawValue] as? [Int] ?? []
+            _cachedAttendance = ret
+            return ret
+        }
+        set {
+            _cachedAttendance = newValue
+            values[Keys.attendance.rawValue] = newValue
+        }
     }
     
     /* ################################################################## */
@@ -84,7 +104,15 @@ extension VMF_Prefs {
      If we want to exclude Service meetings from the displayed results, this Boolean is true.
      */
     var excludeServiceMeetings: Bool {
-        get { values[Keys.excludeServiceMeetings.rawValue] as? Bool ?? true }
-        set { values[Keys.excludeServiceMeetings.rawValue] = newValue }
+        get {
+            guard nil == _cachedExcludeServiceMeetings else { return _cachedExcludeServiceMeetings! }
+            let ret = values[Keys.excludeServiceMeetings.rawValue] as? Bool ?? true
+            _cachedExcludeServiceMeetings = ret
+            return ret
+        }
+        set {
+            _cachedExcludeServiceMeetings = newValue
+            values[Keys.excludeServiceMeetings.rawValue] = newValue
+        }
     }
 }

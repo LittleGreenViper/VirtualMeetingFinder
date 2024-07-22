@@ -49,9 +49,9 @@ extension VMF_MainViewController {
             }
         } ?? []
         
-        // Next, we populate each weekday. This sorting is (local) weekday, local start time, then timezone, then meeting name. We sort into a two-dimensional Array, with the first dimension representing Sunday(0) -> Saturday(6).
-        for index in 1..<8 {
-            // Filter out the meetings just for this weekday (we start at 1 for Sunday, because that is how they are specified in the data).
+        // Next, we populate each weekday. This sorting is (local) weekday, local start time, then timezone, then meeting name. We sort into a two-dimensional Array, with the first dimension representing weekdays (Sunday(0) -> Saturday(6)).
+        for index in 1..<8 { // we start at 1 for Sunday, because that is how they are specified in the data.
+            // Filter out the meetings just for this weekday.
             let weekdayMeetings = virtualService?.meetings.compactMap { (index == $0.meeting.adjustedWeekday) ? $0 : nil } ?? []
             
             // Then, we sort.

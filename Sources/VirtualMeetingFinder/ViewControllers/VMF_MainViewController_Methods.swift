@@ -416,6 +416,7 @@ extension VMF_MainViewController {
      */
     @IBAction func searchTextChanged(_ inTextField: UITextField) {
         searchText = inTextField.text ?? ""
+        selectionHaptic()
     }
     
     /* ################################################################## */

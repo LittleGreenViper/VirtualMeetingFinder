@@ -969,14 +969,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="SLUG-IN-PROGRESS-STANDALONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7tx-Jg-onI">
-                                                <rect key="frame" x="0.0" y="64" width="329" height="8"/>
+                                                <rect key="frame" x="0.0" y="64" width="329" height="0.0"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-IN-PROGRESS-MI-HINT" label="SLUG-ACC-IN-PROGRESS-MI-LABEL"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <color key="textColor" systemColor="systemGreenColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Zone" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JRB-g7-5Qt">
-                                                <rect key="frame" x="128" y="84" width="73" height="20"/>
+                                                <rect key="frame" x="128" y="76" width="73" height="20"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-TZ-MI-HINT" label="SLUG-ACC-TZ-MI-LABEL"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="gkH-oV-ao4"/>
@@ -986,7 +986,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="749" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XiA-7C-mAM">
-                                                <rect key="frame" x="44.666666666666657" y="116" width="239.99999999999997" height="0.0"/>
+                                                <rect key="frame" x="44.666666666666657" y="108" width="239.99999999999997" height="0.0"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-COMMENTS-MI-HINT" label="SLUG-ACC-COMMENTS-MI-LABEL"/>
                                                 <color key="textColor" systemColor="labelColor"/>
@@ -995,7 +995,7 @@
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                             </textView>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="odu-fY-u8h">
-                                                <rect key="frame" x="0.0" y="128" width="329" height="54"/>
+                                                <rect key="frame" x="0.0" y="120" width="329" height="54"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" distribution="fillEqually" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="hZz-Uk-7C5">
                                                         <rect key="frame" x="0.0" y="0.0" width="329" height="54"/>
@@ -1130,7 +1130,7 @@
                                                 </constraints>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GER-7R-iCr">
-                                                <rect key="frame" x="49.666666666666686" y="194" width="230" height="40"/>
+                                                <rect key="frame" x="49.666666666666686" y="186" width="230" height="0.0"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-PHONE-INFO-MI-HINT" label="SLUG-ACC-PHONE-INFO-MI-LABEL"/>
                                                 <color key="textColor" systemColor="labelColor"/>
@@ -1139,7 +1139,7 @@
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                             </textView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="748" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EZk-ly-NJg">
-                                                <rect key="frame" x="44.666666666666657" y="246" width="239.99999999999997" height="0.0"/>
+                                                <rect key="frame" x="44.666666666666657" y="198" width="239.99999999999997" height="0.0"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <accessibility key="accessibilityConfiguration" label="SLUG-ACC-XTRA-INFO-MI-LABEL"/>
                                                 <color key="textColor" systemColor="labelColor"/>
@@ -1147,7 +1147,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="64m-m1-rdV">
-                                                <rect key="frame" x="41.666666666666657" y="258" width="245.99999999999997" height="30"/>
+                                                <rect key="frame" x="41.666666666666657" y="210" width="245.99999999999997" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-FORMATS-HEADER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ml1-yq-PeL">
                                                         <rect key="frame" x="0.0" y="0.0" width="208" height="30"/>
@@ -1177,11 +1177,8 @@
                                                 </connections>
                                             </stackView>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-er-i3Z">
-                                                <rect key="frame" x="49.666666666666686" y="300" width="230" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="252" width="329" height="48"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" placeholder="YES" id="0N4-o7-kdM"/>
-                                                </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="byn-Ac-E0k">
                                                 <rect key="frame" x="35.333333333333343" y="312" width="258.66666666666663" height="30"/>
@@ -1237,7 +1234,6 @@
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gel-fq-Thu" secondAttribute="trailing" id="HvK-8Y-NJr"/>
                                                     <constraint firstItem="1E1-F8-ND2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uzn-9H-qzY" secondAttribute="leading" id="bwb-Di-dRJ"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1E1-F8-ND2" secondAttribute="trailing" id="gLr-9m-flB"/>
-                                                    <constraint firstAttribute="height" placeholder="YES" id="lVp-oX-Gy9"/>
                                                     <constraint firstItem="gel-fq-Thu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uzn-9H-qzY" secondAttribute="leading" id="v16-fO-d2x"/>
                                                 </constraints>
                                             </stackView>
@@ -1270,6 +1266,8 @@
                                             <constraint firstItem="odu-fY-u8h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="NYm-73-ine"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="odu-fY-u8h" secondAttribute="trailing" id="Otq-CO-eqf"/>
                                             <constraint firstAttribute="trailing" secondItem="bIq-s0-xoL" secondAttribute="trailing" id="gux-gH-ra6"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1Me-er-i3Z" secondAttribute="trailing" id="hEp-Rs-uKM"/>
+                                            <constraint firstItem="1Me-er-i3Z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="ilE-sp-x3j"/>
                                             <constraint firstItem="bIq-s0-xoL" firstAttribute="leading" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="imA-rc-8hi"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P0x-Y5-plm" secondAttribute="trailing" id="mac-MC-CPJ"/>
                                         </constraints>

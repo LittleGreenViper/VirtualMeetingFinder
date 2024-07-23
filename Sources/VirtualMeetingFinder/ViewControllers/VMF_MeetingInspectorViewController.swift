@@ -598,7 +598,9 @@ extension VMF_MeetingInspectorViewController {
         
         guard let formatContainerView = formatContainerView else { return }
 
-        formatContainerView.isHidden = false
+        formatContainerView.isHidden = !isFormatsOpen
+        
+        formatContainerView.subviews.forEach { $0.removeFromSuperview() }
         
         var lastTopAnchor = formatContainerView.topAnchor
         

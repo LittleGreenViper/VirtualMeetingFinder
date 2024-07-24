@@ -393,7 +393,7 @@ class VMF_EmbeddedTableController: VMF_BaseViewController, VMF_EmbeddedTableCont
                 refresh.addTarget(self, action: #selector(refreshPulled), for: .valueChanged)
                 _refreshControl = refresh
                 valueTable?.refreshControl = refresh
-            } else {
+            } else if noRefresh {
                 _refreshControl = nil
                 valueTable?.refreshControl = nil
             }

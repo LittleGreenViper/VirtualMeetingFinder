@@ -99,8 +99,6 @@ extension VMF_AppDelegate {
             return
         }
         
-        virtualService = nil
-        
         Self._timer = RVS_BasicGCDTimer(Self._fetchTimeoutInSeconds) { inTimer, inComplete in
             Self._timer = nil
             guard inComplete else { return }
@@ -182,9 +180,7 @@ extension VMF_AppDelegate: UIApplicationDelegate {
      - returns: The default configuration for the scene.
      */
     func application(_: UIApplication, configurationForConnecting inConnectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: inConnectingSceneSession.role)
+        UISceneConfiguration(name: "Default Configuration", sessionRole: inConnectingSceneSession.role)
     }
     
     /* ################################################################## */

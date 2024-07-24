@@ -191,6 +191,7 @@ extension VMF_MainViewController: UIPickerViewDelegate {
             }
         }
         
+        // We highlight the selected rows.
         if inRow == inPickerView.selectedRow(inComponent: inComponent) {
             ret.textColor = .systemBackground
             ret.backgroundColor = .label

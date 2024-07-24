@@ -144,7 +144,7 @@ extension VMF_BaseViewController {
     /* ################################################################## */
     /**
      Called after the view hierarchy layout is complete.
-     We use this to enforce localized accessibility.
+     We use this to enforce localized accessibility, and create the background gradient.
      */
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

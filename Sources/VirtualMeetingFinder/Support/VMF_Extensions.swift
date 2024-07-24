@@ -258,16 +258,6 @@ extension StringProtocol {
 extension MeetingInstance {
     /* ################################################################## */
     /**
-     This allows us to return a string for the meeting time. The return is adjusted and localized, with our strings for noon and midnight.
-     */
-    var timeString: String {
-        var mutableSelf = self
-        
-        return mutableSelf.getNextStartDate(isAdjusted: true).localizedTime
-    }
-    
-    /* ################################################################## */
-    /**
      This returns the start weekday. It is adjusted, so may sometimes be different from the one specified by the meeting. It is always in 1 = Sunday space.
      */
     var adjustedWeekday: Int {
@@ -320,32 +310,6 @@ extension MeetingInstance {
      This is a universal link for this meeting, in this app.
      */
     var linkURL: URL? { URL(string: String(format: "SLUG-UNIVERSAL-LINK-FORMAT".localizedVariant, id)) }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Special Dictionary Extension to Extract Meeting Sets -
-/* ###################################################################################################################################### */
-/**
- This is applied to the dictionary we use to organize meetings.
- */
-extension Dictionary where Key == Int, Value == [MeetingInstance] {
-    /* ################################################################## */
-    /**
-     This returns the key for a time equal to, or immediately after, the given time.
-     
-     - parameter onOrAfter: The start time, as a military-style integer (HHMM).
-     - returns: The key, as a military-style integer. -1, if invalid.
-     */
-    func getKey(onOrAfter inTimeAsInteger: Int) -> Int { keys.sorted().first(where: { $0 >= inTimeAsInteger }) ?? -1 }
-    
-    /* ################################################################## */
-    /**
-     This returns the meetings for a time equal to the given time.
-     
-     - parameter on: The start time, as a military-style integer (HHMM).
-     - returns: An array of meetings that correspond to the time.
-     */
-    func getMeetings(on inTimeAsInteger: Int) -> [MeetingInstance] { self[inTimeAsInteger] ?? [] }
 }
 
 /* ###################################################################################################################################### */

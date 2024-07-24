@@ -51,7 +51,7 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
     /**
      The duration of the open/close animation.
      */
-    private static let _openingAnimationPeriodInSeconds = TimeInterval(0.125)
+    private static let _openingAnimationPeriodInSeconds = TimeInterval(0.25)
 
     /* ################################################################## */
     /**
@@ -371,7 +371,7 @@ extension VMF_MeetingInspectorViewController {
          - returns: The stripped string.
          */
         func stripPhoneNumber(from inString: String) -> String {
-            let allowedChars = CharacterSet(charactersIn: "0123456789 ()-+")
+            let allowedChars = CharacterSet(charactersIn: "0123456789,()-+")
             guard !inString.reduce(false, { current, next in
                 // The higher-order function stuff will convert each character into an aggregate integer, which then becomes a Unicode scalar. Very primitive, but shouldn't be a problem for us, as we only need a very limited ASCII set.
                 guard !current,

@@ -238,12 +238,14 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                 timeSelectorContainerView?.isHidden = true
                 directSelectionItemsContainer?.isHidden = false
                 directSelectionPickerView?.reloadAllComponents()
+                (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = true  // Disables pull to refresh.
                 setDayPicker()
             } else {
                 directSelectionItemsContainer?.isHidden = true
                 completionBar?.isHidden = false
                 weekdayModeSelectorSegmentedSwitch?.isHidden = false
                 timeSelectorContainerView?.isHidden = false
+                (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = false  // Re-enable pull to refresh.
             }
         }
     }
@@ -442,9 +444,9 @@ extension VMF_MainViewController {
                 return true
             } else if aDate > bDate {
                 return false
-            } else if a.timeZone.identifier < b.timeZone.identifier {
+            } else if a.timeZone.secondsFromGMT() < b.timeZone.secondsFromGMT() {
                 return true
-            } else if a.timeZone.identifier > b.timeZone.identifier {
+            } else if a.timeZone.secondsFromGMT() > b.timeZone.secondsFromGMT() {
                 return false
             } else {
                 return a.name.lowercased() < b.name.lowercased()

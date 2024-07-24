@@ -54,7 +54,7 @@ extension VMF_AttendanceViewController {
                 return false
             } else if a.nextDate < b.nextDate {
                 return true
-            } else if b.nextDate < a.nextDate {
+            } else if a.nextDate > b.nextDate {
                 return false
             } else {
                 return a.meeting.name < b.meeting.name

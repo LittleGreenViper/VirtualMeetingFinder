@@ -221,10 +221,10 @@ extension VMF_MainViewController {
     
     /* ################################################################## */
     /**
-     This opens the screen to a certain day index, and time index.
+     This opens the screen to a certain day index, and time (not index).
      
      - parameter dayIndex: The 1-based (but 0 is in progress, 1-7 is Sunday through Saturday) day index. If omitted, then today/now is selected, and time is ignored.
-     - parameter time: The military time (HHMM), as an integer. If omitted, 12AM is assumed.
+     - parameter time: The military time (HHMM), as an integer. If omitted, 12AM (0000) is assumed.
      */
     func openTo(dayIndex inDayIndex: Int = -1, time inMilitaryTime: Int = 0) {
         let weekday = (0..<8).contains(inDayIndex) ? inDayIndex : -1 == inDayIndex ? nowIs.weekday : 0
@@ -241,11 +241,11 @@ extension VMF_MainViewController {
     
     /* ################################################################## */
     /**
-     This returns the index, of the time slot that is closest (before or after) to the given time and day.
+     This returns the index of the time slot that is closest (before or after) to the given time and day.
      
      - parameter dayIndex: The 1-based day index. If omitted, then today/now is selected, and time is ignored.
      - parameter time: The military time (HHMM), as an integer. If omitted, 12AM (0000) is assumed.
-     - returns: The index of the next time slot after (or at the same time as) the given time.
+     - returns: The index of the time slot closest to (or at the same time as) the given time. It may be prior.
      */
     func getNearestIndex(dayIndex inDayIndex: Int = -1, time inMilitaryTime: Int = 0) -> Int {
         let weekday = (1..<8).contains(inDayIndex) ? inDayIndex : -1 == inDayIndex ? nowIs.weekday : 0
@@ -291,7 +291,7 @@ extension VMF_MainViewController {
     
     /* ################################################################## */
     /**
-     This updates the "thermometer" display, in the time selector.
+     This updates the "thermometer" display in the time selector.
      */
     func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol?) {
         completionBar?.subviews.forEach { $0.removeFromSuperview() }
@@ -301,9 +301,7 @@ extension VMF_MainViewController {
               let completionBar = completionBar,
               let repeatDuration = leftButton?.repeatFrequencyInSeconds,
               !isNameSearchMode
-        else {
-            return
-        }
+        else { return }
         
         let dayIndex = tablePage.dayIndex
         let prevTimeIndex = prevPage.timeIndex
@@ -313,7 +311,7 @@ extension VMF_MainViewController {
         var prevDailyMeetings = [Int: [MeetingInstance]]()
 
         if 0 == dayIndex {
-            return
+            return // Not displayed for in progress mode.
         } else if 0 != prevPage.dayIndex {
             dailyMeetings = getDailyMeetings(for: dayIndex)
         
@@ -354,7 +352,7 @@ extension VMF_MainViewController {
         guard let tableDisplayController = tableDisplayController else { return }
         let dayIndex = max(1, min(8, tableDisplayController.dayIndex)) - 1
         let timeIndex = tableDisplayController.timeIndex
-        directSelectionPickerView?.selectRow(dayIndex, inComponent: 0, animated: false)
+        directSelectionPickerView?.selectRow(dayIndex, inComponent: 0, animated: true)
         directSelectionPickerView?.selectRow(timeIndex, inComponent: 1, animated: true)
     }
     
@@ -373,7 +371,7 @@ extension VMF_MainViewController {
 extension VMF_MainViewController {
     /* ################################################################## */
     /**
-     The segmented switch that controls the mode was hit.
+     The segmented switch that controls the current display mode, was hit.
      
      - parameter inSwitch: The segmented switch.
      */
@@ -495,7 +493,7 @@ extension VMF_MainViewController {
     
     /* ################################################################## */
     /**
-     The long-press gesture recognizer on the weekday switch was triggered.
+     The double-tap gesture recognizer on the weekday/time display label was triggered.
      
      This resets the screen to today/now.
      
@@ -746,7 +744,6 @@ extension VMF_MainViewController {
             isNameSearchMode = wasNameSearchMode
         }
         
-        (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = !isNameSearchMode
         setAttendance()
     }
     
@@ -765,6 +762,8 @@ extension VMF_MainViewController {
         
         // This means that we won't arbitrarily reload.
         VMF_SceneDelegate.lastReloadTime = .distantFuture
+        
+        (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = isNameSearchMode
     }
     
     /* ################################################################## */

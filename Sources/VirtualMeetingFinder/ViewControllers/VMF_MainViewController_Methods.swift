@@ -600,7 +600,9 @@ extension VMF_MainViewController {
      - parameter: ignored.
      */
     @IBAction func directSelectionOpen(_: Any) {
-        isDirectSelectionMode = true
+        if 0 < (tableDisplayController?.dayIndex ?? 0) {
+            isDirectSelectionMode = true
+        }
     }
 
     /* ################################################################## */

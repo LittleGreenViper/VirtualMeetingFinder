@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,6 +28,7 @@
 		D4B2ECE42C5044F100AFB5E0 /* SwiftBMLSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D4B2ECE32C5044F100AFB5E0 /* SwiftBMLSDK */; };
 		D4B3E2B42C41B6CE00CD672E /* VirtualMeetingFinder.docc in Sources */ = {isa = PBXBuildFile; fileRef = D4B3E2B32C41B6CE00CD672E /* VirtualMeetingFinder.docc */; };
 		D4B69A342C2B162900D24DA6 /* VMF_MeetingInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B69A332C2B162800D24DA6 /* VMF_MeetingInspectorViewController.swift */; };
+		D4BBD0E22C528E3500301D0F /* RevealServer.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BBD0E12C528E3500301D0F /* RevealServer.xcframework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D4DDAB822C4039570018944E /* VMF_AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DDAB812C4039570018944E /* VMF_AboutViewController.swift */; };
 		D4E7C6C92C4293E10045ACE6 /* VMF_MainViewController_Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7C6C82C4293E10045ACE6 /* VMF_MainViewController_Methods.swift */; };
 		D4E7C6CB2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7C6CA2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift */; };
@@ -63,6 +64,7 @@
 		D4AD6A192C261BCA002E37F3 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D4B3E2B32C41B6CE00CD672E /* VirtualMeetingFinder.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = VirtualMeetingFinder.docc; sourceTree = "<group>"; };
 		D4B69A332C2B162800D24DA6 /* VMF_MeetingInspectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MeetingInspectorViewController.swift; sourceTree = "<group>"; };
+		D4BBD0E12C528E3500301D0F /* RevealServer.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:2V82U7HN27:Itty Bitty Labs Pty Ltd"; lastKnownFileType = wrapper.xcframework; name = RevealServer.xcframework; path = Meta/RevealServer.xcframework; sourceTree = "<group>"; };
 		D4BC72A62C4C85A600955DD8 /* Logo.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Logo.pdf; sourceTree = "<group>"; };
 		D4BC72A72C4C85A600955DD8 /* SocialPreview.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = SocialPreview.pdf; sourceTree = "<group>"; };
 		D4BC72A82C4C85A600955DD8 /* TypeIcons.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = TypeIcons.pdf; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				D4B2ECE42C5044F100AFB5E0 /* SwiftBMLSDK in Frameworks */,
 				D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */,
 				D43A9C132C373F67001285FC /* RVS_Persistent_Prefs in Frameworks */,
+				D4BBD0E22C528E3500301D0F /* RevealServer.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +216,7 @@
 		D4FB82112C4D8FC80069815A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4BBD0E12C528E3500301D0F /* RevealServer.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -594,7 +598,7 @@
 			repositoryURL = "https://github.com/RiftValleySoftware/RVS_PersistentPrefs";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.9;
+				minimumVersion = 1.3.10;
 			};
 		};
 		D48816132C35860F008DF936 /* XCRemoteSwiftPackageReference "RVS_BasicGCDTimer" */ = {

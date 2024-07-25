@@ -29,8 +29,7 @@ extension VMF_MainViewController {
      */
     func reorganizeMeetings() {
         let exclude = VMF_AppDelegate.prefs.excludeServiceMeetings
-        organizedMeetings = []
-        searchMeetings = []
+        
         // First, we populate the search set, which a one-dimensional Array, sorted by meeting name, then timezone, then local start time.
         searchMeetings = VMF_AppDelegate.virtualService?.meetings.compactMap { !(exclude && $0.meeting.isServiceMeeting) ? $0.meeting : nil }.sorted { a, b in
             let aLower = a.name.lowercased()
@@ -51,6 +50,7 @@ extension VMF_MainViewController {
         } ?? []
         
         // Next, we populate each weekday. This sorting is (local) weekday, local start time, then timezone, then meeting name. We sort into a two-dimensional Array, with the first dimension representing weekdays (Sunday(0) -> Saturday(6)).
+        organizedMeetings = []
         for index in 1..<8 { // we start at 1 for Sunday, because that is how they are specified in the data.
             // Filter out the meetings just for this weekday.
             let weekdayMeetings = VMF_AppDelegate.virtualService?.meetings.compactMap { !(exclude && $0.meeting.isServiceMeeting) ? ((index == $0.meeting.adjustedWeekday) ? $0 : nil) : nil } ?? []
@@ -96,7 +96,7 @@ extension VMF_MainViewController {
             }
             // This means that we won't arbitrarily reload.
             VMF_SceneDelegate.lastReloadTime = .distantFuture
-
+            
             VMF_AppDelegate.virtualService = inVirtualService
             
             self?.reorganizeMeetings()
@@ -113,7 +113,7 @@ extension VMF_MainViewController {
      Get the meetings for a particular weekday.
      
      - parameter for: The 1-based (1 is Sunday) weekday index
-     - returns: a Dictionary, with the weekday's meetings, organized by localized start time (the key)
+     - returns: a Dictionary, with the weekday's meetings, organized by localized start time (the key), which is expressed as military time (HHMM).
      */
     func getDailyMeetings(for inWeekdayIndex: Int) -> [Int: [MeetingInstance]] {
         guard (1..<(organizedMeetings.count + 1)).contains(inWeekdayIndex) else { return [:] }
@@ -233,7 +233,7 @@ extension VMF_MainViewController {
         let nextIndex = getNearestIndex(dayIndex: weekday, time: time)
         guard let newViewController = getTableDisplay(for: weekday, time: nextIndex) else { return }
         
-        pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
+        pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)   // No animation. We make it quick.
         weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = mapWeekday(weekday)
         
         timeDayDisplayLabel?.text = newViewController.title
@@ -508,7 +508,7 @@ extension VMF_MainViewController {
     
     /* ############################################################## */
     /**
-     A long-press on the weekday switch was detected.
+     A long-press on the weekday switch was detected. We change the weekday (we do not change to in-progress or search).
      
      - parameter inGestureRecognizer: The gesture recognizer that was triggered.
      */
@@ -559,7 +559,7 @@ extension VMF_MainViewController {
 
     /* ############################################################## */
     /**
-     A long-press on the day/time display label switch was detected.
+     A long-press on the day/time display label switch was detected. We change the time slot.
      
      - parameter inGestureRecognizer: The gesture recognizer that was triggered.
      */

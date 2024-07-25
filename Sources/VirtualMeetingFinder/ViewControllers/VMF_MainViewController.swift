@@ -21,39 +21,46 @@ import UIKit
 import SwiftBMLSDK
 
 /* ###################################################################################################################################### */
+// MARK: - Page View Controller -
+/* ###################################################################################################################################### */
+/**
+ This is the page controller that embeds our tables.
+ */
+class VMF_DayTimeSearchPageViewController: UIPageViewController { }
+
+/* ###################################################################################################################################### */
 // MARK: - Search View Controller -
 /* ###################################################################################################################################### */
 /**
  This is the main view controller for the weekday/time selector tab.
  
- ## QUICK OVERVIEW
+ # QUICK OVERVIEW
  
  The way that the data is set up, we have "day indexes (1-7), and "time slots" (varies, per day).
  
  All times are mapped to the user's local timezone, regardless of the start time in the meeting's "native" timezone.
  
- The instance of this class (and the ``VMF_AttendanceViewController`` class, but that one is disabled) will have a ``UIPageViewController`` embedded.
- This allows the user to swipe-select pages of meetings.
+ The instance of this class will have a ``VMF_DayTimeSearchPageViewController`` embedded (also the ``VMF_AttendanceViewController`` class, but that one disables the page view controller), which allows the user to swipe-select pages of meetings.
  
- ### DAY INDEXES
+ ## DAY INDEXES
  
  These represent 0 (In Progress), 1 (Sunday), through 7 (Saturday), or 8 (Search Mode).
  
- #### Mode 0 (In Progress)
+ ### Mode 0 (In Progress)
  
  In this mode, there is no "time index," and the screen displays all meetings that are in progress, regardless of when they started.
 
- #### Mode 1 -> 7
+ ### Mode 1 -> 7
  
  If the day index is 1 -> 7, the screen displays whatever time index, within that day, is selected.
  
  The day index is stored in Sunday -> Saturday (the database native scheme), but are mapped to the local week, upon display.
  
- #### Mode 8 (Search)
+ ### Mode 8 (Search)
  
  In this mode, the day index and time index are irrelevant. All possible meetings are displayed, then are filtered, "live," as text is entered into the text entry field.
  
- ### TIME INDEXES
+ ## TIME INDEXES
  
  Each day has "time slots." These are groupings of times, where meetings start (1 or more). Each "time slot" is a separate group of meetings that all begin at the same time.
  
@@ -61,7 +68,7 @@ import SwiftBMLSDK
  
  If possible, the user's currently selected time index is honored, and we try to match the time, when changing selected days. It is also preserved, when entering Mode 0 or Mode 8.
  
- ### SELECTING FOR ATTENDANCE
+ ## SELECTING FOR ATTENDANCE
  
  It is possible for a user to indicate that they attend a meeting, by double-tapping on a meeting in the list, or by selecting "I Attend," in the meeting inspector screen.
  

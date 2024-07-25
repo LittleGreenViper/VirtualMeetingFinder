@@ -25,7 +25,7 @@ import RVS_Generic_Swift_Toolbox
 // MARK: - Base Protocol -
 /* ###################################################################################################################################### */
 /**
- Protocol for owners
+ Protocol for both owners and tables
  */
 protocol VMF_BaseProtocol: NSObjectProtocol {
     /* ################################################################## */

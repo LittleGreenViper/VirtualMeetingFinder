@@ -131,13 +131,9 @@ extension VMF_AppDelegate {
         // This ensures that we are on the main thread.
         DispatchQueue.main.async {
             if let presentedBy = inPresentingViewController {
-                let style: UIAlertController.Style = .alert
-                let alertController = UIAlertController(title: inHeader, message: inMessage, preferredStyle: style)
-                alertController.overrideUserInterfaceStyle = .light
+                let alertController = UIAlertController(title: inHeader.localizedVariant, message: inMessage.localizedVariant, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "SLUG-OK-BUTTON-TEXT".localizedVariant, style: .cancel, handler: nil)
-                
                 alertController.addAction(okAction)
-                
                 presentedBy.present(alertController, animated: true, completion: nil)
             }
         }

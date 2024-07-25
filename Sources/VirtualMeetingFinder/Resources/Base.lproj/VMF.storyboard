@@ -49,22 +49,23 @@
                                         <rect key="frame" x="16" y="0.0" width="361" height="666"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hdC-dV-Pyg" userLabel="Filter Service Meetings Container">
-                                                <rect key="frame" x="20" y="0.0" width="321.33333333333331" height="666"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="361" height="666"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" distribution="fillProportionally" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ecF-pT-urt" userLabel="Filter Service Meetings Switch Container">
-                                                        <rect key="frame" x="0.0" y="0.0" width="321.33333333333331" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="40"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-FILTER-SERVICE-MEETINGS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hYF-E7-WBK">
-                                                                <rect key="frame" x="0.0" y="9.9999999999999982" width="268.33333333333331" height="20.333333333333329"/>
-                                                                <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL">
-                                                                    <accessibilityTraits key="traits" button="YES"/>
-                                                                </accessibility>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZa-E4-u9W">
+                                                                <rect key="frame" x="0.0" y="2" width="308.66666666666674" height="36"/>
+                                                                <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="SLUG-FILTER-SERVICE-MEETINGS"/>
+                                                                <connections>
+                                                                    <action selector="filterServiceMeetingsHit:" destination="XMo-Ja-Ohb" eventType="touchUpInside" id="pUC-71-8zc"/>
+                                                                </connections>
+                                                            </button>
                                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUr-un-v6W">
-                                                                <rect key="frame" x="272.33333333333331" y="4.6666666666666714" width="51" height="31"/>
+                                                                <rect key="frame" x="312.66666666666669" y="4.6666666666666714" width="50.333333333333314" height="31"/>
                                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL"/>
                                                                 <connections>
                                                                     <action selector="filterServiceMeetingsHit:" destination="XMo-Ja-Ohb" eventType="valueChanged" id="Zmb-Ws-ZxK"/>
@@ -76,11 +77,11 @@
                                                             <constraint firstAttribute="height" constant="40" id="gIT-WS-xeD"/>
                                                         </constraints>
                                                         <connections>
-                                                            <outletCollection property="gestureRecognizers" destination="3yv-XV-WKn" appends="YES" id="Ssr-tK-P6z"/>
+                                                            <outletCollection property="gestureRecognizers" destination="3yv-XV-WKn" appends="YES" id="ISX-dy-HQg"/>
                                                         </connections>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="SLUG-FILTER-SERVICE-MEETINGS-EXPLAIN" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ayw-H0-aQQ">
-                                                        <rect key="frame" x="6.6666666666666572" y="40" width="308" height="626"/>
+                                                        <rect key="frame" x="26.666666666666657" y="40" width="308" height="626"/>
                                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -127,17 +128,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="filterServiceMeetingsExplainLabel" destination="Ayw-H0-aQQ" id="V1u-EI-9bp"/>
-                        <outlet property="filterServiceMeetingsLabel" destination="hYF-E7-WBK" id="dkR-bL-nJL"/>
+                        <outlet property="filterServiceMeetingsLabelButton" destination="tZa-E4-u9W" id="HSZ-y2-YDi"/>
                         <outlet property="filterServiceMeetingsSwitch" destination="bUr-un-v6W" id="hkg-CO-kd5"/>
                         <outlet property="infoBarButtonItem" destination="Yoa-G1-2C2" id="KxB-sa-ggP"/>
+                        <outlet property="view" destination="h03-aE-qcW" id="zE9-Gc-kQV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qzb-WU-C37" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="3yv-XV-WKn" userLabel="Service Filter Tap Gesture Recognizer">
-                    <connections>
-                        <action selector="filterServiceMeetingsHit:" destination="XMo-Ja-Ohb" id="5mA-XE-lgy"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="3yv-XV-WKn" userLabel="Service Filter Tap Gesture Recognizer"/>
                 <tapGestureRecognizer id="MHx-AL-mmP" userLabel="Open to Attendance Tap Gesture Recognizer">
                     <connections>
                         <action selector="openToAttendanceHit:" destination="XMo-Ja-Ohb" id="hLL-Uz-T4N"/>
@@ -1375,22 +1373,22 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

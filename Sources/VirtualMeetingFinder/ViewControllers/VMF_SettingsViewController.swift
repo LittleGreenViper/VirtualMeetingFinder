@@ -26,6 +26,10 @@ import RVS_Generic_Swift_Toolbox
 /* ###################################################################################################################################### */
 /**
  This displays the settings screen.
+ 
+ NOTE: You will see a double-tap gesture recognizer in the IB file.
+ 
+ This "eats" double-taps. It prevents the switch from doing an "about face," if the user is too fast.
  */
 class VMF_SettingsViewController: VMF_BaseViewController {
     /* ################################################################## */
@@ -38,8 +42,8 @@ class VMF_SettingsViewController: VMF_BaseViewController {
     /**
      The label for the filter Service meetings switch.
      */
-    @IBOutlet weak var filterServiceMeetingsLabel: UILabel?
-    
+    @IBOutlet weak var filterServiceMeetingsLabelButton: UIButton?
+
     /* ################################################################## */
     /**
      The switch, that, if on, means that Service meetings will be removed from the data.
@@ -75,10 +79,15 @@ extension VMF_SettingsViewController {
             guard let time = searchController.getTimeOf(dayIndex: dayIndex, timeIndex: timeIndex) else { return }
             searchController.reorganizeMeetings()
             searchController.openTo(dayIndex: dayIndex, time: time)
-        } else {    // If the label, we toggle the switch, and send the value changed message (which calls us again).
-            filterServiceMeetingsSwitch?.setOn(!(filterServiceMeetingsSwitch?.isOn ?? true), animated: true)
-            filterServiceMeetingsSwitch?.sendActions(for: .valueChanged)
+        } else if let button = inSender as? UIButton {    // If the label, we toggle the switch, and send the value changed message (which calls us again).
             selectionHaptic()
+            button.isEnabled = false
+            let newValue = !(filterServiceMeetingsSwitch?.isOn ?? true)
+            filterServiceMeetingsSwitch?.setOn(newValue, animated: true)
+            filterServiceMeetingsSwitch?.isEnabled = false
+            filterServiceMeetingsSwitch?.sendActions(for: .valueChanged)
+            filterServiceMeetingsSwitch?.isEnabled = true
+            button.isEnabled = true
         }
     }
 }
@@ -97,10 +106,8 @@ extension VMF_SettingsViewController {
         infoBarButtonItem?.accessibilityLabel = "SLUG-ACC-ABOUT-BUTTON-LABEL".accessibilityLocalizedVariant
         infoBarButtonItem?.accessibilityHint = "SLUG-ACC-ABOUT-BUTTON-HINT".accessibilityLocalizedVariant
 
-        filterServiceMeetingsLabel?.textColor = .tintColor
-        filterServiceMeetingsLabel?.text = filterServiceMeetingsLabel?.text?.localizedVariant
+        filterServiceMeetingsLabelButton?.setTitle(filterServiceMeetingsLabelButton?.title(for: .normal)?.localizedVariant, for: .normal)
         filterServiceMeetingsSwitch?.isOn = VMF_AppDelegate.prefs.excludeServiceMeetings
-        
         filterServiceMeetingsExplainLabel?.text = filterServiceMeetingsExplainLabel?.text?.localizedVariant
     }
 }

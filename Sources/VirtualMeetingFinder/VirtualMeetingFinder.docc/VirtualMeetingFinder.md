@@ -24,21 +24,31 @@ Users can select a meeting as one they attend, which allows those meetings to be
 
 #### The Main Screen
 
+![Main Screen](fig01.png)
+
 The Main Screen presents a list of meetings, surmounted by a segmented switch that allows the user to select a weekday (or mode), and a bar that allows the user to select a time.
 
 #### The Attendance Screen
+
+![Attendance Screen](fig02.png)
 
 If the user has selected one or more meetings as ones they attend, a bar button enables in the Main Screen, allowing the user to bring in another screen, with just the meetings they marked as ones they attend.
 
 #### The Meeting Inspector Screen
 
+![Meeting Inspector Screen](fig03.png)
+
 If the user selects a single meeting from the list, another screen is brought in, that displays specific and detailed information about that meeting.
 
 #### The Settings Screen
 
+![Settings Screen](fig04.png)
+
 This is a screen that is brought in from the Main Screen, that allows the user to specify various settings.
 
 #### The About This App Screen
+
+![About Screen](fig04.png)
 
 This is another screen that is brought in from the Settings Screen, that has information about the app, such as its specific version, and links to dependencies.
 

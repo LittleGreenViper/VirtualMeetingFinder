@@ -30,7 +30,7 @@ extension VMF_MainViewController {
     func reorganizeMeetings() {
         let exclude = VMF_AppDelegate.prefs.excludeServiceMeetings
         
-        // First, we populate the search set, which a one-dimensional Array, sorted by meeting name, then timezone, then local start time.
+        // First, we populate the search set, which is a one-dimensional Array, sorted by meeting name, then timezone, then local start time.
         searchMeetings = VMF_AppDelegate.virtualService?.meetings.compactMap { !(exclude && $0.meeting.isServiceMeeting) ? $0.meeting : nil }.sorted { a, b in
             let aLower = a.name.lowercased()
             let bLower = b.name.lowercased()

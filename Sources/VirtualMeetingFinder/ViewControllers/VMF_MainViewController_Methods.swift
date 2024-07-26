@@ -666,7 +666,7 @@ extension VMF_MainViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "SLUG-TAB-0-TITLE".localizedVariant
-        VMF_AppDelegate.searchController = self
+        VMF_AppDelegate.mainScreenController = self
         searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
         myAttendanceBarButtonItem?.isAccessibilityElement = true
         myAttendanceBarButtonItem?.accessibilityLabel = "SLUG-ACC-TAB-1-BUTTON-LABEL"

@@ -1,5 +1,3 @@
 # Privacy Declaration
 
-This project collects **absolutely no information at all**, from anyone, at any time.
-
-It is hosted on GitHub, so users of the library may need to understand [GitHub's Privacy Policy](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement).
+This project collects **absolutely no information at all**, from anyone, at any time. The "I Attend" data is kept local, on your device, using [User Defaults](https://developer.apple.com/documentation/foundation/userdefaults) (which means that deleting the app, also deletes this information, and it will not sync to your other devices).

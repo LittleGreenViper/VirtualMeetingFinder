@@ -70,7 +70,7 @@ extension VMF_SettingsViewController {
     @IBAction func filterServiceMeetingsHit(_ inSender: NSObjectProtocol) {
         if let switcher = inSender as? UISwitch {   // If the switch, we execute it.
             VMF_AppDelegate.prefs.excludeServiceMeetings = switcher.isOn
-            guard let searchController = VMF_AppDelegate.searchController,
+            guard let searchController = VMF_AppDelegate.mainScreenController,
                   let tableDisplayController = searchController.tableDisplayController
             else { return }
             

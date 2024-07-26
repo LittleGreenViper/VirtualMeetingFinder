@@ -32,7 +32,7 @@ import RVS_BasicGCDTimer
 class VMF_AppDelegate: UIResponder {
     /* ################################################################## */
     /**
-     This is our query instance.
+     This is our query instance. It returns a new query instance, freshly initialized to the Root Server, every time it's called.
      */
     private class var _queryInstance: SwiftBMLSDK_Query? {
         guard let bundleURIString = Bundle.main.rootServerURI,
@@ -62,9 +62,9 @@ class VMF_AppDelegate: UIResponder {
 
     /* ################################################################## */
     /**
-     This is set to the search controller
+     This is set to the Main Screen controller
      */
-    static var searchController: VMF_MainViewController?
+    static var mainScreenController: VMF_MainViewController?
 
     /* ################################################################## */
     /**
@@ -150,7 +150,7 @@ extension VMF_AppDelegate: UIApplicationDelegate {
      
      - parameter url: The URL to open.
      - parameter options: The URLoptions.
-     - parameter completionHandler: The closure to be executed, upon completion of the open.
+     - parameter completionHandler: The closure to be executed, upon completion of the open. It has one parameter, a Boolean, that is true, if the open was successful. This is always called in the main thread.
      */
     class func open(url inURL: URL, options inOptions: [UIApplication.OpenExternalURLOptionsKey: Any] = [:], completionHandler inClosure: ((Bool) -> Void)? = nil) {
         UIApplication.shared.open(inURL, options: inOptions, completionHandler: inClosure)
@@ -173,7 +173,7 @@ extension VMF_AppDelegate: UIApplicationDelegate {
      - parameter: The application (ignored)
      - parameter configurationForConnecting: The session being connected.
      - parameter options: Launch options (also ignored).
-     - returns: The default configuration for the scene.
+     - returns: A new instance of a default configuration for the scene.
      */
     func application(_: UIApplication, configurationForConnecting inConnectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         UISceneConfiguration(name: "Default Configuration", sessionRole: inConnectingSceneSession.role)
@@ -182,6 +182,8 @@ extension VMF_AppDelegate: UIApplicationDelegate {
     /* ################################################################## */
     /**
      Called when the application goes into the background.
+     
+     We use this to set the reload delay tracker.
      
      - parameter: The application (ignored)
      */

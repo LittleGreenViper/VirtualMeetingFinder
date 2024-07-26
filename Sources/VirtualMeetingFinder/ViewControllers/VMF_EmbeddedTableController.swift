@@ -139,6 +139,12 @@ extension VMF_MasterTableControllerProtocol {
      Default does nothing
      */
     func setAttendance() { }
+    
+    /* ################################################################## */
+    /**
+     This updates the "thermometer" display, in the time selector.
+     */
+    func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol?) { }
 }
 
 /* ###################################################################################################################################### */

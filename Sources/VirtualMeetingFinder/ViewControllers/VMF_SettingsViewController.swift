@@ -30,6 +30,10 @@ import RVS_Generic_Swift_Toolbox
  NOTE: You will see a double-tap gesture recognizer in the IB file.
  
  This "eats" double-taps. It prevents the switch from doing an "about face," if the user is too fast.
+ 
+ The single-tap gesture recognizer does the same thing, but is the principal trigger.
+ 
+ We use gesture recognizers, instead of controls. Messes with the accessibility a bit, but the delay in responding, means that the user can accidentally trigger multiple switches.
  */
 class VMF_SettingsViewController: VMF_BaseViewController {
     /* ################################################################## */
@@ -37,6 +41,8 @@ class VMF_SettingsViewController: VMF_BaseViewController {
      The bar button item that takes you to the about screen.
      */
     @IBOutlet weak var infoBarButtonItem: UIBarButtonItem?
+    
+    @IBOutlet weak var filterServiceMeetingsSwitchContainer: UIView?
     
     /* ################################################################## */
     /**
@@ -50,6 +56,17 @@ class VMF_SettingsViewController: VMF_BaseViewController {
      */
     @IBOutlet weak var filterServiceMeetingsSwitch: UISwitch?
     
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var singleTapGestureRecognizer: UITapGestureRecognizer?
+    
+    /* ################################################################## */
+    /**
+     This is used to prevent double-taps.
+     */
+    @IBOutlet weak var doubleTapEaterGestureRecognizer: UITapGestureRecognizer?
+
     /* ################################################################## */
     /**
      This is displayed below the switch, and explains its utility.
@@ -79,15 +96,13 @@ extension VMF_SettingsViewController {
             guard let time = searchController.getTimeOf(dayIndex: dayIndex, timeIndex: timeIndex) else { return }
             searchController.reorganizeMeetings()
             searchController.openTo(dayIndex: dayIndex, time: time)
-        } else if let button = inSender as? UIButton {    // If the label, we toggle the switch, and send the value changed message (which calls us again).
+        } else if inSender is UITapGestureRecognizer {    // If the label, we toggle the switch, and send the value changed message (which calls us again).
             selectionHaptic()
-            button.isEnabled = false
             let newValue = !(filterServiceMeetingsSwitch?.isOn ?? true)
             filterServiceMeetingsSwitch?.setOn(newValue, animated: true)
             filterServiceMeetingsSwitch?.isEnabled = false
             filterServiceMeetingsSwitch?.sendActions(for: .valueChanged)
             filterServiceMeetingsSwitch?.isEnabled = true
-            button.isEnabled = true
         }
     }
 }
@@ -102,9 +117,14 @@ extension VMF_SettingsViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard let dtg = doubleTapEaterGestureRecognizer else { return }
+        singleTapGestureRecognizer?.require(toFail: dtg)
 
         infoBarButtonItem?.accessibilityLabel = "SLUG-ACC-ABOUT-BUTTON-LABEL".accessibilityLocalizedVariant
         infoBarButtonItem?.accessibilityHint = "SLUG-ACC-ABOUT-BUTTON-HINT".accessibilityLocalizedVariant
+        filterServiceMeetingsSwitchContainer?.accessibilityLabel = "SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL".accessibilityLocalizedVariant
+        filterServiceMeetingsSwitchContainer?.accessibilityHint = "SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT".accessibilityLocalizedVariant
 
         filterServiceMeetingsLabelButton?.setTitle(filterServiceMeetingsLabelButton?.title(for: .normal)?.localizedVariant, for: .normal)
         filterServiceMeetingsSwitch?.isOn = VMF_AppDelegate.prefs.excludeServiceMeetings

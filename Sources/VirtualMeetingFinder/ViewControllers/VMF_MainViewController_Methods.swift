@@ -90,8 +90,9 @@ extension VMF_MainViewController {
         VMF_AppDelegate.findMeetings { [weak self] inVirtualService in
             guard !(inVirtualService?.meetings.isEmpty ?? true)
             else {
-                inCompletion()
                 VMF_AppDelegate.displayAlert(header: "SLUG-ALERT-ERROR-HEADER", message: "SLUG-ALERT-ERROR-BODY", presentedBy: self)
+                self?.isThrobbing = false
+                inCompletion()
                 return
             }
             // This means that we won't arbitrarily reload.

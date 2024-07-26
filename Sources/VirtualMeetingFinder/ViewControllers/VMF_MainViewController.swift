@@ -21,14 +21,6 @@ import UIKit
 import SwiftBMLSDK
 
 /* ###################################################################################################################################### */
-// MARK: - Page View Controller -
-/* ###################################################################################################################################### */
-/**
- This is the page controller that embeds our tables.
- */
-class VMF_DayTimeSearchPageViewController: UIPageViewController { }
-
-/* ###################################################################################################################################### */
 // MARK: - Search View Controller -
 /* ###################################################################################################################################### */
 /**
@@ -232,7 +224,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
     
     /* ################################################################## */
     /**
-     True, if this is the direct weekday/time selection mode.
+     True, if this is the direct weekday/time selection mode (PickerView displayed).
      */
     var isDirectSelectionMode: Bool = false {
         didSet {
@@ -259,7 +251,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
     
     /* ################################################################## */
     /**
-     Contains the search text filter.
+     Contains the search text filter. Only relevant, if in Name Search Mode.
      */
     var searchText: String = "" {
         didSet {
@@ -324,7 +316,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
     
     /* ################################################################## */
     /**
-     The embedded table controller container view.
+     The embedded table controller container view. This hosts an instance of ``VMF_DayTimeSearchPageViewController``.
      */
     @IBOutlet weak var tableContainerView: UIView?
     

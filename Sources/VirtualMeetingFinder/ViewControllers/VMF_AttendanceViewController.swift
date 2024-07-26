@@ -24,11 +24,11 @@ import SwiftBMLSDK
 // MARK: - Attendance Tab View Controller -
 /* ###################################################################################################################################### */
 /**
- This is the main view controller for the attended meetings tab.
+ This is the main view controller for the My Attendance Screen.
  
  This is a very basic table display. It does not have any controls or filters.
  */
-class VMF_AttendanceViewController: VMF_BaseViewController {
+class VMF_AttendanceViewController: VMF_BaseViewController, VMF_MasterTableControllerProtocol {
     /* ################################################################## */
     /**
      This tracks the current embedded table controller.
@@ -103,15 +103,4 @@ extension VMF_AttendanceViewController {
         destination.myController = self
         destination.meetings = meetings
     }
-}
-
-/* ###################################################################################################################################### */
-// MARK: Base Class Overrides
-/* ###################################################################################################################################### */
-extension VMF_AttendanceViewController: VMF_MasterTableControllerProtocol {
-    /* ################################################################## */
-    /**
-     This does nothing
-     */
-    func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol? = nil) { }
 }

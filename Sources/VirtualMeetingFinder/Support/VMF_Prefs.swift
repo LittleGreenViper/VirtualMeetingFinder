@@ -24,7 +24,7 @@ import RVS_Persistent_Prefs
 // MARK: - Persistent Test Harness Settings -
 /* ###################################################################################################################################### */
 /**
- This stores our various parameters, and also acts as a namespace, for our "global" types.
+ This stores our various parameters.
  */
 class VMF_Prefs: RVS_PersistentPrefs {
     /* ################################################################################################################################## */

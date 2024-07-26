@@ -154,6 +154,49 @@ extension VMF_TapHoldButton {
 }
 
 /* ###################################################################################################################################### */
+// MARK: - A Special URL Button Class -
+/* ###################################################################################################################################### */
+/**
+ This is a special button that has a string and a URL. This class lets us define them in IB.
+ */
+class VMF_URLButton: UIButton {
+    /* ################################################################## */
+    /**
+     This is the URL that is associated with this button.
+     */
+    @IBInspectable var urlString: String?
+    
+    /* ################################################################## */
+    /**
+     The string, as a URL.
+     */
+    var url: URL? { URL(string: (urlString ?? "").localizedVariant) }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension VMF_URLButton {
+    /* ################################################################## */
+    /**
+     Called when the subviews are being laid out.
+     */
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        titleLabel?.numberOfLines = 0
+        setTitle(title(for: .normal)?.localizedVariant, for: .normal)
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Page View Controller -
+/* ###################################################################################################################################### */
+/**
+ This is the page controller that embeds our tables.
+ */
+class VMF_DayTimeSearchPageViewController: UIPageViewController { }
+
+/* ###################################################################################################################################### */
 // MARK: - Date Extension for Localized Strings -
 /* ###################################################################################################################################### */
 /**
@@ -173,7 +216,8 @@ extension Date {
         
         if 2359 == integerTime {
             ret = "SLUG-MIDNIGHT-TIME".localizedVariant
-        } else if 1200 == integerTime {
+        } else if 1200 == integerTime,
+                  "12:00" != "SLUG-NOON-TIME".localizedVariant {    // We let the user's chosen display take this.
             ret = "SLUG-NOON-TIME".localizedVariant
         }
         

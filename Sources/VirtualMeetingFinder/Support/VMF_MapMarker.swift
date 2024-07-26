@@ -38,7 +38,7 @@ class VMF_MapAnnotation: NSObject, MKAnnotation {
 class VMF_MapMarker: MKAnnotationView {
     /* ################################################################## */
     /**
-     Marker Height and Width, in Display Units
+     Marker maximum dimension, in Display Units
      */
     static let sMarkerSizeInDisplayUnits = CGFloat(40)
 
@@ -57,10 +57,9 @@ class VMF_MapMarker: MKAnnotationView {
      */
     override init(annotation inAnnotation: MKAnnotation?, reuseIdentifier inReuseID: String?) {
         super.init(annotation: inAnnotation, reuseIdentifier: inReuseID)
-        if let imageTemp = UIImage(named: "Marker-Single")?.withRenderingMode(.alwaysOriginal).resized(toMaximumSize: Self.sMarkerSizeInDisplayUnits) {
-            image = imageTemp
-            centerOffset = CGPoint(x: 0, y: imageTemp.size.height / -2)
-        }
+        guard let imageTemp = UIImage(named: "Marker-Single")?.withRenderingMode(.alwaysOriginal).resized(toMaximumSize: Self.sMarkerSizeInDisplayUnits) else { return }
+        image = imageTemp
+        centerOffset = CGPoint(x: 0, y: imageTemp.size.height / -2) // Bottom, center.
     }
     
     /* ################################################################## */

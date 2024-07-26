@@ -52,6 +52,7 @@
 		D493933D2C2616C8006438AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D49393402C2616C8006438AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/VMF_LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D49393422C2616C8006438AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D49EC71B2C544246008D7DBA /* BackgroundGradient.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BackgroundGradient.pdf; sourceTree = "<group>"; };
 		D49EE49B2C42A2FC00BAD34A /* LGV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LGV.png; sourceTree = "<group>"; };
 		D49EE49C2C42A2FC00BAD34A /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		D4AADA562C3C2EE9001BCDCA /* VirtualMeetingFinder.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = VirtualMeetingFinder.entitlements; path = Meta/VirtualMeetingFinder.entitlements; sourceTree = "<group>"; };
@@ -210,6 +211,7 @@
 			children = (
 				D4BC72A62C4C85A600955DD8 /* Logo.pdf */,
 				D4BC72A72C4C85A600955DD8 /* SocialPreview.pdf */,
+				D49EC71B2C544246008D7DBA /* BackgroundGradient.pdf */,
 				D4BC72A82C4C85A600955DD8 /* TypeIcons.pdf */,
 			);
 			path = spec;

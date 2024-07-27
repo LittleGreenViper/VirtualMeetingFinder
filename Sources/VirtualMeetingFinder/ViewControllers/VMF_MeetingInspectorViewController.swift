@@ -416,16 +416,6 @@ extension VMF_MeetingInspectorViewController {
             formatHeader?.isHidden = true
             formatContainerView?.isHidden = true
         }
-
-        if meeting?.hasInPerson ?? false,
-           let coords = meeting?.coords,
-           CLLocationCoordinate2DIsValid(coords) {
-            inPersonHeader?.isHidden = false
-            setUpMap(coords)
-        } else {
-            inPersonHeader?.isHidden = true
-            inPersonContainer?.isHidden = true
-        }
         
         if let comments = meeting?.comments,
            !comments.isEmpty {
@@ -487,6 +477,16 @@ extension VMF_MeetingInspectorViewController {
                 inPersonExtraInfoLabel?.isHidden = false
                 inPersonExtraInfoLabel?.text = extraInfo
             }
+        }
+
+        if meeting?.hasInPerson ?? false,
+           let coords = meeting?.coords,
+           CLLocationCoordinate2DIsValid(coords) {
+            inPersonHeader?.isHidden = false
+            setUpMap(coords)
+        } else {
+            inPersonHeader?.isHidden = true
+            inPersonContainer?.isHidden = true
         }
     }
     

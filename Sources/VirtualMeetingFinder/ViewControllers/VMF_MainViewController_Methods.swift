@@ -759,6 +759,7 @@ extension VMF_MainViewController {
     override func viewDidAppear(_ inIsAnimated: Bool) {
         super.viewDidAppear(inIsAnimated)
         
+        // If we have to load from the meeting server, we do so, now.
         if needsReload {
             loadMeetings { self.openTo() }
         }
@@ -766,6 +767,7 @@ extension VMF_MainViewController {
         // This means that we won't arbitrarily reload.
         VMF_SceneDelegate.lastReloadTime = .distantFuture
         
+        // This ensures that we have a pull-to-refresh, as long as we are not in search mode.
         (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = isNameSearchMode
     }
     

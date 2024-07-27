@@ -469,4 +469,14 @@ extension VMF_MainViewController {
         
         return (weekday: day, currentIntegerTime: hour * 100 + minute)
     }
+    
+    /* ################################################################## */
+    /**
+     Returns true, if we need to force a reload from the server.
+     */
+    var needsReload: Bool {
+        return nil == VMF_AppDelegate.virtualService
+               || (VMF_AppDelegate.virtualService?.meetings.isEmpty ?? true)
+               || (VMF_SceneDelegate.forceReloadDelayInSeconds < -VMF_SceneDelegate.lastReloadTime.timeIntervalSinceNow)
+    }
 }

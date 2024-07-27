@@ -741,9 +741,7 @@ extension VMF_MainViewController {
             view?.setNeedsLayout()
         }
         
-        if nil == VMF_AppDelegate.virtualService
-           || (VMF_AppDelegate.virtualService?.meetings.isEmpty ?? true)
-           || VMF_SceneDelegate.forceReloadDelayInSeconds < -VMF_SceneDelegate.lastReloadTime.timeIntervalSinceNow {
+        if needsReload {
             isNameSearchMode = false
         } else {
             isNameSearchMode = wasNameSearchMode
@@ -761,9 +759,7 @@ extension VMF_MainViewController {
     override func viewDidAppear(_ inIsAnimated: Bool) {
         super.viewDidAppear(inIsAnimated)
         
-        if nil == VMF_AppDelegate.virtualService
-           || (VMF_AppDelegate.virtualService?.meetings.isEmpty ?? true)
-           || VMF_SceneDelegate.forceReloadDelayInSeconds < -VMF_SceneDelegate.lastReloadTime.timeIntervalSinceNow {
+        if needsReload {
             loadMeetings { self.openTo() }
         }
         

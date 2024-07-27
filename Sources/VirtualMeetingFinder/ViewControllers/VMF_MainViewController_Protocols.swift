@@ -128,6 +128,26 @@ extension VMF_MainViewController: UIPageViewControllerDelegate {
 // MARK: UIPickerViewDataSource Conformance
 /* ###################################################################################################################################### */
 extension VMF_MainViewController: UIPickerViewDataSource {
+    /* ################################################################################################################################## */
+    // MARK: PickerView Component Enum
+    /* ################################################################################################################################## */
+    /**
+     This enumerates the two PickerView components.
+     */
+    enum PickerViewComponents: Int {
+        /* ############################################################## */
+        /**
+         The leftmost component is for the weekday.
+         */
+        case weekday
+        
+        /* ############################################################## */
+        /**
+         The rightmost component is for the time slot.
+         */
+        case time
+    }
+    
     /* ################################################################## */
     /**
      This returns the number of components in the picker view.
@@ -149,7 +169,7 @@ extension VMF_MainViewController: UIPickerViewDataSource {
     func pickerView(_ inPickerView: UIPickerView, numberOfRowsInComponent inComponent: Int) -> Int {
         guard !isNameSearchMode else { return 0 }
         
-        let ret = 1 == inComponent ? getDailyMeetings(for: unMapWeekday(inPickerView.selectedRow(inComponent: 0) + 1)).count : 7
+        let ret = PickerViewComponents.time.rawValue == inComponent ? getDailyMeetings(for: unMapWeekday(inPickerView.selectedRow(inComponent: PickerViewComponents.weekday.rawValue) + 1)).count : 7
         
         return ret
     }
@@ -176,10 +196,10 @@ extension VMF_MainViewController: UIPickerViewDelegate {
         ret.minimumScaleFactor = 0.5
         
         if !isNameSearchMode {
-            if 0 == inComponent {
+            if PickerViewComponents.weekday.rawValue == inComponent {
                 ret.text = Calendar.current.standaloneWeekdaySymbols[unMapWeekday(inRow + 1) - 1]
             } else {
-                let dayIndex = unMapWeekday(inPickerView.selectedRow(inComponent: 0) + 1)
+                let dayIndex = unMapWeekday(inPickerView.selectedRow(inComponent: PickerViewComponents.weekday.rawValue) + 1)
                 if let time = getTimeOf(dayIndex: dayIndex, timeIndex: inRow) {
                     let hour = time / 100
                     let minute = time - (hour * 100)
@@ -224,7 +244,7 @@ extension VMF_MainViewController: UIPickerViewDelegate {
      - parameter inComponent: The 0-based component index.
      */
     func pickerView(_ inPickerView: UIPickerView, didSelectRow inRow: Int, inComponent: Int) {
-        if 0 == inComponent {
+        if PickerViewComponents.weekday.rawValue == inComponent {
             // This whackiness, is because we want to try to set the time index to be as close as possible to the last one.
             guard let originalDayIndex = tableDisplayController?.dayIndex,
                   var timeIndex = tableDisplayController?.timeIndex,
@@ -238,7 +258,7 @@ extension VMF_MainViewController: UIPickerViewDelegate {
             inPickerView.selectRow(timeIndex, inComponent: 1, animated: false)
             openTo(dayIndex: inRow + 1, time: time)
         } else {
-            let dayIndex = unMapWeekday(inPickerView.selectedRow(inComponent: 0) + 1)
+            let dayIndex = unMapWeekday(inPickerView.selectedRow(inComponent: PickerViewComponents.weekday.rawValue) + 1)
             guard let time = getTimeOf(dayIndex: dayIndex, timeIndex: inRow) else { return }
             openTo(dayIndex: dayIndex, time: time)
         }

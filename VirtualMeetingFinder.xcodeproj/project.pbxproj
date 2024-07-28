@@ -112,27 +112,83 @@
 			path = Support;
 			sourceTree = "<group>";
 		};
-		D47C2F0F2C2C5E750048C91C /* AppDelegate */ = {
+		D447E7452C56DD69000593C8 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D40133682C320C070018076B /* VMF_MainViewController.swift */,
+				D4E7C6C82C4293E10045ACE6 /* VMF_MainViewController_Methods.swift */,
+				D4E7C6CA2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		D447E7462C56DD73000593C8 /* AttendanceScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D455E5662C396F3A00246848 /* VMF_AttendanceViewController.swift */,
+			);
+			path = AttendanceScreen;
+			sourceTree = "<group>";
+		};
+		D447E7472C56DD82000593C8 /* MeetingInspectorScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D4B69A332C2B162800D24DA6 /* VMF_MeetingInspectorViewController.swift */,
+			);
+			path = MeetingInspectorScreen;
+			sourceTree = "<group>";
+		};
+		D447E7482C56DD8D000593C8 /* SettingsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D45E42012C3F2BA7006578F6 /* VMF_SettingsViewController.swift */,
+			);
+			path = SettingsScreen;
+			sourceTree = "<group>";
+		};
+		D447E7492C56DD97000593C8 /* AboutScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D4DDAB812C4039570018944E /* VMF_AboutViewController.swift */,
+			);
+			path = AboutScreen;
+			sourceTree = "<group>";
+		};
+		D447E74A2C56DDB9000593C8 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */,
+				D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		D447E74B2C56DDC4000593C8 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				D447E7452C56DD69000593C8 /* MainScreen */,
+				D447E7462C56DD73000593C8 /* AttendanceScreen */,
+				D447E7472C56DD82000593C8 /* MeetingInspectorScreen */,
+				D447E7482C56DD8D000593C8 /* SettingsScreen */,
+				D447E7492C56DD97000593C8 /* AboutScreen */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		D47C2F0F2C2C5E750048C91C /* MainApp */ = {
 			isa = PBXGroup;
 			children = (
 				D49393342C2616C7006438AE /* VMF_AppDelegate.swift */,
 				D49393362C2616C7006438AE /* VMF_SceneDelegate.swift */,
 			);
-			path = AppDelegate;
+			path = MainApp;
 			sourceTree = "<group>";
 		};
 		D47C2F102C2C5E860048C91C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */,
-				D40133682C320C070018076B /* VMF_MainViewController.swift */,
-				D4E7C6C82C4293E10045ACE6 /* VMF_MainViewController_Methods.swift */,
-				D4E7C6CA2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift */,
-				D455E5662C396F3A00246848 /* VMF_AttendanceViewController.swift */,
-				D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */,
-				D4B69A332C2B162800D24DA6 /* VMF_MeetingInspectorViewController.swift */,
-				D45E42012C3F2BA7006578F6 /* VMF_SettingsViewController.swift */,
-				D4DDAB812C4039570018944E /* VMF_AboutViewController.swift */,
+				D447E74A2C56DDB9000593C8 /* Common */,
+				D447E74B2C56DDC4000593C8 /* Screens */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -159,7 +215,7 @@
 		D49393332C2616C7006438AE /* VirtualMeetingFinder */ = {
 			isa = PBXGroup;
 			children = (
-				D47C2F0F2C2C5E750048C91C /* AppDelegate */,
+				D47C2F0F2C2C5E750048C91C /* MainApp */,
 				D47C2F102C2C5E860048C91C /* ViewControllers */,
 				D43A9C162C37416E001285FC /* Support */,
 				D4AD6A0F2C261AB7002E37F3 /* Resources */,
@@ -502,7 +558,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Meta/VirtualMeetingFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0127;
+				CURRENT_PROJECT_VERSION = 0128;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -536,7 +592,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Meta/VirtualMeetingFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0127;
+				CURRENT_PROJECT_VERSION = 0128;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -592,7 +648,7 @@
 			repositoryURL = "https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.13.1;
+				minimumVersion = 1.13.2;
 			};
 		};
 		D4398E682C2892830001FAE3 /* XCRemoteSwiftPackageReference "RVS_UIKit_Toolbox" */ = {

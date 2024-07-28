@@ -302,10 +302,7 @@ extension Array where Element == MeetingInstance {
       */
      func getMeetingBy(id inID: Int) -> MeetingInstance? {
           let whenIm64 = UInt64(inID)
-          for meeting in self where meeting.id == whenIm64 {
-               return meeting
-          }
-          return nil
+          return first { $0.id == whenIm64 }
      }
 }
 

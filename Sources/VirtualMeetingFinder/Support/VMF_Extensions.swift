@@ -286,6 +286,30 @@ extension StringProtocol {
 }
 
 /* ###################################################################################################################################### */
+// MARK: - Meeting Array Extension -
+/* ###################################################################################################################################### */
+/**
+ This extension adds a quick accessor by ID to an Array of meetings.
+ */
+extension Array where Element == MeetingInstance {
+     /* ################################################################## */
+     /**
+      Basically, the fastest way to get the meeting by ID.
+      
+      - parameter id: The ID of the meeting we're looking for.
+      
+      - returns: The instance. Nil, if not found.
+      */
+     func getMeetingBy(id inID: Int) -> MeetingInstance? {
+          let whenIm64 = UInt64(inID)
+          for meeting in self where meeting.id == whenIm64 {
+               return meeting
+          }
+          return nil
+     }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Additional Function for Meetings -
 /* ###################################################################################################################################### */
 /**

@@ -439,7 +439,7 @@ extension VMF_EmbeddedTableController {
           myController?.setDayPicker()
           
           if 0 < VMF_SceneDelegate.urlMeetingID,
-             let meeting = VMF_AppDelegate.virtualService?.meetings.first(where: { $0.meeting.id == VMF_SceneDelegate.urlMeetingID })?.meeting {
+             let meeting = meetings.getMeetingBy(id: VMF_SceneDelegate.urlMeetingID) {
                selectMeeting(meeting)
           }
           

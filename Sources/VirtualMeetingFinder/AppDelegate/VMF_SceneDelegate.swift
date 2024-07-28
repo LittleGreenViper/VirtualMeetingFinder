@@ -26,102 +26,102 @@ import UIKit
  This class has the Scene Delegate functionality.
  */
 class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    /* ################################################################## */
-    /**
-     If it's been over this many seconds since our last load, we force a new load, the next time we open.
-     */
-    static let forceReloadDelayInSeconds = TimeInterval(60 * 60 * 4)
-    
-    /* ################################################################## */
-    /**
-     This is set to the last time we loaded.
-     While the app is up in the foreground, we won't be forcing a reload, but we will, if it enters the background, then comes back.
-     */
-    static var lastReloadTime = Date.distantPast
-    
-    /* ################################################################## */
-    /**
-     */
-    static var urlMeetingID = Int(0)
-    
-    /* ################################################################## */
-    /**
-     The window object for this scene.
-     */
-    var window: UIWindow?
-    
-    /* ################################################################## */
-    /**
-     Called after the scene is entering into the foreground.
+     /* ################################################################## */
+     /**
+      If it's been over this many seconds since our last load, we force a new load, the next time we open.
+      */
+     static let forceReloadDelayInSeconds = TimeInterval(60 * 60 * 4)
      
-     We use this to set the search screen to today/now.
+     /* ################################################################## */
+     /**
+      This is set to the last time we loaded.
+      While the app is up in the foreground, we won't be forcing a reload, but we will, if it enters the background, then comes back.
+      */
+     static var lastReloadTime = Date.distantPast
      
-     - parameter: The scene instance (ignored).
-     */
-    func sceneWillEnterForeground(_: UIScene) {
-        if nil == VMF_AppDelegate.openMeeting {
-            VMF_AppDelegate.mainScreenController?.isThrobbing = true
-            VMF_AppDelegate.virtualService?.refreshCaches() { _ in
-                VMF_AppDelegate.mainScreenController?.isThrobbing = false
-                VMF_AppDelegate.mainScreenController?.openTo()
-                self.window?.setNeedsLayout()
-            }
-        } else {
-            self.window?.setNeedsLayout()
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when the app is foregrounded via a URL.
+     /* ################################################################## */
+     /**
+      */
+     static var urlMeetingID = Int(0)
      
-     - parameter: The scene instance (ignored).
-     - parameter openURLContexts: The Opening URL contexts (as a set).
-     */
-    func scene(_: UIScene, openURLContexts inURLContexts: Set<UIOpenURLContext>) {
-        inURLContexts.forEach { resolveURL($0.url) }
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when the app is opened via a URL from a "cold start."
-     - parameter: The scene instance.
-     - parameter willConnectTo: The session being connected (ignored).
-     - parameter options: This contains the options, among which, is the URL context.
-     */
-    func scene(_ inScene: UIScene, willConnectTo: UISceneSession, options inConnectionOptions: UIScene.ConnectionOptions) {
-        guard let url = inConnectionOptions.userActivities.first?.webpageURL ?? inConnectionOptions.urlContexts.first?.url else { return }
-        resolveURL(url)
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when the app is opened via a URL (and launched).
-     - parameter: The scene instance (ignored).
-     - parameter continue: The activity being continued.
-     */
-    func scene(_: UIScene, continue inUserActivity: NSUserActivity) {
-        guard let url = inUserActivity.webpageURL else { return }
-        resolveURL(url)
-    }
+     /* ################################################################## */
+     /**
+      The window object for this scene.
+      */
+     var window: UIWindow?
+     
+     /* ################################################################## */
+     /**
+      Called after the scene is entering into the foreground.
+      
+      We use this to set the search screen to today/now.
+      
+      - parameter: The scene instance (ignored).
+      */
+     func sceneWillEnterForeground(_: UIScene) {
+          if nil == VMF_AppDelegate.openMeeting {
+               VMF_AppDelegate.mainScreenController?.isThrobbing = true
+               VMF_AppDelegate.virtualService?.refreshCaches() { _ in
+                    VMF_AppDelegate.mainScreenController?.isThrobbing = false
+                    VMF_AppDelegate.mainScreenController?.openTo()
+                    self.window?.setNeedsLayout()
+               }
+          } else {
+               self.window?.setNeedsLayout()
+          }
+     }
+     
+     /* ################################################################## */
+     /**
+      Called when the app is foregrounded via a URL.
+      
+      - parameter: The scene instance (ignored).
+      - parameter openURLContexts: The Opening URL contexts (as a set).
+      */
+     func scene(_: UIScene, openURLContexts inURLContexts: Set<UIOpenURLContext>) {
+          inURLContexts.forEach { resolveURL($0.url) }
+     }
+     
+     /* ################################################################## */
+     /**
+      Called when the app is opened via a URL from a "cold start."
+      - parameter: The scene instance.
+      - parameter willConnectTo: The session being connected (ignored).
+      - parameter options: This contains the options, among which, is the URL context.
+      */
+     func scene(_ inScene: UIScene, willConnectTo: UISceneSession, options inConnectionOptions: UIScene.ConnectionOptions) {
+          guard let url = inConnectionOptions.userActivities.first?.webpageURL ?? inConnectionOptions.urlContexts.first?.url else { return }
+          resolveURL(url)
+     }
+     
+     /* ################################################################## */
+     /**
+      Called when the app is opened via a URL (and launched).
+      - parameter: The scene instance (ignored).
+      - parameter continue: The activity being continued.
+      */
+     func scene(_: UIScene, continue inUserActivity: NSUserActivity) {
+          guard let url = inUserActivity.webpageURL else { return }
+          resolveURL(url)
+     }
 }
 
 /* ###################################################################################################################################### */
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
 extension VMF_SceneDelegate {
-    /* ################################################################## */
-    /**
-     This will set the static property to a given meeting ID, if it is provided in the URI.
-     
-     - parameter inURL: The URL to resolve.
-     */
-    func resolveURL(_ inURL: URL) {
-        if let statusString = inURL.query(),
-           let meetingID = Int(statusString),
-           0 < meetingID {
-            Self.urlMeetingID = meetingID
-        }
-    }
+     /* ################################################################## */
+     /**
+      This will set the static property to a given meeting ID, if it is provided in the URI.
+      
+      - parameter inURL: The URL to resolve.
+      */
+     func resolveURL(_ inURL: URL) {
+          if let statusString = inURL.query(),
+             let meetingID = Int(statusString),
+             0 < meetingID {
+               Self.urlMeetingID = meetingID
+          }
+     }
 }
 

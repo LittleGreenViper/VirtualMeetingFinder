@@ -27,89 +27,89 @@ import RVS_Generic_Swift_Toolbox
  This displays the About screen.
  */
 class VMF_AboutViewController: VMF_BaseViewController {
-    /* ################################################################## */
-    /**
-     This displays the icon image.
-     */
-    @IBOutlet weak var iconImage: UIImageView?
-    
-    /* ################################################################## */
-    /**
-     This displays the app name.
-     */
-    @IBOutlet weak var appNameLabel: UILabel?
-    
-    /* ################################################################## */
-    /**
-     This displays the full version of the app.
-     */
-    @IBOutlet weak var versionLabel: UILabel?
-    
-    /* ################################################################## */
-    /**
-     The header for the dependency list
-     */
-    @IBOutlet weak var dependencySectionHeader: UILabel?
+     /* ################################################################## */
+     /**
+      This displays the icon image.
+      */
+     @IBOutlet weak var iconImage: UIImageView?
+     
+     /* ################################################################## */
+     /**
+      This displays the app name.
+      */
+     @IBOutlet weak var appNameLabel: UILabel?
+     
+     /* ################################################################## */
+     /**
+      This displays the full version of the app.
+      */
+     @IBOutlet weak var versionLabel: UILabel?
+     
+     /* ################################################################## */
+     /**
+      The header for the dependency list
+      */
+     @IBOutlet weak var dependencySectionHeader: UILabel?
 }
 
 /* ###################################################################################################################################### */
 // MARK: Base Class Overrides
 /* ###################################################################################################################################### */
 extension VMF_AboutViewController {
-    /* ################################################################## */
-    /**
-     Called when the view has completed loading.
-     */
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        appNameLabel?.text = Bundle.main.appDisplayName
-        
-        let mainVersion = Bundle.main.appVersionString
-        let buildVersion = Bundle.main.appVersionBuildString
-        
-        versionLabel?.text = String(format: "SLUG-VERSION-FORMAT".localizedVariant, mainVersion, buildVersion)
-        
-        dependencySectionHeader?.text = dependencySectionHeader?.text?.localizedVariant
-        
-        iconImage?.image = Bundle.main.largeAppIcon
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when the view is about to appear.
+     /* ################################################################## */
+     /**
+      Called when the view has completed loading.
+      */
+     override func viewDidLoad() {
+          super.viewDidLoad()
+          
+          appNameLabel?.text = Bundle.main.appDisplayName
+          
+          let mainVersion = Bundle.main.appVersionString
+          let buildVersion = Bundle.main.appVersionBuildString
+          
+          versionLabel?.text = String(format: "SLUG-VERSION-FORMAT".localizedVariant, mainVersion, buildVersion)
+          
+          dependencySectionHeader?.text = dependencySectionHeader?.text?.localizedVariant
+          
+          iconImage?.image = Bundle.main.largeAppIcon
+     }
      
-     - parameter inIsAnimated: True, if the appearance is animated.
-     */
-    override func viewWillAppear(_ inIsAnimated: Bool) {
-        super.viewWillAppear(inIsAnimated)
-        successHaptic()
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when the view is about to disappear.
+     /* ################################################################## */
+     /**
+      Called when the view is about to appear.
+      
+      - parameter inIsAnimated: True, if the appearance is animated.
+      */
+     override func viewWillAppear(_ inIsAnimated: Bool) {
+          super.viewWillAppear(inIsAnimated)
+          successHaptic()
+     }
      
-     - parameter inIsAnimated: True, if the disappearance is animated.
-     */
-    override func viewWillDisappear(_ inIsAnimated: Bool) {
-        super.viewWillDisappear(inIsAnimated)
-        successHaptic()
-    }
+     /* ################################################################## */
+     /**
+      Called when the view is about to disappear.
+      
+      - parameter inIsAnimated: True, if the disappearance is animated.
+      */
+     override func viewWillDisappear(_ inIsAnimated: Bool) {
+          super.viewWillDisappear(inIsAnimated)
+          successHaptic()
+     }
 }
 
 /* ###################################################################################################################################### */
 // MARK: Callbacks
 /* ###################################################################################################################################### */
 extension VMF_AboutViewController {
-    /* ################################################################## */
-    /**
-     This is called when one of the URL buttons is hit, and takes us to the site.
-     
-     - parameter: the button.
-     */
-    @IBAction func urlButtonHit(_ inButton: VMF_URLButton) {
-        guard let url = inButton.url else { return }
-        UIApplication.shared.open(url)
-    }
+     /* ################################################################## */
+     /**
+      This is called when one of the URL buttons is hit, and takes us to the site.
+      
+      - parameter: the button.
+      */
+     @IBAction func urlButtonHit(_ inButton: VMF_URLButton) {
+          guard let url = inButton.url else { return }
+          UIApplication.shared.open(url)
+     }
 }

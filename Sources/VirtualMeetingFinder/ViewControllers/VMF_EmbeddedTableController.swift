@@ -552,15 +552,5 @@ extension VMF_EmbeddedTableController: UITableViewDelegate {
           selectMeeting(filteredMeetings[inIndexPath.row])
           return inIndexPath
      }
-     
-     /* ################################################################## */
-     /**
-      Called just after the selection. We use this to deselect the row.
-      - parameter: The table view (ignored)
-      - parameter didSelectRowAt: The index path of the row.
-      */
-     func tableView(_ inTableView: UITableView, didSelectRowAt inIndexPath: IndexPath) {
-          inTableView.deselectRow(at: inIndexPath, animated: false)
-     }
 }
 

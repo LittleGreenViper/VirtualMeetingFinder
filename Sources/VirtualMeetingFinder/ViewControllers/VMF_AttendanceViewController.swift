@@ -29,78 +29,78 @@ import SwiftBMLSDK
  This is a very basic table display. It does not have any controls or filters.
  */
 class VMF_AttendanceViewController: VMF_BaseViewController, VMF_MasterTableControllerProtocol {
-    /* ################################################################## */
-    /**
-     This tracks the current embedded table controller.
-     */
-    var tableDisplayController: VMF_EmbeddedTableControllerProtocol?
+     /* ################################################################## */
+     /**
+      This tracks the current embedded table controller.
+      */
+     var tableDisplayController: VMF_EmbeddedTableControllerProtocol?
 }
 
 /* ###################################################################################################################################### */
 // MARK: Computed Properties
 /* ###################################################################################################################################### */
 extension VMF_AttendanceViewController {
-    /* ################################################################## */
-    /**
-     The meetings we are tracking.
-     */
-    var meetings: [MeetingInstance] {
-        VMF_AppDelegate.virtualService?.meetingsThatIAttend.sorted { a, b in
-            if a.isInProgress,
-               !b.isInProgress {
-                return true
-            } else if b.isInProgress,
-                      !a.isInProgress {
-                return false
-            } else if a.nextDate < b.nextDate {
-                return true
-            } else if a.nextDate > b.nextDate {
-                return false
-            } else {
-                return a.meeting.name < b.meeting.name
-            }
-        }.map { $0.meeting } ?? []
-    }
+     /* ################################################################## */
+     /**
+      The meetings we are tracking.
+      */
+     var meetings: [MeetingInstance] {
+          VMF_AppDelegate.virtualService?.meetingsThatIAttend.sorted { a, b in
+               if a.isInProgress,
+                  !b.isInProgress {
+                    return true
+               } else if b.isInProgress,
+                         !a.isInProgress {
+                    return false
+               } else if a.nextDate < b.nextDate {
+                    return true
+               } else if a.nextDate > b.nextDate {
+                    return false
+               } else {
+                    return a.meeting.name < b.meeting.name
+               }
+          }.map { $0.meeting } ?? []
+     }
 }
 
 /* ###################################################################################################################################### */
 // MARK: Base Class Overrides
 /* ###################################################################################################################################### */
 extension VMF_AttendanceViewController {
-    /* ################################################################## */
-    /**
-     Called when the view hierarchy loads.
-     */
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationItem.title = "SLUG-TAB-1-TITLE".localizedVariant
-    }
-    
-    /* ################################################################## */
-    /**
-     Called just before the view is to disappear.
+     /* ################################################################## */
+     /**
+      Called when the view hierarchy loads.
+      */
+     override func viewDidLoad() {
+          super.viewDidLoad()
+          navigationItem.title = "SLUG-TAB-1-TITLE".localizedVariant
+     }
      
-     - parameter inIsAnimated: True, if the disappearance is animated.
-     */
-    override func viewWillDisappear(_ inIsAnimated: Bool) {
-        super.viewWillDisappear(inIsAnimated)
-        
-        if isMovingFromParent {
-            hardImpactHaptic()
-        }
-    }
-
-    /* ################################################################## */
-    /**
-     Called before populating the table
+     /* ################################################################## */
+     /**
+      Called just before the view is to disappear.
+      
+      - parameter inIsAnimated: True, if the disappearance is animated.
+      */
+     override func viewWillDisappear(_ inIsAnimated: Bool) {
+          super.viewWillDisappear(inIsAnimated)
+          
+          if isMovingFromParent {
+               hardImpactHaptic()
+          }
+     }
      
-     - parameter for: The segue object being executed.
-     - parameter sender: Any associated data (ignored).
-     */
-    override func prepare(for inSegue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = inSegue.destination as? VMF_EmbeddedTableController else { return }
-        tableDisplayController = destination
-        destination.myController = self
-        destination.meetings = meetings
-    }
+     /* ################################################################## */
+     /**
+      Called before populating the table
+      
+      - parameter for: The segue object being executed.
+      - parameter sender: Any associated data (ignored).
+      */
+     override func prepare(for inSegue: UIStoryboardSegue, sender: Any?) {
+          guard let destination = inSegue.destination as? VMF_EmbeddedTableController else { return }
+          tableDisplayController = destination
+          destination.myController = self
+          destination.meetings = meetings
+     }
 }

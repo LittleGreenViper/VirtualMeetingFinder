@@ -27,64 +27,64 @@ import RVS_Persistent_Prefs
  This stores our various parameters.
  */
 class VMF_Prefs: RVS_PersistentPrefs {
-    /* ################################################################################################################################## */
-    // MARK: RVS_PersistentPrefs Conformance
-    /* ################################################################################################################################## */
-    /**
-     This is an enumeration that will list the prefs keys for us.
-     */
-    enum Keys: String {
-        /* ############################################################## */
-        /**
-         We save a list of the IDs of meetings we attend, here.
-         */
-        case attendance
-        
-        /* ############################################################## */
-        /**
-         If we want to exclude Service meetings from the displayed results, this Boolean is true.
-         */
-        case excludeServiceMeetings
-
-        /* ############################################################## */
-        /**
-         These are all the keys, in an Array of String.
-         */
-        static var allKeys: [String] {
-            [
-                attendance.rawValue,
-                excludeServiceMeetings.rawValue
-            ]
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     This is a list of the keys for our prefs.
-     We should use the enum for the keys (rawValue).
-     */
-    override var keys: [String] { Keys.allKeys }
+     /* ################################################################################################################################## */
+     // MARK: RVS_PersistentPrefs Conformance
+     /* ################################################################################################################################## */
+     /**
+      This is an enumeration that will list the prefs keys for us.
+      */
+     enum Keys: String {
+          /* ############################################################## */
+          /**
+           We save a list of the IDs of meetings we attend, here.
+           */
+          case attendance
+          
+          /* ############################################################## */
+          /**
+           If we want to exclude Service meetings from the displayed results, this Boolean is true.
+           */
+          case excludeServiceMeetings
+          
+          /* ############################################################## */
+          /**
+           These are all the keys, in an Array of String.
+           */
+          static var allKeys: [String] {
+               [
+                    attendance.rawValue,
+                    excludeServiceMeetings.rawValue
+               ]
+          }
+     }
+     
+     /* ################################################################## */
+     /**
+      This is a list of the keys for our prefs.
+      We should use the enum for the keys (rawValue).
+      */
+     override var keys: [String] { Keys.allKeys }
 }
 
 /* ###################################################################################################################################### */
 // MARK: Public Computed Properties
 /* ###################################################################################################################################### */
 extension VMF_Prefs {
-    /* ################################################################## */
-    /**
-     This saves our meeting attendance, as a list of meeting IDs.
-     */
-    var attendance: [Int] {
-        get { values[Keys.attendance.rawValue] as? [Int] ?? [] }
-        set { values[Keys.attendance.rawValue] = newValue }
-    }
-    
-    /* ################################################################## */
-    /**
-     If we want to exclude Service meetings from the displayed results, this Boolean is true.
-     */
-    var excludeServiceMeetings: Bool {
-        get { values[Keys.excludeServiceMeetings.rawValue] as? Bool ?? true }
-        set { values[Keys.excludeServiceMeetings.rawValue] = newValue }
-    }
+     /* ################################################################## */
+     /**
+      This saves our meeting attendance, as a list of meeting IDs.
+      */
+     var attendance: [Int] {
+          get { values[Keys.attendance.rawValue] as? [Int] ?? [] }
+          set { values[Keys.attendance.rawValue] = newValue }
+     }
+     
+     /* ################################################################## */
+     /**
+      If we want to exclude Service meetings from the displayed results, this Boolean is true.
+      */
+     var excludeServiceMeetings: Bool {
+          get { values[Keys.excludeServiceMeetings.rawValue] as? Bool ?? true }
+          set { values[Keys.excludeServiceMeetings.rawValue] = newValue }
+     }
 }

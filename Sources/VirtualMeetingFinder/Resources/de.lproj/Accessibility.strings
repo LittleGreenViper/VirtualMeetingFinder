@@ -15,181 +15,181 @@
  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-
-/*  NOTE TO TRANSLATOR:
+ 
+  NOTE TO TRANSLATOR:
  
     "Labels" are short, simple titles. "Hints" are longer explanations. Labels should always be short and succinct, but hints can be a lot longer.
  
     These are voiceover strings. Pronunciation and auditory clarity are important.
 */
-
 // ************************************************        ***********************************************************
 // * -------------------------------------------- *        * ------------------------------------------------------- *
 // *|  DO NOT MODIFY ON THIS SIDE OF THE EQUALS  |*        *|   MODIFY THE TEXT ON THIS SIDE TO THE LOCAL LANGUAGE  |*
 // * -------------------------------------------- *        * ------------------------------------------------------- *
 // ************************************************        ***********************************************************
-
 // MARK: -
 // MARK: - MAIN SCREEN -
-
 /* This is the label for the Bar Button item that selects the "I Attend" Screen. */
-"SLUG-ACC-TAB-1-BUTTON-LABEL"                   =   "My Attendance";
+
+
+
+
+"SLUG-ACC-TAB-1-BUTTON-LABEL" = "Meine Teilnahme";
 /* This is the hint for the Bar Button item that selects the "I Attend" Screen. */
-"SLUG-ACC-TAB-1-BUTTON-HINT"                    =   "This opens another screen, with only the meetings that you have marked as ones that you attend.";
+"SLUG-ACC-TAB-1-BUTTON-HINT" = "Es öffnet sich ein neues Fenster, in dem nur die von Ihnen markierten Meetings angezeigt werden, an denen Sie teilnehmen.";
 
 /* This is the label for the Bar Button item that selects the Settings Screen. */
-"SLUG-ACC-SETTINGS-BUTTON-LABEL"                =   "App Settings";
+"SLUG-ACC-SETTINGS-BUTTON-LABEL" = "App-Einstellungen";
 /* This is the hint for the Bar Button item that selects the Settings Screen. */
-"SLUG-ACC-SETTINGS-BUTTON-HINT"                 =   "This will open a screen, with various app settings.";
+"SLUG-ACC-SETTINGS-BUTTON-HINT" = "Es öffnet sich ein Fenster, in dem verschiedene Einstellungen der App vorgenommen werden können.";
 
 /* This is the label for the segmented switch at the top of the Main Screen. */
-"SLUG-ACC-WEEKDAY-SWITCH-LABEL"                 =   "Select Weekday";
+"SLUG-ACC-WEEKDAY-SWITCH-LABEL" = "Wochentag auswählen";
 /* This is the hint for the segmented switch at the top of the Main Screen. */
-"SLUG-ACC-WEEKDAY-SWITCH-HINT"                  =   "With this segmented switch, you can see in-progress meetings, choose a weekday in which to show meetings, or select meeting name search mode.";
+"SLUG-ACC-WEEKDAY-SWITCH-HINT" = "Mit dieser gegliederten Funktion können Sie bereits laufende Meetings anzeigen, den Wochentag auswählen, an dem die Meetings angezeigt werden sollen, oder den Suchmodus für Meeting-Namen auswählen.";
 
 /* The individual segment label for the in-progress (Now) segment */
-"SLUG-ACC-WEEKDAY-SWITCH-0-LABEL"               =   "Meetings In Progress";
+"SLUG-ACC-WEEKDAY-SWITCH-0-LABEL" = "Laufende Meetings";
 /* The individual segment hint for the in-progress (Now) segment */
-"SLUG-ACC-WEEKDAY-SWITCH-0-HINT"                =   "If you select this, the table below will show meetings that are happening now.";
+"SLUG-ACC-WEEKDAY-SWITCH-0-HINT" = "Mit dieser Option werden in der nachstehenden Tabelle Meetings angezeigt, die gerade stattfinden.";
 
 /* The label for each weekday segment. The placeholder (%@) is replaced by the weekday represented by that segment. */
-"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-LABEL-FORMAT"  =   "Meetings On %@s.";
+"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-LABEL-FORMAT" = "Meetings an %@en.";
 /* The hint for each weekday segment. The placeholder is replaced by the weekday represented by that segment. */
-"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-HINT-FORMAT"   =   "If you select this, you will see meetings that gather every %@.";
+"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-HINT-FORMAT" = "Mit dieser Option werden Meetings angezeigt, die jeden %@ stattfinden.";
 
 /* The individual segment label for the search segment */
-"SLUG-ACC-WEEKDAY-SWITCH-8-LABEL"               =   "Meeting Name Search";
+"SLUG-ACC-WEEKDAY-SWITCH-8-LABEL" = "Suche anhand von Meeting-Namen";
 /* The individual segment hint for the search segment */
-"SLUG-ACC-WEEKDAY-SWITCH-8-HINT"                =   "If you select this, you will enter Text Search Mode, where you can find meetings by name.";
+"SLUG-ACC-WEEKDAY-SWITCH-8-HINT" = "Mit dieser Option wechseln Sie in den Textsuchmodus, wo Sie nach Meetings anhand des Namens suchen können.";
 
 /* This is the label for the enter search text text field. */
-"SLUG-ACC-ENTER-SEARCH-TEXT-LABEL"              =   "Enter Text To Find";
+"SLUG-ACC-ENTER-SEARCH-TEXT-LABEL" = "Texteingabe zur Suche";
 /* This is the hint for the enter search text text field. */
-"SLUG-ACC-ENTER-SEARCH-TEXT-HINT"               =   "Any text that you enter here, will be used to filter out meetings that have that text in their meeting name.";
+"SLUG-ACC-ENTER-SEARCH-TEXT-HINT" = "Jeder Text, den Sie hier eingeben, wird verwendet, um Meetings herauszufiltern, die diesen Text im Meeting-Namen enthalten.";
 
 /* This is the label for the close search mode button. */
-"SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL"            =   "Exit Text Search";
+"SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL" = "Textsuche beenden";
 /* This is the label for the close search mode button. */
-"SLUG-ACC-CLOSE-SEARCH-BUTTON-HINT"             =   "Selecting this button leaves text search mode, and returns you to the regular weekday selection mode.";
+"SLUG-ACC-CLOSE-SEARCH-BUTTON-HINT" = "Mit dieser Option verlassen Sie den Textsuchmodus und kehren zum normalen Modus für die Auswahl der Wochentage zurück.";
 
 /* This is the label for the decrement (left) time button. */
-"SLUG-ACC-LEFT-BUTTON-LABEL"                    =   "Go To Time Before";
+"SLUG-ACC-LEFT-BUTTON-LABEL" = "Frühere Zeit anzeigen";
 /* This is the hint for the decrement (left) time button. */
-"SLUG-ACC-LEFT-BUTTON-HINT"                     =   "If you select this, the table will show meetings that start at the time slot before this one.";
+"SLUG-ACC-LEFT-BUTTON-HINT" = "Mit dieser Option werden in der Tabelle die Meetings angezeigt, die im Zeitfenster vor diesem Termin beginnen.";
 
 /* This is the label for the increment (right) time button. */
-"SLUG-ACC-RIGHT-BUTTON-LABEL"                   =   "Go To Time After";
+"SLUG-ACC-RIGHT-BUTTON-LABEL" = "Spätere Zeit anzeigen";
 /* This is the hint for the increment (right) time button. */
-"SLUG-ACC-RIGHT-BUTTON-HINT"                    =   "If you select this, the table will show meetings that start at the time slot after this one.";
+"SLUG-ACC-RIGHT-BUTTON-HINT" = "Mit dieser Option werden in der Tabelle die Meetings angezeigt, die im Zeitfenster nach diesem Termin beginnen.";
 
 /* This is the label for the weekday/time label. */
-"SLUG-ACC-TIME-DISPLAY-LABEL"                   =   "Weekday and Time";
+"SLUG-ACC-TIME-DISPLAY-LABEL" = "Wochentag und Uhrzeit";
 /* This is the hint for the weekday/time label. */
-"SLUG-ACC-TIME-DISPLAY-HINT"                    =   "This shows the selected weekday and time slot for the meetings listed below.";
+"SLUG-ACC-TIME-DISPLAY-HINT" = "Hier werden der ausgewählte Wochentag und das Zeitfenster für die unten aufgeführten Meetings angezeigt.";
 
 /* This is the label for the "thermometer" completion bar, below the segmented switch. */
-"SLUG-ACC-COMPLETION-DISPLAY-LABEL"             =   "Current Time of Day";
+"SLUG-ACC-COMPLETION-DISPLAY-LABEL" = "Aktuelle Uhrzeit";
 /* This is the hint for the "thermometer" completion bar, below the segmented switch. */
-"SLUG-ACC-COMPLETION-DISPLAY-HINT"              =   "This indicates how far through the day we are. Left is towards 12AM, and right is towards midnight.";
+"SLUG-ACC-COMPLETION-DISPLAY-HINT" = "Es wird angezeigt, wie weit der Tag fortgeschritten ist. Nach links geht es auf 0:00 Uhr zu, nach rechts auf 23:59:59 Uhr.";
 
 /* This is the label for the day/time picker. */
-"SLUG-ACC-DIRECT-PICKER-LABEL"                  =   "Select Day And Time";
+"SLUG-ACC-DIRECT-PICKER-LABEL" = "Tag und Uhrzeit auswählen";
 /* This is the hint for the day/time picker. */
-"SLUG-ACC-DIRECT-PICKER-HINT"                   =   "This allows you to directly choose a weekday and time.";
+"SLUG-ACC-DIRECT-PICKER-HINT" = "Diese Funktion ermöglicht die direkte Auswahl eines Wochentags und einer Uhrzeit.";
 
 /* This is the label for the day/time picker. */
-"SLUG-ACC-DIRECT-EXIT-LABEL"                    =   "Go Back to Normal";
+"SLUG-ACC-DIRECT-EXIT-LABEL" = "Zurück zum Normalzustand";
 /* This is the hint for the day/time picker. */
-"SLUG-ACC-DIRECT-EXIT-HINT"                     =   "Selecting this, returns you to the regular weekday/time selector.";
+"SLUG-ACC-DIRECT-EXIT-HINT" = "Mit dieser Option wechseln Sie zurück zur normalen Auswahl von Wochentag und Uhrzeit.";
 
 // MARK: - MEETING INSPECTOR SCREEN -
+/* This label is applied to the meeting name text label in the Meeting Inspector Screen */
+
+"SLUG-ACC-I-ATTEND-BAR-BUTTON-LABEL" = "Ich nehme an diesem Meeting teil";
+/* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
+"SLUG-ACC-I-ATTEND-BAR-BUTTON-HINT" = "Diese Schaltfläche zeigt an, ob wir an diesem Meeting teilnehmen. Da wir teilnehmen, können wir dieses Meeting separat auf dem Teilnahme-Fenster anzeigen.";
 
 /* This label is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-ACC-I-ATTEND-BAR-BUTTON-LABEL"            =   "I Attend This Meeting";
+"SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-LABEL" = "Ich nehme nicht an diesem Meeting teil";
 /* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-ACC-I-ATTEND-BAR-BUTTON-HINT"             =   "This button indicates whether or not we attend this meeting. Since we are attending, we can view this meeting separately, in the Attendance Screen.";
+"SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-HINT" = "Diese Schaltfläche zeigt an, ob wir an diesem Meeting teilnehmen. Wir nehmen derzeit nicht an dem Meeting teil.";
 
 /* This label is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-LABEL"     =   "I Do Not Attend This Meeting";
+"SLUG-ACC-MEETING-NAME-MI-LABEL" = "Meeting-Name";
 /* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-HINT"      =   "This button indicates whether or not we attend this meeting. We currently do not attend this meeting.";
-
-/* This label is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-ACC-MEETING-NAME-MI-LABEL"                =   "Meeting Name";
-/* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-ACC-MEETING-NAME-MI-HINT"                 =   "This is the name of the meeting.";
+"SLUG-ACC-MEETING-NAME-MI-HINT" = "Das ist der Name des Meetings.";
 
 /* This label is applied to the meeting start time/day text label in the Meeting Inspector Screen */
-"SLUG-ACC-TIME-DAY-MI-LABEL"                    =   "Meeting Time";
+"SLUG-ACC-TIME-DAY-MI-LABEL" = "Zeitpunkt des Meetings";
 /* This hint is applied to the meeting start time/day text label in the Meeting Inspector Screen */
-"SLUG-ACC-TIME-DAY-MI-HINT"                     =   "This displays the weekday, start time, and end time, of the meeting.";
+"SLUG-ACC-TIME-DAY-MI-HINT" = "Es wird angezeigt, an welchem Wochentag, und zu welcher Uhrzeit das Meeting beginnt und wann es endet.";
 
 /* This label is applied to the meeting "in progress" text label in the Meeting Inspector Screen */
-"SLUG-ACC-IN-PROGRESS-MI-LABEL"                 =   "Meeting In Progress";
+"SLUG-ACC-IN-PROGRESS-MI-LABEL" = "Meeting läuft";
 /* This hint is applied to the meeting "in progress" text label in the Meeting Inspector Screen */
-"SLUG-ACC-IN-PROGRESS-MI-HINT"                  =   "This means that the meeting is currently under way.";
+"SLUG-ACC-IN-PROGRESS-MI-HINT" = "Das bedeutet, dass das Meeting gerade stattfindet.";
 
 /* This label is applied to the meeting time zone text label in the Meeting Inspector Screen */
-"SLUG-ACC-TZ-MI-LABEL"                          =   "Time Zone";
+"SLUG-ACC-TZ-MI-LABEL" = "Zeitzone";
 /* This hint is applied to the meeting time zone text label in the Meeting Inspector Screen */
-"SLUG-ACC-TZ-MI-HINT"                           =   "The meeting originates in a different timezone from the one we are in. This is that timezone, and when the meeting starts, in that zone.";
+"SLUG-ACC-TZ-MI-HINT" = "Das Meeting findet in einer anderen Zeitzone statt als die, in der wir uns befinden. Es handelt sich um diese Zeitzone und den Beginn des Meetings in dieser Zeitzone.";
 
 /* This label is applied to the meeting comments text label in the Meeting Inspector Screen */
-"SLUG-ACC-COMMENTS-MI-LABEL"                    =   "Extra Information";
+"SLUG-ACC-COMMENTS-MI-LABEL" = "Zusätzliche Informationen";
 /* This hint is applied to the meeting comments text label in the Meeting Inspector Screen */
-"SLUG-ACC-COMMENTS-MI-HINT"                     =   "This has any extra information about the meeting.";
+"SLUG-ACC-COMMENTS-MI-HINT" = "Hier werden zusätzliche Informationen über das Meeting angezeigt.";
 
 /* This label is applied to the phone icon button in the Meeting Inspector Screen */
-"SLUG-ACC-PHONE-MI-LABEL"                       =   "Call the Meeting";
+"SLUG-ACC-PHONE-MI-LABEL" = "Das Meeting anrufen";
 /* This hint is applied to the phone icon button in the Meeting Inspector Screen */
-"SLUG-ACC-PHONE-MI-HINT"                        =   "If you select this, the phone will attempt to call directly into the meeting.";
+"SLUG-ACC-PHONE-MI-HINT" = "Mit dieser Option versucht das Telefon, sich direkt in das Meeting einzuwählen.";
 
 /* This label is applied to the Web icon button in the Meeting Inspector Screen */
-"SLUG-ACC-WEB-MI-LABEL"                         =   "Web Site";
+"SLUG-ACC-WEB-MI-LABEL" = "Website";
 /* This hint is applied to the Web icon button in the Meeting Inspector Screen */
-"SLUG-ACC-WEB-MI-HINT"                          =   "If you select this, Safari will be opened, and take you to the Web site. It is possible that an app may be directly opened.";
+"SLUG-ACC-WEB-MI-HINT" = "Diese Option öffnet Safari und leitet Sie zur Website. Es kann auch sein, dass sich direkt eine App öffnet.";
 
 /* This label is applied to the video icon button in the Meeting Inspector Screen */
-"SLUG-ACC-VIDEO-MI-LABEL-FORMAT"                =   "Open in %@";
+"SLUG-ACC-VIDEO-MI-LABEL-FORMAT" = "In %@ öffnen";
 /* This hint is applied to the video icon button in the Meeting Inspector Screen */
-"SLUG-ACC-VIDEO-MI-HINT-FORMAT"                 =   "If you select this, the %@ app will be opened to the meeting.";
+"SLUG-ACC-VIDEO-MI-HINT-FORMAT" = "Diese Option öffnet die %@ App für das Meeting.";
 
 /* This label is applied to the phone extra info text view in the Meeting Inspector Screen */
-"SLUG-ACC-PHONE-INFO-MI-LABEL"                  =   "Extra Phone Info";
+"SLUG-ACC-PHONE-INFO-MI-LABEL" = "Zusätzliche Telefon-Infos";
 /* This hint is applied to the phone extra info text view in the Meeting Inspector Screen */
-"SLUG-ACC-PHONE-INFO-MI-HINT"                   =   "This contains additional phone information.";
+"SLUG-ACC-PHONE-INFO-MI-HINT" = "Hier finden Sie zusätzliche Telefoninformationen.";
 
 /* This label is applied to the phone extra info text view in the Meeting Inspector Screen */
-"SLUG-ACC-XTRA-INFO-MI-LABEL"                   =   "Extra Virtual Info";
+"SLUG-ACC-XTRA-INFO-MI-LABEL" = "Zusätzliche virtuelle Informationen";
 /* This hint is applied to the phone extra info text view in the Meeting Inspector Screen */
-"SLUG-ACC-XTRA-INFO-MI-HINT"                    =   "This contains additional information about the virtual meeting.";
+"SLUG-ACC-XTRA-INFO-MI-HINT" = "Hier finden Sie zusätzliche Informationen über das virtuelle Meeting.";
 
 /* This label is applied to the in-person address text view in the Meeting Inspector Screen */
-"SLUG-ACC-IN-PERSON-ADDRESS-MI-LABEL"           =   "In-Person Address";
+"SLUG-ACC-IN-PERSON-ADDRESS-MI-LABEL" = "Präsenzadresse";
 /* This hint is applied to the in-person address text view in the Meeting Inspector Screen */
-"SLUG-ACC-IN-PERSON-ADDRESS-MI-HINT"            =   "This is the address of the in-person meeting.";
+"SLUG-ACC-IN-PERSON-ADDRESS-MI-HINT" = "Dies ist die Adresse des Präsenz-Meetings.";
 
 /* This label is applied to the in-person extra information label in the Meeting Inspector Screen */
-"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-LABEL"      =   "Extra Info";
+"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-LABEL" = "Zusätzliche Infos";
 /* This hint is applied to the in-person extra information label in the Meeting Inspector Screen */
-"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-HINT"       =   "This is extra information about the in-person meeting.";
+"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-HINT" = "Hier finden Sie weitere Informationen zum Präsenz-Meeting.";
 
 /* This label is applied to the action button in the navbar of the Meeting Inspector Screen */
-"SLUG-ACC-ACTION-BUTTON-LABEL"                  =   "Share the Meeting";
+"SLUG-ACC-ACTION-BUTTON-LABEL" = "Meeting mit anderen teilen";
 /* This hint is applied to the action button in the navbar of the Meeting Inspector Screen */
-"SLUG-ACC-ACTION-BUTTON-HINT"                   =   "If you select this, a sheet will be shown, allowing you to share a link to this meeting.";
+"SLUG-ACC-ACTION-BUTTON-HINT" = "Mit dieser Option wird ein Blatt angezeigt, auf dem Sie einen Link zu diesem Meeting freigeben können.";
 
 // MARK: - SETTINGS SCREEN -
-
 /* This is the label for the switch to enable/disable Service meeting filtering. */
-"SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL"        =   "Reduce Service Meetings";
+
+"SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL" = "Service-Meetings reduzieren";
 /* This is the hint for the switch to enable/disable Service meeting filtering. */
-"SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT"         =   "If this switch is on, the app will not display any Service (non-Recovery) meetings that it finds.";
+"SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT" = "Wenn diese Funktion aktiviert ist, werden dienstliche (nicht genesungsbezogene) Meetings in der App nicht angezeigt.";
 
 /* This is the label for the "About This App" button. */
-"SLUG-ACC-ABOUT-BUTTON-LABEL"                   =   "About This App";
+"SLUG-ACC-ABOUT-BUTTON-LABEL" = "Über diese App";
 /* This is the hint for the "About This App" button. */
-"SLUG-ACC-ABOUT-BUTTON-HINT"                    =   "Selecting this, will open another screen, with information about this app.";
+"SLUG-ACC-ABOUT-BUTTON-HINT" = "Mit dieser Option wird ein weiteres Fenster mit Informationen zu dieser App geöffnet.";
 
 // MARK: -

@@ -16,172 +16,172 @@
  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 // ************************************************        ***********************************************************
 // * -------------------------------------------- *        * ------------------------------------------------------- *
 // *|  DO NOT MODIFY ON THIS SIDE OF THE EQUALS  |*        *|   MODIFY THE TEXT ON THIS SIDE TO THE LOCAL LANGUAGE  |*
 // * -------------------------------------------- *        * ------------------------------------------------------- *
 // ************************************************        ***********************************************************
-
 // MARK: -
 // MARK: - COMMON -
-
 /* We replace 1200 with the word "Noon" */
-"SLUG-NOON-TIME"                                =   "Noon";
+
+
+
+"SLUG-NOON-TIME" = "12:00";
 /* We replace 2359 with the word "Midnight" */
-"SLUG-MIDNIGHT-TIME"                            =   "Midnight";
+"SLUG-MIDNIGHT-TIME" = "00:00";
 /* General-Purpose Back Button */
-"SLUG-BACK"                                     =   "Back";
+"SLUG-BACK" = "Zurück";
 
 // MARK: - ALERTS -
-
 /* OK Button for alerts */
-"SLUG-OK-BUTTON-TEXT"                           =   "OK";
+
+"SLUG-OK-BUTTON-TEXT" = "OK";
 /* Header for Fetch Error Message */
-"SLUG-ALERT-ERROR-HEADER"                       =   "ERROR";
+"SLUG-ALERT-ERROR-HEADER" = "FEHLER";
 /* Body for Fetch Error Message */
-"SLUG-ALERT-ERROR-BODY"                         =   "There was an error fetching the data. The app will not work, until we can fetch the data.";
+"SLUG-ALERT-ERROR-BODY" = "Beim Abrufen der Daten ist ein Fehler aufgetreten. Die App funktioniert erst, wenn wir die Daten abrufen können.";
 
 // MARK: - MAIN SCREEN -
-
 /* The name of the screen */
-"SLUG-TAB-0-TITLE"                              =   "Find Meetings";
+
+"SLUG-TAB-0-TITLE" = "Nach Meetings suchen";
 /* This is the Title for the time display, when we have selected the "Now" segmented switch item. */
-"SLUG-IN-PROGRESS"                              =   "In Progress";
+"SLUG-IN-PROGRESS" = "Läuft";
 /* This is the Text Field "placeholder" text, for when the Main Screen is in Text Search Mode. */
-"SLUG-SEARCH-PLACEHOLDER"                       =   "Enter A Meeting Name";
+"SLUG-SEARCH-PLACEHOLDER" = "Einen Meeting-Namen eingeben";
 /* This is the string that we display in the list, for in-progress meetings. The placeholder (%@) is replaced by the time, in localized form. */
-"SLUG-IN-PROGRESS-FORMAT"                       =   "In Progress Since %@";
+"SLUG-IN-PROGRESS-FORMAT" = "Läuft seit %@";
 /* This is the string that we display in the list, for in-progress meetings that have been going since yesterday. The placeholder is replaced by the time, in localized form. */
-"SLUG-IN-PROGRESS-YESTERDAY-FORMAT"             =   "In Progress Since %@ Yesterday";
+"SLUG-IN-PROGRESS-YESTERDAY-FORMAT" = "Läuft seit: gestern %@";
 
 /* This is the title for the segmented switch segment, for in-progress meetings, in the Main Screen.
  
    NOTE TO TRANSLATOR: This needs to be very short. It will cause the segment it occupies to expand, horizontally. It is only one of nine, so it can't be too big.
  */
-"SLUG-NOW"                                      =   "Now";
+"SLUG-NOW" = "Jetzt";
 
 // MARK: - MEETING INSPECTOR SCREEN -
-
 /* The title for the Meeting Inspector Screen, when it is displaying a hybrid meeting (meets both virtually, and in-person). */
-"SLUG-HYBRID-MEETING"                           =   "Hybrid Meeting";
+
+"SLUG-HYBRID-MEETING" = "Hybrid-Meeting";
 /* The title for the Meeting Inspector Screen, when it is displaying a fully virtual meeting. */
-"SLUG-VIRTUAL-MEETING"                          =   "Virtual Meeting";
+"SLUG-VIRTUAL-MEETING" = "Virtuelles Meeting";
 
 /* The title for the "I Attend This Meeting" bar button item in the navigation bar of the Meeting Inspector Screen. */
-"SLUG-I-ATTEND"                                 =   "I Attend";
+"SLUG-I-ATTEND" = "Ich nehme teil";
 /* This is displayed, if the meeting Inspector is showing a meeting that is currently in progress. */
-"SLUG-IN-PROGRESS-STANDALONE"                   =   "This Meeting Is In Progress";
+"SLUG-IN-PROGRESS-STANDALONE" = "Dieses Meeting läuft";
 /* This is displayed in the Meeting Inspector, if the meeting has a timezone different from ours. The first placeholder has the timezone name, and the second has the meeting start time, in that timezone (as opposed to local, for most other times). */
-"SLUG-TIMEZONE-FORMAT"                          =   "Time Zone: %@ (%@)";
+"SLUG-TIMEZONE-FORMAT" = "Zeitzone: %@ (%@)";
 /* This displays the meeting start time, and weekday, but no duration. It is displayed in both the Main Screen, and the Meeting Inspector Screen. The first placeholder has the weekday, and the second, the start time, in localized format. */
-"SLUG-WEEKDAY-TIME-FORMAT"                      =   "%@s, at %@";
+"SLUG-WEEKDAY-TIME-FORMAT" = "%@s, um %@";
 /* This displays the meeting start time, and weekday, with duration. It is displayed in both the Main Screen, and the Meeting Inspector Screen. The first placeholder has the weekday, the second, the start time, in localized format, and the third, the end time (also localized format). */
-"SLUG-WEEKDAY-TIME-DURATION-FORMAT"             =   "%@s, %@ - %@";
+"SLUG-WEEKDAY-TIME-DURATION-FORMAT" = "%@s, %@ - %@";
 /* This displays the phone extra information. The placeholder is replaced with the extra information (like passwords, etc.), in the Meeting Inspector. */
-"SLUG-PHONE-NUMBER-FORMAT"                      =   "Phone: %@";
+"SLUG-PHONE-NUMBER-FORMAT" = "Telefon: %@";
 /* This is the header, over the Formats display, in the Meeting Inspector. */
-"SLUG-FORMATS-HEADER"                           =   "Meeting Formats";
+"SLUG-FORMATS-HEADER" = "Meetingformate";
 /* This is the header, over the in-person meeting address, in the Meeting Inspector. */
-"SLUG-IN-PERSON-HEADER"                         =   "In-Person Meeting Location";
+"SLUG-IN-PERSON-HEADER" = "Treffpunkt des Präsenz-Meetings";
 
 // These are the row of three icons.
-
 /* This is displayed under the phone icon, in the Meeting Inspector. */
-"SLUG-PHONE-BUTTON"                             =   "Phone";
+
+"SLUG-PHONE-BUTTON" = "Telefon";
 /* This is displayed under the globe icon, in the Meeting Inspector. */
-"SLUG-GLOBE-BUTTON"                             =   "Web";
+"SLUG-GLOBE-BUTTON" = "Webadresse";
 
 /* One of these is displayed under the video icon, in the Meeting Inspector. They denote the particular app that will be opened, by selecting the icon.
  
    NOTE TO TRANSLATOR: These are corporate trade names. If there are no localized well-known substitutes, leave the English names.
  */
-"SLUG-DIRECT-URI-ZOOM"                          =   "Zoom";
-"SLUG-DIRECT-URI-GOTOMEETING"                   =   "GotoMeeting";
-"SLUG-DIRECT-URI-SKYPE"                         =   "Skype";
-"SLUG-DIRECT-URI-MEET"                          =   "Google Meet";
-"SLUG-DIRECT-URI-DISCORD"                       =   "Discord";
-"SLUG-DIRECT-URI-JITSI"                         =   "Jitsi Meet";
+"SLUG-DIRECT-URI-ZOOM" = "Zoom";
+"SLUG-DIRECT-URI-GOTOMEETING" = "GotoMeeting";
+"SLUG-DIRECT-URI-SKYPE" = "Skype";
+"SLUG-DIRECT-URI-MEET" = "Google Meet";
+"SLUG-DIRECT-URI-DISCORD" = "Discord";
+"SLUG-DIRECT-URI-JITSI" = "Jitsi Meet";
 
 // MARK: - ATTENDANCE SCREEN -
-
 /* The title of the "My Attendance" Screen */
-"SLUG-TAB-1-TITLE"                              =   "My Attendance";
+
+"SLUG-TAB-1-TITLE" = "Meine Teilnahme";
 
 // MARK: - SETTINGS SCREEN -
-
 /* The name of the screen */
-"SLUG-SETTINGS-TITLE"                           =   "Settings";
+
+"SLUG-SETTINGS-TITLE" = "Einstellungen";
 /* The text for the label for the Reduce Service Meetings switch. */
-"SLUG-FILTER-SERVICE-MEETINGS"                  =   "Reduce Service Meetings";
+"SLUG-FILTER-SERVICE-MEETINGS" = "Service-Meetings reduzieren";
 /* This is displayed under the switch, and explains its utility. */
-"SLUG-FILTER-SERVICE-MEETINGS-EXPLAIN"          =   "If this switch is on, the app will attempt to remove meetings that are \"business meetings,\" related to NA Service (not Recovery Meetings).";
+"SLUG-FILTER-SERVICE-MEETINGS-EXPLAIN" = "Wenn diese Funktion aktiviert ist, wird die App versuchen, Meetings zu entfernen, bei denen es sich um \"Business Meetings\" handelt, die sich auf den NA-Service (und nicht auf Genesungsmeetings) beziehen.";
 
 // MARK: - ABOUT SCREEN -
-
 /* The name of the screen */
-"SLUG-ABOUT-SCREEN-TITLE"                       =   "About This App";
+
+"SLUG-ABOUT-SCREEN-TITLE" = "Über diese App";
 /* The complete version */
-"SLUG-VERSION-FORMAT"                           =   "Version: %@ (%@)";
+"SLUG-VERSION-FORMAT" = "Version: %@ (%@)";
 /* The text of the "Presented By" button.
  
    NOTE TO TRANSLATOR: Do not translate "Little Green Viper Software Development LLC". That is a corporate trade name.
  */
-"SLUG-PRESENTED-BY"                             =   "Presented By Little Green Viper Software Development LLC";
+"SLUG-PRESENTED-BY" = "Präsentiert von Little Green Viper Software Development LLC";
 /* The button string for the Privacy button */
-"SLUG-PRIVACY-LABEL"                            =   "Privacy";
+"SLUG-PRIVACY-LABEL" = "Datenschutz";
 /* The header for the dependency list. */
-"SLUG-DEPENDENCY-HEADER-LABEL"                  =   "App Dependencies:";
+"SLUG-DEPENDENCY-HEADER-LABEL" = "App-Abhängigkeiten:";
 /* The button string for the help page button. */
-"SLUG-HELP-PAGE-LABEL"                          =   "More Information";
+"SLUG-HELP-PAGE-LABEL" = "Weitere Informationen";
 /* The button string for the GitHub button */
-"SLUG-GH-LABEL"                                 =   "The Source Code for This App";
+"SLUG-GH-LABEL" = "Der Quellcode für diese App";
 
 // ***********************************************************************************************************
 // MARK: - DO NOT TRANSLATE BELOW THIS LINE -
 // ***********************************************************************************************************
-
 /* The button string for the BMLT button */
-"SLUG-BMLT-LABEL"                               =   "Basic Meeting List Toolbox (BMLT)";
+
+"SLUG-BMLT-LABEL" = "Basic Meeting List Toolbox (BMLT)";
 /* The format for a universal meeting link. The placeholder is replaced with the meeting's ID */
-"SLUG-UNIVERSAL-LINK-FORMAT"                    =   "https://vmf.littlegreenviper.com?%lu";
+"SLUG-UNIVERSAL-LINK-FORMAT" = "https://vmf.littlegreenviper.com?%lu";
 /* The button string for the Basic GCD Timer button */
-"SLUG-BGCD-LABEL"                               =   "RVS_BasicGCDTimer";
+"SLUG-BGCD-LABEL" = "RVS_BasicGCDTimer";
 /* The button string for the Generic Swift Toolbox button */
-"SLUG-GSWT-LABEL"                               =   "RVS_Generic_Swift_Toolbox";
+"SLUG-GSWT-LABEL" = "RVS_Generic_Swift_Toolbox";
 /* The button string for the Persistent Prefs button */
-"SLUG-PP-LABEL"                                 =   "RVS_PersistentPrefs";
+"SLUG-PP-LABEL" = "RVS_PersistentPrefs";
 /* The button string for the UIKit Toolbox button */
-"SLUG-UIKTB-LABEL"                              =   "RVS_UIKit_Toolbox";
+"SLUG-UIKTB-LABEL" = "RVS_UIKit_Toolbox";
 /* The button string for the SwiftBMLSDK button */
-"SLUG-SWBMLSDK-LABEL"                           =   "SwiftBMLSDK";
+"SLUG-SWBMLSDK-LABEL" = "SwiftBMLSDK";
 /* The button string for the Meeting Server button */
-"SLUG-ML-LABEL"                                 =   "LGV_MeetingServer";
+"SLUG-ML-LABEL" = "LGV_MeetingServer";
 /* The button string for the TZ Lookup button */
-"SLUG-TZ-LABEL"                                 =   "LGV_TZ_Lookup";
+"SLUG-TZ-LABEL" = "LGV_TZ_Lookup";
 /* The URL to the site. */
-"SLUG-PRESENTED-BY-URL"                         =   "https://littlegreenviper.com";
+"SLUG-PRESENTED-BY-URL" = "https://littlegreenviper.com";
 /* The URL string for the Privacy button */
-"SLUG-PRIVACY-URL"                              =   "https://littlegreenviper.com/portfolio/the-virtual-na-meeting-finder-app/#privacy";
+"SLUG-PRIVACY-URL" = "https://littlegreenviper.com/portfolio/the-virtual-na-meeting-finder-app/#privacy";
 /* The URL string for the Basic GCD Timer button */
-"SLUG-BGCD-URL"                                 =   "https://github.com/RiftValleySoftware/RVS_BasicGCDTimer";
+"SLUG-BGCD-URL" = "https://github.com/RiftValleySoftware/RVS_BasicGCDTimer";
 /* The URL string for the Generic Swift Toolbox button */
-"SLUG-GSWT-URL"                                 =   "https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox";
+"SLUG-GSWT-URL" = "https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox";
 /* The URL string for the Persistent Prefs button */
-"SLUG-PP-URL"                                   =   "https://github.com/RiftValleySoftware/RVS_PersistentPrefs";
+"SLUG-PP-URL" = "https://github.com/RiftValleySoftware/RVS_PersistentPrefs";
 /* The URL string for the UIKit Toolbox button */
-"SLUG-UIKTB-URL"                                =   "https://github.com/RiftValleySoftware/RVS_UIKit_Toolbox";
+"SLUG-UIKTB-URL" = "https://github.com/RiftValleySoftware/RVS_UIKit_Toolbox";
 /* The URL string for the SwiftBMLSDK button */
-"SLUG-SWBMLSDK-URL"                             =   "https://github.com/LittleGreenViper/SwiftBMLSDK";
+"SLUG-SWBMLSDK-URL" = "https://github.com/LittleGreenViper/SwiftBMLSDK";
 /* The URL string for the Meeting Server button */
-"SLUG-ML-URL"                                   =   "https://github.com/LittleGreenViper/LGV_MeetingServer";
+"SLUG-ML-URL" = "https://github.com/LittleGreenViper/LGV_MeetingServer";
 /* The URL string for the TZ button. */
-"SLUG-TZ-URL"                                   =   "https://github.com/LittleGreenViper/LGV_TZ_Lookup";
+"SLUG-TZ-URL" = "https://github.com/LittleGreenViper/LGV_TZ_Lookup";
 /* The URL string for the GitHub Button */
-"SLUG-GH-URL"                                   =   "https://github.com/LittleGreenViper/VirtualMeetingFinder";
+"SLUG-GH-URL" = "https://github.com/LittleGreenViper/VirtualMeetingFinder";
 /* The URL string for the BMLT button */
-"SLUG-BMLT-URL"                                 =   "https://bmlt.app";
+"SLUG-BMLT-URL" = "https://bmlt.app";
 /* The URL string for the help page button. */
-"SLUG-HELP-PAGE-URL"                            =   "https://littlegreenviper.com/portfolio/the-virtual-na-meeting-finder-app/";
+"SLUG-HELP-PAGE-URL" = "https://littlegreenviper.com/portfolio/the-virtual-na-meeting-finder-app/";
 
 // MARK: -

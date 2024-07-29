@@ -91,7 +91,7 @@
 /* This is the label for the "thermometer" completion bar, below the segmented switch. */
 "SLUG-ACC-COMPLETION-DISPLAY-LABEL" = "Hora actual del día";
 /* This is the hint for the "thermometer" completion bar, below the segmented switch. */
-"SLUG-ACC-COMPLETION-DISPLAY-HINT" = "Esto indica como de avanzado está el día. A la izquierda es hacia las 12 del mediodía, y a la derecha es hacia la medianoche.";
+"SLUG-ACC-COMPLETION-DISPLAY-HINT" = "Esto indica como de avanzado está el día. A la izquierda es hacia las 0 horas, y a la derecha es hacia la medianoche.";
 
 /* This is the label for the day/time picker. */
 "SLUG-ACC-DIRECT-PICKER-LABEL" = "Seleccionar día y hora";

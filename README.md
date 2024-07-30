@@ -1,4 +1,4 @@
-# Virtual NA Meeting Finder
+# We Are Never Alone
 
 An app that makes it simple to discover and attend virtual (and hybrid) NA meetings.
 

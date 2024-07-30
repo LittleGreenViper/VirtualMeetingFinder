@@ -76,7 +76,7 @@ This is another screen that is brought in from the Settings Screen, that has inf
 
 ## Privacy
 
-[The Privacy Policy](https://littlegreenviper.com/welcome-to-little-green-viper/privacy/app-privacy/)
+[The Privacy Policy](https://littlegreenviper.com/the-virtual-na-meeting-finder-app#privacy)
 
 This project collects **absolutely no information at all**, from anyone, at any time.
 

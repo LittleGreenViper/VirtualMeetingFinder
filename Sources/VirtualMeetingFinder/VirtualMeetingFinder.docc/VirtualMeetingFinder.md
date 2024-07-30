@@ -1,4 +1,4 @@
-# ``Virtual_NA_Meeting_Finder``
+# ``We_Are_Never_Alone``
 
 An app that makes it simple to discover and attend virtual (and hybrid) NA meetings.
 
@@ -48,7 +48,7 @@ This is a screen that is brought in from the Main Screen, that allows the user t
 
 #### The About This App Screen
 
-![About Screen](fig04.png)
+![About Screen](fig05.png)
 
 This is another screen that is brought in from the Settings Screen, that has information about the app, such as its specific version, and links to dependencies.
 

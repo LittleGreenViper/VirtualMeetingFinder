@@ -8,7 +8,7 @@
       buildArchitectures = "Automatic">
       <BuildActionEntries>
          <BuildActionEntry
-            buildForTesting = "NO"
+            buildForTesting = "YES"
             buildForRunning = "YES"
             buildForProfiling = "YES"
             buildForArchiving = "YES"
@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D49393302C2616C7006438AE"
-               BuildableName = "Virtual NA Meeting Finder.app"
-               BlueprintName = "Virtual NA Meeting Finder"
+               BuildableName = "We Are Never Alone.app"
+               BlueprintName = "We Are Never Alone"
                ReferencedContainer = "container:VirtualMeetingFinder.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,11 +45,18 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D49393302C2616C7006438AE"
-            BuildableName = "Virtual NA Meeting Finder.app"
-            BlueprintName = "Virtual NA Meeting Finder"
+            BuildableName = "We Are Never Alone.app"
+            BlueprintName = "We Are Never Alone"
             ReferencedContainer = "container:VirtualMeetingFinder.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "SKIP_CANOPEN"
+            value = "1"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -62,8 +69,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D49393302C2616C7006438AE"
-            BuildableName = "Virtual NA Meeting Finder.app"
-            BlueprintName = "Virtual NA Meeting Finder"
+            BuildableName = "We Are Never Alone.app"
+            BlueprintName = "We Are Never Alone"
             ReferencedContainer = "container:VirtualMeetingFinder.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

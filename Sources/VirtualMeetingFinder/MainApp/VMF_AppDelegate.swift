@@ -78,7 +78,7 @@ class VMF_AppDelegate: UIResponder {
      /**
       This is the singleton for the prefs.
       */
-     static var prefs = VMF_Prefs()
+     static var prefs = VMF_Persistent_Prefs()
 }
 
 /* ###################################################################################################################################### */

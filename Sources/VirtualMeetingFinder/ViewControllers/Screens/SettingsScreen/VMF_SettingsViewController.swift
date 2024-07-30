@@ -82,28 +82,15 @@ extension VMF_SettingsViewController {
      /**
       Called when either the label or switch to filter Service meetings is hit.
       
-      - parameter inSender: The gesture recognizer or switch.
+      - parameter: ignored
       */
-     @IBAction func filterServiceMeetingsHit(_ inSender: NSObjectProtocol) {
-          if let switcher = inSender as? UISwitch {   // If the switch, we execute it.
-               VMF_AppDelegate.prefs.excludeServiceMeetings = switcher.isOn
-               guard let searchController = VMF_AppDelegate.mainScreenController,
-                     let tableDisplayController = searchController.tableDisplayController
-               else { return }
-               
-               let dayIndex = tableDisplayController.dayIndex
-               let timeIndex = tableDisplayController.timeIndex
-               guard let time = searchController.getTimeOf(dayIndex: dayIndex, timeIndex: timeIndex) else { return }
-               searchController.reorganizeMeetings()
-               searchController.openTo(dayIndex: dayIndex, time: time)
-          } else if inSender is UITapGestureRecognizer {    // If the label, we toggle the switch, and send the value changed message (which calls us again).
-               selectionHaptic()
-               let newValue = !(filterServiceMeetingsSwitch?.isOn ?? true)
-               filterServiceMeetingsSwitch?.setOn(newValue, animated: true)
-               filterServiceMeetingsSwitch?.isEnabled = false
-               filterServiceMeetingsSwitch?.sendActions(for: .valueChanged)
-               filterServiceMeetingsSwitch?.isEnabled = true
-          }
+     @IBAction func filterServiceMeetingsHit(_: Any) {
+          selectionHaptic()
+          let newValue = !(filterServiceMeetingsSwitch?.isOn ?? true)
+          filterServiceMeetingsSwitch?.setOn(newValue, animated: true)
+          filterServiceMeetingsSwitch?.isEnabled = false
+          VMF_AppDelegate.prefs.excludeServiceMeetings = newValue
+          filterServiceMeetingsSwitch?.isEnabled = true
      }
 }
 

@@ -26,7 +26,7 @@ import RVS_Persistent_Prefs
 /**
  This stores our various parameters.
  */
-class VMF_Prefs: RVS_PersistentPrefs {
+class VMF_Persistent_Prefs: RVS_PersistentPrefs {
      /* ################################################################################################################################## */
      // MARK: RVS_PersistentPrefs Conformance
      /* ################################################################################################################################## */
@@ -69,7 +69,7 @@ class VMF_Prefs: RVS_PersistentPrefs {
 /* ###################################################################################################################################### */
 // MARK: Public Computed Properties
 /* ###################################################################################################################################### */
-extension VMF_Prefs {
+extension VMF_Persistent_Prefs {
      /* ################################################################## */
      /**
       This saves our meeting attendance, as a list of meeting IDs.

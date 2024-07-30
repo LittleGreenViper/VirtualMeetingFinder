@@ -13,7 +13,7 @@
 		D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */; };
 		D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */; };
 		D43A9C132C373F67001285FC /* RVS_Persistent_Prefs in Frameworks */ = {isa = PBXBuildFile; productRef = D43A9C122C373F67001285FC /* RVS_Persistent_Prefs */; };
-		D43A9C192C374198001285FC /* VMF_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A9C172C374198001285FC /* VMF_Prefs.swift */; };
+		D43A9C192C374198001285FC /* VMF_Persistent_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A9C172C374198001285FC /* VMF_Persistent_Prefs.swift */; };
 		D43A9C1A2C374198001285FC /* VMF_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A9C182C374198001285FC /* VMF_Extensions.swift */; };
 		D455E5672C396F3A00246848 /* VMF_AttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D455E5662C396F3A00246848 /* VMF_AttendanceViewController.swift */; };
 		D45E42022C3F2BA7006578F6 /* VMF_SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E42012C3F2BA7006578F6 /* VMF_SettingsViewController.swift */; };
@@ -45,13 +45,13 @@
 		D42997D62C57B06900164E46 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		D42997D72C57B07300164E46 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D42997D82C57B07300164E46 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Accessibility.strings; sourceTree = "<group>"; };
-		D43A9C172C374198001285FC /* VMF_Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Prefs.swift; sourceTree = "<group>"; };
+		D43A9C172C374198001285FC /* VMF_Persistent_Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Persistent_Prefs.swift; sourceTree = "<group>"; };
 		D43A9C182C374198001285FC /* VMF_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Extensions.swift; sourceTree = "<group>"; };
 		D455E5662C396F3A00246848 /* VMF_AttendanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_AttendanceViewController.swift; sourceTree = "<group>"; };
 		D45E42012C3F2BA7006578F6 /* VMF_SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_SettingsViewController.swift; sourceTree = "<group>"; };
 		D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_BaseViewController.swift; sourceTree = "<group>"; };
 		D49349712C29A6D100C58390 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D49393312C2616C7006438AE /* Virtual NA Meeting Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Virtual NA Meeting Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D49393312C2616C7006438AE /* We Are Never Alone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "We Are Never Alone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49393342C2616C7006438AE /* VMF_AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_AppDelegate.swift; sourceTree = "<group>"; };
 		D49393362C2616C7006438AE /* VMF_SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_SceneDelegate.swift; sourceTree = "<group>"; };
 		D493933B2C2616C7006438AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/VMF.storyboard; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 		D43A9C162C37416E001285FC /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				D43A9C172C374198001285FC /* VMF_Prefs.swift */,
+				D43A9C172C374198001285FC /* VMF_Persistent_Prefs.swift */,
 				D43A9C182C374198001285FC /* VMF_Extensions.swift */,
 				D4F4BCEC2C36DAFC0023C21B /* VMF_MapMarker.swift */,
 			);
@@ -213,7 +213,7 @@
 		D49393322C2616C7006438AE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D49393312C2616C7006438AE /* Virtual NA Meeting Finder.app */,
+				D49393312C2616C7006438AE /* We Are Never Alone.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -291,9 +291,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D49393302C2616C7006438AE /* Virtual NA Meeting Finder */ = {
+		D49393302C2616C7006438AE /* We Are Never Alone */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D49393452C2616C8006438AE /* Build configuration list for PBXNativeTarget "Virtual NA Meeting Finder" */;
+			buildConfigurationList = D49393452C2616C8006438AE /* Build configuration list for PBXNativeTarget "We Are Never Alone" */;
 			buildPhases = (
 				D493932D2C2616C7006438AE /* Sources */,
 				D493932E2C2616C7006438AE /* Frameworks */,
@@ -303,7 +303,7 @@
 			);
 			dependencies = (
 			);
-			name = "Virtual NA Meeting Finder";
+			name = "We Are Never Alone";
 			packageProductDependencies = (
 				D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */,
 				D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */,
@@ -312,7 +312,7 @@
 				D4F70AA12C55800E000378E9 /* SwiftBMLSDK */,
 			);
 			productName = VirtualMeetingFinder;
-			productReference = D49393312C2616C7006438AE /* Virtual NA Meeting Finder.app */;
+			productReference = D49393312C2616C7006438AE /* We Are Never Alone.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -354,7 +354,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D49393302C2616C7006438AE /* Virtual NA Meeting Finder */,
+				D49393302C2616C7006438AE /* We Are Never Alone */,
 			);
 		};
 /* End PBXProject section */
@@ -383,7 +383,7 @@
 				D43A9C1A2C374198001285FC /* VMF_Extensions.swift in Sources */,
 				D4DDAB822C4039570018944E /* VMF_AboutViewController.swift in Sources */,
 				D47C2F0E2C2C5E6A0048C91C /* VMF_BaseViewController.swift in Sources */,
-				D43A9C192C374198001285FC /* VMF_Prefs.swift in Sources */,
+				D43A9C192C374198001285FC /* VMF_Persistent_Prefs.swift in Sources */,
 				D4B69A342C2B162900D24DA6 /* VMF_MeetingInspectorViewController.swift in Sources */,
 				D401336B2C320D520018076B /* VMF_EmbeddedTableController.swift in Sources */,
 				D40133692C320C070018076B /* VMF_MainViewController.swift in Sources */,
@@ -573,7 +573,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Meta/VirtualMeetingFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1000;
+				CURRENT_PROJECT_VERSION = 1002;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -607,7 +607,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Meta/VirtualMeetingFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1000;
+				CURRENT_PROJECT_VERSION = 1002;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -646,7 +646,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D49393452C2616C8006438AE /* Build configuration list for PBXNativeTarget "Virtual NA Meeting Finder" */ = {
+		D49393452C2616C8006438AE /* Build configuration list for PBXNativeTarget "We Are Never Alone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D49393462C2616C8006438AE /* Debug */,

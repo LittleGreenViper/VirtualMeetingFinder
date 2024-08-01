@@ -437,15 +437,9 @@ extension VMF_EmbeddedTableController {
           selectionHaptic()
           myController?.updateThermometer(self)
           myController?.setDayPicker()
-          
-          if 0 < VMF_SceneDelegate.urlMeetingID,
-             let meeting = meetings.getMeetingBy(id: VMF_SceneDelegate.urlMeetingID) {
-               selectMeeting(meeting)
-          }
-          
-          VMF_SceneDelegate.urlMeetingID = 0
+          checkForUniversalLink()
      }
-     
+
      /* ################################################################## */
      /**
       Called just before the view segues to another one.
@@ -460,6 +454,24 @@ extension VMF_EmbeddedTableController {
                destination.meeting = meetingInstance
                hardImpactHaptic()
           }
+     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Instance Methods
+/* ###################################################################################################################################### */
+extension VMF_EmbeddedTableController {
+     /* ################################################################## */
+     /**
+      This checks to see if we need to open a linked meeting.
+      */
+     func checkForUniversalLink() {
+          if 0 < VMF_SceneDelegate.urlMeetingID,
+             let meeting = VMF_AppDelegate.virtualService?.meetings.first(where: { $0.meeting.id == VMF_SceneDelegate.urlMeetingID })?.meeting {
+               selectMeeting(meeting)
+          }
+          
+          VMF_SceneDelegate.urlMeetingID = 0
      }
 }
 

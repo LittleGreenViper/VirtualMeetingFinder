@@ -758,7 +758,7 @@ extension VMF_MainViewController {
       */
      override func viewDidAppear(_ inIsAnimated: Bool) {
           super.viewDidAppear(inIsAnimated)
-          
+
           // If we have to load from the meeting server, we do so, now.
           if needsReload {
                loadMeetings { self.openTo() }

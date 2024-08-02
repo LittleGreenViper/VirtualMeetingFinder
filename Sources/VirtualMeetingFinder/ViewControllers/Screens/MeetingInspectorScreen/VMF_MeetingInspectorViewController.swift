@@ -349,34 +349,18 @@ extension VMF_MeetingInspectorViewController {
           event.timeZone = meeting.timeZone
           event.startDate = meeting.getNextStartDate()
           event.endDate = event.startDate.addingTimeInterval(meeting.duration)
-          
-          if let coords = meeting.coords,
-             let goPostal = meeting.inPersonAddress {
-               let location = EKStructuredLocation(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: coords, postalAddress: goPostal)))
-               location.title = meeting.inPersonVenueName
-               event.structuredLocation = location
-          } else {
-               let simpleLocationText = meeting.basicInPersonAddress
-               if let coords = meeting.coords {
-                    let location = EKStructuredLocation(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: coords)))
-                    location.title = simpleLocationText
-                    event.structuredLocation = location
-               } else {
-                    event.location = simpleLocationText
-               }
-          }
+          event.url = appURI
+          event.location = meeting.directAppURI?.absoluteString ?? appURI.absoluteString
+          event.recurrenceRules = [EKRecurrenceRule(recurrenceWith: .weekly, interval: 1, end: nil)]
           
           var notes = [String]()
           
           if let myCurrentTimezoneName = TimeZone.current.localizedName(for: .standard, locale: .current),
              let zoneName = meeting.timeZone.localizedName(for: .standard, locale: .current),
-             !zoneName.isEmpty,
              myCurrentTimezoneName != zoneName {
                let nativeTime = meeting.getNextStartDate(isAdjusted: false)
                notes.append(String(format: "SLUG-TIMEZONE-FORMAT".localizedVariant, zoneName, nativeTime.localizedTime))
           }
-          
-          event.url = meeting.directAppURI ?? appURI
           
           if let comments = meeting.comments,
              !comments.isEmpty {
@@ -992,20 +976,108 @@ extension VMF_AddToCalendar_Activity {
       We extract the event from the items, and return true.
       */
      override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
-          guard 2 == activityItems.count,
-                let eventItem = (activityItems[1] as? EKEvent)
+          guard 1 < activityItems.count,
+                activityItems[1] is EKEvent
           else { return false }
-          
-          print(eventItem.debugDescription)
           
           return true
      }
      
      /* ################################################################## */
      /**
-      This is the modal handler for the activity.
+      This is the execution handler for the activity.
       */
-     override var activityViewController: UIViewController? {
-          nil
+     override func perform() {
+          addReminderEvent()
+     }
+
+     /* ################################################################## */
+     /**
+      This adds a reminder event for the next meeting start time.
+      */
+     func addReminderEvent() {
+          /* ############################################################## */
+          /**
+           Completion proc for the permissions.
+           
+           - parameter inIsGranted: True, if permission was granted.
+           - parameter inError: Any errors that occurred.
+           */
+          func calendarCompletion(_ inIsGranted: Bool, _ inError: Error?) {
+               DispatchQueue.main.async { [weak self] in
+                    guard nil == inError,
+                          inIsGranted,
+                          let self = self
+                    else {
+                         if !inIsGranted {
+                              self?.displayPermissionsAlert(header: "SLUG-CALENDAR-PERM-ALERT-HEADER".localizedVariant, body: "SLUG-CALENDAR-PERM-ALERT-BODY".localizedVariant)
+                         }
+                         return
+                    }
+                    
+                    let eventController = EKEventEditViewController()
+                    eventController.event = meetingEvent
+                    eventController.eventStore = self.myController?.eventStore
+                    eventController.editViewDelegate = self
+                    if .pad == self.myController?.traitCollection.userInterfaceIdiom,
+                       let size = self.myController?.view?.bounds.size {
+                         eventController.modalPresentationStyle = .popover
+                         eventController.preferredContentSize = CGSize(width: size.width, height: size.height / 2)
+                         eventController.popoverPresentationController?.sourceView = myController?.navigationController?.navigationBar
+                         eventController.popoverPresentationController?.permittedArrowDirections = [.up]
+                    }
+                    
+                    self.myController?.present(eventController, animated: true, completion: nil)
+               }
+          }
+          
+          if #available(iOS 17.0, *) {
+               myController?.eventStore.requestWriteOnlyAccessToEvents(completion: calendarCompletion)
+          } else {
+               myController?.eventStore.requestAccess(to: EKEntityType.event, completion: calendarCompletion)
+          }
+     }
+     
+     /* ################################################################## */
+     /**
+      This displays an alert, for when permission is denied, and allows access to the settings.
+      This can be called from non-main threads.
+      
+      - parameter header: The header. This can be a lo9calization slug.
+      - parameter body: The message body. This can be a localization slug.
+      */
+     func displayPermissionsAlert(header inHeader: String, body inBody: String) {
+          DispatchQueue.main.async {
+               let style: UIAlertController.Style = .alert
+               let alertController = UIAlertController(title: inHeader.localizedVariant, message: inBody.localizedVariant, preferredStyle: style)
+               
+               let okAction = UIAlertAction(title: "SLUG-CANCEL-BUTTON-TEXT".localizedVariant, style: .cancel, handler: nil)
+               
+               alertController.addAction(okAction)
+               
+               let settingsAction = UIAlertAction(title: "SETTINGS-ALERT-BUTTON-TEXT".localizedVariant, style: .default, handler: { _ in
+                    VMF_AppDelegate.appDelegateInstance?.openMainSettings()
+               })
+               
+               alertController.addAction(settingsAction)
+               
+               self.myController?.present(alertController, animated: true, completion: nil)
+          }
+     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: EKEventEditViewDelegate Conformance
+/* ###################################################################################################################################### */
+extension VMF_AddToCalendar_Activity: EKEventEditViewDelegate {
+     /* ################################################################## */
+     /**
+      Called when the even kit has completed with an action to add the reminder to the calendar.
+      
+      - parameter inController: The controller we're talking about.
+      - parameter didCompleteWith: The even action that completed.
+      */
+     func eventEditViewController(_ inController: EKEventEditViewController, didCompleteWith inAction: EKEventEditViewAction) {
+          inController.dismiss(animated: true, completion: nil)
      }
 }

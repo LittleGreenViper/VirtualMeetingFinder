@@ -43,6 +43,14 @@
 "SLUG-ALERT-ERROR-HEADER"                         =    "ERROR";
 /* Body for Fetch Error Message */
 "SLUG-ALERT-ERROR-BODY"                           =    "There was an error fetching the data. The app will not work, until we can fetch the data.";
+// This is displayed in the alerts that come up when we are requesting some system permission. This is the button that takes you to the Settings App screen, where the permissions switches are.
+"SETTINGS-ALERT-BUTTON-TEXT"                      =   "Go to Settings";
+
+// MARK: NO PERMISSION FOR CALENDAR ALERT
+// The heading for the error alert that comes up, if we don't have calendar permission.
+"SLUG-CALENDAR-PERM-ALERT-HEADER"                 =   "No Calendar Permission";
+// The body for the error alert that comes up, if we don't have calendar permission.
+"SLUG-CALENDAR-PERM-ALERT-BODY"                   =   "You have denied permission to create calendar entries. Please open the Settings App, and grant Calendar permission to the Recovrr App.";
 
 // MARK: - MAIN SCREEN -
 

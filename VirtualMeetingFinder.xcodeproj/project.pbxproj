@@ -603,6 +603,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/VirtualMeetingFinder/Meta/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = VMF_LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = VMF;
@@ -637,6 +638,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/VirtualMeetingFinder/Meta/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = VMF_LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = VMF;

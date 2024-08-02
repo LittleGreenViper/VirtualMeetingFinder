@@ -40,6 +40,8 @@
 "SLUG-ALERT-ERROR-HEADER" = "FEHLER";
 /* Body for Fetch Error Message */
 "SLUG-ALERT-ERROR-BODY" = "Beim Abrufen der Daten ist ein Fehler aufgetreten. Die App funktioniert erst, wenn wir die Daten abrufen können.";
+// This is displayed in the alerts that come up when we are requesting some system permission. This is the button that takes you to the Settings App screen, where the permissions switches are.
+"SETTINGS-ALERT-BUTTON-TEXT" = "Zu den Einstellungen gehen";
 
 // MARK: - MAIN SCREEN -
 /* The name of the screen */

@@ -40,6 +40,8 @@
 "SLUG-ALERT-ERROR-HEADER" = "ERROR";
 /* Body for Fetch Error Message */
 "SLUG-ALERT-ERROR-BODY" = "Se ha producido un error al obtener los datos. La aplicación no funcionará hasta que no podamos obtener los datos.";
+// This is displayed in the alerts that come up when we are requesting some system permission. This is the button that takes you to the Settings App screen, where the permissions switches are.
+"SETTINGS-ALERT-BUTTON-TEXT" = "Ir a Configuración";
 
 // MARK: - MAIN SCREEN -
 /* The name of the screen */

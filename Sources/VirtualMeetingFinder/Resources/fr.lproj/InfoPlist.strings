@@ -26,6 +26,9 @@
 // MARK: -
 
 // This is the app name.
-"CFBundleDisplayName"                           =   "Nous Ne Sommes Jamais Seuls";
-
+"CFBundleDisplayName"                             =    "Nous Ne Sommes Jamais Seuls";
+// Displayed for the calendar access alerts
+"NSCalendarsUsageDescription"                     =    "Cette application peut ajouter des événements à votre calendrier pour vous rappeler votre participation aux réunions à venir.";
+// Displayed for the calendar access alerts (newer operating systems).
+"NSCalendarsWriteOnlyAccessUsageDescription"      =    "Cette application peut ajouter des événements à votre calendrier pour vous rappeler votre participation aux réunions à venir.";
 // MARK: -

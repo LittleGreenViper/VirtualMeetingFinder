@@ -26,6 +26,9 @@
 // MARK: -
 
 // This is the app name.
-"CFBundleDisplayName"                           =   "We Are Never Alone";
-
+"CFBundleDisplayName"                             =    "We Are Never Alone";
+// Displayed for the calendar access alerts
+"NSCalendarsUsageDescription"                     =    "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
+// Displayed for the calendar access alerts (newer operating systems).
+"NSCalendarsWriteOnlyAccessUsageDescription"      =    "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
 // MARK: -

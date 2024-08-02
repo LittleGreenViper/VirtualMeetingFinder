@@ -1,0 +1,14 @@
+author: 'Little Green Viper Software Development LLC'
+author_url: https://littlegreenviper.com
+hide_documentation_coverage: true
+github_url: https://github.com/LittleGreenViper/VirtualMeetingFinder
+title: 'We Are Never Alone App'
+build_tool_arguments:
+    - "-workspace"
+    - "VirtualMeetingFinder.xcworkspace"
+    - "-scheme"
+    - "We Are Never Alone"
+
+copyright: '© 2024 [Little Green Viper Software Development LLC](https://littlegreenviper.com)'
+min_acl: internal
+theme: fullwidth

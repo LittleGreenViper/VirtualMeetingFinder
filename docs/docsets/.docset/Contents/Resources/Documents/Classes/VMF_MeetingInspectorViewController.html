@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>VMF_MeetingInspectorViewController Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/VMF_MeetingInspectorViewController" class="dashAnchor"></a>
+
+    <a title="VMF_MeetingInspectorViewController Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          We Are Never Alone App
+        </a>
+        
+      </p>
+    
+      <div class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </div>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/LittleGreenViper/VirtualMeetingFinder">
+            <img class="header-icon" src="../img/gh.png" alt="GitHub"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">Index</a>
+      <img class="carat" src="../img/carat.png" alt=""/>
+      <a class="breadcrumb" href="../Classes.html">Classes</a>
+      <img class="carat" src="../img/carat.png" alt=""/>
+      We_Are_Never_Alone.VMF_MeetingInspectorViewController Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_AboutViewController.html">VMF_AboutViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_AppDelegate.html">VMF_AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_AttendanceViewController.html">VMF_AttendanceViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_BaseViewController.html">VMF_BaseViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes.html#/c:@M@We_Are_Never_Alone@objc(cs)VMF_DayTimeSearchPageViewController">VMF_DayTimeSearchPageViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_EmbeddedTableController.html">VMF_EmbeddedTableController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_MainViewController.html">VMF_MainViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_MainViewController/PickerViewComponents.html">– PickerViewComponents</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_MapAnnotation.html">VMF_MapAnnotation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_MapMarker.html">VMF_MapMarker</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_MeetingInspectorViewController.html">VMF_MeetingInspectorViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_Persistent_Prefs.html">VMF_Persistent_Prefs</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_Persistent_Prefs/Keys.html">– Keys</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_SceneDelegate.html">VMF_SceneDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_SettingsViewController.html">VMF_SettingsViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_TableCell.html">VMF_TableCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_TapHoldButton.html">VMF_TapHoldButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_URLButton.html">VMF_URLButton</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/AppKit.NSImage.html">AppKit.NSImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Bundle.html">Bundle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Date.html">Date</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/MeetingInstance.html">MeetingInstance</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/StringProtocol.html">StringProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SwiftBMLSDK_MeetingLocalTimezoneCollection.html">SwiftBMLSDK_MeetingLocalTimezoneCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SwiftUI.html">SwiftUI</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SwiftUI/Color.html">– Color</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SwiftUI/ShapeStyle.html">– ShapeStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SwiftUI/Image.html">– Image</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIKit.UIColor.html">UIKit.UIColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIKit.UIImage.html">UIKit.UIImage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VMF_BaseProtocol.html">VMF_BaseProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VMF_EmbeddedTableControllerProtocol.html">VMF_EmbeddedTableControllerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VMF_MasterTableControllerProtocol.html">VMF_MasterTableControllerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/_ACResourceInitProtocol.html">_ACResourceInitProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ColorResource.html">ColorResource</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ImageResource.html">ImageResource</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>VMF_MeetingInspectorViewController</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_MeetingInspectorViewController</span> <span class="p">:</span> <span class="kt"><a href="../Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_MeetingInspectorViewController</span><span class="p">:</span> <span class="kt">MKMapViewDelegate</span></code></pre>
+
+                </div>
+              </div>
+            <p>This displays one meeting.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC13isFormatsOpenSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isFormatsOpen" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC13isFormatsOpenSbvp">isFormatsOpen</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set to true, to open the formats section.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">isFormatsOpen</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC14isLocationOpenSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isLocationOpen" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC14isLocationOpenSbvp">isLocationOpen</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set to true, to open the formats section.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">isLocationOpen</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC7meeting11SwiftBMLSDK0kL7_ParserV0F0VSgvp"></a>
+                    <a name="//apple_ref/swift/Property/meeting" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC7meeting11SwiftBMLSDK0kL7_ParserV0F0VSgvp">meeting</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The meeting that this screen is displaying.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">meeting</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC02myI0AA0e14_EmbeddedTableI8Protocol_pSgvp"></a>
+                    <a name="//apple_ref/swift/Property/myController" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC02myI0AA0e14_EmbeddedTableI8Protocol_pSgvp">myController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The controller that &ldquo;owns&rdquo; this instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">myController</span><span class="p">:</span> <span class="p">(</span><span class="n">any</span> <span class="kt"><a href="../Protocols/VMF_EmbeddedTableControllerProtocol.html">VMF_EmbeddedTableControllerProtocol</a></span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)meetingNameLabel"></a>
+                    <a name="//apple_ref/swift/Property/meetingNameLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)meetingNameLabel">meetingNameLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The label that displays the meeting name.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">meetingNameLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)timeAndDayLabel"></a>
+                    <a name="//apple_ref/swift/Property/timeAndDayLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)timeAndDayLabel">timeAndDayLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The label that displays the meeting start time and weekday.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">timeAndDayLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)inProgressLabel"></a>
+                    <a name="//apple_ref/swift/Property/inProgressLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)inProgressLabel">inProgressLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This label is displayed if the meeting is in progress.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">inProgressLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)timeZoneLabel"></a>
+                    <a name="//apple_ref/swift/Property/timeZoneLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)timeZoneLabel">timeZoneLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The label that displays the meeting timezone.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">timeZoneLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)commentsTextView"></a>
+                    <a name="//apple_ref/swift/Property/commentsTextView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)commentsTextView">commentsTextView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This contains any additional comments.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">commentsTextView</span><span class="p">:</span> <span class="kt">UITextView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)linkContainer"></a>
+                    <a name="//apple_ref/swift/Property/linkContainer" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)linkContainer">linkContainer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This contains the tappable links.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">linkContainer</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)phoneButtonContainer"></a>
+                    <a name="//apple_ref/swift/Property/phoneButtonContainer" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)phoneButtonContainer">phoneButtonContainer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The vertical container for the phone button.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">phoneButtonContainer</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)phoneLabelButton"></a>
+                    <a name="//apple_ref/swift/Property/phoneLabelButton" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)phoneLabelButton">phoneLabelButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the phone in button&rsquo;s label.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">phoneLabelButton</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)globeButtonContainer"></a>
+                    <a name="//apple_ref/swift/Property/globeButtonContainer" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)globeButtonContainer">globeButtonContainer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The vertical container for the globe button.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">globeButtonContainer</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)globeLabelButton"></a>
+                    <a name="//apple_ref/swift/Property/globeLabelButton" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)globeLabelButton">globeLabelButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the Web link button&rsquo;s label.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">globeLabelButton</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)videoButtonContainer"></a>
+                    <a name="//apple_ref/swift/Property/videoButtonContainer" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)videoButtonContainer">videoButtonContainer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The vertical container for the video button.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">videoButtonContainer</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)videoLabelButton"></a>
+                    <a name="//apple_ref/swift/Property/videoLabelButton" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)videoLabelButton">videoLabelButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the video link button&rsquo;s label.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">videoLabelButton</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)phoneInfoTextView"></a>
+                    <a name="//apple_ref/swift/Property/phoneInfoTextView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)phoneInfoTextView">phoneInfoTextView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Contains any phone info that can&rsquo;t be turned into a URL.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">phoneInfoTextView</span><span class="p">:</span> <span class="kt">UITextView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)virtualExtraInfoTextView"></a>
+                    <a name="//apple_ref/swift/Property/virtualExtraInfoTextView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)virtualExtraInfoTextView">virtualExtraInfoTextView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This has any extra info for virtual meetings.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">virtualExtraInfoTextView</span><span class="p">:</span> <span class="kt">UITextView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)inPersonHeader"></a>
+                    <a name="//apple_ref/swift/Property/inPersonHeader" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)inPersonHeader">inPersonHeader</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This contains the header for the in-person location information.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">inPersonHeader</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)inPersonDisclosureTriangle"></a>
+                    <a name="//apple_ref/swift/Property/inPersonDisclosureTriangle" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)inPersonDisclosureTriangle">inPersonDisclosureTriangle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the disclosure triangle for the in-person section.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">inPersonDisclosureTriangle</span><span class="p">:</span> <span class="kt">UIImageView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)inPersonContainer"></a>
+                    <a name="//apple_ref/swift/Property/inPersonContainer" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)inPersonContainer">inPersonContainer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Contains the in-person meeting stuff.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">inPersonContainer</span><span class="p">:</span> <span class="kt">UIStackView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)inPersonHeaderLabel"></a>
+                    <a name="//apple_ref/swift/Property/inPersonHeaderLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)inPersonHeaderLabel">inPersonHeaderLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The heading for the in-person meeting stuff.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">inPersonHeaderLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)inPersonAddressTextView"></a>
+                    <a name="//apple_ref/swift/Property/inPersonAddressTextView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)inPersonAddressTextView">inPersonAddressTextView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The text view that displays an address for in-person meetings.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">inPersonAddressTextView</span><span class="p">:</span> <span class="kt">UITextView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)inPersonExtraInfoLabel"></a>
+                    <a name="//apple_ref/swift/Property/inPersonExtraInfoLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)inPersonExtraInfoLabel">inPersonExtraInfoLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This has any extra info for in-person meetings.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">inPersonExtraInfoLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)locationMapView"></a>
+                    <a name="//apple_ref/swift/Property/locationMapView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)locationMapView">locationMapView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The map view that displays the meeting location (if it has an in-person component).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">locationMapView</span><span class="p">:</span> <span class="kt">MKMapView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)formatHeader"></a>
+                    <a name="//apple_ref/swift/Property/formatHeader" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)formatHeader">formatHeader</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This contains the format header and disclosure triangle.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">formatHeader</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)formatHeaderLabel"></a>
+                    <a name="//apple_ref/swift/Property/formatHeaderLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)formatHeaderLabel">formatHeaderLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The heading for the format section.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">formatHeaderLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)formatHeaderDisclosureTriangle"></a>
+                    <a name="//apple_ref/swift/Property/formatHeaderDisclosureTriangle" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)formatHeaderDisclosureTriangle">formatHeaderDisclosureTriangle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The disclosure triangle for the format section.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">formatHeaderDisclosureTriangle</span><span class="p">:</span> <span class="kt">UIImageView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)formatContainerView"></a>
+                    <a name="//apple_ref/swift/Property/formatContainerView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)formatContainerView">formatContainerView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This contains individual formats.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">formatContainerView</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)iAttendBarButton"></a>
+                    <a name="//apple_ref/swift/Property/iAttendBarButton" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)iAttendBarButton">iAttendBarButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The navbar button to mark attendance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">iAttendBarButton</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)actionBarButton"></a>
+                    <a name="//apple_ref/swift/Property/actionBarButton" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(py)actionBarButton">actionBarButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The navbar button to copy the URI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">actionBarButton</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Base%20Class%20Overrides"></a>
+                <a name="//apple_ref/swift/Section/Base Class Overrides" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Base%20Class%20Overrides"></a>
+                  <h3 class="section-name"><span>Base Class Overrides</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)viewDidLoad"></a>
+                    <a name="//apple_ref/swift/Method/viewDidLoad()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)viewDidLoad">viewDidLoad()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when the view hierarchy has loaded.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)viewWillAppear:"></a>
+                    <a name="//apple_ref/swift/Method/viewWillAppear(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)viewWillAppear:">viewWillAppear(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called before the screen appears.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillAppear</span><span class="p">(</span><span class="n">_</span> <span class="nv">inIsAnimated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inIsAnimated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>True, if the appearance is animated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)viewWillDisappear:"></a>
+                    <a name="//apple_ref/swift/Method/viewWillDisappear(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)viewWillDisappear:">viewWillDisappear(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called before the screen disappears.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillDisappear</span><span class="p">(</span><span class="n">_</span> <span class="nv">inIsAnimated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inIsAnimated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>True, if the disappearance is animated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)viewDidLayoutSubviews"></a>
+                    <a name="//apple_ref/swift/Method/viewDidLayoutSubviews()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)viewDidLayoutSubviews">viewDidLayoutSubviews()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when the layout is done. We use this to set the &ldquo;please animate&rdquo; flag.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLayoutSubviews</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Instance Methods" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Instance%20Methods"></a>
+                  <h3 class="section-name"><span>Instance Methods</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC17setTimeAndWeekdayyyF"></a>
+                    <a name="//apple_ref/swift/Method/setTimeAndWeekday()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC17setTimeAndWeekdayyyF">setTimeAndWeekday()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the time and weekday (local) for the meeting.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setTimeAndWeekday</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC11setTimeZoneyyF"></a>
+                    <a name="//apple_ref/swift/Method/setTimeZone()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC11setTimeZoneyyF">setTimeZone()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the time zone string (or hides it).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setTimeZone</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC8setUpMapyySo22CLLocationCoordinate2DVF"></a>
+                    <a name="//apple_ref/swift/Method/setUpMap(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC8setUpMapyySo22CLLocationCoordinate2DVF">setUpMap(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes the map view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setUpMap</span><span class="p">(</span><span class="n">_</span> <span class="nv">inCoords</span><span class="p">:</span> <span class="kt">CLLocationCoordinate2D</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inCoords</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The center coordinate for the map (the marker location).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC12setUpFormatsyySay11SwiftBMLSDK0mN7_ParserV0F0V6FormatVGF"></a>
+                    <a name="//apple_ref/swift/Method/setUpFormats(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC12setUpFormatsyySay11SwiftBMLSDK0mN7_ParserV0F0V6FormatVGF">setUpFormats(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Populates the formats section.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setUpFormats</span><span class="p">(</span><span class="n">_</span> <span class="nv">inFormats</span><span class="p">:</span> <span class="p">[</span><span class="kt">SwiftBMLSDK_Parser</span><span class="o">.</span><span class="kt">Meeting</span><span class="o">.</span><span class="kt">Format</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inFormats</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of format instances.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC12setBarButtonyyF"></a>
+                    <a name="//apple_ref/swift/Method/setBarButton()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone34VMF_MeetingInspectorViewControllerC12setBarButtonyyF">setBarButton()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets up the bar button item, with the state of attendance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setBarButton</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Callbacks"></a>
+                <a name="//apple_ref/swift/Section/Callbacks" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Callbacks"></a>
+                  <h3 class="section-name"><span>Callbacks</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)phoneButtonHit:"></a>
+                    <a name="//apple_ref/swift/Method/phoneButtonHit(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)phoneButtonHit:">phoneButtonHit(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The phone in button was hit.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">phoneButtonHit</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)globeButtonHit:"></a>
+                    <a name="//apple_ref/swift/Method/globeButtonHit(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)globeButtonHit:">globeButtonHit(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The globe button was hit.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">globeButtonHit</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)videoButtonHit:"></a>
+                    <a name="//apple_ref/swift/Method/videoButtonHit(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)videoButtonHit:">videoButtonHit(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The video button was hit.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">videoButtonHit</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)formatSectionHeaderHit:"></a>
+                    <a name="//apple_ref/swift/Method/formatSectionHeaderHit(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)formatSectionHeaderHit:">formatSectionHeaderHit(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The format header was hit (open or close the format section).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">formatSectionHeaderHit</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)locationSectionHeaderHit:"></a>
+                    <a name="//apple_ref/swift/Method/locationSectionHeaderHit(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)locationSectionHeaderHit:">locationSectionHeaderHit(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The in-person location header was hit (open or close the location section).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">locationSectionHeaderHit</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)actionItemHit:"></a>
+                    <a name="//apple_ref/swift/Method/actionItemHit(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)actionItemHit:">actionItemHit(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called to handle action tasks.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">actionItemHit</span><span class="p">(</span><span class="n">_</span> <span class="nv">inButton</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inButton</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The action BarButtonItem</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)iAttendHit:"></a>
+                    <a name="//apple_ref/swift/Method/iAttendHit(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)iAttendHit:">iAttendHit(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The &ldquo;I Attend&rdquo; bar button item was hit.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">func</span> <span class="nf">iAttendHit</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/MKMapViewDelegate%20Conformance"></a>
+                <a name="//apple_ref/swift/Section/MKMapViewDelegate Conformance" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/MKMapViewDelegate%20Conformance"></a>
+                  <h3 class="section-name"><span>MKMapViewDelegate Conformance</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)mapView:viewForAnnotation:"></a>
+                    <a name="//apple_ref/swift/Method/mapView(_:viewFor:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MeetingInspectorViewController(im)mapView:viewForAnnotation:">mapView(_:<wbr>viewFor:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is called to fetch an annotation (marker) for the map.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">mapView</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">MKMapView</span><span class="p">,</span> <span class="n">viewFor</span> <span class="nv">inAnnotation</span><span class="p">:</span> <span class="kt">MKAnnotation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">MKAnnotationView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>viewFor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The annotation we&rsquo;re getting the marker for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The marker view for the annotation.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>© 2024 <a class="link" href="https://littlegreenviper.com" target="_blank" rel="external noopener">Little Green Viper Software Development LLC</a></p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+    </section>
+  </body>
+</html>

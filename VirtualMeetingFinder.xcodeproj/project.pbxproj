@@ -48,6 +48,7 @@
 		D42997D82C57B07300164E46 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		D43A9C172C374198001285FC /* VMF_Persistent_Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Persistent_Prefs.swift; sourceTree = "<group>"; };
 		D43A9C182C374198001285FC /* VMF_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Extensions.swift; sourceTree = "<group>"; };
+		D44D7CF52C5D125D00F97305 /* .jazzy.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .jazzy.yaml; sourceTree = "<group>"; };
 		D455E5662C396F3A00246848 /* VMF_AttendanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_AttendanceViewController.swift; sourceTree = "<group>"; };
 		D45E42012C3F2BA7006578F6 /* VMF_SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_SettingsViewController.swift; sourceTree = "<group>"; };
 		D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_BaseViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +80,7 @@
 		D4BC72A72C4C85A600955DD8 /* SocialPreview.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = SocialPreview.pdf; sourceTree = "<group>"; };
 		D4BC72A82C4C85A600955DD8 /* TypeIcons.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = TypeIcons.pdf; sourceTree = "<group>"; };
 		D4DDAB812C4039570018944E /* VMF_AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_AboutViewController.swift; sourceTree = "<group>"; };
+		D4E607262C5D127A00E88D23 /* jazzy.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = jazzy.command; sourceTree = "<group>"; };
 		D4E7C6C82C4293E10045ACE6 /* VMF_MainViewController_Methods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MainViewController_Methods.swift; sourceTree = "<group>"; };
 		D4E7C6CA2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MainViewController_Protocols.swift; sourceTree = "<group>"; };
 		D4F4BCEC2C36DAFC0023C21B /* VMF_MapMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MapMarker.swift; sourceTree = "<group>"; };
@@ -271,6 +273,8 @@
 				D4AD6A172C261BCA002E37F3 /* PrivacyInfo.xcprivacy */,
 				D49EE49C2C42A2FC00BAD34A /* icon.png */,
 				D49EE49B2C42A2FC00BAD34A /* LGV.png */,
+				D44D7CF52C5D125D00F97305 /* .jazzy.yaml */,
+				D4E607262C5D127A00E88D23 /* jazzy.command */,
 				D4BC72A92C4C85A600955DD8 /* spec */,
 			);
 			name = Meta;

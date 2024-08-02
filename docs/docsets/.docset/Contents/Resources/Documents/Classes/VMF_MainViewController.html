@@ -1,0 +1,3356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>VMF_MainViewController Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/VMF_MainViewController" class="dashAnchor"></a>
+
+    <a title="VMF_MainViewController Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          We Are Never Alone App
+        </a>
+        
+      </p>
+    
+      <div class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </div>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/LittleGreenViper/VirtualMeetingFinder">
+            <img class="header-icon" src="../img/gh.png" alt="GitHub"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">Index</a>
+      <img class="carat" src="../img/carat.png" alt=""/>
+      <a class="breadcrumb" href="../Classes.html">Classes</a>
+      <img class="carat" src="../img/carat.png" alt=""/>
+      We_Are_Never_Alone.VMF_MainViewController Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_AboutViewController.html">VMF_AboutViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_AppDelegate.html">VMF_AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_AttendanceViewController.html">VMF_AttendanceViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_BaseViewController.html">VMF_BaseViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes.html#/c:@M@We_Are_Never_Alone@objc(cs)VMF_DayTimeSearchPageViewController">VMF_DayTimeSearchPageViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_EmbeddedTableController.html">VMF_EmbeddedTableController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_MainViewController.html">VMF_MainViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_MainViewController/PickerViewComponents.html">– PickerViewComponents</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_MapAnnotation.html">VMF_MapAnnotation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_MapMarker.html">VMF_MapMarker</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_MeetingInspectorViewController.html">VMF_MeetingInspectorViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_Persistent_Prefs.html">VMF_Persistent_Prefs</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_Persistent_Prefs/Keys.html">– Keys</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_SceneDelegate.html">VMF_SceneDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_SettingsViewController.html">VMF_SettingsViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_TableCell.html">VMF_TableCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_TapHoldButton.html">VMF_TapHoldButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_URLButton.html">VMF_URLButton</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/AppKit.NSImage.html">AppKit.NSImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Bundle.html">Bundle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Date.html">Date</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/MeetingInstance.html">MeetingInstance</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/StringProtocol.html">StringProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SwiftBMLSDK_MeetingLocalTimezoneCollection.html">SwiftBMLSDK_MeetingLocalTimezoneCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SwiftUI.html">SwiftUI</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SwiftUI/Color.html">– Color</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SwiftUI/ShapeStyle.html">– ShapeStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SwiftUI/Image.html">– Image</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIKit.UIColor.html">UIKit.UIColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIKit.UIImage.html">UIKit.UIImage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VMF_BaseProtocol.html">VMF_BaseProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VMF_EmbeddedTableControllerProtocol.html">VMF_EmbeddedTableControllerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VMF_MasterTableControllerProtocol.html">VMF_MasterTableControllerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/_ACResourceInitProtocol.html">_ACResourceInitProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ColorResource.html">ColorResource</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ImageResource.html">ImageResource</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>VMF_MainViewController</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_MainViewController</span> <span class="p">:</span> <span class="kt"><a href="../Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/VMF_MasterTableControllerProtocol.html">VMF_MasterTableControllerProtocol</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_MainViewController</span><span class="p">:</span> <span class="kt">UIPageViewControllerDataSource</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_MainViewController</span><span class="p">:</span> <span class="kt">UIPageViewControllerDelegate</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_MainViewController</span><span class="p">:</span> <span class="kt">UIPickerViewDataSource</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_MainViewController</span><span class="p">:</span> <span class="kt">UIPickerViewDelegate</span></code></pre>
+
+                </div>
+              </div>
+            <p>This is the main view controller for the weekday/time selector tab.</p>
+<h1 id='quick-overview' class='heading'>QUICK OVERVIEW</h1>
+
+<p>The way that the data is set up, we have &ldquo;day indexes (1-7), and &quot;time slots&rdquo; (varies, per day).</p>
+
+<p>All times are mapped to the user&rsquo;s local timezone, regardless of the start time in the meeting&rsquo;s &ldquo;native&rdquo; timezone.</p>
+
+<p>The instance of this class will have a <code><a href="../Classes.html#/c:@M@We_Are_Never_Alone@objc(cs)VMF_DayTimeSearchPageViewController">VMF_DayTimeSearchPageViewController</a></code> embedded (also the <code><a href="../Classes/VMF_AttendanceViewController.html">VMF_AttendanceViewController</a></code> class, but that one disables the page view controller), which allows the user to swipe-select pages of meetings.</p>
+<h2 id='day-indexes' class='heading'>DAY INDEXES</h2>
+
+<p>These represent 0 (In Progress), 1 (Sunday), through 7 (Saturday), or 8 (Search Mode).</p>
+<h3 id='mode-0-in-progress' class='heading'>Mode 0 (In Progress)</h3>
+
+<p>In this mode, there is no &ldquo;time index,&rdquo; and the screen displays all meetings that are in progress, regardless of when they started.</p>
+<h3 id='mode-1-gt-7' class='heading'>Mode 1 -&gt; 7</h3>
+
+<p>If the day index is 1 -&gt; 7, the screen displays whatever time index, within that day, is selected.</p>
+
+<p>The day index is stored in Sunday -&gt; Saturday (the database native scheme), but are mapped to the local week, upon display.</p>
+<h3 id='mode-8-search' class='heading'>Mode 8 (Search)</h3>
+
+<p>In this mode, the day index and time index are irrelevant. All possible meetings are displayed, then are filtered, &ldquo;live,&rdquo; as text is entered into the text entry field.</p>
+<h2 id='time-indexes' class='heading'>TIME INDEXES</h2>
+
+<p>Each day has &ldquo;time slots.&rdquo; These are groupings of times, where meetings start (1 or more). Each &ldquo;time slot&rdquo; is a separate group of meetings that all begin at the same time.</p>
+
+<p>In regular weekdays (day index 1 -&gt; 7), only one &ldquo;time slot&rdquo; is shown at a time. Only the meetings that begin at the same time are shown.</p>
+
+<p>If possible, the user&rsquo;s currently selected time index is honored, and we try to match the time, when changing selected days. It is also preserved, when entering Mode 0 or Mode 8.</p>
+<h2 id='selecting-for-attendance' class='heading'>SELECTING FOR ATTENDANCE</h2>
+
+<p>It is possible for a user to indicate that they attend a meeting, by double-tapping on a meeting in the list, or by selecting &ldquo;I Attend,&rdquo; in the meeting inspector screen.</p>
+
+<p>You can bring in a separate screen, that contains only the meetings that you attend. This is accessed from the chackmark bar button item, in the upper right.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC21openAttendanceSegueIDSSvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/openAttendanceSegueID" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC21openAttendanceSegueIDSSvpZ">openAttendanceSegueID</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The segue ID of our open attendance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">openAttendanceSegueID</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC11searchImageSo7UIImageCSgvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/searchImage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC11searchImageSo7UIImageCSgvpZ">searchImage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The image that we use for search mode.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">searchImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC12checkedImageSo7UIImageCSgvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/checkedImage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC12checkedImageSo7UIImageCSgvpZ">checkedImage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The image to use, when attendance is selected.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">checkedImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC14uncheckedImageSo7UIImageCSgvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/uncheckedImage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC14uncheckedImageSo7UIImageCSgvpZ">uncheckedImage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The image to use, when we do not attend.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">uncheckedImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC12mercuryColorSo7UIColorCvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/mercuryColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC12mercuryColorSo7UIColorCvpZ">mercuryColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The color of the &ldquo;mercury&rdquo; in our &ldquo;thermometer.&rdquo;</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">mercuryColor</span><span class="p">:</span> <span class="kt">UIColor</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC18barButtonLabelFontSo6UIFontCvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/barButtonLabelFont" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC18barButtonLabelFontSo6UIFontCvpZ">barButtonLabelFont</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The font for the &ldquo;I Attend&rdquo; button.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">barButtonLabelFont</span><span class="p">:</span> <span class="kt">UIFont</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC06pickerG28ComponentWidthInDisplayUnits14CoreFoundation7CGFloatVvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/pickerViewComponentWidthInDisplayUnits" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC06pickerG28ComponentWidthInDisplayUnits14CoreFoundation7CGFloatVvpZ">pickerViewComponentWidthInDisplayUnits</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The width of each of the components of our direct picker view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">pickerViewComponentWidthInDisplayUnits</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC19shortWidthThreshold14CoreFoundation7CGFloatVvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/shortWidthThreshold" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC19shortWidthThreshold14CoreFoundation7CGFloatVvpZ">shortWidthThreshold</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The container view needs to be wider than this, to show short (as opposed to &ldquo;very&rdquo; short) weekdays.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">shortWidthThreshold</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC18fullWidthThreshold14CoreFoundation7CGFloatVvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/fullWidthThreshold" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC18fullWidthThreshold14CoreFoundation7CGFloatVvpZ">fullWidthThreshold</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The container view needs to be wider than this, to show full (as opposed to short) weekdays.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">fullWidthThreshold</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC14atRestConstant14CoreFoundation7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/atRestConstant" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC14atRestConstant14CoreFoundation7CGFloatVvp">atRestConstant</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is used to restore the bottom of the stack view, when the keyboard is hidden.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">atRestConstant</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC11oldLocation14CoreFoundation7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/oldLocation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC11oldLocation14CoreFoundation7CGFloatVvp">oldLocation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is used during the long-press slide. It holds the previous location of the gesture.
+We use it to determine if the finger has moved.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">oldLocation</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC8lastTimeSivp"></a>
+                    <a name="//apple_ref/swift/Property/lastTime" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC8lastTimeSivp">lastTime</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This holds the last time of the selected page. We use this to set the time, when directly navigating away from Now.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">lastTime</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC012tableDisplayH0AA0e14_EmbeddedTableH8Protocol_pSgvp"></a>
+                    <a name="//apple_ref/swift/Property/tableDisplayController" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC012tableDisplayH0AA0e14_EmbeddedTableH8Protocol_pSgvp">tableDisplayController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This tracks the current embedded table controller.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">tableDisplayController</span><span class="p">:</span> <span class="kt"><a href="../Protocols/VMF_EmbeddedTableControllerProtocol.html">VMF_EmbeddedTableControllerProtocol</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC04pagegH0AA0e18_DayTimeSearchPagegH0CSgvp"></a>
+                    <a name="//apple_ref/swift/Property/pageViewController" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC04pagegH0AA0e18_DayTimeSearchPagegH0CSgvp">pageViewController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is our page view controller.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">weak</span> <span class="k">var</span> <span class="nv">pageViewController</span><span class="p">:</span> <span class="kt"><a href="../Classes.html#/c:@M@We_Are_Never_Alone@objc(cs)VMF_DayTimeSearchPageViewController">VMF_DayTimeSearchPageViewController</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC17wasNameSearchModeSbvp"></a>
+                    <a name="//apple_ref/swift/Property/wasNameSearchMode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC17wasNameSearchModeSbvp">wasNameSearchMode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is set to true, if we were (past tense) in name search mode.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">wasNameSearchMode</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC14searchMeetingsSay11SwiftBMLSDK0kL7_ParserV7MeetingVGvp"></a>
+                    <a name="//apple_ref/swift/Property/searchMeetings" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC14searchMeetingsSay11SwiftBMLSDK0kL7_ParserV7MeetingVGvp">searchMeetings</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Storage for our search meeting source</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">searchMeetings</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC17organizedMeetingsSaySay11SwiftBMLSDK0kL7_ParserV7MeetingVGGvp"></a>
+                    <a name="//apple_ref/swift/Property/organizedMeetings" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC17organizedMeetingsSaySay11SwiftBMLSDK0kL7_ParserV7MeetingVGGvp">organizedMeetings</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This has the &ldquo;mostly organized&rdquo; meeting data.</p>
+
+<p>The meetings are organized in ascending local time, arranged by weekday, with [0] being Sunday.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">organizedMeetings</span><span class="p">:</span> <span class="p">[[</span><span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">]]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC16isNameSearchModeSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isNameSearchMode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC16isNameSearchModeSbvp">isNameSearchMode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is set to true, if we are in name search mode.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">isNameSearchMode</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC21isDirectSelectionModeSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isDirectSelectionMode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC21isDirectSelectionModeSbvp">isDirectSelectionMode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>True, if this is the direct weekday/time selection mode (PickerView displayed).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">isDirectSelectionMode</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC10searchTextSSvp"></a>
+                    <a name="//apple_ref/swift/Property/searchText" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC10searchTextSSvp">searchText</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Contains the search text filter. Only relevant, if in Name Search Mode.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">searchText</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC11isThrobbingSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isThrobbing" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC11isThrobbingSbvp">isThrobbing</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is set to true, if the &ldquo;throbber&rdquo; is shown (hiding everything else).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">isThrobbing</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)settingsBarButtonItem"></a>
+                    <a name="//apple_ref/swift/Property/settingsBarButtonItem" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)settingsBarButtonItem">settingsBarButtonItem</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The bar button item that brings in the Settings Screen.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">settingsBarButtonItem</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)myAttendanceBarButtonItem"></a>
+                    <a name="//apple_ref/swift/Property/myAttendanceBarButtonItem" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)myAttendanceBarButtonItem">myAttendanceBarButtonItem</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The bar button item that brings in the My Attendance Screen.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">myAttendanceBarButtonItem</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)weekdayModeSelectorSegmentedSwitch"></a>
+                    <a name="//apple_ref/swift/Property/weekdayModeSelectorSegmentedSwitch" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)weekdayModeSelectorSegmentedSwitch">weekdayModeSelectorSegmentedSwitch</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The segmented switch that controls the mode.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">weekdayModeSelectorSegmentedSwitch</span><span class="p">:</span> <span class="kt">UISegmentedControl</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)tableContainerView"></a>
+                    <a name="//apple_ref/swift/Property/tableContainerView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)tableContainerView">tableContainerView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The embedded table controller container view. This hosts an instance of <code><a href="../Classes.html#/c:@M@We_Are_Never_Alone@objc(cs)VMF_DayTimeSearchPageViewController">VMF_DayTimeSearchPageViewController</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">tableContainerView</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)searchItemsContainerView"></a>
+                    <a name="//apple_ref/swift/Property/searchItemsContainerView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)searchItemsContainerView">searchItemsContainerView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This contains the search items.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">searchItemsContainerView</span><span class="p">:</span> <span class="kt">UIStackView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)searchTextField"></a>
+                    <a name="//apple_ref/swift/Property/searchTextField" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)searchTextField">searchTextField</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The text field for entering a search.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">searchTextField</span><span class="p">:</span> <span class="kt">UITextField</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)searchCloseButton"></a>
+                    <a name="//apple_ref/swift/Property/searchCloseButton" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)searchCloseButton">searchCloseButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The button to close the search mode.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">searchCloseButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)timeSelectorContainerView"></a>
+                    <a name="//apple_ref/swift/Property/timeSelectorContainerView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)timeSelectorContainerView">timeSelectorContainerView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This contains the time selector items.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">timeSelectorContainerView</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)leftButton"></a>
+                    <a name="//apple_ref/swift/Property/leftButton" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)leftButton">leftButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The decrement time button</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">leftButton</span><span class="p">:</span> <span class="kt"><a href="../Classes/VMF_TapHoldButton.html">VMF_TapHoldButton</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)rightButton"></a>
+                    <a name="//apple_ref/swift/Property/rightButton" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)rightButton">rightButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The increment time button</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">rightButton</span><span class="p">:</span> <span class="kt"><a href="../Classes/VMF_TapHoldButton.html">VMF_TapHoldButton</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)timeDayDisplayLabel"></a>
+                    <a name="//apple_ref/swift/Property/timeDayDisplayLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)timeDayDisplayLabel">timeDayDisplayLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This displays the current time and day.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">timeDayDisplayLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)bottomConstraint"></a>
+                    <a name="//apple_ref/swift/Property/bottomConstraint" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)bottomConstraint">bottomConstraint</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The bottom constraint of the table display area. We use this to shrink the table area, when the keyboard is shown.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">bottomConstraint</span><span class="p">:</span> <span class="kt">NSLayoutConstraint</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)completionBar"></a>
+                    <a name="//apple_ref/swift/Property/completionBar" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)completionBar">completionBar</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is a narrow bar, along the top, that shows how far into the day we are.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">completionBar</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)throbber"></a>
+                    <a name="//apple_ref/swift/Property/throbber" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)throbber">throbber</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The &ldquo;Throbber&rdquo; view</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">throbber</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)labelDoubleTapGesture"></a>
+                    <a name="//apple_ref/swift/Property/labelDoubleTapGesture" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)labelDoubleTapGesture">labelDoubleTapGesture</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The double-tap gesture for bring us back to today.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">labelDoubleTapGesture</span><span class="p">:</span> <span class="kt">UITapGestureRecognizer</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)weekdayLongPressGesture"></a>
+                    <a name="//apple_ref/swift/Property/weekdayLongPressGesture" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)weekdayLongPressGesture">weekdayLongPressGesture</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The long-press gesture for selecting a weekday.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">weekdayLongPressGesture</span><span class="p">:</span> <span class="kt">UILongPressGestureRecognizer</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)timeDayLongPressGesture"></a>
+                    <a name="//apple_ref/swift/Property/timeDayLongPressGesture" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)timeDayLongPressGesture">timeDayLongPressGesture</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The long-press gesture for selecting a time.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">timeDayLongPressGesture</span><span class="p">:</span> <span class="kt">UILongPressGestureRecognizer</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)directSelectionTapRecognizer"></a>
+                    <a name="//apple_ref/swift/Property/directSelectionTapRecognizer" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)directSelectionTapRecognizer">directSelectionTapRecognizer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The tap recognizer for entering direct selection mode.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">directSelectionTapRecognizer</span><span class="p">:</span> <span class="kt">UITapGestureRecognizer</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)directSelectionItemsContainer"></a>
+                    <a name="//apple_ref/swift/Property/directSelectionItemsContainer" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)directSelectionItemsContainer">directSelectionItemsContainer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The container, for the Direct Selection Mode items.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">directSelectionItemsContainer</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)directSelectionPickerView"></a>
+                    <a name="//apple_ref/swift/Property/directSelectionPickerView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)directSelectionPickerView">directSelectionPickerView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The picker view, for the Direct Selection Mode.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">directSelectionPickerView</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)directSelectionCloseButton"></a>
+                    <a name="//apple_ref/swift/Property/directSelectionCloseButton" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)directSelectionCloseButton">directSelectionCloseButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The button to exit Direct Selection Mode.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">directSelectionCloseButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Computed%20Properties"></a>
+                <a name="//apple_ref/swift/Section/Computed Properties" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Computed%20Properties"></a>
+                  <h3 class="section-name"><span>Computed Properties</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC18inProgressMeetingsSay11SwiftBMLSDK0lM7_ParserV7MeetingVGvp"></a>
+                    <a name="//apple_ref/swift/Property/inProgressMeetings" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC18inProgressMeetingsSay11SwiftBMLSDK0lM7_ParserV7MeetingVGvp">inProgressMeetings</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>These are the meetings that are currently in progress. They are sorted in ascending local start time.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">inProgressMeetings</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC5nowIsSi7weekday_Si18currentIntegerTimetvp"></a>
+                    <a name="//apple_ref/swift/Property/nowIs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC5nowIsSi7weekday_Si18currentIntegerTimetvp">nowIs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns now, in terms understood by the meeting search.</p>
+
+<p>weekday is the current weekday, transformed to the meeting data (1 is Sunday)
+currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">nowIs</span><span class="p">:</span> <span class="p">(</span><span class="nv">weekday</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">currentIntegerTime</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC11needsReloadSbvp"></a>
+                    <a name="//apple_ref/swift/Property/needsReload" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC11needsReloadSbvp">needsReload</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns true, if we need to force a reload from the server.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">needsReload</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Instance Methods" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Instance%20Methods"></a>
+                  <h3 class="section-name"><span>Instance Methods</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC18reorganizeMeetingsyyF"></a>
+                    <a name="//apple_ref/swift/Method/reorganizeMeetings()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC18reorganizeMeetingsyyF">reorganizeMeetings()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This recalculates all the meeting data, breaking it into a couple of sorted arrays.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">reorganizeMeetings</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC12loadMeetings10completionyyyc_tF"></a>
+                    <a name="//apple_ref/swift/Method/loadMeetings(completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC12loadMeetings10completionyyyc_tF">loadMeetings(completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called to load the meetings from the server.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">loadMeetings</span><span class="p">(</span><span class="n">completion</span> <span class="nv">inCompletion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A simple, no-parameter completion. It is always called in the main thread.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC16getDailyMeetings3forSDySiSay11SwiftBMLSDK0mN7_ParserV7MeetingVGGSi_tF"></a>
+                    <a name="//apple_ref/swift/Method/getDailyMeetings(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC16getDailyMeetings3forSDySiSay11SwiftBMLSDK0mN7_ParserV7MeetingVGGSi_tF">getDailyMeetings(for:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the meetings for a particular weekday.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getDailyMeetings</span><span class="p">(</span><span class="k">for</span> <span class="nv">inWeekdayIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Int</span> <span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">]]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 1-based (1 is Sunday) weekday index</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>a Dictionary, with the weekday&rsquo;s meetings, organized by localized start time (the key), which is expressed as military time (HHMM).</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC15getTableDisplay3for4timeAA0e9_EmbeddedjH0CSgSi_SitF"></a>
+                    <a name="//apple_ref/swift/Method/getTableDisplay(for:time:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC15getTableDisplay3for4timeAA0e9_EmbeddedjH0CSgSi_SitF">getTableDisplay(for:<wbr>time:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This returns a new destination controller to use for transitions.</p>
+
+<p>NOTE: If the controller is in text search mode, then the name search controller is returned.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getTableDisplay</span><span class="p">(</span><span class="k">for</span> <span class="nv">inDayIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">time</span> <span class="nv">inTimeIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/VMF_EmbeddedTableController.html">VMF_EmbeddedTableController</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 0-based &ldquo;day index.&rdquo; If it is 0, though, it is the &ldquo;in-progress&rdquo; display.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>time</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 0-based time index. This is the index of the currently selected time slot.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new (or reused) view controller, for the destination of the transition.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC17getCurentMeetings3for4timeSay11SwiftBMLSDK0nO7_ParserV7MeetingVGSi_SitF"></a>
+                    <a name="//apple_ref/swift/Method/getCurentMeetings(for:time:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC17getCurentMeetings3for4timeSay11SwiftBMLSDK0nO7_ParserV7MeetingVGSi_SitF">getCurentMeetings(for:<wbr>time:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This returns a the meetings we should display, given the day and time.</p>
+
+<p>NOTE: If the controller is in text search mode, then the search set is returned.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getCurentMeetings</span><span class="p">(</span><span class="k">for</span> <span class="nv">inDayIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">time</span> <span class="nv">inTimeIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 0-based &ldquo;day index.&rdquo; If it is 0, though, it is the &ldquo;in-progress&rdquo; display.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>time</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 0-based time index. This is the index of the currently selected time slot.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new (or reused) view controller, for the destination of the transition.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC6openTo8dayIndex4timeySi_SitF"></a>
+                    <a name="//apple_ref/swift/Method/openTo(dayIndex:time:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC6openTo8dayIndex4timeySi_SitF">openTo(dayIndex:<wbr>time:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This opens the screen to a certain day index, and time (not index).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">openTo</span><span class="p">(</span><span class="n">dayIndex</span> <span class="nv">inDayIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">time</span> <span class="nv">inMilitaryTime</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dayIndex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 1-based (but 0 is in progress, 1-7 is Sunday through Saturday) day index. If omitted, then today/now is selected, and time is ignored.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>time</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The military time (HHMM), as an integer. If omitted, 12AM (0000) is assumed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC15getNearestIndex03dayK04timeS2i_SitF"></a>
+                    <a name="//apple_ref/swift/Method/getNearestIndex(dayIndex:time:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC15getNearestIndex03dayK04timeS2i_SitF">getNearestIndex(dayIndex:<wbr>time:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This returns the index of the time slot that is closest (before or after) to the given time and day.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getNearestIndex</span><span class="p">(</span><span class="n">dayIndex</span> <span class="nv">inDayIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">time</span> <span class="nv">inMilitaryTime</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dayIndex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 1-based day index. If omitted, then today/now is selected, and time is ignored.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>time</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The military time (HHMM), as an integer. If omitted, 12AM (0000) is assumed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The index of the time slot closest to (or at the same time as) the given time. It may be prior.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC9getTimeOf8dayIndex04timeM0SiSgSi_SitF"></a>
+                    <a name="//apple_ref/swift/Method/getTimeOf(dayIndex:timeIndex:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC9getTimeOf8dayIndex04timeM0SiSgSi_SitF">getTimeOf(dayIndex:<wbr>timeIndex:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This returns the time that corresponds to the day and time presented.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getTimeOf</span><span class="p">(</span><span class="n">dayIndex</span> <span class="nv">inDayIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">timeIndex</span> <span class="nv">inTimeIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dayIndex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 1-based day index.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeIndex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The index, as a 0-based integer.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The time, as a military time integer, of the time slot for the given time. Returns nil, if the time can&rsquo;t be found.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC17updateThermometeryyAA0e14_EmbeddedTableH8Protocol_pSgF"></a>
+                    <a name="//apple_ref/swift/Method/updateThermometer(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC17updateThermometeryyAA0e14_EmbeddedTableH8Protocol_pSgF">updateThermometer(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This updates the &ldquo;thermometer&rdquo; display in the time selector.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">updateThermometer</span><span class="p">(</span><span class="n">_</span> <span class="nv">inTablePage</span><span class="p">:</span> <span class="kt"><a href="../Protocols/VMF_EmbeddedTableControllerProtocol.html">VMF_EmbeddedTableControllerProtocol</a></span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC12setDayPickeryyF"></a>
+                    <a name="//apple_ref/swift/Method/setDayPicker()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC12setDayPickeryyF">setDayPicker()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the day picker to whatever the current day/time is.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setDayPicker</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC13setAttendanceyyF"></a>
+                    <a name="//apple_ref/swift/Method/setAttendance()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC13setAttendanceyyF">setAttendance()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This enables or disables the attendance item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setAttendance</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Callbacks"></a>
+                <a name="//apple_ref/swift/Section/Callbacks" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Callbacks"></a>
+                  <h3 class="section-name"><span>Callbacks</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)weekdayModeSelectorSegmentedSwitchHit:"></a>
+                    <a name="//apple_ref/swift/Method/weekdayModeSelectorSegmentedSwitchHit(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)weekdayModeSelectorSegmentedSwitchHit:">weekdayModeSelectorSegmentedSwitchHit(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The segmented switch that controls the current display mode, was hit.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">weekdayModeSelectorSegmentedSwitchHit</span><span class="p">(</span><span class="n">_</span> <span class="nv">inSwitch</span><span class="p">:</span> <span class="kt">UISegmentedControl</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inSwitch</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The segmented switch.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)searchTextChanged:"></a>
+                    <a name="//apple_ref/swift/Method/searchTextChanged(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)searchTextChanged:">searchTextChanged(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when something changes in the search text field.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">searchTextChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">inTextField</span><span class="p">:</span> <span class="kt">UITextField</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)searchCloseHit:"></a>
+                    <a name="//apple_ref/swift/Method/searchCloseHit(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)searchCloseHit:">searchCloseHit(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when the search close button is hit.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">searchCloseHit</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)leftButtonHit:"></a>
+                    <a name="//apple_ref/swift/Method/leftButtonHit(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)leftButtonHit:">leftButtonHit(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The decrement time button was hit.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">leftButtonHit</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)rightButtonHit:"></a>
+                    <a name="//apple_ref/swift/Method/rightButtonHit(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)rightButtonHit:">rightButtonHit(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The increment time button was hit.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">rightButtonHit</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)doubleTapOnDayTimeLabel:"></a>
+                    <a name="//apple_ref/swift/Method/doubleTapOnDayTimeLabel(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)doubleTapOnDayTimeLabel:">doubleTapOnDayTimeLabel(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The double-tap gesture recognizer on the weekday/time display label was triggered.</p>
+
+<p>This resets the screen to today/now.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">doubleTapOnDayTimeLabel</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)longPressGestureInWeekdaySwitchDetected:"></a>
+                    <a name="//apple_ref/swift/Method/longPressGestureInWeekdaySwitchDetected(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)longPressGestureInWeekdaySwitchDetected:">longPressGestureInWeekdaySwitchDetected(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A long-press on the weekday switch was detected. We change the weekday (we do not change to in-progress or search).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">longPressGestureInWeekdaySwitchDetected</span><span class="p">(</span><span class="n">_</span> <span class="nv">inGestureRecognizer</span><span class="p">:</span> <span class="kt">UILongPressGestureRecognizer</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inGestureRecognizer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The gesture recognizer that was triggered.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)longPressGestureInDisplayLabelDetected:"></a>
+                    <a name="//apple_ref/swift/Method/longPressGestureInDisplayLabelDetected(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)longPressGestureInDisplayLabelDetected:">longPressGestureInDisplayLabelDetected(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A long-press on the day/time display label switch was detected. We change the time slot.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">longPressGestureInDisplayLabelDetected</span><span class="p">(</span><span class="n">_</span> <span class="nv">inGestureRecognizer</span><span class="p">:</span> <span class="kt">UILongPressGestureRecognizer</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inGestureRecognizer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The gesture recognizer that was triggered.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)directSelectionOpen:"></a>
+                    <a name="//apple_ref/swift/Method/directSelectionOpen(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)directSelectionOpen:">directSelectionOpen(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The weekday/time label was touched.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">directSelectionOpen</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)directSelectionCloseButtonHit:"></a>
+                    <a name="//apple_ref/swift/Method/directSelectionCloseButtonHit(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)directSelectionCloseButtonHit:">directSelectionCloseButtonHit(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The close button for the direct selection mode was hit.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">directSelectionCloseButtonHit</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)keyboardWillShowWithNotification:"></a>
+                    <a name="//apple_ref/swift/Method/keyboardWillShow(notification:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)keyboardWillShowWithNotification:">keyboardWillShow(notification:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is called just before the keyboard shows. We use this to &ldquo;nudge&rdquo; the table bottom up.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">func</span> <span class="nf">keyboardWillShow</span><span class="p">(</span><span class="n">notification</span> <span class="nv">inNotification</span><span class="p">:</span> <span class="kt">NSNotification</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>notification</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The notification being passed in.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)keyboardWillHideWithNotification:"></a>
+                    <a name="//apple_ref/swift/Method/keyboardWillHide(notification:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)keyboardWillHideWithNotification:">keyboardWillHide(notification:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is called just before the keyboard shows. We use this to return the table bottom to its original position.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">func</span> <span class="nf">keyboardWillHide</span><span class="p">(</span><span class="nv">notification</span><span class="p">:</span> <span class="kt">NSNotification</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>notification</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The notification being passed in.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC13refreshCalled10completionyyyc_tF"></a>
+                    <a name="//apple_ref/swift/Method/refreshCalled(completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC13refreshCalled10completionyyyc_tF">refreshCalled(completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reloads all the meetings.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">refreshCalled</span><span class="p">(</span><span class="n">completion</span> <span class="nv">inCompletion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A simple empty callback. Always called in the main thread.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Base%20Class%20Overrides"></a>
+                <a name="//apple_ref/swift/Section/Base Class Overrides" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Base%20Class%20Overrides"></a>
+                  <h3 class="section-name"><span>Base Class Overrides</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)viewDidLoad"></a>
+                    <a name="//apple_ref/swift/Method/viewDidLoad()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)viewDidLoad">viewDidLoad()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when the view hierarchy loads.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)viewWillAppear:"></a>
+                    <a name="//apple_ref/swift/Method/viewWillAppear(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)viewWillAppear:">viewWillAppear(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called just before the view is to appear.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillAppear</span><span class="p">(</span><span class="n">_</span> <span class="nv">inIsAnimated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inIsAnimated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>True, if the appearance is animated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)viewDidAppear:"></a>
+                    <a name="//apple_ref/swift/Method/viewDidAppear(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)viewDidAppear:">viewDidAppear(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called just after the view appears.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidAppear</span><span class="p">(</span><span class="n">_</span> <span class="nv">inIsAnimated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inIsAnimated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>True, if the appearance is animated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)viewDidLayoutSubviews"></a>
+                    <a name="//apple_ref/swift/Method/viewDidLayoutSubviews()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)viewDidLayoutSubviews">viewDidLayoutSubviews()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when the subviews are laid out. We use this to ensure that our segmented switch is set up correctly.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLayoutSubviews</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)viewWillDisappear:"></a>
+                    <a name="//apple_ref/swift/Method/viewWillDisappear(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)viewWillDisappear:">viewWillDisappear(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called just before the view disappears.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillDisappear</span><span class="p">(</span><span class="n">_</span> <span class="nv">inIsAnimated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inIsAnimated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>True, if the disappearance is animated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)prepareForSegue:sender:"></a>
+                    <a name="//apple_ref/swift/Method/prepare(for:sender:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)prepareForSegue:sender:">prepare(for:<wbr>sender:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called before transitioning to another view controller.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">prepare</span><span class="p">(</span><span class="k">for</span> <span class="nv">inSegue</span><span class="p">:</span> <span class="kt">UIStoryboardSegue</span><span class="p">,</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The segue instance.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ignored.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/UIPageViewControllerDataSource%20Conformance"></a>
+                <a name="//apple_ref/swift/Section/UIPageViewControllerDataSource Conformance" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/UIPageViewControllerDataSource%20Conformance"></a>
+                  <h3 class="section-name"><span>UIPageViewControllerDataSource Conformance</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)pageViewController:viewControllerBeforeViewController:"></a>
+                    <a name="//apple_ref/swift/Method/pageViewController(_:viewControllerBefore:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)pageViewController:viewControllerBeforeViewController:">pageViewController(_:<wbr>viewControllerBefore:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called to fetch the view controller before the current one.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pageViewController</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">UIPageViewController</span><span class="p">,</span> <span class="n">viewControllerBefore</span> <span class="nv">inBeforeViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIViewController</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>viewControllerBefore</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The view controller after (to the right of) the one we want.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new (or reused) view controller to appear before (to the left of) the &ldquo;before&rdquo; controller.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)pageViewController:viewControllerAfterViewController:"></a>
+                    <a name="//apple_ref/swift/Method/pageViewController(_:viewControllerAfter:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)pageViewController:viewControllerAfterViewController:">pageViewController(_:<wbr>viewControllerAfter:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called to fetch the view controller after the current one.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pageViewController</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">UIPageViewController</span><span class="p">,</span> <span class="n">viewControllerAfter</span> <span class="nv">inAfterViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIViewController</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>viewControllerBefore</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The view controller before (to the left of) the one we want.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new (or reused) view controller to appear after (to the right of) the &ldquo;before&rdquo; controller.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/UIPageViewControllerDelegate%20Conformance"></a>
+                <a name="//apple_ref/swift/Section/UIPageViewControllerDelegate Conformance" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/UIPageViewControllerDelegate%20Conformance"></a>
+                  <h3 class="section-name"><span>UIPageViewControllerDelegate Conformance</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)pageViewController:didFinishAnimating:previousViewControllers:transitionCompleted:"></a>
+                    <a name="//apple_ref/swift/Method/pageViewController(_:didFinishAnimating:previousViewControllers:transitionCompleted:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)pageViewController:didFinishAnimating:previousViewControllers:transitionCompleted:">pageViewController(_:<wbr>didFinishAnimating:<wbr>previousViewControllers:<wbr>transitionCompleted:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a swipe transition is done. The only thing we do here, is reset our trackers.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pageViewController</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">UIPageViewController</span><span class="p">,</span> <span class="nv">didFinishAnimating</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">previousViewControllers</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIViewController</span><span class="p">],</span> <span class="n">transitionCompleted</span> <span class="nv">inIsDone</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>didFinishAnimating</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The animation is complete (ignored)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>previousViewControllers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A list of previous view controllers (also ignored)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>transitionCompleted</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>True, if the transition completed, and was not aborted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/PickerView%20Component%20Enum"></a>
+                <a name="//apple_ref/swift/Section/PickerView Component Enum" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/PickerView%20Component%20Enum"></a>
+                  <h3 class="section-name"><span>PickerView Component Enum</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC06PickerG10ComponentsO"></a>
+                    <a name="//apple_ref/swift/Enum/PickerViewComponents" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC06PickerG10ComponentsO">PickerViewComponents</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This enumerates the two PickerView components.</p>
+
+                        <a href="../Classes/VMF_MainViewController/PickerViewComponents.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">PickerViewComponents</span> <span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)numberOfComponentsInPickerView:"></a>
+                    <a name="//apple_ref/swift/Method/numberOfComponents(in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)numberOfComponentsInPickerView:">numberOfComponents(in:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This returns the number of components in the picker view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">numberOfComponents</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>in</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The picker view (ignored).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>2 (always)</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)pickerView:numberOfRowsInComponent:"></a>
+                    <a name="//apple_ref/swift/Method/pickerView(_:numberOfRowsInComponent:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)pickerView:numberOfRowsInComponent:">pickerView(_:<wbr>numberOfRowsInComponent:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This returns the number of rows in each component.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pickerView</span><span class="p">(</span><span class="n">_</span> <span class="nv">inPickerView</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">,</span> <span class="n">numberOfRowsInComponent</span> <span class="nv">inComponent</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>numberOfRowsInComponent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 0-based component index. Component 0 is the weekday, and Component 1, is the time slots for that weekday.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>7 (Component 0), or the number of time slots for the selected weekday (usually around 70).</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/UIPickerViewDelegate%20Conformance"></a>
+                <a name="//apple_ref/swift/Section/UIPickerViewDelegate Conformance" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/UIPickerViewDelegate%20Conformance"></a>
+                  <h3 class="section-name"><span>UIPickerViewDelegate Conformance</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)pickerView:viewForRow:forComponent:reusingView:"></a>
+                    <a name="//apple_ref/swift/Method/pickerView(_:viewForRow:forComponent:reusing:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)pickerView:viewForRow:forComponent:reusingView:">pickerView(_:<wbr>viewForRow:<wbr>forComponent:<wbr>reusing:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This returns the title for the selected row, as a label.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pickerView</span><span class="p">(</span><span class="n">_</span> <span class="nv">inPickerView</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">,</span> <span class="n">viewForRow</span> <span class="nv">inRow</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">forComponent</span> <span class="nv">inComponent</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">reusing</span> <span class="nv">inReusing</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">UIView</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inPickerView</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The picker view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>titleForRow</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 0-based row index.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>forComponent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 0-based component index.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>reusing</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Any previously allocated view, to be reused.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>a view (a label), with the title for the indicated row.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)pickerView:widthForComponent:"></a>
+                    <a name="//apple_ref/swift/Method/pickerView(_:widthForComponent:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)pickerView:widthForComponent:">pickerView(_:<wbr>widthForComponent:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the width of a component.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pickerView</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">,</span> <span class="nv">widthForComponent</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>widthForComponent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 0-based component index.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The width, in display units, of the component.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)pickerView:didSelectRow:inComponent:"></a>
+                    <a name="//apple_ref/swift/Method/pickerView(_:didSelectRow:inComponent:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)pickerView:didSelectRow:inComponent:">pickerView(_:<wbr>didSelectRow:<wbr>inComponent:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a row is selected in the picker.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pickerView</span><span class="p">(</span><span class="n">_</span> <span class="nv">inPickerView</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">,</span> <span class="n">didSelectRow</span> <span class="nv">inRow</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">inComponent</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inPickerView</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The picker view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>didSelectRow</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 0-based row index.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inComponent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 0-based component index.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>© 2024 <a class="link" href="https://littlegreenviper.com" target="_blank" rel="external noopener">Little Green Viper Software Development LLC</a></p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+    </section>
+  </body>
+</html>

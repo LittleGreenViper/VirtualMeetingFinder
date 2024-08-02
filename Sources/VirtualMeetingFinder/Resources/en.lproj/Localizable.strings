@@ -34,6 +34,7 @@
 "SLUG-BACK"                                       =    "Back";
 /* This is used for the add event action sheet line. */
 "SLUG-ADD-TO-CALENDAR"                            =    "Add to Calendar";
+
 // MARK: - ALERTS -
 
 /* OK Button for alerts */

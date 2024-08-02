@@ -24,9 +24,6 @@
 // MARK: -
 // MARK: - COMMON -
 /* We replace 1200 with the word "Noon" */
-
-
-
 "SLUG-NOON-TIME" = "Meio-dia";
 /* We replace 2359 with the word "Midnight" */
 "SLUG-MIDNIGHT-TIME" = "Meia-noite";

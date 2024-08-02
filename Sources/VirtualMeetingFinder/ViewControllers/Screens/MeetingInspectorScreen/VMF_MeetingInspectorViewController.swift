@@ -155,13 +155,13 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
       The controller that "owns" this instance.
       */
      var myController: (any VMF_EmbeddedTableControllerProtocol)?
-
+     
      /* ################################################################## */
      /**
       This will allow us to add events to the Calendar, without leaving this app.
       */
      let eventStore = EKEventStore()
-
+     
      /* ################################################################## */
      /**
       The label that displays the meeting name.
@@ -333,6 +333,8 @@ extension VMF_MeetingInspectorViewController {
      /**
       This creates an attendance event for the next meeting start time.
       
+      > NOTE: This sets the event in the meeting's native timezone. The calendar is responsible for converting the TZ.
+      
       - returns: a new EKEvent for the meeting, or nil.
       */
      var attendanceEvent: EKEvent? {
@@ -340,28 +342,27 @@ extension VMF_MeetingInspectorViewController {
                 let appURI = meeting.linkURL
           else { return nil }
           
-          let startTime = meeting.getNextStartDate(isAdjusted: true)
-         
           let event = EKEvent(eventStore: eventStore)
           
           event.addRecurrenceRule(EKRecurrenceRule(recurrenceWith: .weekly, interval: 1, end: nil))
           event.title = meeting.name
-          event.startDate = startTime
-          event.endDate = startTime.addingTimeInterval(meeting.duration)
+          event.timeZone = meeting.timeZone
+          event.startDate = meeting.getNextStartDate()
+          event.endDate = event.startDate.addingTimeInterval(meeting.duration)
           
           if let coords = meeting.coords,
              let goPostal = meeting.inPersonAddress {
-              let location = EKStructuredLocation(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: coords, postalAddress: goPostal)))
+               let location = EKStructuredLocation(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: coords, postalAddress: goPostal)))
                location.title = meeting.inPersonVenueName
-              event.structuredLocation = location
+               event.structuredLocation = location
           } else {
                let simpleLocationText = meeting.basicInPersonAddress
                if let coords = meeting.coords {
-                   let location = EKStructuredLocation(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: coords)))
-                   location.title = simpleLocationText
-                   event.structuredLocation = location
+                    let location = EKStructuredLocation(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: coords)))
+                    location.title = simpleLocationText
+                    event.structuredLocation = location
                } else {
-                   event.location = simpleLocationText
+                    event.location = simpleLocationText
                }
           }
           
@@ -374,26 +375,26 @@ extension VMF_MeetingInspectorViewController {
                let nativeTime = meeting.getNextStartDate(isAdjusted: false)
                notes.append(String(format: "SLUG-TIMEZONE-FORMAT".localizedVariant, zoneName, nativeTime.localizedTime))
           }
-
-           event.url = meeting.directAppURI ?? appURI
           
-           if let comments = meeting.comments,
-              !comments.isEmpty {
-                notes.append(comments)
-           }
+          event.url = meeting.directAppURI ?? appURI
+          
+          if let comments = meeting.comments,
+             !comments.isEmpty {
+               notes.append(comments)
+          }
           
           for format in meeting.formats {
-              let key = format.key
-              let name = format.name
-              let description = format.description
-              let mainString = String(format: "%@ - %@", key, name)
-              notes.append("\(mainString)\n\(description)")
+               let key = format.key
+               let name = format.name
+               let description = format.description
+               let mainString = String(format: "%@ - %@", key, name)
+               notes.append("\(mainString)\n\(description)")
           }
           
           event.notes = notes.joined(separator: "\n\n")
           
           return event
-      }
+     }
 }
 
 /* ###################################################################################################################################### */

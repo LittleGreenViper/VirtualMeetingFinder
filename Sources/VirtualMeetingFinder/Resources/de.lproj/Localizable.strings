@@ -32,6 +32,8 @@
 "SLUG-MIDNIGHT-TIME" = "00:00";
 /* General-Purpose Back Button */
 "SLUG-BACK" = "Zurück";
+/* This is used for the add event action sheet line. */
+"SLUG-ADD-TO-CALENDAR" = "Zum Kalender Hinzufügen";
 
 // MARK: - ALERTS -
 /* OK Button for alerts */

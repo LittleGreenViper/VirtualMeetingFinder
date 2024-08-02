@@ -138,6 +138,30 @@ extension VMF_AppDelegate {
                }
           }
      }
+     
+     /* ################################################################## */
+     /**
+      Quick access to the app delegate object.
+      */
+     class var appDelegateInstance: VMF_AppDelegate? {
+          UIApplication.shared.delegate as? VMF_AppDelegate
+     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Instance Methods
+/* ###################################################################################################################################### */
+extension VMF_AppDelegate {
+     /* ################################################################## */
+     /**
+      This opens our app settings, with the permissions shown. It is ObjC, so it can be directly referenced from a callback.
+      
+      - parameter: Ignored (and can be omitted).
+      */
+     @objc dynamic func openMainSettings(_: Any! = nil) {
+         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+         Self.open(url: url)
+     }
 }
 
 /* ###################################################################################################################################### */

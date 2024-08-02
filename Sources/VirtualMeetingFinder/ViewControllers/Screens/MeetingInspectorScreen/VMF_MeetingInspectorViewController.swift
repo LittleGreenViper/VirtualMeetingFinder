@@ -860,11 +860,14 @@ extension VMF_MeetingInspectorViewController {
       - parameter inButton: The action BarButtonItem
       */
      @IBAction func actionItemHit(_ inButton: UIBarButtonItem) {
-          guard var mutableMeeting = meeting,
-                let url = mutableMeeting.linkURL
+          guard let meeting = meeting,
+                let url = meeting.linkURL,
+                let event = attendanceEvent
           else { return }
           
-          let viewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+          let activities: [UIActivity] = [VMF_AddToCalendar_Activity(meetingEvent: event, myController: self)]
+          
+          let viewController = UIActivityViewController(activityItems: [url, event], applicationActivities: activities)
           viewController.excludedActivityTypes = [.assignToContact, .openInIBooks, .print, .saveToCameraRoll, .addToReadingList]
           
           // iPad uses a popover.
@@ -921,5 +924,88 @@ extension VMF_MeetingInspectorViewController: MKMapViewDelegate {
           }
           
           return ret
+     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Custom Activity Class -
+/* ###################################################################################################################################### */
+/**
+ We can present a custom activity, that allows the user to add the meeting to their calendar.
+ */
+class VMF_AddToCalendar_Activity: UIActivity {
+     /* ################################################################## */
+     /**
+      The URL string, which is sent to Messages.
+      */
+     let meetingEvent: EKEvent
+     
+     /* ################################################################## */
+     /**
+      The controller that "owns" this instance.
+      */
+     weak var myController: VMF_MeetingInspectorViewController?
+     
+     /* ################################################################## */
+     /**
+      Initializer
+      
+      - parameter meetingEvent: The event for this activity.
+      - parameter actionButton: The action button for the screen. We use it to anchor an iPad popover.
+      */
+     init(meetingEvent inMeetingEvent: EKEvent, myController inMyController: VMF_MeetingInspectorViewController?) {
+          meetingEvent = inMeetingEvent
+          myController = inMyController
+     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension VMF_AddToCalendar_Activity {
+     /* ################################################################## */
+     /**
+      The basic category for this activity (an action line).
+      */
+     override class var activityCategory: UIActivity.Category { .action }
+     
+     /* ################################################################## */
+     /**
+      The title string for this activity.
+      */
+     override var activityTitle: String? { String(format: "SLUG-ADD-TO-CALENDAR".localizedVariant) }
+     
+     /* ################################################################## */
+     /**
+      The template image for the activity line.
+      */
+     override var activityImage: UIImage? { UIImage(named: "ActivityLogo") }
+     
+     /* ################################################################## */
+     /**
+      We have our own custom activity type.
+      */
+     override var activityType: UIActivity.ActivityType? { UIActivity.ActivityType("com.littlegreenviper.vmf.addToCalendar") }
+     
+     /* ################################################################## */
+     /**
+      We extract the event from the items, and return true.
+      */
+     override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
+          guard 2 == activityItems.count,
+                let eventItem = (activityItems[1] as? EKEvent)
+          else { return false }
+          
+          print(eventItem.debugDescription)
+          
+          return true
+     }
+     
+     /* ################################################################## */
+     /**
+      This is the modal handler for the activity.
+      */
+     override var activityViewController: UIViewController? {
+          nil
      }
 }

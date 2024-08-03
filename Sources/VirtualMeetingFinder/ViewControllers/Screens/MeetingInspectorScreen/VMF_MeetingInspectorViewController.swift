@@ -379,6 +379,16 @@ extension VMF_MeetingInspectorViewController {
           
           return event
      }
+     
+     /* ################################################################## */
+     /**
+      This returns the valid activities that we can have, in our action sheet.
+      */
+     var validActivities: [UIActivity] {
+          guard let event = attendanceEvent else { return [] }
+          
+          return [VMF_AddToCalendar_Activity(meetingEvent: event, myController: self)]
+     }
 }
 
 /* ###################################################################################################################################### */
@@ -849,9 +859,7 @@ extension VMF_MeetingInspectorViewController {
                 let event = attendanceEvent
           else { return }
           
-          let activities: [UIActivity] = [VMF_AddToCalendar_Activity(meetingEvent: event, myController: self)]
-          
-          let viewController = UIActivityViewController(activityItems: [url, event], applicationActivities: activities)
+          let viewController = UIActivityViewController(activityItems: [url, event], applicationActivities: validActivities)
           viewController.excludedActivityTypes = [.assignToContact, .openInIBooks, .print, .saveToCameraRoll, .addToReadingList]
           
           // iPad uses a popover.

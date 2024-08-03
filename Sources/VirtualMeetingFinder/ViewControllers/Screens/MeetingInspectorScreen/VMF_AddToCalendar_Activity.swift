@@ -182,7 +182,7 @@ extension VMF_AddToCalendar_Activity {
 extension VMF_AddToCalendar_Activity: EKEventEditViewDelegate {
      /* ################################################################## */
      /**
-      Called when the even kit has completed with an action to add the reminder to the calendar.
+      Called when the event kit has completed with an action to add the reminder to the calendar.
       
       - parameter inController: The controller we're talking about.
       - parameter didCompleteWith: The even action that completed.

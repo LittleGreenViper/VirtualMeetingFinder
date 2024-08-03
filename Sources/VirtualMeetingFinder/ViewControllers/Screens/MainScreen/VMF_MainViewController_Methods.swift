@@ -692,6 +692,7 @@ extension VMF_MainViewController {
           UISegmentedControl.appearance().setTitleTextAttributes(titleTextAttributes, for: .selected)
           
           weekdayModeSelectorSegmentedSwitch?.apportionsSegmentWidthsByContent = true
+          
           (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: 0) as? UIView)?.accessibilityLabel = "SLUG-ACC-WEEKDAY-SWITCH-0-LABEL"
           (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: 0) as? UIView)?.accessibilityHint = "SLUG-ACC-WEEKDAY-SWITCH-0-HINT"
           

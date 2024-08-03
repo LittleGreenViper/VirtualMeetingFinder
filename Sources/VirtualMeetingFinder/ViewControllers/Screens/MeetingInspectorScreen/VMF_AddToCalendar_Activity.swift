@@ -22,12 +22,12 @@ import EventKitUI
 import RVS_Generic_Swift_Toolbox
 
 /* ###################################################################################################################################### */
-// MARK: - Custom Activity Class -
+// MARK: - Custom Activity Class Base -
 /* ###################################################################################################################################### */
 /**
  We can present a custom activity, that allows the user to add the meeting to their calendar.
  */
-class VMF_AddToCalendar_Activity: UIActivity {
+class VMF_Base_Activity: UIActivity {
      /* ################################################################## */
      /**
       The URL string, which is sent to Messages.
@@ -56,13 +56,26 @@ class VMF_AddToCalendar_Activity: UIActivity {
 /* ###################################################################################################################################### */
 // MARK: Base Class Overrides
 /* ###################################################################################################################################### */
-extension VMF_AddToCalendar_Activity {
+extension VMF_Base_Activity {
      /* ################################################################## */
      /**
       The basic category for this activity (an action line).
       */
      override class var activityCategory: UIActivity.Category { .action }
-     
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Custom Add To Calendar Activity Class -
+/* ###################################################################################################################################### */
+/**
+ We can present a custom activity, that allows the user to add the meeting to their calendar.
+ */
+class VMF_AddToCalendar_Activity: VMF_Base_Activity { }
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension VMF_AddToCalendar_Activity {
      /* ################################################################## */
      /**
       The title string for this activity.
@@ -100,7 +113,12 @@ extension VMF_AddToCalendar_Activity {
      override func perform() {
           addReminderEvent()
      }
+}
 
+/* ###################################################################################################################################### */
+// MARK: Instance Methods
+/* ###################################################################################################################################### */
+extension VMF_AddToCalendar_Activity {
      /* ################################################################## */
      /**
       This adds a reminder event for the next meeting start time.

@@ -36,6 +36,8 @@
 /* OK Button for alerts */
 
 "SLUG-OK-BUTTON-TEXT" = "OK";
+/* Cancel Button for Alerts */
+"SLUG-CANCEL-BUTTON-TEXT" = "Annuler";
 /* Header for Fetch Error Message */
 "SLUG-ALERT-ERROR-HEADER" = "ERREUR";
 /* Body for Fetch Error Message */

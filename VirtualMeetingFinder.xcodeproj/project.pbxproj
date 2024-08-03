@@ -15,6 +15,7 @@
 		D43A9C132C373F67001285FC /* RVS_Persistent_Prefs in Frameworks */ = {isa = PBXBuildFile; productRef = D43A9C122C373F67001285FC /* RVS_Persistent_Prefs */; };
 		D43A9C192C374198001285FC /* VMF_Persistent_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A9C172C374198001285FC /* VMF_Persistent_Prefs.swift */; };
 		D43A9C1A2C374198001285FC /* VMF_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A9C182C374198001285FC /* VMF_Extensions.swift */; };
+		D43D850C2C5E616D00E6EB2B /* VMF_AddToCalendar_Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43D850B2C5E616D00E6EB2B /* VMF_AddToCalendar_Activity.swift */; };
 		D455E5672C396F3A00246848 /* VMF_AttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D455E5662C396F3A00246848 /* VMF_AttendanceViewController.swift */; };
 		D45E42022C3F2BA7006578F6 /* VMF_SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E42012C3F2BA7006578F6 /* VMF_SettingsViewController.swift */; };
 		D47C2F0E2C2C5E6A0048C91C /* VMF_BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */; };
@@ -48,6 +49,7 @@
 		D42997D82C57B07300164E46 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		D43A9C172C374198001285FC /* VMF_Persistent_Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Persistent_Prefs.swift; sourceTree = "<group>"; };
 		D43A9C182C374198001285FC /* VMF_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Extensions.swift; sourceTree = "<group>"; };
+		D43D850B2C5E616D00E6EB2B /* VMF_AddToCalendar_Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_AddToCalendar_Activity.swift; sourceTree = "<group>"; };
 		D44D7CF52C5D125D00F97305 /* .jazzy.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .jazzy.yaml; sourceTree = "<group>"; };
 		D455E5662C396F3A00246848 /* VMF_AttendanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_AttendanceViewController.swift; sourceTree = "<group>"; };
 		D45E42012C3F2BA7006578F6 /* VMF_SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_SettingsViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				D4B69A332C2B162800D24DA6 /* VMF_MeetingInspectorViewController.swift */,
+				D43D850B2C5E616D00E6EB2B /* VMF_AddToCalendar_Activity.swift */,
 			);
 			path = MeetingInspectorScreen;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				D40133692C320C070018076B /* VMF_MainViewController.swift in Sources */,
 				D4E7C6C92C4293E10045ACE6 /* VMF_MainViewController_Methods.swift in Sources */,
 				D4E7C6CB2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift in Sources */,
+				D43D850C2C5E616D00E6EB2B /* VMF_AddToCalendar_Activity.swift in Sources */,
 				D455E5672C396F3A00246848 /* VMF_AttendanceViewController.swift in Sources */,
 				D4F4BCED2C36DAFC0023C21B /* VMF_MapMarker.swift in Sources */,
 				D49393372C2616C7006438AE /* VMF_SceneDelegate.swift in Sources */,

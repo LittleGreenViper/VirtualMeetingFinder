@@ -143,9 +143,7 @@ extension VMF_AppDelegate {
      /**
       Quick access to the app delegate object.
       */
-     class var appDelegateInstance: VMF_AppDelegate? {
-          UIApplication.shared.delegate as? VMF_AppDelegate
-     }
+     class var appDelegateInstance: VMF_AppDelegate? { UIApplication.shared.delegate as? VMF_AppDelegate }
 }
 
 /* ###################################################################################################################################### */
@@ -201,17 +199,5 @@ extension VMF_AppDelegate: UIApplicationDelegate {
       */
      func application(_: UIApplication, configurationForConnecting inConnectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
           UISceneConfiguration(name: "Default Configuration", sessionRole: inConnectingSceneSession.role)
-     }
-     
-     /* ################################################################## */
-     /**
-      Called when the application goes into the background.
-      
-      We use this to set the reload delay tracker.
-      
-      - parameter: The application (ignored)
-      */
-     func applicationDidEnterBackground(_: UIApplication) {
-          VMF_SceneDelegate.lastReloadTime = .now
      }
 }

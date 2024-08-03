@@ -43,12 +43,24 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
      /**
       */
      static var urlMeetingID = Int(0)
-     
+
      /* ################################################################## */
      /**
       The window object for this scene.
       */
      var window: UIWindow?
+     
+     /* ################################################################## */
+     /**
+      Called after the scene went into the background.
+      
+      We use this to set the search screen to today/now.
+      
+      - parameter: The scene instance (ignored).
+      */
+     func sceneDidEnterBackground(_: UIScene) {
+          Self.lastReloadTime = .now
+     }
      
      /* ################################################################## */
      /**

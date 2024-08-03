@@ -28,7 +28,7 @@
 // This is the app name.
 "CFBundleDisplayName"                             =    "Nós Nunca Estamos Sozinhos";
 // Displayed for the calendar access alerts
-"NSCalendarsUsageDescription"                     =    "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
+"NSCalendarsUsageDescription"                     =    "Este aplicativo pode adicionar eventos ao seu calendário para lembrá-lo da participação em reuniões futuras.";
 // Displayed for the calendar access alerts (newer operating systems).
-"NSCalendarsWriteOnlyAccessUsageDescription"      =    "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
+"NSCalendarsWriteOnlyAccessUsageDescription"      =    "Este aplicativo pode adicionar eventos ao seu calendário para lembrá-lo da participação em reuniões futuras.";
 // MARK: -

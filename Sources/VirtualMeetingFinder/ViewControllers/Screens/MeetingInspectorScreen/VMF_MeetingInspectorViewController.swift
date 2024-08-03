@@ -347,7 +347,7 @@ extension VMF_MeetingInspectorViewController {
           event.addRecurrenceRule(EKRecurrenceRule(recurrenceWith: .weekly, interval: 1, end: nil))
           event.title = meeting.name
           event.timeZone = meeting.timeZone
-          event.startDate = meeting.getNextStartDate()
+          event.startDate = meeting.getNextStartDate(isAdjusted: true)
           event.endDate = event.startDate.addingTimeInterval(meeting.duration)
           event.url = appURI
           event.location = meeting.directAppURI?.absoluteString ?? appURI.absoluteString
@@ -963,7 +963,7 @@ extension VMF_AddToCalendar_Activity {
      /**
       The template image for the activity line.
       */
-     override var activityImage: UIImage? { UIImage(named: "ActivityLogo") }
+     override var activityImage: UIImage? { UIImage(systemName: "calendar.badge.plus") }
      
      /* ################################################################## */
      /**

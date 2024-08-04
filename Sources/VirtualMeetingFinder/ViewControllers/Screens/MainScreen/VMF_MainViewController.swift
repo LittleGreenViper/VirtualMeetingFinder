@@ -64,7 +64,7 @@ import SwiftBMLSDK
  
  It is possible for a user to indicate that they attend a meeting, by selecting "I Attend," in the meeting inspector screen.
  
- You can bring in a separate screen, that contains only the meetings that you attend. This is accessed from the chackmark bar button item, in the upper right.
+ You can bring in a separate screen, that contains only the meetings that you attend. This is accessed from the checkmark bar button item, in the upper right.
  */
 class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerProtocol {
      /* ################################################################## */

@@ -72,7 +72,9 @@ This is another screen that is brought in from the Settings Screen, that has inf
 
 ## More Information
 
-[This is a page with a much more detailed explanation of the app.](https://littlegreenviper.com/the-virtual-na-meeting-finder-app/)
+- [This is a page with a much more detailed explanation of the app.](https://littlegreenviper.com/the-virtual-na-meeting-finder-app/)
+
+- [This is the internal Technical Documentation for the Project](https://littlegreenviper.github.io/VirtualMeetingFinder/)
 
 ## Privacy
 

@@ -31,12 +31,6 @@ import RVS_Generic_Swift_Toolbox
 class VMF_Base_Activity: UIActivity {
      /* ################################################################## */
      /**
-      The URL string, which is sent to Messages.
-      */
-     let meetingEvent: EKEvent?
-     
-     /* ################################################################## */
-     /**
       The controller that "owns" this instance.
       */
      weak var myController: VMF_MeetingInspectorViewController?
@@ -45,11 +39,10 @@ class VMF_Base_Activity: UIActivity {
      /**
       Initializer
       
-      - parameter meetingEvent: The event for this activity (Can be omitted).
+      - parameter myController: The controller that "owns" this activity.
       - parameter actionButton: The action button for the screen. We use it to anchor an iPad popover (Can be omitted).
       */
-     init(meetingEvent inMeetingEvent: EKEvent? = nil, myController inMyController: VMF_MeetingInspectorViewController? = nil) {
-          meetingEvent = inMeetingEvent
+     init(myController inMyController: VMF_MeetingInspectorViewController?) {
           myController = inMyController
      }
 }
@@ -71,7 +64,26 @@ extension VMF_Base_Activity {
 /**
  We can present a custom activity, that allows the user to add the meeting to their calendar.
  */
-class VMF_AddToCalendar_Activity: VMF_Base_Activity { }
+class VMF_AddToCalendar_Activity: VMF_Base_Activity {
+     /* ################################################################## */
+     /**
+      The URL string, which is sent to Messages.
+      */
+     let meetingEvent: EKEvent?
+     
+     /* ################################################################## */
+     /**
+      Initializer
+      
+      - parameter meetingEvent: The event for this activity (Can be omitted).
+      - parameter myController: The controller that "owns" this activity.
+      - parameter actionButton: The action button for the screen. We use it to anchor an iPad popover (Can be omitted).
+      */
+     init(meetingEvent inMeetingEvent: EKEvent? = nil, myController inMyController: VMF_MeetingInspectorViewController? = nil) {
+          meetingEvent = inMeetingEvent
+          super.init(myController: inMyController)
+     }
+}
 
 /* ###################################################################################################################################### */
 // MARK: Base Class Overrides
@@ -98,6 +110,8 @@ extension VMF_AddToCalendar_Activity {
      /* ################################################################## */
      /**
       We extract the event from the items, and return true.
+      
+      - parameter withActivityItems: The activity items (ignored).
       */
      override func canPerform(withActivityItems inActivityItems: [Any]) -> Bool {
           guard 1 < inActivityItems.count,
@@ -321,11 +335,13 @@ class VMF_OpenLocationIn_Activity: VMF_Base_Activity {
 
      /* ################################################################## */
      /**
-      Initializer that adds the location app to the other stuff.
+      Default Initializer.
+      - parameter app: The app enum case for this activity.
+      - parameter myController: The controller that "owns" this activity.
       */
      init(app inApp: LocationHandlerApp, myController inMyController: VMF_MeetingInspectorViewController?) {
           app = inApp
-          super.init(meetingEvent: nil, myController: inMyController)
+          super.init(myController: inMyController)
      }
 }
 
@@ -353,11 +369,10 @@ extension VMF_OpenLocationIn_Activity {
      
      /* ################################################################## */
      /**
-      We extract the location from the items, and return true.
+      - parameter withActivityItems: The activity items (ignored).
+      We return true, if the app is installed.
       */
-     override func canPerform(withActivityItems: [Any]) -> Bool {
-          return true
-     }
+     override func canPerform(withActivityItems: [Any]) -> Bool { nil != app.appURL }
      
      /* ################################################################## */
      /**

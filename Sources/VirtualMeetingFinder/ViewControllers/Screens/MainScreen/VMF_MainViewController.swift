@@ -62,7 +62,7 @@ import SwiftBMLSDK
  
  ## SELECTING FOR ATTENDANCE
  
- It is possible for a user to indicate that they attend a meeting, by double-tapping on a meeting in the list, or by selecting "I Attend," in the meeting inspector screen.
+ It is possible for a user to indicate that they attend a meeting, by selecting "I Attend," in the meeting inspector screen.
  
  You can bring in a separate screen, that contains only the meetings that you attend. This is accessed from the chackmark bar button item, in the upper right.
  */

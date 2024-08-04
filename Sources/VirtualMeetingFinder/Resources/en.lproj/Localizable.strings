@@ -115,6 +115,22 @@
 "SLUG-DIRECT-URI-DISCORD"                         =    "Discord";
 "SLUG-DIRECT-URI-JITSI"                           =    "Jitsi Meet";
 
+/* This is the "Open In" heading for the action items. The placeholder is replaced by the app name. */
+"SLUG-OPEN-IN-FORMAT"                             =    "Open In %@";
+/* This is the generic placeholder fo NA meetings. */
+"SLUG-NA-MEETING"                                 =    "NA Meeting";
+
+/* One of these is displayed in the "Open In" action items. They indicate which app will be used to open an in-person meeting location.
+ 
+   NOTE TO TRANSLATOR: These are corporate trade names. If there are no localized well-known substitutes, leave the English names.
+ */
+/* The app title for the built-in Apple Maps app. */
+"SLUG-APPLE-MAPS-APP-TITLE"                       =    "Maps";
+/* The app title for the Google Maps app. */
+"SLUG-GOOGLE-MAPS-APP-TITLE"                      =    "Google Maps";
+/* The app title for the Google Waze app. */
+"SLUG-WAZE-APP-TITLE"                             =    "Waze";
+
 // MARK: - ATTENDANCE SCREEN -
 
 /* The title of the "My Attendance" Screen */
@@ -152,7 +168,6 @@
 // ***********************************************************************************************************
 // MARK: - DO NOT TRANSLATE BELOW THIS LINE -
 // ***********************************************************************************************************
-
 /* The button string for the BMLT button */
 "SLUG-BMLT-LABEL"                                 =    "Basic Meeting List Toolbox (BMLT)";
 /* The format for a universal meeting link. The placeholder is replaced with the meeting's ID */

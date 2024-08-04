@@ -95,6 +95,11 @@
 /* This is displayed under the globe icon, in the Meeting Inspector. */
 "SLUG-GLOBE-BUTTON" = "Endereço web";
 
+/* This is the "Open In" heading for the action items. The placeholder is replaced by the app name. */
+"SLUG-OPEN-IN-FORMAT" = "Abrir no Aplicativo %@";
+/* This is the generic placeholder fo NA meetings. */
+"SLUG-NA-MEETING" = "Reunião de NA";
+
 /* One of these is displayed under the video icon, in the Meeting Inspector. They denote the particular app that will be opened, by selecting the icon.
  
    NOTE TO TRANSLATOR: These are corporate trade names. If there are no localized well-known substitutes, leave the English names.

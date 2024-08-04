@@ -95,6 +95,11 @@
 /* This is displayed under the globe icon, in the Meeting Inspector. */
 "SLUG-GLOBE-BUTTON" = "Dirección web";
 
+/* This is the "Open In" heading for the action items. The placeholder is replaced by the app name. */
+"SLUG-OPEN-IN-FORMAT" = "Abrir en la Aplicación %@";
+/* This is the generic placeholder fo NA meetings. */
+"SLUG-NA-MEETING" = "Reunión de NA";
+
 /* One of these is displayed under the video icon, in the Meeting Inspector. They denote the particular app that will be opened, by selecting the icon.
  
    NOTE TO TRANSLATOR: These are corporate trade names. If there are no localized well-known substitutes, leave the English names.
@@ -109,7 +114,7 @@
 // MARK: - ATTENDANCE SCREEN -
 /* The title of the "My Attendance" Screen */
 
-"SLUG-TAB-1-TITLE" = "Mi asistencia";
+"SLUG-TAB-1-TITLE" = "Mi Asistencia";
 
 // MARK: - SETTINGS SCREEN -
 /* The name of the screen */
@@ -123,7 +128,7 @@
 // MARK: - ABOUT SCREEN -
 /* The name of the screen */
 
-"SLUG-ABOUT-SCREEN-TITLE" = "Acerca de esta aplicación";
+"SLUG-ABOUT-SCREEN-TITLE" = "Acerca de esta Aplicación";
 /* The complete version */
 "SLUG-VERSION-FORMAT" = "Versión: %@ (%@)";
 /* The text of the "Presented By" button.

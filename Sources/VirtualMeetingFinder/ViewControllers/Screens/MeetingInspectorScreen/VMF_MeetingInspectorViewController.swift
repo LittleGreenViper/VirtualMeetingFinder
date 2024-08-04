@@ -20,6 +20,7 @@
 import UIKit
 import EventKit
 import MapKit
+import CoreLocation
 import SwiftBMLSDK
 import RVS_Generic_Swift_Toolbox
 
@@ -387,7 +388,32 @@ extension VMF_MeetingInspectorViewController {
      var validActivities: [UIActivity] {
           guard let event = attendanceEvent else { return [] }
           
-          return [VMF_AddToCalendar_Activity(meetingEvent: event, myController: self)]
+          var activities: [UIActivity] = [VMF_AddToCalendar_Activity(meetingEvent: event, myController: self)]
+          
+          if .hybrid == meeting?.meetingType || .inPerson == meeting?.meetingType,
+             let coords = meeting?.coords,
+             let name = (meeting?.name ?? "SLUG-NA-MEETING".localizedVariant).urlEncodedString,
+             CLLocationCoordinate2DIsValid(coords) {
+               var placeMark: CLPlacemark
+               if let postalAddress = meeting?.inPersonAddress {
+                    placeMark = MKPlacemark(coordinate: coords, postalAddress: postalAddress)
+               } else {
+                    placeMark = MKPlacemark(coordinate: coords)
+               }
+               let apps: [VMF_OpenLocationIn_Activity.LocationHandlerApp] = [
+                    .appleMaps(location: placeMark, name: name),
+                    .googleMaps(location: placeMark, name: name),
+                    .waze(location: placeMark, name: name)
+               ]
+               
+               apps.forEach {
+                    if nil != $0.appURL {
+                         activities.append(VMF_OpenLocationIn_Activity(app: $0, myController: self))
+                    }
+               }
+          }
+          
+          return activities
      }
 }
 

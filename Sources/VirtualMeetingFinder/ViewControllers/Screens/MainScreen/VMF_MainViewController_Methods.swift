@@ -185,7 +185,7 @@ extension VMF_MainViewController {
      
      /* ################################################################## */
      /**
-      This returns a the meetings we should display, given the day and time.
+      This returns the meetings we should display, given the day and time.
       
       NOTE: If the controller is in text search mode, then the search set is returned.
       

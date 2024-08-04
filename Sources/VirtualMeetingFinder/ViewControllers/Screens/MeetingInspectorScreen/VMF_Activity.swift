@@ -19,6 +19,7 @@
 
 import UIKit
 import EventKitUI
+import MapKit
 import RVS_Generic_Swift_Toolbox
 
 /* ###################################################################################################################################### */
@@ -32,7 +33,7 @@ class VMF_Base_Activity: UIActivity {
      /**
       The URL string, which is sent to Messages.
       */
-     let meetingEvent: EKEvent
+     let meetingEvent: EKEvent?
      
      /* ################################################################## */
      /**
@@ -44,10 +45,10 @@ class VMF_Base_Activity: UIActivity {
      /**
       Initializer
       
-      - parameter meetingEvent: The event for this activity.
-      - parameter actionButton: The action button for the screen. We use it to anchor an iPad popover.
+      - parameter meetingEvent: The event for this activity (Can be omitted).
+      - parameter actionButton: The action button for the screen. We use it to anchor an iPad popover (Can be omitted).
       */
-     init(meetingEvent inMeetingEvent: EKEvent, myController inMyController: VMF_MeetingInspectorViewController?) {
+     init(meetingEvent inMeetingEvent: EKEvent? = nil, myController inMyController: VMF_MeetingInspectorViewController? = nil) {
           meetingEvent = inMeetingEvent
           myController = inMyController
      }
@@ -80,7 +81,7 @@ extension VMF_AddToCalendar_Activity {
      /**
       The title string for this activity.
       */
-     override var activityTitle: String? { String(format: "SLUG-ADD-TO-CALENDAR".localizedVariant) }
+     override var activityTitle: String? { "SLUG-ADD-TO-CALENDAR".localizedVariant }
      
      /* ################################################################## */
      /**
@@ -98,9 +99,9 @@ extension VMF_AddToCalendar_Activity {
      /**
       We extract the event from the items, and return true.
       */
-     override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
-          guard 1 < activityItems.count,
-                activityItems[1] is EKEvent
+     override func canPerform(withActivityItems inActivityItems: [Any]) -> Bool {
+          guard 1 < inActivityItems.count,
+                inActivityItems[1] is EKEvent
           else { return false }
           
           return true
@@ -207,5 +208,163 @@ extension VMF_AddToCalendar_Activity: EKEventEditViewDelegate {
       */
      func eventEditViewController(_ inController: EKEventEditViewController, didCompleteWith inAction: EKEventEditViewAction) {
           inController.dismiss(animated: true, completion: nil)
+     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Custom Open Location In Activity Class -
+/* ###################################################################################################################################### */
+/**
+ We can present a custom activity, that allows the user to open a location, using an installed app.
+ */
+class VMF_OpenLocationIn_Activity: VMF_Base_Activity {
+     /* ################################################################################################################################## */
+     // MARK: Enum That Transparently Handles A Location App
+     /* ################################################################################################################################## */
+     /**
+      This enum abstracts the particulars of having multiple apps that can deal with the location.
+      */
+     enum LocationHandlerApp {
+          /* ############################################################## */
+          /**
+           The built-in Apple Maps app.
+           
+           - parameter location: The placemark for the location.
+           - parameter name: The name of the meeting.
+           */
+          case appleMaps(location: CLPlacemark, name: String)
+          
+          /* ############################################################## */
+          /**
+           The Google Maps app.
+           
+           - parameter location: The placemark for the location.
+           - parameter name: The name of the meeting.
+           */
+          case googleMaps(location: CLPlacemark, name: String)
+          
+          /* ############################################################## */
+          /**
+           The (Google) Waze app.
+           
+           - parameter location: The placemark for the location.
+           - parameter name: The name of the meeting.
+          */
+          case waze(location: CLPlacemark, name: String)
+          
+          /* ############################################################## */
+          /**
+           This returns the Universal Links URL for each of the types of apps.
+           */
+          var appURL: URL? {
+               var ret: String = ""
+               
+               switch self {
+               case let .appleMaps(inLocation, name):
+                    if let coords = inLocation.location?.coordinate,
+                       CLLocationCoordinate2DIsValid(coords) {
+                         ret = "http://maps.apple.com/?ll=\(coords.latitude),\(coords.longitude)&q=\(name)"
+                    }
+                    
+               case let .googleMaps(inLocation, _):
+                    if let coords = inLocation.location?.coordinate,
+                       let testURL = URL(string: "comgooglemaps://"),
+                       UIApplication.shared.canOpenURL(testURL),
+                       CLLocationCoordinate2DIsValid(coords) {
+                         ret = "https://www.google.com/maps/search/?api=1&query=\(coords.latitude)%2C\(coords.longitude)"
+                    }
+                    
+               case let .waze(inLocation, _):
+                    if let coords = inLocation.location?.coordinate,
+                       let testURL = URL(string: "waze://"),
+                       UIApplication.shared.canOpenURL(testURL),
+                       CLLocationCoordinate2DIsValid(coords) {
+                         ret = "https://waze.com/ul?ll=\(coords.latitude),\(coords.longitude)&navigate=yes"
+                    }
+               }
+               
+               if let url = URL(string: ret),
+                  UIApplication.shared.canOpenURL(url) {
+                    return url
+               }
+               
+               return nil
+          }
+          
+          /* ############################################################## */
+          /**
+           This returns the App title.
+           */
+          var appTitle: String {
+               var ret = "ERROR"
+               
+               switch self {
+               case .appleMaps(_, _):
+                    ret = "SLUG-APPLE-MAPS-APP-TITLE".localizedVariant
+                    
+               case .googleMaps(_, _):
+                    ret = "SLUG-GOOGLE-MAPS-APP-TITLE".localizedVariant
+
+               case .waze(_, _):
+                    ret = "SLUG-WAZE-APP-TITLE".localizedVariant
+               }
+               
+               return ret
+          }
+     }
+     
+     /* ################################################################## */
+     /**
+      This is the enum with the app, and the location (associated value).
+      */
+     let app: LocationHandlerApp
+
+     /* ################################################################## */
+     /**
+      Initializer that adds the location app to the other stuff.
+      */
+     init(app inApp: LocationHandlerApp, myController inMyController: VMF_MeetingInspectorViewController?) {
+          app = inApp
+          super.init(meetingEvent: nil, myController: inMyController)
+     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension VMF_OpenLocationIn_Activity {
+     /* ################################################################## */
+     /**
+      The title string for this activity.
+      */
+     override var activityTitle: String? { String(format: "SLUG-OPEN-IN-FORMAT".localizedVariant, app.appTitle) }
+     
+     /* ################################################################## */
+     /**
+      The template image for the activity line.
+      */
+     override var activityImage: UIImage? { UIImage(systemName: "map") }
+     
+     /* ################################################################## */
+     /**
+      We have our own custom activity type.
+      */
+     override var activityType: UIActivity.ActivityType? { UIActivity.ActivityType("com.littlegreenviper.vmf.openIn-\(app.appTitle)") }
+     
+     /* ################################################################## */
+     /**
+      We extract the location from the items, and return true.
+      */
+     override func canPerform(withActivityItems: [Any]) -> Bool {
+          return true
+     }
+     
+     /* ################################################################## */
+     /**
+      This is the execution handler for the activity.
+      */
+     override func perform() {
+          guard let appURL = app.appURL else { return }
+          UIApplication.shared.open(appURL)
      }
 }

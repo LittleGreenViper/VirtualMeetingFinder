@@ -23,6 +23,7 @@
 		<string>skype</string>
 		<string>maps</string>
 		<string>gmeet</string>
+		<string>waze</string>
 		<string>whatsapp</string>
 	</array>
 	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>

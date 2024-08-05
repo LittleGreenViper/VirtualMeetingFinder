@@ -892,7 +892,7 @@ extension VMF_MeetingInspectorViewController {
           if .pad == traitCollection.userInterfaceIdiom,
              let size = view?.bounds.size {
                viewController.modalPresentationStyle = .popover
-               viewController.preferredContentSize = CGSize(width: size.width, height: size.height / 2)
+               viewController.preferredContentSize = CGSize(width: size.width, height: size.height)
                viewController.popoverPresentationController?.barButtonItem = inButton
                viewController.popoverPresentationController?.permittedArrowDirections = [.up]
           }

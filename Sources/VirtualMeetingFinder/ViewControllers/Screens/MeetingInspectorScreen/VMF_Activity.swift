@@ -126,6 +126,7 @@ extension VMF_AddToCalendar_Activity {
       This is the execution handler for the activity.
       */
      override func perform() {
+          myController?.selectionHaptic()
           addReminderEvent()
      }
 }
@@ -165,7 +166,7 @@ extension VMF_AddToCalendar_Activity {
                     if .pad == self.myController?.traitCollection.userInterfaceIdiom,
                        let size = self.myController?.view?.bounds.size {
                          eventController.modalPresentationStyle = .popover
-                         eventController.preferredContentSize = CGSize(width: size.width, height: size.height / 2)
+                         eventController.preferredContentSize = CGSize(width: size.width, height: size.height)
                          eventController.popoverPresentationController?.sourceView = myController?.navigationController?.navigationBar
                          eventController.popoverPresentationController?.permittedArrowDirections = [.up]
                     }
@@ -380,6 +381,7 @@ extension VMF_OpenLocationIn_Activity {
       */
      override func perform() {
           guard let appURL = app.appURL else { return }
+          myController?.successHaptic()
           UIApplication.shared.open(appURL)
      }
 }

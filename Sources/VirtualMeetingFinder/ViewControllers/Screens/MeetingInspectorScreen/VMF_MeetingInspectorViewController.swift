@@ -795,6 +795,14 @@ extension VMF_MeetingInspectorViewController {
           iAttendBarButton?.accessibilityLabel = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-LABEL".accessibilityLocalizedVariant
           iAttendBarButton?.accessibilityHint = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-HINT".accessibilityLocalizedVariant
      }
+     
+     /* ################################################################## */
+     /**
+      This displays the alert for links to Zoom, telling the user they need to download the app.
+      */
+     func displayMacZoomAlert() {
+          
+     }
 }
 
 /* ###################################################################################################################################### */
@@ -834,7 +842,15 @@ extension VMF_MeetingInspectorViewController {
           if let webLinkURL = meeting?.virtualURL,
              UIApplication.shared.canOpenURL(webLinkURL) {
                hardImpactHaptic()
-               VMF_AppDelegate.open(url: webLinkURL)
+               #if targetEnvironment(macCatalyst)
+                    if webLinkURL.absoluteString.contains("zoom.us") {
+                         displayMacZoomAlert()
+                    } else {
+                         VMF_AppDelegate.open(url: webLinkURL)
+                    }
+               #else
+                    VMF_AppDelegate.open(url: webLinkURL)
+               #endif
           }
      }
      

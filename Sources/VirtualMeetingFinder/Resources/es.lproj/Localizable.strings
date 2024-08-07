@@ -111,6 +111,13 @@
 "SLUG-DIRECT-URI-DISCORD" = "Discord";
 "SLUG-DIRECT-URI-JITSI" = "Jitsi Meet";
 
+/* This is the alert heading. */
+"SLUG-ZOOM-WARING-ALERT-HEADER" = "No se Puede Abrir en Zoom";
+/* This is the alert text. */
+"SLUG-ZOOM-WARING-ALERT-BODY" = "Apple no permite el acceso directo a las reuniones a través de Safari debido a la descarga de la aplicación. Por favor, instale la aplicación Zoom y únase desde allí.";
+/* This is the button that takes you directly to the Zoom app download. */
+"SLUG-ZOOM-WARING-ALERT-APP-BUTTON" = "Ir a la Descarga de la Aplicación";
+
 // MARK: - ATTENDANCE SCREEN -
 /* The title of the "My Attendance" Screen */
 
@@ -191,5 +198,7 @@
 "SLUG-BMLT-URL" = "https://bmlt.app";
 /* The URL string for the help page button. */
 "SLUG-HELP-PAGE-URL" = "https://littlegreenviper.com/portfolio/the-virtual-na-meeting-finder-app/";
+/* The URL to download the Zoom App */
+"SLUG-ZOOM-DOWNLOAD-URL" = "https://zoom.us/download?os=mac";
 
 // MARK: -

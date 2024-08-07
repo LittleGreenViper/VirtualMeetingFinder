@@ -115,6 +115,15 @@
 "SLUG-DIRECT-URI-DISCORD"                         =    "Discord";
 "SLUG-DIRECT-URI-JITSI"                           =    "Jitsi Meet";
 
+/* This message is displayed for Mac Catalyst, when the user clicks on the "Web" icon, for a Zoom meeting. Apple does not allow direct Zoom access (because of the app download). */
+
+/* This is the alert heading. */
+"SLUG-ZOOM-WARING-ALERT-HEADER"                   =    "Cannot Open In Zoom";
+/* This is the alert text. */
+"SLUG-ZOOM-WARING-ALERT-BODY"                     =    "Apple does not allow direct access to the meetings via Safari, because of the app download. Please install the Zoom app, and join from that.";
+/* This is the button that takes you directly to the Zoom app download. */
+"SLUG-ZOOM-WARING-ALERT-APP-BUTTON"               =    "Go to App Download";
+
 /* This is the "Open In" heading for the action items. The placeholder is replaced by the app name. */
 "SLUG-OPEN-IN-FORMAT"                             =    "Open In %@";
 /* This is the generic placeholder fo NA meetings. */
@@ -210,4 +219,6 @@
 "SLUG-BMLT-URL"                                   =    "https://bmlt.app";
 /* The URL string for the help page button. */
 "SLUG-HELP-PAGE-URL"                              =    "https://littlegreenviper.com/portfolio/the-virtual-na-meeting-finder-app/";
+/* The URL to download the Zoom App */
+"SLUG-ZOOM-DOWNLOAD-URL"                          =    "https://zoom.us/download?os=mac";
 // MARK: -

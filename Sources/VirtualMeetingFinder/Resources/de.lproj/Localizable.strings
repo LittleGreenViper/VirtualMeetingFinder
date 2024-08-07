@@ -116,9 +116,9 @@
 /* This is the alert heading. */
 "SLUG-ZOOM-WARING-ALERT-HEADER" = "Kann Nicht in Zoom Geöffnet Werden";
 /* This is the alert text. */
-"SLUG-ZOOM-WARING-ALERT-BODY" = "Apple does not allow direct access to the meetings via Safari, because of the app download. Please install the Zoom app, and join from that.";
+"SLUG-ZOOM-WARING-ALERT-BODY" = "Apple erlaubt keinen direkten Zugang zu den Meetings über Safari, aufgrund des App-Downloads. Bitte installieren Sie die Zoom-App und treten Sie über diese bei.";
 /* This is the button that takes you directly to the Zoom app download. */
-"SLUG-ZOOM-WARING-ALERT-APP-BUTTON" = "Go to App Download";
+"SLUG-ZOOM-WARING-ALERT-APP-BUTTON" = "Zur App-Download-Seite gehen";
 
 // MARK: - ATTENDANCE SCREEN -
 /* The title of the "My Attendance" Screen */

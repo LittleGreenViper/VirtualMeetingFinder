@@ -801,7 +801,21 @@ extension VMF_MeetingInspectorViewController {
       This displays the alert for links to Zoom, telling the user they need to download the app.
       */
      func displayMacZoomAlert() {
+          guard let zoomURI = URL(string: "SLUG-ZOOM-DOWNLOAD-URL".localizedVariant) else { return }
+          let style: UIAlertController.Style = .alert
+          let alertController = UIAlertController(title: "SLUG-ZOOM-WARING-ALERT-HEADER".localizedVariant, message: "SLUG-ZOOM-WARING-ALERT-BODY".localizedVariant, preferredStyle: style)
           
+          let okAction = UIAlertAction(title: "SLUG-CANCEL-BUTTON-TEXT".localizedVariant, style: .cancel, handler: nil)
+          
+          alertController.addAction(okAction)
+          
+          let downloadAction = UIAlertAction(title: "SLUG-ZOOM-WARING-ALERT-APP-BUTTON".localizedVariant, style: .default, handler: { _ in
+               VMF_AppDelegate.open(url: zoomURI)
+          })
+          
+          alertController.addAction(downloadAction)
+          
+          present(alertController, animated: true, completion: nil)
      }
 }
 
@@ -842,6 +856,8 @@ extension VMF_MeetingInspectorViewController {
           if let webLinkURL = meeting?.virtualURL,
              UIApplication.shared.canOpenURL(webLinkURL) {
                hardImpactHaptic()
+               // HACK ALERT!
+               // Apple does not allow Mac Safari to connect directly to meetings in Zoom, because of the immediate download, so we need to tell the user to get the app, and join from there.
                #if targetEnvironment(macCatalyst)
                     if webLinkURL.absoluteString.contains("zoom.us") {
                          displayMacZoomAlert()

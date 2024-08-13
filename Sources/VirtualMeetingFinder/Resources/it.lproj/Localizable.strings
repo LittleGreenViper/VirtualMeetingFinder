@@ -1,0 +1,223 @@
+/*
+ © Copyright 2024, Little Green Viper Software Development LLC
+con licenza di costruzione:
+ 
+ Licenza MIT
+ 
+ L'autorizzazione è concessa, a titolo gratuito, a chiunque ottenga una copia di questo software e della documentazione associata
+ file (il "Software"), per gestire il Software senza restrizioni, inclusi, a titolo esemplificativo ma non esaustivo, i diritti di utilizzo, copia,
+ modificare, unire, pubblicare, distribuire, concedere in sublicenza e/o vendere copie del Software e consentire alle persone a cui il
+procedere in tal senso, in base alle seguenti condizioni:
+ 
+La nota sul copyright riportata sopra e la presente nota sull'autorizzazione devono essere incluse in tutte le copie o parti sostanziali del Software.
+ 
+ IL SOFTWARE VIENE FORNITO "COSÌ COM'È", SENZA GARANZIE DI ALCUN TIPO, ESPLICITE O IMPLICITE, INCLUSE, A TITOLO ESEMPLIFICATIVO MA NON ESAUSTIVO, LE GARANZIE
+ DI COMMERCIABILITÀ, IDONEITÀ A UNO SCOPO PARTICOLARE E NON VIOLAZIONE.
+ IN NESSUN CASO GLI AUTORI O I TITOLARI DEI DIRITTI D'AUTORE SARANNO RESPONSABILI PER QUALSIASI RECLAMO, DANNO O ALTRA RESPONSABILITÀ, SIA IN UN'AZIONE DI
+ CONTRATTO, ILLECITO O ALTRO, DERIVANTE DA, FUORI DA O IN CONNESSIONE CON IL SOFTWARE O L'UTILIZZO O ALTRI RAPPORTI NEL SOFTWARE.
+ */
+
+// ************************************************           ***********************************************************
+// * -------------------------------------------- *           * ------------------------------------------------------- *
+// *| NON MODIFICARE DA QUESTO LATO DEGLI UGUALI  |*           *|   MODIFICARE IL TESTO DA QUESTO LATO NELLA LINGUA LOCALE |*
+// * -------------------------------------------- *           * ------------------------------------------------------- *
+// ************************************************           ***********************************************************
+
+// MARK: -
+// MARK: - COMMON -
+/* Sostituiamo 1200 con la parola "mezzogiorno" */
+"SLUG-NOON-TIME"                                  =    "Mezzogiorno";
+/* Sostituiamo 2359 con la parola "Midnight" */
+"SLUG-MIDNIGHT-TIME"                              =    "Mezzanotte";
+/* Pulsante generale Indietro */
+"SLUG-BACK"                                       =    "Indietro";
+/* Viene utilizzato per la riga Aggiungi scheda azione evento. */
+"SLUG-ADD-TO-CALENDAR"                            =    "Aggiungi al calendario";
+
+// MARK: - ALERTS -
+
+/* Pulsante OK per avvisi */
+"SLUG-OK-BUTTON-TEXT"                             =    "OK";
+/* Pulsante Annulla per avvisi */
+"SLUG-CANCEL-BUTTON-TEXT"                         =    "Annulla";
+/* Header for Fetch Error Message */
+"SLUG-ALERT-ERROR-HEADER"                         =    "ERRORE";
+/* Body for Fetch Error Message */
+"SLUG-ALERT-ERROR-BODY"                           =    "Si è verificato un errore durante il recupero dei dati. L'app non funzionerà, fino a quando non potremo recuperare i dati.";
+// Questo viene visualizzato negli avvisi che compaiono quando richiediamo alcune autorizzazioni di sistema. Questo è il pulsante che ti porta alla schermata Impostazioni dell'app, dove si trovano gli interruttori delle autorizzazioni.
+"SETTINGS-ALERT-BUTTON-TEXT"                      =   "Vai a Impostazioni";
+
+// MARK: NESSUNA AUTORIZZAZIONE PER L'ALLARME DEL CALENDARIO
+// L'intestazione dell'avviso di errore che compare, se non disponiamo dell'autorizzazione per il calendario.
+"SLUG-CALENDAR-PERM-ALERT-HEADER"                 =   "Nessun permesso di calendario";
+// Il corpo dell'avviso di errore che compare, se non disponiamo dell'autorizzazione per il calendario.
+"SLUG-CALENDAR-PERM-ALERT-BODY"                   =   "Hai negato il permesso di creare voci di calendario. Apri l'app Impostazioni e concedi l'autorizzazione Calendario all'app Recovrr.";
+
+// MARK: - SCHERMATA PRINCIPALE -
+
+/* Il nome dello schermo */
+"SLUG-TAB-0-TITLE"                                =    "Trova riunioni";
+/* Questo è il titolo per la visualizzazione dell'ora, quando abbiamo selezionato la voce "Ora" dell'interruttore segmentato. */
+"SLUG-IN-PROGRESS"                                =    "In corso";
+/* Questo è il testo "segnaposto" del campo di testo, per quando la schermata principale è in modalità di ricerca testo. */
+"SLUG-SEARCH-PLACEHOLDER"                         =    "Inserisci UN nome riunione";
+/* Questa è la stringa che visualizziamo nell'elenco, per le riunioni in corso. Il segnaposto (%@) è sostituito dal tempo, in forma localizzata. */
+"SLUG-IN-PROGRESS-FORMAT"                         =    "In corso dal %@";
+/* Questa è la stringa che mostriamo nell'elenco, per le riunioni in corso che sono in corso da ieri. |||UNTRANSLATED_CONTENT_START|||The placeholder is replaced by the time, in localized form. |||UNTRANSLATED_CONTENT_END|||*/
+"SLUG-IN-PROGRESS-YESTERDAY-FORMAT"               =    "In corso da %@ ieri";
+
+/* Questo è il titolo per il segmento di switch segmentato, per le riunioni in corso, nella schermata principale.
+ 
+ NOTA per IL TRADUTTORE: deve essere molto breve. Farà sì che il segmento che occupa si espanda, orizzontalmente. È solo una delle nove, quindi non può essere troppo grande.
+ */
+"SLUG-NOW"                                        =    "Adesso";
+
+// MARK: - SCHERMATA MEETING INSPECTOR -
+
+/* Il titolo per la schermata Meeting Inspector, quando viene visualizzata una riunione ibrida (soddisfa sia virtualmente che di persona). */
+"SLUG-HYBRID-MEETING"                             =    "Riunione ibrida";
+/* Il titolo della schermata di ispezione della riunione, quando viene visualizzata una riunione completamente virtuale. */
+"SLUG-VIRTUAL-MEETING"                            =    "Riunione virtuale";
+
+/* Il titolo della voce del pulsante della barra "Partecipo a questa riunione" nella barra di navigazione della schermata Controllo riunione. */
+"SLUG-I-ATTEND"                                   =    "Partecipo";
+/* Viene visualizzato se l'ispettore della riunione mostra una riunione attualmente in corso. */
+"SLUG-IN-PROGRESS-STANDALONE"                     =    "Questo incontro è in corso";
+/* Questo viene visualizzato nell'ispettore della riunione, se la riunione ha un fuso orario diverso dal nostro. Il primo segnaposto ha il nome del fuso orario e il secondo ha l'ora di inizio della riunione, in quel fuso orario (al contrario del locale, per la maggior parte delle altre volte). */
+"SLUG-TIMEZONE-FORMAT"                            =    "Fuso orario: %@ (%@)";
+/* Visualizza l'ora di inizio della riunione e il giorno feriale, ma non la durata. Viene visualizzato sia nella schermata principale che nella schermata di ispezione della riunione. Il primo segnaposto ha il giorno della settimana e il secondo, l'ora di inizio, in formato localizzato. */
+"SLUG-WEEKDAY-TIME-FORMAT"                        =    "%@s, at %@";
+/* Visualizza l'ora di inizio della riunione e il giorno feriale, ma non la durata. Viene visualizzato sia nella schermata principale che nella schermata di ispezione della riunione. Il primo segnaposto ha il giorno della settimana, il secondo, l'ora di inizio, in formato localizzato, e il terzo, l'ora di fine (anche in formato localizzato). */
+"SLUG-WEEKDAY-TIME-DURATION-FORMAT"               =    "%@s, %@ - %@";
+/* Visualizza informazioni aggiuntive sul telefono. Il segnaposto viene sostituito con le informazioni aggiuntive (come password, ecc.), nell'ispettore della riunione. */
+"SLUG-PHONE-NUMBER-FORMAT"                        =    "Telefono: %@";
+/* Questa è l'intestazione, sopra il display Formati, in Meeting Inspector. */
+"SLUG-FORMATS-HEADER"                             =    "Formati riunione";
+/* Questa è l'intestazione, sopra l'indirizzo della riunione di persona, nell'ispettore della riunione. */
+"SLUG-IN-PERSON-HEADER"                           =    "Luogo di incontro di persona";
+
+// Queste sono la fila di tre icone.
+
+/* Viene visualizzato sotto l'icona del telefono, in Meeting Inspector. */
+"SLUG-PHONE-BUTTON"                               =    "Telefono";
+/* Questo viene visualizzato sotto l'icona del globo, in Meeting Inspector. */
+"SLUG-GLOBE-BUTTON"                               =    "Web";
+
+/* Uno di questi viene visualizzato sotto l'icona del video, in Meeting Inspector. Indicano la particolare app che verrà aperta, selezionando l'icona.
+ 
+ NOTA per IL TRADUTTORE: si tratta di nomi commerciali aziendali. Se non ci sono sostituti ben noti localizzati, lasciare i nomi inglesi.
+ */
+"SLUG-DIRECT-URI-ZOOM"                            =    "Zoom";
+"SLUG-DIRECT-URI-GOTOMEETING"                     =    "GotoMeeting";
+"SLUG-DIRECT-URI-SKYPE"                           =    "Skype";
+"SLUG-DIRECT-URI-MEET"                            =    "Google Meet";
+"SLUG-DIRECT-URI-DISCORD"                         =    "Discord";
+"SLUG-DIRECT-URI-JITSI"                           =    "Jitsi Meet";
+
+/* Questo messaggio viene visualizzato per Mac Catalyst, quando l'utente fa clic sull'icona "Web", per una riunione Zoom. Apple non consente l'accesso diretto a Zoom (a causa del download dell'app). */
+
+/* Questa è l'intestazione dell'avviso. */
+"SLUG-ZOOM-WARING-ALERT-HEADER"                   =    "Impossibile aprire in Zoom";
+/* Questo è il testo dell'avviso. */
+"SLUG-ZOOM-WARING-ALERT-BODY"                     =    "Apple non consente l'accesso diretto alle riunioni tramite Safari, a causa del download dell'app. Installa l'app Zoom e unisciti da lì.";
+/* Questo è il pulsante che ti porta direttamente al download dell'app Zoom. */
+"SLUG-ZOOM-WARING-ALERT-APP-BUTTON"               =    "Vai al download dell'app";
+
+/* Questa è l'intestazione "Apri in" per le attività. Il segnaposto viene sostituito dal nome dell'app. */
+"SLUG-OPEN-IN-FORMAT"                             =    "Apri in %@";
+/* Questo è il segnaposto generico per le riunioni NA. */
+"SLUG-NA-MEETING"                                 =    "Riunione NA";
+
+/* Uno di questi viene visualizzato nelle attività "Apri in". Indicano quale app verrà utilizzata per aprire un luogo di incontro di persona.
+ 
+ NOTA per IL TRADUTTORE: si tratta di nomi commerciali aziendali. Se non ci sono sostituti ben noti localizzati, lasciare i nomi inglesi.
+ */
+/* Il titolo dell'app integrata Apple Maps. */
+"SLUG-APPLE-MAPS-APP-TITLE"                       =    "Mappe";
+/* Il titolo dell'app per Google Maps. */
+"SLUG-GOOGLE-MAPS-APP-TITLE"                      =    "Google Maps";
+/* Il titolo dell'app Google Waze. */
+"SLUG-WAZE-APP-TITLE"                             =    "Waze";
+
+// VOTO: - SCHERMATA PRESENZE -
+
+/* Il titolo della schermata "La mia presenza" */
+"SLUG-TAB-1-TITLE"                                =    "La mia presenza";
+
+// MARK: - SCHERMATA IMPOSTAZIONI -
+
+/* Il nome dello schermo */
+"SLUG-SETTINGS-TITLE"                             =    "Impostazioni";
+/* Il testo per l'etichetta per lo switch Riduci riunioni di servizio. */
+"SLUG-FILTER-SERVICE-MEETINGS"                    =    "Riduci riunioni di servizio";
+/* Viene visualizzato sotto l'interruttore e ne spiega l'utilità. */
+"SLUG-FILTER-SERVICE-MEETINGS-EXPLAIN"            =    "Se questo interruttore è attivo, l'app tenterà di rimuovere le riunioni che sono \" riunioni di lavoro,\" relative al servizio NA (non riunioni di recupero).";
+
+// MARK: - INFORMAZIONI SULLA SCHERMATA -
+
+/* Il nome dello schermo */
+"SLUG-ABOUT-SCREEN-TITLE"                         =    "Informazioni su questa app";
+/* La versione completa */
+"SLUG-VERSION-FORMAT"                             =    "Versione: %@ (%@)";
+/* Il testo del pulsante "Presentato da".
+ 
+ NOTA per IL TRADUTTORE: non tradurre "Little Green Viper Software Development LLC". Questo è un nome commerciale aziendale.
+ */
+"SLUG-PRESENTED-BY"                               =    "Presentato da Little Green Viper Software Development LLC";
+/* La stringa del pulsante Privacy */
+"SLUG-PRIVACY-LABEL"                              =    "privacy";
+/* L'intestazione per l'elenco delle dipendenze. */
+"SLUG-DEPENDENCY-HEADER-LABEL"                    =    "Dipendenze app:";
+/* La stringa del pulsante per il pulsante della pagina di aiuto. */
+"SLUG-HELP-PAGE-LABEL"                            =    "Maggiori informazioni";
+/* La stringa del pulsante per il pulsante GitHub */
+"SLUG-GH-LABEL"                                   =    "Il codice sorgente di questa app";
+
+// ***********************************************************************************************************
+// MARK: - DO NOT TRANSLATE BELOW THIS LINE -
+// ***********************************************************************************************************
+/* La stringa del pulsante per il pulsante GitHub */
+"SLUG-BMLT-LABEL"                                 =    "Toolbox Basic Meeting List (BMLT)";
+/* Il formato per un link di incontro universale. Il segnaposto viene sostituito con l'ID dell'assemblea */
+"SLUG-UNIVERSAL-LINK-FORMAT"                      =    "https://vmf.littlegreenviper.com?|||UNTRANSLATED_CONTENT_START|||%lu";|||UNTRANSLATED_CONTENT_END|||
+/* La stringa del pulsante per il pulsante Basic GCD Timer */
+"SLUG-BGCD-LABEL"                                 =    "RVS_BasicGCDTimer";
+/* La stringa di pulsanti per il pulsante Swift Toolbox generico */
+"SLUG-GSWT-LABEL"                                 =    "RVS_Generic_Swift_Toolbox";
+/* La stringa del pulsante per il pulsante Pref. persistenti */
+"SLUG-PP-LABEL"                                   =    "RVS_PersistentPrefs";
+/* La stringa del pulsante per il pulsante UIKit Toolbox */
+"SLUG-UIKTB-LABEL"                                =    "RVS_UIKit_Toolbox";
+/* La stringa del pulsante per il pulsante GitHub */
+"SLUG-SWBMLSDK-LABEL"                             =    "SwiftBMLSDK";
+/* La stringa di pulsanti per il pulsante Meeting Server */
+"SLUG-ML-LABEL"                                   =    "LGV_MeetingServer";
+/* La stringa del pulsante per il pulsante Ricerca TZ */
+"SLUG-TZ-LABEL"                                   =    "LGV_TZ_Lookup";
+/* L'URL del sito. */
+"SLUG-PRESENTED-BY-URL"                           =    "https://littlegreenviper.com";
+/* La stringa del pulsante Privacy */
+"SLUG-PRIVACY-URL"                                =    "https://littlegreenviper.com/portfolio/the-virtual-na-meeting-finder-app/#privacy";
+/* La stringa del pulsante per il pulsante Basic GCD Timer */
+"SLUG-BGCD-URL"                                   =    "https://github.com/RiftValleySoftware/RVS_BasicGCDTimer";
+/* La stringa di pulsanti per il pulsante Swift Toolbox generico */
+"SLUG-GSWT-URL"                                   =    "https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox";
+/* La stringa del pulsante per il pulsante Pref. persistenti */
+"SLUG-PP-URL"                                     =    "https://github.com/RiftValleySoftware/RVS_PersistentPrefs";
+/* La stringa del pulsante per il pulsante UIKit Toolbox */
+"SLUG-UIKTB-URL"                                  =    "https://github.com/RiftValleySoftware/RVS_UIKit_Toolbox";
+/* La stringa del pulsante per il pulsante GitHub */
+"SLUG-SWBMLSDK-URL"                               =    "https://github.com/LittleGreenViper/SwiftBMLSDK";
+/* La stringa di pulsanti per il pulsante Meeting Server */
+"SLUG-ML-URL"                                     =    "https://github.com/LittleGreenViper/LGV_MeetingServer";
+/* La stringa URL per il pulsante TZ. */
+"SLUG-TZ-URL"                                     =    "https://github.com/LittleGreenViper/LGV_TZ_Lookup";
+/* La stringa del pulsante per il pulsante GitHub */
+"SLUG-GH-URL"                                     =    "https://github.com/LittleGreenViper/VirtualMeetingFinder";
+/* La stringa URL per il pulsante TZ.
+"SLUG-BMLT-URL"                                   =    "https://bmlt.app";
+/* La stringa del pulsante per il pulsante della pagina di aiuto. */
+"SLUG-HELP-PAGE-URL"                              =    "https://littlegreenviper.com/portfolio/the-virtual-na-meeting-finder-app/";
+/* L'URL per scaricare l'app Zoom */
+"SLUG-ZOOM-DOWNLOAD-URL"                          =    "https://zoom.us/download?os=mac";
+Votazione:

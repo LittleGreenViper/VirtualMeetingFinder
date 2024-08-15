@@ -23,11 +23,11 @@ La nota sul copyright riportata sopra e la presente nota sull'autorizzazione dev
 // * -------------------------------------------- *           * ------------------------------------------------------- *
 // ************************************************           ***********************************************************
 
-// MARK: -
-// MARK: - COMMON -
-/* Sostituiamo 1200 con la parola "mezzogiorno" */
+// MARK: - COMUNE -
+
+/*  "mezzogiorno" */
 "SLUG-NOON-TIME"                                  =    "Mezzogiorno";
-/* Sostituiamo 2359 con la parola "Midnight" */
+/* "Midnight" */
 "SLUG-MIDNIGHT-TIME"                              =    "Mezzanotte";
 /* Pulsante generale Indietro */
 "SLUG-BACK"                                       =    "Indietro";
@@ -214,10 +214,9 @@ La nota sul copyright riportata sopra e la presente nota sull'autorizzazione dev
 "SLUG-TZ-URL"                                     =    "https://github.com/LittleGreenViper/LGV_TZ_Lookup";
 /* La stringa del pulsante per il pulsante GitHub */
 "SLUG-GH-URL"                                     =    "https://github.com/LittleGreenViper/VirtualMeetingFinder";
-/* La stringa URL per il pulsante TZ.
+/* La stringa URL per il pulsante TZ. 
 "SLUG-BMLT-URL"                                   =    "https://bmlt.app";
 /* La stringa del pulsante per il pulsante della pagina di aiuto. */
 "SLUG-HELP-PAGE-URL"                              =    "https://littlegreenviper.com/portfolio/the-virtual-na-meeting-finder-app/";
 /* L'URL per scaricare l'app Zoom */
 "SLUG-ZOOM-DOWNLOAD-URL"                          =    "https://zoom.us/download?os=mac";
-Votazione:

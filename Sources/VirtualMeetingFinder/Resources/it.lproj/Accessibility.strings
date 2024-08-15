@@ -1,195 +1,192 @@
 /*
  © Copyright 2024, Little Green Viper Software Development LLC
- LICENSE:
+con licenza di costruzione:
  
- MIT License
+ Licenza MIT
  
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
- modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following conditions:
+ L'autorizzazione è concessa, a titolo gratuito, a chiunque ottenga una copia di questo software e della documentazione associata
+ file (il "Software"), per gestire il Software senza restrizioni, inclusi, a titolo esemplificativo ma non esaustivo, i diritti di utilizzo, copia,
+ modificare, unire, pubblicare, distribuire, concedere in sublicenza e/o vendere copie del Software e consentire alle persone a cui il
+procedere in tal senso, in base alle seguenti condizioni:
  
- The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+La nota sul copyright riportata sopra e la presente nota sull'autorizzazione devono essere incluse in tutte le copie o parti sostanziali del Software.
  
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
- IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
- CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ IL SOFTWARE VIENE FORNITO "COSÌ COM'È", SENZA GARANZIE DI ALCUN TIPO, ESPLICITE O IMPLICITE, INCLUSE, A TITOLO ESEMPLIFICATIVO MA NON ESAUSTIVO, LE GARANZIE
+ DI COMMERCIABILITÀ, IDONEITÀ A UNO SCOPO PARTICOLARE E NON VIOLAZIONE.
+ IN NESSUN CASO GLI AUTORI O I TITOLARI DEI DIRITTI D'AUTORE SARANNO RESPONSABILI PER QUALSIASI RECLAMO, DANNO O ALTRA RESPONSABILITÀ, SIA IN UN'AZIONE DI
+ CONTRATTO, ILLECITO O ALTRO, DERIVANTE DA, FUORI DA O IN CONNESSIONE CON IL SOFTWARE O L'UTILIZZO O ALTRI RAPPORTI NEL SOFTWARE.
  */
 
-/*  NOTE TO TRANSLATOR:
+/*  NOTE PER TRADUTTORE
  
-    "Labels" are short, simple titles. "Hints" are longer explanations. Labels should always be short and succinct, but hints can be a lot longer.
+ Le "etichette" sono titoli brevi e semplici. I "suggerimenti" sono spiegazioni più lunghe. Le etichette dovrebbero essere sempre brevi e succinte, ma i suggerimenti possono essere molto più lunghi.
  
-    These are voiceover strings. Pronunciation and auditory clarity are important.
+ Queste sono corde di voce fuori campo. La pronuncia e la chiarezza uditiva sono importanti.
 */
 
 // ************************************************        ***********************************************************
 // * -------------------------------------------- *        * ------------------------------------------------------- *
-// *|  DO NOT MODIFY ON THIS SIDE OF THE EQUALS  |*        *|   MODIFY THE TEXT ON THIS SIDE TO THE LOCAL LANGUAGE  |*
+// *| NON MODIFICARE DA QUESTO LATO DEGLI UGUALI  |*           *|   MODIFICARE IL TESTO DA QUESTO LATO NELLA LINGUA LOCALE |*
 // * -------------------------------------------- *        * ------------------------------------------------------- *
 // ************************************************        ***********************************************************
 
-// MARK: -
-// MARK: - MAIN SCREEN -
+// MARK: - SCHERMATA PRINCIPALE -
 
-/* This is the label for the Bar Button item that selects the "I Attend" Screen. */
-"SLUG-ACC-TAB-1-BUTTON-LABEL"                   =   "My Attendance";
-/* This is the hint for the Bar Button item that selects the "I Attend" Screen. */
-"SLUG-ACC-TAB-1-BUTTON-HINT"                    =   "This opens another screen, with only the meetings that you have marked as ones that you attend.";
+/* Questa è l'etichetta per la voce Pulsante Barra che seleziona la schermata "Partecipo". */
+"SLUG-ACC-TAB-1-BUTTON-LABEL"                   =   "La mia presenza";
+/* Questo è il suggerimento per la voce Pulsante Barra che seleziona la schermata "Partecipo". */
+"SLUG-ACC-TAB-1-BUTTON-HINT"                    =   "Si apre un'altra schermata, con solo le riunioni che hai contrassegnato come quelle a cui partecipi.";
 
-/* This is the label for the Bar Button item that selects the Settings Screen. */
-"SLUG-ACC-SETTINGS-BUTTON-LABEL"                =   "App Settings";
-/* This is the hint for the Bar Button item that selects the Settings Screen. */
-"SLUG-ACC-SETTINGS-BUTTON-HINT"                 =   "This will open a screen, with various app settings.";
+/* Questa è l'etichetta per la voce Pulsante Barra che seleziona la schermata Impostazioni. */
+"SLUG-ACC-SETTINGS-BUTTON-LABEL"                =   "Impostazioni app";
+/* Questo è il suggerimento per la voce Pulsante barra che seleziona la schermata Impostazioni. */
+"SLUG-ACC-SETTINGS-BUTTON-HINT"                 =   "Si aprirà una schermata, con varie impostazioni dell'app.";
 
-/* This is the label for the segmented switch at the top of the Main Screen. */
-"SLUG-ACC-WEEKDAY-SWITCH-LABEL"                 =   "Select Weekday";
-/* This is the hint for the segmented switch at the top of the Main Screen. */
-"SLUG-ACC-WEEKDAY-SWITCH-HINT"                  =   "With this segmented switch, you can see in-progress meetings, choose a weekday in which to show meetings, or select meeting name search mode.";
+/* Questa è l'etichetta per l'interruttore segmentato nella parte superiore della schermata principale. */
+"SLUG-ACC-WEEKDAY-SWITCH-LABEL"                 =   "Seleziona giorno feriale";
+/* Questo è il suggerimento per l'interruttore segmentato nella parte superiore della schermata principale. */
+"SLUG-ACC-WEEKDAY-SWITCH-HINT"                  =   "Con questo switch segmentato, puoi vedere le riunioni in corso, scegliere un giorno feriale in cui mostrare le riunioni o selezionare la modalità di ricerca del nome della riunione.";
 
-/* The individual segment label for the in-progress (Now) segment */
-"SLUG-ACC-WEEKDAY-SWITCH-0-LABEL"               =   "Meetings In Progress";
-/* The individual segment hint for the in-progress (Now) segment */
-"SLUG-ACC-WEEKDAY-SWITCH-0-HINT"                =   "If you select this, the table below will show meetings that are happening now.";
+/* L'etichetta del singolo segmento per il segmento in corso (Now) */
+"SLUG-ACC-WEEKDAY-SWITCH-0-LABEL"               =   "Riunioni in corso";
+/* Il suggerimento del singolo segmento per il segmento in corso (Now) */
+"SLUG-ACC-WEEKDAY-SWITCH-0-HINT"                =   "Se selezioni questa opzione, la tabella seguente mostrerà le riunioni in corso.";
 
-/* The label for each weekday segment. The placeholder (%@) is replaced by the weekday represented by that segment. */
-"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-LABEL-FORMAT"  =   "Meetings On %@s.";
-/* The hint for each weekday segment. The placeholder is replaced by the weekday represented by that segment. */
-"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-HINT-FORMAT"   =   "If you select this, you will see meetings that gather every %@.";
+/* L'etichetta per ogni segmento feriale. Il segnaposto (%@) viene sostituito dal giorno della settimana rappresentato da quel segmento. */
+"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-LABEL-FORMAT"  =   "Incontri su %@s.";
+/* Il suggerimento per ogni segmento dei giorni feriali. Il segnaposto viene sostituito dal giorno della settimana rappresentato da quel segmento. */
+"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-HINT-FORMAT"   =   "Se selezioni questa opzione, vedrai riunioni che si riuniscono ogni %@.";
 
-/* The individual segment label for the search segment */
-"SLUG-ACC-WEEKDAY-SWITCH-8-LABEL"               =   "Meeting Name Search";
-/* The individual segment hint for the search segment */
-"SLUG-ACC-WEEKDAY-SWITCH-8-HINT"                =   "If you select this, you will enter Text Search Mode, where you can find meetings by name.";
+/* L'etichetta del singolo segmento per il segmento di ricerca */
+"SLUG-ACC-WEEKDAY-SWITCH-8-LABEL"               =   "Ricerca Nome Riunione";
+/* Il suggerimento del singolo segmento per il segmento di ricerca */
+"SLUG-ACC-WEEKDAY-SWITCH-8-HINT"                =   "Se selezioni questa opzione, entrerai nella modalità di ricerca del testo, dove puoi trovare le riunioni per nome.";
 
-/* This is the label for the enter search text text field. */
-"SLUG-ACC-ENTER-SEARCH-TEXT-LABEL"              =   "Enter Text To Find";
-/* This is the hint for the enter search text text field. */
-"SLUG-ACC-ENTER-SEARCH-TEXT-HINT"               =   "Any text that you enter here, will be used to filter out meetings that have that text in their meeting name.";
+/* Questa è l'etichetta per il campo di testo di ricerca. */
+"SLUG-ACC-ENTER-SEARCH-TEXT-LABEL"              =   "Inserisci testo da trovare";
+/* Questo è il suggerimento per il campo di testo di ricerca. */
+"SLUG-ACC-ENTER-SEARCH-TEXT-HINT"               =   "Qualsiasi testo che inserisci qui, verrà utilizzato per filtrare le riunioni che hanno quel testo nel nome della riunione.";
 
-/* This is the label for the close search mode button. */
-"SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL"            =   "Exit Text Search";
-/* This is the label for the close search mode button. */
-"SLUG-ACC-CLOSE-SEARCH-BUTTON-HINT"             =   "Selecting this button leaves text search mode, and returns you to the regular weekday selection mode.";
+/* Questa è l'etichetta per il pulsante Chiudi modalità di ricerca. */
+"SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL"            =   "Esci dalla ricerca di testo";
+/* Questa è l'etichetta per il pulsante Chiudi modalità di ricerca. */
+"SLUG-ACC-CLOSE-SEARCH-BUTTON-HINT"             =   "Selezionando questo pulsante si esce dalla modalità di ricerca del testo e si torna alla normale modalità di selezione dei giorni feriali.";
 
-/* This is the label for the decrement (left) time button. */
-"SLUG-ACC-LEFT-BUTTON-LABEL"                    =   "Go To Time Before";
-/* This is the hint for the decrement (left) time button. */
-"SLUG-ACC-LEFT-BUTTON-HINT"                     =   "If you select this, the table will show meetings that start at the time slot before this one.";
+/* Questa è l'etichetta per il pulsante di decremento (a sinistra) del tempo. */
+"SLUG-ACC-LEFT-BUTTON-LABEL"                    =   "Vai al tempo prima";
+/* Questo è il suggerimento per il pulsante di decremento (a sinistra) del tempo. */
+"SLUG-ACC-LEFT-BUTTON-HINT"                     =   "Se selezioni questa opzione, la tabella mostrerà le riunioni che iniziano nella fascia oraria precedente a questa.";
 
-/* This is the label for the increment (right) time button. */
-"SLUG-ACC-RIGHT-BUTTON-LABEL"                   =   "Go To Time After";
-/* This is the hint for the increment (right) time button. */
-"SLUG-ACC-RIGHT-BUTTON-HINT"                    =   "If you select this, the table will show meetings that start at the time slot after this one.";
+/* Questa è l'etichetta per il pulsante di incremento (a destra) del tempo. */
+"SLUG-ACC-RIGHT-BUTTON-LABEL"                   =   "Vai al tempo dopo";
+/* Questo è il suggerimento per il pulsante di incremento (a destra) del tempo. */
+"SLUG-ACC-LEFT-BUTTON-HINT"                     =   "Se selezioni questa opzione, la tabella mostrerà le riunioni che iniziano nella fascia oraria precedente a questa.";
 
-/* This is the label for the weekday/time label. */
-"SLUG-ACC-TIME-DISPLAY-LABEL"                   =   "Weekday and Time";
-/* This is the hint for the weekday/time label. */
-"SLUG-ACC-TIME-DISPLAY-HINT"                    =   "This shows the selected weekday and time slot for the meetings listed below.";
+/* Questa è l'etichetta per il giorno della settimana/ora. */
+"SLUG-ACC-TIME-DISPLAY-LABEL"                   =   "Giorno e ora della settimana";
+/* Questo è il suggerimento per l'etichetta giorno feriale/ora. */
+"SLUG-ACC-TIME-DISPLAY-HINT"                    =   "Mostra il giorno della settimana e la fascia oraria selezionati per le riunioni elencate di seguito.";
 
-/* This is the label for the "thermometer" completion bar, below the segmented switch. */
-"SLUG-ACC-COMPLETION-DISPLAY-LABEL"             =   "Current Time of Day";
-/* This is the hint for the "thermometer" completion bar, below the segmented switch. */
-"SLUG-ACC-COMPLETION-DISPLAY-HINT"              =   "This indicates how far through the day we are. Left is towards 12AM, and right is towards midnight.";
+/* Questa è l'etichetta per la barra di completamento "termometro", sotto l'interruttore segmentato. */
+"SLUG-ACC-COMPLETION-DISPLAY-LABEL"             =   "Ora corrente del giorno";
+/* Questo è il suggerimento per la barra di completamento del "termometro", sotto l'interruttore segmentato. */
+"SLUG-ACC-COMPLETION-DISPLAY-HINT"              =   "Questo indica quanto siamo lontani durante la giornata. La sinistra è verso MEZZANOTTE e la destra è verso mezzanotte.";
 
-/* This is the label for the day/time picker. */
-"SLUG-ACC-DIRECT-PICKER-LABEL"                  =   "Select Day And Time";
-/* This is the hint for the day/time picker. */
-"SLUG-ACC-DIRECT-PICKER-HINT"                   =   "This allows you to directly choose a weekday and time.";
+/* Questa è l'etichetta per il selezionatore giorno/ora. */
+"SLUG-ACC-DIRECT-PICKER-LABEL"                  =   "Seleziona giorno e ora";
+/* Questo è il suggerimento per il selezionatore giorno/ora. */
+"SLUG-ACC-DIRECT-PICKER-HINT"                   =   "Questo ti consente di scegliere direttamente un giorno e un'ora della settimana.";
 
-/* This is the label for the day/time picker. */
-"SLUG-ACC-DIRECT-EXIT-LABEL"                    =   "Go Back to Normal";
-/* This is the hint for the day/time picker. */
-"SLUG-ACC-DIRECT-EXIT-HINT"                     =   "Selecting this, returns you to the regular weekday/time selector.";
+/* Questa è l'etichetta per il selezionatore giorno/ora. */
+"SLUG-ACC-DIRECT-EXIT-LABEL"                    =   "Torna alla normalità";
+/* Questo è il suggerimento per il selezionatore giorno/ora. */
+"SLUG-ACC-DIRECT-EXIT-HINT"                     =   "Selezionando questo, si torna al normale selettore giorno feriale/ora.";
 
-// MARK: - MEETING INSPECTOR SCREEN -
+// MARK: - SCHERMATA MEETING INSPECTOR -
 
-/* This label is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-ACC-I-ATTEND-BAR-BUTTON-LABEL"            =   "I Attend This Meeting";
-/* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-ACC-I-ATTEND-BAR-BUTTON-HINT"             =   "This button indicates whether or not we attend this meeting. Since we are attending, we can view this meeting separately, in the Attendance Screen.";
+/* Questa etichetta viene applicata all'etichetta di testo del nome della riunione nella schermata Controllo riunione */
+"SLUG-ACC-I-ATTEND-BAR-BUTTON-LABEL"            =   "Partecipo a questo incontro";
+/* Questo suggerimento viene applicato all'etichetta di testo del nome della riunione nella schermata Controllo riunione */
+"SLUG-ACC-I-ATTEND-BAR-BUTTON-HINT"             =   "Questo pulsante indica se partecipiamo o meno a questa riunione. Dal momento che stiamo partecipando, possiamo visualizzare questa riunione separatamente, nella schermata delle presenze.";
 
-/* This label is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-LABEL"     =   "I Do Not Attend This Meeting";
-/* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-HINT"      =   "This button indicates whether or not we attend this meeting. We currently do not attend this meeting.";
+/* Questa etichetta viene applicata all'etichetta di testo del nome della riunione nella schermata Controllo riunione */
+"SLUG-ACC-I-ATTEND-BAR-BUTTON-LABEL"            =   "Partecipo a questo incontro";
+/* Questo suggerimento viene applicato all'etichetta di testo del nome della riunione nella schermata Controllo riunione */
+"SLUG-ACC-I-ATTEND-BAR-BUTTON-HINT"             =   "Questo pulsante indica se partecipiamo o meno a questa riunione. Al momento non partecipiamo a questa riunione.";
 
-/* This label is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-ACC-MEETING-NAME-MI-LABEL"                =   "Meeting Name";
-/* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
-"SLUG-ACC-MEETING-NAME-MI-HINT"                 =   "This is the name of the meeting.";
+/* Questa etichetta viene applicata all'etichetta di testo del nome della riunione nella schermata Controllo riunione */
+"SLUG-ACC-MEETING-NAME-MI-LABEL"                =   "Nome riunione";
+/* Questo suggerimento viene applicato all'etichetta di testo del nome della riunione nella schermata Controllo riunione */
+"SLUG-ACC-MEETING-NAME-MI-HINT"                 =   "Questo è il nome della riunione.";
 
-/* This label is applied to the meeting start time/day text label in the Meeting Inspector Screen */
-"SLUG-ACC-TIME-DAY-MI-LABEL"                    =   "Meeting Time";
-/* This hint is applied to the meeting start time/day text label in the Meeting Inspector Screen */
-"SLUG-ACC-TIME-DAY-MI-HINT"                     =   "This displays the weekday, start time, and end time, of the meeting.";
+/* Questa etichetta viene applicata all'etichetta di testo del nome della riunione nella schermata Controllo riunione */
+"SLUG-ACC-TIME-DAY-MI-LABEL"                    =   "Ora riunione";
+/* Questo suggerimento viene applicato all'etichetta di testo del nome della riunione nella schermata Controllo riunione */
+"SLUG-ACC-TIME-DAY-MI-HINT"                     =   "Visualizza il giorno della settimana, l'ora di inizio e l'ora di fine della riunione.";
 
-/* This label is applied to the meeting "in progress" text label in the Meeting Inspector Screen */
-"SLUG-ACC-IN-PROGRESS-MI-LABEL"                 =   "Meeting In Progress";
-/* This hint is applied to the meeting "in progress" text label in the Meeting Inspector Screen */
-"SLUG-ACC-IN-PROGRESS-MI-HINT"                  =   "This means that the meeting is currently under way.";
+/* Questa etichetta viene applicata all'etichetta di testo del nome della riunione nella schermata Controllo riunione */
+"SLUG-ACC-IN-PROGRESS-MI-LABEL"                 =   "Riunione in corso";
+/* Questo suggerimento viene applicato all'etichetta di testo del nome della riunione nella schermata Controllo riunione */
+"SLUG-ACC-IN-PROGRESS-MI-HINT"                  =   "Ciò significa che la riunione è attualmente in corso.";
 
-/* This label is applied to the meeting time zone text label in the Meeting Inspector Screen */
-"SLUG-ACC-TZ-MI-LABEL"                          =   "Time Zone";
-/* This hint is applied to the meeting time zone text label in the Meeting Inspector Screen */
-"SLUG-ACC-TZ-MI-HINT"                           =   "The meeting originates in a different timezone from the one we are in. This is that timezone, and when the meeting starts, in that zone.";
+/* Questa etichetta viene applicata all'etichetta di testo del nome della riunione nella schermata Controllo riunione */
+"SLUG-ACC-TZ-MI-LABEL"                          =   "Fuso orario";
+/* Questo suggerimento viene applicato all'etichetta di testo del nome della riunione nella schermata Controllo riunione */
+"SLUG-ACC-TZ-MI-HINT"                           =   "L'incontro ha origine in un fuso orario diverso da quello in cui ci troviamo. Questo è quel fuso orario, e quando inizia la riunione, in quella zona.";
 
-/* This label is applied to the meeting comments text label in the Meeting Inspector Screen */
-"SLUG-ACC-COMMENTS-MI-LABEL"                    =   "Extra Information";
-/* This hint is applied to the meeting comments text label in the Meeting Inspector Screen */
-"SLUG-ACC-COMMENTS-MI-HINT"                     =   "This has any extra information about the meeting.";
+/* Questa etichetta viene applicata all'etichetta di testo del nome della riunione nella schermata Controllo riunione */
+"SLUG-ACC-COMMENTS-MI-LABEL"                    =   "Informazioni aggiuntive";
+/* Questo suggerimento viene applicato all'etichetta di testo del nome della riunione nella schermata Controllo riunione */
+"SLUG-ACC-COMMENTS-MI-HINT"                     =   "Questo ha ulteriori informazioni sulla riunione.";
 
-/* This label is applied to the phone icon button in the Meeting Inspector Screen */
-"SLUG-ACC-PHONE-MI-LABEL"                       =   "Call the Meeting";
-/* This hint is applied to the phone icon button in the Meeting Inspector Screen */
-"SLUG-ACC-PHONE-MI-HINT"                        =   "If you select this, the phone will attempt to call directly into the meeting.";
+/* Questa etichetta viene applicata al pulsante dell'icona del telefono nella schermata Meeting Inspector */
+"SLUG-ACC-PHONE-MI-LABEL"                       =   "Convocare l'Assemblea";
+/* Questo suggerimento viene applicato al pulsante dell'icona del telefono nella schermata Controllo riunione */
+"SLUG-ACC-PHONE-MI-HINT"                        =   "Se selezioni questa opzione, il telefono tenterà di chiamare direttamente la riunione.";
 
-/* This label is applied to the Web icon button in the Meeting Inspector Screen */
-"SLUG-ACC-WEB-MI-LABEL"                         =   "Web Site";
-/* This hint is applied to the Web icon button in the Meeting Inspector Screen */
-"SLUG-ACC-WEB-MI-HINT"                          =   "If you select this, Safari will be opened, and take you to the Web site. It is possible that an app may be directly opened.";
+/* Questa etichetta viene applicata al pulsante dell'icona del telefono nella schermata Meeting Inspector */
+"SLUG-ACC-WEB-MI-LABEL"                         =   "Sito Web";
+/* Questo suggerimento viene applicato al pulsante dell'icona del telefono nella schermata Controllo riunione */
+"SLUG-ACC-WEB-MI-HINT"                          =   "Se selezioni questa opzione, Safari verrà aperto e ti porterà al sito Web. È possibile che un'app venga aperta direttamente.";
 
-/* This label is applied to the video icon button in the Meeting Inspector Screen */
-"SLUG-ACC-VIDEO-MI-LABEL-FORMAT"                =   "Open in %@";
-/* This hint is applied to the video icon button in the Meeting Inspector Screen */
-"SLUG-ACC-VIDEO-MI-HINT-FORMAT"                 =   "If you select this, the %@ app will be opened to the meeting.";
+/* Questa etichetta viene applicata al pulsante dell'icona del telefono nella schermata Meeting Inspector */
+"SLUG-ACC-VIDEO-MI-LABEL-FORMAT"                =   "Apri in %@";
+/* Questo suggerimento viene applicato al pulsante dell'icona del telefono nella schermata Controllo riunione */
+"SLUG-ACC-VIDEO-MI-HINT-FORMAT"                 =   "Se selezioni questa opzione, l' %@ app verrà aperta alla riunione.";
 
-/* This label is applied to the phone extra info text view in the Meeting Inspector Screen */
-"SLUG-ACC-PHONE-INFO-MI-LABEL"                  =   "Extra Phone Info";
-/* This hint is applied to the phone extra info text view in the Meeting Inspector Screen */
-"SLUG-ACC-PHONE-INFO-MI-HINT"                   =   "This contains additional phone information.";
+/* Questa etichetta viene applicata alla visualizzazione del testo delle informazioni aggiuntive del telefono nella schermata Controllo riunione */
+"SLUG-ACC-PHONE-INFO-MI-LABEL"                  =   "Info Telefono Extra";
+/* Questo suggerimento viene applicato alla visualizzazione del testo delle informazioni aggiuntive del telefono nella schermata Controllo riunione */
+"SLUG-ACC-PHONE-INFO-MI-HINT"                   =   "Contiene informazioni aggiuntive sul telefono.";
 
-/* This label is applied to the phone extra info text view in the Meeting Inspector Screen */
-"SLUG-ACC-XTRA-INFO-MI-LABEL"                   =   "Extra Virtual Info";
-/* This hint is applied to the phone extra info text view in the Meeting Inspector Screen */
-"SLUG-ACC-XTRA-INFO-MI-HINT"                    =   "This contains additional information about the virtual meeting.";
+/* Questa etichetta viene applicata alla visualizzazione del testo delle informazioni aggiuntive del telefono nella schermata Controllo riunione */
+"SLUG-ACC-XTRA-INFO-MI-LABEL"                   =   "Informazioni extra virtuali";
+/* Questo suggerimento viene applicato alla visualizzazione del testo delle informazioni aggiuntive del telefono nella schermata Controllo riunione */
+"SLUG-ACC-XTRA-INFO-MI-HINT"                    =   "Contiene ulteriori informazioni sulla riunione virtuale.";
 
-/* This label is applied to the in-person address text view in the Meeting Inspector Screen */
-"SLUG-ACC-IN-PERSON-ADDRESS-MI-LABEL"           =   "In-Person Address";
-/* This hint is applied to the in-person address text view in the Meeting Inspector Screen */
-"SLUG-ACC-IN-PERSON-ADDRESS-MI-HINT"            =   "This is the address of the in-person meeting.";
+/* Questa etichetta viene applicata alla visualizzazione del testo dell'indirizzo di persona nella schermata Controllo riunione */
+"SLUG-ACC-IN-PERSON-ADDRESS-MI-LABEL"           =   "Indirizzo di persona";
+/* Questo suggerimento viene applicato alla visualizzazione del testo dell'indirizzo di persona nella schermata Controllo riunione */
+"SLUG-ACC-IN-PERSON-ADDRESS-MI-HINT"            =   "Questo è l'indirizzo della riunione di persona.";
 
-/* This label is applied to the in-person extra information label in the Meeting Inspector Screen */
-"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-LABEL"      =   "Extra Info";
-/* This hint is applied to the in-person extra information label in the Meeting Inspector Screen */
-"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-HINT"       =   "This is extra information about the in-person meeting.";
+/* Questa etichetta viene applicata all'etichetta delle informazioni aggiuntive di persona nella schermata Meeting Inspector */
+"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-LABEL"      =   "Informazioni extra";
+/* Questo suggerimento viene applicato all'etichetta delle informazioni aggiuntive di persona nella schermata Ispettore riunione */
+"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-HINT"       =   "Queste sono informazioni aggiuntive sulla riunione di persona.";
 
-/* This label is applied to the action button in the navbar of the Meeting Inspector Screen */
-"SLUG-ACC-ACTION-BUTTON-LABEL"                  =   "Share the Meeting";
-/* This hint is applied to the action button in the navbar of the Meeting Inspector Screen */
-"SLUG-ACC-ACTION-BUTTON-HINT"                   =   "If you select this, a sheet will be shown, allowing you to share a link to this meeting.";
+/* Questa etichetta viene applicata al pulsante di azione nella barra di navigazione della schermata Meeting Inspector */
+"SLUG-ACC-ACTION-BUTTON-LABEL"                  =   "Condividi l'Assemblea";
+/* Questo suggerimento viene applicato al pulsante di azione nella barra di navigazione della schermata Controllo riunione */
+"SLUG-ACC-ACTION-BUTTON-HINT"                   =   "Se selezioni questa opzione, verrà mostrato un foglio che ti consentirà di condividere un link a questa riunione.";
 
-// MARK: - SETTINGS SCREEN -
+// MARK: - SCHERMATA IMPOSTAZIONI -
 
-/* This is the label for the switch to enable/disable Service meeting filtering. */
-"SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL"        =   "Reduce Service Meetings";
-/* This is the hint for the switch to enable/disable Service meeting filtering. */
-"SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT"         =   "If this switch is on, the app will not display any Service (non-Recovery) meetings that it finds.";
+/* Questa è l'etichetta per lo switch per abilitare/disabilitare il filtro delle riunioni di servizio. */
+"SLUG-FILTER-SERVICE-MEETINGS"                  =    "Riduci riunioni di servizio";
+/* Questo è il suggerimento per lo switch di abilitare/disabilitare il filtro delle riunioni di servizio. */
+"SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT"         =   "Se questo interruttore è attivo, l'app non visualizzerà alcuna riunione di servizio (non di recupero) che trova.";
 
-/* This is the label for the "About This App" button. */
-"SLUG-ACC-ABOUT-BUTTON-LABEL"                   =   "About This App";
-/* This is the hint for the "About This App" button. */
-"SLUG-ACC-ABOUT-BUTTON-HINT"                    =   "Selecting this, will open another screen, with information about this app.";
-
-// MARK: -
+/* Questa è l'etichetta per il pulsante "Informazioni su questa app". */
+"SLUG-ACC-ABOUT-BUTTON-LABEL"                   =   "Informazioni su questa app";
+/* Questo è il suggerimento per il pulsante "Informazioni su questa app". */
+"SLUG-ACC-ABOUT-BUTTON-HINT"                    =   "Selezionando questo, si aprirà un'altra schermata, con informazioni su questa app.";

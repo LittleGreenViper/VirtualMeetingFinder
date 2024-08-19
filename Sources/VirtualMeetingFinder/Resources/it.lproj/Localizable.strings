@@ -86,9 +86,9 @@ La nota sul copyright riportata sopra e la presente nota sull'autorizzazione dev
 /* Questo viene visualizzato nell'ispettore della riunione, se la riunione ha un fuso orario diverso dal nostro. Il primo segnaposto ha il nome del fuso orario e il secondo ha l'ora di inizio della riunione, in quel fuso orario (al contrario del locale, per la maggior parte delle altre volte). */
 "SLUG-TIMEZONE-FORMAT"                            =    "Fuso orario: %@ (%@)";
 /* Visualizza l'ora di inizio della riunione e il giorno feriale, ma non la durata. Viene visualizzato sia nella schermata principale che nella schermata di ispezione della riunione. Il primo segnaposto ha il giorno della settimana e il secondo, l'ora di inizio, in formato localizzato. */
-"SLUG-WEEKDAY-TIME-FORMAT"                        =    "%@s, at %@";
+"SLUG-WEEKDAY-TIME-FORMAT"                        =    "%@, at %@";
 /* Visualizza l'ora di inizio della riunione e il giorno feriale, ma non la durata. Viene visualizzato sia nella schermata principale che nella schermata di ispezione della riunione. Il primo segnaposto ha il giorno della settimana, il secondo, l'ora di inizio, in formato localizzato, e il terzo, l'ora di fine (anche in formato localizzato). */
-"SLUG-WEEKDAY-TIME-DURATION-FORMAT"               =    "%@s, %@ - %@";
+"SLUG-WEEKDAY-TIME-DURATION-FORMAT"               =    "%@, %@ - %@";
 /* Visualizza informazioni aggiuntive sul telefono. Il segnaposto viene sostituito con le informazioni aggiuntive (come password, ecc.), nell'ispettore della riunione. */
 "SLUG-PHONE-NUMBER-FORMAT"                        =    "Telefono: %@";
 /* Questa è l'intestazione, sopra il display Formati, in Meeting Inspector. */

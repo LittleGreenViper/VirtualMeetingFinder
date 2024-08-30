@@ -26,6 +26,7 @@
 		D493933C2C2616C7006438AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D493933B2C2616C7006438AE /* Base */; };
 		D493933E2C2616C8006438AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D493933D2C2616C8006438AE /* Assets.xcassets */; };
 		D49393412C2616C8006438AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D49393402C2616C8006438AE /* Base */; };
+		D49979442C82002100CD77A5 /* VMF_SiriKit.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = D49979432C82002100CD77A5 /* VMF_SiriKit.intentdefinition */; };
 		D4B3E2B42C41B6CE00CD672E /* VirtualMeetingFinder.docc in Sources */ = {isa = PBXBuildFile; fileRef = D4B3E2B32C41B6CE00CD672E /* VirtualMeetingFinder.docc */; };
 		D4B69A342C2B162900D24DA6 /* VMF_MeetingInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B69A332C2B162800D24DA6 /* VMF_MeetingInspectorViewController.swift */; };
 		D4BBD0E22C528E3500301D0F /* RevealServer.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BBD0E12C528E3500301D0F /* RevealServer.xcframework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -62,6 +63,7 @@
 		D493933D2C2616C8006438AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D49393402C2616C8006438AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/VMF_LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D49393422C2616C8006438AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D49979432C82002100CD77A5 /* VMF_SiriKit.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = VMF_SiriKit.intentdefinition; sourceTree = "<group>"; };
 		D49EC71B2C544246008D7DBA /* BackgroundGradient.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BackgroundGradient.pdf; sourceTree = "<group>"; };
 		D49EE49B2C42A2FC00BAD34A /* LGV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LGV.png; sourceTree = "<group>"; };
 		D49EE49C2C42A2FC00BAD34A /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 		D4AD6A102C261ACB002E37F3 /* Meta */ = {
 			isa = PBXGroup;
 			children = (
+				D49979432C82002100CD77A5 /* VMF_SiriKit.intentdefinition */,
 				D49393422C2616C8006438AE /* Info.plist */,
 			);
 			path = Meta;
@@ -399,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D49393352C2616C7006438AE /* VMF_AppDelegate.swift in Sources */,
+				D49979442C82002100CD77A5 /* VMF_SiriKit.intentdefinition in Sources */,
 				D43A9C1A2C374198001285FC /* VMF_Extensions.swift in Sources */,
 				D4DDAB822C4039570018944E /* VMF_AboutViewController.swift in Sources */,
 				D47C2F0E2C2C5E6A0048C91C /* VMF_BaseViewController.swift in Sources */,

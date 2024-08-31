@@ -18,6 +18,7 @@
  */
 
 import UIKit
+import Intents
 import SwiftBMLSDK
 import RVS_Generic_Swift_Toolbox
 import RVS_BasicGCDTimer
@@ -199,5 +200,17 @@ extension VMF_AppDelegate: UIApplicationDelegate {
       */
      func application(_: UIApplication, configurationForConnecting inConnectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
           UISceneConfiguration(name: "Default Configuration", sessionRole: inConnectingSceneSession.role)
+     }
+     
+     /* ################################################################## */
+     /**
+      Fetch an intent handler for the app.
+      
+      - parameter: The application (ignored)
+      - parameter handlerFor: An intent that needs to be handled by the app.
+      - returns: An intent handler
+      */
+     func application(_: UIApplication, handlerFor inIntent: INIntent) -> Any? {
+          nil
      }
 }

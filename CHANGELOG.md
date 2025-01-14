@@ -1,3 +1,8 @@
+**1.1.3** *January 14, 2025*
+
+- Updated the meeting SDK.
+- Now use the same data source as Recovrr.
+
 **1.1.2** *August 19, 2024*
 
 - Added Italian localization.

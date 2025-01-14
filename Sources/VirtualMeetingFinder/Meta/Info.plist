@@ -54,6 +54,6 @@
 		</dict>
 	</dict>
 	<key>VMF_BaseServerURI</key>
-	<string>https://vmf.littlegreenviper.com/meetings/index.php</string>
+	<string>https://meetings.recovrr.org/entrypoint.php</string>
 </dict>
 </plist>

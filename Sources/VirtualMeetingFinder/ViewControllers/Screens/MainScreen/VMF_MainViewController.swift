@@ -333,6 +333,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                }, completion: { _ in
                     self.controlPanel?.isHidden = !self.isHeaderExpanded
                     self.setDisclosureButton()
+                    self.hardImpactHaptic()
                })
           }
      }

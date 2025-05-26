@@ -43,6 +43,16 @@
 /* This is the hint for the Bar Button item that selects the Settings Screen. */
 "SLUG-ACC-SETTINGS-BUTTON-HINT" = "Es öffnet sich ein Fenster, in dem verschiedene Einstellungen der App vorgenommen werden können.";
 
+/* This is the label for the Bar Button item that opens the Control Panel (When closed). */
+"SLUG-ACC-DISCLOSURE-BUTTON-CLOSED-LABEL"       =   "Systemsteuerung öffnen";
+/* This is the hint for the Bar Button item that opens the Control Panel (When closed). */
+"SLUG-ACC-DISCLOSURE-BUTTON-CLOSED-HINT"        =   "Dies öffnet oben ein Steuerungsfeld, mit dem Sie einen Tag und eine Uhrzeit auswählen können.";
+
+/* This is the label for the Bar Button item that opens the Control Panel (When open). */
+"SLUG-ACC-DISCLOSURE-BUTTON-OPEN-LABEL"         =   "Systemsteuerung schließen";
+/* This is the hint for the Bar Button item that opens the Control Panel (When open). */
+"SLUG-ACC-DISCLOSURE-BUTTON-OPEN-HINT"          =   "Dies wird die Systemsteuerung schließen.";
+
 /* This is the label for the segmented switch at the top of the Main Screen. */
 "SLUG-ACC-WEEKDAY-SWITCH-LABEL" = "Wochentag auswählen";
 /* This is the hint for the segmented switch at the top of the Main Screen. */

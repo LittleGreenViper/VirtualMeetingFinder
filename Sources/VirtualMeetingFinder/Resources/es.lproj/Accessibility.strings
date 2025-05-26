@@ -27,13 +27,11 @@
 // *|  DO NOT MODIFY ON THIS SIDE OF THE EQUALS  |*        *|   MODIFY THE TEXT ON THIS SIDE TO THE LOCAL LANGUAGE  |*
 // * -------------------------------------------- *        * ------------------------------------------------------- *
 // ************************************************        ***********************************************************
+
 // MARK: -
 // MARK: - MAIN SCREEN -
+
 /* This is the label for the Bar Button item that selects the "I Attend" Screen. */
-
-
-
-
 "SLUG-ACC-TAB-1-BUTTON-LABEL" = "Mi asistencia";
 /* This is the hint for the Bar Button item that selects the "I Attend" Screen. */
 "SLUG-ACC-TAB-1-BUTTON-HINT" = "Al pulsar este botón, se abre otra pantalla solo con las reuniones que has marcado como aquellas a las que asistes.";
@@ -42,6 +40,16 @@
 "SLUG-ACC-SETTINGS-BUTTON-LABEL" = "Ajustes de la aplicación";
 /* This is the hint for the Bar Button item that selects the Settings Screen. */
 "SLUG-ACC-SETTINGS-BUTTON-HINT" = "Al pulsar este botón, se abre una pantalla con varios ajustes de la aplicación.";
+
+/* This is the label for the Bar Button item that opens the Control Panel (When closed). */
+"SLUG-ACC-DISCLOSURE-BUTTON-CLOSED-LABEL"       =   "Obre el tauler de control";
+/* This is the hint for the Bar Button item that opens the Control Panel (When closed). */
+"SLUG-ACC-DISCLOSURE-BUTTON-CLOSED-HINT"        =   "Això obrirà un tauler de control a la part superior, que et permetrà seleccionar un dia i una hora.";
+
+/* This is the label for the Bar Button item that opens the Control Panel (When open). */
+"SLUG-ACC-DISCLOSURE-BUTTON-OPEN-LABEL"         =   "Tanca el tauler de control";
+/* This is the hint for the Bar Button item that opens the Control Panel (When open). */
+"SLUG-ACC-DISCLOSURE-BUTTON-OPEN-HINT"          =   "Això tancarà el tauler de control.";
 
 /* This is the label for the segmented switch at the top of the Main Screen. */
 "SLUG-ACC-WEEKDAY-SWITCH-LABEL" = "Seleccionar día de la semana";

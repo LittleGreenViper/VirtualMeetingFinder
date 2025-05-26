@@ -42,6 +42,16 @@ La nota sul copyright riportata sopra e la presente nota sull'autorizzazione dev
 /* Questo è il suggerimento per la voce Pulsante barra che seleziona la schermata Impostazioni. */
 "SLUG-ACC-SETTINGS-BUTTON-HINT"                 =   "Si aprirà una schermata, con varie impostazioni dell'app.";
 
+/* This is the label for the Bar Button item that opens the Control Panel (When closed). */
+"SLUG-ACC-DISCLOSURE-BUTTON-CLOSED-LABEL"       =   "Apri il pannello di controllo";
+/* This is the hint for the Bar Button item that opens the Control Panel (When closed). */
+"SLUG-ACC-DISCLOSURE-BUTTON-CLOSED-HINT"        =   "Questo aprirà un pannello di controllo in alto, che ti permetterà di selezionare un giorno e un orario.";
+
+/* This is the label for the Bar Button item that opens the Control Panel (When open). */
+"SLUG-ACC-DISCLOSURE-BUTTON-OPEN-LABEL"         =   "Chiudi il pannello di controllo";
+/* This is the hint for the Bar Button item that opens the Control Panel (When open). */
+"SLUG-ACC-DISCLOSURE-BUTTON-OPEN-HINT"          =   "Questo chiuderà il pannello di controllo.";
+
 /* Questa è l'etichetta per l'interruttore segmentato nella parte superiore della schermata principale. */
 "SLUG-ACC-WEEKDAY-SWITCH-LABEL"                 =   "Seleziona giorno feriale";
 /* Questo è il suggerimento per l'interruttore segmentato nella parte superiore della schermata principale. */

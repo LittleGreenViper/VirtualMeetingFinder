@@ -15,15 +15,13 @@
  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
 
-/*  NOTE TO TRANSLATOR:
+  NOTE TO TRANSLATOR:
  
     "Labels" are short, simple titles. "Hints" are longer explanations. Labels should always be short and succinct, but hints can be a lot longer.
  
     These are voiceover strings. Pronunciation and auditory clarity are important.
 */
-
 // ************************************************        ***********************************************************
 // * -------------------------------------------- *        * ------------------------------------------------------- *
 // *|  DO NOT MODIFY ON THIS SIDE OF THE EQUALS  |*        *|   MODIFY THE TEXT ON THIS SIDE TO THE LOCAL LANGUAGE  |*
@@ -42,6 +40,16 @@
 "SLUG-ACC-SETTINGS-BUTTON-LABEL"                =   "App Settings";
 /* This is the hint for the Bar Button item that selects the Settings Screen. */
 "SLUG-ACC-SETTINGS-BUTTON-HINT"                 =   "This will open a screen, with various app settings.";
+
+/* This is the label for the Bar Button item that opens the Control Panel (When closed). */
+"SLUG-ACC-DISCLOSURE-BUTTON-CLOSED-LABEL"       =   "Open Control Panel";
+/* This is the hint for the Bar Button item that opens the Control Panel (When closed). */
+"SLUG-ACC-DISCLOSURE-BUTTON-CLOSED-HINT"        =   "This will open a control panel at the top, which will allow you to select a day and time.";
+
+/* This is the label for the Bar Button item that opens the Control Panel (When closed). */
+"SLUG-ACC-DISCLOSURE-BUTTON-OPEN-LABEL"         =   "Close Control Panel";
+/* This is the hint for the Bar Button item that opens the Control Panel (When closed). */
+"SLUG-ACC-DISCLOSURE-BUTTON-OPEN-HINT"          =   "This will open a control panel at the top, which will allow you to select a day and time.";
 
 /* This is the label for the segmented switch at the top of the Main Screen. */
 "SLUG-ACC-WEEKDAY-SWITCH-LABEL"                 =   "Select Weekday";

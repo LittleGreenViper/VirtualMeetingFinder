@@ -372,6 +372,8 @@ extension VMF_MainViewController {
      func setDisclosureButton() {
           self.disclosureButton?.image = UIImage(systemName: isHeaderExpanded ? "rectangle" : "rectangle.tophalf.filled")
           self.disclosureButton?.isEnabled = true
+          self.disclosureButton?.accessibilityLabel = "SLUG-ACC-DISCLOSURE-BUTTON-\(isHeaderExpanded ? "OPEN" : "CLOSED")-LABEL".accessibilityLocalizedVariant
+          self.disclosureButton?.accessibilityHint = "SLUG-ACC-DISCLOSURE-BUTTON-\(isHeaderExpanded ? "OPEN" : "CLOSED")-HINT".accessibilityLocalizedVariant
      }
 }
 
@@ -729,6 +731,8 @@ extension VMF_MainViewController {
           
           isDirectSelectionMode = false
           
+          let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapOnDayTimeLabel))
+          navigationController?.navigationBar.addGestureRecognizer(doubleTapGesture)
           setDisclosureButton()
      }
      

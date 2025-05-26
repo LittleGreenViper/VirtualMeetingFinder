@@ -324,7 +324,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
      /**
       If true, then the "Control Panel" header is open.
       */
-     var isHeaderExpanded = VMF_Persistent_Prefs().openControlPanel {
+     var isHeaderExpanded = false {
           didSet {
                self.disclosureButton?.isEnabled = false
                 VMF_Persistent_Prefs().openControlPanel = isHeaderExpanded

@@ -48,12 +48,19 @@ class VMF_Persistent_Prefs: RVS_PersistentPrefs {
           
           /* ############################################################## */
           /**
+           This saves the state of the control panel header.
+           */
+          case openControlPanel
+
+          /* ############################################################## */
+          /**
            These are all the keys, in an Array of String.
            */
           static var allKeys: [String] {
                [
                     attendance.rawValue,
-                    excludeServiceMeetings.rawValue
+                    excludeServiceMeetings.rawValue,
+                    openControlPanel.rawValue
                ]
           }
      }
@@ -86,5 +93,14 @@ extension VMF_Persistent_Prefs {
      var excludeServiceMeetings: Bool {
           get { values[Keys.excludeServiceMeetings.rawValue] as? Bool ?? true }
           set { values[Keys.excludeServiceMeetings.rawValue] = newValue }
+     }
+     
+     /* ################################################################## */
+     /**
+      This saves the state of the control panel header. True means it is open.
+      */
+     var openControlPanel: Bool {
+          get { values[Keys.openControlPanel.rawValue] as? Bool ?? false }
+          set { values[Keys.openControlPanel.rawValue] = newValue }
      }
 }

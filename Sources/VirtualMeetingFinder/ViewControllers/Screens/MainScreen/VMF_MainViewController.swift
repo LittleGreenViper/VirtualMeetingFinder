@@ -320,21 +320,26 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
       */
      @IBOutlet weak var controlPanelHeightConstraint: NSLayoutConstraint?
      
-     var isHeaderExpanded = false {
+     /* ################################################################## */
+     /**
+      If true, then the "Control Panel" header is open.
+      */
+     var isHeaderExpanded = VMF_Persistent_Prefs().openControlPanel {
           didSet {
-              self.disclosureButton?.isEnabled = false
-               if self.isHeaderExpanded {
-                    controlPanel?.isHidden = false
-                    view?.layoutIfNeeded()
-               }
-               UIView.animate(withDuration: 0.3, animations: {
-                   self.controlPanelHeightConstraint?.constant = self.isHeaderExpanded ? Self.controlPanelHeightInDisplayUnits : 0
-                   self.view?.layoutIfNeeded()
-               }, completion: { _ in
-                    self.controlPanel?.isHidden = !self.isHeaderExpanded
-                    self.setDisclosureButton()
-                    self.hardImpactHaptic()
-               })
+               self.disclosureButton?.isEnabled = false
+                VMF_Persistent_Prefs().openControlPanel = isHeaderExpanded
+                if self.isHeaderExpanded {
+                     controlPanel?.isHidden = false
+                     view?.layoutIfNeeded()
+                }
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.controlPanelHeightConstraint?.constant = self.isHeaderExpanded ? Self.controlPanelHeightInDisplayUnits : 0
+                    self.view?.layoutIfNeeded()
+                }, completion: { _ in
+                     self.controlPanel?.isHidden = !self.isHeaderExpanded
+                     self.setDisclosureButton()
+                     self.hardImpactHaptic()
+                })
           }
      }
 

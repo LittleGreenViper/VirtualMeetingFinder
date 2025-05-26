@@ -15,8 +15,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>comgooglemaps</string>
@@ -30,10 +28,6 @@
 	</array>
 	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
 	<string>This app can add events to your calendar, to remind you of upcoming meeting attendance.</string>
-	<key>NSUserActivityTypes</key>
-	<array>
-		<string>FindVirtualMeetingsIntent</string>
-	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

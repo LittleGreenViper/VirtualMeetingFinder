@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		D40133692C320C070018076B /* VMF_MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40133682C320C070018076B /* VMF_MainViewController.swift */; };
 		D401336B2C320D520018076B /* VMF_EmbeddedTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */; };
 		D40EB4DE2C3B142B00AAE33B /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = D40EB4DC2C3B142B00AAE33B /* Accessibility.strings */; };
+		D41A54A22DE50BFF00EA9A56 /* SwiftBMLSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D41A54A12DE50BFF00EA9A56 /* SwiftBMLSDK */; };
 		D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */; };
 		D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */; };
 		D43A9C132C373F67001285FC /* RVS_Persistent_Prefs in Frameworks */ = {isa = PBXBuildFile; productRef = D43A9C122C373F67001285FC /* RVS_Persistent_Prefs */; };
@@ -28,14 +29,11 @@
 		D49393412C2616C8006438AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D49393402C2616C8006438AE /* Base */; };
 		D4B3E2B42C41B6CE00CD672E /* VirtualMeetingFinder.docc in Sources */ = {isa = PBXBuildFile; fileRef = D4B3E2B32C41B6CE00CD672E /* VirtualMeetingFinder.docc */; };
 		D4B69A342C2B162900D24DA6 /* VMF_MeetingInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B69A332C2B162800D24DA6 /* VMF_MeetingInspectorViewController.swift */; };
-		D4BBD0E22C528E3500301D0F /* RevealServer.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BBD0E12C528E3500301D0F /* RevealServer.xcframework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D4DDAB822C4039570018944E /* VMF_AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DDAB812C4039570018944E /* VMF_AboutViewController.swift */; };
 		D4E7C6C92C4293E10045ACE6 /* VMF_MainViewController_Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7C6C82C4293E10045ACE6 /* VMF_MainViewController_Methods.swift */; };
 		D4E7C6CB2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7C6CA2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift */; };
 		D4F4BCED2C36DAFC0023C21B /* VMF_MapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4BCEC2C36DAFC0023C21B /* VMF_MapMarker.swift */; };
-		D4F70AA22C55800E000378E9 /* SwiftBMLSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D4F70AA12C55800E000378E9 /* SwiftBMLSDK */; };
 		D4F8FC9E2C5A689000D6884E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4F8FC9D2C5A689000D6884E /* InfoPlist.strings */; };
-		D4FFD0942C8354BE00EDE29E /* VMF_SiriKit.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = D4FFD0932C8354BE00EDE29E /* VMF_SiriKit.intentdefinition */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,7 +76,6 @@
 		D4B155652C529F2400A703F7 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		D4B3E2B32C41B6CE00CD672E /* VirtualMeetingFinder.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = VirtualMeetingFinder.docc; sourceTree = "<group>"; };
 		D4B69A332C2B162800D24DA6 /* VMF_MeetingInspectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MeetingInspectorViewController.swift; sourceTree = "<group>"; };
-		D4BBD0E12C528E3500301D0F /* RevealServer.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:2V82U7HN27:Itty Bitty Labs Pty Ltd"; lastKnownFileType = wrapper.xcframework; name = RevealServer.xcframework; path = Meta/RevealServer.xcframework; sourceTree = "<group>"; };
 		D4BC72A62C4C85A600955DD8 /* Logo.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Logo.pdf; sourceTree = "<group>"; };
 		D4BC72A72C4C85A600955DD8 /* SocialPreview.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = SocialPreview.pdf; sourceTree = "<group>"; };
 		D4BC72A82C4C85A600955DD8 /* TypeIcons.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = TypeIcons.pdf; sourceTree = "<group>"; };
@@ -95,22 +92,18 @@
 		D4F8FCA02C5A68E700D6884E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D4F8FCA12C5A68E700D6884E /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D4F8FCA22C5A68E800D6884E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D4FFD0922C8354BE00EDE29E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/VMF_SiriKit.intentdefinition; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D493932E2C2616C7006438AE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				D48816152C35860F008DF936 /* RVS_BasicGCDTimer in Frameworks */,
-				D4F70AA22C55800E000378E9 /* SwiftBMLSDK in Frameworks */,
 				D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */,
+				D41A54A22DE50BFF00EA9A56 /* SwiftBMLSDK in Frameworks */,
 				D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */,
 				D43A9C132C373F67001285FC /* RVS_Persistent_Prefs in Frameworks */,
-				D4BBD0E22C528E3500301D0F /* RevealServer.xcframework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -263,7 +256,6 @@
 		D4AD6A102C261ACB002E37F3 /* Meta */ = {
 			isa = PBXGroup;
 			children = (
-				D4FFD0932C8354BE00EDE29E /* VMF_SiriKit.intentdefinition */,
 				D49393422C2616C8006438AE /* Info.plist */,
 			);
 			path = Meta;
@@ -303,7 +295,6 @@
 		D4FB82112C4D8FC80069815A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D4BBD0E12C528E3500301D0F /* RevealServer.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -321,15 +312,13 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			name = "We Are Never Alone";
 			packageProductDependencies = (
 				D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */,
 				D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */,
 				D48816142C35860F008DF936 /* RVS_BasicGCDTimer */,
 				D43A9C122C373F67001285FC /* RVS_Persistent_Prefs */,
-				D4F70AA12C55800E000378E9 /* SwiftBMLSDK */,
+				D41A54A12DE50BFF00EA9A56 /* SwiftBMLSDK */,
 			);
 			productName = VirtualMeetingFinder;
 			productReference = D49393312C2616C7006438AE /* We Are Never Alone.app */;
@@ -351,7 +340,6 @@
 				};
 			};
 			buildConfigurationList = D493932C2C2616C7006438AE /* Build configuration list for PBXProject "VirtualMeetingFinder" */;
-			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -369,8 +357,9 @@
 				D4398E682C2892830001FAE3 /* XCRemoteSwiftPackageReference "RVS_UIKit_Toolbox" */,
 				D48816132C35860F008DF936 /* XCRemoteSwiftPackageReference "RVS_BasicGCDTimer" */,
 				D43A9C112C373F67001285FC /* XCRemoteSwiftPackageReference "RVS_PersistentPrefs" */,
-				D4F70AA02C55800E000378E9 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */,
+				D41A54A02DE50BFF00EA9A56 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */,
 			);
+			preferredProjectObjectVersion = 90;
 			productRefGroup = D49393322C2616C7006438AE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -383,7 +372,6 @@
 /* Begin PBXResourcesBuildPhase section */
 		D493932F2C2616C7006438AE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				D493933E2C2616C8006438AE /* Assets.xcassets in Resources */,
 				D4F8FC9E2C5A689000D6884E /* InfoPlist.strings in Resources */,
@@ -392,17 +380,14 @@
 				D49393412C2616C8006438AE /* Base in Resources */,
 				D493933C2C2616C7006438AE /* Base in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D493932D2C2616C7006438AE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				D49393352C2616C7006438AE /* VMF_AppDelegate.swift in Sources */,
-				D4FFD0942C8354BE00EDE29E /* VMF_SiriKit.intentdefinition in Sources */,
 				D43A9C1A2C374198001285FC /* VMF_Extensions.swift in Sources */,
 				D4DDAB822C4039570018944E /* VMF_AboutViewController.swift in Sources */,
 				D47C2F0E2C2C5E6A0048C91C /* VMF_BaseViewController.swift in Sources */,
@@ -419,7 +404,6 @@
 				D4B3E2B42C41B6CE00CD672E /* VirtualMeetingFinder.docc in Sources */,
 				D45E42022C3F2BA7006578F6 /* VMF_SettingsViewController.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -479,18 +463,10 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		D4FFD0932C8354BE00EDE29E /* VMF_SiriKit.intentdefinition */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D4FFD0922C8354BE00EDE29E /* Base */,
-			);
-			name = VMF_SiriKit.intentdefinition;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		D49393432C2616C8006438AE /* Debug */ = {
+		D49393432C2616C8006438AE /* Debug configuration for PBXProject "VirtualMeetingFinder" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D4AD6A122C261B75002E37F3 /* Warnings.xcconfig */;
 			buildSettings = {
@@ -557,7 +533,7 @@
 			};
 			name = Debug;
 		};
-		D49393442C2616C8006438AE /* Release */ = {
+		D49393442C2616C8006438AE /* Release configuration for PBXProject "VirtualMeetingFinder" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D4AD6A122C261B75002E37F3 /* Warnings.xcconfig */;
 			buildSettings = {
@@ -617,7 +593,7 @@
 			};
 			name = Release;
 		};
-		D49393462C2616C8006438AE /* Debug */ = {
+		D49393462C2616C8006438AE /* Debug configuration for PBXNativeTarget "We Are Never Alone" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -626,9 +602,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1021;
 				DRIVERKIT_DEPLOYMENT_TARGET = "";
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/VirtualMeetingFinder/Meta/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -656,7 +634,7 @@
 			};
 			name = Debug;
 		};
-		D49393472C2616C8006438AE /* Release */ = {
+		D49393472C2616C8006438AE /* Release configuration for PBXNativeTarget "We Are Never Alone" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -665,9 +643,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1021;
 				DRIVERKIT_DEPLOYMENT_TARGET = "";
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/VirtualMeetingFinder/Meta/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -701,24 +681,30 @@
 		D493932C2C2616C7006438AE /* Build configuration list for PBXProject "VirtualMeetingFinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D49393432C2616C8006438AE /* Debug */,
-				D49393442C2616C8006438AE /* Release */,
+				D49393432C2616C8006438AE /* Debug configuration for PBXProject "VirtualMeetingFinder" */,
+				D49393442C2616C8006438AE /* Release configuration for PBXProject "VirtualMeetingFinder" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		D49393452C2616C8006438AE /* Build configuration list for PBXNativeTarget "We Are Never Alone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D49393462C2616C8006438AE /* Debug */,
-				D49393472C2616C8006438AE /* Release */,
+				D49393462C2616C8006438AE /* Debug configuration for PBXNativeTarget "We Are Never Alone" */,
+				D49393472C2616C8006438AE /* Release configuration for PBXNativeTarget "We Are Never Alone" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D41A54A02DE50BFF00EA9A56 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/LittleGreenViper/SwiftBMLSDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.8;
+			};
+		};
 		D4398E652C2892790001FAE3 /* XCRemoteSwiftPackageReference "RVS_Generic_Swift_Toolbox" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox";
@@ -751,17 +737,14 @@
 				minimumVersion = 1.7.1;
 			};
 		};
-		D4F70AA02C55800E000378E9 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/LittleGreenViper/SwiftBMLSDK";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.7;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D41A54A12DE50BFF00EA9A56 /* SwiftBMLSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D41A54A02DE50BFF00EA9A56 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */;
+			productName = SwiftBMLSDK;
+		};
 		D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D4398E652C2892790001FAE3 /* XCRemoteSwiftPackageReference "RVS_Generic_Swift_Toolbox" */;
@@ -781,11 +764,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D48816132C35860F008DF936 /* XCRemoteSwiftPackageReference "RVS_BasicGCDTimer" */;
 			productName = RVS_BasicGCDTimer;
-		};
-		D4F70AA12C55800E000378E9 /* SwiftBMLSDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D4F70AA02C55800E000378E9 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */;
-			productName = SwiftBMLSDK;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

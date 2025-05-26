@@ -364,6 +364,15 @@ extension VMF_MainViewController {
      func setAttendance() {
           myAttendanceBarButtonItem?.isEnabled = !(VMF_AppDelegate.virtualService?.meetingsThatIAttend.isEmpty ?? true)
      }
+
+     /* ################################################################## */
+     /**
+      This sets the appropriate image for the disclosure button.
+      */
+     func setDisclosureButton() {
+          self.disclosureButton?.image = UIImage(systemName: isHeaderExpanded ? "rectangle" : "rectangle.tophalf.filled")
+          self.disclosureButton?.isEnabled = true
+     }
 }
 
 /* ###################################################################################################################################### */
@@ -618,6 +627,14 @@ extension VMF_MainViewController {
      
      /* ################################################################## */
      /**
+      This shows or hides the Control Panel (the header).
+      */
+     @IBAction func toggleHeader() {
+         isHeaderExpanded.toggle()
+     }
+
+     /* ################################################################## */
+     /**
       This is called just before the keyboard shows. We use this to "nudge" the table bottom up.
       
       - parameter notification: The notification being passed in.
@@ -642,7 +659,7 @@ extension VMF_MainViewController {
                self?.bottomConstraint?.constant = self?.atRestConstant ?? 0
           }
      }
-     
+
      /* ################################################################## */
      /**
       Reloads all the meetings.
@@ -711,6 +728,8 @@ extension VMF_MainViewController {
           timeDayDisplayLabel?.textColor = .tintColor
           
           isDirectSelectionMode = false
+          
+          setDisclosureButton()
      }
      
      /* ################################################################## */

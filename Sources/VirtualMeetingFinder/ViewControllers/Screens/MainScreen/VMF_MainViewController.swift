@@ -105,10 +105,16 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
      
      /* ################################################################## */
      /**
+      The height of the control panel, when shown.
+      */
+     static let controlPanelHeightInDisplayUnits = CGFloat(122)
+
+     /* ################################################################## */
+     /**
       The width of each of the components of our direct picker view.
       */
      static let pickerViewComponentWidthInDisplayUnits = CGFloat(140)
-     
+
      /* ################################################################## */
      /**
       The container view needs to be wider than this, to show short (as opposed to "very" short) weekdays.
@@ -296,6 +302,41 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
           }
      }
      
+     /* ################################################################## */
+     /**
+      The bar button that controls whether or not the header (control panel) is shown.
+      */
+     @IBOutlet weak var disclosureButton: UIBarButtonItem?
+
+     /* ################################################################## */
+     /**
+      The panel at the top, with all the settings and displays.
+      */
+     @IBOutlet weak var controlPanel: UIStackView?
+     
+     /* ################################################################## */
+     /**
+      The height of the panel. We use this to control its disclosure.
+      */
+     @IBOutlet weak var controlPanelHeightConstraint: NSLayoutConstraint?
+     
+     var isHeaderExpanded = false {
+          didSet {
+              self.disclosureButton?.isEnabled = false
+               if self.isHeaderExpanded {
+                    controlPanel?.isHidden = false
+                    view?.layoutIfNeeded()
+               }
+               UIView.animate(withDuration: 0.3, animations: {
+                   self.controlPanelHeightConstraint?.constant = self.isHeaderExpanded ? Self.controlPanelHeightInDisplayUnits : 0
+                   self.view?.layoutIfNeeded()
+               }, completion: { _ in
+                    self.controlPanel?.isHidden = !self.isHeaderExpanded
+                    self.setDisclosureButton()
+               })
+          }
+     }
+
      /* ################################################################## */
      /**
       The bar button item that brings in the Settings Screen.

@@ -430,7 +430,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1R3-iR-Giq">
+                            <stackView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1R3-iR-Giq">
                                 <rect key="frame" x="16" y="162" width="361" height="0.0"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Hjc-M6-UmS">
@@ -833,7 +833,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" translatesAutoresizingMaskIntoConstraints="NO" id="8L8-qW-vGE" customClass="VMF_TableCell" customModule="We_Are_Never_Alone" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" translatesAutoresizingMaskIntoConstraints="NO" id="8L8-qW-vGE" customClass="VMF_TableCell" customModule="We_Are_Never_Alone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="100.33333587646484"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8L8-qW-vGE" id="E3R-WY-hTi">
@@ -948,7 +948,7 @@
                                 <rect key="frame" x="0.0" y="64" width="361" height="602"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="X4o-s5-Dmh" userLabel="Container Vertical Stack View">
-                                        <rect key="frame" x="16" y="0.0" width="329" height="602"/>
+                                        <rect key="frame" x="16" y="0.0" width="329" height="755"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="747" text="Meeting Name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0x-Y5-plm">
                                                 <rect key="frame" x="76" y="0.0" width="177" height="20"/>
@@ -1241,7 +1241,7 @@
                                                 </constraints>
                                             </stackView>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="250" rotateEnabled="NO" pitchEnabled="NO" showsCompass="NO" showsPointsOfInterest="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bIq-s0-xoL">
-                                                <rect key="frame" x="0.0" y="442" width="329" height="160"/>
+                                                <rect key="frame" x="0.0" y="442" width="329" height="313"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="bIq-s0-xoL" secondAttribute="height" multiplier="1:1" priority="750" id="aIo-6j-deK"/>
                                                 </constraints>
@@ -1268,10 +1268,10 @@
                                             <constraint firstItem="P0x-Y5-plm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="91z-VW-KPF"/>
                                             <constraint firstItem="odu-fY-u8h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="NYm-73-ine"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="odu-fY-u8h" secondAttribute="trailing" id="Otq-CO-eqf"/>
-                                            <constraint firstAttribute="trailing" secondItem="bIq-s0-xoL" secondAttribute="trailing" id="gux-gH-ra6"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bIq-s0-xoL" secondAttribute="trailing" id="gux-gH-ra6"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1Me-er-i3Z" secondAttribute="trailing" id="hEp-Rs-uKM"/>
                                             <constraint firstItem="1Me-er-i3Z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="ilE-sp-x3j"/>
-                                            <constraint firstItem="bIq-s0-xoL" firstAttribute="leading" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="imA-rc-8hi"/>
+                                            <constraint firstItem="bIq-s0-xoL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X4o-s5-Dmh" secondAttribute="leading" id="imA-rc-8hi"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P0x-Y5-plm" secondAttribute="trailing" id="mac-MC-CPJ"/>
                                         </constraints>
                                     </stackView>
@@ -1388,22 +1388,22 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

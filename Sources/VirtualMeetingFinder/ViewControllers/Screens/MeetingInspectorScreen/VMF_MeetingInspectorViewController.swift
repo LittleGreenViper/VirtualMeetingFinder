@@ -136,12 +136,21 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
                }
                let imageRotation = isLocationOpen ? Double.pi / 2 : 0
                view?.layoutIfNeeded()
-               UIView.animate(withDuration: Self._openingAnimationPeriodInSeconds) {
+               UIView.animate(withDuration: Self._openingAnimationPeriodInSeconds, animations: {
                     self.inPersonDisclosureTriangle?.transform = CGAffineTransform(rotationAngle: CGFloat(imageRotation))
                     self.inPersonContainer?.isHidden = !self.isLocationOpen
-                    self.locationMapView?.isHidden = !self.isLocationOpen
+                    if !self.isLocationOpen {
+                         self.locationMapView?.widthAnchor.constraint(equalToConstant: 0).isActive = true
+                    } else if let mapView = self.locationMapView,
+                              let container = mapView.superview {
+                         mapView.widthAnchor.constraint(equalTo: container.widthAnchor).isActive = true
+                         mapView.heightAnchor.constraint(equalTo: mapView.widthAnchor).isActive = true
+                    }
+                    
                     self.view?.layoutIfNeeded()
-               }
+               }, completion: { _ in
+                    self.locationMapView?.isHidden = !self.isLocationOpen
+               })
           }
      }
      

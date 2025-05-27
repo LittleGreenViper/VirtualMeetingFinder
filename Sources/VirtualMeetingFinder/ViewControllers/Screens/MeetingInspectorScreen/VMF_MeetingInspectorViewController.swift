@@ -81,6 +81,12 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
      
      /* ################################################################## */
      /**
+      This is the height of the "Address" section of the in-person meeting display, when open.
+      */
+     private static let _addressSectionOpenHeight = CGFloat(100)
+     
+     /* ################################################################## */
+     /**
       The image to use, for the bar button item, of a meeting that is selected for attendance.
       */
      private static let _checkedImage = UIImage(systemName: "checkmark.square.fill")
@@ -103,6 +109,18 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
       */
      private var _openSezMe = false
      
+     /* ################################################################## */
+     /**
+      This references our map height constraint. We use it for expanding and collapsing the map.
+      */
+     @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint?
+     
+     /* ################################################################## */
+     /**
+      This references our in-person address height constraint. We use it for expanding and collapsing the map.
+      */
+     @IBOutlet weak var addressHeightConstraint: NSLayoutConstraint?
+
      /* ################################################################## */
      /**
       Set to true, to open the formats section.
@@ -136,20 +154,24 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
                }
                let imageRotation = isLocationOpen ? Double.pi / 2 : 0
                view?.layoutIfNeeded()
+               if self.isLocationOpen {
+                    self.locationMapView?.isHidden = false
+                    self.inPersonContainer?.isHidden = false
+               }
                UIView.animate(withDuration: Self._openingAnimationPeriodInSeconds, animations: {
                     self.inPersonDisclosureTriangle?.transform = CGAffineTransform(rotationAngle: CGFloat(imageRotation))
-                    self.inPersonContainer?.isHidden = !self.isLocationOpen
                     if !self.isLocationOpen {
-                         self.locationMapView?.widthAnchor.constraint(equalToConstant: 0).isActive = true
-                    } else if let mapView = self.locationMapView,
-                              let container = mapView.superview {
-                         mapView.widthAnchor.constraint(equalTo: container.widthAnchor).isActive = true
-                         mapView.heightAnchor.constraint(equalTo: mapView.widthAnchor).isActive = true
+                         self.addressHeightConstraint?.constant = 0
+                         self.mapHeightConstraint?.constant = 0
+                    } else if let mapView = self.locationMapView {
+                         self.addressHeightConstraint?.constant = Self._addressSectionOpenHeight
+                         self.mapHeightConstraint?.constant = mapView.bounds.size.width
                     }
                     
                     self.view?.layoutIfNeeded()
                }, completion: { _ in
                     self.locationMapView?.isHidden = !self.isLocationOpen
+                    self.inPersonContainer?.isHidden = !self.isLocationOpen
                })
           }
      }

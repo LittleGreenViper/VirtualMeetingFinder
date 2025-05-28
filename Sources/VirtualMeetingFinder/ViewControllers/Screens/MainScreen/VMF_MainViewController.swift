@@ -335,15 +335,16 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
      var isHeaderExpanded = false {
           didSet {
                self.disclosureButton?.isEnabled = false
-                VMF_Persistent_Prefs().openControlPanel = isHeaderExpanded
-               isNameSearchMode = false
-               isDirectSelectionMode = false
+               VMF_Persistent_Prefs().openControlPanel = isHeaderExpanded
                 if self.isHeaderExpanded {
                      controlPanel?.isHidden = false
                      view?.layoutIfNeeded()
+                } else {
+                     isNameSearchMode = false
+                     isDirectSelectionMode = false
                 }
                 UIView.animate(withDuration: 0.3, animations: {
-                    self.controlPanelHeightConstraint?.constant = self.isHeaderExpanded ? Self.controlPanelHeightInDisplayUnits : 0
+                     self.controlPanelHeightConstraint?.constant = self.isHeaderExpanded ? self.isNameSearchMode ? Self.searchBarHeightInDisplayUnits : Self.controlPanelHeightInDisplayUnits : 0
                     self.view?.layoutIfNeeded()
                 }, completion: { _ in
                      self.controlPanel?.isHidden = !self.isHeaderExpanded

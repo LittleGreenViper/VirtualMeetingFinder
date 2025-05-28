@@ -733,8 +733,6 @@ extension VMF_MainViewController {
           
           let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapOnDayTimeLabel))
           navigationController?.navigationBar.addGestureRecognizer(doubleTapGesture)
-          setDisclosureButton()
-          isHeaderExpanded = VMF_Persistent_Prefs().openControlPanel
      }
      
      /* ################################################################## */
@@ -772,6 +770,8 @@ extension VMF_MainViewController {
                isNameSearchMode = wasNameSearchMode
           }
           
+          setDisclosureButton()
+          isHeaderExpanded = VMF_Persistent_Prefs().openControlPanel
           setAttendance()
      }
      

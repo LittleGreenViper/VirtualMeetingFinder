@@ -108,6 +108,12 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
       The height of the control panel, when shown.
       */
      static let controlPanelHeightInDisplayUnits = CGFloat(122)
+     
+     /* ################################################################## */
+     /**
+      The height of the control panel search bar, when shown.
+      */
+     static let searchBarHeightInDisplayUnits = CGFloat(40)
 
      /* ################################################################## */
      /**
@@ -194,6 +200,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                               pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
                          }
                          wasNameSearchMode = false
+                         controlPanelHeightConstraint?.constant = Self.searchBarHeightInDisplayUnits
                          searchTextField?.becomeFirstResponder()
                          searchTextField?.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
                          timeSelectorContainerView?.isHidden = true
@@ -204,6 +211,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                          pageViewController?.dataSource = self
                          searchTextField?.removeTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
                          searchTextField?.resignFirstResponder()
+                         controlPanelHeightConstraint?.constant = Self.controlPanelHeightInDisplayUnits
                          if oldValue != isNameSearchMode {
                               weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = mapWeekday(dayIndex)
                               tableDisplayController?.meetings = getCurentMeetings(for: dayIndex, time: timeIndex)
@@ -328,6 +336,8 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
           didSet {
                self.disclosureButton?.isEnabled = false
                 VMF_Persistent_Prefs().openControlPanel = isHeaderExpanded
+               isNameSearchMode = false
+               isDirectSelectionMode = false
                 if self.isHeaderExpanded {
                      controlPanel?.isHidden = false
                      view?.layoutIfNeeded()

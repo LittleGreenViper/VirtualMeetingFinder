@@ -430,7 +430,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1R3-iR-Giq">
+                            <stackView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1R3-iR-Giq">
                                 <rect key="frame" x="16" y="162" width="361" height="0.0"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Hjc-M6-UmS">
@@ -456,17 +456,17 @@
                                             <outletCollection property="gestureRecognizers" destination="IWd-Bm-73J" appends="YES" id="hCf-CY-YVf"/>
                                         </connections>
                                     </segmentedControl>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uw7-7n-oJo">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Uw7-7n-oJo">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="0.0"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="SLUG-SEARCH-PLACEHOLDER" textAlignment="natural" minimumFontSize="14" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="p2c-SZ-uyw">
-                                                <rect key="frame" x="0.0" y="0.0" width="361" height="0.0"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="SLUG-SEARCH-PLACEHOLDER" textAlignment="natural" minimumFontSize="14" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="p2c-SZ-uyw">
+                                                <rect key="frame" x="0.0" y="0.0" width="331.33333333333331" height="0.0"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-ENTER-SEARCH-TEXT-HINT" label="SLUG-ACC-ENTER-SEARCH-TEXT-LABEL"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yr2-tI-yOo">
-                                                <rect key="frame" x="361" y="0.0" width="0.0" height="0.0"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yr2-tI-yOo">
+                                                <rect key="frame" x="335.33333333333331" y="0.0" width="25.666666666666686" height="0.0"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-CLOSE-SEARCH-BUTTON-HINT" label="SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="751" constant="30" id="MPL-oo-Pem"/>
@@ -591,24 +591,21 @@
                                             <outletCollection property="gestureRecognizers" destination="tZV-WQ-Mpq" appends="YES" id="gri-Iz-wCX"/>
                                         </connections>
                                     </view>
-                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4zE-zm-UoW">
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4zE-zm-UoW">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="0.0"/>
                                         <subviews>
-                                            <pickerView contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="stC-p8-nOr">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="stC-p8-nOr">
+                                                <rect key="frame" x="0.0" y="0.0" width="334.33333333333331" height="0.0"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-DIRECT-PICKER-HINT" label="SLUG-ACC-DIRECT-PICKER-LABEL">
                                                     <bool key="isElement" value="YES"/>
                                                 </accessibility>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" priority="750" constant="100" id="0pc-rD-60B"/>
-                                                </constraints>
                                                 <connections>
                                                     <outlet property="dataSource" destination="Avq-Pc-erz" id="3kp-tn-8uA"/>
                                                     <outlet property="delegate" destination="Avq-Pc-erz" id="EG0-F9-SLC"/>
                                                 </connections>
                                             </pickerView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4k-eR-coX" userLabel="Direct Selection Close Button">
-                                                <rect key="frame" x="320" y="0.0" width="41" height="0.0"/>
+                                                <rect key="frame" x="334.33333333333331" y="0.0" width="26.666666666666686" height="0.0"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-DIRECT-EXIT-HINT" label="SLUG-ACC-DIRECT-EXIT-LABEL"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="E4k-eR-coX" secondAttribute="height" multiplier="1:1" priority="750" id="89N-nk-MWS"/>
@@ -634,9 +631,15 @@
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="JrU-ny-TZt" secondAttribute="trailing" id="CRs-UW-Gzj"/>
+                                    <constraint firstAttribute="trailing" secondItem="4zE-zm-UoW" secondAttribute="trailing" id="Ffq-A4-QiV"/>
                                     <constraint firstItem="JrU-ny-TZt" firstAttribute="leading" secondItem="1R3-iR-Giq" secondAttribute="leading" id="HUm-Oa-uXU"/>
+                                    <constraint firstItem="Uw7-7n-oJo" firstAttribute="leading" secondItem="1R3-iR-Giq" secondAttribute="leading" id="M95-Jw-W0w"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hjc-M6-UmS" secondAttribute="trailing" id="R5S-4Q-Ba4"/>
                                     <constraint firstItem="BMR-eh-nTU" firstAttribute="leading" secondItem="1R3-iR-Giq" secondAttribute="leading" id="iiK-SU-3Md"/>
+                                    <constraint firstItem="Hjc-M6-UmS" firstAttribute="leading" secondItem="1R3-iR-Giq" secondAttribute="leading" id="mIX-Ur-mQk"/>
                                     <constraint firstAttribute="trailing" secondItem="BMR-eh-nTU" secondAttribute="trailing" id="v5K-5Y-iWx"/>
+                                    <constraint firstAttribute="trailing" secondItem="Uw7-7n-oJo" secondAttribute="trailing" id="vtn-VT-wJY"/>
+                                    <constraint firstItem="4zE-zm-UoW" firstAttribute="leading" secondItem="1R3-iR-Giq" secondAttribute="leading" id="xjW-8P-DXI"/>
                                     <constraint firstAttribute="height" id="yN4-65-dpw"/>
                                 </constraints>
                             </stackView>

@@ -52,6 +52,12 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
      
      /* ################################################################## */
      /**
+      Quick access to the scene delegate object.
+      */
+     static weak var sceneDelegateInstance: VMF_SceneDelegate?
+
+     /* ################################################################## */
+     /**
       Called after the scene went into the background.
       
       We use this to set the search screen to today/now.
@@ -71,6 +77,7 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
       - parameter: The scene instance (ignored).
       */
      func sceneWillEnterForeground(_: UIScene) {
+          Self.sceneDelegateInstance = self
           if nil == VMF_AppDelegate.openMeeting {
                VMF_AppDelegate.mainScreenController?.isThrobbing = true
                VMF_AppDelegate.virtualService?.refreshCaches() { _ in

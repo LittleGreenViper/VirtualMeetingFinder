@@ -132,6 +132,8 @@ extension VMF_BaseViewController {
       */
      override func viewDidLoad() {
           super.viewDidLoad()
+          navigationController?.navigationBar.tintColor = UIColor(named: "AccentColor")
+          view?.tintColor = UIColor(named: "AccentColor")
           navigationController?.isToolbarHidden = true
           feedbackGenerator = UIImpactFeedbackGenerator(style: .rigid)
           feedbackGenerator?.prepare()

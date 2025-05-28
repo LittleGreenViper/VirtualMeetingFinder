@@ -370,7 +370,7 @@ extension VMF_MainViewController {
       This sets the appropriate image for the disclosure button.
       */
      func setDisclosureButton() {
-          self.disclosureButton?.image = UIImage(systemName: isHeaderExpanded ? "rectangle" : "rectangle.tophalf.filled")
+          self.disclosureButton?.image = UIImage(systemName: isHeaderExpanded ? "inset.filled.rectangle" : "inset.filled.bottomhalf.tophalf.rectangle")
           self.disclosureButton?.isEnabled = true
           self.disclosureButton?.accessibilityLabel = "SLUG-ACC-DISCLOSURE-BUTTON-\(isHeaderExpanded ? "OPEN" : "CLOSED")-LABEL".accessibilityLocalizedVariant
           self.disclosureButton?.accessibilityHint = "SLUG-ACC-DISCLOSURE-BUTTON-\(isHeaderExpanded ? "OPEN" : "CLOSED")-HINT".accessibilityLocalizedVariant

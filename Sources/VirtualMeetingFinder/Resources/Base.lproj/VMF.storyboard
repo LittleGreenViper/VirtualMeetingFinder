@@ -703,7 +703,7 @@
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" id="apy-uC-OrG">
+                        <barButtonItem key="rightBarButtonItem" id="apy-uC-OrG" customClass="VMF_DisappearingBarButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
                             <imageReference key="image" image="checkmark.square.fill" catalog="system" symbolScale="large"/>
                             <connections>
                                 <segue destination="h2L-IG-jx9" kind="show" identifier="open-attendance" id="1dM-eQ-05b"/>

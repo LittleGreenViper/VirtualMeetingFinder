@@ -388,3 +388,23 @@ extension SwiftBMLSDK_MeetingLocalTimezoneCollection {
       */
      var meetingsThatIAttend: [CachedMeeting] { meetings.filter { $0.meeting.iAttend } }
 }
+
+/* ###################################################################################################################################### */
+// MARK: - Special Bar Button Item That Disappears, When Disabled -
+/* ###################################################################################################################################### */
+/**
+ This will not turn grey. Instead, it will become clear.
+ */
+class VMF_DisappearingBarButton: UIBarButtonItem {
+    /* ################################################################## */
+    /**
+     If the control is disabled, we return clear.
+     */
+    override var isEnabled: Bool {
+        get { super.isEnabled }
+        set {
+            super.isEnabled = newValue
+             super.tintColor = newValue ? nil : .clear
+        }
+    }
+}

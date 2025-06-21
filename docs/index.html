@@ -51,7 +51,13 @@
             <a class="nav-group-name-link" href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes.html#/s:18We_Are_Never_Alone19ResourceBundleClass33_75A984968C34A42CCDA5970E186E9C42LLC">ResourceBundleClass</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/VMF_AboutViewController.html">VMF_AboutViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/VMF_AddToCalendar_Activity.html">VMF_AddToCalendar_Activity</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/VMF_AppDelegate.html">VMF_AppDelegate</a>
@@ -63,7 +69,13 @@
                 <a class="nav-group-task-link" href="Classes/VMF_BaseViewController.html">VMF_BaseViewController</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/VMF_Base_Activity.html">VMF_Base_Activity</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes.html#/c:@M@We_Are_Never_Alone@objc(cs)VMF_DayTimeSearchPageViewController">VMF_DayTimeSearchPageViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/VMF_DisappearingBarButton.html">VMF_DisappearingBarButton</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/VMF_EmbeddedTableController.html">VMF_EmbeddedTableController</a>
@@ -82,6 +94,12 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/VMF_MeetingInspectorViewController.html">VMF_MeetingInspectorViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/VMF_OpenLocationIn_Activity.html">VMF_OpenLocationIn_Activity</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/VMF_OpenLocationIn_Activity/LocationHandlerApp.html">– LocationHandlerApp</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/VMF_Persistent_Prefs.html">VMF_Persistent_Prefs</a>
@@ -103,6 +121,17 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/VMF_URLButton.html">VMF_URLButton</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Global%20Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global%20Variables.html#/resourceBundle">resourceBundle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global%20Variables.html#/s:18We_Are_Never_Alone14resourceBundle33_75A984968C34A42CCDA5970E186E9C42LLSo8NSBundleCvp">resourceBundle</a>
               </li>
             </ul>
           </li>
@@ -198,11 +227,22 @@
 <p><img src="icon.png" alt="Icon"></p>
 
 <p>This app works by downloading a large list of virtual (and hybrid) meetings from a worldwide database, then presents them to the user, in a form that is directly useful to the user.</p>
+<h3 id='get-the-application-itself' class='heading'>Get the application, itself</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: center">The app is available for free, from the iOS/iPadOS/MacOS Apple App Store</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><a href="https://apps.apple.com/us/app/we-are-never-alone/id6504826025"><img src="img/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="Apple App Store Badge"></a></td>
+</tr>
+</tbody></table>
 <h2 id='usage' class='heading'>Usage</h2>
 
 <p>This app connects to an instance of <a href="https://github.com/LittleGreenViper/LGV_MeetingServer"><code>LGV_MeetingServer</code></a>, and downloads the entire dataset for all meetings that have a virtual component (Either full virtual, or hybrid Virtual/in-Person). It either does this, when starting &ldquo;cold,&rdquo; after 4 hours have passed, or at the user&rsquo;s behest (by doing a &ldquo;pull-to refresh&rdquo; on the table).</p>
 
-<p>It then converts the meeting start and end times to the user&rsquo;s current timezone, and presents the meetings as a list, segregated by the weekday, and meeting start time. The user can use a couple of simple controls to select a day and start time for the meeting.</p>
+<p>It then converts the meeting start and end times to the user&rsquo;s current timezone, and presents the meetings as a list, segregated by the weekday, and meeting start time. The user can use a couple of simple controls to select a day and start time for the meeting. This &ldquo;control panel&rdquo; is initially closed, but selecting the icon (the square one) in the top left of the navigation bar will open the panel, and the app will remember your choice (so the next time you start it, the panel is open, if that was how you left it).</p>
 
 <p>Each meeting can be inspected individually, in order to see things like formats, in-person addresses, and virtual URLs. Also, if the user has an app installed (for example, <a href="https://zoom.us">Zoom</a>), and the meeting has a join URL, the app will translate it to that app&rsquo;s URL scheme, and open the app directly (without having to go through Safari).</p>
 
@@ -211,27 +251,37 @@
 <h3 id='the-screens' class='heading'>The Screens</h3>
 <h4 id='the-main-screen' class='heading'>The Main Screen</h4>
 
-<p><img src="img/fig01.png" alt="Main Screen"></p>
+<table><thead>
+<tr>
+<th style="text-align: center">Control Panel Closed</th>
+<th style="text-align: center">Control Panel Open</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><img src="img/fig01.png" alt="Main Screen Closed"></td>
+<td style="text-align: center"><img src="img/fig02.png" alt="Main Screen Open"></td>
+</tr>
+</tbody></table>
 
 <p>The Main Screen presents a list of meetings, surmounted by a segmented switch that allows the user to select a weekday (or mode), and a bar that allows the user to select a time.</p>
 <h4 id='the-attendance-screen' class='heading'>The Attendance Screen</h4>
 
-<p><img src="img/fig02.png" alt="Attendance Screen"></p>
+<p><img src="img/fig03.png" alt="Attendance Screen"></p>
 
 <p>If the user has selected one or more meetings as ones they attend, a bar button enables in the Main Screen, allowing the user to bring in another screen, with just the meetings they marked as ones they attend.</p>
 <h4 id='the-meeting-inspector-screen' class='heading'>The Meeting Inspector Screen</h4>
 
-<p><img src="img/fig03.png" alt="Meeting Inspector Screen"></p>
+<p><img src="img/fig04.png" alt="Meeting Inspector Screen"></p>
 
 <p>If the user selects a single meeting from the list, another screen is brought in, that displays specific and detailed information about that meeting.</p>
 <h4 id='the-settings-screen' class='heading'>The Settings Screen</h4>
 
-<p><img src="img/fig04.png" alt="Settings Screen"></p>
+<p><img src="img/fig05.png" alt="Settings Screen"></p>
 
 <p>This is a screen that is brought in from the Main Screen, that allows the user to specify various settings.</p>
 <h4 id='the-about-this-app-screen' class='heading'>The About This App Screen</h4>
 
-<p><img src="img/fig05.png" alt="About Screen"></p>
+<p><img src="img/fig06.png" alt="About Screen"></p>
 
 <p>This is another screen that is brought in from the Settings Screen, that has information about the app, such as its specific version, and links to dependencies.</p>
 <h2 id='dependencies' class='heading'>Dependencies</h2>
@@ -248,7 +298,10 @@
 </ul>
 <h2 id='more-information' class='heading'>More Information</h2>
 
-<p><a href="https://littlegreenviper.com/the-virtual-na-meeting-finder-app/">This is a page with a much more detailed explanation of the app.</a></p>
+<ul>
+<li><p><a href="https://littlegreenviper.com/the-virtual-na-meeting-finder-app/">This is a page with a much more detailed explanation of the app.</a></p></li>
+<li><p><a href="https://littlegreenviper.github.io/VirtualMeetingFinder/">This is the internal Technical Documentation for the Project</a></p></li>
+</ul>
 <h2 id='privacy' class='heading'>Privacy</h2>
 
 <p><a href="https://littlegreenviper.com/the-virtual-na-meeting-finder-app#privacy">The Privacy Policy</a></p>

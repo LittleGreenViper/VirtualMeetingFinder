@@ -10,5 +10,5 @@ build_tool_arguments:
     - "We Are Never Alone"
 
 copyright: '© 2024 [Little Green Viper Software Development LLC](https://littlegreenviper.com)'
-min_acl: internal
+min_acl: private
 theme: fullwidth

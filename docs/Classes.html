@@ -54,7 +54,13 @@
             <a class="nav-group-name-link" href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes.html#/s:18We_Are_Never_Alone19ResourceBundleClass33_75A984968C34A42CCDA5970E186E9C42LLC">ResourceBundleClass</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/VMF_AboutViewController.html">VMF_AboutViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/VMF_AddToCalendar_Activity.html">VMF_AddToCalendar_Activity</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/VMF_AppDelegate.html">VMF_AppDelegate</a>
@@ -66,7 +72,13 @@
                 <a class="nav-group-task-link" href="Classes/VMF_BaseViewController.html">VMF_BaseViewController</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/VMF_Base_Activity.html">VMF_Base_Activity</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes.html#/c:@M@We_Are_Never_Alone@objc(cs)VMF_DayTimeSearchPageViewController">VMF_DayTimeSearchPageViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/VMF_DisappearingBarButton.html">VMF_DisappearingBarButton</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/VMF_EmbeddedTableController.html">VMF_EmbeddedTableController</a>
@@ -85,6 +97,12 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/VMF_MeetingInspectorViewController.html">VMF_MeetingInspectorViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/VMF_OpenLocationIn_Activity.html">VMF_OpenLocationIn_Activity</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/VMF_OpenLocationIn_Activity/LocationHandlerApp.html">– LocationHandlerApp</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/VMF_Persistent_Prefs.html">VMF_Persistent_Prefs</a>
@@ -106,6 +124,17 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/VMF_URLButton.html">VMF_URLButton</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Global%20Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global%20Variables.html#/resourceBundle">resourceBundle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global%20Variables.html#/s:18We_Are_Never_Alone14resourceBundle33_75A984968C34A42CCDA5970E186E9C42LLSo8NSBundleCvp">resourceBundle</a>
               </li>
             </ul>
           </li>
@@ -201,6 +230,36 @@
         <section class="section">
           <div class="section-content">
             <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone19ResourceBundleClass33_75A984968C34A42CCDA5970E186E9C42LLC"></a>
+                    <a name="//apple_ref/swift/Class/ResourceBundleClass" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone19ResourceBundleClass33_75A984968C34A42CCDA5970E186E9C42LLC">ResourceBundleClass</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">class</span> <span class="kt">ResourceBundleClass</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
               <div class="task-name-container">
                 <a name="/Main%20App%20Delegate"></a>
                 <a name="//apple_ref/swift/Section/Main App Delegate" class="dashAnchor"></a>
@@ -233,6 +292,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@main</span>
+<span class="kd">@MainActor</span>
 <span class="kd">class</span> <span class="kt">VMF_AppDelegate</span> <span class="p">:</span> <span class="kt">UIResponder</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_AppDelegate</span><span class="p">:</span> <span class="kt">UIApplicationDelegate</span></code></pre>
 
@@ -275,7 +335,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_SceneDelegate</span> <span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="kt">UIWindowSceneDelegate</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_SceneDelegate</span> <span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="kt">UIWindowSceneDelegate</span></code></pre>
 
                         </div>
                       </div>
@@ -316,7 +377,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_TapHoldButton</span> <span class="p">:</span> <span class="kt">UIControl</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_TapHoldButton</span> <span class="p">:</span> <span class="kt">UIControl</span></code></pre>
 
                         </div>
                       </div>
@@ -357,7 +419,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_URLButton</span> <span class="p">:</span> <span class="kt">UIButton</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_URLButton</span> <span class="p">:</span> <span class="kt">UIButton</span></code></pre>
 
                         </div>
                       </div>
@@ -397,7 +460,50 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_DayTimeSearchPageViewController</span> <span class="p">:</span> <span class="kt">UIPageViewController</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_DayTimeSearchPageViewController</span> <span class="p">:</span> <span class="kt">UIPageViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Special%20Bar%20Button%20Item%20That%20Disappears%2C%20When%20Disabled"></a>
+                <a name="//apple_ref/swift/Section/Special Bar Button Item That Disappears, When Disabled" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Special%20Bar%20Button%20Item%20That%20Disappears%2C%20When%20Disabled"></a>
+                  <h3 class="section-name"><span>Special Bar Button Item That Disappears, When Disabled</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_DisappearingBarButton"></a>
+                    <a name="//apple_ref/swift/Class/VMF_DisappearingBarButton" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_DisappearingBarButton">VMF_DisappearingBarButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This will not turn grey. Instead, it will become clear.</p>
+
+                        <a href="Classes/VMF_DisappearingBarButton.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_DisappearingBarButton</span> <span class="p">:</span> <span class="kt">UIBarButtonItem</span></code></pre>
 
                         </div>
                       </div>
@@ -479,7 +585,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_MapMarker</span> <span class="p">:</span> <span class="kt">MKAnnotationView</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_MapMarker</span> <span class="p">:</span> <span class="kt">MKAnnotationView</span></code></pre>
 
                         </div>
                       </div>
@@ -561,7 +668,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_BaseViewController</span> <span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_BaseViewController</span> <span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
 
                         </div>
                       </div>
@@ -602,7 +710,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_TableCell</span> <span class="p">:</span> <span class="kt">UITableViewCell</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_TableCell</span> <span class="p">:</span> <span class="kt">UITableViewCell</span></code></pre>
 
                         </div>
                       </div>
@@ -643,7 +752,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_EmbeddedTableController</span> <span class="p">:</span> <span class="kt"><a href="Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/VMF_EmbeddedTableControllerProtocol.html">VMF_EmbeddedTableControllerProtocol</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_EmbeddedTableController</span> <span class="p">:</span> <span class="kt"><a href="Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/VMF_EmbeddedTableControllerProtocol.html">VMF_EmbeddedTableControllerProtocol</a></span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_EmbeddedTableController</span><span class="p">:</span> <span class="kt">UITableViewDataSource</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_EmbeddedTableController</span><span class="p">:</span> <span class="kt">UITableViewDelegate</span></code></pre>
 
@@ -686,7 +796,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_AboutViewController</span> <span class="p">:</span> <span class="kt"><a href="Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_AboutViewController</span> <span class="p">:</span> <span class="kt"><a href="Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span></code></pre>
 
                         </div>
                       </div>
@@ -729,7 +840,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_AttendanceViewController</span> <span class="p">:</span> <span class="kt"><a href="Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/VMF_MasterTableControllerProtocol.html">VMF_MasterTableControllerProtocol</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_AttendanceViewController</span> <span class="p">:</span> <span class="kt"><a href="Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/VMF_MasterTableControllerProtocol.html">VMF_MasterTableControllerProtocol</a></span></code></pre>
 
                         </div>
                       </div>
@@ -793,9 +905,9 @@
 <p>If possible, the user&rsquo;s currently selected time index is honored, and we try to match the time, when changing selected days. It is also preserved, when entering Mode 0 or Mode 8.</p>
 <h2 id='selecting-for-attendance' class='heading'>SELECTING FOR ATTENDANCE</h2>
 
-<p>It is possible for a user to indicate that they attend a meeting, by double-tapping on a meeting in the list, or by selecting &ldquo;I Attend,&rdquo; in the meeting inspector screen.</p>
+<p>It is possible for a user to indicate that they attend a meeting, by selecting &ldquo;I Attend,&rdquo; in the meeting inspector screen.</p>
 
-<p>You can bring in a separate screen, that contains only the meetings that you attend. This is accessed from the chackmark bar button item, in the upper right.</p>
+<p>You can bring in a separate screen, that contains only the meetings that you attend. This is accessed from the checkmark bar button item, in the upper right.</p>
 
                         <a href="Classes/VMF_MainViewController.html" class="slightly-smaller">See more</a>
                       </div>
@@ -803,11 +915,136 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_MainViewController</span> <span class="p">:</span> <span class="kt"><a href="Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/VMF_MasterTableControllerProtocol.html">VMF_MasterTableControllerProtocol</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_MainViewController</span> <span class="p">:</span> <span class="kt"><a href="Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/VMF_MasterTableControllerProtocol.html">VMF_MasterTableControllerProtocol</a></span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_MainViewController</span><span class="p">:</span> <span class="kt">UIPageViewControllerDataSource</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_MainViewController</span><span class="p">:</span> <span class="kt">UIPageViewControllerDelegate</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_MainViewController</span><span class="p">:</span> <span class="kt">UIPickerViewDataSource</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_MainViewController</span><span class="p">:</span> <span class="kt">UIPickerViewDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Custom%20Activity%20Class%20Base"></a>
+                <a name="//apple_ref/swift/Section/Custom Activity Class Base" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Custom%20Activity%20Class%20Base"></a>
+                  <h3 class="section-name"><span>Custom Activity Class Base</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_Base_Activity"></a>
+                    <a name="//apple_ref/swift/Class/VMF_Base_Activity" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_Base_Activity">VMF_Base_Activity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>We can present a custom activity, that allows the user to add the meeting to their calendar.</p>
+
+                        <a href="Classes/VMF_Base_Activity.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_Base_Activity</span> <span class="p">:</span> <span class="kt">UIActivity</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Custom%20Add%20To%20Calendar%20Activity%20Class"></a>
+                <a name="//apple_ref/swift/Section/Custom Add To Calendar Activity Class" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Custom%20Add%20To%20Calendar%20Activity%20Class"></a>
+                  <h3 class="section-name"><span>Custom Add To Calendar Activity Class</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_AddToCalendar_Activity"></a>
+                    <a name="//apple_ref/swift/Class/VMF_AddToCalendar_Activity" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_AddToCalendar_Activity">VMF_AddToCalendar_Activity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>We can present a custom activity, that allows the user to add the meeting to their calendar.</p>
+
+                        <a href="Classes/VMF_AddToCalendar_Activity.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_AddToCalendar_Activity</span> <span class="p">:</span> <span class="kt"><a href="Classes/VMF_Base_Activity.html">VMF_Base_Activity</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_AddToCalendar_Activity</span><span class="p">:</span> <span class="kt">EKEventEditViewDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Custom%20Open%20Location%20In%20Activity%20Class"></a>
+                <a name="//apple_ref/swift/Section/Custom Open Location In Activity Class" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Custom%20Open%20Location%20In%20Activity%20Class"></a>
+                  <h3 class="section-name"><span>Custom Open Location In Activity Class</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_OpenLocationIn_Activity"></a>
+                    <a name="//apple_ref/swift/Class/VMF_OpenLocationIn_Activity" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_OpenLocationIn_Activity">VMF_OpenLocationIn_Activity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>We can present a custom activity, that allows the user to open a location, using an installed app.</p>
+
+                        <a href="Classes/VMF_OpenLocationIn_Activity.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_OpenLocationIn_Activity</span> <span class="p">:</span> <span class="kt"><a href="Classes/VMF_Base_Activity.html">VMF_Base_Activity</a></span></code></pre>
 
                         </div>
                       </div>
@@ -848,7 +1085,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_MeetingInspectorViewController</span> <span class="p">:</span> <span class="kt"><a href="Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_MeetingInspectorViewController</span> <span class="p">:</span> <span class="kt"><a href="Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_MeetingInspectorViewController</span><span class="p">:</span> <span class="kt">MKMapViewDelegate</span></code></pre>
 
                         </div>
@@ -898,7 +1136,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_SettingsViewController</span> <span class="p">:</span> <span class="kt"><a href="Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_SettingsViewController</span> <span class="p">:</span> <span class="kt"><a href="Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span></code></pre>
 
                         </div>
                       </div>

@@ -56,7 +56,13 @@
             <a class="nav-group-name-link" href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes.html#/s:18We_Are_Never_Alone19ResourceBundleClass33_75A984968C34A42CCDA5970E186E9C42LLC">ResourceBundleClass</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/VMF_AboutViewController.html">VMF_AboutViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_AddToCalendar_Activity.html">VMF_AddToCalendar_Activity</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/VMF_AppDelegate.html">VMF_AppDelegate</a>
@@ -68,7 +74,13 @@
                 <a class="nav-group-task-link" href="../Classes/VMF_BaseViewController.html">VMF_BaseViewController</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_Base_Activity.html">VMF_Base_Activity</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes.html#/c:@M@We_Are_Never_Alone@objc(cs)VMF_DayTimeSearchPageViewController">VMF_DayTimeSearchPageViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_DisappearingBarButton.html">VMF_DisappearingBarButton</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/VMF_EmbeddedTableController.html">VMF_EmbeddedTableController</a>
@@ -87,6 +99,12 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/VMF_MeetingInspectorViewController.html">VMF_MeetingInspectorViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_OpenLocationIn_Activity.html">VMF_OpenLocationIn_Activity</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_OpenLocationIn_Activity/LocationHandlerApp.html">– LocationHandlerApp</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/VMF_Persistent_Prefs.html">VMF_Persistent_Prefs</a>
@@ -108,6 +126,17 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/VMF_URLButton.html">VMF_URLButton</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Global%20Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global%20Variables.html#/resourceBundle">resourceBundle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global%20Variables.html#/s:18We_Are_Never_Alone14resourceBundle33_75A984968C34A42CCDA5970E186E9C42LLSo8NSBundleCvp">resourceBundle</a>
               </li>
             </ul>
           </li>
@@ -198,7 +227,8 @@
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_TableCell</span> <span class="p">:</span> <span class="kt">UITableViewCell</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_TableCell</span> <span class="p">:</span> <span class="kt">UITableViewCell</span></code></pre>
 
                 </div>
               </div>
@@ -231,7 +261,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">reuseID</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">reuseID</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -258,7 +289,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">weak</span> <span class="k">var</span> <span class="nv">myController</span><span class="p">:</span> <span class="kt"><a href="../Classes/VMF_EmbeddedTableController.html">VMF_EmbeddedTableController</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">myController</span><span class="p">:</span> <span class="kt"><a href="../Classes/VMF_EmbeddedTableController.html">VMF_EmbeddedTableController</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -285,7 +317,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">myMeeting</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">myMeeting</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -313,6 +346,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">typeImage</span><span class="p">:</span> <span class="kt">UIImageView</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -341,6 +375,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">nameLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -369,6 +404,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">timeAndDayLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -397,6 +433,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">timeZoneLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -425,6 +462,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">inProgressLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -465,7 +503,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">layoutSubviews</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">override</span> <span class="kd">func</span> <span class="nf">layoutSubviews</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -506,6 +545,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">@MainActor</span>
 <span class="kd">func</span> <span class="nf">doubleTapped</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
@@ -547,7 +587,8 @@ We can&rsquo;t wait for layout. This stuff needs to be done in advance.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setUpTextItems</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">setUpTextItems</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>

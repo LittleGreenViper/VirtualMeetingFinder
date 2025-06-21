@@ -8,11 +8,17 @@ An app that makes it simple to discover and attend virtual (and hybrid) NA meeti
 
 This app works by downloading a large list of virtual (and hybrid) meetings from a worldwide database, then presents them to the user, in a form that is directly useful to the user.
 
+### Get the application, itself
+
+|The app is available for free, from the iOS/iPadOS/MacOS Apple App Store|
+|:-:|
+|[![Apple App Store Badge](img/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg)](https://apps.apple.com/us/app/we-are-never-alone/id6504826025)|
+
 ## Usage
 
 This app connects to an instance of [`LGV_MeetingServer`](https://github.com/LittleGreenViper/LGV_MeetingServer), and downloads the entire dataset for all meetings that have a virtual component (Either full virtual, or hybrid Virtual/in-Person). It either does this, when starting "cold," after 4 hours have passed, or at the user's behest (by doing a "pull-to refresh" on the table).
 
-It then converts the meeting start and end times to the user's current timezone, and presents the meetings as a list, segregated by the weekday, and meeting start time. The user can use a couple of simple controls to select a day and start time for the meeting.
+It then converts the meeting start and end times to the user's current timezone, and presents the meetings as a list, segregated by the weekday, and meeting start time. The user can use a couple of simple controls to select a day and start time for the meeting. This "control panel" is initially closed, but selecting the icon (the square one) in the top left of the navigation bar will open the panel, and the app will remember your choice (so the next time you start it, the panel is open, if that was how you left it).
 
 Each meeting can be inspected individually, in order to see things like formats, in-person addresses, and virtual URLs. Also, if the user has an app installed (for example, [Zoom](https://zoom.us)), and the meeting has a join URL, the app will translate it to that app's URL scheme, and open the app directly (without having to go through Safari).
 
@@ -24,31 +30,33 @@ Users can select a meeting as one they attend, which allows those meetings to be
 
 #### The Main Screen
 
-![Main Screen](img/fig01.png)
+| Control Panel Closed | Control Panel Open |
+|:-:| :-: |
+| ![Main Screen Closed](img/fig01.png) | ![Main Screen Open](img/fig02.png) |
 
 The Main Screen presents a list of meetings, surmounted by a segmented switch that allows the user to select a weekday (or mode), and a bar that allows the user to select a time.
 
 #### The Attendance Screen
 
-![Attendance Screen](img/fig02.png)
+![Attendance Screen](img/fig03.png)
 
 If the user has selected one or more meetings as ones they attend, a bar button enables in the Main Screen, allowing the user to bring in another screen, with just the meetings they marked as ones they attend.
 
 #### The Meeting Inspector Screen
 
-![Meeting Inspector Screen](img/fig03.png)
+![Meeting Inspector Screen](img/fig04.png)
 
 If the user selects a single meeting from the list, another screen is brought in, that displays specific and detailed information about that meeting.
 
 #### The Settings Screen
 
-![Settings Screen](img/fig04.png)
+![Settings Screen](img/fig05.png)
 
 This is a screen that is brought in from the Main Screen, that allows the user to specify various settings.
 
 #### The About This App Screen
 
-![About Screen](img/fig05.png)
+![About Screen](img/fig06.png)
 
 This is another screen that is brought in from the Settings Screen, that has information about the app, such as its specific version, and links to dependencies.
 

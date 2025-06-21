@@ -56,7 +56,13 @@
             <a class="nav-group-name-link" href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes.html#/s:18We_Are_Never_Alone19ResourceBundleClass33_75A984968C34A42CCDA5970E186E9C42LLC">ResourceBundleClass</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/VMF_AboutViewController.html">VMF_AboutViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_AddToCalendar_Activity.html">VMF_AddToCalendar_Activity</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/VMF_AppDelegate.html">VMF_AppDelegate</a>
@@ -68,7 +74,13 @@
                 <a class="nav-group-task-link" href="../Classes/VMF_BaseViewController.html">VMF_BaseViewController</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_Base_Activity.html">VMF_Base_Activity</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes.html#/c:@M@We_Are_Never_Alone@objc(cs)VMF_DayTimeSearchPageViewController">VMF_DayTimeSearchPageViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_DisappearingBarButton.html">VMF_DisappearingBarButton</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/VMF_EmbeddedTableController.html">VMF_EmbeddedTableController</a>
@@ -87,6 +99,12 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/VMF_MeetingInspectorViewController.html">VMF_MeetingInspectorViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_OpenLocationIn_Activity.html">VMF_OpenLocationIn_Activity</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_OpenLocationIn_Activity/LocationHandlerApp.html">– LocationHandlerApp</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/VMF_Persistent_Prefs.html">VMF_Persistent_Prefs</a>
@@ -108,6 +126,17 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/VMF_URLButton.html">VMF_URLButton</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Global%20Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global%20Variables.html#/resourceBundle">resourceBundle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global%20Variables.html#/s:18We_Are_Never_Alone14resourceBundle33_75A984968C34A42CCDA5970E186E9C42LLSo8NSBundleCvp">resourceBundle</a>
               </li>
             </ul>
           </li>
@@ -198,7 +227,8 @@
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">VMF_MainViewController</span> <span class="p">:</span> <span class="kt"><a href="../Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/VMF_MasterTableControllerProtocol.html">VMF_MasterTableControllerProtocol</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">class</span> <span class="kt">VMF_MainViewController</span> <span class="p">:</span> <span class="kt"><a href="../Classes/VMF_BaseViewController.html">VMF_BaseViewController</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/VMF_MasterTableControllerProtocol.html">VMF_MasterTableControllerProtocol</a></span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_MainViewController</span><span class="p">:</span> <span class="kt">UIPageViewControllerDataSource</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_MainViewController</span><span class="p">:</span> <span class="kt">UIPageViewControllerDelegate</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">VMF_MainViewController</span><span class="p">:</span> <span class="kt">UIPickerViewDataSource</span></code></pre>
@@ -237,9 +267,9 @@
 <p>If possible, the user&rsquo;s currently selected time index is honored, and we try to match the time, when changing selected days. It is also preserved, when entering Mode 0 or Mode 8.</p>
 <h2 id='selecting-for-attendance' class='heading'>SELECTING FOR ATTENDANCE</h2>
 
-<p>It is possible for a user to indicate that they attend a meeting, by double-tapping on a meeting in the list, or by selecting &ldquo;I Attend,&rdquo; in the meeting inspector screen.</p>
+<p>It is possible for a user to indicate that they attend a meeting, by selecting &ldquo;I Attend,&rdquo; in the meeting inspector screen.</p>
 
-<p>You can bring in a separate screen, that contains only the meetings that you attend. This is accessed from the chackmark bar button item, in the upper right.</p>
+<p>You can bring in a separate screen, that contains only the meetings that you attend. This is accessed from the checkmark bar button item, in the upper right.</p>
 
           </div>
         </section>
@@ -268,7 +298,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">openAttendanceSegueID</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">openAttendanceSegueID</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -295,7 +326,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">searchImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">searchImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -322,7 +354,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">checkedImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">checkedImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -349,7 +382,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">uncheckedImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">uncheckedImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -376,7 +410,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">mercuryColor</span><span class="p">:</span> <span class="kt">UIColor</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">mercuryColor</span><span class="p">:</span> <span class="kt">UIColor</span></code></pre>
 
                         </div>
                       </div>
@@ -403,7 +438,64 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">barButtonLabelFont</span><span class="p">:</span> <span class="kt">UIFont</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">barButtonLabelFont</span><span class="p">:</span> <span class="kt">UIFont</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC32controlPanelHeightInDisplayUnits14CoreFoundation7CGFloatVvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/controlPanelHeightInDisplayUnits" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC32controlPanelHeightInDisplayUnits14CoreFoundation7CGFloatVvpZ">controlPanelHeightInDisplayUnits</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The height of the control panel, when shown.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">controlPanelHeightInDisplayUnits</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC29searchBarHeightInDisplayUnits14CoreFoundation7CGFloatVvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/searchBarHeightInDisplayUnits" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC29searchBarHeightInDisplayUnits14CoreFoundation7CGFloatVvpZ">searchBarHeightInDisplayUnits</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The height of the control panel search bar, when shown.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">searchBarHeightInDisplayUnits</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
 
                         </div>
                       </div>
@@ -430,7 +522,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">pickerViewComponentWidthInDisplayUnits</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">pickerViewComponentWidthInDisplayUnits</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
 
                         </div>
                       </div>
@@ -457,7 +550,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">shortWidthThreshold</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">shortWidthThreshold</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
 
                         </div>
                       </div>
@@ -484,7 +578,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">fullWidthThreshold</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">fullWidthThreshold</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
 
                         </div>
                       </div>
@@ -511,7 +606,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">atRestConstant</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">atRestConstant</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
 
                         </div>
                       </div>
@@ -539,7 +635,8 @@ We use it to determine if the finger has moved.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">oldLocation</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">oldLocation</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
 
                         </div>
                       </div>
@@ -566,7 +663,8 @@ We use it to determine if the finger has moved.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">lastTime</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">lastTime</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
 
                         </div>
                       </div>
@@ -593,7 +691,8 @@ We use it to determine if the finger has moved.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">tableDisplayController</span><span class="p">:</span> <span class="kt"><a href="../Protocols/VMF_EmbeddedTableControllerProtocol.html">VMF_EmbeddedTableControllerProtocol</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">tableDisplayController</span><span class="p">:</span> <span class="kt"><a href="../Protocols/VMF_EmbeddedTableControllerProtocol.html">VMF_EmbeddedTableControllerProtocol</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -620,7 +719,8 @@ We use it to determine if the finger has moved.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">weak</span> <span class="k">var</span> <span class="nv">pageViewController</span><span class="p">:</span> <span class="kt"><a href="../Classes.html#/c:@M@We_Are_Never_Alone@objc(cs)VMF_DayTimeSearchPageViewController">VMF_DayTimeSearchPageViewController</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">pageViewController</span><span class="p">:</span> <span class="kt"><a href="../Classes.html#/c:@M@We_Are_Never_Alone@objc(cs)VMF_DayTimeSearchPageViewController">VMF_DayTimeSearchPageViewController</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -647,7 +747,8 @@ We use it to determine if the finger has moved.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">wasNameSearchMode</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">wasNameSearchMode</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -674,7 +775,8 @@ We use it to determine if the finger has moved.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">searchMeetings</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">searchMeetings</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -703,7 +805,8 @@ We use it to determine if the finger has moved.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">organizedMeetings</span><span class="p">:</span> <span class="p">[[</span><span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">]]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">organizedMeetings</span><span class="p">:</span> <span class="p">[[</span><span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">]]</span></code></pre>
 
                         </div>
                       </div>
@@ -730,7 +833,8 @@ We use it to determine if the finger has moved.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">isNameSearchMode</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">isNameSearchMode</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -757,7 +861,8 @@ We use it to determine if the finger has moved.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">isDirectSelectionMode</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">isDirectSelectionMode</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -784,7 +889,8 @@ We use it to determine if the finger has moved.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">searchText</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">searchText</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -811,7 +917,152 @@ We use it to determine if the finger has moved.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">isThrobbing</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">isThrobbing</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)disclosureButton"></a>
+                    <a name="//apple_ref/swift/Property/disclosureButton" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)disclosureButton">disclosureButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The bar button that controls whether or not the header (control panel) is shown.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">disclosureButton</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)controlPanel"></a>
+                    <a name="//apple_ref/swift/Property/controlPanel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)controlPanel">controlPanel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The panel at the top, with all the settings and displays.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">controlPanel</span><span class="p">:</span> <span class="kt">UIStackView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)controlPanelHeightConstraint"></a>
+                    <a name="//apple_ref/swift/Property/controlPanelHeightConstraint" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)controlPanelHeightConstraint">controlPanelHeightConstraint</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The height of the panel. We use this to control its disclosure.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">controlPanelHeightConstraint</span><span class="p">:</span> <span class="kt">NSLayoutConstraint</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC16isHeaderExpandedSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isHeaderExpanded" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC16isHeaderExpandedSbvp">isHeaderExpanded</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If true, then the &ldquo;Control Panel&rdquo; header is open.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">isHeaderExpanded</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)swipeLabel"></a>
+                    <a name="//apple_ref/swift/Property/swipeLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)swipeLabel">swipeLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The label at the bottom, showing a swipe tip.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">swipeLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -839,6 +1090,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">settingsBarButtonItem</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -867,6 +1119,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">myAttendanceBarButtonItem</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -895,6 +1148,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">weekdayModeSelectorSegmentedSwitch</span><span class="p">:</span> <span class="kt">UISegmentedControl</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -923,6 +1177,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">tableContainerView</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -951,6 +1206,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">searchItemsContainerView</span><span class="p">:</span> <span class="kt">UIStackView</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -979,6 +1235,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">searchTextField</span><span class="p">:</span> <span class="kt">UITextField</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1007,6 +1264,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">searchCloseButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1035,6 +1293,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">timeSelectorContainerView</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1063,6 +1322,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">leftButton</span><span class="p">:</span> <span class="kt"><a href="../Classes/VMF_TapHoldButton.html">VMF_TapHoldButton</a></span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1091,6 +1351,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">rightButton</span><span class="p">:</span> <span class="kt"><a href="../Classes/VMF_TapHoldButton.html">VMF_TapHoldButton</a></span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1119,6 +1380,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">timeDayDisplayLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1147,6 +1409,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">bottomConstraint</span><span class="p">:</span> <span class="kt">NSLayoutConstraint</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1175,6 +1438,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">completionBar</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1203,6 +1467,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">throbber</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1231,6 +1496,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">labelDoubleTapGesture</span><span class="p">:</span> <span class="kt">UITapGestureRecognizer</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1259,6 +1525,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">weekdayLongPressGesture</span><span class="p">:</span> <span class="kt">UILongPressGestureRecognizer</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1287,6 +1554,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">timeDayLongPressGesture</span><span class="p">:</span> <span class="kt">UILongPressGestureRecognizer</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1315,6 +1583,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">directSelectionTapRecognizer</span><span class="p">:</span> <span class="kt">UITapGestureRecognizer</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1343,6 +1612,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">directSelectionItemsContainer</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1371,6 +1641,7 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">directSelectionPickerView</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1399,7 +1670,48 @@ We use it to determine if the finger has moved.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="kd">@MainActor</span>
 <span class="k">weak</span> <span class="k">var</span> <span class="nv">directSelectionCloseButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Base%20Class%20Overrides%20%28Computed%20Properties%29"></a>
+                <a name="//apple_ref/swift/Section/Base Class Overrides (Computed Properties)" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Base%20Class%20Overrides%20%28Computed%20Properties%29"></a>
+                  <h3 class="section-name"><span>Base Class Overrides (Computed Properties)</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)prefersHomeIndicatorAutoHidden"></a>
+                    <a name="//apple_ref/swift/Property/prefersHomeIndicatorAutoHidden" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(py)prefersHomeIndicatorAutoHidden">prefersHomeIndicatorAutoHidden</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">override</span> <span class="k">var</span> <span class="nv">prefersHomeIndicatorAutoHidden</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -1439,7 +1751,8 @@ We use it to determine if the finger has moved.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">inProgressMeetings</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">inProgressMeetings</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -1469,7 +1782,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">nowIs</span><span class="p">:</span> <span class="p">(</span><span class="nv">weekday</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">currentIntegerTime</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">nowIs</span><span class="p">:</span> <span class="p">(</span><span class="nv">weekday</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">currentIntegerTime</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -1496,7 +1810,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">needsReload</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">var</span> <span class="nv">needsReload</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -1536,7 +1851,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">reorganizeMeetings</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">reorganizeMeetings</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -1563,7 +1879,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">loadMeetings</span><span class="p">(</span><span class="n">completion</span> <span class="nv">inCompletion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">loadMeetings</span><span class="p">(</span><span class="n">completion</span> <span class="nv">inCompletion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1609,7 +1926,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getDailyMeetings</span><span class="p">(</span><span class="k">for</span> <span class="nv">inWeekdayIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Int</span> <span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">]]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">getDailyMeetings</span><span class="p">(</span><span class="k">for</span> <span class="nv">inWeekdayIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Int</span> <span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">]]</span></code></pre>
 
                         </div>
                       </div>
@@ -1661,7 +1979,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getTableDisplay</span><span class="p">(</span><span class="k">for</span> <span class="nv">inDayIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">time</span> <span class="nv">inTimeIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/VMF_EmbeddedTableController.html">VMF_EmbeddedTableController</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">getTableDisplay</span><span class="p">(</span><span class="k">for</span> <span class="nv">inDayIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">time</span> <span class="nv">inTimeIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/VMF_EmbeddedTableController.html">VMF_EmbeddedTableController</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -1716,7 +2035,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This returns a the meetings we should display, given the day and time.</p>
+                        <p>This returns the meetings we should display, given the day and time.</p>
 
 <p>NOTE: If the controller is in text search mode, then the search set is returned.</p>
 
@@ -1725,7 +2044,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getCurentMeetings</span><span class="p">(</span><span class="k">for</span> <span class="nv">inDayIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">time</span> <span class="nv">inTimeIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">getCurentMeetings</span><span class="p">(</span><span class="k">for</span> <span class="nv">inDayIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">time</span> <span class="nv">inTimeIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:18We_Are_Never_Alone15MeetingInstancea">MeetingInstance</a></span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -1787,7 +2107,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">openTo</span><span class="p">(</span><span class="n">dayIndex</span> <span class="nv">inDayIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">time</span> <span class="nv">inMilitaryTime</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">openTo</span><span class="p">(</span><span class="n">dayIndex</span> <span class="nv">inDayIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">time</span> <span class="nv">inMilitaryTime</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1845,7 +2166,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getNearestIndex</span><span class="p">(</span><span class="n">dayIndex</span> <span class="nv">inDayIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">time</span> <span class="nv">inMilitaryTime</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">getNearestIndex</span><span class="p">(</span><span class="n">dayIndex</span> <span class="nv">inDayIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">time</span> <span class="nv">inMilitaryTime</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
 
                         </div>
                       </div>
@@ -1907,7 +2229,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getTimeOf</span><span class="p">(</span><span class="n">dayIndex</span> <span class="nv">inDayIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">timeIndex</span> <span class="nv">inTimeIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">getTimeOf</span><span class="p">(</span><span class="n">dayIndex</span> <span class="nv">inDayIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">timeIndex</span> <span class="nv">inTimeIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -1969,7 +2292,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">updateThermometer</span><span class="p">(</span><span class="n">_</span> <span class="nv">inTablePage</span><span class="p">:</span> <span class="kt"><a href="../Protocols/VMF_EmbeddedTableControllerProtocol.html">VMF_EmbeddedTableControllerProtocol</a></span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">updateThermometer</span><span class="p">(</span><span class="n">_</span> <span class="nv">inTablePage</span><span class="p">:</span> <span class="kt"><a href="../Protocols/VMF_EmbeddedTableControllerProtocol.html">VMF_EmbeddedTableControllerProtocol</a></span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>
@@ -1996,7 +2320,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setDayPicker</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">setDayPicker</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -2023,7 +2348,36 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setAttendance</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">setAttendance</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:18We_Are_Never_Alone22VMF_MainViewControllerC19setDisclosureButtonyyF"></a>
+                    <a name="//apple_ref/swift/Method/setDisclosureButton()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:18We_Are_Never_Alone22VMF_MainViewControllerC19setDisclosureButtonyyF">setDisclosureButton()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This sets the appropriate image for the disclosure button.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">setDisclosureButton</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -2064,6 +2418,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">@MainActor</span>
 <span class="kd">func</span> <span class="nf">weekdayModeSelectorSegmentedSwitchHit</span><span class="p">(</span><span class="n">_</span> <span class="nv">inSwitch</span><span class="p">:</span> <span class="kt">UISegmentedControl</span><span class="p">)</span></code></pre>
 
                         </div>
@@ -2111,6 +2466,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">@MainActor</span>
 <span class="kd">func</span> <span class="nf">searchTextChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">inTextField</span><span class="p">:</span> <span class="kt">UITextField</span><span class="p">)</span></code></pre>
 
                         </div>
@@ -2139,6 +2495,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">@MainActor</span>
 <span class="kd">func</span> <span class="nf">searchCloseHit</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
@@ -2167,6 +2524,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">@MainActor</span>
 <span class="kd">func</span> <span class="nf">leftButtonHit</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
@@ -2195,6 +2553,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">@MainActor</span>
 <span class="kd">func</span> <span class="nf">rightButtonHit</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
@@ -2225,6 +2584,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">@MainActor</span>
 <span class="kd">func</span> <span class="nf">doubleTapOnDayTimeLabel</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
@@ -2253,6 +2613,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">@MainActor</span>
 <span class="kd">func</span> <span class="nf">longPressGestureInWeekdaySwitchDetected</span><span class="p">(</span><span class="n">_</span> <span class="nv">inGestureRecognizer</span><span class="p">:</span> <span class="kt">UILongPressGestureRecognizer</span><span class="p">)</span></code></pre>
 
                         </div>
@@ -2300,6 +2661,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">@MainActor</span>
 <span class="kd">func</span> <span class="nf">longPressGestureInDisplayLabelDetected</span><span class="p">(</span><span class="n">_</span> <span class="nv">inGestureRecognizer</span><span class="p">:</span> <span class="kt">UILongPressGestureRecognizer</span><span class="p">)</span></code></pre>
 
                         </div>
@@ -2347,6 +2709,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">@MainActor</span>
 <span class="kd">func</span> <span class="nf">directSelectionOpen</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
@@ -2375,7 +2738,37 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">@MainActor</span>
 <span class="kd">func</span> <span class="nf">directSelectionCloseButtonHit</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)toggleHeader"></a>
+                    <a name="//apple_ref/swift/Method/toggleHeader()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@We_Are_Never_Alone@objc(cs)VMF_MainViewController(im)toggleHeader">toggleHeader()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This shows or hides the Control Panel (the header).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">toggleHeader</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -2403,6 +2796,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">@MainActor</span>
 <span class="kd">func</span> <span class="nf">keyboardWillShow</span><span class="p">(</span><span class="n">notification</span> <span class="nv">inNotification</span><span class="p">:</span> <span class="kt">NSNotification</span><span class="p">)</span></code></pre>
 
                         </div>
@@ -2450,6 +2844,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">@MainActor</span>
 <span class="kd">func</span> <span class="nf">keyboardWillHide</span><span class="p">(</span><span class="nv">notification</span><span class="p">:</span> <span class="kt">NSNotification</span><span class="p">)</span></code></pre>
 
                         </div>
@@ -2496,7 +2891,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">refreshCalled</span><span class="p">(</span><span class="n">completion</span> <span class="nv">inCompletion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">refreshCalled</span><span class="p">(</span><span class="n">completion</span> <span class="nv">inCompletion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -2555,7 +2951,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -2582,7 +2979,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillAppear</span><span class="p">(</span><span class="n">_</span> <span class="nv">inIsAnimated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillAppear</span><span class="p">(</span><span class="n">_</span> <span class="nv">inIsAnimated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -2628,7 +3026,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidAppear</span><span class="p">(</span><span class="n">_</span> <span class="nv">inIsAnimated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidAppear</span><span class="p">(</span><span class="n">_</span> <span class="nv">inIsAnimated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -2674,7 +3073,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLayoutSubviews</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLayoutSubviews</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -2701,7 +3101,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillDisappear</span><span class="p">(</span><span class="n">_</span> <span class="nv">inIsAnimated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillDisappear</span><span class="p">(</span><span class="n">_</span> <span class="nv">inIsAnimated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -2747,7 +3148,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">prepare</span><span class="p">(</span><span class="k">for</span> <span class="nv">inSegue</span><span class="p">:</span> <span class="kt">UIStoryboardSegue</span><span class="p">,</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="k">override</span> <span class="kd">func</span> <span class="nf">prepare</span><span class="p">(</span><span class="k">for</span> <span class="nv">inSegue</span><span class="p">:</span> <span class="kt">UIStoryboardSegue</span><span class="p">,</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>
@@ -2818,7 +3220,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pageViewController</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">UIPageViewController</span><span class="p">,</span> <span class="n">viewControllerBefore</span> <span class="nv">inBeforeViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIViewController</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">pageViewController</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">UIPageViewController</span><span class="p">,</span> <span class="n">viewControllerBefore</span> <span class="nv">inBeforeViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIViewController</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -2868,7 +3271,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pageViewController</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">UIPageViewController</span><span class="p">,</span> <span class="n">viewControllerAfter</span> <span class="nv">inAfterViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIViewController</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">pageViewController</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">UIPageViewController</span><span class="p">,</span> <span class="n">viewControllerAfter</span> <span class="nv">inAfterViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIViewController</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -2931,7 +3335,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pageViewController</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">UIPageViewController</span><span class="p">,</span> <span class="nv">didFinishAnimating</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">previousViewControllers</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIViewController</span><span class="p">],</span> <span class="n">transitionCompleted</span> <span class="nv">inIsDone</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">pageViewController</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">UIPageViewController</span><span class="p">,</span> <span class="nv">didFinishAnimating</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">previousViewControllers</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIViewController</span><span class="p">],</span> <span class="n">transitionCompleted</span> <span class="nv">inIsDone</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -3042,7 +3447,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">numberOfComponents</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">numberOfComponents</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
 
                         </div>
                       </div>
@@ -3092,7 +3498,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pickerView</span><span class="p">(</span><span class="n">_</span> <span class="nv">inPickerView</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">,</span> <span class="n">numberOfRowsInComponent</span> <span class="nv">inComponent</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">pickerView</span><span class="p">(</span><span class="n">_</span> <span class="nv">inPickerView</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">,</span> <span class="n">numberOfRowsInComponent</span> <span class="nv">inComponent</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
 
                         </div>
                       </div>
@@ -3155,7 +3562,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pickerView</span><span class="p">(</span><span class="n">_</span> <span class="nv">inPickerView</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">,</span> <span class="n">viewForRow</span> <span class="nv">inRow</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">forComponent</span> <span class="nv">inComponent</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">reusing</span> <span class="nv">inReusing</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">UIView</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">pickerView</span><span class="p">(</span><span class="n">_</span> <span class="nv">inPickerView</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">,</span> <span class="n">viewForRow</span> <span class="nv">inRow</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">forComponent</span> <span class="nv">inComponent</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">reusing</span> <span class="nv">inReusing</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">UIView</span></code></pre>
 
                         </div>
                       </div>
@@ -3241,7 +3649,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pickerView</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">,</span> <span class="nv">widthForComponent</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">pickerView</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">,</span> <span class="nv">widthForComponent</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span></code></pre>
 
                         </div>
                       </div>
@@ -3291,7 +3700,8 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pickerView</span><span class="p">(</span><span class="n">_</span> <span class="nv">inPickerView</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">,</span> <span class="n">didSelectRow</span> <span class="nv">inRow</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">inComponent</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">func</span> <span class="nf">pickerView</span><span class="p">(</span><span class="n">_</span> <span class="nv">inPickerView</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">,</span> <span class="n">didSelectRow</span> <span class="nv">inRow</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">inComponent</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>

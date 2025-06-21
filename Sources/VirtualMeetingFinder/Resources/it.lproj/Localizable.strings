@@ -65,6 +65,8 @@ La nota sul copyright riportata sopra e la presente nota sull'autorizzazione dev
 "SLUG-IN-PROGRESS-FORMAT"                         =    "In corso dal %@";
 /* Questa è la stringa che mostriamo nell'elenco, per le riunioni in corso che sono in corso da ieri. |||UNTRANSLATED_CONTENT_START|||The placeholder is replaced by the time, in localized form. |||UNTRANSLATED_CONTENT_END|||*/
 "SLUG-IN-PROGRESS-YESTERDAY-FORMAT"               =    "In corso da %@ ieri";
+/* Questo viene mostrato in una piccola etichetta, in fondo allo schermo, come istruzione. */
+"SLUG-SWIPE-LABEL-TEXT"                           =    "← Scorri per cambiare l’orario di inizio →";
 
 /* Questo è il titolo per il segmento di switch segmentato, per le riunioni in corso, nella schermata principale.
  

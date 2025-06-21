@@ -290,6 +290,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                     navigationController?.isNavigationBarHidden = true
                     directSelectionItemsContainer?.isHidden = true
                     tableContainerView?.isHidden = true
+                    swipeLabel?.isHidden = true
                     completionBar?.isHidden = true
                     searchItemsContainerView?.isHidden = true
                     weekdayModeSelectorSegmentedSwitch?.isHidden = true
@@ -304,6 +305,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                     weekdayModeSelectorSegmentedSwitch?.isHidden = isNameSearchMode
                     timeSelectorContainerView?.isHidden = isNameSearchMode
                     completionBar?.isHidden = false
+                    swipeLabel?.isHidden = false
                     tableContainerView?.isHidden = false
                     navigationController?.isNavigationBarHidden = false
                }
@@ -353,6 +355,12 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                 })
           }
      }
+     
+     /* ################################################################## */
+     /**
+      The label at the bottom, showing a swipe tip.
+      */
+     @IBOutlet weak var swipeLabel: UILabel?
 
      /* ################################################################## */
      /**
@@ -479,6 +487,17 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
       The button to exit Direct Selection Mode.
       */
      @IBOutlet weak var directSelectionCloseButton: UIButton?
+}
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides (Computed Properties)
+/* ###################################################################################################################################### */
+extension VMF_MainViewController {
+     /* ################################################################## */
+     /**
+      - returns true, indicating that X-phones should hide the Home Bar.
+      */
+     override var prefersHomeIndicatorAutoHidden: Bool { true }
 }
 
 /* ###################################################################################################################################### */

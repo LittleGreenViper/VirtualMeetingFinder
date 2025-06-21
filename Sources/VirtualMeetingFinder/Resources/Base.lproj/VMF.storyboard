@@ -660,6 +660,12 @@
                                     <segue destination="bxe-Jd-mqJ" kind="embed" id="PRK-8l-msD"/>
                                 </connections>
                             </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SLUG-SWIPE-LABEL-TEXT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGu-sf-GRR">
+                                <rect key="frame" x="16" y="735" width="361" height="20.333333333333371"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yRJ-fe-3Cl">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
@@ -686,9 +692,12 @@
                             <constraint firstItem="Zdh-eu-ih1" firstAttribute="leading" secondItem="pPU-8y-L0V" secondAttribute="leading" constant="16" id="J9t-bp-sYV"/>
                             <constraint firstItem="pPU-8y-L0V" firstAttribute="trailing" secondItem="Zdh-eu-ih1" secondAttribute="trailing" constant="16" id="JlR-Jz-wHy"/>
                             <constraint firstItem="Zdh-eu-ih1" firstAttribute="top" secondItem="1R3-iR-Giq" secondAttribute="bottom" constant="16" id="RAN-d7-98l"/>
+                            <constraint firstItem="BGu-sf-GRR" firstAttribute="top" secondItem="Zdh-eu-ih1" secondAttribute="bottom" id="Ush-O3-9Yb"/>
+                            <constraint firstItem="BGu-sf-GRR" firstAttribute="leading" secondItem="pPU-8y-L0V" secondAttribute="leading" constant="16" id="aVl-A0-tVP"/>
                             <constraint firstAttribute="trailing" secondItem="yRJ-fe-3Cl" secondAttribute="trailing" id="eGN-f0-8fH"/>
                             <constraint firstItem="pPU-8y-L0V" firstAttribute="bottom" secondItem="Zdh-eu-ih1" secondAttribute="bottom" id="jzp-y2-Q6P"/>
                             <constraint firstItem="yRJ-fe-3Cl" firstAttribute="top" secondItem="sFK-py-g0o" secondAttribute="top" id="l9h-PB-NGL"/>
+                            <constraint firstItem="pPU-8y-L0V" firstAttribute="trailing" secondItem="BGu-sf-GRR" secondAttribute="trailing" constant="16" id="mB0-sK-5IR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SLUG-TAB-0-TITLE" id="88p-ma-gyu">
@@ -731,6 +740,7 @@
                         <outlet property="searchItemsContainerView" destination="Uw7-7n-oJo" id="KkA-Fc-FOu"/>
                         <outlet property="searchTextField" destination="p2c-SZ-uyw" id="C6N-3J-n8I"/>
                         <outlet property="settingsBarButtonItem" destination="3tP-yY-Fhw" id="C2d-H7-CZn"/>
+                        <outlet property="swipeLabel" destination="BGu-sf-GRR" id="7Uz-vI-7Yc"/>
                         <outlet property="tableContainerView" destination="Zdh-eu-ih1" id="JTb-KD-iZG"/>
                         <outlet property="throbber" destination="yRJ-fe-3Cl" id="Y5J-9Q-wAi"/>
                         <outlet property="timeDayDisplayLabel" destination="X3d-iJ-1Id" id="3id-EB-8MS"/>

@@ -687,6 +687,7 @@ extension VMF_MainViewController {
           super.viewDidLoad()
           navigationItem.title = "SLUG-TAB-0-TITLE".localizedVariant
           VMF_AppDelegate.mainScreenController = self
+          swipeLabel?.text = swipeLabel?.text?.localizedVariant
           searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
           myAttendanceBarButtonItem?.isAccessibilityElement = true
           myAttendanceBarButtonItem?.accessibilityLabel = "SLUG-ACC-TAB-1-BUTTON-LABEL"

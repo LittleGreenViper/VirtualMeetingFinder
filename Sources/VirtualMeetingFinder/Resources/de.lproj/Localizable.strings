@@ -57,6 +57,8 @@
 "SLUG-IN-PROGRESS-FORMAT" = "Läuft seit %@";
 /* This is the string that we display in the list, for in-progress meetings that have been going since yesterday. The placeholder is replaced by the time, in localized form. */
 "SLUG-IN-PROGRESS-YESTERDAY-FORMAT" = "Läuft seit: gestern %@";
+/* This is displayed in a little label, at the bottom of the screen, as instruction. */
+"SLUG-SWIPE-LABEL-TEXT" = "← Wischen, um die Startzeit zu ändern →";
 
 /* This is the title for the segmented switch segment, for in-progress meetings, in the Main Screen.
  

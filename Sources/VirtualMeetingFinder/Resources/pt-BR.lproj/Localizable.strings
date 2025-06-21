@@ -57,6 +57,8 @@
 "SLUG-IN-PROGRESS-FORMAT" = "Em andamento desde às %@";
 /* This is the string that we display in the list, for in-progress meetings that have been going since yesterday. The placeholder is replaced by the time, in localized form. */
 "SLUG-IN-PROGRESS-YESTERDAY-FORMAT" = "Em andamento desde às %@ de ontem";
+/* This is displayed in a little label, at the bottom of the screen, as instruction. */
+"SLUG-SWIPE-LABEL-TEXT" = "← Deslize para mudar o horário de início →";
 
 /* This is the title for the segmented switch segment, for in-progress meetings, in the Main Screen.
  

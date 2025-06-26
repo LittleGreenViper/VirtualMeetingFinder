@@ -47,6 +47,8 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIDesignRequiresCompatibility</key>
+	<true/>
 	<key>VMF_BaseServerURI</key>
 	<string>https://meetings.recovrr.org/entrypoint.php</string>
 </dict>

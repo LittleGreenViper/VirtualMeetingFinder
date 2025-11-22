@@ -26,8 +26,6 @@
 		<string>waze</string>
 		<string>whatsapp</string>
 	</array>
-	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
-	<string>This app can add events to your calendar, to remind you of upcoming meeting attendance.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -48,7 +46,7 @@
 		</dict>
 	</dict>
 	<key>UIDesignRequiresCompatibility</key>
-	<true/>
+	<false/>
 	<key>VMF_BaseServerURI</key>
 	<string>https://meetings.recovrr.org/entrypoint.php</string>
 </dict>

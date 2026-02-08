@@ -1,10 +1,10 @@
 # ``We_Are_Never_Alone``
 
+![Icon](icon.png)
+
 An app that makes it simple to discover and attend virtual (and hybrid) NA meetings.
 
 ## Overview
-
-![Icon](icon.png)
 
 This app works by downloading a large list of virtual (and hybrid) meetings from a worldwide database, then presents them to the user, in a form that is directly useful to the user.
 

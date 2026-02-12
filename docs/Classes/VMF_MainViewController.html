@@ -101,6 +101,9 @@
                 <a class="nav-group-task-link" href="../Classes/VMF_MeetingInspectorViewController.html">VMF_MeetingInspectorViewController</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_OpenInRecovrr_Activity.html">VMF_OpenInRecovrr_Activity</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/VMF_OpenLocationIn_Activity.html">VMF_OpenLocationIn_Activity</a>
               </li>
               <li class="nav-group-task">
@@ -144,7 +147,10 @@
             <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/AppKit.NSImage.html">AppKit.NSImage</a>
+                <a class="nav-group-task-link" href="../Extensions/AppKit.html">AppKit</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/AppKit.html#/NSImage">– NSImage</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/Bundle.html">Bundle</a>
@@ -194,7 +200,7 @@
                 <a class="nav-group-task-link" href="../Protocols/VMF_MasterTableControllerProtocol.html">VMF_MasterTableControllerProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Protocols/_ACResourceInitProtocol.html">_ACResourceInitProtocol</a>
+                <a class="nav-group-task-link" href="../Protocols.html#/_ACResourceInitProtocol">_ACResourceInitProtocol</a>
               </li>
             </ul>
           </li>
@@ -1891,7 +1897,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>completion</em>
+                                <em>inCompletion</em>
                                 </code>
                               </td>
                               <td>
@@ -1938,7 +1944,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>for</em>
+                                <em>inWeekdayIndex</em>
                                 </code>
                               </td>
                               <td>
@@ -1991,7 +1997,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>for</em>
+                                <em>inDayIndex</em>
                                 </code>
                               </td>
                               <td>
@@ -2003,7 +2009,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>time</em>
+                                <em>inTimeIndex</em>
                                 </code>
                               </td>
                               <td>
@@ -2056,7 +2062,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>for</em>
+                                <em>inDayIndex</em>
                                 </code>
                               </td>
                               <td>
@@ -2068,7 +2074,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>time</em>
+                                <em>inTimeIndex</em>
                                 </code>
                               </td>
                               <td>
@@ -2119,7 +2125,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>dayIndex</em>
+                                <em>inDayIndex</em>
                                 </code>
                               </td>
                               <td>
@@ -2131,7 +2137,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>time</em>
+                                <em>inMilitaryTime</em>
                                 </code>
                               </td>
                               <td>
@@ -2178,7 +2184,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>dayIndex</em>
+                                <em>inDayIndex</em>
                                 </code>
                               </td>
                               <td>
@@ -2190,7 +2196,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>time</em>
+                                <em>inMilitaryTime</em>
                                 </code>
                               </td>
                               <td>
@@ -2241,7 +2247,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>dayIndex</em>
+                                <em>inDayIndex</em>
                                 </code>
                               </td>
                               <td>
@@ -2253,7 +2259,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>timeIndex</em>
+                                <em>inTimeIndex</em>
                                 </code>
                               </td>
                               <td>
@@ -2296,6 +2302,25 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
 <span class="kd">func</span> <span class="nf">updateThermometer</span><span class="p">(</span><span class="n">_</span> <span class="nv">inTablePage</span><span class="p">:</span> <span class="kt"><a href="../Protocols/VMF_EmbeddedTableControllerProtocol.html">VMF_EmbeddedTableControllerProtocol</a></span><span class="p">?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inTablePage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The page with the table.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -2808,7 +2833,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>notification</em>
+                                <em>inNotification</em>
                                 </code>
                               </td>
                               <td>
@@ -2903,7 +2928,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>completion</em>
+                                <em>inCompletion</em>
                                 </code>
                               </td>
                               <td>
@@ -3160,7 +3185,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>for</em>
+                                <em>inSegue</em>
                                 </code>
                               </td>
                               <td>
@@ -3272,7 +3297,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@MainActor</span>
-<span class="kd">func</span> <span class="nf">pageViewController</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">UIPageViewController</span><span class="p">,</span> <span class="n">viewControllerAfter</span> <span class="nv">inAfterViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIViewController</span><span class="p">?</span></code></pre>
+<span class="kd">func</span> <span class="nf">pageViewController</span><span class="p">(</span><span class="n">_</span> <span class="nv">inPageViewController</span><span class="p">:</span> <span class="kt">UIPageViewController</span><span class="p">,</span> <span class="n">viewControllerAfter</span> <span class="nv">inAfterViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIViewController</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -3283,7 +3308,19 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>viewControllerBefore</em>
+                                <em>inPageViewController</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The page view controller (ignored).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inAfterViewController</em>
                                 </code>
                               </td>
                               <td>
@@ -3510,7 +3547,19 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>numberOfRowsInComponent</em>
+                                <em>inPickerView</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The picker view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inComponent</em>
                                 </code>
                               </td>
                               <td>
@@ -3586,7 +3635,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>titleForRow</em>
+                                <em>inRow</em>
                                 </code>
                               </td>
                               <td>
@@ -3598,7 +3647,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>forComponent</em>
+                                <em>inComponent</em>
                                 </code>
                               </td>
                               <td>
@@ -3610,7 +3659,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>reusing</em>
+                                <em>inReusing</em>
                                 </code>
                               </td>
                               <td>
@@ -3650,7 +3699,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@MainActor</span>
-<span class="kd">func</span> <span class="nf">pickerView</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">,</span> <span class="nv">widthForComponent</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span></code></pre>
+<span class="kd">func</span> <span class="nf">pickerView</span><span class="p">(</span><span class="n">_</span> <span class="nv">inPickerView</span><span class="p">:</span> <span class="kt">UIPickerView</span><span class="p">,</span> <span class="nv">widthForComponent</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span></code></pre>
 
                         </div>
                       </div>
@@ -3658,6 +3707,18 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                         <h4>Parameters</h4>
                         <table class="graybox">
                           <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inPickerView</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The picker view.</p>
+                                </div>
+                              </td>
+                            </tr>
                             <tr>
                               <td>
                                 <code>
@@ -3724,7 +3785,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
                             <tr>
                               <td>
                                 <code>
-                                <em>didSelectRow</em>
+                                <em>inRow</em>
                                 </code>
                               </td>
                               <td>
@@ -3760,7 +3821,7 @@ currentIntegerTime is the current time, as an integer (hours * 100 + minute).</p
     </div>
     <section class="footer">
       <p>© 2024 <a class="link" href="https://littlegreenviper.com" target="_blank" rel="external noopener">Little Green Viper Software Development LLC</a></p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
 </html>

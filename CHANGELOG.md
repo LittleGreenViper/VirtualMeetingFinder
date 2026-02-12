@@ -1,3 +1,16 @@
+**1.3.0** *February 12, 2026*
+
+- Added an "Open in Recovrr" option to the meeting inspector action sheet.
+
+**1.2.1** *June 21, 2025*
+
+- Bug Fixes
+- We are "Liquid Glass Native," now.
+
+**1.2.0** *May 28, 2025*
+
+- The header is now collapsible.
+
 **1.1.3** *January 14, 2025*
 
 - Updated the meeting SDK.

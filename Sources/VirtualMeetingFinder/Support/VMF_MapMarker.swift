@@ -22,7 +22,7 @@ class VMF_MapAnnotation: NSObject, MKAnnotation {
      /**
       Default initializer.
       
-      - parameter coordinate: the coordinate for this annotation.
+      - parameter inCoordinate: the coordinate for this annotation.
       */
      init(coordinate inCoordinate: CLLocationCoordinate2D) {
           coordinate = inCoordinate
@@ -52,8 +52,8 @@ class VMF_MapMarker: MKAnnotationView {
      /**
       We override, so we can set the image.
       
-      - parameter annotation: The annotation instance.
-      - parameter reuseIdentifier: The reuse ID.
+      - parameter inAnnotation: The annotation instance.
+      - parameter inReuseID: The reuse ID.
       */
      override init(annotation inAnnotation: MKAnnotation?, reuseIdentifier inReuseID: String?) {
           super.init(annotation: inAnnotation, reuseIdentifier: inReuseID)

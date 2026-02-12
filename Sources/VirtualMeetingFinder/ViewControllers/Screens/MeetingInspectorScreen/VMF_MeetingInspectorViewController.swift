@@ -1,5 +1,5 @@
 /*
- © Copyright 2024, Little Green Viper Software Development LLC
+ © Copyright 2024-2026, Little Green Viper Software Development LLC
  LICENSE:
  
  MIT License
@@ -419,8 +419,10 @@ extension VMF_MeetingInspectorViewController {
      var validActivities: [UIActivity] {
           guard let event = attendanceEvent else { return [] }
           
-          var activities: [UIActivity] = [VMF_AddToCalendar_Activity(meetingEvent: event, myController: self)]
-          
+          var activities: [UIActivity] = [VMF_AddToCalendar_Activity(meetingEvent: event, myController: self),
+                                          VMF_OpenInRecovrr_Activity(meetingID: Int(meeting?.id ?? 0), myController: self)
+          ]
+
           if .hybrid == meeting?.meetingType || .inPerson == meeting?.meetingType,
              let coords = meeting?.coords,
              let name = (meeting?.name ?? "SLUG-NA-MEETING".localizedVariant).urlEncodedString,
@@ -442,7 +444,7 @@ extension VMF_MeetingInspectorViewController {
                          activities.append(VMF_OpenLocationIn_Activity(app: $0, myController: self))
                     }
                }
-          }
+         }
           
           return activities
      }

@@ -1,5 +1,5 @@
 /*
- © Copyright 2024, Little Green Viper Software Development LLC
+ © Copyright 2024-2026, Little Green Viper Software Development LLC
  LICENSE:
  
  MIT License
@@ -60,11 +60,11 @@ extension VMF_MainViewController: UIPageViewControllerDataSource {
      /**
       Called to fetch the view controller after the current one.
       
-      - parameter: The page view controller (ignored).
-      - parameter viewControllerBefore: The view controller before (to the left of) the one we want.
+      - parameter inPageViewController: The page view controller (ignored).
+      - parameter inAfterViewController: The view controller before (to the left of) the one we want.
       - returns: A new (or reused) view controller to appear after (to the right of) the "before" controller.
       */
-     func pageViewController(_: UIPageViewController, viewControllerAfter inAfterViewController: UIViewController) -> UIViewController? {
+     func pageViewController(_ inPageViewController: UIPageViewController, viewControllerAfter inAfterViewController: UIViewController) -> UIViewController? {
           guard !isNameSearchMode,
                 let oldViewController = inAfterViewController as? VMF_EmbeddedTableController
           else { return nil }
@@ -161,8 +161,8 @@ extension VMF_MainViewController: UIPickerViewDataSource {
      /**
       This returns the number of rows in each component.
       
-      - parameter: The picker view.
-      - parameter numberOfRowsInComponent: The 0-based component index. Component 0 is the weekday, and Component 1, is the time slots for that weekday.
+      - parameter inPickerView: The picker view.
+      - parameter inComponent: The 0-based component index. Component 0 is the weekday, and Component 1, is the time slots for that weekday.
       
       - returns: 7 (Component 0), or the number of time slots for the selected weekday (usually around 70).
       */
@@ -184,9 +184,9 @@ extension VMF_MainViewController: UIPickerViewDelegate {
       This returns the title for the selected row, as a label.
       
       - parameter inPickerView: The picker view.
-      - parameter titleForRow: The 0-based row index.
-      - parameter forComponent: The 0-based component index.
-      - parameter reusing: Any previously allocated view, to be reused.
+      - parameter inRow: The 0-based row index.
+      - parameter inComponent: The 0-based component index.
+      - parameter inReusing: Any previously allocated view, to be reused.
       
       - returns: a view (a label), with the title for the indicated row.
       */
@@ -229,18 +229,18 @@ extension VMF_MainViewController: UIPickerViewDelegate {
      /**
       Get the width of a component.
       
-      - parameter: The picker view.
+      - parameter inPickerView: The picker view.
       - parameter widthForComponent: The 0-based component index.
       - returns: The width, in display units, of the component.
       */
-     func pickerView(_: UIPickerView, widthForComponent: Int) -> CGFloat { Self.pickerViewComponentWidthInDisplayUnits }
+     func pickerView(_ inPickerView: UIPickerView, widthForComponent: Int) -> CGFloat { Self.pickerViewComponentWidthInDisplayUnits }
      
      /* ################################################################## */
      /**
       Called when a row is selected in the picker.
       
       - parameter inPickerView: The picker view.
-      - parameter didSelectRow: The 0-based row index.
+      - parameter inRow: The 0-based row index.
       - parameter inComponent: The 0-based component index.
       */
      func pickerView(_ inPickerView: UIPickerView, didSelectRow inRow: Int, inComponent: Int) {

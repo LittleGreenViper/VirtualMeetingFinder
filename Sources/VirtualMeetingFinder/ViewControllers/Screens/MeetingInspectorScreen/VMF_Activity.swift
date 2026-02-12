@@ -1,5 +1,5 @@
 /*
- © Copyright 2024, Little Green Viper Software Development LLC
+ © Copyright 2024-2026, Little Green Viper Software Development LLC
  LICENSE:
  
  MIT License
@@ -39,11 +39,10 @@ class VMF_Base_Activity: UIActivity {
      /**
       Initializer
       
-      - parameter myController: The controller that "owns" this activity.
-      - parameter actionButton: The action button for the screen. We use it to anchor an iPad popover (Can be omitted).
+      - parameter inMyController: The controller that "owns" this activity.
       */
      init(myController inMyController: VMF_MeetingInspectorViewController?) {
-          myController = inMyController
+          self.myController = inMyController
      }
 }
 
@@ -75,9 +74,8 @@ class VMF_AddToCalendar_Activity: VMF_Base_Activity {
      /**
       Initializer
       
-      - parameter meetingEvent: The event for this activity (Can be omitted).
-      - parameter myController: The controller that "owns" this activity.
-      - parameter actionButton: The action button for the screen. We use it to anchor an iPad popover (Can be omitted).
+      - parameter inMeetingEvent: The event for this activity (Can be omitted).
+      - parameter inMyController: The controller that "owns" this activity.
       */
      init(meetingEvent inMeetingEvent: EKEvent? = nil, myController inMyController: VMF_MeetingInspectorViewController? = nil) {
           meetingEvent = inMeetingEvent
@@ -111,7 +109,7 @@ extension VMF_AddToCalendar_Activity {
      /**
       We extract the event from the items, and return true.
       
-      - parameter withActivityItems: The activity items (ignored).
+      - parameter inActivityItems: The activity items (ignored).
       */
      override func canPerform(withActivityItems inActivityItems: [Any]) -> Bool {
           guard 1 < inActivityItems.count,
@@ -187,8 +185,8 @@ extension VMF_AddToCalendar_Activity {
       This displays an alert, for when permission is denied, and allows access to the settings.
       This can be called from non-main threads.
       
-      - parameter header: The header. This can be a lo9calization slug.
-      - parameter body: The message body. This can be a localization slug.
+      - parameter inHeader: The header. This can be a lo9calization slug.
+      - parameter inBody: The message body. This can be a localization slug.
       */
      func displayPermissionsAlert(header inHeader: String, body inBody: String) {
           DispatchQueue.main.async {
@@ -219,7 +217,7 @@ extension VMF_AddToCalendar_Activity: EKEventEditViewDelegate {
       Called when the event kit has completed with an action to add the reminder to the calendar.
       
       - parameter inController: The controller we're talking about.
-      - parameter didCompleteWith: The even action that completed.
+      - parameter inAction: The even action that completed.
       */
      func eventEditViewController(_ inController: EKEventEditViewController, didCompleteWith inAction: EKEventEditViewAction) {
           inController.dismiss(animated: true, completion: nil)
@@ -337,8 +335,8 @@ class VMF_OpenLocationIn_Activity: VMF_Base_Activity {
      /* ################################################################## */
      /**
       Default Initializer.
-      - parameter app: The app enum case for this activity.
-      - parameter myController: The controller that "owns" this activity.
+      - parameter inApp: The app enum case for this activity.
+      - parameter inMyController: The controller that "owns" this activity.
       */
      init(app inApp: LocationHandlerApp, myController inMyController: VMF_MeetingInspectorViewController?) {
           app = inApp
@@ -383,5 +381,89 @@ extension VMF_OpenLocationIn_Activity {
           guard let appURL = app.appURL else { return }
           myController?.successHaptic()
           UIApplication.shared.open(appURL)
+     }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - Custom Open In Recovrr Activity Class -
+/* ###################################################################################################################################### */
+/**
+ Presents a custom activity that opens the current meeting in the Recovrr.org app, via its universal link.
+ The universal link format is:
+
+     https://rcvr.recovrr.org/meeting/<Integer ID>
+ */
+class VMF_OpenInRecovrr_Activity: VMF_Base_Activity {
+     /* ################################################################## */
+     /**
+      The meeting ID to open in the Recovrr app.
+      */
+     let meetingID: Int
+
+     /* ################################################################## */
+     /**
+      Default Initializer.
+
+      - parameter inMeetingID: The integer meeting ID to open.
+      - parameter inMyController: The controller that "owns" this activity.
+      */
+     init(meetingID inMeetingID: Int, myController inMyController: VMF_MeetingInspectorViewController?) {
+          self.meetingID = inMeetingID
+          super.init(myController: inMyController)
+     }
+
+     /* ################################################################## */
+     /**
+      The universal link URL for this meeting in Recovrr.
+      */
+     private var _recovrrURL: URL? { URL(string: "https://rcvr.recovrr.org/meeting/\(meetingID)") }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension VMF_OpenInRecovrr_Activity {
+     /* ################################################################## */
+     /**
+      The title string for this activity.
+      */
+     override var activityTitle: String? { String(format: "SLUG-OPEN-IN-FORMAT".localizedVariant, "Recovrr") }
+
+     /* ################################################################## */
+     /**
+      The icon image for the activity line.
+      */
+     override var activityImage: UIImage? {
+         UIImage(
+             named: "RecovrrLogo",
+             in: Bundle(for: Self.self),
+             compatibleWith: nil
+         )
+     }
+
+     /* ################################################################## */
+     /**
+      We have our own custom activity type.
+      */
+     override var activityType: UIActivity.ActivityType? { UIActivity.ActivityType("com.littlegreenviper.vmf.openInRecovrr") }
+
+     /* ################################################################## */
+     /**
+      We return true as long as we can form a URL (https URLs are always openable).
+      */
+     override func canPerform(withActivityItems inActivityItems: [Any]) -> Bool { nil != self._recovrrURL }
+
+     /* ################################################################## */
+     /**
+      This is the execution handler for the activity.
+      */
+     override func perform() {
+          guard let url = self._recovrrURL else {
+               self.activityDidFinish(false)
+               return
+          }
+
+          self.myController?.successHaptic()
+          UIApplication.shared.open(url, options: [:]) { [weak self] inDidOpen in self?.activityDidFinish(inDidOpen) }
      }
 }

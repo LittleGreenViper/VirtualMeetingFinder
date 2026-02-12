@@ -1,5 +1,5 @@
 /*
- © Copyright 2024, Little Green Viper Software Development LLC
+ © Copyright 2024-2026, Little Green Viper Software Development LLC
  LICENSE:
  
  MIT License
@@ -94,7 +94,7 @@ extension VMF_AttendanceViewController {
      /**
       Called before populating the table
       
-      - parameter for: The segue object being executed.
+      - parameter inSegue: The segue object being executed.
       - parameter sender: Any associated data (ignored).
       */
      override func prepare(for inSegue: UIStoryboardSegue, sender: Any?) {

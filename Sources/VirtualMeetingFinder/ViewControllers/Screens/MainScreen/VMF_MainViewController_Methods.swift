@@ -1,5 +1,5 @@
 /*
- © Copyright 2024, Little Green Viper Software Development LLC
+ © Copyright 2024-2026, Little Green Viper Software Development LLC
  LICENSE:
  
  MIT License
@@ -81,7 +81,7 @@ extension VMF_MainViewController {
      /**
       Called to load the meetings from the server.
       
-      - parameter completion: A simple, no-parameter completion. It is always called in the main thread.
+      - parameter inCompletion: A simple, no-parameter completion. It is always called in the main thread.
       */
      func loadMeetings(completion inCompletion: @escaping () -> Void) {
           isThrobbing = true
@@ -113,7 +113,7 @@ extension VMF_MainViewController {
      /**
       Get the meetings for a particular weekday.
       
-      - parameter for: The 1-based (1 is Sunday) weekday index
+      - parameter inWeekdayIndex: The 1-based (1 is Sunday) weekday index
       - returns: a Dictionary, with the weekday's meetings, organized by localized start time (the key), which is expressed as military time (HHMM).
       */
      func getDailyMeetings(for inWeekdayIndex: Int) -> [Int: [MeetingInstance]] {
@@ -140,8 +140,8 @@ extension VMF_MainViewController {
       
       NOTE: If the controller is in text search mode, then the name search controller is returned.
       
-      - parameter for: The 0-based "day index." If it is 0, though, it is the "in-progress" display.
-      - parameter time: The 0-based time index. This is the index of the currently selected time slot.
+      - parameter inDayIndex: The 0-based "day index." If it is 0, though, it is the "in-progress" display.
+      - parameter inTimeIndex: The 0-based time index. This is the index of the currently selected time slot.
       - returns: A new (or reused) view controller, for the destination of the transition.
       */
      func getTableDisplay(for inDayIndex: Int, time inTimeIndex: Int) -> VMF_EmbeddedTableController? {
@@ -189,8 +189,8 @@ extension VMF_MainViewController {
       
       NOTE: If the controller is in text search mode, then the search set is returned.
       
-      - parameter for: The 0-based "day index." If it is 0, though, it is the "in-progress" display.
-      - parameter time: The 0-based time index. This is the index of the currently selected time slot.
+      - parameter inDayIndex: The 0-based "day index." If it is 0, though, it is the "in-progress" display.
+      - parameter inTimeIndex: The 0-based time index. This is the index of the currently selected time slot.
       - returns: A new (or reused) view controller, for the destination of the transition.
       */
      func getCurentMeetings(for inDayIndex: Int = 0, time inTimeIndex: Int = 0) -> [MeetingInstance] {
@@ -224,8 +224,8 @@ extension VMF_MainViewController {
      /**
       This opens the screen to a certain day index, and time (not index).
       
-      - parameter dayIndex: The 1-based (but 0 is in progress, 1-7 is Sunday through Saturday) day index. If omitted, then today/now is selected, and time is ignored.
-      - parameter time: The military time (HHMM), as an integer. If omitted, 12AM (0000) is assumed.
+      - parameter inDayIndex: The 1-based (but 0 is in progress, 1-7 is Sunday through Saturday) day index. If omitted, then today/now is selected, and time is ignored.
+      - parameter inMilitaryTime: The military time (HHMM), as an integer. If omitted, 12AM (0000) is assumed.
       */
      func openTo(dayIndex inDayIndex: Int = -1, time inMilitaryTime: Int = 0) {
           let weekday = (0..<8).contains(inDayIndex) ? inDayIndex : -1 == inDayIndex ? nowIs.weekday : 0
@@ -244,8 +244,8 @@ extension VMF_MainViewController {
      /**
       This returns the index of the time slot that is closest (before or after) to the given time and day.
       
-      - parameter dayIndex: The 1-based day index. If omitted, then today/now is selected, and time is ignored.
-      - parameter time: The military time (HHMM), as an integer. If omitted, 12AM (0000) is assumed.
+      - parameter inDayIndex: The 1-based day index. If omitted, then today/now is selected, and time is ignored.
+      - parameter inMilitaryTime: The military time (HHMM), as an integer. If omitted, 12AM (0000) is assumed.
       - returns: The index of the time slot closest to (or at the same time as) the given time. It may be prior.
       */
      func getNearestIndex(dayIndex inDayIndex: Int = -1, time inMilitaryTime: Int = 0) -> Int {
@@ -279,8 +279,8 @@ extension VMF_MainViewController {
      /**
       This returns the time that corresponds to the day and time presented.
       
-      - parameter dayIndex: The 1-based day index.
-      - parameter timeIndex: The index, as a 0-based integer.
+      - parameter inDayIndex: The 1-based day index.
+      - parameter inTimeIndex: The index, as a 0-based integer.
       - returns: The time, as a military time integer, of the time slot for the given time. Returns nil, if the time can't be found.
       */
      func getTimeOf(dayIndex inDayIndex: Int = -1, timeIndex inTimeIndex: Int = 0) -> Int? {
@@ -293,6 +293,8 @@ extension VMF_MainViewController {
      /* ################################################################## */
      /**
       This updates the "thermometer" display in the time selector.
+      
+      - parameter inTablePage: The page with the table.
       */
      func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol?) {
           completionBar?.subviews.forEach { $0.removeFromSuperview() }
@@ -639,7 +641,7 @@ extension VMF_MainViewController {
      /**
       This is called just before the keyboard shows. We use this to "nudge" the table bottom up.
       
-      - parameter notification: The notification being passed in.
+      - parameter inNotification: The notification being passed in.
       */
      @objc func keyboardWillShow(notification inNotification: NSNotification) {
           DispatchQueue.main.async { [weak self] in
@@ -666,7 +668,7 @@ extension VMF_MainViewController {
      /**
       Reloads all the meetings.
       
-      - parameter completion: A simple empty callback. Always called in the main thread.
+      - parameter inCompletion: A simple empty callback. Always called in the main thread.
       */
      func refreshCalled(completion inCompletion: @escaping () -> Void) {
           guard !isNameSearchMode else { return }
@@ -858,7 +860,7 @@ extension VMF_MainViewController {
      /**
       Called before transitioning to another view controller.
       
-      - parameter for: The segue instance.
+      - parameter inSegue: The segue instance.
       - parameter sender: ignored.
       */
      override func prepare(for inSegue: UIStoryboardSegue, sender: Any?) {

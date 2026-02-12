@@ -1,5 +1,5 @@
 /*
- © Copyright 2024, Little Green Viper Software Development LLC
+ © Copyright 2024-2026, Little Green Viper Software Development LLC
  LICENSE:
  
  MIT License
@@ -444,8 +444,8 @@ extension VMF_EmbeddedTableController {
      /**
       Called just before the view segues to another one.
       
-      - parameter for: The segue instance.
-      - parameter sender: Any associated data.
+      - parameter inSegue: The segue instance.
+      - parameter inData: Any associated data.
       */
      override func prepare(for inSegue: UIStoryboardSegue, sender inData: Any?) {
           if let destination = inSegue.destination as? VMF_MeetingInspectorViewController,
@@ -526,16 +526,16 @@ extension VMF_EmbeddedTableController {
 extension VMF_EmbeddedTableController: UITableViewDataSource {
      /* ################################################################## */
      /**
-      - parameter: The table view (ignored)
+      - parameter inTableView: The table view (ignored)
       - parameter numberOfRowsInSection: The 0-based section index.
       - returns: The number of meetings to display.
       */
-     func tableView(_: UITableView, numberOfRowsInSection : Int) -> Int { filteredMeetings.count }
+     func tableView(_ inTableView: UITableView, numberOfRowsInSection : Int) -> Int { filteredMeetings.count }
      
      /* ################################################################## */
      /**
       - parameter inTableView: The table view
-      - parameter numberOfRowsInSection: The index path of the cell we want.
+      - parameter inIndexPath: The index path of the cell we want.
       */
      func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
           guard let ret = inTableView.dequeueReusableCell(withIdentifier: VMF_TableCell.reuseID) as? VMF_TableCell else { return UITableViewCell() }

@@ -101,6 +101,9 @@
                 <a class="nav-group-task-link" href="../Classes/VMF_MeetingInspectorViewController.html">VMF_MeetingInspectorViewController</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VMF_OpenInRecovrr_Activity.html">VMF_OpenInRecovrr_Activity</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/VMF_OpenLocationIn_Activity.html">VMF_OpenLocationIn_Activity</a>
               </li>
               <li class="nav-group-task">
@@ -144,7 +147,10 @@
             <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/AppKit.NSImage.html">AppKit.NSImage</a>
+                <a class="nav-group-task-link" href="../Extensions/AppKit.html">AppKit</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/AppKit.html#/NSImage">– NSImage</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/Bundle.html">Bundle</a>
@@ -194,7 +200,7 @@
                 <a class="nav-group-task-link" href="../Protocols/VMF_MasterTableControllerProtocol.html">VMF_MasterTableControllerProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Protocols/_ACResourceInitProtocol.html">_ACResourceInitProtocol</a>
+                <a class="nav-group-task-link" href="../Protocols.html#/_ACResourceInitProtocol">_ACResourceInitProtocol</a>
               </li>
             </ul>
           </li>
@@ -520,6 +526,18 @@ While the app is up in the foreground, we won&rsquo;t be forcing a reload, but w
                             <tr>
                               <td>
                                 <code>
+                                <em>inScene</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The scene instance.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>willConnectTo</em>
                                 </code>
                               </td>
@@ -532,7 +550,7 @@ While the app is up in the foreground, we won&rsquo;t be forcing a reload, but w
                             <tr>
                               <td>
                                 <code>
-                                <em>options</em>
+                                <em>inConnectionOptions</em>
                                 </code>
                               </td>
                               <td>
@@ -568,7 +586,7 @@ While the app is up in the foreground, we won&rsquo;t be forcing a reload, but w
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@MainActor</span>
-<span class="kd">func</span> <span class="nf">scene</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">UIScene</span><span class="p">,</span> <span class="k">continue</span> <span class="nv">inUserActivity</span><span class="p">:</span> <span class="kt">NSUserActivity</span><span class="p">)</span></code></pre>
+<span class="kd">func</span> <span class="nf">scene</span><span class="p">(</span><span class="n">_</span> <span class="nv">inScene</span><span class="p">:</span> <span class="kt">UIScene</span><span class="p">,</span> <span class="k">continue</span> <span class="nv">inUserActivity</span><span class="p">:</span> <span class="kt">NSUserActivity</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -579,7 +597,19 @@ While the app is up in the foreground, we won&rsquo;t be forcing a reload, but w
                             <tr>
                               <td>
                                 <code>
-                                <em>continue</em>
+                                <em>inScene</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The scene instance (ignored).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inUserActivity</em>
                                 </code>
                               </td>
                               <td>
@@ -663,7 +693,7 @@ While the app is up in the foreground, we won&rsquo;t be forcing a reload, but w
     </div>
     <section class="footer">
       <p>© 2024 <a class="link" href="https://littlegreenviper.com" target="_blank" rel="external noopener">Little Green Viper Software Development LLC</a></p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
 </html>

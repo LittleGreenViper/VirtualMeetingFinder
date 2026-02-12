@@ -1,5 +1,5 @@
 /*
- © Copyright 2024, Little Green Viper Software Development LLC
+ © Copyright 2024-2026, Little Green Viper Software Development LLC
  LICENSE:
  
  MIT License
@@ -128,7 +128,7 @@
 
 /* This is the "Open In" heading for the action items. The placeholder is replaced by the app name. */
 "SLUG-OPEN-IN-FORMAT"                             =    "Open In %@";
-/* This is the generic placeholder fo NA meetings. */
+/* This is the generic placeholder for NA meetings. */
 "SLUG-NA-MEETING"                                 =    "NA Meeting";
 
 /* One of these is displayed in the "Open In" action items. They indicate which app will be used to open an in-person meeting location.

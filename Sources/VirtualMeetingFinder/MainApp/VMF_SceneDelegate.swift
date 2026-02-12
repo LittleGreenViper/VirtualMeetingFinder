@@ -1,5 +1,5 @@
 /*
- © Copyright 2024, Little Green Viper Software Development LLC
+ © Copyright 2024-2026, Little Green Viper Software Development LLC
  LICENSE:
  
  MIT License
@@ -104,9 +104,9 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
      /* ################################################################## */
      /**
       Called when the app is opened via a URL from a "cold start."
-      - parameter: The scene instance.
+      - parameter inScene: The scene instance.
       - parameter willConnectTo: The session being connected (ignored).
-      - parameter options: This contains the options, among which, is the URL context.
+      - parameter inConnectionOptions: This contains the options, among which, is the URL context.
       */
      func scene(_ inScene: UIScene, willConnectTo: UISceneSession, options inConnectionOptions: UIScene.ConnectionOptions) {
           guard let url = inConnectionOptions.userActivities.first?.webpageURL ?? inConnectionOptions.urlContexts.first?.url else { return }
@@ -116,10 +116,10 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
      /* ################################################################## */
      /**
       Called when the app is opened via a URL (and launched).
-      - parameter: The scene instance (ignored).
-      - parameter continue: The activity being continued.
+      - parameter inScene: The scene instance (ignored).
+      - parameter inUserActivity: The activity being continued.
       */
-     func scene(_: UIScene, continue inUserActivity: NSUserActivity) {
+     func scene(_ inScene: UIScene, continue inUserActivity: NSUserActivity) {
           guard let url = inUserActivity.webpageURL else { return }
           resolveURL(url)
      }

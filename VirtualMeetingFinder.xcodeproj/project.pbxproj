@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D40128C02F676B600076EB62 /* RVS_PersistentPrefs in Frameworks */ = {isa = PBXBuildFile; productRef = D40128BF2F676B600076EB62 /* RVS_PersistentPrefs */; };
 		D40133692C320C070018076B /* VMF_MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40133682C320C070018076B /* VMF_MainViewController.swift */; };
 		D401336B2C320D520018076B /* VMF_EmbeddedTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */; };
 		D40EB4DE2C3B142B00AAE33B /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = D40EB4DC2C3B142B00AAE33B /* Accessibility.strings */; };
 		D41A54A22DE50BFF00EA9A56 /* SwiftBMLSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D41A54A12DE50BFF00EA9A56 /* SwiftBMLSDK */; };
 		D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */; };
 		D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */; };
-		D43A9C132C373F67001285FC /* RVS_Persistent_Prefs in Frameworks */ = {isa = PBXBuildFile; productRef = D43A9C122C373F67001285FC /* RVS_Persistent_Prefs */; };
 		D43A9C192C374198001285FC /* VMF_Persistent_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A9C172C374198001285FC /* VMF_Persistent_Prefs.swift */; };
 		D43A9C1A2C374198001285FC /* VMF_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A9C182C374198001285FC /* VMF_Extensions.swift */; };
 		D43D850C2C5E616D00E6EB2B /* VMF_Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43D850B2C5E616D00E6EB2B /* VMF_Activity.swift */; };
@@ -101,8 +101,8 @@
 				D48816152C35860F008DF936 /* RVS_BasicGCDTimer in Frameworks */,
 				D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */,
 				D41A54A22DE50BFF00EA9A56 /* SwiftBMLSDK in Frameworks */,
+				D40128C02F676B600076EB62 /* RVS_PersistentPrefs in Frameworks */,
 				D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */,
-				D43A9C132C373F67001285FC /* RVS_Persistent_Prefs in Frameworks */,
 			);
 		};
 /* End PBXFrameworksBuildPhase section */
@@ -317,8 +317,8 @@
 				D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */,
 				D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */,
 				D48816142C35860F008DF936 /* RVS_BasicGCDTimer */,
-				D43A9C122C373F67001285FC /* RVS_Persistent_Prefs */,
 				D41A54A12DE50BFF00EA9A56 /* SwiftBMLSDK */,
+				D40128BF2F676B600076EB62 /* RVS_PersistentPrefs */,
 			);
 			productName = VirtualMeetingFinder;
 			productReference = D49393312C2616C7006438AE /* We Are Never Alone.app */;
@@ -332,7 +332,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 2620;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					D49393302C2616C7006438AE = {
 						CreatedOnToolsVersion = 15.4;
@@ -356,8 +356,8 @@
 				D4398E652C2892790001FAE3 /* XCRemoteSwiftPackageReference "RVS_Generic_Swift_Toolbox" */,
 				D4398E682C2892830001FAE3 /* XCRemoteSwiftPackageReference "RVS_UIKit_Toolbox" */,
 				D48816132C35860F008DF936 /* XCRemoteSwiftPackageReference "RVS_BasicGCDTimer" */,
-				D43A9C112C373F67001285FC /* XCRemoteSwiftPackageReference "RVS_PersistentPrefs" */,
 				D41A54A02DE50BFF00EA9A56 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */,
+				D40128BE2F676B600076EB62 /* XCRemoteSwiftPackageReference "RVS_PersistentPrefs" */,
 			);
 			preferredProjectObjectVersion = 90;
 			productRefGroup = D49393322C2616C7006438AE /* Products */;
@@ -624,7 +624,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -668,7 +668,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -705,12 +705,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D40128BE2F676B600076EB62 /* XCRemoteSwiftPackageReference "RVS_PersistentPrefs" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RiftValleySoftware/RVS_PersistentPrefs";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.0;
+			};
+		};
 		D41A54A02DE50BFF00EA9A56 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/LittleGreenViper/SwiftBMLSDK";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.8;
+				minimumVersion = 1.4.0;
 			};
 		};
 		D4398E652C2892790001FAE3 /* XCRemoteSwiftPackageReference "RVS_Generic_Swift_Toolbox" */ = {
@@ -718,7 +726,7 @@
 			repositoryURL = "https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.15.2;
+				minimumVersion = 1.17.0;
 			};
 		};
 		D4398E682C2892830001FAE3 /* XCRemoteSwiftPackageReference "RVS_UIKit_Toolbox" */ = {
@@ -726,15 +734,7 @@
 			repositoryURL = "https://github.com/RiftValleySoftware/RVS_UIKit_Toolbox";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.6.1;
-			};
-		};
-		D43A9C112C373F67001285FC /* XCRemoteSwiftPackageReference "RVS_PersistentPrefs" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RiftValleySoftware/RVS_PersistentPrefs";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.10;
+				minimumVersion = 1.7.2;
 			};
 		};
 		D48816132C35860F008DF936 /* XCRemoteSwiftPackageReference "RVS_BasicGCDTimer" */ = {
@@ -742,12 +742,17 @@
 			repositoryURL = "https://github.com/RiftValleySoftware/RVS_BasicGCDTimer";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.7.1;
+				minimumVersion = 1.7.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D40128BF2F676B600076EB62 /* RVS_PersistentPrefs */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D40128BE2F676B600076EB62 /* XCRemoteSwiftPackageReference "RVS_PersistentPrefs" */;
+			productName = RVS_PersistentPrefs;
+		};
 		D41A54A12DE50BFF00EA9A56 /* SwiftBMLSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D41A54A02DE50BFF00EA9A56 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */;
@@ -762,11 +767,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D4398E682C2892830001FAE3 /* XCRemoteSwiftPackageReference "RVS_UIKit_Toolbox" */;
 			productName = RVS_UIKit_Toolbox;
-		};
-		D43A9C122C373F67001285FC /* RVS_Persistent_Prefs */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D43A9C112C373F67001285FC /* XCRemoteSwiftPackageReference "RVS_PersistentPrefs" */;
-			productName = RVS_Persistent_Prefs;
 		};
 		D48816142C35860F008DF936 /* RVS_BasicGCDTimer */ = {
 			isa = XCSwiftPackageProductDependency;

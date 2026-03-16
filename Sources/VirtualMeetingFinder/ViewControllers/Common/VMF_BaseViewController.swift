@@ -105,19 +105,26 @@ extension VMF_BaseViewController {
       - returns: The timezone string.
       */
      func getMeetingTimeZone(_ inMeeting: MeetingInstance) -> String {
-          var ret = ""
-          
-          var meeting = inMeeting
-          let nativeTime = meeting.getNextStartDate(isAdjusted: false)
-          
-          if let myCurrentTimezoneName = TimeZone.current.localizedName(for: .standard, locale: .current),
-             let zoneName = meeting.timeZone.localizedName(for: .standard, locale: .current),
-             !zoneName.isEmpty,
-             myCurrentTimezoneName != zoneName {
-               ret = String(format: "SLUG-TIMEZONE-FORMAT".localizedVariant, zoneName, nativeTime.localizedTime)
-          }
-          
-          return ret
+         guard TimeZone.current.identifier != inMeeting.timeZone.identifier,
+               let zoneName = inMeeting.timeZone.localizedName(for: .standard, locale: .current),
+               !zoneName.isEmpty
+         else { return "" }
+         
+         let nativeTime = inMeeting.nextOccurrenceDateFast()
+         
+         let formatter = DateFormatter()
+         formatter.locale = .current
+         formatter.timeZone = inMeeting.timeZone
+         formatter.dateStyle = .none
+         formatter.timeStyle = .short
+         
+         let nativeTimeString = formatter.string(from: nativeTime)
+         
+         return String(
+             format: "SLUG-TIMEZONE-FORMAT".localizedVariant,
+             zoneName,
+             nativeTimeString
+         )
      }
 }
 

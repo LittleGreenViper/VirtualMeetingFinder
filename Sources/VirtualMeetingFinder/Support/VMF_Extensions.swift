@@ -294,14 +294,14 @@ extension StringProtocol {
 extension MeetingInstance {
      /* ################################################################## */
      /**
-      This returns the start weekday. It is adjusted, so may sometimes be different from the one specified by the meeting. It is always in 1 = Sunday space.
+      This returns the start weekday. It is adjusted, so may sometimes be different
+      from the one specified by the meeting. It is always in 1 = Sunday space.
       */
      var adjustedWeekday: Int {
-          var mutableSelf = self
-          
-          let startDate = mutableSelf.getNextStartDate(isAdjusted: true)
-          
-          return Calendar.current.component(.weekday, from: startDate)
+         let startDate = self.nextOccurrenceDateFast()
+         var calendar = Calendar.autoupdatingCurrent
+         calendar.timeZone = .autoupdatingCurrent
+         return calendar.component(.weekday, from: startDate)
      }
      
      /* ################################################################## */

@@ -145,42 +145,60 @@ extension VMF_MainViewController {
       - returns: A new (or reused) view controller, for the destination of the transition.
       */
      func getTableDisplay(for inDayIndex: Int, time inTimeIndex: Int) -> VMF_EmbeddedTableController? {
-          let dayIndex = max(0, min(organizedMeetings.count, inDayIndex))
-          
-          let dailyMeetings = getDailyMeetings(for: dayIndex)
-          let timeIndex = max(0, min(inTimeIndex, dailyMeetings.keys.count - 1))
-          let meetings = getCurentMeetings(for: dayIndex, time: timeIndex)
-          
-          guard let newViewController = storyboard?.instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController else { return nil }
-          
-          newViewController.myController = self
-          newViewController.timeIndex = timeIndex
-          newViewController.dayIndex = dayIndex
-          newViewController.meetings = meetings
-          
-          if !isNameSearchMode,
-             0 < dayIndex {
-               guard (1..<8).contains(dayIndex) else { return nil }
-               var testMeeting = meetings.first
-               let timeString = testMeeting?.getNextStartDate(isAdjusted: true).localizedTime ?? "ERROR"
-               let weekdayString = Calendar.current.weekdaySymbols[dayIndex - 1]
-               newViewController.title = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekdayString, timeString)
-               newViewController.noRefresh = false
-          } else if isNameSearchMode {
-               newViewController.title = (tableDisplayController as? UIViewController)?.title
-               newViewController.noRefresh = true
-          } else if 0 == dayIndex {
-               newViewController.title = "SLUG-IN-PROGRESS".localizedVariant
-               newViewController.noRefresh = false
-          }
-          
-          newViewController.noRefresh = isNameSearchMode || isDirectSelectionMode
-          
-          if (1..<8).contains(dayIndex) {
-               lastTime = getTimeOf(dayIndex: dayIndex, timeIndex: timeIndex) ?? 0
-          }
-          
-          return newViewController
+         let dayIndex = max(0, min(organizedMeetings.count, inDayIndex))
+         
+         let dailyMeetings = getDailyMeetings(for: dayIndex)
+         let timeIndex = max(0, min(inTimeIndex, dailyMeetings.keys.count - 1))
+         let meetings = getCurentMeetings(for: dayIndex, time: timeIndex)
+         
+         guard let newViewController = storyboard?.instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController else { return nil }
+         
+         newViewController.myController = self
+         newViewController.timeIndex = timeIndex
+         newViewController.dayIndex = dayIndex
+         newViewController.meetings = meetings
+         
+         if !isNameSearchMode,
+            0 < dayIndex {
+             guard (1..<8).contains(dayIndex) else { return nil }
+             
+             if let testMeeting = meetings.first {
+                 let nextDate = testMeeting.nextOccurrenceDateFast()
+                 
+                 let timeFormatter = DateFormatter()
+                 timeFormatter.locale = .current
+                 timeFormatter.timeZone = .autoupdatingCurrent
+                 timeFormatter.dateStyle = .none
+                 timeFormatter.timeStyle = .short
+                 
+                 let timeString = timeFormatter.string(from: nextDate)
+                 let weekdayString = Calendar.current.weekdaySymbols[dayIndex - 1]
+                 
+                 newViewController.title = String(
+                     format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant,
+                     weekdayString,
+                     timeString
+                 )
+             } else {
+                 newViewController.title = "ERROR"
+             }
+             
+             newViewController.noRefresh = false
+         } else if isNameSearchMode {
+             newViewController.title = (tableDisplayController as? UIViewController)?.title
+             newViewController.noRefresh = true
+         } else if 0 == dayIndex {
+             newViewController.title = "SLUG-IN-PROGRESS".localizedVariant
+             newViewController.noRefresh = false
+         }
+         
+         newViewController.noRefresh = isNameSearchMode || isDirectSelectionMode
+         
+         if (1..<8).contains(dayIndex) {
+             lastTime = getTimeOf(dayIndex: dayIndex, timeIndex: timeIndex) ?? 0
+         }
+         
+         return newViewController
      }
      
      /* ################################################################## */

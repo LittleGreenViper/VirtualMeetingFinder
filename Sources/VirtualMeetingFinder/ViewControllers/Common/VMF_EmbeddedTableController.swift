@@ -255,12 +255,24 @@ extension VMF_TableCell {
       */
      func setUpTextItems() {
           guard let myController = myController,
-                var meeting = myMeeting
+                let meeting = myMeeting
           else { return }
           
           let inProgress = meeting.isMeetingInProgress()
-          let startDate = meeting.getPreviousStartDate(isAdjusted: true)
-          let startTime = startDate.localizedTime
+          let startDate = meeting.previousOccurrenceDateFast()
+          
+          let timeFormatter = DateFormatter()
+          timeFormatter.locale = .current
+          timeFormatter.timeZone = .autoupdatingCurrent
+          timeFormatter.dateStyle = .none
+          timeFormatter.timeStyle = .short
+          
+          let weekdayFormatter = DateFormatter()
+          weekdayFormatter.locale = .current
+          weekdayFormatter.timeZone = .autoupdatingCurrent
+          weekdayFormatter.setLocalizedDateFormatFromTemplate("EEEE")
+          
+          let startTime = timeFormatter.string(from: startDate)
           
           if meeting.iAttend {
                typeImage?.image = UIImage(systemName: "checkmark.square.fill")
@@ -274,7 +286,18 @@ extension VMF_TableCell {
           
           let meetingName = meeting.name
           let timeZoneString = myController.getMeetingTimeZone(meeting)
-          let inProgressString = String(format: (Calendar.current.startOfDay(for: .now) > startDate ? "SLUG-IN-PROGRESS-YESTERDAY-FORMAT" : "SLUG-IN-PROGRESS-FORMAT").localizedVariant, startTime)
+          
+          var userCalendar = Calendar.autoupdatingCurrent
+          userCalendar.timeZone = .autoupdatingCurrent
+          
+          let inProgressString = String(
+               format: (
+                    userCalendar.startOfDay(for: .now) > userCalendar.startOfDay(for: startDate)
+                    ? "SLUG-IN-PROGRESS-YESTERDAY-FORMAT"
+                    : "SLUG-IN-PROGRESS-FORMAT"
+               ).localizedVariant,
+               startTime
+          )
           
           nameLabel?.text = meetingName
           
@@ -292,13 +315,24 @@ extension VMF_TableCell {
                inProgressLabel?.isHidden = true
           }
           
-          let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
-          let nextStart = meeting.getNextStartDate(isAdjusted: true)
+          let nextStart = meeting.nextOccurrenceDateFast()
+          let weekday = weekdayFormatter.string(from: nextStart)
+          let nextStartTime = timeFormatter.string(from: nextStart)
           
           if 0 < meeting.duration {
-               timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant, weekday, nextStart.localizedTime, nextStart.addingTimeInterval(meeting.duration).localizedTime)
+               let endTime = timeFormatter.string(from: nextStart.addingTimeInterval(meeting.duration))
+               timeAndDayLabel?.text = String(
+                    format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant,
+                    weekday,
+                    nextStartTime,
+                    endTime
+               )
           } else {
-               timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, nextStart.localizedTime)
+               timeAndDayLabel?.text = String(
+                    format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant,
+                    weekday,
+                    nextStartTime
+               )
           }
      }
 }

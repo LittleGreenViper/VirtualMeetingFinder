@@ -370,46 +370,57 @@ extension VMF_MeetingInspectorViewController {
       - returns: a new EKEvent for the meeting, or nil.
       */
      var attendanceEvent: EKEvent? {
-          guard var meeting = meeting,
-                let appURI = meeting.linkURL
-          else { return nil }
-          
-          let event = EKEvent(eventStore: eventStore)
-          
-          event.addRecurrenceRule(EKRecurrenceRule(recurrenceWith: .weekly, interval: 1, end: nil))
-          event.title = meeting.name
-          event.timeZone = meeting.timeZone
-          event.startDate = meeting.getNextStartDate(isAdjusted: true)
-          event.endDate = event.startDate.addingTimeInterval(meeting.duration)
-          event.url = appURI
-          event.location = meeting.directAppURI?.absoluteString ?? appURI.absoluteString
-          event.recurrenceRules = [EKRecurrenceRule(recurrenceWith: .weekly, interval: 1, end: nil)]
-          
-          var notes = [String]()
-          
-          if let myCurrentTimezoneName = TimeZone.current.localizedName(for: .standard, locale: .current),
-             let zoneName = meeting.timeZone.localizedName(for: .standard, locale: .current),
-             myCurrentTimezoneName != zoneName {
-               let nativeTime = meeting.getNextStartDate(isAdjusted: false)
-               notes.append(String(format: "SLUG-TIMEZONE-FORMAT".localizedVariant, zoneName, nativeTime.localizedTime))
-          }
-          
-          if let comments = meeting.comments,
-             !comments.isEmpty {
-               notes.append(comments)
-          }
-          
-          for format in meeting.formats {
-               let key = format.key
-               let name = format.name
-               let description = format.description
-               let mainString = String(format: "%@ - %@", key, name)
-               notes.append("\(mainString)\n\(description)")
-          }
-          
-          event.notes = notes.joined(separator: "\n\n")
-          
-          return event
+         guard let meeting = meeting,
+               let appURI = meeting.linkURL
+         else { return nil }
+         
+         let nextStart = meeting.nextOccurrenceDateFast()
+         let event = EKEvent(eventStore: eventStore)
+         
+         event.title = meeting.name
+         event.timeZone = meeting.timeZone
+         event.startDate = nextStart
+         event.endDate = nextStart.addingTimeInterval(meeting.duration)
+         event.url = appURI
+         event.location = meeting.directAppURI?.absoluteString ?? appURI.absoluteString
+         event.recurrenceRules = [
+             EKRecurrenceRule(recurrenceWith: .weekly, interval: 1, end: nil)
+         ]
+         
+         var notes = [String]()
+         
+         if TimeZone.current.identifier != meeting.timeZone.identifier,
+            let zoneName = meeting.timeZone.localizedName(for: .standard, locale: .current),
+            !zoneName.isEmpty {
+             let formatter = DateFormatter()
+             formatter.locale = .current
+             formatter.timeZone = meeting.timeZone
+             formatter.dateStyle = .none
+             formatter.timeStyle = .short
+             
+             let nativeTimeString = formatter.string(from: nextStart)
+             notes.append(
+                 String(
+                     format: "SLUG-TIMEZONE-FORMAT".localizedVariant,
+                     zoneName,
+                     nativeTimeString
+                 )
+             )
+         }
+         
+         if let comments = meeting.comments,
+            !comments.isEmpty {
+             notes.append(comments)
+         }
+         
+         for format in meeting.formats {
+             let mainString = String(format: "%@ - %@", format.key, format.name)
+             notes.append("\(mainString)\n\(format.description)")
+         }
+         
+         event.notes = notes.joined(separator: "\n\n")
+         
+         return event
      }
      
      /* ################################################################## */
@@ -672,21 +683,47 @@ extension VMF_MeetingInspectorViewController {
       Sets the time and weekday (local) for the meeting.
       */
      func setTimeAndWeekday() {
-          guard var meeting = meeting,
-                (1..<8).contains(meeting.weekday)
-          else { return }
-          
-          let weekday = Calendar.current.weekdaySymbols[meeting.adjustedWeekday - 1]
-          let prevTime = meeting.getPreviousStartDate(isAdjusted: true)
-          let startTime = meeting.getNextStartDate(isAdjusted: true)
-          
-          if 0 < meeting.duration {
-               timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant, weekday, startTime.localizedTime, startTime.addingTimeInterval(meeting.duration).localizedTime)
-               inProgressLabel?.isHidden = !(prevTime...prevTime.addingTimeInterval(meeting.duration)).contains(.now)
-          } else {
-               timeAndDayLabel?.text = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant, weekday, startTime.localizedTime)
-               inProgressLabel?.isHidden = true
-          }
+         guard let meeting = meeting,
+               (1..<8).contains(meeting.weekday)
+         else { return }
+         
+         let previousStart = meeting.previousOccurrenceDateFast()
+         let nextStart = meeting.nextOccurrenceDateFast()
+         
+         let weekdayFormatter = DateFormatter()
+         weekdayFormatter.locale = .current
+         weekdayFormatter.timeZone = .autoupdatingCurrent
+         weekdayFormatter.setLocalizedDateFormatFromTemplate("EEEE")
+         
+         let timeFormatter = DateFormatter()
+         timeFormatter.locale = .current
+         timeFormatter.timeZone = .autoupdatingCurrent
+         timeFormatter.dateStyle = .none
+         timeFormatter.timeStyle = .short
+         
+         let weekday = weekdayFormatter.string(from: nextStart)
+         let startTime = timeFormatter.string(from: nextStart)
+         
+         if 0 < meeting.duration {
+             let endDate = nextStart.addingTimeInterval(meeting.duration)
+             let endTime = timeFormatter.string(from: endDate)
+             
+             timeAndDayLabel?.text = String(
+                 format: "SLUG-WEEKDAY-TIME-DURATION-FORMAT".localizedVariant,
+                 weekday,
+                 startTime,
+                 endTime
+             )
+             
+             inProgressLabel?.isHidden = !(previousStart...previousStart.addingTimeInterval(meeting.duration)).contains(.now)
+         } else {
+             timeAndDayLabel?.text = String(
+                 format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant,
+                 weekday,
+                 startTime
+             )
+             inProgressLabel?.isHidden = true
+         }
      }
      
      /* ################################################################## */

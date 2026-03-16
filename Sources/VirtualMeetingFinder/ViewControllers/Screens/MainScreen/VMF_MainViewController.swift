@@ -509,25 +509,24 @@ extension VMF_MainViewController {
       These are the meetings that are currently in progress. They are sorted in ascending local start time.
       */
      var inProgressMeetings: [MeetingInstance] {
-          VMF_AppDelegate.virtualService?.meetings.compactMap { $0.isInProgress ? $0.meeting : nil }.sorted { a, b in
-               var mutableA = a
-               var mutableB = b
-               
-               let aDate = mutableA.getPreviousStartDate(isAdjusted: true)
-               let bDate = mutableB.getPreviousStartDate(isAdjusted: true)
-               
-               if aDate < bDate {
-                    return true
-               } else if aDate > bDate {
-                    return false
-               } else if a.timeZone.secondsFromGMT() < b.timeZone.secondsFromGMT() {
-                    return true
-               } else if a.timeZone.secondsFromGMT() > b.timeZone.secondsFromGMT() {
-                    return false
-               } else {
-                    return a.name.lowercased() < b.name.lowercased()
-               }
-          } ?? []
+         VMF_AppDelegate.virtualService?.meetings
+             .compactMap { $0.isInProgress ? $0.meeting : nil }
+             .sorted { a, b in
+                 let aDate = a.previousOccurrenceDateFast()
+                 let bDate = b.previousOccurrenceDateFast()
+                 
+                 if aDate < bDate {
+                     return true
+                 } else if aDate > bDate {
+                     return false
+                 } else if a.timeZone.secondsFromGMT(for: aDate) < b.timeZone.secondsFromGMT(for: bDate) {
+                     return true
+                 } else if a.timeZone.secondsFromGMT(for: aDate) > b.timeZone.secondsFromGMT(for: bDate) {
+                     return false
+                 } else {
+                     return a.name.localizedCaseInsensitiveCompare(b.name) == .orderedAscending
+                 }
+             } ?? []
      }
      
      /* ################################################################## */

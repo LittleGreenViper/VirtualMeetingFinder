@@ -18,7 +18,7 @@
  */
 
 import Foundation
-import RVS_Persistent_Prefs
+import RVS_PersistentPrefs
 
 /* ###################################################################################################################################### */
 // MARK: - Persistent Test Harness Settings -

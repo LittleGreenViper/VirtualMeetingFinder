@@ -97,6 +97,8 @@ La nota sul copyright riportata sopra e la presente nota sull'autorizzazione dev
 "SLUG-FORMATS-HEADER"                             =    "Formati riunione";
 /* Questa è l'intestazione, sopra l'indirizzo della riunione di persona, nell'ispettore della riunione. */
 "SLUG-IN-PERSON-HEADER"                           =    "Luogo di incontro di persona";
+/* This is the button that is shown, if Recovrr is also installed. It allows the user to inspect the meeting in the Recovrr app. */
+"SLUG-OPEN-IN-RECOVRR-BUTTON"                     =    "Apri in Recovrr";
 
 // Queste sono la fila di tre icone.
 

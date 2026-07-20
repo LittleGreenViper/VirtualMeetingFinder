@@ -352,6 +352,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                      self.controlPanel?.isHidden = !self.isHeaderExpanded
                      self.setDisclosureButton()
                      self.hardImpactHaptic()
+                     self.tableDisplayController?.valueTable?.reloadData()
                 })
           }
      }

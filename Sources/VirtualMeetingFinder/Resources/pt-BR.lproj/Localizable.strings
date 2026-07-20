@@ -89,6 +89,8 @@
 "SLUG-FORMATS-HEADER" = "Formatos de reunião";
 /* This is the header, over the in-person meeting address, in the Meeting Inspector. */
 "SLUG-IN-PERSON-HEADER" = "Local da reunião presencial";
+/* This is the button that is shown, if Recovrr is also installed. It allows the user to inspect the meeting in the Recovrr app. */
+"SLUG-OPEN-IN-RECOVRR-BUTTON" = "Abrir no Recovrr";
 
 // These are the row of three icons.
 /* This is displayed under the phone icon, in the Meeting Inspector. */

@@ -190,6 +190,11 @@
 /* This hint is applied to the action button in the navbar of the Meeting Inspector Screen */
 "SLUG-ACC-ACTION-BUTTON-HINT" = "Se você selecionar essa opção, uma planilha será exibida, permitindo que você compartilhe um link para a reunião.";
 
+/* Este rótulo é aplicado ao botão "Abrir no Recovrr" da tela de detalhes da reunião. */
+"SLUG-ACC-OPEN-IN-RECOVRR-BUTTON-LABEL"         =   "Abrir esta reunião no Recovrr";
+/* Esta dica é aplicada ao botão "Abrir no Recovrr" da tela de detalhes da reunião. */
+"SLUG-ACC-OPEN-IN-RECOVRR-BUTTON-HINT"          =   "Isso abrirá o app Recovrr e mostrará a reunião nele.";
+
 // MARK: - SETTINGS SCREEN -
 /* This is the label for the switch to enable/disable Service meeting filtering. */
 

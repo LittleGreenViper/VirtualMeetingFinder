@@ -189,10 +189,15 @@ La nota sul copyright riportata sopra e la presente nota sull'autorizzazione dev
 /* Questo suggerimento viene applicato al pulsante di azione nella barra di navigazione della schermata Controllo riunione */
 "SLUG-ACC-ACTION-BUTTON-HINT"                   =   "Se selezioni questa opzione, verrà mostrato un foglio che ti consentirà di condividere un link a questa riunione.";
 
+/* Questa etichetta viene applicata al pulsante “Apri in Recovrr” nella schermata dei dettagli della riunione. */
+"SLUG-ACC-OPEN-IN-RECOVRR-BUTTON-LABEL"         =   "Apri questa riunione in Recovrr";
+/* Questo suggerimento viene applicato al pulsante “Apri in Recovrr” nella schermata dei dettagli della riunione. */
+"SLUG-ACC-OPEN-IN-RECOVRR-BUTTON-HINT"          =   "Verrà aperta l’app Recovrr e la riunione sarà mostrata al suo interno.";
+
 // MARK: - SCHERMATA IMPOSTAZIONI -
 
 /* Questa è l'etichetta per lo switch per abilitare/disabilitare il filtro delle riunioni di servizio. */
-"SLUG-FILTER-SERVICE-MEETINGS"                  =    "Riduci riunioni di servizio";
+"SLUG-FILTER-SERVICE-MEETINGS"                  =   "Riduci riunioni di servizio";
 /* Questo è il suggerimento per lo switch di abilitare/disabilitare il filtro delle riunioni di servizio. */
 "SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT"         =   "Se questo interruttore è attivo, l'app non visualizzerà alcuna riunione di servizio (non di recupero) che trova.";
 

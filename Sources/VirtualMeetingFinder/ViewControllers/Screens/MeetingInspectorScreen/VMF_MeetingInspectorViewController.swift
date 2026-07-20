@@ -108,7 +108,7 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
       Set to true, after our first layout. We use this to prevent unnecessary animation delays.
       */
      private var _openSezMe = false
-     
+
      /* ################################################################## */
      /**
       This references our map height constraint. We use it for expanding and collapsing the map.
@@ -355,6 +355,12 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
       The navbar button to copy the URI.
       */
      @IBOutlet weak var actionBarButton: UIBarButtonItem?
+     
+     /* ################################################################## */
+     /**
+      The optional "Open in Recovrr" button.
+      */
+     @IBOutlet weak var openInRecovrrButton: UIButton?
 }
 
 /* ###################################################################################################################################### */
@@ -459,6 +465,19 @@ extension VMF_MeetingInspectorViewController {
           
           return activities
      }
+     
+     /* ################################################################## */
+     /**
+      If Recovrr is installed, and we can iopen this meeting in it, the URL is returned.
+      */
+     private var _recovrrURL: URL? {
+          guard let id = self.meeting?.id,
+                let url = URL(string: "rcvr://meeting/\(id)"),
+                UIApplication.shared.canOpenURL(url)
+          else { return nil }
+          
+          return url
+     }
 }
 
 /* ###################################################################################################################################### */
@@ -536,6 +555,15 @@ extension VMF_MeetingInspectorViewController {
           
           actionBarButton?.accessibilityLabel = "SLUG-ACC-ACTION-BUTTON-LABEL".accessibilityLocalizedVariant
           actionBarButton?.accessibilityHint = "SLUG-ACC-ACTION-BUTTON-HINT".accessibilityLocalizedVariant
+          
+          if nil != _recovrrURL {
+               openInRecovrrButton?.isHidden = false
+               openInRecovrrButton?.setTitle(openInRecovrrButton?.title(for: .normal)?.localizedVariant, for: .normal)
+               openInRecovrrButton?.accessibilityLabel = openInRecovrrButton?.accessibilityLabel?.accessibilityLocalizedVariant
+               openInRecovrrButton?.accessibilityHint = openInRecovrrButton?.accessibilityHint?.accessibilityLocalizedVariant
+          } else {
+               openInRecovrrButton?.isHidden = true
+          }
           
           navigationItem.title = ((.hybrid == meeting?.meetingType) ? "SLUG-HYBRID-MEETING" : "SLUG-VIRTUAL-MEETING").localizedVariant
           
@@ -1003,7 +1031,18 @@ extension VMF_MeetingInspectorViewController {
           
           present(viewController, animated: true, completion: nil)
      }
-     
+
+     /* ################################################################## */
+     /**
+      The optional "Open in Recovrr" button was selected
+      
+      - parameter inButton: The button (ignored).
+      */
+     @IBAction func openInRecovrrButtonHit(_ inButton: Any) {
+          guard let _recovrrURL else { return }
+          UIApplication.shared.open(_recovrrURL, options: [:], completionHandler: nil)
+     }
+
      /* ################################################################## */
      /**
       The "I Attend" bar button item was hit.

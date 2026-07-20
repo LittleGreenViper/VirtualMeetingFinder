@@ -25,6 +25,7 @@
 		<string>gmeet</string>
 		<string>waze</string>
 		<string>whatsapp</string>
+		<string>rcvr</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

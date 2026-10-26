@@ -444,7 +444,7 @@ final class VMF_RecovrrButton: UIButton {
      override func updateConfiguration() {
           super.updateConfiguration()
           guard var style = configuration else { return }
-          let foreground = tintColor.withAlphaComponent(isEnabled && !isHighlighted ? 1 : 0.55)
+          let foreground = UIColor.label.withAlphaComponent(isEnabled && !isHighlighted ? 1 : 0.55)
           style.baseForegroundColor = foreground
           style.background.backgroundColor = UIColor(named: "RecovrrButtonFill")
           style.background.backgroundColorTransformer = UIConfigurationColorTransformer { $0 }

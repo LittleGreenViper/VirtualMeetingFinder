@@ -473,7 +473,7 @@ extension VMF_MeetingInspectorViewController {
      private var _recovrrURL: URL? {
           guard let id = self.meeting?.id,
                 let url = URL(string: "rcvr://meeting/\(id)"),
-                UIApplication.shared.canOpenURL(url)
+                (VMF_AppDelegate.isScreenshot || UIApplication.shared.canOpenURL(url))
           else { return nil }
           
           return url
@@ -1050,9 +1050,9 @@ extension VMF_MeetingInspectorViewController {
       - parameter: ignored
       */
      @objc func iAttendHit(_: Any) {
-          guard var meeting = meeting else { return }
+          guard let meeting = meeting else { return }
           let originalState = meeting.iAttend
-          meeting.iAttend = !originalState
+          meeting.setAttendance(!originalState)
           
           selectionHaptic()
           

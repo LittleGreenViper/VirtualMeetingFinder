@@ -31,6 +31,23 @@ import RVS_BasicGCDTimer
  */
 @main
 class VMF_AppDelegate: UIResponder {
+     /// Screenshot presentation overrides are restricted to simulator screenshot builds.
+     static var isScreenshot: Bool {
+          #if targetEnvironment(simulator) && VMF_SCREENSHOTS
+          return true
+          #else
+          return false
+          #endif
+     }
+
+     override init() {
+          super.init()
+          if Self.isScreenshot {
+               // Ask SwiftBMLSDK to expose recognized meeting apps without installation checks.
+               setenv("SKIP_CANOPEN", "1", 1)
+          }
+     }
+
      /* ################################################################## */
      /**
       This is our query instance. It returns a new query instance, freshly initialized to the Root Server, every time it's called.

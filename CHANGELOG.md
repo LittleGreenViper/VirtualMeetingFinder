@@ -1,3 +1,13 @@
+**1.4.1** *October 26, 2026*
+
+- Updated the SwiftBMLSDK and PhoneNumberKit dependencies.
+- Restyled the Open In Recovrr button, so it is more akin to the ones used in the Recovrr app.
+
+**1.4.0** *July 20, 2026*
+
+- Moved the Open in Recovrr to an explicit button in the Meeting Inspector Screen.
+- Updated the SwiftBMLSDK dependency, which improves performance.
+
 **1.3.0** *February 12, 2026*
 
 - Added an "Open in Recovrr" option to the meeting inspector action sheet.

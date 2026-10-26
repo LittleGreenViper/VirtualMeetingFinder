@@ -17,6 +17,7 @@
 		D43A9C192C374198001285FC /* VMF_Persistent_Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A9C172C374198001285FC /* VMF_Persistent_Prefs.swift */; };
 		D43A9C1A2C374198001285FC /* VMF_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A9C182C374198001285FC /* VMF_Extensions.swift */; };
 		D43D850C2C5E616D00E6EB2B /* VMF_Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43D850B2C5E616D00E6EB2B /* VMF_Activity.swift */; };
+		D454C7F0308F743000BFFA2B /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = D454C7EF308F743000BFFA2B /* PhoneNumberKit */; };
 		D455E5672C396F3A00246848 /* VMF_AttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D455E5662C396F3A00246848 /* VMF_AttendanceViewController.swift */; };
 		D45E42022C3F2BA7006578F6 /* VMF_SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E42012C3F2BA7006578F6 /* VMF_SettingsViewController.swift */; };
 		D47C2F0E2C2C5E6A0048C91C /* VMF_BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47C2F0D2C2C5E6A0048C91C /* VMF_BaseViewController.swift */; };
@@ -101,6 +102,7 @@
 				D48816152C35860F008DF936 /* RVS_BasicGCDTimer in Frameworks */,
 				D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */,
 				D41A54A22DE50BFF00EA9A56 /* SwiftBMLSDK in Frameworks */,
+				D454C7F0308F743000BFFA2B /* PhoneNumberKit in Frameworks */,
 				D40128C02F676B600076EB62 /* RVS_PersistentPrefs in Frameworks */,
 				D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */,
 			);
@@ -306,6 +308,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D49393452C2616C8006438AE /* Build configuration list for PBXNativeTarget "We Are Never Alone" */;
 			buildPhases = (
+				A12610260000000000000003 /* Prevent Screenshot Archives */,
 				D493932D2C2616C7006438AE /* Sources */,
 				D493932E2C2616C7006438AE /* Frameworks */,
 				D493932F2C2616C7006438AE /* Resources */,
@@ -319,6 +322,7 @@
 				D48816142C35860F008DF936 /* RVS_BasicGCDTimer */,
 				D41A54A12DE50BFF00EA9A56 /* SwiftBMLSDK */,
 				D40128BF2F676B600076EB62 /* RVS_PersistentPrefs */,
+				D454C7EF308F743000BFFA2B /* PhoneNumberKit */,
 			);
 			productName = VirtualMeetingFinder;
 			productReference = D49393312C2616C7006438AE /* We Are Never Alone.app */;
@@ -332,7 +336,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 2660;
+				LastUpgradeCheck = 2710;
 				TargetAttributes = {
 					D49393302C2616C7006438AE = {
 						CreatedOnToolsVersion = 15.4;
@@ -358,6 +362,7 @@
 				D48816132C35860F008DF936 /* XCRemoteSwiftPackageReference "RVS_BasicGCDTimer" */,
 				D41A54A02DE50BFF00EA9A56 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */,
 				D40128BE2F676B600076EB62 /* XCRemoteSwiftPackageReference "RVS_PersistentPrefs" */,
+				D454C7EE308F743000BFFA2B /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
 			);
 			preferredProjectObjectVersion = 90;
 			productRefGroup = D49393322C2616C7006438AE /* Products */;
@@ -382,6 +387,22 @@
 			);
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A12610260000000000000003 /* Prevent Screenshot Archives */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			name = "Prevent Screenshot Archives";
+			shellPath = /bin/sh;
+			shellScript = (
+				"if [ \"$CONFIGURATION\" = \"Screenshots\" ] && { [ \"$ACTION\" = \"install\" ] || [ \"$ACTION\" = \"archive\" ]; }; then",
+				"    echo \"error: Screenshots builds cannot be archived. Use the regular We Are Never Alone scheme.\"",
+				"    exit 1",
+				"fi",
+				"",
+			);
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D493932D2C2616C7006438AE /* Sources */ = {
@@ -466,6 +487,121 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A12610260000000000000001 /* Screenshots configuration for PBXProject "VirtualMeetingFinder" */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4AD6A122C261B75002E37F3 /* Warnings.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = P53V4JS928;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Screenshots;
+		};
+		A12610260000000000000002 /* Screenshots configuration for PBXNativeTarget "We Are Never Alone" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Meta/VirtualMeetingFinder.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0000;
+				DRIVERKIT_DEPLOYMENT_TARGET = "$(RECOMMENDED_DRIVERKIT_DEPLOYMENT_TARGET)";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Sources/VirtualMeetingFinder/Meta/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
+				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = VMF_LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = VMF;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MARKETING_VERSION = 1.4.1;
+				PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = iphonesimulator;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) VMF_SCREENSHOTS";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_TVOS_DEPLOYMENT_TARGET)";
+				WATCHOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_WATCHOS_DEPLOYMENT_TARGET)";
+				XROS_DEPLOYMENT_TARGET = "$(RECOMMENDED_XROS_DEPLOYMENT_TARGET)";
+			};
+			name = Screenshots;
+		};
 		D49393432C2616C8006438AE /* Debug configuration for PBXProject "VirtualMeetingFinder" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D4AD6A122C261B75002E37F3 /* Warnings.xcconfig */;
@@ -602,8 +738,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Meta/VirtualMeetingFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0001;
-				DRIVERKIT_DEPLOYMENT_TARGET = "";
+				CURRENT_PROJECT_VERSION = 0000;
+				DRIVERKIT_DEPLOYMENT_TARGET = "$(RECOMMENDED_DRIVERKIT_DEPLOYMENT_TARGET)";
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_RESOURCE_ACCESS_CALENDARS = YES;
@@ -619,12 +755,13 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = VMF;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.4.0;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -633,9 +770,9 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TVOS_DEPLOYMENT_TARGET = "";
-				WATCHOS_DEPLOYMENT_TARGET = "";
-				XROS_DEPLOYMENT_TARGET = "";
+				TVOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_TVOS_DEPLOYMENT_TARGET)";
+				WATCHOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_WATCHOS_DEPLOYMENT_TARGET)";
+				XROS_DEPLOYMENT_TARGET = "$(RECOMMENDED_XROS_DEPLOYMENT_TARGET)";
 			};
 			name = Debug;
 		};
@@ -646,8 +783,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Meta/VirtualMeetingFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0001;
-				DRIVERKIT_DEPLOYMENT_TARGET = "";
+				CURRENT_PROJECT_VERSION = 0000;
+				DRIVERKIT_DEPLOYMENT_TARGET = "$(RECOMMENDED_DRIVERKIT_DEPLOYMENT_TARGET)";
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_RESOURCE_ACCESS_CALENDARS = YES;
@@ -663,12 +800,13 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = VMF;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.4.0;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -677,9 +815,9 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TVOS_DEPLOYMENT_TARGET = "";
-				WATCHOS_DEPLOYMENT_TARGET = "";
-				XROS_DEPLOYMENT_TARGET = "";
+				TVOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_TVOS_DEPLOYMENT_TARGET)";
+				WATCHOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_WATCHOS_DEPLOYMENT_TARGET)";
+				XROS_DEPLOYMENT_TARGET = "$(RECOMMENDED_XROS_DEPLOYMENT_TARGET)";
 			};
 			name = Release;
 		};
@@ -690,6 +828,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D49393432C2616C8006438AE /* Debug configuration for PBXProject "VirtualMeetingFinder" */,
+				A12610260000000000000001 /* Screenshots configuration for PBXProject "VirtualMeetingFinder" */,
 				D49393442C2616C8006438AE /* Release configuration for PBXProject "VirtualMeetingFinder" */,
 			);
 			defaultConfigurationName = Release;
@@ -698,6 +837,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D49393462C2616C8006438AE /* Debug configuration for PBXNativeTarget "We Are Never Alone" */,
+				A12610260000000000000002 /* Screenshots configuration for PBXNativeTarget "We Are Never Alone" */,
 				D49393472C2616C8006438AE /* Release configuration for PBXNativeTarget "We Are Never Alone" */,
 			);
 			defaultConfigurationName = Release;
@@ -710,7 +850,7 @@
 			repositoryURL = "https://github.com/RiftValleySoftware/RVS_PersistentPrefs";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.6.0;
+				minimumVersion = 1.17.0;
 			};
 		};
 		D41A54A02DE50BFF00EA9A56 /* XCRemoteSwiftPackageReference "SwiftBMLSDK" */ = {
@@ -718,7 +858,7 @@
 			repositoryURL = "https://github.com/LittleGreenViper/SwiftBMLSDK";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.3;
+				minimumVersion = 1.5.7;
 			};
 		};
 		D4398E652C2892790001FAE3 /* XCRemoteSwiftPackageReference "RVS_Generic_Swift_Toolbox" */ = {
@@ -726,7 +866,7 @@
 			repositoryURL = "https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.17.0;
+				minimumVersion = 1.18.1;
 			};
 		};
 		D4398E682C2892830001FAE3 /* XCRemoteSwiftPackageReference "RVS_UIKit_Toolbox" */ = {
@@ -734,7 +874,15 @@
 			repositoryURL = "https://github.com/RiftValleySoftware/RVS_UIKit_Toolbox";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.7.2;
+				minimumVersion = 1.7.6;
+			};
+		};
+		D454C7EE308F743000BFFA2B /* XCRemoteSwiftPackageReference "PhoneNumberKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PhoneNumberKit/PhoneNumberKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.12;
 			};
 		};
 		D48816132C35860F008DF936 /* XCRemoteSwiftPackageReference "RVS_BasicGCDTimer" */ = {
@@ -742,7 +890,7 @@
 			repositoryURL = "https://github.com/RiftValleySoftware/RVS_BasicGCDTimer";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.7.3;
+				minimumVersion = 1.8.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -767,6 +915,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D4398E682C2892830001FAE3 /* XCRemoteSwiftPackageReference "RVS_UIKit_Toolbox" */;
 			productName = RVS_UIKit_Toolbox;
+		};
+		D454C7EF308F743000BFFA2B /* PhoneNumberKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D454C7EE308F743000BFFA2B /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
+			productName = PhoneNumberKit;
 		};
 		D48816142C35860F008DF936 /* RVS_BasicGCDTimer */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -520,8 +520,7 @@ extension VMF_EmbeddedTableController {
       - parameter inMeeting: The meeting instance.
       */
      func attendanceChanged(_ inMeeting: MeetingInstance) {
-          var mutableMeeting = inMeeting
-          mutableMeeting.iAttend = !inMeeting.iAttend
+          inMeeting.setAttendance(!inMeeting.iAttend)
           successHaptic()
           valueTable?.reloadData()
           myController?.setAttendance()   // This tells the "owner" to update its table and bar button.

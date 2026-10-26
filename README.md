@@ -60,6 +60,12 @@ This is a screen that is brought in from the Main Screen, that allows the user t
 
 This is another screen that is brought in from the Settings Screen, that has information about the app, such as its specific version, and links to dependencies.
 
+## Screenshots
+
+Select the **We Are Never Alone (For Screenshots)** scheme and an iPhone or iPad simulator. Its Screenshots configuration displays the supported virtual-meeting app control for the meeting's connection URL, even when that app is not installed, and displays Open in Recovrr. These controls are for screenshot presentation; the simulator does not gain cameras or installed apps.
+
+Archiving is disabled in the scheme, and a build guard rejects archive/install actions using the Screenshots configuration. Regular Debug and Release builds retain their normal availability checks.
+
 ## Dependencies
 
 - [`RVS_BasicGCDTimer`](https://github.com/RiftValleySoftware/RVS_BasicGCDTimer)

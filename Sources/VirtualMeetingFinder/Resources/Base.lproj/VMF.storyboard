@@ -1249,7 +1249,7 @@
                                                     <constraint firstAttribute="height" id="afA-rx-knH"/>
                                                 </constraints>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="muY-vL-JjX">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="muY-vL-JjX" customClass="VMF_RecovrrButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
                                                 <rect key="frame" x="39" y="605" width="251" height="30"/>
                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-OPEN-IN-RECOVRR-BUTTON-HINT" label="SLUG-ACC-OPEN-IN-RECOVRR-BUTTON-LABEL"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>

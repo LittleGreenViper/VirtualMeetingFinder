@@ -108,10 +108,10 @@ extension VMF_SettingsViewController {
           guard let dtg = doubleTapEaterGestureRecognizer else { return }
           singleTapGestureRecognizer?.require(toFail: dtg)
           
-          infoBarButtonItem?.accessibilityLabel = "SLUG-ACC-ABOUT-BUTTON-LABEL".accessibilityLocalizedVariant
-          infoBarButtonItem?.accessibilityHint = "SLUG-ACC-ABOUT-BUTTON-HINT".accessibilityLocalizedVariant
-          filterServiceMeetingsSwitchContainer?.accessibilityLabel = "SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL".accessibilityLocalizedVariant
-          filterServiceMeetingsSwitchContainer?.accessibilityHint = "SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT".accessibilityLocalizedVariant
+          infoBarButtonItem?.accessibilityLabel = "SLUG-ACC-ABOUT-BUTTON-LABEL".localizedVariant
+          infoBarButtonItem?.accessibilityHint = "SLUG-ACC-ABOUT-BUTTON-HINT".localizedVariant
+          filterServiceMeetingsSwitchContainer?.accessibilityLabel = "SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL".localizedVariant
+          filterServiceMeetingsSwitchContainer?.accessibilityHint = "SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT".localizedVariant
           
           filterServiceMeetingsLabelButton?.setTitle(filterServiceMeetingsLabelButton?.title(for: .normal)?.localizedVariant, for: .normal)
           filterServiceMeetingsSwitch?.isOn = VMF_AppDelegate.prefs.excludeServiceMeetings

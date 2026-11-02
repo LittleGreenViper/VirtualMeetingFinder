@@ -553,14 +553,14 @@ extension VMF_MeetingInspectorViewController {
           globeLabelButton?.text = globeLabelButton?.text?.localizedVariant
           videoLabelButton?.text = videoLabelButton?.text?.localizedVariant
           
-          actionBarButton?.accessibilityLabel = "SLUG-ACC-ACTION-BUTTON-LABEL".accessibilityLocalizedVariant
-          actionBarButton?.accessibilityHint = "SLUG-ACC-ACTION-BUTTON-HINT".accessibilityLocalizedVariant
+          actionBarButton?.accessibilityLabel = "SLUG-ACC-ACTION-BUTTON-LABEL".localizedVariant
+          actionBarButton?.accessibilityHint = "SLUG-ACC-ACTION-BUTTON-HINT".localizedVariant
           
           if nil != _recovrrURL {
                openInRecovrrButton?.isHidden = false
                openInRecovrrButton?.setTitle(openInRecovrrButton?.title(for: .normal)?.localizedVariant, for: .normal)
-               openInRecovrrButton?.accessibilityLabel = openInRecovrrButton?.accessibilityLabel?.accessibilityLocalizedVariant
-               openInRecovrrButton?.accessibilityHint = openInRecovrrButton?.accessibilityHint?.accessibilityLocalizedVariant
+               openInRecovrrButton?.accessibilityLabel = openInRecovrrButton?.accessibilityLabel?.localizedVariant
+               openInRecovrrButton?.accessibilityHint = openInRecovrrButton?.accessibilityHint?.localizedVariant
           } else {
                openInRecovrrButton?.isHidden = true
           }
@@ -613,8 +613,8 @@ extension VMF_MeetingInspectorViewController {
                linkContainer?.isHidden = false
                videoButtonContainer?.isHidden = false
                videoLabelButton?.text = directApp.appName.localizedVariant
-               videoButtonContainer?.accessibilityLabel = String(format: "SLUG-ACC-VIDEO-MI-LABEL-FORMAT".accessibilityLocalizedVariant, directApp.appName.localizedVariant)
-               videoButtonContainer?.accessibilityHint = String(format: "SLUG-ACC-VIDEO-MI-HINT-FORMAT".accessibilityLocalizedVariant, directApp.appName.localizedVariant)
+               videoButtonContainer?.accessibilityLabel = String(format: "SLUG-ACC-VIDEO-MI-LABEL-FORMAT".localizedVariant, directApp.appName.localizedVariant)
+               videoButtonContainer?.accessibilityHint = String(format: "SLUG-ACC-VIDEO-MI-HINT-FORMAT".localizedVariant, directApp.appName.localizedVariant)
           }
           
           if let webLinkURL = meeting?.virtualURL,
@@ -890,8 +890,8 @@ extension VMF_MeetingInspectorViewController {
           iAttendBarButton?.target = self
           iAttendBarButton?.action = #selector(iAttendHit)
           
-          iAttendBarButton?.accessibilityLabel = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-LABEL".accessibilityLocalizedVariant
-          iAttendBarButton?.accessibilityHint = "SLUG-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-HINT".accessibilityLocalizedVariant
+          iAttendBarButton?.accessibilityLabel = "SLUG-ACC-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-LABEL".localizedVariant
+          iAttendBarButton?.accessibilityHint = "SLUG-ACC-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-HINT".localizedVariant
      }
      
      /* ################################################################## */

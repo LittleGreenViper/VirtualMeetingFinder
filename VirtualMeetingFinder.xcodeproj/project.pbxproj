@@ -10,7 +10,6 @@
 		D40128C02F676B600076EB62 /* RVS_PersistentPrefs in Frameworks */ = {isa = PBXBuildFile; productRef = D40128BF2F676B600076EB62 /* RVS_PersistentPrefs */; };
 		D40133692C320C070018076B /* VMF_MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40133682C320C070018076B /* VMF_MainViewController.swift */; };
 		D401336B2C320D520018076B /* VMF_EmbeddedTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */; };
-		D40EB4DE2C3B142B00AAE33B /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = D40EB4DC2C3B142B00AAE33B /* Accessibility.strings */; };
 		D41A54A22DE50BFF00EA9A56 /* SwiftBMLSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D41A54A12DE50BFF00EA9A56 /* SwiftBMLSDK */; };
 		D4398E672C2892790001FAE3 /* RVS_Generic_Swift_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */; };
 		D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */; };
@@ -40,13 +39,9 @@
 /* Begin PBXFileReference section */
 		D40133682C320C070018076B /* VMF_MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MainViewController.swift; sourceTree = "<group>"; };
 		D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_EmbeddedTableController.swift; sourceTree = "<group>"; };
-		D40EB4DD2C3B142B00AAE33B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		D42997D32C57B05D00164E46 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		D42997D42C57B05D00164E46 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Accessibility.strings"; sourceTree = "<group>"; };
 		D42997D52C57B06900164E46 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D42997D62C57B06900164E46 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		D42997D72C57B07300164E46 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D42997D82C57B07300164E46 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		D43A9C172C374198001285FC /* VMF_Persistent_Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Persistent_Prefs.swift; sourceTree = "<group>"; };
 		D43A9C182C374198001285FC /* VMF_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Extensions.swift; sourceTree = "<group>"; };
 		D43D850B2C5E616D00E6EB2B /* VMF_Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_Activity.swift; sourceTree = "<group>"; };
@@ -74,19 +69,21 @@
 		D4AD6A182C261BCA002E37F3 /* CODEOWNERS */ = {isa = PBXFileReference; lastKnownFileType = text; path = CODEOWNERS; sourceTree = "<group>"; };
 		D4AD6A192C261BCA002E37F3 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D4B155642C529F2400A703F7 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D4B155652C529F2400A703F7 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		D4B3E2B32C41B6CE00CD672E /* VirtualMeetingFinder.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = VirtualMeetingFinder.docc; sourceTree = "<group>"; };
 		D4B69A332C2B162800D24DA6 /* VMF_MeetingInspectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MeetingInspectorViewController.swift; sourceTree = "<group>"; };
 		D4BC72A62C4C85A600955DD8 /* Logo.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Logo.pdf; sourceTree = "<group>"; };
 		D4BC72A72C4C85A600955DD8 /* SocialPreview.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = SocialPreview.pdf; sourceTree = "<group>"; };
 		D4BC72A82C4C85A600955DD8 /* TypeIcons.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = TypeIcons.pdf; sourceTree = "<group>"; };
 		D4D320262C6BEDB00023B32A /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D4D320272C6BEDB00023B32A /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		D4D320282C6BEDB00023B32A /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D4DDAB812C4039570018944E /* VMF_AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_AboutViewController.swift; sourceTree = "<group>"; };
 		D4E607262C5D127A00E88D23 /* jazzy.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = jazzy.command; sourceTree = "<group>"; };
 		D4E7C6C82C4293E10045ACE6 /* VMF_MainViewController_Methods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MainViewController_Methods.swift; sourceTree = "<group>"; };
 		D4E7C6CA2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MainViewController_Protocols.swift; sourceTree = "<group>"; };
+		D4F01912309934820002C72E /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D4F01914309934820002C72E /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D4F01915309934930002C72E /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D4F01917309934930002C72E /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D4F4BCEC2C36DAFC0023C21B /* VMF_MapMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MapMarker.swift; sourceTree = "<group>"; };
 		D4F8FC9C2C5A689000D6884E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D4F8FC9F2C5A68E500D6884E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -247,7 +244,6 @@
 			children = (
 				D493933A2C2616C7006438AE /* VMF.storyboard */,
 				D49349702C29A6D100C58390 /* Localizable.strings */,
-				D40EB4DC2C3B142B00AAE33B /* Accessibility.strings */,
 				D4F8FC9D2C5A689000D6884E /* InfoPlist.strings */,
 				D493933D2C2616C8006438AE /* Assets.xcassets */,
 				D493933F2C2616C8006438AE /* VMF_LaunchScreen.storyboard */,
@@ -354,6 +350,8 @@
 				fr,
 				de,
 				it,
+				el,
+				"es-419",
 			);
 			mainGroup = D49393282C2616C7006438AE;
 			packageReferences = (
@@ -380,7 +378,6 @@
 			files = (
 				D493933E2C2616C8006438AE /* Assets.xcassets in Resources */,
 				D4F8FC9E2C5A689000D6884E /* InfoPlist.strings in Resources */,
-				D40EB4DE2C3B142B00AAE33B /* Accessibility.strings in Resources */,
 				D49349722C29A6D100C58390 /* Localizable.strings in Resources */,
 				D49393412C2616C8006438AE /* Base in Resources */,
 				D493933C2C2616C7006438AE /* Base in Resources */,
@@ -429,19 +426,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D40EB4DC2C3B142B00AAE33B /* Accessibility.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D40EB4DD2C3B142B00AAE33B /* en */,
-				D4B155652C529F2400A703F7 /* es */,
-				D42997D42C57B05D00164E46 /* pt-BR */,
-				D42997D62C57B06900164E46 /* fr */,
-				D42997D82C57B07300164E46 /* de */,
-				D4D320272C6BEDB00023B32A /* it */,
-			);
-			name = Accessibility.strings;
-			sourceTree = "<group>";
-		};
 		D49349702C29A6D100C58390 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -451,6 +435,8 @@
 				D42997D52C57B06900164E46 /* fr */,
 				D42997D72C57B07300164E46 /* de */,
 				D4D320262C6BEDB00023B32A /* it */,
+				D4F01912309934820002C72E /* el */,
+				D4F01915309934930002C72E /* es-419 */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -480,6 +466,8 @@
 				D4F8FCA12C5A68E700D6884E /* pt-BR */,
 				D4F8FCA22C5A68E800D6884E /* es */,
 				D4D320282C6BEDB00023B32A /* it */,
+				D4F01914309934820002C72E /* el */,
+				D4F01917309934930002C72E /* es-419 */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -572,8 +560,8 @@
 				INFOPLIST_FILE = Sources/VirtualMeetingFinder/Meta/Info.plist;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
-				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app can add a meeting to your calendar when you choose to create an event.";
+				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "This app can add a meeting to your calendar when you choose to create an event.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = VMF_LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = VMF;
@@ -585,7 +573,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -748,8 +736,8 @@
 				INFOPLIST_FILE = Sources/VirtualMeetingFinder/Meta/Info.plist;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
-				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app can add a meeting to your calendar when you choose to create an event.";
+				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "This app can add a meeting to your calendar when you choose to create an event.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = VMF_LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = VMF;
@@ -761,7 +749,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -793,8 +781,8 @@
 				INFOPLIST_FILE = Sources/VirtualMeetingFinder/Meta/Info.plist;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
-				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "This app can add events to your calendar, to remind you of upcoming meeting attendance.";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app can add a meeting to your calendar when you choose to create an event.";
+				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "This app can add a meeting to your calendar when you choose to create an event.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = VMF_LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = VMF;
@@ -806,7 +794,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -882,7 +870,7 @@
 			repositoryURL = "https://github.com/PhoneNumberKit/PhoneNumberKit";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.12;
+				minimumVersion = 5.0.13;
 			};
 		};
 		D48816132C35860F008DF936 /* XCRemoteSwiftPackageReference "RVS_BasicGCDTimer" */ = {

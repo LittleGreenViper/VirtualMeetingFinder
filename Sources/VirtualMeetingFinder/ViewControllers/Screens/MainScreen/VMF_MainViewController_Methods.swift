@@ -392,8 +392,8 @@ extension VMF_MainViewController {
      func setDisclosureButton() {
           self.disclosureButton?.image = UIImage(systemName: isHeaderExpanded ? "inset.filled.rectangle" : "inset.filled.bottomhalf.tophalf.rectangle")
           self.disclosureButton?.isEnabled = true
-          self.disclosureButton?.accessibilityLabel = "SLUG-ACC-DISCLOSURE-BUTTON-\(isHeaderExpanded ? "OPEN" : "CLOSED")-LABEL".accessibilityLocalizedVariant
-          self.disclosureButton?.accessibilityHint = "SLUG-ACC-DISCLOSURE-BUTTON-\(isHeaderExpanded ? "OPEN" : "CLOSED")-HINT".accessibilityLocalizedVariant
+          self.disclosureButton?.accessibilityLabel = "SLUG-ACC-DISCLOSURE-BUTTON-\(isHeaderExpanded ? "OPEN" : "CLOSED")-LABEL".localizedVariant
+          self.disclosureButton?.accessibilityHint = "SLUG-ACC-DISCLOSURE-BUTTON-\(isHeaderExpanded ? "OPEN" : "CLOSED")-HINT".localizedVariant
      }
 }
 
@@ -738,8 +738,8 @@ extension VMF_MainViewController {
           
           for index in (1..<(numberOfSegments - 1)) {
                let weekday = Calendar.current.standaloneWeekdaySymbols[mapWeekday(index) - 1]
-               (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: index) as? UIView)?.accessibilityLabel = String(format: "SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-LABEL-FORMAT".accessibilityLocalizedVariant, weekday)
-               (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: index) as? UIView)?.accessibilityHint = String(format: "SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-HINT-FORMAT".accessibilityLocalizedVariant, weekday)
+               (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: index) as? UIView)?.accessibilityLabel = String(format: "SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-LABEL-FORMAT".localizedVariant, weekday)
+               (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: index) as? UIView)?.accessibilityHint = String(format: "SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-HINT-FORMAT".localizedVariant, weekday)
           }
           
           (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: 8) as? UIView)?.accessibilityLabel = "SLUG-ACC-WEEKDAY-SWITCH-8-LABEL"

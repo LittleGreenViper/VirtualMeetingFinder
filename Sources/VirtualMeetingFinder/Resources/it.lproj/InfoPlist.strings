@@ -1,31 +1,34 @@
 /*
  © Copyright 2024-2026, Little Green Viper Software Development LLC
-con licenza di costruzione:
- 
- Licenza MIT
- 
- L'autorizzazione è concessa, a titolo gratuito, a chiunque ottenga una copia di questo software e della documentazione associata
- file (il "Software"), per gestire il Software senza restrizioni, inclusi, a titolo esemplificativo ma non esaustivo, i diritti di utilizzo, copia,
- modificare, unire, pubblicare, distribuire, concedere in sublicenza e/o vendere copie del Software e consentire alle persone a cui il
-procedere in tal senso, in base alle seguenti condizioni:
- 
-La nota sul copyright riportata sopra e la presente nota sull'autorizzazione devono essere incluse in tutte le copie o parti sostanziali del Software.
- 
- IL SOFTWARE VIENE FORNITO "COSÌ COM'È", SENZA GARANZIE DI ALCUN TIPO, ESPLICITE O IMPLICITE, INCLUSE, A TITOLO ESEMPLIFICATIVO MA NON ESAUSTIVO, LE GARANZIE
- DI COMMERCIABILITÀ, IDONEITÀ A UNO SCOPO PARTICOLARE E NON VIOLAZIONE.
- IN NESSUN CASO GLI AUTORI O I TITOLARI DEI DIRITTI D'AUTORE SARANNO RESPONSABILI PER QUALSIASI RECLAMO, DANNO O ALTRA RESPONSABILITÀ, SIA IN UN'AZIONE DI
- CONTRATTO, ILLECITO O ALTRO, DERIVANTE DA, FUORI DA O IN CONNESSIONE CON IL SOFTWARE O L'UTILIZZO O ALTRI RAPPORTI NEL SOFTWARE.
+ LICENSE:
+
+ MIT License
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
+ files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
+ modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+ Software is furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 // ************************************************        ***********************************************************
 // * -------------------------------------------- *        * ------------------------------------------------------- *
-// *| NON MODIFICARE DA QUESTO LATO DEGLI UGUALI  |*           *|   MODIFICARE IL TESTO DA QUESTO LATO NELLA LINGUA LOCALE |*
+// *|  DO NOT MODIFY ON THIS SIDE OF THE EQUALS  |*        *|   MODIFY THE TEXT ON THIS SIDE TO THE LOCAL LANGUAGE  |*
 // * -------------------------------------------- *        * ------------------------------------------------------- *
 // ************************************************        ***********************************************************
 
-// Questo è il nome della App
+// MARK: -
+
+// This is the app name.
 "CFBundleDisplayName"                             =    "Non siamo mai soli";
-// Visualizzato per gli avvisi di accesso al calendario
-"NSCalendarsUsageDescription"                     =    "Questa app può aggiungere eventi al tuo calendario, per ricordarti della prossima partecipazione alla riunione.";
-// Visualizzato per gli avvisi di accesso al calendario (sistemi operativi più recenti).
-"NSCalendarsWriteOnlyAccessUsageDescription"      =    "Questa app può aggiungere eventi al tuo calendario, per ricordarti della prossima partecipazione alla riunione.";
+// Displayed for the calendar access alerts
+"NSCalendarsUsageDescription"                     =    "Questa app può aggiungere una riunione al tuo calendario quando scegli di creare un evento.";
+// Displayed for the calendar access alerts (newer operating systems).
+"NSCalendarsWriteOnlyAccessUsageDescription"      =    "Questa app può aggiungere una riunione al tuo calendario quando scegli di creare un evento.";
+// MARK: -

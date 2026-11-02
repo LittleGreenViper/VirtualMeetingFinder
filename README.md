@@ -66,6 +66,12 @@ Select the **We Are Never Alone (For Screenshots)** scheme and an iPhone or iPad
 
 Archiving is disabled in the scheme, and a build guard rejects archive/install actions using the Screenshots configuration. Regular Debug and Release builds retain their normal availability checks.
 
+## Localization
+
+The app supports English, German, Greek, Spanish, Latin American Spanish, French, Italian, and Brazilian Portuguese. App text, alerts, and VoiceOver labels and hints share `Localizable.strings` in each language’s resource folder and use `String.localizedVariant` from RVS_Generic_Swift_Toolbox.
+
+`InfoPlist.strings` remains separate because iOS reads the app display name and calendar permission prompts from that table. Use plain language consistent with Recovrr and local NA terminology. Preserve format placeholders, product names, and URLs. Weekday names are supplied by Foundation; avoid adding language-specific plural endings to them.
+
 ## Dependencies
 
 - [`RVS_BasicGCDTimer`](https://github.com/RiftValleySoftware/RVS_BasicGCDTimer)

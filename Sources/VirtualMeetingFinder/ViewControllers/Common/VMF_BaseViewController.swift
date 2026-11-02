@@ -206,8 +206,8 @@ extension VMF_BaseViewController {
            */
           func accessorize(me inView: UIView) {
                inView.subviews.forEach { accessorize(me: $0) }
-               inView.accessibilityLabel = inView.accessibilityLabel?.accessibilityLocalizedVariant
-               inView.accessibilityHint = inView.accessibilityHint?.accessibilityLocalizedVariant
+               inView.accessibilityLabel = inView.accessibilityLabel?.localizedVariant
+               inView.accessibilityHint = inView.accessibilityHint?.localizedVariant
           }
           
           if let tabBar = tabBarController?.tabBar {
@@ -218,16 +218,16 @@ extension VMF_BaseViewController {
                if let view = $0.customView {
                     accessorize(me: view)
                }
-               $0.accessibilityLabel = $0.accessibilityLabel?.accessibilityLocalizedVariant
-               $0.accessibilityHint = $0.accessibilityHint?.accessibilityLocalizedVariant
+               $0.accessibilityLabel = $0.accessibilityLabel?.localizedVariant
+               $0.accessibilityHint = $0.accessibilityHint?.localizedVariant
           }
           
           navigationItem.leftBarButtonItems?.forEach {
                if let view = $0.customView {
                     accessorize(me: view)
                }
-               $0.accessibilityLabel = $0.accessibilityLabel?.accessibilityLocalizedVariant
-               $0.accessibilityHint = $0.accessibilityHint?.accessibilityLocalizedVariant
+               $0.accessibilityLabel = $0.accessibilityLabel?.localizedVariant
+               $0.accessibilityHint = $0.accessibilityHint?.localizedVariant
           }
           
           navigationItem.centerItemGroups.forEach { item in
@@ -235,11 +235,11 @@ extension VMF_BaseViewController {
                     if let view = $0.customView {
                          accessorize(me: view)
                     }
-                    $0.accessibilityLabel = $0.accessibilityLabel?.accessibilityLocalizedVariant
-                    $0.accessibilityHint = $0.accessibilityHint?.accessibilityLocalizedVariant
+                    $0.accessibilityLabel = $0.accessibilityLabel?.localizedVariant
+                    $0.accessibilityHint = $0.accessibilityHint?.localizedVariant
                }
-               item.accessibilityLabel = item.accessibilityLabel?.accessibilityLocalizedVariant
-               item.accessibilityHint = item.accessibilityHint?.accessibilityLocalizedVariant
+               item.accessibilityLabel = item.accessibilityLabel?.localizedVariant
+               item.accessibilityHint = item.accessibilityHint?.localizedVariant
           }
           
           guard let view = view else { return }

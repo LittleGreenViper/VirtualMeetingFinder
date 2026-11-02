@@ -1,21 +1,30 @@
 /*
  © Copyright 2024-2026, Little Green Viper Software Development LLC
  LICENSE:
- 
+
  MIT License
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
  files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
  modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
  Software is furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
+// LOCALIZATION NOTES:
+// App text, alerts, and VoiceOver text share this Localizable table.
+// System permission prompts and the app display name remain in InfoPlist.strings.
+// Use plain, welcoming language consistent with Recovrr and local NA terminology.
+// Keep NA, Recovrr, company names, product names, URLs, and format specifiers intact.
+// Weekday names come from Foundation. Do not add plural endings or require a
+// particular grammatical gender or case; use a neutral day/time layout instead.
+// VoiceOver labels should be short. Hints explain what happens when activated.
 
 // ************************************************           ***********************************************************
 // * -------------------------------------------- *           * ------------------------------------------------------- *
@@ -33,7 +42,7 @@
 /* General-Purpose Back Button */
 "SLUG-BACK"                                       =    "Back";
 /* This is used for the add event action sheet line. */
-"SLUG-ADD-TO-CALENDAR"                            =    "Add to Calendar";
+"SLUG-ADD-TO-CALENDAR"                            =    "Add to calendar";
 
 // MARK: - ALERTS -
 
@@ -42,35 +51,35 @@
 /* Cancel Button for Alerts */
 "SLUG-CANCEL-BUTTON-TEXT"                         =    "Cancel";
 /* Header for Fetch Error Message */
-"SLUG-ALERT-ERROR-HEADER"                         =    "ERROR";
+"SLUG-ALERT-ERROR-HEADER"                         =    "Unable to load meetings";
 /* Body for Fetch Error Message */
-"SLUG-ALERT-ERROR-BODY"                           =    "There was an error fetching the data. The app will not work, until we can fetch the data.";
+"SLUG-ALERT-ERROR-BODY"                           =    "We couldn’t load the meeting list. Check your internet connection and try again.";
 // This is displayed in the alerts that come up when we are requesting some system permission. This is the button that takes you to the Settings App screen, where the permissions switches are.
-"SETTINGS-ALERT-BUTTON-TEXT"                      =   "Go to Settings";
+"SETTINGS-ALERT-BUTTON-TEXT"                      =    "Open Settings";
 
 // MARK: NO PERMISSION FOR CALENDAR ALERT
 // The heading for the error alert that comes up, if we don't have calendar permission.
-"SLUG-CALENDAR-PERM-ALERT-HEADER"                 =   "No Calendar Permission";
+"SLUG-CALENDAR-PERM-ALERT-HEADER"                 =    "Calendar access is off";
 // The body for the error alert that comes up, if we don't have calendar permission.
-"SLUG-CALENDAR-PERM-ALERT-BODY"                   =   "You have denied permission to create calendar entries. Please open the Settings App, and grant Calendar permission to the Recovrr App.";
+"SLUG-CALENDAR-PERM-ALERT-BODY"                   =    "To add a meeting to your calendar, open Settings and allow this app to add calendar events.";
 
 // MARK: - MAIN SCREEN -
 
 /* The name of the screen */
-"SLUG-TAB-0-TITLE"                                =    "Find Meetings";
+"SLUG-TAB-0-TITLE"                                =    "Find meetings";
 /* This is the Title for the time display, when we have selected the "Now" segmented switch item. */
-"SLUG-IN-PROGRESS"                                =    "In Progress";
+"SLUG-IN-PROGRESS"                                =    "In progress";
 /* This is the Text Field "placeholder" text, for when the Main Screen is in Text Search Mode. */
-"SLUG-SEARCH-PLACEHOLDER"                         =    "Enter A Meeting Name";
+"SLUG-SEARCH-PLACEHOLDER"                         =    "Enter a meeting name";
 /* This is the string that we display in the list, for in-progress meetings. The placeholder (%@) is replaced by the time, in localized form. */
-"SLUG-IN-PROGRESS-FORMAT"                         =    "In Progress Since %@";
+"SLUG-IN-PROGRESS-FORMAT"                         =    "In progress since %@";
 /* This is the string that we display in the list, for in-progress meetings that have been going since yesterday. The placeholder is replaced by the time, in localized form. */
-"SLUG-IN-PROGRESS-YESTERDAY-FORMAT"               =    "In Progress Since %@ Yesterday";
+"SLUG-IN-PROGRESS-YESTERDAY-FORMAT"               =    "In progress since %@ yesterday";
 /* This is displayed in a little label, at the bottom of the screen, as instruction. */
-"SLUG-SWIPE-LABEL-TEXT"                           =    "← Swipe to Change Time →";
+"SLUG-SWIPE-LABEL-TEXT"                           =    "← Swipe to change time →";
 
 /* This is the title for the segmented switch segment, for in-progress meetings, in the Main Screen.
- 
+
    NOTE TO TRANSLATOR: This needs to be very short. It will cause the segment it occupies to expand, horizontally. It is only one of nine, so it can't be too big.
  */
 "SLUG-NOW"                                        =    "Now";
@@ -78,26 +87,26 @@
 // MARK: - MEETING INSPECTOR SCREEN -
 
 /* The title for the Meeting Inspector Screen, when it is displaying a hybrid meeting (meets both virtually, and in-person). */
-"SLUG-HYBRID-MEETING"                             =    "Hybrid Meeting";
+"SLUG-HYBRID-MEETING"                             =    "Hybrid meeting";
 /* The title for the Meeting Inspector Screen, when it is displaying a fully virtual meeting. */
-"SLUG-VIRTUAL-MEETING"                            =    "Virtual Meeting";
+"SLUG-VIRTUAL-MEETING"                            =    "Virtual meeting";
 
 /* The title for the "I Attend This Meeting" bar button item in the navigation bar of the Meeting Inspector Screen. */
-"SLUG-I-ATTEND"                                   =    "I Attend";
+"SLUG-I-ATTEND"                                   =    "I attend";
 /* This is displayed, if the meeting Inspector is showing a meeting that is currently in progress. */
-"SLUG-IN-PROGRESS-STANDALONE"                     =    "This Meeting Is In Progress";
+"SLUG-IN-PROGRESS-STANDALONE"                     =    "This meeting is in progress";
 /* This is displayed in the Meeting Inspector, if the meeting has a timezone different from ours. The first placeholder has the timezone name, and the second has the meeting start time, in that timezone (as opposed to local, for most other times). */
-"SLUG-TIMEZONE-FORMAT"                            =    "Time Zone: %@ (%@)";
+"SLUG-TIMEZONE-FORMAT"                            =    "Time zone: %@ (%@)";
 /* This displays the meeting start time, and weekday, but no duration. It is displayed in both the Main Screen, and the Meeting Inspector Screen. The first placeholder has the weekday, and the second, the start time, in localized format. */
-"SLUG-WEEKDAY-TIME-FORMAT"                        =    "%@s, at %@";
+"SLUG-WEEKDAY-TIME-FORMAT"                        =    "%@, %@";
 /* This displays the meeting start time, and weekday, with duration. It is displayed in both the Main Screen, and the Meeting Inspector Screen. The first placeholder has the weekday, the second, the start time, in localized format, and the third, the end time (also localized format). */
-"SLUG-WEEKDAY-TIME-DURATION-FORMAT"               =    "%@s, %@ - %@";
+"SLUG-WEEKDAY-TIME-DURATION-FORMAT"               =    "%@, %@ – %@";
 /* This displays the phone extra information. The placeholder is replaced with the extra information (like passwords, etc.), in the Meeting Inspector. */
 "SLUG-PHONE-NUMBER-FORMAT"                        =    "Phone: %@";
 /* This is the header, over the Formats display, in the Meeting Inspector. */
-"SLUG-FORMATS-HEADER"                             =    "Meeting Formats";
+"SLUG-FORMATS-HEADER"                             =    "Meeting formats";
 /* This is the header, over the in-person meeting address, in the Meeting Inspector. */
-"SLUG-IN-PERSON-HEADER"                           =    "In-Person Meeting Location";
+"SLUG-IN-PERSON-HEADER"                           =    "In-person meeting location";
 /* This is the button that is shown, if Recovrr is also installed. It allows the user to inspect the meeting in the Recovrr app. */
 "SLUG-OPEN-IN-RECOVRR-BUTTON"                     =    "Open in Recovrr";
 
@@ -109,11 +118,11 @@
 "SLUG-GLOBE-BUTTON"                               =    "Web";
 
 /* One of these is displayed under the video icon, in the Meeting Inspector. They denote the particular app that will be opened, by selecting the icon.
- 
+
    NOTE TO TRANSLATOR: These are corporate trade names. If there are no localized well-known substitutes, leave the English names.
  */
 "SLUG-DIRECT-URI-ZOOM"                            =    "Zoom";
-"SLUG-DIRECT-URI-GOTOMEETING"                     =    "GotoMeeting";
+"SLUG-DIRECT-URI-GOTOMEETING"                     =    "GoToMeeting";
 "SLUG-DIRECT-URI-SKYPE"                           =    "Skype";
 "SLUG-DIRECT-URI-MEET"                            =    "Google Meet";
 "SLUG-DIRECT-URI-DISCORD"                         =    "Discord";
@@ -122,19 +131,19 @@
 /* This message is displayed for Mac Catalyst, when the user clicks on the "Web" icon, for a Zoom meeting. Apple does not allow direct Zoom access (because of the app download). */
 
 /* This is the alert heading. */
-"SLUG-ZOOM-WARING-ALERT-HEADER"                   =    "Cannot Open In Zoom";
+"SLUG-ZOOM-WARING-ALERT-HEADER"                   =    "Open this meeting in Zoom";
 /* This is the alert text. */
-"SLUG-ZOOM-WARING-ALERT-BODY"                     =    "Apple does not allow direct access to the meetings via Safari, because of the app download. Please install the Zoom app, and join from that.";
+"SLUG-ZOOM-WARING-ALERT-BODY"                     =    "To join this meeting on your Mac, install Zoom and open the meeting in the Zoom app.";
 /* This is the button that takes you directly to the Zoom app download. */
-"SLUG-ZOOM-WARING-ALERT-APP-BUTTON"               =    "Go to App Download";
+"SLUG-ZOOM-WARING-ALERT-APP-BUTTON"               =    "Download Zoom";
 
 /* This is the "Open In" heading for the action items. The placeholder is replaced by the app name. */
-"SLUG-OPEN-IN-FORMAT"                             =    "Open In %@";
+"SLUG-OPEN-IN-FORMAT"                             =    "Open in %@";
 /* This is the generic placeholder for NA meetings. */
-"SLUG-NA-MEETING"                                 =    "NA Meeting";
+"SLUG-NA-MEETING"                                 =    "NA meeting";
 
 /* One of these is displayed in the "Open In" action items. They indicate which app will be used to open an in-person meeting location.
- 
+
    NOTE TO TRANSLATOR: These are corporate trade names. If there are no localized well-known substitutes, leave the English names.
  */
 /* The app title for the built-in Apple Maps app. */
@@ -147,36 +156,220 @@
 // MARK: - ATTENDANCE SCREEN -
 
 /* The title of the "My Attendance" Screen */
-"SLUG-TAB-1-TITLE"                                =    "My Attendance";
+"SLUG-TAB-1-TITLE"                                =    "My attendance";
 
 // MARK: - SETTINGS SCREEN -
 
 /* The name of the screen */
 "SLUG-SETTINGS-TITLE"                             =    "Settings";
 /* The text for the label for the Reduce Service Meetings switch. */
-"SLUG-FILTER-SERVICE-MEETINGS"                    =    "Reduce Service Meetings";
+"SLUG-FILTER-SERVICE-MEETINGS"                    =    "Hide service meetings";
 /* This is displayed under the switch, and explains its utility. */
-"SLUG-FILTER-SERVICE-MEETINGS-EXPLAIN"            =    "If this switch is on, the app will attempt to remove meetings that are \"business meetings,\" related to NA Service (not Recovery Meetings).";
+"SLUG-FILTER-SERVICE-MEETINGS-EXPLAIN"            =    "Hide meetings identified as NA service or business meetings so you can focus on recovery meetings. Some service meetings may still appear.";
 
 // MARK: - ABOUT SCREEN -
 
 /* The name of the screen */
-"SLUG-ABOUT-SCREEN-TITLE"                         =    "About This App";
+"SLUG-ABOUT-SCREEN-TITLE"                         =    "About this app";
 /* The complete version */
 "SLUG-VERSION-FORMAT"                             =    "Version: %@ (%@)";
 /* The text of the "Presented By" button.
- 
+
    NOTE TO TRANSLATOR: Do not translate "Little Green Viper Software Development LLC". That is a corporate trade name.
  */
-"SLUG-PRESENTED-BY"                               =    "Presented By Little Green Viper Software Development LLC";
+"SLUG-PRESENTED-BY"                               =    "Presented by Little Green Viper Software Development LLC";
 /* The button string for the Privacy button */
 "SLUG-PRIVACY-LABEL"                              =    "Privacy";
 /* The header for the dependency list. */
-"SLUG-DEPENDENCY-HEADER-LABEL"                    =    "App Dependencies:";
+"SLUG-DEPENDENCY-HEADER-LABEL"                    =    "App dependencies:";
 /* The button string for the help page button. */
-"SLUG-HELP-PAGE-LABEL"                            =    "More Information";
+"SLUG-HELP-PAGE-LABEL"                            =    "More information";
 /* The button string for the GitHub button */
-"SLUG-GH-LABEL"                                   =    "The Source Code for This App";
+"SLUG-GH-LABEL"                                   =    "App source code";
+
+// MARK: -
+// MARK: - MAIN SCREEN -
+
+/* This is the label for the Bar Button item that selects the "I Attend" Screen. */
+"SLUG-ACC-TAB-1-BUTTON-LABEL"                   =    "My attendance";
+/* This is the hint for the Bar Button item that selects the "I Attend" Screen. */
+"SLUG-ACC-TAB-1-BUTTON-HINT"                    =    "Shows the meetings you’ve marked as ones you attend.";
+
+/* This is the label for the Bar Button item that selects the Settings Screen. */
+"SLUG-ACC-SETTINGS-BUTTON-LABEL"                =    "App settings";
+/* This is the hint for the Bar Button item that selects the Settings Screen. */
+"SLUG-ACC-SETTINGS-BUTTON-HINT"                 =    "Opens the app’s settings.";
+
+/* This is the label for the Bar Button item that opens the Control Panel (When closed). */
+"SLUG-ACC-DISCLOSURE-BUTTON-CLOSED-LABEL"       =    "Show day and time controls";
+/* This is the hint for the Bar Button item that opens the Control Panel (When closed). */
+"SLUG-ACC-DISCLOSURE-BUTTON-CLOSED-HINT"        =    "Opens controls for choosing a day and time.";
+
+/* This is the label for the Bar Button item that opens the Control Panel (When closed). */
+"SLUG-ACC-DISCLOSURE-BUTTON-OPEN-LABEL"         =    "Hide day and time controls";
+/* This is the hint for the Bar Button item that opens the Control Panel (When closed). */
+"SLUG-ACC-DISCLOSURE-BUTTON-OPEN-HINT"          =    "Closes the day and time controls.";
+
+/* This is the label for the segmented switch at the top of the Main Screen. */
+"SLUG-ACC-WEEKDAY-SWITCH-LABEL"                 =    "Choose a day or search";
+/* This is the hint for the segmented switch at the top of the Main Screen. */
+"SLUG-ACC-WEEKDAY-SWITCH-HINT"                  =    "Show meetings in progress, choose a day, or search by meeting name.";
+
+/* The individual segment label for the in-progress (Now) segment */
+"SLUG-ACC-WEEKDAY-SWITCH-0-LABEL"               =    "Meetings in progress";
+/* The individual segment hint for the in-progress (Now) segment */
+"SLUG-ACC-WEEKDAY-SWITCH-0-HINT"                =    "Shows meetings happening now.";
+
+/* The label for each weekday segment. The placeholder (%@) is replaced by the weekday represented by that segment. */
+"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-LABEL-FORMAT"  =    "Meetings: %@";
+/* The hint for each weekday segment. The placeholder is replaced by the weekday represented by that segment. */
+"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-HINT-FORMAT"   =    "Shows meetings held on this day of the week: %@.";
+
+/* The individual segment label for the search segment */
+"SLUG-ACC-WEEKDAY-SWITCH-8-LABEL"               =    "Search by meeting name";
+/* The individual segment hint for the search segment */
+"SLUG-ACC-WEEKDAY-SWITCH-8-HINT"                =    "Opens the meeting name search.";
+
+/* This is the label for the enter search text text field. */
+"SLUG-ACC-ENTER-SEARCH-TEXT-LABEL"              =    "Meeting name";
+/* This is the hint for the enter search text text field. */
+"SLUG-ACC-ENTER-SEARCH-TEXT-HINT"               =    "Shows meetings whose names contain the text you enter.";
+
+/* This is the label for the close search mode button. */
+"SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL"            =    "Close search";
+/* This is the label for the close search mode button. */
+"SLUG-ACC-CLOSE-SEARCH-BUTTON-HINT"             =    "Returns to choosing meetings by day and time.";
+
+/* This is the label for the decrement (left) time button. */
+"SLUG-ACC-LEFT-BUTTON-LABEL"                    =    "Earlier time";
+/* This is the hint for the decrement (left) time button. */
+"SLUG-ACC-LEFT-BUTTON-HINT"                     =    "Shows meetings in the previous time slot.";
+
+/* This is the label for the increment (right) time button. */
+"SLUG-ACC-RIGHT-BUTTON-LABEL"                   =    "Later time";
+/* This is the hint for the increment (right) time button. */
+"SLUG-ACC-RIGHT-BUTTON-HINT"                    =    "Shows meetings in the next time slot.";
+
+/* This is the label for the weekday/time label. */
+"SLUG-ACC-TIME-DISPLAY-LABEL"                   =    "Day and time";
+/* This is the hint for the weekday/time label. */
+"SLUG-ACC-TIME-DISPLAY-HINT"                    =    "The selected day and start time for the meetings below.";
+
+/* This is the label for the selected-time progress bar, below the segmented switch. */
+"SLUG-ACC-COMPLETION-DISPLAY-LABEL"             =    "Selected time of day";
+/* This is the hint for the selected-time progress bar, below the segmented switch. */
+"SLUG-ACC-COMPLETION-DISPLAY-HINT"              =    "Shows the selected time’s position in the day. Earlier times are on the left, later times on the right.";
+
+/* This is the label for the day/time picker. */
+"SLUG-ACC-DIRECT-PICKER-LABEL"                  =    "Choose day and time";
+/* This is the hint for the day/time picker. */
+"SLUG-ACC-DIRECT-PICKER-HINT"                   =    "Choose a day of the week and a meeting start time.";
+
+/* This is the label for the day/time picker. */
+"SLUG-ACC-DIRECT-EXIT-LABEL"                    =    "Back to time controls";
+/* This is the hint for the day/time picker. */
+"SLUG-ACC-DIRECT-EXIT-HINT"                     =    "Returns to the day and time controls.";
+
+// MARK: - MEETING INSPECTOR SCREEN -
+
+/* Attendance toggle: label describes the current state. */
+"SLUG-ACC-I-ATTEND-BAR-BUTTON-LABEL"            =    "I attend this meeting";
+/* Attendance toggle: hint describes the action when activated. */
+"SLUG-ACC-I-ATTEND-BAR-BUTTON-HINT"             =    "Removes this meeting from your attendance list.";
+
+/* Attendance toggle: label describes the current state. */
+"SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-LABEL"     =    "I don’t attend this meeting";
+/* Attendance toggle: hint describes the action when activated. */
+"SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-HINT"      =    "Adds this meeting to your attendance list.";
+
+/* This label is applied to the meeting name text label in the Meeting Inspector Screen */
+"SLUG-ACC-MEETING-NAME-MI-LABEL"                =    "Meeting name";
+/* This hint is applied to the meeting name text label in the Meeting Inspector Screen */
+"SLUG-ACC-MEETING-NAME-MI-HINT"                 =    "The name of this meeting.";
+
+/* This label is applied to the meeting start time/day text label in the Meeting Inspector Screen */
+"SLUG-ACC-TIME-DAY-MI-LABEL"                    =    "Meeting time";
+/* This hint is applied to the meeting start time/day text label in the Meeting Inspector Screen */
+"SLUG-ACC-TIME-DAY-MI-HINT"                     =    "The meeting’s day, start time, and end time, when available.";
+
+/* This label is applied to the meeting "in progress" text label in the Meeting Inspector Screen */
+"SLUG-ACC-IN-PROGRESS-MI-LABEL"                 =    "Meeting in progress";
+/* This hint is applied to the meeting "in progress" text label in the Meeting Inspector Screen */
+"SLUG-ACC-IN-PROGRESS-MI-HINT"                  =    "This meeting is happening now.";
+
+/* This label is applied to the meeting time zone text label in the Meeting Inspector Screen */
+"SLUG-ACC-TZ-MI-LABEL"                          =    "Meeting time zone";
+/* This hint is applied to the meeting time zone text label in the Meeting Inspector Screen */
+"SLUG-ACC-TZ-MI-HINT"                           =    "The meeting’s original time zone and start time there. Other times are shown in your local time zone.";
+
+/* This label is applied to the meeting comments text label in the Meeting Inspector Screen */
+"SLUG-ACC-COMMENTS-MI-LABEL"                    =    "Meeting information";
+/* This hint is applied to the meeting comments text label in the Meeting Inspector Screen */
+"SLUG-ACC-COMMENTS-MI-HINT"                     =    "Additional details about this meeting.";
+
+/* This label is applied to the phone icon button in the Meeting Inspector Screen */
+"SLUG-ACC-PHONE-MI-LABEL"                       =    "Join by phone";
+/* This hint is applied to the phone icon button in the Meeting Inspector Screen */
+"SLUG-ACC-PHONE-MI-HINT"                        =    "Calls the meeting’s phone number.";
+
+/* This label is applied to the Web icon button in the Meeting Inspector Screen */
+"SLUG-ACC-WEB-MI-LABEL"                         =    "Open meeting link";
+/* This hint is applied to the Web icon button in the Meeting Inspector Screen */
+"SLUG-ACC-WEB-MI-HINT"                          =    "Opens the meeting link in your browser or a supported app.";
+
+/* This label is applied to the video icon button in the Meeting Inspector Screen */
+"SLUG-ACC-VIDEO-MI-LABEL-FORMAT"                =    "Open in %@";
+/* This hint is applied to the video icon button in the Meeting Inspector Screen */
+"SLUG-ACC-VIDEO-MI-HINT-FORMAT"                 =    "Opens this meeting in %@.";
+
+/* This label is applied to the phone extra info text view in the Meeting Inspector Screen */
+"SLUG-ACC-PHONE-INFO-MI-LABEL"                  =    "Phone details";
+/* This hint is applied to the phone extra info text view in the Meeting Inspector Screen */
+"SLUG-ACC-PHONE-INFO-MI-HINT"                   =    "Additional information for joining by phone.";
+
+/* This label is applied to the phone extra info text view in the Meeting Inspector Screen */
+"SLUG-ACC-XTRA-INFO-MI-LABEL"                   =    "Virtual meeting details";
+/* This hint is applied to the phone extra info text view in the Meeting Inspector Screen */
+"SLUG-ACC-XTRA-INFO-MI-HINT"                    =    "Additional information for joining the virtual meeting.";
+
+/* This label is applied to the in-person address text view in the Meeting Inspector Screen */
+"SLUG-ACC-IN-PERSON-ADDRESS-MI-LABEL"           =    "In-person meeting address";
+/* This hint is applied to the in-person address text view in the Meeting Inspector Screen */
+"SLUG-ACC-IN-PERSON-ADDRESS-MI-HINT"            =    "The address where this meeting also meets in person.";
+
+/* This label is applied to the in-person extra information label in the Meeting Inspector Screen */
+"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-LABEL"      =    "In-person meeting details";
+/* This hint is applied to the in-person extra information label in the Meeting Inspector Screen */
+"SLUG-ACC-XTRA-IN-PERSON-ADDRESS-MI-HINT"       =    "Additional information about attending in person.";
+
+/* This label is applied to the action button in the navbar of the Meeting Inspector Screen */
+"SLUG-ACC-ACTION-BUTTON-LABEL"                  =    "Share meeting";
+/* This hint is applied to the action button in the navbar of the Meeting Inspector Screen */
+"SLUG-ACC-ACTION-BUTTON-HINT"                   =    "Opens options to share this meeting or add it to your calendar.";
+
+/* This label is applied to the Open in Recovrr button of the Meeting Inspector Screen. */
+"SLUG-ACC-OPEN-IN-RECOVRR-BUTTON-LABEL"         =    "Open this meeting in Recovrr";
+/* This hint is applied to the Open in Recovrr button of the Meeting Inspector Screen. */
+"SLUG-ACC-OPEN-IN-RECOVRR-BUTTON-HINT"          =    "Shows this meeting in the Recovrr app.";
+
+// MARK: - SETTINGS SCREEN -
+
+/* This is the label for the switch to enable/disable Service meeting filtering. */
+"SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL"        =    "Hide service meetings";
+/* This is the hint for the switch to enable/disable Service meeting filtering. */
+"SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT"         =    "Hides meetings identified as NA service or business meetings. Some may still appear.";
+
+/* This is the label for the "About This App" button. */
+"SLUG-ACC-ABOUT-BUTTON-LABEL"                   =    "About this app";
+/* This is the hint for the "About This App" button. */
+"SLUG-ACC-ABOUT-BUTTON-HINT"                    =    "Shows app information and helpful links.";
+
+// MARK: -
+
+/* Spoken label for the checkmark beside a meeting marked as attended. */
+"SLUG-ACC-ATTEND-IMAGE-ON-LABEL" =    "I attend this meeting";
+/* Spoken explanation of the attendance checkmark. */
+"SLUG-ACC-ATTEND-IMAGE-ON-HINT" =    "You’ve added this meeting to your attendance list.";
 
 // ***********************************************************************************************************
 // MARK: - DO NOT TRANSLATE BELOW THIS LINE -

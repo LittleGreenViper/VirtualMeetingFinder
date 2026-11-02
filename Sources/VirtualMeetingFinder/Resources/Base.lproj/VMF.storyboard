@@ -964,7 +964,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="747" text="Meeting Name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0x-Y5-plm">
                                                 <rect key="frame" x="76" y="0.0" width="177" height="33.666666666666664"/>
-                                                <accessibility key="accessibilityConfiguration" hint="SLUG-MEETING-NAME-MI-HINT" label="SLUG-ACC-MEETING-NAME-MI-LABEL"/>
+                                                <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-MEETING-NAME-MI-HINT" label="SLUG-ACC-MEETING-NAME-MI-LABEL"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="hgJ-HO-w5f"/>
                                                 </constraints>

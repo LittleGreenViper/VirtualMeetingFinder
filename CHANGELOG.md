@@ -1,3 +1,9 @@
+**1.5.0** *TBD*
+
+- Added Greek and Latin American Spanish, so that the app is aligned with Recovrr.
+- Made sure that the terminology used meshes with Recovrr.
+- Updated dependencies.
+
 **1.4.1** *October 26, 2026*
 
 - Updated the SwiftBMLSDK and PhoneNumberKit dependencies.

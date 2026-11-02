@@ -277,8 +277,8 @@ extension VMF_TableCell {
           if meeting.iAttend {
                typeImage?.image = UIImage(systemName: "checkmark.square.fill")
                typeImage?.isAccessibilityElement = true
-               typeImage?.accessibilityLabel = "SLUG-ACC-ATTEND-IMAGE-ON-LABEL".accessibilityLocalizedVariant
-               typeImage?.accessibilityHint = "SLUG-ACC-ATTEND-IMAGE-ON-HINT".accessibilityLocalizedVariant
+               typeImage?.accessibilityLabel = "SLUG-ACC-ATTEND-IMAGE-ON-LABEL".localizedVariant
+               typeImage?.accessibilityHint = "SLUG-ACC-ATTEND-IMAGE-ON-HINT".localizedVariant
           } else {
                typeImage?.isAccessibilityElement = false
                typeImage?.image = nil

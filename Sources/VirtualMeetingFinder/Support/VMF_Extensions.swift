@@ -19,7 +19,24 @@
 
 import UIKit
 import SwiftBMLSDK
+import RVS_Generic_Swift_Toolbox
 import RVS_BasicGCDTimer
+
+/* ###################################################################################################################################### */
+// MARK: - String Extension for Localization -
+/* ###################################################################################################################################### */
+extension String {
+     /* ################################################################## */
+     /**
+      Uses the toolbox's localized tables, then checks the shared nonlocalized table.
+      Returns the original string when no table contains it.
+      */
+     var localizedVariant: String {
+          let localized = localizedVariant(bundle: .main)
+          guard localized == self else { return localized }
+          return Bundle.main.localizedString(forKey: self, value: nil, table: "NonLocalized")
+     }
+}
 
 /* ###################################################################################################################################### */
 // MARK: - Abstraction for the Meeting Type -

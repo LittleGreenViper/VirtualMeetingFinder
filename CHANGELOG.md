@@ -1,6 +1,8 @@
-**1.5.0** *TBD*
+**2.0.0** *TBD*
 
 - The About screen now displays the dark app icon in light mode and the light app icon in dark mode.
+- Changed the way the background is displayed.
+- Updated the app icon and the splash screen, to use the new 2.0 styling.
 - Added Greek and Latin American Spanish, so that the app is aligned with Recovrr.
 - Made sure that the terminology used meshes with Recovrr.
 - Updated dependencies.

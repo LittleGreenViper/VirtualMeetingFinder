@@ -892,6 +892,7 @@ extension VMF_MeetingInspectorViewController {
           
           iAttendBarButton?.accessibilityLabel = "SLUG-ACC-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-LABEL".localizedVariant
           iAttendBarButton?.accessibilityHint = "SLUG-ACC-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-HINT".localizedVariant
+          removeNavigationBarItemBackgrounds()
      }
      
      /* ################################################################## */

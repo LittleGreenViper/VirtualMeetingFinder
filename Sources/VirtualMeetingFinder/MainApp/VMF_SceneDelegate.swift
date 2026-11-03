@@ -49,6 +49,18 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
       The window object for this scene.
       */
      var window: UIWindow?
+
+     /* ################################################################## */
+     /**
+      Keeps the configured launch screen visible over the main screen's initial layout.
+      */
+     private var _launchScreenWindow: UIWindow?
+
+     /* ################################################################## */
+     /**
+      Reveals the main screen on the next display refresh after its startup layout.
+      */
+     private var _launchScreenDisplayLink: CADisplayLink?
      
      /* ################################################################## */
      /**
@@ -66,6 +78,16 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
       */
      func sceneDidEnterBackground(_: UIScene) {
           Self.lastReloadTime = .now
+     }
+
+     /* ################################################################## */
+     /**
+      Releases any startup cover when its scene is disconnected.
+
+      - parameter: The scene instance (ignored).
+      */
+     func sceneDidDisconnect(_: UIScene) {
+          _removeLaunchScreen()
      }
      
      /* ################################################################## */
@@ -109,6 +131,16 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
       - parameter inConnectionOptions: This contains the options, among which, is the URL context.
       */
      func scene(_ inScene: UIScene, willConnectTo: UISceneSession, options inConnectionOptions: UIScene.ConnectionOptions) {
+          if let windowScene = inScene as? UIWindowScene,
+             let storyboardName = Bundle.main.object(forInfoDictionaryKey: "UILaunchStoryboardName") as? String,
+             let launchController = UIStoryboard(name: storyboardName, bundle: nil).instantiateInitialViewController() {
+               let launchWindow = UIWindow(windowScene: windowScene)
+               launchWindow.windowLevel = UIWindow.Level(rawValue: (window?.windowLevel ?? .normal).rawValue + 1)
+               launchWindow.rootViewController = launchController
+               _launchScreenWindow = launchWindow
+               launchWindow.isHidden = false
+          }
+
           guard let url = inConnectionOptions.userActivities.first?.webpageURL ?? inConnectionOptions.urlContexts.first?.url else { return }
           resolveURL(url)
      }
@@ -129,6 +161,53 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
 extension VMF_SceneDelegate {
+     /* ################################################################## */
+     /**
+      Finishes startup after initial loading and layout of the main screen and navigation bar.
+      */
+     func finishLaunching() {
+          guard nil != _launchScreenWindow,
+                nil == _launchScreenDisplayLink
+          else { return }
+
+          window?.layoutIfNeeded()
+          let displayLink = CADisplayLink(target: self, selector: #selector(_launchScreenFrameDidRender))
+          _launchScreenDisplayLink = displayLink
+          displayLink.add(to: .main, forMode: .common)
+     }
+
+     /* ################################################################## */
+     /**
+      Dissolves the startup cover once the completed main screen is ready for the next frame.
+
+      - parameter inDisplayLink: The display link that waits for the main screen's first frame.
+      */
+     @objc private func _launchScreenFrameDidRender(_ inDisplayLink: CADisplayLink) {
+          inDisplayLink.invalidate()
+          guard let launchWindow = _launchScreenWindow else {
+               _removeLaunchScreen()
+               return
+          }
+
+          UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut) {
+               launchWindow.alpha = 0
+          } completion: { [weak self] _ in
+               guard self?._launchScreenWindow === launchWindow else { return }
+               self?._removeLaunchScreen()
+          }
+     }
+
+     /* ################################################################## */
+     /**
+      Releases the startup cover and its display link.
+      */
+     private func _removeLaunchScreen() {
+          _launchScreenDisplayLink?.invalidate()
+          _launchScreenDisplayLink = nil
+          _launchScreenWindow?.isHidden = true
+          _launchScreenWindow = nil
+     }
+
      /* ################################################################## */
      /**
       This will set the static property to a given meeting ID, if it is provided in the URI.

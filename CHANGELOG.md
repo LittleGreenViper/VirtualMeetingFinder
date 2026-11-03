@@ -1,5 +1,6 @@
 **1.5.0** *TBD*
 
+- The About screen now displays the dark app icon in light mode and the light app icon in dark mode.
 - Added Greek and Latin American Spanish, so that the app is aligned with Recovrr.
 - Made sure that the terminology used meshes with Recovrr.
 - Updated dependencies.

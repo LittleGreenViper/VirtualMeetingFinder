@@ -30,9 +30,15 @@ import RVS_Generic_Swift_Toolbox
 class VMF_BaseViewController: UIViewController {
      /* ################################################################## */
      /**
-      Keeps track of our gradient layer.
+      The plain replacement for the system Back button on iOS 26 and later.
       */
-     private weak var _backgroundGradientLayer: CALayer?
+     private var _plainBackBarButtonItem: UIBarButtonItem?
+
+     /* ################################################################## */
+     /**
+      The navigation controller's gesture delegate, restored when this screen disappears.
+      */
+     private weak var _interactivePopGestureDelegate: UIGestureRecognizerDelegate?
      
      /* ################################################################## */
      /**
@@ -51,6 +57,26 @@ class VMF_BaseViewController: UIViewController {
       This will provide subtle haptic/audio feedback for selections.
       */
      var selectionGenerator: UISelectionFeedbackGenerator?
+}
+
+/* ###################################################################################################################################### */
+// MARK: UIGestureRecognizerDelegate Conformance
+/* ###################################################################################################################################### */
+extension VMF_BaseViewController: UIGestureRecognizerDelegate {
+     /* ################################################################## */
+     /**
+      Allows swiping back only from a settled screen with a preceding navigation entry.
+
+      - parameter inGestureRecognizer: The navigation controller's edge swipe recognizer.
+      - returns: True, if a back navigation can begin.
+      */
+     func gestureRecognizerShouldBegin(_ inGestureRecognizer: UIGestureRecognizer) -> Bool {
+          guard let navigationController = navigationController else { return false }
+          return inGestureRecognizer === navigationController.interactivePopGestureRecognizer
+               && navigationController.topViewController === self
+               && 1 < navigationController.viewControllers.count
+               && nil == navigationController.transitionCoordinator
+     }
 }
 
 /* ###################################################################################################################################### */
@@ -135,13 +161,20 @@ extension VMF_BaseViewController {
      /* ################################################################## */
      /**
       Called when the view hierarchy is complete.
-      We use this to prep our haptics.
+      We use this to set the background image and prep our haptics.
       */
      override func viewDidLoad() {
           super.viewDidLoad()
+          let backgroundView = UIImageView(image: UIImage(named: "BackgroundGradient"))
+          backgroundView.frame = view.bounds
+          backgroundView.contentMode = .scaleToFill
+          backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+          view.insertSubview(backgroundView, at: 0)
+
           navigationController?.navigationBar.tintColor = UIColor(named: "AccentColor")
           view?.tintColor = UIColor(named: "AccentColor")
           navigationController?.isToolbarHidden = true
+          removeNavigationBarItemBackgrounds()
           feedbackGenerator = UIImpactFeedbackGenerator(style: .rigid)
           feedbackGenerator?.prepare()
           selectionGenerator = UISelectionFeedbackGenerator()
@@ -153,28 +186,13 @@ extension VMF_BaseViewController {
      /* ################################################################## */
      /**
       Called after the view hierarchy layout is complete.
-      We use this to enforce localized accessibility, and create the background gradient.
+      We use this to enforce localized accessibility.
       */
      override func viewDidLayoutSubviews() {
           super.viewDidLayoutSubviews()
           navigationItem.backButtonTitle = "SLUG-BACK".localizedVariant
+          removeNavigationBarItemBackgrounds()
           accessorizer()
-          _backgroundGradientLayer?.removeFromSuperlayer()
-          
-          guard let view = view,
-                let startColor = UIColor(named: "Background-Begin")?.cgColor,
-                let endColor = UIColor(named: "Background-End")?.cgColor
-          else { return }
-          
-          let gradientLayer = CAGradientLayer()
-          gradientLayer.colors = [startColor, endColor]
-          gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
-          gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
-          gradientLayer.locations = [0, 1]
-          gradientLayer.frame = view.bounds
-          
-          view.layer.insertSublayer(gradientLayer, at: 0)
-          _backgroundGradientLayer = gradientLayer
      }
      
      /* ################################################################## */
@@ -187,12 +205,135 @@ extension VMF_BaseViewController {
           super.viewWillAppear(inIsAnimated)
           navigationItem.title = navigationItem.title?.localizedVariant ?? title?.localizedVariant
      }
+
+     /* ################################################################## */
+     /**
+      Called after each screen has finished its viewWillAppear setup, before it is displayed.
+
+      - parameter inIsAnimated: True, if the appearance is animated.
+      */
+     override func viewIsAppearing(_ inIsAnimated: Bool) {
+          super.viewIsAppearing(inIsAnimated)
+          removeNavigationBarItemBackgrounds()
+     }
+
+     /* ################################################################## */
+     /**
+      Keeps the edge swipe available when using our plain Back button.
+
+      - parameter inIsAnimated: True, if the appearance is animated.
+      */
+     override func viewDidAppear(_ inIsAnimated: Bool) {
+          super.viewDidAppear(inIsAnimated)
+          guard nil != _plainBackBarButtonItem,
+                navigationController?.topViewController === self,
+                let gesture = navigationController?.interactivePopGestureRecognizer,
+                gesture.delegate !== self
+          else { return }
+
+          _interactivePopGestureDelegate = gesture.delegate
+          gesture.delegate = self
+     }
+
+     /* ################################################################## */
+     /**
+      Restores the navigation controller's gesture handling before leaving this screen.
+
+      - parameter inIsAnimated: True, if the disappearance is animated.
+      */
+     override func viewWillDisappear(_ inIsAnimated: Bool) {
+          super.viewWillDisappear(inIsAnimated)
+          if let gesture = navigationController?.interactivePopGestureRecognizer,
+             gesture.delegate === self {
+               gesture.delegate = _interactivePopGestureDelegate
+               _interactivePopGestureDelegate = nil
+          }
+     }
 }
 
 /* ###################################################################################################################################### */
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
 extension VMF_BaseViewController {
+     /* ################################################################## */
+     /**
+      Removes the Liquid Glass backgrounds from navigation bar buttons on iOS 26 and later.
+      */
+     func removeNavigationBarItemBackgrounds() {
+          guard #available(iOS 26.0, *) else { return }
+
+          _setUpPlainBackButton()
+
+          // During a push, the bar's item stack may not contain this screen's item yet.
+          let navigationItems = [navigationItem] + (navigationController?.navigationBar.items ?? [])
+          navigationItems.forEach { item in
+               item.backBarButtonItem?.hidesSharedBackground = true
+
+               var barButtons = (item.leftBarButtonItems ?? []) + (item.rightBarButtonItems ?? [])
+               var groups = item.leadingItemGroups + item.centerItemGroups + item.trailingItemGroups
+               if let pinnedGroup = item.pinnedTrailingGroup {
+                    groups.append(pinnedGroup)
+               }
+               groups.forEach { group in
+                    barButtons.append(contentsOf: group.barButtonItems)
+                    if let representativeItem = group.representativeItem {
+                         barButtons.append(representativeItem)
+                    }
+               }
+               barButtons.forEach { $0.hidesSharedBackground = true }
+          }
+     }
+
+     /* ################################################################## */
+     /**
+      Replaces the native Back control, which ignores hidesSharedBackground, without replacing other left buttons.
+      */
+     @available(iOS 26.0, *)
+     private func _setUpPlainBackButton() {
+          guard let navigationController = navigationController,
+                let index = navigationController.viewControllers.firstIndex(of: self),
+                0 < index
+          else { return }
+
+          let leftButtons = navigationItem.leftBarButtonItems ?? []
+          if nil == _plainBackBarButtonItem {
+               guard !navigationItem.hidesBackButton,
+                     leftButtons.isEmpty || navigationItem.leftItemsSupplementBackButton
+               else { return }
+
+               let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(_goBack))
+               backButton.accessibilityLabel = "SLUG-BACK".localizedVariant
+               backButton.hidesSharedBackground = true
+               backButton.menu = UIMenu(children: navigationController.viewControllers[..<index].reversed().map { controller in
+                    UIAction(title: controller.navigationItem.title ?? controller.title ?? "SLUG-BACK".localizedVariant) { [weak navigationController, weak controller] _ in
+                         guard let controller = controller else { return }
+                         navigationController?.popToViewController(controller, animated: true)
+                    }
+               })
+               _plainBackBarButtonItem = backButton
+          }
+
+          guard let backButton = _plainBackBarButtonItem else { return }
+          navigationItem.hidesBackButton = true
+          if !leftButtons.contains(where: { $0 === backButton }) {
+               navigationItem.leftBarButtonItems = [backButton] + leftButtons
+          }
+     }
+
+     /* ################################################################## */
+     /**
+      Returns to the preceding screen using the navigation controller's normal pop transition.
+      */
+     @objc private func _goBack() {
+          guard navigationController?.topViewController === self,
+                nil == navigationController?.transitionCoordinator
+          else { return }
+          navigationController?.popViewController(animated: true)
+     }
+
      /* ################################################################## */
      /**
       This travels around the whole view hierarchy, and resolves accessibility tokens.

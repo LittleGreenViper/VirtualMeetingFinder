@@ -25,6 +25,18 @@ import UIKit
 extension VMF_MainViewController {
      /* ################################################################## */
      /**
+      Reveals the first main screen after loading and laying out its navigation bar.
+      */
+     private func _finishLaunching() {
+          UIView.performWithoutAnimation {
+               removeNavigationBarItemBackgrounds()
+               navigationController?.view.layoutIfNeeded()
+          }
+          (view.window?.windowScene?.delegate as? VMF_SceneDelegate)?.finishLaunching()
+     }
+
+     /* ################################################################## */
+     /**
       This recalculates all the meeting data, breaking it into a couple of sorted arrays.
       */
      func reorganizeMeetings() {
@@ -807,7 +819,12 @@ extension VMF_MainViewController {
 
           // If we have to load from the meeting server, we do so, now.
           if needsReload {
-               loadMeetings { self.openTo() }
+               loadMeetings {
+                    self.openTo()
+                    self._finishLaunching()
+               }
+          } else {
+               _finishLaunching()
           }
           
           // This means that we won't arbitrarily reload.

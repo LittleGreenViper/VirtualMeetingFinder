@@ -19,6 +19,7 @@
 
 import UIKit
 import RVS_Generic_Swift_Toolbox
+import RVS_UIKit_Toolbox
 
 /* ###################################################################################################################################### */
 // MARK: - About View Controller -
@@ -72,7 +73,7 @@ extension VMF_AboutViewController {
           
           dependencySectionHeader?.text = dependencySectionHeader?.text?.localizedVariant
           
-          iconImage?.image = Bundle.main.largeAppIcon
+          iconImage?.image = UIImage(named: "AboutAppIcon", in: .main, compatibleWith: traitCollection) ?? Bundle.main.appIcon
      }
      
      /* ################################################################## */

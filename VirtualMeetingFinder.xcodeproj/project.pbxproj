@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A12611040000000000000001 /* VMF_DayTimeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12611040000000000000002 /* VMF_DayTimeSelectionViewController.swift */; };
 		A12611030000000000000001 /* NonLocalized.strings in Resources */ = {isa = PBXBuildFile; fileRef = A12611030000000000000002 /* NonLocalized.strings */; };
 		D40128C02F676B600076EB62 /* RVS_PersistentPrefs in Frameworks */ = {isa = PBXBuildFile; productRef = D40128BF2F676B600076EB62 /* RVS_PersistentPrefs */; };
 		D40133692C320C070018076B /* VMF_MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40133682C320C070018076B /* VMF_MainViewController.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A12611040000000000000002 /* VMF_DayTimeSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_DayTimeSelectionViewController.swift; sourceTree = "<group>"; };
 		A12611030000000000000002 /* NonLocalized.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = NonLocalized.strings; sourceTree = "<group>"; };
 		D40133682C320C070018076B /* VMF_MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MainViewController.swift; sourceTree = "<group>"; };
 		D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_EmbeddedTableController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				D40133682C320C070018076B /* VMF_MainViewController.swift */,
 				D4E7C6C82C4293E10045ACE6 /* VMF_MainViewController_Methods.swift */,
 				D4E7C6CA2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift */,
+				A12611040000000000000002 /* VMF_DayTimeSelectionViewController.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				D40133692C320C070018076B /* VMF_MainViewController.swift in Sources */,
 				D4E7C6C92C4293E10045ACE6 /* VMF_MainViewController_Methods.swift in Sources */,
 				D4E7C6CB2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift in Sources */,
+				A12611040000000000000001 /* VMF_DayTimeSelectionViewController.swift in Sources */,
 				D43D850C2C5E616D00E6EB2B /* VMF_Activity.swift in Sources */,
 				D455E5672C396F3A00246848 /* VMF_AttendanceViewController.swift in Sources */,
 				D4F4BCED2C36DAFC0023C21B /* VMF_MapMarker.swift in Sources */,

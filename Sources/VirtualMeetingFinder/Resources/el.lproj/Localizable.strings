@@ -250,6 +250,11 @@
 /* This is the hint for the increment (right) time button. */
 "SLUG-ACC-RIGHT-BUTTON-HINT"                    =    "Εμφανίζει συγκεντρώσεις με την επόμενη διαθέσιμη ώρα έναρξης.";
 
+/* Label for the navigation title button that opens the day/time popover. Its value is the displayed day/time or mode. */
+"SLUG-ACC-DAY-TIME-BUTTON-LABEL"                 =    "Ημέρα και ώρα";
+/* Hint for the navigation title button. The popover will contain the day/time controls. */
+"SLUG-ACC-DAY-TIME-BUTTON-HINT"                  =    "Ανοίγει το αναδυόμενο παράθυρο επιλογής ημέρας και ώρας.";
+
 /* This is the label for the weekday/time label. */
 "SLUG-ACC-TIME-DISPLAY-LABEL"                   =    "Ημέρα και ώρα";
 /* This is the hint for the weekday/time label. */

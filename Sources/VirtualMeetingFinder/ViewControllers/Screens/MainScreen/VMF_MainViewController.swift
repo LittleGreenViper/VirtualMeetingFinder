@@ -156,7 +156,15 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
      /**
       This tracks the current embedded table controller.
       */
-     var tableDisplayController: VMF_EmbeddedTableControllerProtocol?
+     var tableDisplayController: VMF_EmbeddedTableControllerProtocol? {
+          didSet { updateDayTimeSelectionButton() }
+     }
+
+     /* ################################################################## */
+     /**
+      The navigation title button, showing the day and time of the displayed meetings.
+      */
+     let dayTimeSelectionButton = UIButton(type: .system)
      
      /* ################################################################## */
      /**
@@ -233,6 +241,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
                }
                
                (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = isNameSearchMode
+               updateDayTimeSelectionButton()
           }
      }
      

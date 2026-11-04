@@ -25,6 +25,53 @@ import UIKit
 extension VMF_MainViewController {
      /* ################################################################## */
      /**
+      Sets up the localized, accessible navigation title button.
+      */
+     private func _setUpDayTimeSelectionButton() {
+          var configuration = UIButton.Configuration.plain()
+          configuration.image = UIImage(systemName: "chevron.down")
+          configuration.imagePlacement = .trailing
+          configuration.imagePadding = 4
+          configuration.titleAlignment = .center
+          configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 4)
+          configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attributes in
+               var attributes = attributes
+               attributes.font = UIFont.preferredFont(forTextStyle: .headline)
+               return attributes
+          }
+          dayTimeSelectionButton.configuration = configuration
+          dayTimeSelectionButton.titleLabel?.adjustsFontForContentSizeCategory = true
+          dayTimeSelectionButton.titleLabel?.adjustsFontSizeToFitWidth = true
+          dayTimeSelectionButton.titleLabel?.minimumScaleFactor = 0.65
+          dayTimeSelectionButton.titleLabel?.numberOfLines = 2
+          dayTimeSelectionButton.titleLabel?.textAlignment = .center
+          dayTimeSelectionButton.titleLabel?.lineBreakMode = .byTruncatingTail
+          dayTimeSelectionButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
+          dayTimeSelectionButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
+          dayTimeSelectionButton.isAccessibilityElement = true
+          dayTimeSelectionButton.accessibilityLabel = "SLUG-ACC-DAY-TIME-BUTTON-LABEL".localizedVariant
+          dayTimeSelectionButton.accessibilityHint = "SLUG-ACC-DAY-TIME-BUTTON-HINT".localizedVariant
+          dayTimeSelectionButton.accessibilityIdentifier = "day-time-selection-button"
+          dayTimeSelectionButton.addTarget(self, action: #selector(dayTimeSelectionButtonHit), for: .touchUpInside)
+          navigationItem.titleView = dayTimeSelectionButton
+          updateDayTimeSelectionButton()
+     }
+
+     /* ################################################################## */
+     /**
+      Keeps the navigation button and its spoken value in sync with the displayed table.
+      Search and in-progress modes use their localized descriptions instead of a time slot.
+      */
+     func updateDayTimeSelectionButton() {
+          let selectionTitle = isNameSearchMode
+               ? "SLUG-ACC-WEEKDAY-SWITCH-8-LABEL".localizedVariant
+               : (tableDisplayController as? UIViewController)?.title ?? "SLUG-ACC-DIRECT-PICKER-LABEL".localizedVariant
+          dayTimeSelectionButton.setTitle(selectionTitle, for: .normal)
+          dayTimeSelectionButton.accessibilityValue = selectionTitle
+     }
+
+     /* ################################################################## */
+     /**
       Reveals the first main screen after loading and laying out its navigation bar.
       */
      private func _finishLaunching() {
@@ -192,7 +239,8 @@ extension VMF_MainViewController {
                      timeString
                  )
              } else {
-                 newViewController.title = "ERROR"
+                 // An empty weekday has no time slot, but still needs a localized title.
+                 newViewController.title = Calendar.current.weekdaySymbols[dayIndex - 1]
              }
              
              newViewController.noRefresh = false
@@ -658,6 +706,25 @@ extension VMF_MainViewController {
      @IBAction func directSelectionCloseButtonHit(_: Any) {
           isDirectSelectionMode = false
      }
+
+     /* ################################################################## */
+     /**
+      Opens the day and time popover from the navigation title button.
+      */
+     @objc func dayTimeSelectionButtonHit() {
+          guard nil == presentedViewController else { return }
+          searchTextField?.resignFirstResponder()
+
+          let controller = VMF_DayTimeSelectionViewController()
+          controller.modalPresentationStyle = .popover
+          controller.preferredContentSize = CGSize(width: 600, height: 500)
+          guard let popover = controller.popoverPresentationController else { return }
+          popover.delegate = controller
+          popover.sourceView = dayTimeSelectionButton
+          popover.sourceRect = dayTimeSelectionButton.bounds
+          popover.permittedArrowDirections = .up
+          present(controller, animated: true)
+     }
      
      /* ################################################################## */
      /**
@@ -718,6 +785,7 @@ extension VMF_MainViewController {
      override func viewDidLoad() {
           super.viewDidLoad()
           navigationItem.title = "SLUG-TAB-0-TITLE".localizedVariant
+          _setUpDayTimeSelectionButton()
           VMF_AppDelegate.mainScreenController = self
           swipeLabel?.text = swipeLabel?.text?.localizedVariant
           searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
@@ -763,9 +831,6 @@ extension VMF_MainViewController {
           timeDayDisplayLabel?.textColor = .tintColor
           
           isDirectSelectionMode = false
-          
-          let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapOnDayTimeLabel))
-          navigationController?.navigationBar.addGestureRecognizer(doubleTapGesture)
      }
      
      /* ################################################################## */

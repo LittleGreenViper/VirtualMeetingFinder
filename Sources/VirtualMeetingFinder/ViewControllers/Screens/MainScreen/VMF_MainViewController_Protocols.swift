@@ -20,72 +20,58 @@
 import UIKit
 
 /* ###################################################################################################################################### */
+// MARK: Time Slot Paging
+/* ###################################################################################################################################### */
+extension VMF_MainViewController {
+     /**
+      Resolves Now to the latest available start at or before the current local time.
+      Regular pages move one slot at a time, skipping empty weekdays and wrapping the week.
+      Now is entered explicitly from the popover, rather than appearing between time slots.
+      */
+     func adjacentTimeSlot(fromDay inDay: Int, timeIndex inIndex: Int, forward inIsForward: Bool) -> (dayIndex: Int, timeIndex: Int)? {
+          if inDay == 0 {
+               let now = nowIs
+               guard (1...7).contains(now.weekday) else { return nil }
+               for offset in 0...7 {
+                    let day = (now.weekday - 1 - offset + 7) % 7 + 1
+                    let times = getDailyMeetings(for: day).keys.sorted()
+                    let index = offset == 0 ? times.lastIndex(where: { $0 <= now.currentIntegerTime }) : times.indices.last
+                    if let index = index { return (day, index) }
+               }
+               return nil
+          }
+
+          guard (1...7).contains(inDay) else { return nil }
+          let step = inIsForward ? 1 : -1
+          let nextIndex = inIndex + step
+          if (0..<getDailyMeetings(for: inDay).count).contains(nextIndex) {
+               return (inDay, nextIndex)
+          }
+          for offset in 1...7 {
+               let day = (inDay - 1 + offset * step + 7) % 7 + 1
+               let count = getDailyMeetings(for: day).count
+               if count > 0 { return (day, inIsForward ? 0 : count - 1) }
+          }
+          return nil
+     }
+}
+
+/* ###################################################################################################################################### */
 // MARK: UIPageViewControllerDataSource Conformance
 /* ###################################################################################################################################### */
 extension VMF_MainViewController: UIPageViewControllerDataSource {
-     /* ################################################################## */
-     /**
-      Called to fetch the view controller before the current one.
-      
-      - parameter: The page view controller (ignored).
-      - parameter viewControllerBefore: The view controller after (to the right of) the one we want.
-      - returns: A new (or reused) view controller to appear before (to the left of) the "before" controller.
-      */
-     func pageViewController(_: UIPageViewController, viewControllerBefore inBeforeViewController: UIViewController) -> UIViewController? {
+     func pageViewController(_: UIPageViewController, viewControllerBefore inController: UIViewController) -> UIViewController? {
           guard !isNameSearchMode,
-                let oldViewController = inBeforeViewController as? VMF_EmbeddedTableController
-          else { return nil }
-          
-          var dayIndex = oldViewController.dayIndex
-          var timeIndex = oldViewController.timeIndex
-          timeIndex -= 1
-          
-          // Look for overflow.
-          if 0 == dayIndex || 0 > timeIndex {
-               if 0 == dayIndex {
-                    dayIndex = 7
-               } else {
-                    dayIndex -= 1
-                    if 0 > dayIndex {
-                         dayIndex = 7
-                    }
-               }
-               timeIndex = getDailyMeetings(for: mapWeekday(dayIndex)).keys.count - 1
-          }
-          
-          return getTableDisplay(for: dayIndex, time: timeIndex)
+                let page = inController as? VMF_EmbeddedTableController,
+                let slot = adjacentTimeSlot(fromDay: page.dayIndex, timeIndex: page.timeIndex, forward: false) else { return nil }
+          return getTableDisplay(for: slot.dayIndex, time: slot.timeIndex)
      }
-     
-     /* ################################################################## */
-     /**
-      Called to fetch the view controller after the current one.
-      
-      - parameter inPageViewController: The page view controller (ignored).
-      - parameter inAfterViewController: The view controller before (to the left of) the one we want.
-      - returns: A new (or reused) view controller to appear after (to the right of) the "before" controller.
-      */
-     func pageViewController(_ inPageViewController: UIPageViewController, viewControllerAfter inAfterViewController: UIViewController) -> UIViewController? {
+
+     func pageViewController(_: UIPageViewController, viewControllerAfter inController: UIViewController) -> UIViewController? {
           guard !isNameSearchMode,
-                let oldViewController = inAfterViewController as? VMF_EmbeddedTableController
-          else { return nil }
-          
-          var timeIndex = oldViewController.timeIndex + 1
-          var dayIndex = oldViewController.dayIndex
-          
-          // Look for overflow.
-          if 0 == dayIndex {
-               timeIndex = 0
-               dayIndex = 1
-          } else if timeIndex >= getDailyMeetings(for: mapWeekday(dayIndex)).count {
-               dayIndex += 1
-               timeIndex = 0
-               
-               if 7 < dayIndex {
-                    dayIndex = 0
-               }
-          }
-          
-          return getTableDisplay(for: dayIndex, time: timeIndex)
+                let page = inController as? VMF_EmbeddedTableController,
+                let slot = adjacentTimeSlot(fromDay: page.dayIndex, timeIndex: page.timeIndex, forward: true) else { return nil }
+          return getTableDisplay(for: slot.dayIndex, time: slot.timeIndex)
      }
 }
 
@@ -93,176 +79,22 @@ extension VMF_MainViewController: UIPageViewControllerDataSource {
 // MARK: UIPageViewControllerDelegate Conformance
 /* ###################################################################################################################################### */
 extension VMF_MainViewController: UIPageViewControllerDelegate {
-     /* ################################################################## */
-     /**
-      Called when a swipe transition is done. The only thing we do here, is reset our trackers.
-      
-      - parameter: The page view controller (ignored).
-      - parameter didFinishAnimating: The animation is complete (ignored)
-      - parameter previousViewControllers: A list of previous view controllers (also ignored)
-      - parameter transitionCompleted: True, if the transition completed, and was not aborted.
-      */
-     func pageViewController(_: UIPageViewController, didFinishAnimating: Bool, previousViewControllers: [UIViewController], transitionCompleted inIsDone: Bool) {
-          if inIsDone {
-               if isNameSearchMode {
-                    weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = (weekdayModeSelectorSegmentedSwitch?.numberOfSegments ?? 1) - 1
-               } else {
-                    let newIndex = tableDisplayController?.dayIndex ?? 0
-                    let oldIndex = weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex ?? 0
-                    weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = tableDisplayController?.dayIndex ?? 0
-                    if oldIndex != newIndex {
-                         successHaptic()
-                    }
-                    
-                    if let tableDisplayController = tableDisplayController {
-                         updateThermometer(tableDisplayController)
-                    }
-               }
-               
-               timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
+     /** Commits only a completed swipe, keeping the navigation title on the visible page. */
+     func pageViewController(_ inController: UIPageViewController, didFinishAnimating: Bool, previousViewControllers inPrevious: [UIViewController], transitionCompleted inIsDone: Bool) {
+          guard inIsDone,
+                let page = inController.viewControllers?.first as? VMF_EmbeddedTableController else { return }
+          if (inPrevious.first as? VMF_EmbeddedTableController)?.dayIndex != page.dayIndex {
+               successHaptic()
           }
-     }
-}
-
-/* ###################################################################################################################################### */
-// MARK: UIPickerViewDataSource Conformance
-/* ###################################################################################################################################### */
-extension VMF_MainViewController: UIPickerViewDataSource {
-     /* ################################################################################################################################## */
-     // MARK: PickerView Component Enum
-     /* ################################################################################################################################## */
-     /**
-      This enumerates the two PickerView components.
-      */
-     enum PickerViewComponents: Int {
-          /* ############################################################## */
-          /**
-           The leftmost component is for the weekday.
-           */
-          case weekday
-          
-          /* ############################################################## */
-          /**
-           The rightmost component is for the time slot.
-           */
-          case time
-     }
-     
-     /* ################################################################## */
-     /**
-      This returns the number of components in the picker view.
-      
-      - parameter in: The picker view (ignored).
-      - returns: 2 (always)
-      */
-     func numberOfComponents(in: UIPickerView) -> Int { 2 }
-     
-     /* ################################################################## */
-     /**
-      This returns the number of rows in each component.
-      
-      - parameter inPickerView: The picker view.
-      - parameter inComponent: The 0-based component index. Component 0 is the weekday, and Component 1, is the time slots for that weekday.
-      
-      - returns: 7 (Component 0), or the number of time slots for the selected weekday (usually around 70).
-      */
-     func pickerView(_ inPickerView: UIPickerView, numberOfRowsInComponent inComponent: Int) -> Int {
-          guard !isNameSearchMode else { return 0 }
-          
-          let ret = PickerViewComponents.time.rawValue == inComponent ? getDailyMeetings(for: unMapWeekday(inPickerView.selectedRow(inComponent: PickerViewComponents.weekday.rawValue) + 1)).count : 7
-          
-          return ret
-     }
-}
-
-/* ###################################################################################################################################### */
-// MARK: UIPickerViewDelegate Conformance
-/* ###################################################################################################################################### */
-extension VMF_MainViewController: UIPickerViewDelegate {
-     /* ################################################################## */
-     /**
-      This returns the title for the selected row, as a label.
-      
-      - parameter inPickerView: The picker view.
-      - parameter inRow: The 0-based row index.
-      - parameter inComponent: The 0-based component index.
-      - parameter inReusing: Any previously allocated view, to be reused.
-      
-      - returns: a view (a label), with the title for the indicated row.
-      */
-     func pickerView(_ inPickerView: UIPickerView, viewForRow inRow: Int, forComponent inComponent: Int, reusing inReusing: UIView?) -> UIView {
-          let ret = inReusing as? UILabel ?? UILabel()
-          ret.adjustsFontSizeToFitWidth = true
-          ret.minimumScaleFactor = 0.5
-          
-          if !isNameSearchMode {
-               if PickerViewComponents.weekday.rawValue == inComponent {
-                    ret.text = Calendar.current.standaloneWeekdaySymbols[unMapWeekday(inRow + 1) - 1]
-               } else {
-                    let dayIndex = unMapWeekday(inPickerView.selectedRow(inComponent: PickerViewComponents.weekday.rawValue) + 1)
-                    if let time = getTimeOf(dayIndex: dayIndex, timeIndex: inRow) {
-                         let hour = time / 100
-                         let minute = time - (hour * 100)
-                         let dateComponents = DateComponents(hour: hour, minute: minute)
-                         let date = Calendar.current.date(from: dateComponents)
-                         let string = date?.localizedTime
-                         ret.text = string
-                    }
+          tableDisplayController = page
+          if inPrevious.contains(where: { ($0 as? VMF_EmbeddedTableController)?.dayIndex == 0 }) {
+               // Let UIKit finish the transition before discarding its cached Now neighbor.
+               DispatchQueue.main.async { [weak self, weak inController] in
+                    guard let self = self, let controller = inController,
+                          controller.viewControllers?.first === page, !self.isNameSearchMode else { return }
+                    controller.dataSource = nil
+                    controller.dataSource = self
                }
           }
-          
-          // We highlight the selected rows.
-          if inRow == inPickerView.selectedRow(inComponent: inComponent) {
-               ret.textColor = .systemBackground
-               ret.backgroundColor = .label
-          } else {
-               ret.backgroundColor = .clear
-               ret.textColor = .tintColor
-          }
-          
-          ret.textAlignment = .center
-          
-          return ret
-     }
-     
-     /* ################################################################## */
-     /**
-      Get the width of a component.
-      
-      - parameter inPickerView: The picker view.
-      - parameter widthForComponent: The 0-based component index.
-      - returns: The width, in display units, of the component.
-      */
-     func pickerView(_ inPickerView: UIPickerView, widthForComponent: Int) -> CGFloat { Self.pickerViewComponentWidthInDisplayUnits }
-     
-     /* ################################################################## */
-     /**
-      Called when a row is selected in the picker.
-      
-      - parameter inPickerView: The picker view.
-      - parameter inRow: The 0-based row index.
-      - parameter inComponent: The 0-based component index.
-      */
-     func pickerView(_ inPickerView: UIPickerView, didSelectRow inRow: Int, inComponent: Int) {
-          if PickerViewComponents.weekday.rawValue == inComponent {
-               // This whackiness, is because we want to try to set the time index to be as close as possible to the last one.
-               guard let originalDayIndex = tableDisplayController?.dayIndex,
-                     var timeIndex = tableDisplayController?.timeIndex,
-                     let originalTime = getTimeOf(dayIndex: originalDayIndex, timeIndex: timeIndex)
-               else { return }
-               
-               timeIndex = getNearestIndex(dayIndex: inRow + 1, time: originalTime)
-               guard let time = getTimeOf(dayIndex: inRow + 1, timeIndex: timeIndex) else { return }
-               
-               inPickerView.reloadComponent(1)
-               inPickerView.selectRow(timeIndex, inComponent: 1, animated: false)
-               openTo(dayIndex: inRow + 1, time: time)
-          } else {
-               let dayIndex = unMapWeekday(inPickerView.selectedRow(inComponent: PickerViewComponents.weekday.rawValue) + 1)
-               guard let time = getTimeOf(dayIndex: dayIndex, timeIndex: inRow) else { return }
-               openTo(dayIndex: dayIndex, time: time)
-          }
-          
-          inPickerView.reloadAllComponents()
      }
 }

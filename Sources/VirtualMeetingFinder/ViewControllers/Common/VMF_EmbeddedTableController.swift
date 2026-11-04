@@ -98,19 +98,7 @@ protocol VMF_MasterTableControllerProtocol: VMF_BaseProtocol {
       - parameter completion: A simple, no-parameter completion. It is always called in the main thread.
       */
      func refreshCalled(completion: @escaping () -> Void)
-     
-     /* ################################################################## */
-     /**
-      This updates the "thermometer" display, in the time selector.
-      */
-     func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol?)
-     
-     /* ################################################################## */
-     /**
-      This sets the day picker, if we have one.
-      */
-     func setDayPicker()
-     
+
      /* ################################################################## */
      /**
       This enables or disables the attendance item.
@@ -127,24 +115,13 @@ extension VMF_MasterTableControllerProtocol {
       Default does nothing
       */
      func refreshCalled(completion inCompletion: @escaping () -> Void) { inCompletion() }
-     
-     /* ################################################################## */
-     /**
-      Default does nothing
-      */
-     func setDayPicker() { }
-     
+
      /* ################################################################## */
      /**
       Default does nothing
       */
      func setAttendance() { }
      
-     /* ################################################################## */
-     /**
-      This updates the "thermometer" display, in the time selector.
-      */
-     func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol?) { }
 }
 
 /* ###################################################################################################################################### */
@@ -469,8 +446,6 @@ extension VMF_EmbeddedTableController {
           super.viewDidAppear(inIsAnimated)
           myController?.tableDisplayController = self
           selectionHaptic()
-          myController?.updateThermometer(self)
-          myController?.setDayPicker()
           checkForUniversalLink()
      }
 

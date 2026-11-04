@@ -33,6 +33,7 @@ extension VMF_MainViewController {
           configuration.imagePlacement = .trailing
           configuration.imagePadding = 4
           configuration.titleAlignment = .center
+          configuration.titleLineBreakMode = .byTruncatingTail
           configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 4)
           configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attributes in
                var attributes = attributes
@@ -46,7 +47,7 @@ extension VMF_MainViewController {
           dayTimeSelectionButton.titleLabel?.numberOfLines = 2
           dayTimeSelectionButton.titleLabel?.textAlignment = .center
           dayTimeSelectionButton.titleLabel?.lineBreakMode = .byTruncatingTail
-          dayTimeSelectionButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
+          dayTimeSelectionButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
           dayTimeSelectionButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
           dayTimeSelectionButton.isAccessibilityElement = true
           dayTimeSelectionButton.accessibilityLabel = "SLUG-ACC-DAY-TIME-BUTTON-LABEL".localizedVariant
@@ -64,10 +65,28 @@ extension VMF_MainViewController {
       */
      func updateDayTimeSelectionButton() {
           let selectionTitle = isNameSearchMode
-               ? "SLUG-ACC-WEEKDAY-SWITCH-8-LABEL".localizedVariant
+               ? "SLUG-SEARCH-MODE-TITLE".localizedVariant
                : (tableDisplayController as? UIViewController)?.title ?? "SLUG-ACC-DIRECT-PICKER-LABEL".localizedVariant
           dayTimeSelectionButton.setTitle(selectionTitle, for: .normal)
-          dayTimeSelectionButton.accessibilityValue = selectionTitle
+          dayTimeSelectionButton.accessibilityValue = isNameSearchMode ? "SLUG-ACC-WEEKDAY-SWITCH-8-LABEL".localizedVariant : selectionTitle
+          dayTimeSelectionButton.sizeToFit()
+          navigationController?.navigationBar.setNeedsLayout()
+          if let popover = presentedViewController?.popoverPresentationController,
+             popover.sourceView === dayTimeSelectionButton {
+               navigationController?.navigationBar.layoutIfNeeded()
+               popover.sourceRect = dayTimeSelectionButton.bounds
+          }
+     }
+
+     /* ################################################################## */
+     /**
+      Closes the day/time popover and its keyboard when the scene enters the background.
+      Dismisses without animation so suspension cannot leave an unfinished presentation on screen.
+      */
+     func dismissDayTimeSelectionPopover() {
+          guard let controller = presentedViewController as? VMF_DayTimeSelectionViewController else { return }
+          controller.viewIfLoaded?.endEditing(true)
+          controller.dismiss(animated: false)
      }
 
      /* ################################################################## */
@@ -245,19 +264,15 @@ extension VMF_MainViewController {
              
              newViewController.noRefresh = false
          } else if isNameSearchMode {
-             newViewController.title = (tableDisplayController as? UIViewController)?.title
+             newViewController.title = "SLUG-SEARCH-MODE-TITLE".localizedVariant
              newViewController.noRefresh = true
          } else if 0 == dayIndex {
              newViewController.title = "SLUG-IN-PROGRESS".localizedVariant
              newViewController.noRefresh = false
          }
          
-         newViewController.noRefresh = isNameSearchMode || isDirectSelectionMode
-         
-         if (1..<8).contains(dayIndex) {
-             lastTime = getTimeOf(dayIndex: dayIndex, timeIndex: timeIndex) ?? 0
-         }
-         
+         newViewController.noRefresh = isNameSearchMode
+
          return newViewController
      }
      
@@ -278,7 +293,8 @@ extension VMF_MainViewController {
                if searchText.isEmpty {
                     meetings = searchMeetings
                } else {
-                    meetings = searchMeetings.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+                    let query = searchText.meetingSearchKey
+                    meetings = zip(searchMeetings, searchMeetingNames).compactMap { $0.1.contains(query) ? $0.0 : nil }
                }
           } else if 0 == inDayIndex {
                meetings = inProgressMeetings
@@ -309,13 +325,12 @@ extension VMF_MainViewController {
           let weekday = (0..<8).contains(inDayIndex) ? inDayIndex : -1 == inDayIndex ? nowIs.weekday : 0
           let time = (0..<8).contains(inDayIndex) && (0..<2400).contains(inMilitaryTime) ? inMilitaryTime : -1 == inDayIndex ? nowIs.currentIntegerTime : 0
           
+          isNameSearchMode = false
           let nextIndex = getNearestIndex(dayIndex: weekday, time: time)
           guard let newViewController = getTableDisplay(for: weekday, time: nextIndex) else { return }
           
           pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)   // No animation. We make it quick.
-          weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = mapWeekday(weekday)
-          
-          timeDayDisplayLabel?.text = newViewController.title
+          tableDisplayController = newViewController
      }
      
      /* ################################################################## */
@@ -330,27 +345,13 @@ extension VMF_MainViewController {
           let weekday = (1..<8).contains(inDayIndex) ? inDayIndex : -1 == inDayIndex ? nowIs.weekday : 0
           let time = (1..<8).contains(inDayIndex) && (0..<2400).contains(inMilitaryTime) ? inMilitaryTime : -1 == inDayIndex ? nowIs.currentIntegerTime : 0
           
-          let dailyMeetings = getDailyMeetings(for: weekday)
-          let dailyKeys = dailyMeetings.keys.sorted()
-          var nextIndex = 0
-          
-          for index in (0..<max(0, dailyKeys.count - 1)) {
-               let before = dailyKeys[index]
-               let after = dailyKeys[index + 1]
-               
-               if (before...after).contains(time) {
-                    nextIndex = (time - before) <= (after - time) ? index : index + 1
-                    break
-               } else if before >= time {
-                    nextIndex = max(0, index - 1)
-                    break
-               } else if after >= time {
-                    nextIndex = min(dailyKeys.count - 1, index + 1)
-                    break
-               }
-          }
-          
-          return nextIndex
+          let dailyKeys = getDailyMeetings(for: weekday).keys.sorted()
+          let targetMinutes = (time / 100) * 60 + time % 100
+          return dailyKeys.indices.min {
+               let firstMinutes = (dailyKeys[$0] / 100) * 60 + dailyKeys[$0] % 100
+               let secondMinutes = (dailyKeys[$1] / 100) * 60 + dailyKeys[$1] % 100
+               return abs(firstMinutes - targetMinutes) < abs(secondMinutes - targetMinutes)
+          } ?? 0
      }
      
      /* ################################################################## */
@@ -367,76 +368,7 @@ extension VMF_MainViewController {
           guard (0..<dailyKeys.count).contains(inTimeIndex) else { return nil }
           return dailyKeys[inTimeIndex]
      }
-     
-     /* ################################################################## */
-     /**
-      This updates the "thermometer" display in the time selector.
-      
-      - parameter inTablePage: The page with the table.
-      */
-     func updateThermometer(_ inTablePage: VMF_EmbeddedTableControllerProtocol?) {
-          completionBar?.subviews.forEach { $0.removeFromSuperview() }
-          
-          guard let tablePage = inTablePage,
-                let prevPage = tableDisplayController,
-                let completionBar = completionBar,
-                let repeatDuration = leftButton?.repeatFrequencyInSeconds,
-                !isNameSearchMode
-          else { return }
-          
-          let dayIndex = tablePage.dayIndex
-          let prevTimeIndex = prevPage.timeIndex
-          var timeIndex = tablePage.timeIndex
-          
-          var dailyMeetings = [Int: [MeetingInstance]]()
-          var prevDailyMeetings = [Int: [MeetingInstance]]()
-          
-          if 0 == dayIndex {
-               return // Not displayed for in progress mode.
-          } else if 0 != prevPage.dayIndex {
-               dailyMeetings = getDailyMeetings(for: dayIndex)
-               
-               guard (0..<dailyMeetings.count).contains(timeIndex) else { return }
-          } else if 1 == dayIndex,
-                    0 == prevPage.dayIndex {
-               timeIndex = 0
-          } else if 7 == dayIndex,
-                    0 == prevPage.dayIndex {
-               timeIndex = dailyMeetings.count - 1
-          }
-          
-          prevDailyMeetings = 0 == prevPage.dayIndex ? [:] : getDailyMeetings(for: prevPage.dayIndex)
-          
-          let oldWidth = CGFloat(prevTimeIndex + 1) / max(1, CGFloat(prevDailyMeetings.count))
-          let newWidth = CGFloat(timeIndex + 1) / max(1, CGFloat(dailyMeetings.count))
-          let mercury = UIView()
-          mercury.backgroundColor = Self.mercuryColor
-          mercury.cornerRadius = completionBar.bounds.size.height / 2
-          completionBar.addSubview(mercury)
-          mercury.translatesAutoresizingMaskIntoConstraints = false
-          mercury.topAnchor.constraint(equalTo: completionBar.topAnchor).isActive = true
-          mercury.leftAnchor.constraint(equalTo: completionBar.leftAnchor).isActive = true
-          mercury.bottomAnchor.constraint(equalTo: completionBar.bottomAnchor).isActive = true
-          mercury.widthAnchor.constraint(equalTo: completionBar.widthAnchor, multiplier: oldWidth).isActive = true
-          mercury.layoutIfNeeded()
-          UIView.animate(withDuration: repeatDuration) {
-               mercury.widthAnchor.constraint(equalTo: completionBar.widthAnchor, multiplier: newWidth).isActive = true
-               mercury.layoutIfNeeded()
-          }
-     }
-     
-     /* ################################################################## */
-     /**
-      Sets the day picker to whatever the current day/time is.
-      */
-     func setDayPicker() {
-          guard let tableDisplayController = tableDisplayController else { return }
-          let dayIndex = max(1, min(8, tableDisplayController.dayIndex)) - 1
-          let timeIndex = tableDisplayController.timeIndex
-          directSelectionPickerView?.selectRow(dayIndex, inComponent: 0, animated: true)
-          directSelectionPickerView?.selectRow(timeIndex, inComponent: 1, animated: true)
-     }
-     
+
      /* ################################################################## */
      /**
       This enables or disables the attendance item.
@@ -445,267 +377,12 @@ extension VMF_MainViewController {
           myAttendanceBarButtonItem?.isEnabled = !(VMF_AppDelegate.virtualService?.meetingsThatIAttend.isEmpty ?? true)
      }
 
-     /* ################################################################## */
-     /**
-      This sets the appropriate image for the disclosure button.
-      */
-     func setDisclosureButton() {
-          self.disclosureButton?.image = UIImage(systemName: isHeaderExpanded ? "inset.filled.rectangle" : "inset.filled.bottomhalf.tophalf.rectangle")
-          self.disclosureButton?.isEnabled = true
-          self.disclosureButton?.accessibilityLabel = "SLUG-ACC-DISCLOSURE-BUTTON-\(isHeaderExpanded ? "OPEN" : "CLOSED")-LABEL".localizedVariant
-          self.disclosureButton?.accessibilityHint = "SLUG-ACC-DISCLOSURE-BUTTON-\(isHeaderExpanded ? "OPEN" : "CLOSED")-HINT".localizedVariant
-     }
 }
 
 /* ###################################################################################################################################### */
 // MARK: Callbacks
 /* ###################################################################################################################################### */
 extension VMF_MainViewController {
-     /* ################################################################## */
-     /**
-      The segmented switch that controls the current display mode, was hit.
-      
-      - parameter inSwitch: The segmented switch.
-      */
-     @IBAction func weekdayModeSelectorSegmentedSwitchHit(_ inSwitch: UISegmentedControl) {
-          let selectedIndex = inSwitch.selectedSegmentIndex
-          let originalDayIndex = tableDisplayController?.dayIndex ?? 0
-          var timeIndex = tableDisplayController?.timeIndex ?? 0
-          if selectedIndex == (inSwitch.numberOfSegments - 1) {
-               let dayIndex = tableDisplayController?.dayIndex ?? 0
-               if !wasNameSearchMode {
-                    guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
-                    self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
-               }
-               isNameSearchMode = true
-          } else {
-               isNameSearchMode = false
-               let dayIndex = unMapWeekday(selectedIndex)
-               
-               // This whackiness, is because we want to try to set the time index to be as close as possible to the last one.
-               if (1..<8).contains(dayIndex),
-                  0 < lastTime {
-                    timeIndex = getNearestIndex(dayIndex: dayIndex, time: lastTime)
-               } else if 0 < originalDayIndex,
-                         0 < dayIndex,
-                         0 < timeIndex,
-                         let originalTime = getTimeOf(dayIndex: originalDayIndex, timeIndex: timeIndex) {
-                    timeIndex = getNearestIndex(dayIndex: dayIndex, time: originalTime)
-               }
-               
-               guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
-               self.pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
-          }
-          
-          timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
-     }
-     
-     /* ################################################################## */
-     /**
-      Called when something changes in the search text field.
-      */
-     @IBAction func searchTextChanged(_ inTextField: UITextField) {
-          searchText = inTextField.text ?? ""
-          selectionHaptic()
-     }
-     
-     /* ################################################################## */
-     /**
-      Called when the search close button is hit.
-      */
-     @IBAction func searchCloseHit(_: Any) {
-          isNameSearchMode = false
-     }
-     
-     /* ################################################################## */
-     /**
-      The decrement time button was hit.
-      
-      - parameter: ignored
-      */
-     @IBAction func leftButtonHit(_: Any) {
-          if !isNameSearchMode,
-             var dayIndex = tableDisplayController?.dayIndex,
-             var timeIndex = tableDisplayController?.timeIndex {
-               timeIndex -= 1
-               
-               if 0 == dayIndex || 0 > timeIndex {
-                    if 0 == dayIndex {
-                         dayIndex = unMapWeekday(7)
-                         timeIndex = getDailyMeetings(for: dayIndex).keys.count - 1
-                    } else if unMapWeekday(1) == dayIndex {
-                         dayIndex = 0
-                         timeIndex += 1
-                    } else {
-                         dayIndex -= 1
-                         timeIndex = getDailyMeetings(for: dayIndex).keys.count - 1
-                    }
-                    successHaptic()
-               }
-               
-               guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
-               pageViewController?.setViewControllers([newViewController], direction: .reverse, animated: false)
-               timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
-               weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = mapWeekday(dayIndex)
-               timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
-          }
-     }
-     
-     /* ################################################################## */
-     /**
-      The increment time button was hit.
-      
-      - parameter: ignored
-      */
-     @IBAction func rightButtonHit(_: Any) {
-          if !isNameSearchMode,
-             var dayIndex = tableDisplayController?.dayIndex,
-             var timeIndex = tableDisplayController?.timeIndex {
-               timeIndex += 1
-               if 0 == dayIndex || timeIndex >= getDailyMeetings(for: dayIndex).keys.count {
-                    if 0 == dayIndex {
-                         dayIndex = unMapWeekday(1)
-                         timeIndex = 0
-                    } else if unMapWeekday(7) == dayIndex {
-                         dayIndex = 0
-                         timeIndex -= 1
-                    } else {
-                         dayIndex += 1
-                         timeIndex = 0
-                    }
-                    successHaptic()
-               }
-               
-               guard let newViewController = getTableDisplay(for: dayIndex, time: timeIndex) else { return }
-               pageViewController?.setViewControllers([newViewController], direction: .reverse, animated: false)
-               weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = mapWeekday(dayIndex)
-               timeDayDisplayLabel?.text = (tableDisplayController as? UIViewController)?.title
-          }
-     }
-     
-     /* ################################################################## */
-     /**
-      The double-tap gesture recognizer on the weekday/time display label was triggered.
-      
-      This resets the screen to today/now.
-      
-      - parameter: ignored
-      */
-     @IBAction func doubleTapOnDayTimeLabel(_: Any) {
-          if !isNameSearchMode {
-               hardImpactHaptic()
-               openTo()
-          }
-     }
-     
-     /* ############################################################## */
-     /**
-      A long-press on the weekday switch was detected. We change the weekday (we do not change to in-progress or search).
-      
-      - parameter inGestureRecognizer: The gesture recognizer that was triggered.
-      */
-     @IBAction func longPressGestureInWeekdaySwitchDetected(_ inGestureRecognizer: UILongPressGestureRecognizer) {
-          guard let weekdayModeSelectorSegmentedSwitch = weekdayModeSelectorSegmentedSwitch else { return }
-          
-          let width = weekdayModeSelectorSegmentedSwitch.bounds.size.width
-          let selectedSegment = weekdayModeSelectorSegmentedSwitch.selectedSegmentIndex
-          let numberOfSegments = weekdayModeSelectorSegmentedSwitch.numberOfSegments
-          let gestureLocation = inGestureRecognizer.location(ofTouch: 0, in: weekdayModeSelectorSegmentedSwitch)
-          var location = gestureLocation.x
-          let stepSize = width / CGFloat(numberOfSegments)
-          var steps = [(start: CGFloat, end: CGFloat)]()
-          for index in 1..<(numberOfSegments - 1) {
-               let start = CGFloat(index) * stepSize
-               let end = start + stepSize
-               steps.append((start: start, end: end))
-          }
-          
-          switch inGestureRecognizer.state {
-          case .began, .changed:
-               if .began == inGestureRecognizer.state || location != oldLocation {
-                    var selectedIndex = -1
-                    for enumeration in steps.enumerated() {
-                         let testRange = enumeration.element.start..<enumeration.element.end
-                         if testRange.contains(location) {
-                              selectedIndex = enumeration.offset + 1
-                              break
-                         }
-                    }
-                    
-                    if .began == inGestureRecognizer.state || selectedIndex != selectedSegment,
-                       (1..<(numberOfSegments - 1)).contains(selectedIndex) {
-                         if .began == inGestureRecognizer.state {
-                              hardImpactHaptic()
-                         }
-                         weekdayModeSelectorSegmentedSwitch.selectedSegmentIndex = selectedIndex
-                         weekdayModeSelectorSegmentedSwitch.sendActions(for: .valueChanged)
-                    }
-               }
-               
-          default:
-               location = 0
-          }
-          
-          oldLocation = location
-     }
-     
-     /* ############################################################## */
-     /**
-      A long-press on the day/time display label switch was detected. We change the time slot.
-      
-      - parameter inGestureRecognizer: The gesture recognizer that was triggered.
-      */
-     @IBAction func longPressGestureInDisplayLabelDetected(_ inGestureRecognizer: UILongPressGestureRecognizer) {
-          guard let view = view,
-                let dayIndex = tableDisplayController?.dayIndex,
-                (1..<8).contains(dayIndex),
-                0 < view.bounds.size.width
-          else { return }
-          
-          let timeSlots = getDailyMeetings(for: dayIndex)
-          let gestureLocation = inGestureRecognizer.location(ofTouch: 0, in: view)
-          let fraction = gestureLocation.x / view.bounds.size.width
-          let timeSlot = max(0, min(timeSlots.count - 1, Int(round(fraction * CGFloat(timeSlots.count)))))
-          
-          switch inGestureRecognizer.state {
-          case .began, .changed:
-               if timeSlot != Int(oldLocation),
-                  let time = getTimeOf(dayIndex: dayIndex, timeIndex: timeSlot) {
-                    if .began == inGestureRecognizer.state {
-                         hardImpactHaptic()
-                    }
-                    
-                    openTo(dayIndex: dayIndex, time: time)
-               }
-               oldLocation = CGFloat(timeSlot)
-               
-          default:
-               oldLocation = 0
-          }
-          
-     }
-     
-     /* ################################################################## */
-     /**
-      The weekday/time label was touched.
-      
-      - parameter: ignored.
-      */
-     @IBAction func directSelectionOpen(_: Any) {
-          if 0 < (tableDisplayController?.dayIndex ?? 0) {
-               isDirectSelectionMode = true
-          }
-     }
-     
-     /* ################################################################## */
-     /**
-      The close button for the direct selection mode was hit.
-      
-      - parameter: ignored.
-      */
-     @IBAction func directSelectionCloseButtonHit(_: Any) {
-          isDirectSelectionMode = false
-     }
 
      /* ################################################################## */
      /**
@@ -713,52 +390,17 @@ extension VMF_MainViewController {
       */
      @objc func dayTimeSelectionButtonHit() {
           guard nil == presentedViewController else { return }
-          searchTextField?.resignFirstResponder()
 
           let controller = VMF_DayTimeSelectionViewController()
+          controller.mainController = self
           controller.modalPresentationStyle = .popover
-          controller.preferredContentSize = CGSize(width: 600, height: 500)
+          controller.preferredContentSize = VMF_DayTimeSelectionViewController.browsingSize
           guard let popover = controller.popoverPresentationController else { return }
           popover.delegate = controller
           popover.sourceView = dayTimeSelectionButton
           popover.sourceRect = dayTimeSelectionButton.bounds
           popover.permittedArrowDirections = .up
           present(controller, animated: true)
-     }
-     
-     /* ################################################################## */
-     /**
-      This shows or hides the Control Panel (the header).
-      */
-     @IBAction func toggleHeader() {
-         isHeaderExpanded.toggle()
-     }
-
-     /* ################################################################## */
-     /**
-      This is called just before the keyboard shows. We use this to "nudge" the table bottom up.
-      
-      - parameter inNotification: The notification being passed in.
-      */
-     @objc func keyboardWillShow(notification inNotification: NSNotification) {
-          DispatchQueue.main.async { [weak self] in
-               if let keyboardSize = (inNotification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                    let newPosition = (keyboardSize.size.height - (self?.view?.safeAreaInsets.bottom ?? 0))
-                    self?.bottomConstraint?.constant = newPosition
-               }
-          }
-     }
-     
-     /* ################################################################## */
-     /**
-      This is called just before the keyboard shows. We use this to return the table bottom to its original position.
-      
-      - parameter notification: The notification being passed in.
-      */
-     @objc func keyboardWillHide(notification: NSNotification) {
-          DispatchQueue.main.async { [weak self] in
-               self?.bottomConstraint?.constant = self?.atRestConstant ?? 0
-          }
      }
 
      /* ################################################################## */
@@ -770,7 +412,12 @@ extension VMF_MainViewController {
      func refreshCalled(completion inCompletion: @escaping () -> Void) {
           guard !isNameSearchMode else { return }
           hardImpactHaptic()
-          loadMeetings(completion: inCompletion)
+          let day = tableDisplayController?.dayIndex ?? 0
+          let time = getTimeOf(dayIndex: day, timeIndex: tableDisplayController?.timeIndex ?? 0) ?? lastTime
+          loadMeetings {
+               self.openTo(dayIndex: day, time: time)
+               inCompletion()
+          }
      }
 }
 
@@ -788,49 +435,16 @@ extension VMF_MainViewController {
           _setUpDayTimeSelectionButton()
           VMF_AppDelegate.mainScreenController = self
           swipeLabel?.text = swipeLabel?.text?.localizedVariant
-          searchTextField?.placeholder = searchTextField?.placeholder?.localizedVariant
           myAttendanceBarButtonItem?.isAccessibilityElement = true
-          myAttendanceBarButtonItem?.accessibilityLabel = "SLUG-ACC-TAB-1-BUTTON-LABEL"
-          myAttendanceBarButtonItem?.accessibilityHint = "SLUG-ACC-TAB-1-BUTTON-HINT"
+          myAttendanceBarButtonItem?.accessibilityLabel = "SLUG-ACC-TAB-1-BUTTON-LABEL".localizedVariant
+          myAttendanceBarButtonItem?.accessibilityHint = "SLUG-ACC-TAB-1-BUTTON-HINT".localizedVariant
           settingsBarButtonItem?.isAccessibilityElement = true
-          settingsBarButtonItem?.accessibilityLabel = "SLUG-ACC-SETTINGS-BUTTON-LABEL"
-          settingsBarButtonItem?.accessibilityHint = "SLUG-ACC-SETTINGS-BUTTON-HINT"
-          weekdayModeSelectorSegmentedSwitch?.accessibilityLabel = "SLUG-ACC-WEEKDAY-SWITCH-LABEL"
-          weekdayModeSelectorSegmentedSwitch?.accessibilityHint = "SLUG-ACC-WEEKDAY-SWITCH-HINT"
-          
-          atRestConstant = bottomConstraint?.constant ?? 0
-          
-          guard let numberOfSegments = weekdayModeSelectorSegmentedSwitch?.numberOfSegments,
-                0 < numberOfSegments,
-                8 < numberOfSegments
-          else { return }
-          
-          var titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.tintColor, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
-          UISegmentedControl.appearance().setTitleTextAttributes(titleTextAttributes, for: .normal)
-          
-          titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)]
-          UISegmentedControl.appearance().setTitleTextAttributes(titleTextAttributes, for: .selected)
-          
-          weekdayModeSelectorSegmentedSwitch?.apportionsSegmentWidthsByContent = true
-          
-          (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: 0) as? UIView)?.accessibilityLabel = "SLUG-ACC-WEEKDAY-SWITCH-0-LABEL"
-          (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: 0) as? UIView)?.accessibilityHint = "SLUG-ACC-WEEKDAY-SWITCH-0-HINT"
-          
-          for index in (1..<(numberOfSegments - 1)) {
-               let weekday = Calendar.current.standaloneWeekdaySymbols[mapWeekday(index) - 1]
-               (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: index) as? UIView)?.accessibilityLabel = String(format: "SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-LABEL-FORMAT".localizedVariant, weekday)
-               (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: index) as? UIView)?.accessibilityHint = String(format: "SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-HINT-FORMAT".localizedVariant, weekday)
+          settingsBarButtonItem?.accessibilityLabel = "SLUG-ACC-SETTINGS-BUTTON-LABEL".localizedVariant
+          settingsBarButtonItem?.accessibilityHint = "SLUG-ACC-SETTINGS-BUTTON-HINT".localizedVariant
+
+          if let swipeLabel = swipeLabel {
+               swipeLabel.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -8).isActive = true
           }
-          
-          (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: 8) as? UIView)?.accessibilityLabel = "SLUG-ACC-WEEKDAY-SWITCH-8-LABEL"
-          (weekdayModeSelectorSegmentedSwitch?.accessibilityElement(at: 8) as? UIView)?.accessibilityHint = "SLUG-ACC-WEEKDAY-SWITCH-8-HINT"
-          
-          guard let labelDoubleTapGesture = labelDoubleTapGesture else { return }
-          directSelectionTapRecognizer?.require(toFail: labelDoubleTapGesture)
-          
-          timeDayDisplayLabel?.textColor = .tintColor
-          
-          isDirectSelectionMode = false
      }
      
      /* ################################################################## */
@@ -842,34 +456,8 @@ extension VMF_MainViewController {
      override func viewWillAppear(_ inIsAnimated: Bool) {
           super.viewWillAppear(inIsAnimated)
           
-          NotificationCenter.default.addObserver(
-               self,
-               selector: #selector(keyboardWillShow),
-               name: UIResponder.keyboardWillShowNotification,
-               object: nil
-          )
-          
-          NotificationCenter.default.addObserver(
-               self,
-               selector: #selector(keyboardWillHide),
-               name: UIResponder.keyboardWillHideNotification,
-               object: nil
-          )
-          
-          isDirectSelectionMode = false
-          if organizedMeetings.isEmpty {
-               reorganizeMeetings()
-               view?.setNeedsLayout()
-          }
-          
-          if needsReload {
-               isNameSearchMode = false
-          } else {
-               isNameSearchMode = wasNameSearchMode
-          }
-          
-          setDisclosureButton()
-          isHeaderExpanded = VMF_Persistent_Prefs().openControlPanel
+          if organizedMeetings.isEmpty { reorganizeMeetings() }
+          if needsReload { isNameSearchMode = false }
           setAttendance()
      }
      
@@ -901,59 +489,11 @@ extension VMF_MainViewController {
      
      /* ################################################################## */
      /**
-      Called when the subviews are laid out. We use this to ensure that our segmented switch is set up correctly.
+      Updates the attendance button after layout.
       */
      override func viewDidLayoutSubviews() {
           super.viewDidLayoutSubviews()
           setAttendance()
-          
-          guard let maxIndex = weekdayModeSelectorSegmentedSwitch?.numberOfSegments,
-                let windowWidth = view?.bounds.size.width
-          else { return }
-          
-          for index in (0..<maxIndex) {
-               if 0 == index {
-                    weekdayModeSelectorSegmentedSwitch?.setTitle("SLUG-NOW".localizedVariant, forSegmentAt: index)
-               } else if index == (maxIndex - 1) {
-                    weekdayModeSelectorSegmentedSwitch?.setImage(Self.searchImage, forSegmentAt: index)
-               } else {
-                    let wdIndex = unMapWeekday(index) - 1
-                    // We try to use the largest weekday indicator possible.
-                    let weekdayName = Self.shortWidthThreshold > windowWidth
-                    ? Calendar.current.veryShortStandaloneWeekdaySymbols[wdIndex]   // Single letter
-                    : Self.fullWidthThreshold > windowWidth
-                    ? Calendar.current.shortStandaloneWeekdaySymbols[wdIndex]   // Abbreviation
-                    : Calendar.current.standaloneWeekdaySymbols[wdIndex]        // Full word
-                    
-                    weekdayModeSelectorSegmentedSwitch?.setTitle(weekdayName, forSegmentAt: index)
-               }
-          }
-     }
-     
-     /* ################################################################## */
-     /**
-      Called just before the view disappears.
-      
-      - parameter inIsAnimated: True, if the disappearance is animated.
-      */
-     override func viewWillDisappear(_ inIsAnimated: Bool) {
-          super.viewWillDisappear(inIsAnimated)
-          wasNameSearchMode = isNameSearchMode
-          
-          searchTextField?.resignFirstResponder()
-          bottomConstraint?.constant = atRestConstant
-          
-          NotificationCenter.default.removeObserver(
-               self,
-               name: UIResponder.keyboardWillShowNotification,
-               object: nil
-          )
-          
-          NotificationCenter.default.removeObserver(
-               self,
-               name: UIResponder.keyboardWillHideNotification,
-               object: nil
-          )
      }
      
      /* ################################################################## */

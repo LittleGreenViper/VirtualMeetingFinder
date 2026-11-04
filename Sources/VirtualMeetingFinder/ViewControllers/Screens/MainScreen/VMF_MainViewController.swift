@@ -67,436 +67,79 @@ import SwiftBMLSDK
  You can bring in a separate screen, that contains only the meetings that you attend. This is accessed from the checkmark bar button item, in the upper right.
  */
 class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerProtocol {
-     /* ################################################################## */
-     /**
-      The segue ID of our open attendance.
-      */
      static let openAttendanceSegueID = "open-attendance"
-     
-     /* ################################################################## */
-     /**
-      The image that we use for search mode.
-      */
-     static let searchImage = UIImage(systemName: "magnifyingglass")
-     
-     /* ################################################################## */
-     /**
-      The image to use, when attendance is selected.
-      */
      static let checkedImage = UIImage(systemName: "checkmark.square.fill")
-     
-     /* ################################################################## */
-     /**
-      The image to use, when we do not attend.
-      */
      static let uncheckedImage = UIImage(systemName: "square")
-     
-     /* ################################################################## */
-     /**
-      The color of the "mercury" in our "thermometer."
-      */
-     static let mercuryColor = UIColor.systemRed
-     
-     /* ################################################################## */
-     /**
-      The font for the "I Attend" button.
-      */
      static let barButtonLabelFont = UIFont.systemFont(ofSize: 15)
-     
-     /* ################################################################## */
-     /**
-      The height of the control panel, when shown.
-      */
-     static let controlPanelHeightInDisplayUnits = CGFloat(122)
-     
-     /* ################################################################## */
-     /**
-      The height of the control panel search bar, when shown.
-      */
-     static let searchBarHeightInDisplayUnits = CGFloat(40)
 
-     /* ################################################################## */
-     /**
-      The width of each of the components of our direct picker view.
-      */
-     static let pickerViewComponentWidthInDisplayUnits = CGFloat(140)
+     /** The last selected start time, preserved when entering Now or search. */
+     var lastTime = 0
 
-     /* ################################################################## */
-     /**
-      The container view needs to be wider than this, to show short (as opposed to "very" short) weekdays.
-      */
-     static let shortWidthThreshold = CGFloat(500)
-     
-     /* ################################################################## */
-     /**
-      The container view needs to be wider than this, to show full (as opposed to short) weekdays.
-      */
-     static let fullWidthThreshold = CGFloat(1000)
-     
-     /* ################################################################## */
-     /**
-      This is used to restore the bottom of the stack view, when the keyboard is hidden.
-      */
-     var atRestConstant = CGFloat(0)
-     
-     /* ################################################################## */
-     /**
-      This is used during the long-press slide. It holds the previous location of the gesture.
-      We use it to determine if the finger has moved.
-      */
-     var oldLocation = CGFloat(0)
-     
-     /* ################################################################## */
-     /**
-      This holds the last time of the selected page. We use this to set the time, when directly navigating away from Now.
-      */
-     var lastTime = Int(0)
-     
-     /* ################################################################## */
-     /**
-      This tracks the current embedded table controller.
-      */
+     /** The currently displayed page also supplies the navigation button's title. */
      var tableDisplayController: VMF_EmbeddedTableControllerProtocol? {
-          didSet { updateDayTimeSelectionButton() }
-     }
-
-     /* ################################################################## */
-     /**
-      The navigation title button, showing the day and time of the displayed meetings.
-      */
-     let dayTimeSelectionButton = UIButton(type: .system)
-     
-     /* ################################################################## */
-     /**
-      This is our page view controller.
-      */
-     weak var pageViewController: VMF_DayTimeSearchPageViewController?
-     
-     /* ################################################################## */
-     /**
-      This is set to true, if we were (past tense) in name search mode.
-      */
-     var wasNameSearchMode: Bool = false
-     
-     /* ################################################################## */
-     /**
-      Storage for our search meeting source
-      */
-     var searchMeetings: [MeetingInstance] = []
-     
-     /* ################################################################## */
-     /**
-      This has the "mostly organized" meeting data.
-      
-      The meetings are organized in ascending local time, arranged by weekday, with [0] being Sunday.
-      */
-     var organizedMeetings: [[MeetingInstance]] = []
-     
-     /* ################################################################## */
-     /**
-      This is set to true, if we are in name search mode.
-      */
-     var isNameSearchMode: Bool = false {
           didSet {
-               searchItemsContainerView?.isHidden = !isNameSearchMode
-               weekdayModeSelectorSegmentedSwitch?.isHidden = isNameSearchMode
-               if let dayIndex = tableDisplayController?.dayIndex,
-                  let timeIndex = tableDisplayController?.timeIndex {
-                    if isNameSearchMode {
-                         if !wasNameSearchMode {
-                              guard let newViewController = self.getTableDisplay(for: dayIndex, time: timeIndex) else { return }
-                              pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)
-                         }
-                         wasNameSearchMode = false
-                         controlPanelHeightConstraint?.constant = Self.searchBarHeightInDisplayUnits
-                         searchTextField?.becomeFirstResponder()
-                         searchTextField?.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
-                         timeSelectorContainerView?.isHidden = true
-                         directSelectionItemsContainer?.isHidden = true
-                    } else {
-                         // The reason for this, is an internal cache reset: https://stackoverflow.com/a/25016836/879365
-                         pageViewController?.dataSource = nil
-                         pageViewController?.dataSource = self
-                         searchTextField?.removeTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
-                         searchTextField?.resignFirstResponder()
-                         controlPanelHeightConstraint?.constant = Self.controlPanelHeightInDisplayUnits
-                         if oldValue != isNameSearchMode {
-                              weekdayModeSelectorSegmentedSwitch?.selectedSegmentIndex = mapWeekday(dayIndex)
-                              tableDisplayController?.meetings = getCurentMeetings(for: dayIndex, time: timeIndex)
-                         }
-                         
-                         if let ctrl = tableDisplayController as? VMF_EmbeddedTableController {
-                              updateThermometer(ctrl)
-                              timeDayDisplayLabel?.text = ctrl.title
-                         }
-                         
-                         timeSelectorContainerView?.isHidden = false
-                    }
-                    
-                    tableDisplayController?.meetings = getCurentMeetings(for: dayIndex, time: timeIndex)
+               if !isNameSearchMode,
+                  let page = tableDisplayController,
+                  let time = getTimeOf(dayIndex: page.dayIndex, timeIndex: page.timeIndex) {
+                    lastTime = time
                }
-               
-               if isNameSearchMode != oldValue {
-                    successHaptic()
-               }
-               
-               (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = isNameSearchMode
                updateDayTimeSelectionButton()
           }
      }
-     
-     /* ################################################################## */
-     /**
-      True, if this is the direct weekday/time selection mode (PickerView displayed).
-      */
-     var isDirectSelectionMode: Bool = false {
+
+     let dayTimeSelectionButton = UIButton(type: .system)
+     weak var pageViewController: VMF_DayTimeSearchPageViewController?
+
+     /** Meetings sorted by name for search, and by weekday for time selection. */
+     var searchMeetings: [MeetingInstance] = [] {
+          didSet { searchMeetingNames = searchMeetings.map { $0.name.meetingSearchKey } }
+     }
+     private(set) var searchMeetingNames: [String] = []
+     var organizedMeetings: [[MeetingInstance]] = []
+
+     /** Search retains the underlying weekday/time selection for returning to browsing. */
+     var isNameSearchMode = false {
           didSet {
-               successHaptic()
-               
-               if isDirectSelectionMode {
-                    isNameSearchMode = false
-                    completionBar?.isHidden = true
-                    weekdayModeSelectorSegmentedSwitch?.isHidden = true
-                    timeSelectorContainerView?.isHidden = true
-                    directSelectionItemsContainer?.isHidden = false
-                    directSelectionPickerView?.reloadAllComponents()
-                    (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = true  // Disables pull to refresh.
-                    setDayPicker()
-               } else {
-                    directSelectionItemsContainer?.isHidden = true
-                    completionBar?.isHidden = false
-                    weekdayModeSelectorSegmentedSwitch?.isHidden = false
-                    timeSelectorContainerView?.isHidden = false
-                    (tableDisplayController as? VMF_EmbeddedTableController)?.noRefresh = false  // Re-enable pull to refresh.
+               guard oldValue != isNameSearchMode else { return }
+               pageViewController?.dataSource = nil
+               if !isNameSearchMode {
+                    pageViewController?.dataSource = self
                }
+               if let page = tableDisplayController,
+                  let controller = getTableDisplay(for: page.dayIndex, time: page.timeIndex) {
+                    pageViewController?.setViewControllers([controller], direction: .forward, animated: false)
+                    tableDisplayController = controller
+               }
+               swipeLabel?.isHidden = isNameSearchMode
+               updateDayTimeSelectionButton()
+               successHaptic()
           }
      }
-     
-     /* ################################################################## */
-     /**
-      Contains the search text filter. Only relevant, if in Name Search Mode.
-      */
-     var searchText: String = "" {
+
+     var searchText = "" {
           didSet {
                if isNameSearchMode {
-                    if searchText.isEmpty {
-                         tableDisplayController?.meetings = searchMeetings
-                    } else {
-                         tableDisplayController?.meetings = getCurentMeetings()
-                    }
+                    tableDisplayController?.meetings = getCurentMeetings()
                }
           }
      }
-     
-     /* ################################################################## */
-     /**
-      This is set to true, if the "throbber" is shown (hiding everything else).
-      */
-     var isThrobbing: Bool = false {
-          didSet {
-               isDirectSelectionMode = false
-               if isThrobbing {
-                    navigationController?.isNavigationBarHidden = true
-                    directSelectionItemsContainer?.isHidden = true
-                    tableContainerView?.isHidden = true
-                    swipeLabel?.isHidden = true
-                    completionBar?.isHidden = true
-                    searchItemsContainerView?.isHidden = true
-                    weekdayModeSelectorSegmentedSwitch?.isHidden = true
-                    timeSelectorContainerView?.isHidden = true
-                    tabBarController?.tabBar.isHidden = true
-                    throbber?.isHidden = false
-               } else {
-                    throbber?.isHidden = true
-                    myAttendanceBarButtonItem?.isEnabled = !(VMF_AppDelegate.virtualService?.meetingsThatIAttend.isEmpty ?? true)
-                    tabBarController?.tabBar.isHidden = false
-                    searchItemsContainerView?.isHidden = !isNameSearchMode
-                    weekdayModeSelectorSegmentedSwitch?.isHidden = isNameSearchMode
-                    timeSelectorContainerView?.isHidden = isNameSearchMode
-                    completionBar?.isHidden = false
-                    swipeLabel?.isHidden = false
-                    tableContainerView?.isHidden = false
-                    navigationController?.isNavigationBarHidden = false
-               }
-          }
-     }
-     
-     /* ################################################################## */
-     /**
-      The bar button that controls whether or not the header (control panel) is shown.
-      */
-     @IBOutlet weak var disclosureButton: UIBarButtonItem?
 
-     /* ################################################################## */
-     /**
-      The panel at the top, with all the settings and displays.
-      */
-     @IBOutlet weak var controlPanel: UIStackView?
-     
-     /* ################################################################## */
-     /**
-      The height of the panel. We use this to control its disclosure.
-      */
-     @IBOutlet weak var controlPanelHeightConstraint: NSLayoutConstraint?
-     
-     /* ################################################################## */
-     /**
-      If true, then the "Control Panel" header is open.
-      */
-     var isHeaderExpanded = false {
+     var isThrobbing = false {
           didSet {
-               self.disclosureButton?.isEnabled = false
-               VMF_Persistent_Prefs().openControlPanel = isHeaderExpanded
-                if self.isHeaderExpanded {
-                     controlPanel?.isHidden = false
-                     view?.layoutIfNeeded()
-                } else {
-                     isNameSearchMode = false
-                     isDirectSelectionMode = false
-                }
-                UIView.animate(withDuration: 0.3, animations: {
-                     self.controlPanelHeightConstraint?.constant = self.isHeaderExpanded ? self.isNameSearchMode ? Self.searchBarHeightInDisplayUnits : Self.controlPanelHeightInDisplayUnits : 0
-                    self.view?.layoutIfNeeded()
-                }, completion: { _ in
-                     self.controlPanel?.isHidden = !self.isHeaderExpanded
-                     self.setDisclosureButton()
-                     self.hardImpactHaptic()
-                     self.tableDisplayController?.valueTable?.reloadData()
-                })
+               navigationController?.isNavigationBarHidden = isThrobbing
+               tabBarController?.tabBar.isHidden = isThrobbing
+               tableContainerView?.isHidden = isThrobbing
+               swipeLabel?.isHidden = isThrobbing || isNameSearchMode
+               throbber?.isHidden = !isThrobbing
+               if !isThrobbing { setAttendance() }
           }
      }
-     
-     /* ################################################################## */
-     /**
-      The label at the bottom, showing a swipe tip.
-      */
+
      @IBOutlet weak var swipeLabel: UILabel?
-
-     /* ################################################################## */
-     /**
-      The bar button item that brings in the Settings Screen.
-      */
      @IBOutlet weak var settingsBarButtonItem: UIBarButtonItem?
-     
-     /* ################################################################## */
-     /**
-      The bar button item that brings in the My Attendance Screen.
-      */
      @IBOutlet weak var myAttendanceBarButtonItem: UIBarButtonItem?
-     
-     /* ################################################################## */
-     /**
-      The segmented switch that controls the mode.
-      */
-     @IBOutlet weak var weekdayModeSelectorSegmentedSwitch: UISegmentedControl?
-     
-     /* ################################################################## */
-     /**
-      The embedded table controller container view. This hosts an instance of ``VMF_DayTimeSearchPageViewController``.
-      */
      @IBOutlet weak var tableContainerView: UIView?
-     
-     /* ################################################################## */
-     /**
-      This contains the search items.
-      */
-     @IBOutlet weak var searchItemsContainerView: UIStackView?
-     
-     /* ################################################################## */
-     /**
-      The text field for entering a search.
-      */
-     @IBOutlet weak var searchTextField: UITextField?
-     
-     /* ################################################################## */
-     /**
-      The button to close the search mode.
-      */
-     @IBOutlet weak var searchCloseButton: UIButton?
-     
-     /* ################################################################## */
-     /**
-      This contains the time selector items.
-      */
-     @IBOutlet weak var timeSelectorContainerView: UIView?
-     
-     /* ################################################################## */
-     /**
-      The decrement time button
-      */
-     @IBOutlet weak var leftButton: VMF_TapHoldButton?
-     
-     /* ################################################################## */
-     /**
-      The increment time button
-      */
-     @IBOutlet weak var rightButton: VMF_TapHoldButton?
-     
-     /* ################################################################## */
-     /**
-      This displays the current time and day.
-      */
-     @IBOutlet weak var timeDayDisplayLabel: UILabel?
-     
-     /* ################################################################## */
-     /**
-      The bottom constraint of the table display area. We use this to shrink the table area, when the keyboard is shown.
-      */
-     @IBOutlet weak var bottomConstraint: NSLayoutConstraint?
-     
-     /* ################################################################## */
-     /**
-      This is a narrow bar, along the top, that shows how far into the day we are.
-      */
-     @IBOutlet weak var completionBar: UIView?
-     
-     /* ################################################################## */
-     /**
-      The "Throbber" view
-      */
      @IBOutlet weak var throbber: UIView?
-     
-     /* ################################################################## */
-     /**
-      The double-tap gesture for bring us back to today.
-      */
-     @IBOutlet weak var labelDoubleTapGesture: UITapGestureRecognizer?
-     
-     /* ################################################################## */
-     /**
-      The long-press gesture for selecting a weekday.
-      */
-     @IBOutlet weak var weekdayLongPressGesture: UILongPressGestureRecognizer?
-     
-     /* ################################################################## */
-     /**
-      The long-press gesture for selecting a time.
-      */
-     @IBOutlet weak var timeDayLongPressGesture: UILongPressGestureRecognizer?
-     
-     /* ################################################################## */
-     /**
-      The tap recognizer for entering direct selection mode.
-      */
-     @IBOutlet weak var directSelectionTapRecognizer: UITapGestureRecognizer?
-     
-     /* ################################################################## */
-     /**
-      The container, for the Direct Selection Mode items.
-      */
-     @IBOutlet weak var directSelectionItemsContainer: UIView?
-     
-     /* ################################################################## */
-     /**
-      The picker view, for the Direct Selection Mode.
-      */
-     @IBOutlet weak var directSelectionPickerView: UIPickerView?
-     
-     /* ################################################################## */
-     /**
-      The button to exit Direct Selection Mode.
-      */
-     @IBOutlet weak var directSelectionCloseButton: UIButton?
 }
 
 /* ###################################################################################################################################### */

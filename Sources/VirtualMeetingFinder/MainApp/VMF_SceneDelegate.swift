@@ -72,11 +72,12 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
      /**
       Called after the scene went into the background.
       
-      We use this to set the search screen to today/now.
+      Dismisses the day/time popover before suspension and records when the app was backgrounded.
       
       - parameter: The scene instance (ignored).
       */
      func sceneDidEnterBackground(_: UIScene) {
+          VMF_AppDelegate.mainScreenController?.dismissDayTimeSelectionPopover()
           Self.lastReloadTime = .now
      }
 
@@ -100,9 +101,12 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
       */
      func sceneWillEnterForeground(_: UIScene) {
           Self.sceneDelegateInstance = self
-          if nil == VMF_AppDelegate.openMeeting {
+          // Also finish any pending dismissal before the refresh hides the popover's navigation-bar anchor.
+          VMF_AppDelegate.mainScreenController?.dismissDayTimeSelectionPopover()
+          if nil == VMF_AppDelegate.openMeeting,
+             let virtualService = VMF_AppDelegate.virtualService {
                VMF_AppDelegate.mainScreenController?.isThrobbing = true
-               VMF_AppDelegate.virtualService?.refreshCaches() { _ in
+               virtualService.refreshCaches() { _ in
                     VMF_AppDelegate.mainScreenController?.isThrobbing = false
                     VMF_AppDelegate.mainScreenController?.openTo()
                     self.window?.setNeedsLayout()

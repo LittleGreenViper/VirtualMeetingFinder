@@ -255,6 +255,23 @@
 /* Hint for the navigation title button. The popover will contain the day/time controls. */
 "SLUG-ACC-DAY-TIME-BUTTON-HINT"                  =    "Ouvre la fenêtre de sélection du jour et de l’heure.";
 
+/* Dismisses the popover while retaining the live meeting-name search results in the main table. */
+"SLUG-SHOW-SEARCH-RESULTS"                      =    "Afficher les résultats";
+"SLUG-ACC-SHOW-SEARCH-RESULTS-HINT"              =    "Ferme la fenêtre et conserve les résultats de recherche sur l’écran principal.";
+
+/* Short navigation title while searching by meeting name. */
+"SLUG-SEARCH-MODE-TITLE"                        =    "Recherche";
+
+/* The weekday selector in the day/time popover. Weekdays are ordered using the user's calendar. */
+"SLUG-ACC-POPOVER-WEEKDAY-LABEL"                 =    "Choisir un jour";
+"SLUG-ACC-POPOVER-WEEKDAY-HINT"                  =    "Affiche les horaires de réunion disponibles pour ce jour.";
+/* The scrolling list of start times for the selected weekday. */
+"SLUG-ACC-AVAILABLE-TIMES-LABEL"                 =    "Horaires de réunion disponibles";
+/* Hint for a start time row in the popover. */
+"SLUG-ACC-SELECT-TIME-HINT"                      =    "Affiche les réunions à cette heure et ferme la fenêtre de sélection du jour et de l’heure.";
+/* Shown in the popover when a weekday has no available start times. */
+"SLUG-NO-MEETING-TIMES"                         =    "Aucun horaire de réunion n’est disponible pour ce jour.";
+
 /* This is the label for the weekday/time label. */
 "SLUG-ACC-TIME-DISPLAY-LABEL"                   =    "Jour et heure";
 /* This is the hint for the weekday/time label. */

@@ -18,7 +18,7 @@ This app works by downloading a large list of virtual (and hybrid) meetings from
 
 This app connects to an instance of [`LGV_MeetingServer`](https://github.com/LittleGreenViper/LGV_MeetingServer), and downloads the entire dataset for all meetings that have a virtual component (Either full virtual, or hybrid Virtual/in-Person). It either does this, when starting "cold," after 4 hours have passed, or at the user's behest (by doing a "pull-to refresh" on the table).
 
-It then converts the meeting start and end times to the user's current timezone, and presents the meetings as a list, segregated by the weekday, and meeting start time. The user can use a couple of simple controls to select a day and start time for the meeting. This "control panel" is initially closed, but selecting the icon (the square one) in the top left of the navigation bar will open the panel, and the app will remember your choice (so the next time you start it, the panel is open, if that was how you left it).
+It then converts meeting start and end times to the user's current timezone. Select the weekday and time in the navigation bar to open the day/time popover. Choose a weekday to see its available meeting start times, then tap a time to display those meetings and close the popover. The time list scrolls when needed. **Now** shows meetings in progress, and the search button opens the meeting-name field inside the popover and filters the main table as you type. Select **Show results**, use the keyboard’s Search key, or dismiss the popover to view the results; reopening it preserves your query. Search ignores case, accents, character-width differences, and equivalent Latin glyphs such as ligatures.
 
 Each meeting can be inspected individually, in order to see things like formats, in-person addresses, and virtual URLs. Also, if the user has an app installed (for example, [Zoom](https://zoom.us)), and the meeting has a join URL, the app will translate it to that app's URL scheme, and open the app directly (without having to go through Safari).
 
@@ -30,11 +30,7 @@ Users can select a meeting as one they attend, which allows those meetings to be
 
 #### The Main Screen
 
-| Control Panel Closed | Control Panel Open |
-|:-:| :-: |
-| ![Main Screen Closed](img/fig01.png) | ![Main Screen Open](img/fig02.png) |
-
-The Main Screen presents a list of meetings, surmounted by a segmented switch that allows the user to select a weekday (or mode), and a bar that allows the user to select a time.
+The navigation title shows the selected weekday and time, or the current search/Now mode. Its popover contains the weekday selector, the available start times, Now, and search. Weekdays follow the user's local calendar order. Swiping the meeting list still moves between time slots. From Now, the first swipe opens the latest available start at or before the current local time. Further swipes move through adjacent start times, skipping days without meetings.
 
 #### The Attendance Screen
 

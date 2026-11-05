@@ -331,6 +331,10 @@ extension VMF_MainViewController {
           
           pageViewController?.setViewControllers([newViewController], direction: .forward, animated: false)   // No animation. We make it quick.
           tableDisplayController = newViewController
+          // The page must be attached before a cold-start meeting link can segue.
+          DispatchQueue.main.async {
+               VMF_SceneDelegate.sceneDelegateInstance?.openPendingMeeting()
+          }
      }
      
      /* ################################################################## */

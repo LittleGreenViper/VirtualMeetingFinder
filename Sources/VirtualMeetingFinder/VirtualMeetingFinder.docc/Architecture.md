@@ -84,6 +84,17 @@ meetings. The service filter applies to every widget section. An icon Link and
 the widget's default URL use `lgv-vmf://open`, which opens the app without selecting
 a meeting inspector.
 
+Each meeting row is a separate Link using `lgv-vmf://meeting?<ID>`. The scene
+delegate resolves these and existing public meeting links through the shared
+``VMF_MeetingLink`` helper. It preserves a pending ID until the data and table are
+ready, then opens the inspector from the full collection. Warm links dismiss
+presentations and replace the previous inspector or other navigation screen.
+Opening the widget icon cancels any pending meeting selection.
+
+The widget's two string catalogs cover all eight app languages. Its display name
+and attendance terminology match the main app; source meeting names are displayed
+verbatim. Date formatters use the widget's locale without recalculating SDK dates.
+
 ### Meeting links and external actions
 
 The app generates meeting links using `SLUG-UNIVERSAL-LINK-FORMAT`. The current

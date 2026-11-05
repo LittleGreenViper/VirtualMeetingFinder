@@ -58,6 +58,7 @@ struct VMF_WidgetView: View {
      let entry: VMF_WidgetEntry
      @Environment(\.widgetFamily) private var family
      @Environment(\.widgetRenderingMode) private var renderingMode
+     @Environment(\.locale) private var locale
      @ScaledMetric(relativeTo: .caption) private var unit = 12.0
 
      private var columns: Int { family == .systemExtraLarge ? 2 : 1 }
@@ -89,7 +90,7 @@ struct VMF_WidgetView: View {
                     appIcon.frame(width: 28, height: 28).clipShape(RoundedRectangle(cornerRadius: 6))
                }
                .accessibilityLabel(Text("WIDGET-OPEN-APP"))
-               Text("We Are Never Alone")
+               Text("WIDGET-APP-NAME")
                     .font(.caption.weight(.semibold))
                     .lineLimit(1)
                     .foregroundStyle(.secondary)
@@ -110,7 +111,7 @@ struct VMF_WidgetView: View {
           VStack(alignment: .leading, spacing: 3) {
                Text("WIDGET-I-ATTEND").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
                if let meeting = entry.state.attendance.first {
-                    attendanceRow(meeting)
+                    meetingLink(meeting, attendance: true)
                } else {
                     Text("WIDGET-NO-ATTENDANCE").font(.subheadline).foregroundStyle(.secondary)
                }
@@ -153,20 +154,29 @@ struct VMF_WidgetView: View {
           LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 16, alignment: .leading), count: columns),
                     alignment: .leading, spacing: 0) {
                ForEach(meetings) { meeting in
-                    Group {
-                         if attendance { attendanceRow(meeting) } else { compactRow(meeting) }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                    .frame(height: height, alignment: .top)
+                    meetingLink(meeting, attendance: attendance, height: height)
                }
           }
      }
 
+     private func meetingLink(_ occurrence: VMF_WidgetOccurrence, attendance: Bool, height: Double? = nil) -> some View {
+          Link(destination: VMF_MeetingLink.url(for: occurrence.id) ?? VMF_WidgetStore.openAppURL) {
+               Group {
+                    if attendance { attendanceRow(occurrence) } else { compactRow(occurrence) }
+               }
+               .frame(maxWidth: .infinity, alignment: .topLeading)
+               .frame(height: height.map { CGFloat($0) }, alignment: .top)
+               .contentShape(Rectangle())
+          }
+          .buttonStyle(.plain)
+          .accessibilityHint(Text("WIDGET-OPEN-MEETING-HINT"))
+     }
+
      private func attendanceRow(_ occurrence: VMF_WidgetOccurrence) -> some View {
           VStack(alignment: .leading, spacing: 2) {
-               Text(occurrence.meeting.name).font(.subheadline.weight(.semibold)).lineLimit(2)
-               Text(VMF_WidgetTime.span(occurrence, relativeTo: entry.date)).font(.caption).lineLimit(1)
-               if let native = VMF_WidgetTime.nativeTime(occurrence) {
+               Text(verbatim: occurrence.meeting.name).font(.subheadline.weight(.semibold)).lineLimit(2)
+               Text(VMF_WidgetTime.span(occurrence, relativeTo: entry.date, locale: locale)).font(.caption).lineLimit(1)
+               if let native = VMF_WidgetTime.nativeTime(occurrence, locale: locale) {
                     Text(native).font(.caption2).foregroundStyle(.secondary).lineLimit(1)
                }
           }
@@ -175,8 +185,8 @@ struct VMF_WidgetView: View {
 
      private func compactRow(_ occurrence: VMF_WidgetOccurrence) -> some View {
           VStack(alignment: .leading, spacing: 1) {
-               Text(occurrence.meeting.name).font(.caption.weight(.medium)).lineLimit(1)
-               Text(VMF_WidgetTime.start(occurrence, relativeTo: entry.date))
+               Text(verbatim: occurrence.meeting.name).font(.caption.weight(.medium)).lineLimit(1)
+               Text(VMF_WidgetTime.start(occurrence, relativeTo: entry.date, locale: locale))
                     .font(.caption2).foregroundStyle(.secondary).lineLimit(1)
           }
           .accessibilityElement(children: .combine)

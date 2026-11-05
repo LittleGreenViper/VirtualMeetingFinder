@@ -1,8 +1,58 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "We Are Never Alone" : {
-
+    "WIDGET-APP-NAME" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wir sind nie allein"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Δεν είμαστε ποτέ μόνοι"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We Are Never Alone"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nunca estamos solos"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nunca estamos solos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nous ne sommes jamais seuls"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non siamo mai soli"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nunca estamos sozinhos"
+          }
+        }
+      }
     },
     "WIDGET-DESCRIPTION" : {
       "extractionState" : "manual",
@@ -16,7 +66,7 @@
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Η επόμενη συνάντηση που παρακολουθείς, οι συναντήσεις σε εξέλιξη και οι προσεχείς συναντήσεις."
+            "value" : "Η επόμενη συγκέντρωση στην οποία συμμετέχεις, οι συγκεντρώσεις σε εξέλιξη και οι προσεχείς συγκεντρώσεις."
           }
         },
         "en" : {
@@ -69,7 +119,7 @@
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Παρακολουθώ"
+            "value" : "Συμμετέχω"
           }
         },
         "en" : {
@@ -105,7 +155,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eu participo"
+            "value" : "Participo"
           }
         }
       }
@@ -116,7 +166,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Laufende Meetings"
+            "value" : "Läuft gerade"
           }
         },
         "el" : {
@@ -128,7 +178,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In progress"
+            "value" : "In Progress"
           }
         },
         "es" : {
@@ -175,7 +225,7 @@
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Δεν υπάρχουν συναντήσεις για παρακολούθηση."
+            "value" : "Δεν υπάρχουν συγκεντρώσεις για να συμμετάσχεις."
           }
         },
         "en" : {
@@ -222,13 +272,13 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "We Are Never Alone öffnen"
+            "value" : "Wir sind nie allein öffnen"
           }
         },
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Άνοιγμα του We Are Never Alone"
+            "value" : "Άνοιγμα του «Δεν είμαστε ποτέ μόνοι»"
           }
         },
         "en" : {
@@ -240,31 +290,84 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abrir We Are Never Alone"
+            "value" : "Abrir Nunca estamos solos"
           }
         },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abrir We Are Never Alone"
+            "value" : "Abrir Nunca estamos solos"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrir We Are Never Alone"
+            "value" : "Ouvrir Nous ne sommes jamais seuls"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri We Are Never Alone"
+            "value" : "Apri Non siamo mai soli"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abrir We Are Never Alone"
+            "value" : "Abrir Nunca estamos sozinhos"
+          }
+        }
+      }
+    },
+    "WIDGET-OPEN-MEETING-HINT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnet dieses Meeting in der App."
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ανοίγει αυτή τη συγκέντρωση στην εφαρμογή."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens this meeting in the app."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abre esta reunión en la app."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abre esta reunión en la app."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvre cette réunion dans l’app."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apre questa riunione nell’app."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abre esta reunião no app."
           }
         }
       }
@@ -281,7 +384,7 @@
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Άνοιξε την εφαρμογή για να φορτώσεις τις πιο πρόσφατες συναντήσεις."
+            "value" : "Άνοιξε την εφαρμογή για να φορτώσεις τις πιο πρόσφατες συγκεντρώσεις."
           }
         },
         "en" : {
@@ -334,7 +437,7 @@
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Συναντήσεις"
+            "value" : "Συγκεντρώσεις"
           }
         },
         "en" : {

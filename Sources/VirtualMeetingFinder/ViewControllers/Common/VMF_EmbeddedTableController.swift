@@ -471,12 +471,7 @@ extension VMF_EmbeddedTableController {
       This checks to see if we need to open a linked meeting.
       */
      func checkForUniversalLink() {
-          if 0 < VMF_SceneDelegate.urlMeetingID,
-             let meeting = VMF_AppDelegate.virtualService?.meetings.first(where: { $0.meeting.id == VMF_SceneDelegate.urlMeetingID })?.meeting {
-               selectMeeting(meeting)
-          }
-          
-          VMF_SceneDelegate.urlMeetingID = 0
+          VMF_SceneDelegate.sceneDelegateInstance?.openPendingMeeting()
      }
 }
 

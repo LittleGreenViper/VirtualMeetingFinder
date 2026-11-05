@@ -2,6 +2,25 @@
 
 import Foundation
 
+/// Widget links use the app's registered scheme, so opening a meeting never needs
+/// a browser or a network round trip through the universal-link website.
+enum VMF_MeetingLink {
+     static func url(for meetingID: Int) -> URL? {
+          guard meetingID > 0 else { return nil }
+          return URL(string: "lgv-vmf://meeting?\(meetingID)")
+     }
+
+     /// Also accepts the existing public meeting links shared by the app.
+     static func meetingID(in url: URL) -> Int? {
+          let scheme = url.scheme?.lowercased()
+          let host = url.host?.lowercased()
+          guard scheme == "lgv-vmf" || ((scheme == "https" || scheme == "http") && host == "vmf.littlegreenviper.com"),
+                let query = URLComponents(url: url, resolvingAgainstBaseURL: false)?.query,
+                let id = Int(query), id > 0 else { return nil }
+          return id
+     }
+}
+
 /// Absolute intervals calculated by SwiftBMLSDK in the app, including DST.
 struct VMF_WidgetSpan: Codable, Equatable {
      let start: Date

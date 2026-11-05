@@ -28,6 +28,8 @@ Users can select a meeting as one they attend, which allows those meetings to be
 
 Add **Meetings** from the We Are Never Alone widget gallery. Medium shows the next meeting marked **I attend**, including a meeting already in progress, or an empty-attendance message. Large and extra-large show attended meetings first, then meetings in progress, followed by upcoming meetings when space permits. Extra-large sizes are offered where the device and OS support them. The icon follows light, dark, and tinted appearances; tapping it opens the app normally.
 
+Tap an attended, in-progress, or upcoming meeting to open its inspector directly in the app. This works on startup and when the app is already open on another screen. Links wait for the initial meeting download when needed. The icon and unused widget background continue to open the app normally.
+
 All primary times use the member's current timezone and locale. Attended meetings include a start–end span and, when their timezone differs, the source timezone and native start time. The widget honors the service-meeting filter and avoids repeating displayed attended meetings in the other sections.
 
 The app publishes its downloaded meeting collection and preferences to an on-device App Group. SwiftBMLSDK resolves eight upcoming occurrences per meeting, including DST, before dates reach the widget. The widget selects and formats these absolute dates; it does not calculate recurrences, apply offsets, or make its own meeting requests. Opening or refreshing the app renews the schedule; attendance and filter changes request a widget update. WidgetKit controls update timing. Before the first download, or when the cached dates run out, the widget asks the member to open the app.
@@ -81,6 +83,8 @@ The app supports English, German, Greek, Spanish, Latin American Spanish, French
 `Resources/NonLocalized.strings` holds shared product names, URLs, and universal-link formats in one nonlocalized resource. This includes the six `SLUG-DIRECT-URI-*` app-name keys supplied dynamically by SwiftBMLSDK; retain these even though they have no literal callers in app source. Callers use `String.localizedVariant` for both shared values and translated text, without choosing a table. Keep this table out of the language-specific folders and translation work.
 
 `InfoPlist.strings` remains separate because iOS reads the app display name and calendar permission prompts from that table. Use plain language consistent with Recovrr and local NA terminology. Preserve format placeholders, product names, and URLs. Weekday names are supplied by Foundation; avoid adding language-specific plural endings to them.
+
+The widget uses `Sources/VMFWidgets/Localizable.xcstrings` and `InfoPlist.xcstrings` for the same eight languages, including its header, gallery description, empty/refresh messages, accessibility hints, and extension display name. Attendance and in-progress labels match the app's terminology. Meeting names remain in their source language; dates and timezone names use the widget's current locale. Regression tests check every compiled widget translation and compare its app name and attendance label with the corresponding app localization.
 
 ## Building Documentation
 

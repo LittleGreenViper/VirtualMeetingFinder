@@ -49,6 +49,7 @@
 		D4E7C6CB2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7C6CA2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift */; };
 		D4F4BCED2C36DAFC0023C21B /* VMF_MapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4BCEC2C36DAFC0023C21B /* VMF_MapMarker.swift */; };
 		D4F8FC9E2C5A689000D6884E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4F8FC9D2C5A689000D6884E /* InfoPlist.strings */; };
+		A12611060000000000000301 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000302; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +148,7 @@
 		D4F8FCA02C5A68E700D6884E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D4F8FCA12C5A68E700D6884E /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D4F8FCA22C5A68E800D6884E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A12611060000000000000302 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 				A12611060000000000000003 /* VMF_MeetingsWidget.swift */,
 				A12611060000000000000004 /* Assets.xcassets */,
 				A12611060000000000000007 /* Localizable.xcstrings */,
+				A12611060000000000000302 /* InfoPlist.xcstrings */,
 				A12611060000000000000005 /* VMFWidgets.entitlements */,
 				A12611060000000000000006 /* Info.plist */,
 			);
@@ -532,6 +535,7 @@
 			files = (
 				A12611060000000000000069 /* Assets.xcassets in Resources */,
 				A1261106000000000000006A /* Localizable.xcstrings in Resources */,
+				A12611060000000000000301 /* InfoPlist.xcstrings in Resources */,
 				A1261106000000000000006B /* PrivacyInfo.xcprivacy in Resources */,
 			);
 		};
@@ -791,7 +795,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = Sources/VMFWidgets/VMFWidgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0004;
+				CURRENT_PROJECT_VERSION = 0005;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/VMFWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "We Are Never Alone";
@@ -820,7 +824,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = Sources/VMFWidgets/VMFWidgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0004;
+				CURRENT_PROJECT_VERSION = 0005;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/VMFWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "We Are Never Alone";
@@ -849,7 +853,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = Sources/VMFWidgets/VMFWidgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0004;
+				CURRENT_PROJECT_VERSION = 0005;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/VMFWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "We Are Never Alone";

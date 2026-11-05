@@ -1,6 +1,7 @@
 // © Copyright 2026, Little Green Viper Software Development LLC. MIT License.
 
 import XCTest
+import UIKit
 @testable import SwiftBMLSDK
 @testable import We_Are_Never_Alone
 
@@ -111,6 +112,123 @@ final class VMFWidgetTests: XCTestCase {
           return try XCTUnwrap(parser.meetings.first)
      }
 
+     func testWidgetMeetingLinksRetainFullSDKIdentifiers() throws {
+          for id in [1, 17592186044417, Int.max] {
+               let url = try XCTUnwrap(VMF_MeetingLink.url(for: id))
+               XCTAssertEqual(url.scheme, "lgv-vmf")
+               XCTAssertEqual(VMF_MeetingLink.meetingID(in: url), id)
+          }
+          XCTAssertNil(VMF_MeetingLink.url(for: 0))
+          XCTAssertNil(VMF_MeetingLink.url(for: -1))
+          XCTAssertEqual(VMF_MeetingLink.meetingID(in: URL(string: "https://vmf.littlegreenviper.com?17592186044417")!), 17592186044417)
+          for url in ["lgv-vmf://open", "lgv-vmf://meeting?0", "lgv-vmf://meeting?-1", "lgv-vmf://meeting?invalid", "https://example.com?123"] {
+               XCTAssertNil(VMF_MeetingLink.meetingID(in: URL(string: url)!))
+          }
+     }
+
+     func testWidgetBundlesEveryAppLanguageAndLocalizedMeetingHint() throws {
+          let widgetURL = try XCTUnwrap(Bundle.main.builtInPlugInsURL?.appendingPathComponent("VMFWidgets.appex"))
+          let widget = try XCTUnwrap(Bundle(url: widgetURL))
+          let languages = Set(Bundle.main.localizations).subtracting(["Base"])
+          XCTAssertEqual(Set(widget.localizations).subtracting(["Base"]), languages)
+          for language in languages {
+               let app = try XCTUnwrap(Bundle(path: Bundle.main.path(forResource: language, ofType: "lproj")!))
+               let localized = try XCTUnwrap(Bundle(path: widget.path(forResource: language, ofType: "lproj")!))
+               for key in ["WIDGET-TITLE", "WIDGET-DESCRIPTION", "WIDGET-APP-NAME", "WIDGET-I-ATTEND", "WIDGET-IN-PROGRESS", "WIDGET-UPCOMING", "WIDGET-NO-ATTENDANCE", "WIDGET-OPEN-APP", "WIDGET-OPEN-TO-REFRESH", "WIDGET-OPEN-MEETING-HINT"] {
+                    let value = localized.localizedString(forKey: key, value: nil, table: "Localizable")
+                    XCTAssertFalse(value.isEmpty)
+                    XCTAssertNotEqual(value, key, "Missing \(language) widget translation for \(key)")
+               }
+               let appName = app.localizedString(forKey: "CFBundleDisplayName", value: nil, table: "InfoPlist")
+               XCTAssertEqual(localized.localizedString(forKey: "WIDGET-APP-NAME", value: nil, table: "Localizable"), appName)
+               XCTAssertEqual(localized.localizedString(forKey: "CFBundleDisplayName", value: nil, table: "InfoPlist"), appName)
+               XCTAssertEqual(localized.localizedString(forKey: "WIDGET-I-ATTEND", value: nil, table: "Localizable"), app.localizedString(forKey: "SLUG-I-ATTEND", value: nil, table: "Localizable"))
+          }
+     }
+
+     @MainActor func testMeetingLinkWaitsForDataAndReplacesAnOpenInspector() throws {
+          let configuration = URLSessionConfiguration.ephemeral
+          configuration.protocolClasses = [VMF_WidgetFixtureProtocol.self]
+          let query = SwiftBMLSDK_Query(serverBaseURI: URL(string: "https://widget-fixture.invalid/"), session: URLSession(configuration: configuration))
+          let loaded = expectation(description: "Fixture collection loaded")
+          let collection = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: query) { _ in loaded.fulfill() }
+          wait(for: [loaded], timeout: 3)
+          XCTAssertEqual(collection.meetings.count, 2)
+
+          let originalMain = VMF_AppDelegate.mainScreenController
+          let originalInspector = VMF_AppDelegate.openMeeting
+          let originalPending = VMF_SceneDelegate.urlMeetingID
+          let originalDelegate = VMF_SceneDelegate.sceneDelegateInstance
+          let windowScene = try XCTUnwrap(UIApplication.shared.connectedScenes.first as? UIWindowScene)
+          let originalWindow = windowScene.keyWindow
+          let window = UIWindow(windowScene: windowScene)
+          let main = VMF_WidgetLinkTestController()
+          let navigation = UINavigationController(rootViewController: main)
+          let table = try XCTUnwrap(UIStoryboard(name: "VMF", bundle: .main).instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController)
+          let scene = VMF_SceneDelegate()
+          var availableMeetings: [MeetingInstance]?
+          scene.meetingSource = { availableMeetings }
+          defer {
+               window.isHidden = true
+               window.rootViewController = nil
+               VMF_AppDelegate.mainScreenController = originalMain
+               VMF_AppDelegate.openMeeting = originalInspector
+               VMF_SceneDelegate.urlMeetingID = originalPending
+               VMF_SceneDelegate.sceneDelegateInstance = originalDelegate
+               originalWindow?.makeKeyAndVisible()
+          }
+          VMF_AppDelegate.mainScreenController = main
+          VMF_SceneDelegate.urlMeetingID = 0
+          VMF_SceneDelegate.sceneDelegateInstance = scene
+          main.loadViewIfNeeded()
+          main.addChild(table)
+          main.view.addSubview(table.view)
+          table.didMove(toParent: main)
+          table.myController = main
+          main.tableDisplayController = table
+          window.rootViewController = navigation
+          window.makeKeyAndVisible()
+
+          let firstID = Int(collection.meetings[0].meeting.id)
+          let secondID = Int(collection.meetings[1].meeting.id)
+          scene.resolveURL(try XCTUnwrap(VMF_MeetingLink.url(for: firstID)))
+          table.checkForUniversalLink()
+          XCTAssertEqual(VMF_SceneDelegate.urlMeetingID, firstID, "A link must survive until meeting data arrives")
+          XCTAssertTrue(navigation.topViewController === main)
+
+          scene.resolveURL(VMF_WidgetStore.openAppURL)
+          XCTAssertEqual(VMF_SceneDelegate.urlMeetingID, 0, "The icon must cancel a meeting link still waiting for data")
+          scene.resolveURL(try XCTUnwrap(VMF_MeetingLink.url(for: firstID)))
+
+          availableMeetings = collection.meetings.map(\.meeting)
+          scene.openPendingMeeting()
+          XCTAssertEqual((navigation.topViewController as? VMF_MeetingInspectorViewController)?.meeting?.id, UInt64(firstID))
+          XCTAssertEqual(VMF_SceneDelegate.urlMeetingID, 0)
+
+          // A second widget tap can arrive while the first inspector is animating.
+          scene.resolveURL(try XCTUnwrap(VMF_MeetingLink.url(for: secondID)))
+          let replaced = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in
+               (navigation.topViewController as? VMF_MeetingInspectorViewController)?.meeting?.id == UInt64(secondID)
+          }, object: nil)
+          wait(for: [replaced], timeout: 3)
+          XCTAssertEqual(navigation.viewControllers.count, 2)
+          XCTAssertEqual(VMF_SceneDelegate.urlMeetingID, 0)
+
+          let settled = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in navigation.transitionCoordinator == nil }, object: nil)
+          wait(for: [settled], timeout: 3)
+          navigation.pushViewController(UIViewController(), animated: false)
+          scene.resolveURL(try XCTUnwrap(VMF_MeetingLink.url(for: firstID)))
+          let returned = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in
+               (navigation.topViewController as? VMF_MeetingInspectorViewController)?.meeting?.id == UInt64(firstID)
+          }, object: nil)
+          wait(for: [returned], timeout: 3)
+          XCTAssertEqual((navigation.topViewController as? VMF_MeetingInspectorViewController)?.meeting?.id, UInt64(firstID))
+          XCTAssertEqual(navigation.viewControllers.count, 2, "A link from another screen returns to one inspector above the main screen")
+
+          scene.resolveURL(VMF_WidgetStore.openAppURL)
+          XCTAssertEqual(VMF_SceneDelegate.urlMeetingID, 0, "The icon's normal-open URL must not select a meeting")
+     }
+
      func testSDKResolvesSpringDSTBeforeExport() throws {
           let reference = ISO8601DateFormatter().date(from: "2026-03-07T12:00:00Z")!
           let meeting = try sdkMeeting(time: "02:30:00")
@@ -137,4 +255,31 @@ final class VMFWidgetTests: XCTestCase {
           XCTAssertEqual(state.inProgress.first?.start, meeting.previousOccurrenceDateFast(from: reference))
           XCTAssertEqual(state.attendance.first?.start, ISO8601DateFormatter().date(from: "2026-11-05T04:30:00Z"))
      }
+}
+
+/// Suppresses the main screen's real download during isolated navigation tests.
+private final class VMF_WidgetLinkTestController: VMF_MainViewController {
+     override func viewDidLoad() { }
+     override func viewWillAppear(_ animated: Bool) { }
+     override func viewDidAppear(_ animated: Bool) { }
+     override func viewDidLayoutSubviews() { }
+}
+
+/// Supplies real SDK parsing and collection behavior without a network request.
+private final class VMF_WidgetFixtureProtocol: URLProtocol {
+     override class func canInit(with request: URLRequest) -> Bool { request.url?.host == "widget-fixture.invalid" }
+     override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+     override func startLoading() {
+          let records: [[String: Any]] = (1...2).map { id in
+               ["server_id": 1, "meeting_id": id, "organization_key": "na", "name": "Link fixture \(id)",
+                "weekday": 1, "start_time": "12:00:00", "duration": 3600, "time_zone": "America/New_York",
+                "virtual_information": ["url": "https://example.com/meeting"]]
+          }
+          let response: [String: Any] = ["meta": ["actual_size": 2, "page_size": -1, "starting_index": 0, "total": 2, "total_pages": 1, "page": 0, "search_time": 0.0], "meetings": records]
+          let data = try! JSONSerialization.data(withJSONObject: response)
+          client?.urlProtocol(self, didReceive: HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: ["Content-Type": "application/json"])!, cacheStoragePolicy: .notAllowed)
+          client?.urlProtocol(self, didLoad: data)
+          client?.urlProtocolDidFinishLoading(self)
+     }
+     override func stopLoading() { }
 }

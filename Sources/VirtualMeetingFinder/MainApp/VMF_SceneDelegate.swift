@@ -61,6 +61,15 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
       Reveals the main screen on the next display refresh after its startup layout.
       */
      private var _launchScreenDisplayLink: CADisplayLink?
+
+     /// Serializes link navigation while dismissing an existing presentation.
+     private var _isOpeningLinkedMeeting = false
+
+     /// Reads the latest full collection when navigation is ready. Keeping the
+     /// source replaceable also allows navigation tests to supply offline records.
+     var meetingSource: () -> [MeetingInstance]? = {
+          VMF_AppDelegate.virtualService?.meetings.map(\.meeting)
+     }
      
      /* ################################################################## */
      /**
@@ -110,10 +119,16 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     VMF_AppDelegate.mainScreenController?.isThrobbing = false
                     VMF_AppDelegate.mainScreenController?.openTo(dayIndex: 0)
                     self.window?.setNeedsLayout()
+                    self.openPendingMeeting()
                }
           } else {
                self.window?.setNeedsLayout()
           }
+     }
+
+     /// Retries a link delivered before the scene or its meeting collection was ready.
+     func sceneDidBecomeActive(_: UIScene) {
+          openPendingMeeting()
      }
      
      /* ################################################################## */
@@ -135,6 +150,7 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
       - parameter inConnectionOptions: This contains the options, among which, is the URL context.
       */
      func scene(_ inScene: UIScene, willConnectTo: UISceneSession, options inConnectionOptions: UIScene.ConnectionOptions) {
+          Self.sceneDelegateInstance = self
           if let windowScene = inScene as? UIWindowScene,
              let storyboardName = Bundle.main.object(forInfoDictionaryKey: "UILaunchStoryboardName") as? String,
              let launchController = UIStoryboard(name: storyboardName, bundle: nil).instantiateInitialViewController() {
@@ -219,11 +235,57 @@ extension VMF_SceneDelegate {
       - parameter inURL: The URL to resolve.
       */
      func resolveURL(_ inURL: URL) {
-          if let statusString = inURL.query(),
-             let meetingID = Int(statusString),
-             0 < meetingID {
-               Self.urlMeetingID = meetingID
+          if inURL == VMF_WidgetStore.openAppURL {
+               Self.urlMeetingID = 0
+               return
           }
+          guard let meetingID = VMF_MeetingLink.meetingID(in: inURL) else { return }
+          Self.urlMeetingID = meetingID
+          openPendingMeeting()
+     }
+
+     /// Opens a pending meeting from the full collection, independent of the current
+     /// day, search, or service filter. A cold-start link stays queued until data and
+     /// the embedded table are ready; a warm link replaces any existing inspector.
+     func openPendingMeeting() {
+          guard !_isOpeningLinkedMeeting, Self.urlMeetingID > 0,
+                let main = VMF_AppDelegate.mainScreenController, !main.isThrobbing,
+                let navigation = main.navigationController, navigation.viewIfLoaded?.window != nil,
+                let table = main.tableDisplayController as? VMF_EmbeddedTableController,
+                let meetings = meetingSource(), !meetings.isEmpty else { return }
+          guard let meeting = meetings.first(where: { $0.id == Self.urlMeetingID }) else {
+               Self.urlMeetingID = 0
+               return
+          }
+
+          // Wait until UIKit can change the navigation stack without competing with
+          // a presentation, swipe-back, or push already in progress.
+          if let transition = navigation.transitionCoordinator {
+               _isOpeningLinkedMeeting = true
+               transition.animate(alongsideTransition: nil) { [weak self] _ in
+                    DispatchQueue.main.async {
+                         self?._isOpeningLinkedMeeting = false
+                         self?.openPendingMeeting()
+                    }
+               }
+               return
+          }
+          if navigation.presentedViewController != nil {
+               _isOpeningLinkedMeeting = true
+               navigation.dismiss(animated: false) { [weak self] in
+                    self?._isOpeningLinkedMeeting = false
+                    self?.openPendingMeeting()
+               }
+               return
+          }
+
+          // Clear before popping: the embedded table's appearance callback also
+          // checks for pending links. This prevents opening the inspector twice.
+          Self.urlMeetingID = 0
+          if let inspector = navigation.topViewController as? VMF_MeetingInspectorViewController,
+             inspector.meeting?.id == meeting.id { return }
+          navigation.popToViewController(main, animated: false)
+          table.selectMeeting(meeting)
      }
 }
 

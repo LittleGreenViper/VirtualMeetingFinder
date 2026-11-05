@@ -267,6 +267,8 @@
 "SLUG-ACC-POPOVER-WEEKDAY-HINT"                  =    "Affiche les horaires de réunion disponibles pour ce jour.";
 /* The scrolling list of start times for the selected weekday. */
 "SLUG-ACC-AVAILABLE-TIMES-LABEL"                 =    "Horaires de réunion disponibles";
+/* Meeting count spoken for an available time slot. %@ is the localized number. */
+"SLUG-ACC-TIME-SLOT-COUNT-FORMAT"                 =    "Réunions disponibles : %@";
 /* Hint for a start time row in the popover. */
 "SLUG-ACC-SELECT-TIME-HINT"                      =    "Affiche les réunions à cette heure et ferme la fenêtre de sélection du jour et de l’heure.";
 /* Shown in the popover when a weekday has no available start times. */

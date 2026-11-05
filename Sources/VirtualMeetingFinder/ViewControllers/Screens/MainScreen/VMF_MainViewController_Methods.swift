@@ -473,7 +473,7 @@ extension VMF_MainViewController {
           // If we have to load from the meeting server, we do so, now.
           if needsReload {
                loadMeetings {
-                    self.openTo()
+                    self.openTo(dayIndex: 0)
                     self._finishLaunching()
                }
           } else {

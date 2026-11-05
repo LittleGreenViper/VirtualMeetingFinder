@@ -32,7 +32,7 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
 
      weak var mainController: VMF_MainViewController?
 
-     private let weekdaySelector = UISegmentedControl()
+     private let weekdaySelector = VMF_StyledSegmentedControl()
      private let weekdayLabel = UILabel()
      private let timeTableView = UITableView(frame: .zero, style: .plain)
      private let emptyLabel = UILabel()
@@ -45,22 +45,35 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
      private var selectedDayIndex = 1
      private var timeSlots: [Int] = []
      private var timeTitles: [Int: String] = [:]
+     private var timeCounts: [Int: Int] = [:]
+     private var selection: (dayIndex: Int, time: Int)?
      private var didScrollToSelection = false
 
      override func viewDidLoad() {
           super.viewDidLoad()
           view.backgroundColor = .systemBackground
-          view.tintColor = UIColor(named: "AccentColor")
+          let accentColor = UIColor(named: "AccentColor") ?? .systemBlue
+          view.tintColor = accentColor
           view.accessibilityViewIsModal = true
           view.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 12, leading: 16, bottom: 8, trailing: 16)
 
           if let main = mainController {
                let day = main.tableDisplayController?.dayIndex ?? 0
                selectedDayIndex = (1...7).contains(day) ? day : main.nowIs.weekday
+               if day == 0, !main.isNameSearchMode,
+                  let slot = main.adjacentTimeSlot(fromDay: 0, timeIndex: 0, forward: false),
+                  let time = main.getTimeOf(dayIndex: slot.dayIndex, timeIndex: slot.timeIndex) {
+                    // Now opens the picker at the latest available start at or before now.
+                    selectedDayIndex = slot.dayIndex
+                    selection = (slot.dayIndex, time)
+               } else if let time = main.getTimeOf(dayIndex: day, timeIndex: main.tableDisplayController?.timeIndex ?? 0) {
+                    selection = (day, time)
+               }
           }
 
           var nowConfiguration = UIButton.Configuration.plain()
           nowConfiguration.title = "SLUG-NOW".localizedVariant
+          nowConfiguration.baseForegroundColor = accentColor
           nowButton.configuration = nowConfiguration
           nowButton.accessibilityLabel = "SLUG-ACC-WEEKDAY-SWITCH-0-LABEL".localizedVariant
           nowButton.accessibilityHint = "SLUG-ACC-WEEKDAY-SWITCH-0-HINT".localizedVariant
@@ -69,6 +82,7 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
 
           var searchConfiguration = UIButton.Configuration.plain()
           searchConfiguration.image = UIImage(systemName: "magnifyingglass")
+          searchConfiguration.baseForegroundColor = accentColor
           searchButton.configuration = searchConfiguration
           searchButton.accessibilityLabel = "SLUG-ACC-WEEKDAY-SWITCH-8-LABEL".localizedVariant
           searchButton.accessibilityHint = "SLUG-ACC-WEEKDAY-SWITCH-8-HINT".localizedVariant
@@ -98,7 +112,11 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
           weekdaySelector.accessibilityLabel = "SLUG-ACC-POPOVER-WEEKDAY-LABEL".localizedVariant
           weekdaySelector.accessibilityHint = "SLUG-ACC-POPOVER-WEEKDAY-HINT".localizedVariant
           weekdaySelector.accessibilityIdentifier = "popover-weekday-selector"
-          let weekdayHeight = weekdaySelector.heightAnchor.constraint(greaterThanOrEqualToConstant: 44)
+          weekdaySelector.selectedSegmentTintColor = accentColor
+          weekdaySelector.setTitleTextAttributes([.foregroundColor: accentColor], for: .normal)
+          weekdaySelector.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+          weekdaySelector.setTitleTextAttributes([.foregroundColor: UIColor.tertiaryLabel], for: .disabled)
+          let weekdayHeight = weekdaySelector.heightAnchor.constraint(equalToConstant: 30)
           weekdayHeight.priority = UILayoutPriority(999)
           weekdayHeight.isActive = true
           weekdaySelector.addTarget(self, action: #selector(selectWeekday), for: .valueChanged)
@@ -134,6 +152,8 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
 
           var resultsConfiguration = UIButton.Configuration.filled()
           resultsConfiguration.title = "SLUG-SHOW-SEARCH-RESULTS".localizedVariant
+          resultsConfiguration.baseBackgroundColor = accentColor
+          resultsConfiguration.baseForegroundColor = .white
           showResultsButton.configuration = resultsConfiguration
           showResultsButton.accessibilityHint = "SLUG-ACC-SHOW-SEARCH-RESULTS-HINT".localizedVariant
           showResultsButton.accessibilityIdentifier = "show-meeting-search-results"
@@ -199,7 +219,7 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
                }
           }
           if !isShowingSearch, !didScrollToSelection, !timeSlots.isEmpty, timeTableView.bounds.height > 0 {
-               let index = mainController?.getNearestIndex(dayIndex: selectedDayIndex, time: mainController?.lastTime ?? 0) ?? 0
+               let index = mainController?.getNearestIndex(dayIndex: selectedDayIndex, time: selection?.time ?? mainController?.lastTime ?? 0) ?? 0
                timeTableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .middle, animated: false)
                didScrollToSelection = true
           }
@@ -209,6 +229,7 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
      private func reloadTimes() {
           let dailyMeetings = mainController?.getDailyMeetings(for: selectedDayIndex) ?? [:]
           timeSlots = dailyMeetings.keys.sorted()
+          timeCounts = dailyMeetings.mapValues { $0.count }
           let formatter = DateFormatter()
           formatter.locale = .current
           formatter.timeZone = .autoupdatingCurrent
@@ -305,17 +326,30 @@ extension VMF_DayTimeSelectionViewController: UITableViewDataSource, UITableView
           let time = timeSlots[inIndexPath.row]
           let title = timeTitles[time] ?? ""
           let main = mainController
-          let page = main?.tableDisplayController
-          let isSelected = main?.isNameSearchMode == false && page?.dayIndex == selectedDayIndex
-               && main?.getTimeOf(dayIndex: selectedDayIndex, timeIndex: page?.timeIndex ?? 0) == time
+          let isSelected = main?.isNameSearchMode == false && selection?.dayIndex == selectedDayIndex && selection?.time == time
+          let count = NumberFormatter.localizedString(from: NSNumber(value: timeCounts[time] ?? 0), number: .decimal)
           var content = cell.defaultContentConfiguration()
           content.text = title
           content.textProperties.font = .preferredFont(forTextStyle: .body)
           content.textProperties.adjustsFontForContentSizeCategory = true
+          content.textProperties.color = view.tintColor
+          content.secondaryText = count
+          content.secondaryTextProperties.font = .preferredFont(forTextStyle: .body)
+          content.secondaryTextProperties.adjustsFontForContentSizeCategory = true
+          content.secondaryTextProperties.color = view.tintColor
+          content.prefersSideBySideTextAndSecondaryText = true
           cell.contentConfiguration = content
-          cell.accessoryType = isSelected ? .checkmark : .none
+          cell.tintColor = view.tintColor
+          // Reserve the same trailing space so the counts line up on every row.
+          let checkmark = (cell.accessoryView as? UIImageView) ?? UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+          checkmark.image = isSelected ? UIImage(systemName: "checkmark") : nil
+          checkmark.contentMode = .center
+          checkmark.isAccessibilityElement = false
+          cell.accessoryView = checkmark
+          cell.accessoryType = .none
           cell.accessibilityLabel = String(format: "SLUG-WEEKDAY-TIME-FORMAT".localizedVariant,
                                           Calendar.current.weekdaySymbols[selectedDayIndex - 1], title)
+          cell.accessibilityValue = String(format: "SLUG-ACC-TIME-SLOT-COUNT-FORMAT".localizedVariant, count)
           cell.accessibilityHint = "SLUG-ACC-SELECT-TIME-HINT".localizedVariant
           cell.accessibilityTraits = isSelected ? [.button, .selected] : .button
           cell.accessibilityIdentifier = "meeting-time-\(selectedDayIndex)-\(time)"

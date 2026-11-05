@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A12611040000000000000001 /* VMF_DayTimeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12611040000000000000002 /* VMF_DayTimeSelectionViewController.swift */; };
 		A12611030000000000000001 /* NonLocalized.strings in Resources */ = {isa = PBXBuildFile; fileRef = A12611030000000000000002 /* NonLocalized.strings */; };
+		A12611040000000000000001 /* VMF_DayTimeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12611040000000000000002 /* VMF_DayTimeSelectionViewController.swift */; };
+		A12611050000000000000001 /* VMF_StyledSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12611050000000000000002 /* VMF_StyledSegmentedControl.swift */; };
 		D40128C02F676B600076EB62 /* RVS_PersistentPrefs in Frameworks */ = {isa = PBXBuildFile; productRef = D40128BF2F676B600076EB62 /* RVS_PersistentPrefs */; };
 		D40133692C320C070018076B /* VMF_MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40133682C320C070018076B /* VMF_MainViewController.swift */; };
 		D401336B2C320D520018076B /* VMF_EmbeddedTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */; };
@@ -39,8 +40,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A12611040000000000000002 /* VMF_DayTimeSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_DayTimeSelectionViewController.swift; sourceTree = "<group>"; };
 		A12611030000000000000002 /* NonLocalized.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = NonLocalized.strings; sourceTree = "<group>"; };
+		A12611040000000000000002 /* VMF_DayTimeSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_DayTimeSelectionViewController.swift; sourceTree = "<group>"; };
+		A12611050000000000000002 /* VMF_StyledSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_StyledSegmentedControl.swift; sourceTree = "<group>"; };
 		D40133682C320C070018076B /* VMF_MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MainViewController.swift; sourceTree = "<group>"; };
 		D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_EmbeddedTableController.swift; sourceTree = "<group>"; };
 		D42997D32C57B05D00164E46 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				D43A9C172C374198001285FC /* VMF_Persistent_Prefs.swift */,
 				D43A9C182C374198001285FC /* VMF_Extensions.swift */,
 				D4F4BCEC2C36DAFC0023C21B /* VMF_MapMarker.swift */,
+				A12611050000000000000002 /* VMF_StyledSegmentedControl.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				D4E7C6C92C4293E10045ACE6 /* VMF_MainViewController_Methods.swift in Sources */,
 				D4E7C6CB2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift in Sources */,
 				A12611040000000000000001 /* VMF_DayTimeSelectionViewController.swift in Sources */,
+				A12611050000000000000001 /* VMF_StyledSegmentedControl.swift in Sources */,
 				D43D850C2C5E616D00E6EB2B /* VMF_Activity.swift in Sources */,
 				D455E5672C396F3A00246848 /* VMF_AttendanceViewController.swift in Sources */,
 				D4F4BCED2C36DAFC0023C21B /* VMF_MapMarker.swift in Sources */,
@@ -558,7 +562,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Meta/VirtualMeetingFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0000;
+				CURRENT_PROJECT_VERSION = 0001;
 				DRIVERKIT_DEPLOYMENT_TARGET = "$(RECOMMENDED_DRIVERKIT_DEPLOYMENT_TARGET)";
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
@@ -734,7 +738,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Meta/VirtualMeetingFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0000;
+				CURRENT_PROJECT_VERSION = 0001;
 				DRIVERKIT_DEPLOYMENT_TARGET = "$(RECOMMENDED_DRIVERKIT_DEPLOYMENT_TARGET)";
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
@@ -779,7 +783,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Meta/VirtualMeetingFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0000;
+				CURRENT_PROJECT_VERSION = 0001;
 				DRIVERKIT_DEPLOYMENT_TARGET = "$(RECOMMENDED_DRIVERKIT_DEPLOYMENT_TARGET)";
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;

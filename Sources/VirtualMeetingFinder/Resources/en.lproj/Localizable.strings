@@ -68,7 +68,7 @@
 /* The name of the screen */
 "SLUG-TAB-0-TITLE"                                =    "Find meetings";
 /* This is the Title for the time display, when we have selected the "Now" segmented switch item. */
-"SLUG-IN-PROGRESS"                                =    "In progress";
+"SLUG-IN-PROGRESS"                                =    "In Progress";
 /* This is the Text Field "placeholder" text, for when the Main Screen is in Text Search Mode. */
 "SLUG-SEARCH-PLACEHOLDER"                         =    "Enter a meeting name";
 /* This is the string that we display in the list, for in-progress meetings. The placeholder (%@) is replaced by the time, in localized form. */
@@ -267,6 +267,8 @@
 "SLUG-ACC-POPOVER-WEEKDAY-HINT"                  =    "Shows the available meeting times for this day.";
 /* The scrolling list of start times for the selected weekday. */
 "SLUG-ACC-AVAILABLE-TIMES-LABEL"                 =    "Available meeting times";
+/* Meeting count spoken for an available time slot. %@ is the localized number. */
+"SLUG-ACC-TIME-SLOT-COUNT-FORMAT"                 =    "Available meetings: %@";
 /* Hint for a start time row in the popover. */
 "SLUG-ACC-SELECT-TIME-HINT"                      =    "Shows meetings at this time and closes the day and time popover.";
 /* Shown in the popover when a weekday has no available start times. */

@@ -267,6 +267,8 @@
 "SLUG-ACC-POPOVER-WEEKDAY-HINT"                  =    "Zeigt die verfügbaren Meetingzeiten für diesen Tag.";
 /* The scrolling list of start times for the selected weekday. */
 "SLUG-ACC-AVAILABLE-TIMES-LABEL"                 =    "Verfügbare Meetingzeiten";
+/* Meeting count spoken for an available time slot. %@ is the localized number. */
+"SLUG-ACC-TIME-SLOT-COUNT-FORMAT"                 =    "Verfügbare Meetings: %@";
 /* Hint for a start time row in the popover. */
 "SLUG-ACC-SELECT-TIME-HINT"                      =    "Zeigt Meetings zu dieser Uhrzeit und schließt das Fenster zur Auswahl von Tag und Uhrzeit.";
 /* Shown in the popover when a weekday has no available start times. */

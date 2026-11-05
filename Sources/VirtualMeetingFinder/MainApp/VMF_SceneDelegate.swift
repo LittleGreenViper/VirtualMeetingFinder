@@ -95,7 +95,7 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
      /**
       Called after the scene is entering into the foreground.
       
-      We use this to set the search screen to today/now.
+      We use this to show the meetings that are in progress, just like the Now button.
       
       - parameter: The scene instance (ignored).
       */
@@ -108,7 +108,7 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
                VMF_AppDelegate.mainScreenController?.isThrobbing = true
                virtualService.refreshCaches() { _ in
                     VMF_AppDelegate.mainScreenController?.isThrobbing = false
-                    VMF_AppDelegate.mainScreenController?.openTo()
+                    VMF_AppDelegate.mainScreenController?.openTo(dayIndex: 0)
                     self.window?.setNeedsLayout()
                }
           } else {

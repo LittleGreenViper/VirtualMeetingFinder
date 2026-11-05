@@ -267,6 +267,8 @@
 "SLUG-ACC-POPOVER-WEEKDAY-HINT"                  =    "Εμφανίζει τις διαθέσιμες ώρες συγκεντρώσεων για αυτή την ημέρα.";
 /* The scrolling list of start times for the selected weekday. */
 "SLUG-ACC-AVAILABLE-TIMES-LABEL"                 =    "Διαθέσιμες ώρες συγκεντρώσεων";
+/* Meeting count spoken for an available time slot. %@ is the localized number. */
+"SLUG-ACC-TIME-SLOT-COUNT-FORMAT"                 =    "Διαθέσιμες συγκεντρώσεις: %@";
 /* Hint for a start time row in the popover. */
 "SLUG-ACC-SELECT-TIME-HINT"                      =    "Εμφανίζει τις συγκεντρώσεις αυτή την ώρα και κλείνει το παράθυρο επιλογής ημέρας και ώρας.";
 /* Shown in the popover when a weekday has no available start times. */

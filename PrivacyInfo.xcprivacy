@@ -2,6 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- App code and pinned SDKs contain no developer data-collection or tracking implementation.
+	     Recheck these declarations if production request logs retain user information;
+	     see PRIVACY_AUDIT.md for the server-verification requirement. -->
 	<key>NSPrivacyCollectedDataTypes</key>
 	<array/>
 	<key>NSPrivacyTrackingDomains</key>
@@ -11,6 +14,7 @@
 	<key>NSPrivacyAccessedAPITypes</key>
 	<array>
 		<dict>
+			<!-- Attendance meeting IDs and the service-meeting filter are app-local preferences. -->
 			<key>NSPrivacyAccessedAPIType</key>
 			<string>NSPrivacyAccessedAPICategoryUserDefaults</string>
 			<key>NSPrivacyAccessedAPITypeReasons</key>

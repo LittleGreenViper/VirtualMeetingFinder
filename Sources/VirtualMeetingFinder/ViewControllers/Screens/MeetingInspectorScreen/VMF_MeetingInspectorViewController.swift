@@ -28,7 +28,8 @@ import RVS_Generic_Swift_Toolbox
 // MARK: - Meeting Inspector View Controller -
 /* ###################################################################################################################################### */
 /**
- This displays one meeting.
+ Displays a meeting's local schedule, joining options, formats, and optional in-person location.
+ Attendance is stored locally. The share sheet provides calendar, map, and Recovrr actions.
  */
 class VMF_MeetingInspectorViewController: VMF_BaseViewController {
      /* ################################################################## */
@@ -127,6 +128,7 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
       */
      var isFormatsOpen = false {
           didSet {
+               updateDisclosureAccessibility()
                guard _openSezMe else {
                     formatContainerView?.isHidden = !isFormatsOpen
                     return
@@ -143,10 +145,11 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
      
      /* ################################################################## */
      /**
-      Set to true, to open the formats section.
+      Set to true to reveal the in-person address and map.
       */
      var isLocationOpen = false {
           didSet {
+               updateDisclosureAccessibility()
                guard _openSezMe else {
                     inPersonContainer?.isHidden = !isLocationOpen
                     locationMapView?.isHidden = !isLocationOpen
@@ -234,7 +237,7 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
      /**
       The vertical container for the phone button.
       */
-     @IBOutlet weak var phoneButtonContainer: UIView?
+     @IBOutlet weak var phoneButtonContainer: VMF_ActionView?
      
      /* ################################################################## */
      /**
@@ -246,7 +249,7 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
      /**
       The vertical container for the globe button.
       */
-     @IBOutlet weak var globeButtonContainer: UIView?
+     @IBOutlet weak var globeButtonContainer: VMF_ActionView?
      
      /* ################################################################## */
      /**
@@ -258,7 +261,7 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
      /**
       The vertical container for the video button.
       */
-     @IBOutlet weak var videoButtonContainer: UIView?
+     @IBOutlet weak var videoButtonContainer: VMF_ActionView?
      
      /* ################################################################## */
      /**
@@ -282,7 +285,7 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
      /**
       This contains the header for the in-person location information.
       */
-     @IBOutlet weak var inPersonHeader: UIView?
+     @IBOutlet weak var inPersonHeader: VMF_ActionStackView?
      
      /* ################################################################## */
      /**
@@ -324,7 +327,7 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
      /**
       This contains the format header and disclosure triangle.
       */
-     @IBOutlet weak var formatHeader: UIView?
+     @IBOutlet weak var formatHeader: VMF_ActionStackView?
      
      /* ################################################################## */
      /**
@@ -352,7 +355,7 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
      
      /* ################################################################## */
      /**
-      The navbar button to copy the URI.
+      The navigation button that opens sharing and meeting actions.
       */
      @IBOutlet weak var actionBarButton: UIBarButtonItem?
      
@@ -369,7 +372,7 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
 extension VMF_MeetingInspectorViewController {
      /* ################################################################## */
      /**
-      This creates an attendance event for the next meeting start time.
+      Creates a weekly recurring calendar event starting at the next occurrence.
       
       > NOTE: This sets the event in the meeting's native timezone. The calendar is responsible for converting the TZ.
       
@@ -468,7 +471,7 @@ extension VMF_MeetingInspectorViewController {
      
      /* ################################################################## */
      /**
-      If Recovrr is installed, and we can iopen this meeting in it, the URL is returned.
+      Returns the Recovrr app URL when it can be opened, or in a simulator screenshot build.
       */
      private var _recovrrURL: URL? {
           guard let id = self.meeting?.id,
@@ -528,7 +531,7 @@ extension VMF_MeetingInspectorViewController {
      override func viewDidLoad() {
           /* ############################################################## */
           /**
-           This simply strips out all non-decimal characters in the string, leaving only valid decimal digits.
+           Accepts a phone-like ASCII string and returns its decimal digits; rejects other text.
            - parameter from: The string to be stripped.
            - returns: The stripped string.
            */
@@ -547,6 +550,17 @@ extension VMF_MeetingInspectorViewController {
           }
           
           super.viewDidLoad()
+
+          phoneButtonContainer?.accessibilityActivation = { [weak self] in self?.phoneButtonHit(()) }
+          globeButtonContainer?.accessibilityActivation = { [weak self] in self?.globeButtonHit(()) }
+          videoButtonContainer?.accessibilityActivation = { [weak self] in self?.videoButtonHit(()) }
+          formatHeader?.accessibilityActivation = { [weak self] in self?.formatSectionHeaderHit(()) }
+          inPersonHeader?.accessibilityActivation = { [weak self] in self?.locationSectionHeaderHit(()) }
+          for control in [phoneButtonContainer, globeButtonContainer, videoButtonContainer] {
+               control?.isAccessibilityElement = true
+               control?.accessibilityTraits = .button
+          }
+          updateDisclosureAccessibility()
           
           meetingNameLabel?.text = meeting?.name
           phoneLabelButton?.text = phoneLabelButton?.text?.localizedVariant
@@ -613,7 +627,7 @@ extension VMF_MeetingInspectorViewController {
                linkContainer?.isHidden = false
                videoButtonContainer?.isHidden = false
                videoLabelButton?.text = directApp.appName.localizedVariant
-               videoButtonContainer?.accessibilityLabel = String(format: "SLUG-ACC-VIDEO-MI-LABEL-FORMAT".localizedVariant, directApp.appName.localizedVariant)
+               videoButtonContainer?.accessibilityLabel = String(format: "SLUG-OPEN-IN-FORMAT".localizedVariant, directApp.appName.localizedVariant)
                videoButtonContainer?.accessibilityHint = String(format: "SLUG-ACC-VIDEO-MI-HINT-FORMAT".localizedVariant, directApp.appName.localizedVariant)
           }
           
@@ -659,6 +673,15 @@ extension VMF_MeetingInspectorViewController {
                inPersonHeader?.isHidden = true
                inPersonContainer?.isHidden = true
           }
+
+          // A field's generic label must not replace its actual meeting content in speech.
+          for label in [meetingNameLabel, timeAndDayLabel, inProgressLabel, timeZoneLabel, inPersonExtraInfoLabel] {
+               label?.accessibilityValue = label?.text
+          }
+          for textView in [commentsTextView, phoneInfoTextView, virtualExtraInfoTextView, inPersonAddressTextView] {
+               textView?.accessibilityValue = textView?.text
+          }
+          virtualExtraInfoTextView?.accessibilityHint = "SLUG-ACC-XTRA-INFO-MI-HINT".localizedVariant
      }
      
      /* ################################################################## */
@@ -706,6 +729,18 @@ extension VMF_MeetingInspectorViewController {
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
 extension VMF_MeetingInspectorViewController {
+     /** Keeps each disclosure's spoken state and action aligned with its visible contents. */
+     func updateDisclosureAccessibility() {
+          for (header, title, isOpen) in [(formatHeader, "SLUG-FORMATS-HEADER", isFormatsOpen),
+                                        (inPersonHeader, "SLUG-IN-PERSON-HEADER", isLocationOpen)] {
+               header?.isAccessibilityElement = true
+               header?.accessibilityTraits = .button
+               header?.accessibilityLabel = title.localizedVariant
+               header?.accessibilityValue = (isOpen ? "SLUG-ACC-EXPANDED" : "SLUG-ACC-COLLAPSED").localizedVariant
+               header?.accessibilityHint = (isOpen ? "SLUG-ACC-COLLAPSE-SECTION-HINT" : "SLUG-ACC-EXPAND-SECTION-HINT").localizedVariant
+          }
+     }
+
      /* ################################################################## */
      /**
       Sets the time and weekday (local) for the meeting.
@@ -776,9 +811,11 @@ extension VMF_MeetingInspectorViewController {
       - parameter inCoords: The center coordinate for the map (the marker location).
       */
      func setUpMap(_ inCoords: CLLocationCoordinate2D) {
+          locationMapView?.accessibilityLabel = "SLUG-IN-PERSON-HEADER".localizedVariant
+          locationMapView?.accessibilityHint = "SLUG-ACC-MAP-HINT".localizedVariant
           if let initialRegion = locationMapView?.regionThatFits(MKCoordinateRegion(center: inCoords, span: MKCoordinateSpan(latitudeDelta: Self._mapRegionSizeInDegrees, longitudeDelta: Self._mapRegionSizeInDegrees))) {
                locationMapView?.region = initialRegion
-               locationMapView?.addAnnotation(VMF_MapAnnotation(coordinate: inCoords))
+               locationMapView?.addAnnotation(VMF_MapAnnotation(coordinate: inCoords, title: meeting?.name, subtitle: meeting?.basicInPersonAddress))
           }
      }
      
@@ -807,6 +844,8 @@ extension VMF_MeetingInspectorViewController {
                let description = format.element.description
                
                let container = UIView()
+               container.isAccessibilityElement = true
+               container.accessibilityLabel = [key, name, description].joined(separator: ". ")
                
                let keyLabel = UILabel()
                keyLabel.font = Self._formatKeyFont
@@ -864,34 +903,31 @@ extension VMF_MeetingInspectorViewController {
      func setBarButton() {
           guard let meeting = meeting else { return }
           
-          let barButtonView = UIView()
-          barButtonView.isUserInteractionEnabled = true
-          barButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(iAttendHit)))
+          let barButtonView = (iAttendBarButton?.customView as? UIButton) ?? UIButton(type: .system)
           let useThisImage = meeting.iAttend ? Self._checkedImage : Self._uncheckedImage
-          let barButtonImage = UIImageView(image: useThisImage?.withRenderingMode(.alwaysTemplate).withTintColor(view.tintColor))
-          let barButtonLabel = UILabel()
-          barButtonLabel.text = "SLUG-I-ATTEND".localizedVariant
-          barButtonLabel.font = Self._barButtonLabelFont
-          barButtonLabel.textColor = view.tintColor
-          barButtonView.addSubview(barButtonLabel)
-          barButtonLabel.translatesAutoresizingMaskIntoConstraints = false
-          barButtonLabel.leftAnchor.constraint(equalTo: barButtonView.leftAnchor).isActive = true
-          barButtonLabel.topAnchor.constraint(equalTo: barButtonView.topAnchor).isActive = true
-          barButtonLabel.bottomAnchor.constraint(equalTo: barButtonView.bottomAnchor).isActive = true
-          barButtonView.addSubview(barButtonImage)
-          barButtonImage.translatesAutoresizingMaskIntoConstraints = false
-          barButtonImage.widthAnchor.constraint(equalTo: barButtonImage.heightAnchor).isActive = true
-          barButtonImage.widthAnchor.constraint(equalToConstant: 24).isActive = true
-          barButtonImage.leftAnchor.constraint(equalTo: barButtonLabel.rightAnchor, constant: 4).isActive = true
-          barButtonImage.rightAnchor.constraint(equalTo: barButtonView.rightAnchor).isActive = true
-          barButtonImage.topAnchor.constraint(equalTo: barButtonView.topAnchor).isActive = true
-          barButtonImage.bottomAnchor.constraint(equalTo: barButtonView.bottomAnchor).isActive = true
+          var configuration = UIButton.Configuration.plain()
+          configuration.title = "SLUG-I-ATTEND".localizedVariant
+          configuration.image = useThisImage
+          configuration.imagePlacement = .trailing
+          configuration.imagePadding = 4
+          configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+          configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attributes in
+               var attributes = attributes
+               attributes.font = Self._barButtonLabelFont
+               return attributes
+          }
+          barButtonView.configuration = configuration
+          barButtonView.removeTarget(self, action: #selector(iAttendHit), for: .touchUpInside)
+          barButtonView.addTarget(self, action: #selector(iAttendHit), for: .touchUpInside)
+          barButtonView.accessibilityLabel = (meeting.iAttend ? "SLUG-ACC-I-ATTEND-BAR-BUTTON-LABEL" : "SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-LABEL").localizedVariant
+          barButtonView.accessibilityHint = (meeting.iAttend ? "SLUG-ACC-I-ATTEND-BAR-BUTTON-HINT" : "SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-HINT").localizedVariant
+          barButtonView.accessibilityTraits = meeting.iAttend ? [.button, .selected] : .button
           iAttendBarButton?.customView = barButtonView
           iAttendBarButton?.target = self
           iAttendBarButton?.action = #selector(iAttendHit)
           
-          iAttendBarButton?.accessibilityLabel = "SLUG-ACC-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-LABEL".localizedVariant
-          iAttendBarButton?.accessibilityHint = "SLUG-ACC-I-\(meeting.iAttend ? "" : "DO-NOT-")ATTEND-BAR-BUTTON-HINT".localizedVariant
+          iAttendBarButton?.accessibilityLabel = barButtonView.accessibilityLabel
+          iAttendBarButton?.accessibilityHint = barButtonView.accessibilityHint
           removeNavigationBarItemBackgrounds()
      }
      
@@ -926,7 +962,7 @@ extension VMF_MeetingInspectorViewController {
      /**
       The phone in button was hit.
       
-      - parameter: ignored
+      The sender is ignored.
       */
      @IBAction func phoneButtonHit(_: Any) {
           var directPhoneNumberString = meeting?.directPhoneURI?.absoluteString.replacingOccurrences(of: "https://", with: "tel:") ?? ""
@@ -949,14 +985,13 @@ extension VMF_MeetingInspectorViewController {
      /**
       The globe button was hit.
       
-      - parameter: ignored
+      The sender is ignored.
       */
      @IBAction func globeButtonHit(_: Any) {
           if let webLinkURL = meeting?.virtualURL,
              UIApplication.shared.canOpenURL(webLinkURL) {
                hardImpactHaptic()
-               // HACK ALERT!
-               // Apple does not allow Mac Safari to connect directly to meetings in Zoom, because of the immediate download, so we need to tell the user to get the app, and join from there.
+               // Mac Catalyst offers Zoom installation guidance instead of opening Zoom web links.
                #if targetEnvironment(macCatalyst)
                     if webLinkURL.absoluteString.contains("zoom.us") {
                          displayMacZoomAlert()
@@ -973,7 +1008,7 @@ extension VMF_MeetingInspectorViewController {
      /**
       The video button was hit.
       
-      - parameter: ignored
+      The sender is ignored.
       */
      @IBAction func videoButtonHit(_: Any) {
           if let videoLinkURL = meeting?.directAppURI {
@@ -986,7 +1021,7 @@ extension VMF_MeetingInspectorViewController {
      /**
       The format header was hit (open or close the format section).
       
-      - parameter: ignored
+      The sender is ignored.
       */
      @IBAction func formatSectionHeaderHit(_: Any) {
           selectionHaptic()
@@ -997,7 +1032,7 @@ extension VMF_MeetingInspectorViewController {
      /**
       The in-person location header was hit (open or close the location section).
       
-      - parameter: ignored
+      The sender is ignored.
       */
      @IBAction func locationSectionHeaderHit(_: Any) {
           selectionHaptic()
@@ -1048,7 +1083,7 @@ extension VMF_MeetingInspectorViewController {
      /**
       The "I Attend" bar button item was hit.
       
-      - parameter: ignored
+      The sender is ignored.
       */
      @objc func iAttendHit(_: Any) {
           guard let meeting = meeting else { return }
@@ -1072,11 +1107,11 @@ extension VMF_MeetingInspectorViewController: MKMapViewDelegate {
      /**
       This is called to fetch an annotation (marker) for the map.
       
-      - parameter: The map view (ignored)
-      - parameter viewFor: The annotation we're getting the marker for.
+      - parameter inMapView: The map view (unused).
+      - parameter inAnnotation: The annotation receiving a marker view.
       - returns: The marker view for the annotation.
       */
-     func mapView(_: MKMapView, viewFor inAnnotation: MKAnnotation) -> MKAnnotationView? {
+     func mapView(_ inMapView: MKMapView, viewFor inAnnotation: MKAnnotation) -> MKAnnotationView? {
           var ret: MKAnnotationView?
           
           if let myAnnotation = inAnnotation as? VMF_MapAnnotation {

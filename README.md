@@ -66,9 +66,24 @@ Archiving is disabled in the scheme, and a build guard rejects archive/install a
 
 The app supports English, German, Greek, Spanish, Latin American Spanish, French, Italian, and Brazilian Portuguese. App text, alerts, and VoiceOver labels and hints share `Localizable.strings` in each language’s resource folder. The app’s `String.localizedVariant` accessor uses RVS_Generic_Swift_Toolbox to check Accessibility, Errors, and Localizable, then falls back to the shared NonLocalized table.
 
-`Resources/NonLocalized.strings` holds shared product names, URLs, and universal-link formats in one nonlocalized resource. Callers use `String.localizedVariant` for both shared values and translated text, without choosing a table. Keep this table out of the language-specific folders and translation work.
+`Resources/NonLocalized.strings` holds shared product names, URLs, and universal-link formats in one nonlocalized resource. This includes the six `SLUG-DIRECT-URI-*` app-name keys supplied dynamically by SwiftBMLSDK; retain these even though they have no literal callers in app source. Callers use `String.localizedVariant` for both shared values and translated text, without choosing a table. Keep this table out of the language-specific folders and translation work.
 
 `InfoPlist.strings` remains separate because iOS reads the app display name and calendar permission prompts from that table. Use plain language consistent with Recovrr and local NA terminology. Preserve format placeholders, product names, and URLs. Weekday names are supplied by Foundation; avoid adding language-specific plural endings to them.
+
+## Building Documentation
+
+Select the **We Are Never Alone** scheme and an iOS simulator in Xcode, then choose **Product > Build Documentation**. The app target includes internal symbols so the catalog covers its controllers and support types. The catalog contains guides to architecture, documentation builds, accessibility, and localization.
+
+For a command-line build from the repository root:
+
+```sh
+xcodebuild docbuild -project VirtualMeetingFinder.xcodeproj \
+  -scheme 'We Are Never Alone' -configuration Debug \
+  -destination 'generic/platform=iOS Simulator' \
+  -derivedDataPath /tmp/VMFDocumentation CODE_SIGNING_ALLOWED=NO
+```
+
+Open `/tmp/VMFDocumentation/Build/Products/Debug-iphonesimulator/We Are Never Alone.doccarchive` in Xcode. The older generated site in `docs/` is separate from this DocC output.
 
 ## Dependencies
 

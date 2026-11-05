@@ -25,7 +25,8 @@ import RVS_Generic_Swift_Toolbox
 // MARK: - Base View Controller for All Views -
 /* ###################################################################################################################################### */
 /**
- The base class for all our view controllers.
+ Shared navigation styling, localization, and haptic feedback for storyboard screens.
+ The programmatic day/time popover inherits directly from `UIViewController`.
  */
 class VMF_BaseViewController: UIViewController {
      /* ################################################################## */
@@ -42,19 +43,19 @@ class VMF_BaseViewController: UIViewController {
      
      /* ################################################################## */
      /**
-      This will provide haptic/audio feedback, in general.
+      Provides impact haptic feedback.
       */
      var feedbackGenerator: UIImpactFeedbackGenerator?
      
      /* ################################################################## */
      /**
-      This will provide haptic/audio feedback, in general.
+      Provides success notification haptic feedback.
       */
      var notificationGenerator: UINotificationFeedbackGenerator?
      
      /* ################################################################## */
      /**
-      This will provide subtle haptic/audio feedback for selections.
+      Provides subtle selection haptic feedback.
       */
      var selectionGenerator: UISelectionFeedbackGenerator?
 }
@@ -87,7 +88,7 @@ extension VMF_BaseViewController {
      /**
       This converts a 1 == Sun format into a localized weekday index (1 ... 7)
       
-      - parameter: An integer (1 -> 7), with the unlocalized index (database native setup).
+      - parameter inWeekdayIndex: A Sunday-based weekday (1 through 7).
       - returns: The 1-based weekday index for the local system.
       */
      func mapWeekday(_ inWeekdayIndex: Int) -> Int {
@@ -105,7 +106,7 @@ extension VMF_BaseViewController {
      /**
       This converts the selected localized weekday into the 1 == Sun format needed for the meeting data.
       
-      - parameter: An integer (1 -> 7), with the localized weekday (user's native setup).
+      - parameter inWeekdayIndex: A weekday position (1 through 7), starting with the user's first weekday.
       - returns: The 1-based weekday index for 1 = Sunday
       */
      func unMapWeekday(_ inWeekdayIndex: Int) -> Int {
@@ -306,6 +307,7 @@ extension VMF_BaseViewController {
                                                 target: self,
                                                 action: #selector(_goBack))
                backButton.accessibilityLabel = "SLUG-BACK".localizedVariant
+               backButton.accessibilityHint = "SLUG-ACC-BACK-HINT".localizedVariant
                backButton.hidesSharedBackground = true
                backButton.menu = UIMenu(children: navigationController.viewControllers[..<index].reversed().map { controller in
                     UIAction(title: controller.navigationItem.title ?? controller.title ?? "SLUG-BACK".localizedVariant) { [weak navigationController, weak controller] _ in

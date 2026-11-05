@@ -31,30 +31,36 @@ class VMF_StyledSegmentedControl: UISegmentedControl {
      private var renderedSegmentSize: CGSize = .zero
      private var backgroundImagesNeedUpdate = true
 
+     /// Rebuilds custom selection backgrounds when the selection color changes.
      override var selectedSegmentTintColor: UIColor? {
           didSet { invalidateBackgroundImages() }
      }
 
+     /// Creates a control and registers appearance changes that affect its background images.
      override init(frame: CGRect) {
           super.init(frame: frame)
           registerAppearanceTraits()
      }
 
+     /// Creates a control with UIKit segments and appearance-aware background images.
      override init(items: [Any]?) {
           super.init(items: items)
           registerAppearanceTraits()
      }
 
+     /// Restores a storyboard control and registers appearance changes.
      required init?(coder: NSCoder) {
           super.init(coder: coder)
           registerAppearanceTraits()
      }
 
+     /// Invalidates the rendered backgrounds after the inherited tint changes.
      override func tintColorDidChange() {
           super.tintColorDidChange()
           invalidateBackgroundImages()
      }
 
+     /// Fits the selection images and outer clipping radius to the current bounds.
      override func layoutSubviews() {
           let radius = min(6, bounds.height / 2)
           if #available(iOS 26.0, *) { updateBackgroundImages(cornerRadius: radius) }

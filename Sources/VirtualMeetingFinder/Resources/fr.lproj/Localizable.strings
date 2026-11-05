@@ -35,10 +35,6 @@
 // MARK: -
 // MARK: - COMMON -
 
-/* We replace 1200 with the word "Noon" */
-"SLUG-NOON-TIME"                                  =    "Midi";
-/* We replace 2359 with the word "Midnight" */
-"SLUG-MIDNIGHT-TIME"                              =    "Minuit";
 /* General-Purpose Back Button */
 "SLUG-BACK"                                       =    "Retour";
 /* This is used for the add event action sheet line. */
@@ -67,7 +63,7 @@
 
 /* The name of the screen */
 "SLUG-TAB-0-TITLE"                                =    "Trouver des réunions";
-/* This is the Title for the time display, when we have selected the "Now" segmented switch item. */
+/* Navigation title while displaying meetings in progress. */
 "SLUG-IN-PROGRESS"                                =    "En cours";
 /* This is the Text Field "placeholder" text, for when the Main Screen is in Text Search Mode. */
 "SLUG-SEARCH-PLACEHOLDER"                         =    "Saisis le nom d’une réunion";
@@ -78,10 +74,7 @@
 /* This is displayed in a little label, at the bottom of the screen, as instruction. */
 "SLUG-SWIPE-LABEL-TEXT"                           =    "← Balaye pour changer l’heure →";
 
-/* This is the title for the segmented switch segment, for in-progress meetings, in the Main Screen.
-
-   NOTE TO TRANSLATOR: This needs to be very short. It will cause the segment it occupies to expand, horizontally. It is only one of nine, so it can't be too big.
- */
+/* Short title for the Now button in the day/time popover. */
 "SLUG-NOW"                                        =    "En cours";
 
 // MARK: - MEETING INSPECTOR SCREEN -
@@ -116,17 +109,6 @@
 "SLUG-PHONE-BUTTON"                               =    "Téléphone";
 /* This is displayed under the globe icon, in the Meeting Inspector. */
 "SLUG-GLOBE-BUTTON"                               =    "Web";
-
-/* One of these is displayed under the video icon, in the Meeting Inspector. They denote the particular app that will be opened, by selecting the icon.
-
-   NOTE TO TRANSLATOR: These are corporate trade names. If there are no localized well-known substitutes, leave the English names.
- */
-"SLUG-DIRECT-URI-ZOOM"                            =    "Zoom";
-"SLUG-DIRECT-URI-GOTOMEETING"                     =    "GoToMeeting";
-"SLUG-DIRECT-URI-SKYPE"                           =    "Skype";
-"SLUG-DIRECT-URI-MEET"                            =    "Google Meet";
-"SLUG-DIRECT-URI-DISCORD"                         =    "Discord";
-"SLUG-DIRECT-URI-JITSI"                           =    "Jitsi Meet";
 
 /* This message is displayed for Mac Catalyst, when the user clicks on the "Web" icon, for a Zoom meeting. Apple does not allow direct Zoom access (because of the app download). */
 
@@ -190,8 +172,6 @@
 // MARK: -
 // MARK: - MAIN SCREEN -
 
-/* This is the label for the Bar Button item that selects the "I Attend" Screen. */
-"SLUG-ACC-TAB-1-BUTTON-LABEL"                   =    "Ma participation";
 /* This is the hint for the Bar Button item that selects the "I Attend" Screen. */
 "SLUG-ACC-TAB-1-BUTTON-HINT"                    =    "Affiche les réunions auxquelles tu as indiqué participer.";
 
@@ -200,55 +180,23 @@
 /* This is the hint for the Bar Button item that selects the Settings Screen. */
 "SLUG-ACC-SETTINGS-BUTTON-HINT"                 =    "Ouvre les réglages de l’app.";
 
-/* This is the label for the Bar Button item that opens the Control Panel (When closed). */
-"SLUG-ACC-DISCLOSURE-BUTTON-CLOSED-LABEL"       =    "Afficher les commandes de jour et d’heure";
-/* This is the hint for the Bar Button item that opens the Control Panel (When closed). */
-"SLUG-ACC-DISCLOSURE-BUTTON-CLOSED-HINT"        =    "Ouvre les commandes pour choisir un jour et une heure.";
-
-/* This is the label for the Bar Button item that opens the Control Panel (When closed). */
-"SLUG-ACC-DISCLOSURE-BUTTON-OPEN-LABEL"         =    "Masquer les commandes de jour et d’heure";
-/* This is the hint for the Bar Button item that opens the Control Panel (When closed). */
-"SLUG-ACC-DISCLOSURE-BUTTON-OPEN-HINT"          =    "Ferme les commandes de jour et d’heure.";
-
-/* This is the label for the segmented switch at the top of the Main Screen. */
-"SLUG-ACC-WEEKDAY-SWITCH-LABEL"                 =    "Choisir un jour ou rechercher";
-/* This is the hint for the segmented switch at the top of the Main Screen. */
-"SLUG-ACC-WEEKDAY-SWITCH-HINT"                  =    "Affiche les réunions en cours, choisis un jour ou recherche par nom de réunion.";
-
 /* The individual segment label for the in-progress (Now) segment */
 "SLUG-ACC-WEEKDAY-SWITCH-0-LABEL"               =    "Réunions en cours";
 /* The individual segment hint for the in-progress (Now) segment */
 "SLUG-ACC-WEEKDAY-SWITCH-0-HINT"                =    "Affiche les réunions qui ont lieu maintenant.";
-
-/* The label for each weekday segment. The placeholder (%@) is replaced by the weekday represented by that segment. */
-"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-LABEL-FORMAT"  =    "Réunions : %@";
-/* The hint for each weekday segment. The placeholder is replaced by the weekday represented by that segment. */
-"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-HINT-FORMAT"   =    "Affiche les réunions qui ont lieu ce jour de la semaine : %@.";
 
 /* The individual segment label for the search segment */
 "SLUG-ACC-WEEKDAY-SWITCH-8-LABEL"               =    "Rechercher par nom de réunion";
 /* The individual segment hint for the search segment */
 "SLUG-ACC-WEEKDAY-SWITCH-8-HINT"                =    "Ouvre la recherche par nom de réunion.";
 
-/* This is the label for the enter search text text field. */
-"SLUG-ACC-ENTER-SEARCH-TEXT-LABEL"              =    "Nom de la réunion";
 /* This is the hint for the enter search text text field. */
 "SLUG-ACC-ENTER-SEARCH-TEXT-HINT"               =    "Affiche les réunions dont le nom contient le texte que tu saisis.";
 
 /* This is the label for the close search mode button. */
 "SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL"            =    "Fermer la recherche";
-/* This is the label for the close search mode button. */
+/* Hint for returning from name search to day/time browsing. */
 "SLUG-ACC-CLOSE-SEARCH-BUTTON-HINT"             =    "Revient au choix des réunions par jour et par heure.";
-
-/* This is the label for the decrement (left) time button. */
-"SLUG-ACC-LEFT-BUTTON-LABEL"                    =    "Heure précédente";
-/* This is the hint for the decrement (left) time button. */
-"SLUG-ACC-LEFT-BUTTON-HINT"                     =    "Affiche les réunions du créneau horaire précédent.";
-
-/* This is the label for the increment (right) time button. */
-"SLUG-ACC-RIGHT-BUTTON-LABEL"                   =    "Heure suivante";
-/* This is the hint for the increment (right) time button. */
-"SLUG-ACC-RIGHT-BUTTON-HINT"                    =    "Affiche les réunions du créneau horaire suivant.";
 
 /* Label for the navigation title button that opens the day/time popover. Its value is the displayed day/time or mode. */
 "SLUG-ACC-DAY-TIME-BUTTON-LABEL"                 =    "Jour et heure";
@@ -273,26 +221,6 @@
 "SLUG-ACC-SELECT-TIME-HINT"                      =    "Affiche les réunions à cette heure et ferme la fenêtre de sélection du jour et de l’heure.";
 /* Shown in the popover when a weekday has no available start times. */
 "SLUG-NO-MEETING-TIMES"                         =    "Aucun horaire de réunion n’est disponible pour ce jour.";
-
-/* This is the label for the weekday/time label. */
-"SLUG-ACC-TIME-DISPLAY-LABEL"                   =    "Jour et heure";
-/* This is the hint for the weekday/time label. */
-"SLUG-ACC-TIME-DISPLAY-HINT"                    =    "Le jour et l’heure de début sélectionnés pour les réunions ci-dessous.";
-
-/* This is the label for the selected-time progress bar, below the segmented switch. */
-"SLUG-ACC-COMPLETION-DISPLAY-LABEL"             =    "Heure sélectionnée";
-/* This is the hint for the selected-time progress bar, below the segmented switch. */
-"SLUG-ACC-COMPLETION-DISPLAY-HINT"              =    "Indique où se situe l’heure sélectionnée dans la journée. Les heures précédentes sont à gauche, les suivantes à droite.";
-
-/* This is the label for the day/time picker. */
-"SLUG-ACC-DIRECT-PICKER-LABEL"                  =    "Choisir le jour et l’heure";
-/* This is the hint for the day/time picker. */
-"SLUG-ACC-DIRECT-PICKER-HINT"                   =    "Choisis un jour de la semaine et une heure de début.";
-
-/* This is the label for the day/time picker. */
-"SLUG-ACC-DIRECT-EXIT-LABEL"                    =    "Revenir aux commandes d’heure";
-/* This is the hint for the day/time picker. */
-"SLUG-ACC-DIRECT-EXIT-HINT"                     =    "Revient aux commandes de jour et d’heure.";
 
 // MARK: - MEETING INSPECTOR SCREEN -
 
@@ -341,8 +269,6 @@
 /* This hint is applied to the Web icon button in the Meeting Inspector Screen */
 "SLUG-ACC-WEB-MI-HINT"                          =    "Ouvre le lien dans ton navigateur ou une app compatible.";
 
-/* This label is applied to the video icon button in the Meeting Inspector Screen */
-"SLUG-ACC-VIDEO-MI-LABEL-FORMAT"                =    "Ouvrir dans %@";
 /* This hint is applied to the video icon button in the Meeting Inspector Screen */
 "SLUG-ACC-VIDEO-MI-HINT-FORMAT"                 =    "Ouvre cette réunion dans %@.";
 
@@ -378,19 +304,29 @@
 
 // MARK: - SETTINGS SCREEN -
 
-/* This is the label for the switch to enable/disable Service meeting filtering. */
-"SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL"        =    "Masquer les réunions de service";
 /* This is the hint for the switch to enable/disable Service meeting filtering. */
 "SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT"         =    "Masque les réunions identifiées comme des réunions de service ou de gestion de NA. Certaines peuvent encore apparaître.";
 
-/* This is the label for the "About This App" button. */
-"SLUG-ACC-ABOUT-BUTTON-LABEL"                   =    "À propos de l’app";
 /* This is the hint for the "About This App" button. */
 "SLUG-ACC-ABOUT-BUTTON-HINT"                    =    "Affiche les informations sur l’app et des liens utiles.";
 
 // MARK: -
 
-/* Spoken label for the checkmark beside a meeting marked as attended. */
-"SLUG-ACC-ATTEND-IMAGE-ON-LABEL" =    "Je participe à cette réunion";
-/* Spoken explanation of the attendance checkmark. */
-"SLUG-ACC-ATTEND-IMAGE-ON-HINT" =    "Tu as ajouté cette réunion à la liste « Ma participation ».";
+// MARK: - SHARED ACCESSIBILITY ACTIONS AND STATES -
+
+"SLUG-ACC-OPEN-WEBSITE-HINT" = "Ouvre ce site web dans votre navigateur.";
+"SLUG-ACC-BACK-HINT" = "Revient à l’écran précédent.";
+"SLUG-ACC-MEETING-ROW-HINT" = "Affiche les modalités de connexion, les formats de réunion et les informations sur le lieu.";
+"SLUG-ACC-ADD-ATTENDANCE" = "Ajouter aux réunions que je fréquente";
+"SLUG-ACC-REMOVE-ATTENDANCE" = "Retirer des réunions que je fréquente";
+"SLUG-ACC-REFRESH-LABEL" = "Actualiser les réunions";
+"SLUG-ACC-REFRESH-HINT" = "Télécharge une liste de réunions à jour.";
+"SLUG-ACC-LATEST-TIME-LABEL" = "Sélectionner la dernière heure de début jusqu’à maintenant";
+"SLUG-ACC-LATEST-TIME-HINT" = "Propose une action pour sélectionner la dernière heure de début disponible jusqu’à maintenant.";
+"SLUG-ACC-ON" = "Activé";
+"SLUG-ACC-OFF" = "Désactivé";
+"SLUG-ACC-EXPANDED" = "Développé";
+"SLUG-ACC-COLLAPSED" = "Réduit";
+"SLUG-ACC-EXPAND-SECTION-HINT" = "Affiche les détails de cette section.";
+"SLUG-ACC-COLLAPSE-SECTION-HINT" = "Masque les détails de cette section.";
+"SLUG-ACC-MAP-HINT" = "Affiche le lieu de cette réunion en présentiel. Utilisez Partager la réunion pour accéder aux applications de cartes.";

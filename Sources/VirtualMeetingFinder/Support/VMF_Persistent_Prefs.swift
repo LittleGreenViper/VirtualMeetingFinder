@@ -21,10 +21,11 @@ import Foundation
 import RVS_PersistentPrefs
 
 /* ###################################################################################################################################### */
-// MARK: - Persistent Test Harness Settings -
+// MARK: - Persistent App Preferences -
 /* ###################################################################################################################################### */
 /**
- This stores our various parameters.
+ Stores attendance selections and the service-meeting filter in local user defaults.
+ Attendance is a list of meeting IDs; service meetings are hidden by default.
  */
 class VMF_Persistent_Prefs: RVS_PersistentPrefs {
      /* ################################################################################################################################## */

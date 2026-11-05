@@ -107,7 +107,7 @@ extension VMF_AboutViewController {
      /**
       This is called when one of the URL buttons is hit, and takes us to the site.
       
-      - parameter: the button.
+      - parameter inButton: The link button supplying the destination URL.
       */
      @IBAction func urlButtonHit(_ inButton: VMF_URLButton) {
           guard let url = inButton.url else { return }

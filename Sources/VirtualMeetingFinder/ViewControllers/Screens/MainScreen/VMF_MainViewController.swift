@@ -4,7 +4,7 @@
  
  MIT License
  
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentationmap
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
  files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
  modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
  Software is furnished to do so, subject to the following conditions:
@@ -24,52 +24,33 @@ import SwiftBMLSDK
 // MARK: - Search View Controller -
 /* ###################################################################################################################################### */
 /**
- This is the main view controller for the weekday/time selector tab.
- 
- # QUICK OVERVIEW
- 
- The way that the data is set up, we have "day indexes (1-7), and "time slots" (varies, per day).
- 
- All times are mapped to the user's local timezone, regardless of the start time in the meeting's "native" timezone.
- 
- The instance of this class will have a ``VMF_DayTimeSearchPageViewController`` embedded (also the ``VMF_AttendanceViewController`` class, but that one disables the page view controller), which allows the user to swipe-select pages of meetings.
- 
- ## DAY INDEXES
- 
- These represent 0 (In Progress), 1 (Sunday), through 7 (Saturday), or 8 (Search Mode).
- 
- ### Mode 0 (In Progress)
- 
- In this mode, there is no "time index," and the screen displays all meetings that are in progress, regardless of when they started.
- 
- ### Mode 1 -> 7
- 
- If the day index is 1 -> 7, the screen displays whatever time index, within that day, is selected.
- 
- The day index is stored in Sunday -> Saturday (the database native scheme), but are mapped to the local week, upon display.
- 
- ### Mode 8 (Search)
- 
- In this mode, the day index and time index are irrelevant. All possible meetings are displayed, then are filtered, "live," as text is entered into the text entry field.
- 
- ## TIME INDEXES
- 
- Each day has "time slots." These are groupings of times, where meetings start (1 or more). Each "time slot" is a separate group of meetings that all begin at the same time.
- 
- In regular weekdays (day index 1 -> 7), only one "time slot" is shown at a time. Only the meetings that begin at the same time are shown.
- 
- If possible, the user's currently selected time index is honored, and we try to match the time, when changing selected days. It is also preserved, when entering Mode 0 or Mode 8.
- 
- ## SELECTING FOR ATTENDANCE
- 
- It is possible for a user to indicate that they attend a meeting, by selecting "I Attend," in the meeting inspector screen.
- 
- You can bring in a separate screen, that contains only the meetings that you attend. This is accessed from the checkmark bar button item, in the upper right.
+ Coordinates the main meeting list, time-slot paging, and meeting-name search.
+
+ ## Selection model
+
+ Day indexes use 0 for meetings in progress and 1 through 7 for Sunday through Saturday.
+ ``isNameSearchMode`` enables name search independently of the stored day and time indexes;
+ search is not a weekday index. A time index is a zero-based position among the sorted,
+ distinct local start times for a weekday. ``lastTime`` stores an HHMM value instead.
+
+ ``VMF_DayTimeSelectionViewController`` presents the weekday/time picker and search field
+ from the navigation title button. ``VMF_DayTimeSearchPageViewController`` embeds the
+ current meeting table and allows adjacent time-slot swipes outside search mode.
+ Selecting Now explicitly displays all meetings in progress. The first swipe from Now
+ selects the latest available start at or before the current local time.
+
+ Search filters the name-sorted collection as text changes and preserves the underlying
+ time selection. Local attendance selections are available from a separate
+ ``VMF_AttendanceViewController`` screen when at least one meeting is marked.
  */
 class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerProtocol {
+     /// Storyboard segue used to open the attendance screen.
      static let openAttendanceSegueID = "open-attendance"
+     /// Filled attendance icon.
      static let checkedImage = UIImage(systemName: "checkmark.square.fill")
+     /// Empty attendance icon.
      static let uncheckedImage = UIImage(systemName: "square")
+     /// Font for compact navigation labels.
      static let barButtonLabelFont = UIFont.systemFont(ofSize: 15)
 
      /** The last selected start time, preserved when entering Now or search. */
@@ -87,14 +68,18 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
           }
      }
 
+     /// Navigation title control that opens the day/time and search popover.
      let dayTimeSelectionButton = UIButton(type: .system)
+     /// Storyboard page controller hosting the current meeting table.
      weak var pageViewController: VMF_DayTimeSearchPageViewController?
 
      /** Meetings sorted by name for search, and by weekday for time selection. */
      var searchMeetings: [MeetingInstance] = [] {
           didSet { searchMeetingNames = searchMeetings.map { $0.name.meetingSearchKey } }
      }
+     /// Normalized names parallel to the name-sorted meeting array.
      private(set) var searchMeetingNames: [String] = []
+     /// Local weekday groups: index 0 is Sunday, index 6 is Saturday.
      var organizedMeetings: [[MeetingInstance]] = []
 
      /** Search retains the underlying weekday/time selection for returning to browsing. */
@@ -116,6 +101,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
           }
      }
 
+     /// Retained name query; changing it refreshes the table only while searching.
      var searchText = "" {
           didSet {
                if isNameSearchMode {
@@ -124,6 +110,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
           }
      }
 
+     /// Hides navigation and results while meeting data is loading.
      var isThrobbing = false {
           didSet {
                navigationController?.isNavigationBarHidden = isThrobbing
@@ -135,10 +122,15 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
           }
      }
 
+     /// Visual instruction for moving between meeting time slots.
      @IBOutlet weak var swipeLabel: UILabel?
+     /// Opens app settings.
      @IBOutlet weak var settingsBarButtonItem: UIBarButtonItem?
+     /// Opens saved attendance; disabled when the attendance list is empty.
      @IBOutlet weak var myAttendanceBarButtonItem: UIBarButtonItem?
+     /// Contains the embedded time-slot page controller.
      @IBOutlet weak var tableContainerView: UIView?
+     /// Loading indicator container.
      @IBOutlet weak var throbber: UIView?
 }
 
@@ -148,7 +140,7 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
 extension VMF_MainViewController {
      /* ################################################################## */
      /**
-      - returns true, indicating that X-phones should hide the Home Bar.
+      Requests automatic hiding of the home indicator on supported devices.
       */
      override var prefersHomeIndicatorAutoHidden: Bool { true }
 }

@@ -27,7 +27,8 @@ import RVS_BasicGCDTimer
 // MARK: - Main App Delegate -
 /* ###################################################################################################################################### */
 /**
- This is the original app delegate part of the app (starting point). We are actually using Scene Delegate, but this is a good place to use as a "fulcrum."
+ The app entry point and shared access to meeting data, local preferences, and URL/alert helpers.
+ ``VMF_SceneDelegate`` manages the window, startup cover, and incoming meeting links.
  */
 @main
 class VMF_AppDelegate: UIResponder {
@@ -40,6 +41,7 @@ class VMF_AppDelegate: UIResponder {
           #endif
      }
 
+     /// Applies simulator-only SDK overrides before the app begins loading meetings.
      override init() {
           super.init()
           if Self.isScreenshot {
@@ -86,9 +88,7 @@ class VMF_AppDelegate: UIResponder {
      
      /* ################################################################## */
      /**
-      This handles the server data. This is the main container. All others reference this weakly.
-      
-      "There can only be one." - Connor MacLeod
+      The shared in-memory meeting collection. Screens derive their displayed lists from it.
       */
      static var virtualService: SwiftBMLSDK_MeetingLocalTimezoneCollection?
      
@@ -143,7 +143,7 @@ extension VMF_AppDelegate {
       
       - parameter inHeader: a string to be displayed as the title of the alert. It is localized by this method.
       - parameter inMessage: a string to be displayed as the message of the alert. It is localized by this method.
-      - parameter inPresentingViewController: An optional UIViewController object that is acting as the presenter context for the alert. If nil, we use the top controller of the Navigation stack.
+      - parameter inPresentingViewController: The presenting controller. If nil, no alert is displayed.
       */
      class func displayAlert(header inHeader: String, message inMessage: String = "", presentedBy inPresentingViewController: UIViewController! = nil) {
           // This ensures that we are on the main thread.
@@ -172,7 +172,7 @@ extension VMF_AppDelegate {
      /**
       This opens our app settings, with the permissions shown. It is ObjC, so it can be directly referenced from a callback.
       
-      - parameter: Ignored (and can be omitted).
+      The sender is ignored.
       */
      @objc dynamic func openMainSettings(_: Any! = nil) {
          guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
@@ -223,11 +223,11 @@ extension VMF_AppDelegate: UIApplicationDelegate {
      /**
       Fetch an intent handler for the app.
       
-      - parameter: The application (ignored)
-      - parameter handlerFor: An intent that needs to be handled by the app.
-      - returns: An intent handler
+      - parameter inApplication: The application (unused).
+      - parameter inIntent: The intent requesting a handler.
+      - returns: Nil; this app does not provide a custom intent handler.
       */
-     func application(_: UIApplication, handlerFor inIntent: INIntent) -> Any? {
+     func application(_ inApplication: UIApplication, handlerFor inIntent: INIntent) -> Any? {
           nil
      }
 }

@@ -24,6 +24,7 @@ import RVS_Generic_Swift_Toolbox
 /* ###################################################################################################################################### */
 // MARK: - String Extension for Localization -
 /* ###################################################################################################################################### */
+/// Normalizes meeting-name searches and resolves app resource strings.
 extension String {
      /** A consistent search form for case, accents, width variants, and Latin ligatures. */
      var meetingSearchKey: String {
@@ -48,7 +49,7 @@ extension String {
 /* ###################################################################################################################################### */
 /* ###################################################################### */
 /**
- This allows us to play around with the SDK.
+ The SDK meeting record used throughout the app. App-specific extensions add local attendance and link helpers.
  */
 public typealias MeetingInstance = SwiftBMLSDK_Parser.Meeting
 
@@ -84,6 +85,9 @@ extension VMF_URLButton {
           super.layoutSubviews()
           titleLabel?.numberOfLines = 0
           setTitle(title(for: .normal)?.localizedVariant, for: .normal)
+          isAccessibilityElement = true
+          accessibilityLabel = title(for: .normal) ?? "SLUG-PRESENTED-BY".localizedVariant
+          accessibilityHint = "SLUG-ACC-OPEN-WEBSITE-HINT".localizedVariant
      }
 }
 
@@ -96,38 +100,34 @@ extension VMF_URLButton {
 class VMF_DayTimeSearchPageViewController: UIPageViewController { }
 
 /* ###################################################################################################################################### */
-// MARK: - Date Extension for Localized Strings -
+// MARK: - Accessible Gesture Controls -
 /* ###################################################################################################################################### */
 /**
- Adds a special method for localizing our time.
+ A gesture-backed view that also supports VoiceOver's standard activation.
+ Set ``accessibilityActivation`` to the same action as the view's tap recognizer.
  */
-extension Date {
-     /* ################################################################## */
-     /**
-      Localizes the time (not the date).
-      */
-     var localizedTime: String {
-          var ret = ""
-          
-          let hour = Calendar.current.component(.hour, from: self)
-          let minute = Calendar.current.component(.minute, from: self)
-          let integerTime = hour * 100 + minute
-          
-          if 2359 == integerTime {
-               ret = "SLUG-MIDNIGHT-TIME".localizedVariant
-          } else if 1200 == integerTime,
-                    "12:00" != "SLUG-NOON-TIME".localizedVariant {    // We let the user's chosen display take this.
-               ret = "SLUG-NOON-TIME".localizedVariant
-          }
-          
-          if ret.isEmpty {
-               let formatter = DateFormatter()
-               formatter.dateFormat = .none
-               formatter.timeStyle = .short
-               ret = formatter.string(from: self)
-          }
-          
-          return ret
+class VMF_ActionView: UIView {
+     /// Performs the control's action. Capture its owning controller weakly.
+     var accessibilityActivation: (() -> Void)?
+
+     /// Invokes the configured action for a standard assistive-technology activation.
+     override func accessibilityActivate() -> Bool {
+          guard let action = accessibilityActivation else { return false }
+          action()
+          return true
+     }
+}
+
+/// A stack-based disclosure control with the same activation contract as ``VMF_ActionView``.
+class VMF_ActionStackView: UIStackView {
+     /// Performs the disclosure action. Capture its owning controller weakly.
+     var accessibilityActivation: (() -> Void)?
+
+     /// Invokes the configured action for a standard assistive-technology activation.
+     override func accessibilityActivate() -> Bool {
+          guard let action = accessibilityActivation else { return false }
+          action()
+          return true
      }
 }
 
@@ -305,6 +305,7 @@ final class VMF_RecovrrButton: UIButton {
      private let _borderGradient = CAGradientLayer()
      private let _borderMask = CAShapeLayer()
 
+     /// Installs the Recovrr logo, title, and gradient border after storyboard decoding.
      override func awakeFromNib() {
           super.awakeFromNib()
           var style = UIButton.Configuration.plain()
@@ -327,6 +328,7 @@ final class VMF_RecovrrButton: UIButton {
           heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
      }
 
+     /// Updates the text and fill for the current highlighted and enabled state.
      override func updateConfiguration() {
           super.updateConfiguration()
           guard var style = configuration else { return }
@@ -343,6 +345,7 @@ final class VMF_RecovrrButton: UIButton {
           configuration = style
      }
 
+     /// Fits the gradient border to the current button bounds.
      override func layoutSubviews() {
           super.layoutSubviews()
           CATransaction.begin()

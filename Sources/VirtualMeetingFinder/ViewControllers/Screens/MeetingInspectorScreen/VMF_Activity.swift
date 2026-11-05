@@ -26,7 +26,7 @@ import RVS_Generic_Swift_Toolbox
 // MARK: - Custom Activity Class Base -
 /* ###################################################################################################################################### */
 /**
- We can present a custom activity, that allows the user to add the meeting to their calendar.
+ Base for the inspector's calendar, location, and Recovrr share-sheet actions.
  */
 class VMF_Base_Activity: UIActivity {
      /* ################################################################## */
@@ -66,7 +66,7 @@ extension VMF_Base_Activity {
 class VMF_AddToCalendar_Activity: VMF_Base_Activity {
      /* ################################################################## */
      /**
-      The URL string, which is sent to Messages.
+      The recurring meeting event to present in the calendar editor.
       */
      let meetingEvent: EKEvent?
      
@@ -107,7 +107,7 @@ extension VMF_AddToCalendar_Activity {
      
      /* ################################################################## */
      /**
-      We extract the event from the items, and return true.
+      Returns true when the second activity item is a calendar event. No items are modified.
       
       - parameter inActivityItems: The activity items (ignored).
       */
@@ -135,7 +135,7 @@ extension VMF_AddToCalendar_Activity {
 extension VMF_AddToCalendar_Activity {
      /* ################################################################## */
      /**
-      This adds a reminder event for the next meeting start time.
+      Requests calendar access and presents the event editor. The user decides whether to save the event.
       */
      func addReminderEvent() {
           /* ############################################################## */
@@ -185,7 +185,7 @@ extension VMF_AddToCalendar_Activity {
       This displays an alert, for when permission is denied, and allows access to the settings.
       This can be called from non-main threads.
       
-      - parameter inHeader: The header. This can be a lo9calization slug.
+      - parameter inHeader: The header. This can be a localization key.
       - parameter inBody: The message body. This can be a localization slug.
       */
      func displayPermissionsAlert(header inHeader: String, body inBody: String) {
@@ -217,7 +217,7 @@ extension VMF_AddToCalendar_Activity: EKEventEditViewDelegate {
       Called when the event kit has completed with an action to add the reminder to the calendar.
       
       - parameter inController: The controller we're talking about.
-      - parameter inAction: The even action that completed.
+      - parameter inAction: The event editing action that completed.
       */
      func eventEditViewController(_ inController: EKEventEditViewController, didCompleteWith inAction: EKEventEditViewAction) {
           inController.dismiss(animated: true, completion: nil)
@@ -267,7 +267,7 @@ class VMF_OpenLocationIn_Activity: VMF_Base_Activity {
           
           /* ############################################################## */
           /**
-           This returns the Universal Links URL for each of the types of apps.
+           Returns a map URL after validating coordinates and checking app availability.
            */
           var appURL: URL? {
                var ret: String = ""
@@ -449,7 +449,7 @@ extension VMF_OpenInRecovrr_Activity {
 
      /* ################################################################## */
      /**
-      We return true as long as we can form a URL (https URLs are always openable).
+      Returns true when the meeting URL can be formed; perform reports whether opening succeeded.
       */
      override func canPerform(withActivityItems inActivityItems: [Any]) -> Bool { nil != self._recovrrURL }
 

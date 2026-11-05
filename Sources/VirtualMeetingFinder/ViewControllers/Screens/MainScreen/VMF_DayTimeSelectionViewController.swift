@@ -27,13 +27,17 @@ import UIKit
  Search filters the main table live; dismissing the popover keeps those results visible.
  */
 class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+     /// Preferred popover size while browsing weekday start times.
      static let browsingSize = CGSize(width: 600, height: 500)
+     /// Preferred popover size while entering a meeting-name query.
      static let searchSize = CGSize(width: 600, height: 180)
+     /// Opaque light/dark background shared with the popover outline.
      static let backgroundColor = UIColor { $0.userInterfaceStyle == .dark ? .black : .white }
 
+     /// Owns the meeting data and receives time selections and live search changes.
      weak var mainController: VMF_MainViewController?
 
-     private let weekdaySelector = VMF_StyledSegmentedControl()
+     private let weekdaySelector = VMF_WeekdaySegmentedControl()
      private let weekdayLabel = UILabel()
      private let timeTableView = UITableView(frame: .zero, style: .plain)
      private let emptyLabel = UILabel()
@@ -50,6 +54,7 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
      private var selection: (dayIndex: Int, time: Int)?
      private var didScrollToSelection = false
 
+     /// Builds the picker and search controls from the main screen's current selection.
      override func viewDidLoad() {
           super.viewDidLoad()
           view.backgroundColor = Self.backgroundColor
@@ -122,6 +127,12 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
           weekdaySelector.accessibilityLabel = "SLUG-ACC-POPOVER-WEEKDAY-LABEL".localizedVariant
           weekdaySelector.accessibilityHint = "SLUG-ACC-POPOVER-WEEKDAY-HINT".localizedVariant
           weekdaySelector.accessibilityIdentifier = "popover-weekday-selector"
+          weekdaySelector.isAccessibilityElement = false
+          weekdaySelector.weekdayAccessibilityElements = (0..<7).map { index in
+               let day = mainController?.unMapWeekday(index + 1) ?? ((Calendar.current.firstWeekday + index - 1) % 7 + 1)
+               return VMF_WeekdayAccessibilityElement(selector: weekdaySelector, index: index,
+                                                     label: Calendar.current.standaloneWeekdaySymbols[day - 1])
+          }
           weekdaySelector.selectedSegmentTintColor = accentColor
           let weekdayFont = UIFont.systemFont(ofSize: 16, weight: .medium)
           weekdaySelector.setTitleTextAttributes([.foregroundColor: accentColor, .font: weekdayFont], for: .normal)
@@ -150,7 +161,7 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
           searchTextField.font = .preferredFont(forTextStyle: .body)
           searchTextField.adjustsFontForContentSizeCategory = true
           searchTextField.placeholder = "SLUG-SEARCH-PLACEHOLDER".localizedVariant
-          searchTextField.accessibilityLabel = "SLUG-ACC-ENTER-SEARCH-TEXT-LABEL".localizedVariant
+          searchTextField.accessibilityLabel = "SLUG-ACC-MEETING-NAME-MI-LABEL".localizedVariant
           searchTextField.accessibilityHint = "SLUG-ACC-ENTER-SEARCH-TEXT-HINT".localizedVariant
           searchTextField.accessibilityIdentifier = "popover-meeting-name-search"
           searchTextField.clearButtonMode = .whileEditing
@@ -167,6 +178,7 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
           resultsConfiguration.baseBackgroundColor = accentColor
           resultsConfiguration.baseForegroundColor = .white
           showResultsButton.configuration = resultsConfiguration
+          showResultsButton.accessibilityLabel = "SLUG-SHOW-SEARCH-RESULTS".localizedVariant
           showResultsButton.accessibilityHint = "SLUG-ACC-SHOW-SEARCH-RESULTS-HINT".localizedVariant
           showResultsButton.accessibilityIdentifier = "show-meeting-search-results"
           showResultsButton.addTarget(self, action: #selector(showSearchResults), for: .touchUpInside)
@@ -210,27 +222,25 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
           setSearchMode(mainController?.isNameSearchMode ?? false)
      }
 
+     /// Focuses the retained search field when the popover opens in search mode.
      override func viewDidAppear(_ inIsAnimated: Bool) {
           super.viewDidAppear(inIsAnimated)
           if isShowingSearch { searchTextField.becomeFirstResponder() }
      }
 
+     /// Releases the search keyboard and confirms dismissal with a sharp haptic while the scene is active.
      override func viewWillDisappear(_ inIsAnimated: Bool) {
           super.viewWillDisappear(inIsAnimated)
           searchTextField.resignFirstResponder()
+          if isBeingDismissed, view.window?.windowScene?.activationState == .foregroundActive {
+               mainController?.hardImpactHaptic()
+          }
      }
 
+     /// Fits visual weekday titles and scrolls to the selected time. Spoken names stay unabbreviated.
      override func viewDidLayoutSubviews() {
           super.viewDidLayoutSubviews()
           updateWeekdayTitles()
-          // Segment titles can be abbreviated visually while VoiceOver speaks the full weekday.
-          for index in 0..<7 {
-               let day = mainController?.unMapWeekday(index + 1) ?? ((Calendar.current.firstWeekday + index - 1) % 7 + 1)
-               if let element = weekdaySelector.accessibilityElement(at: index) as? NSObject {
-                    element.accessibilityLabel = Calendar.current.standaloneWeekdaySymbols[day - 1]
-                    element.accessibilityHint = "SLUG-ACC-POPOVER-WEEKDAY-HINT".localizedVariant
-               }
-          }
           if !isShowingSearch, !didScrollToSelection, !timeSlots.isEmpty, timeTableView.bounds.height > 0 {
                let index = mainController?.getNearestIndex(dayIndex: selectedDayIndex, time: selection?.time ?? mainController?.lastTime ?? 0) ?? 0
                timeTableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .middle, animated: false)
@@ -316,6 +326,12 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
           timeTableView.isHidden = inIsSearching
           searchContainer.isHidden = !inIsSearching
           weekdayLabel.text = inIsSearching ? "SLUG-SEARCH-MODE-TITLE".localizedVariant : Calendar.current.standaloneWeekdaySymbols[selectedDayIndex - 1]
+          weekdayLabel.accessibilityHint = inIsSearching ? nil : "SLUG-ACC-LATEST-TIME-HINT".localizedVariant
+          weekdayLabel.accessibilityCustomActions = inIsSearching ? nil : [UIAccessibilityCustomAction(name: "SLUG-ACC-LATEST-TIME-LABEL".localizedVariant) { [weak self] _ in
+               guard let self = self else { return false }
+               self.selectPreviousTimeSlot()
+               return true
+          }]
           var configuration = searchButton.configuration
           configuration?.image = UIImage(systemName: inIsSearching ? "xmark.circle" : "magnifyingglass")
           searchButton.configuration = configuration
@@ -340,12 +356,77 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
           dismiss(animated: true)
      }
 
+     /// Preserves popover presentation in compact layouts.
      func adaptivePresentationStyle(for inController: UIPresentationController) -> UIModalPresentationStyle { .none }
 
+     /// Preserves the popover when the presentation environment's traits change.
      func adaptivePresentationStyle(for inController: UIPresentationController, traitCollection inTraitCollection: UITraitCollection) -> UIModalPresentationStyle { .none }
 
+     /// Dismisses the picker for the standard accessibility escape gesture.
      override func accessibilityPerformEscape() -> Bool {
           dismiss(animated: true)
+          return true
+     }
+}
+
+/// Exposes a stable accessibility container even when UIKit rebuilds its visual segments.
+private final class VMF_WeekdaySegmentedControl: VMF_StyledSegmentedControl {
+     var weekdayAccessibilityElements: [UIAccessibilityElement] = []
+
+     override func accessibilityElementCount() -> Int { weekdayAccessibilityElements.count }
+
+     override func accessibilityElement(at inIndex: Int) -> Any? {
+          weekdayAccessibilityElements.indices.contains(inIndex) ? weekdayAccessibilityElements[inIndex] : nil
+     }
+
+     override func index(ofAccessibilityElement inElement: Any) -> Int {
+          guard let element = inElement as? UIAccessibilityElement else { return NSNotFound }
+          return weekdayAccessibilityElements.firstIndex(where: { $0 === element }) ?? NSNotFound
+     }
+}
+
+/**
+ A full-name weekday target independent of UIKit's private segment subviews.
+ Its frame follows the segment's layout direction and its selected trait follows the control.
+ */
+private final class VMF_WeekdayAccessibilityElement: UIAccessibilityElement {
+     private weak var selector: UISegmentedControl?
+     private let index: Int
+
+     init(selector inSelector: UISegmentedControl, index inIndex: Int, label inLabel: String) {
+          selector = inSelector
+          index = inIndex
+          super.init(accessibilityContainer: inSelector)
+          accessibilityLabel = inLabel
+          accessibilityHint = "SLUG-ACC-POPOVER-WEEKDAY-HINT".localizedVariant
+     }
+
+     override var accessibilityTraits: UIAccessibilityTraits {
+          get {
+               var traits: UIAccessibilityTraits = .button
+               if selector?.selectedSegmentIndex == index { traits.insert(.selected) }
+               if selector?.isEnabled == false { traits.insert(.notEnabled) }
+               return traits
+          }
+          set { super.accessibilityTraits = newValue }
+     }
+
+     override var accessibilityFrameInContainerSpace: CGRect {
+          get {
+               guard let selector = selector, selector.numberOfSegments > index else { return .zero }
+               let width = selector.bounds.width / CGFloat(selector.numberOfSegments)
+               let visualIndex = selector.effectiveUserInterfaceLayoutDirection == .rightToLeft ? selector.numberOfSegments - index - 1 : index
+               return CGRect(x: selector.bounds.minX + CGFloat(visualIndex) * width,
+                             y: selector.bounds.minY, width: width, height: selector.bounds.height)
+          }
+          set { super.accessibilityFrameInContainerSpace = newValue }
+     }
+
+     override func accessibilityActivate() -> Bool {
+          guard let selector = selector, selector.isEnabled,
+                selector.numberOfSegments > index, selector.isEnabledForSegment(at: index) else { return false }
+          selector.selectedSegmentIndex = index
+          selector.sendActions(for: .valueChanged)
           return true
      }
 }
@@ -355,33 +436,42 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
 /* ###################################################################################################################################### */
 /** Draws the opaque body and pointer as one shape, with a continuous one-point label-colored border. */
 final class VMF_DayTimePopoverBackgroundView: UIPopoverBackgroundView {
+     /// Width in points of the continuous body-and-arrow outline.
      static let borderWidth: CGFloat = 1
+     /// Preferred radius in points of the popover body corners.
      static let cornerRadius: CGFloat = 40
 
      private var storedArrowOffset: CGFloat = 0
      private var storedArrowDirection: UIPopoverArrowDirection = .up
 
+     /// Arrow displacement from the center, supplied by UIKit.
      override var arrowOffset: CGFloat {
           get { storedArrowOffset }
           set { storedArrowOffset = newValue; setNeedsDisplay() }
      }
 
+     /// Arrow orientation supplied by UIKit.
      override var arrowDirection: UIPopoverArrowDirection {
           get { storedArrowDirection }
           set { storedArrowDirection = newValue; setNeedsDisplay() }
      }
 
+     /// Width in points of the pointer's base.
      override class func arrowBase() -> CGFloat { 26 }
+     /// Height in points reserved for the pointer.
      override class func arrowHeight() -> CGFloat { 13 }
+     /// Insets content by the outline width so it does not overlap the border.
      override class func contentViewInsets() -> UIEdgeInsets {
           UIEdgeInsets(top: borderWidth, left: borderWidth, bottom: borderWidth, right: borderWidth)
      }
 
+     /// Configures transparent, bounds-aware drawing for a programmatically created outline.
      override init(frame: CGRect) {
           super.init(frame: frame)
           configureDrawing()
      }
 
+     /// Configures drawing after decoding.
      required init?(coder: NSCoder) {
           super.init(coder: coder)
           configureDrawing()
@@ -393,6 +483,7 @@ final class VMF_DayTimePopoverBackgroundView: UIPopoverBackgroundView {
           contentMode = .redraw
      }
 
+     /// Draws one filled outline, rotated to match UIKit's arrow direction.
      override func draw(_ inRect: CGRect) {
           let isHorizontal = arrowDirection == .left || arrowDirection == .right
           let size = isHorizontal ? CGSize(width: bounds.height, height: bounds.width) : bounds.size
@@ -447,6 +538,7 @@ final class VMF_DayTimePopoverBackgroundView: UIPopoverBackgroundView {
 // MARK: Meeting Name Search
 /* ###################################################################################################################################### */
 extension VMF_DayTimeSelectionViewController: UITextFieldDelegate {
+     /// Keeps the live query results and dismisses the popover when Search is pressed.
      func textFieldShouldReturn(_ inTextField: UITextField) -> Bool {
           showSearchResults()
           return true
@@ -457,8 +549,10 @@ extension VMF_DayTimeSelectionViewController: UITextFieldDelegate {
 // MARK: Available Meeting Times
 /* ###################################################################################################################################### */
 extension VMF_DayTimeSelectionViewController: UITableViewDataSource, UITableViewDelegate {
+     /// Returns the number of distinct start times for the selected weekday.
      func tableView(_ inTableView: UITableView, numberOfRowsInSection inSection: Int) -> Int { timeSlots.count }
 
+     /// Presents a local start time, meeting count, and accessible selection state.
      func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
           let cell = inTableView.dequeueReusableCell(withIdentifier: "meeting-time", for: inIndexPath)
           cell.backgroundColor = Self.backgroundColor
@@ -502,6 +596,7 @@ extension VMF_DayTimeSelectionViewController: UITableViewDataSource, UITableView
           return cell
      }
 
+     /// Opens the chosen weekday/start time in the main screen and dismisses the picker.
      func tableView(_ inTableView: UITableView, didSelectRowAt inIndexPath: IndexPath) {
           guard timeSlots.indices.contains(inIndexPath.row) else { return }
           mainController?.openTo(dayIndex: selectedDayIndex, time: timeSlots[inIndexPath.row])

@@ -35,10 +35,6 @@
 // MARK: -
 // MARK: - COMMON -
 
-/* We replace 1200 with the word "Noon" */
-"SLUG-NOON-TIME"                                  =    "Noon";
-/* We replace 2359 with the word "Midnight" */
-"SLUG-MIDNIGHT-TIME"                              =    "Midnight";
 /* General-Purpose Back Button */
 "SLUG-BACK"                                       =    "Back";
 /* This is used for the add event action sheet line. */
@@ -67,7 +63,7 @@
 
 /* The name of the screen */
 "SLUG-TAB-0-TITLE"                                =    "Find meetings";
-/* This is the Title for the time display, when we have selected the "Now" segmented switch item. */
+/* Navigation title while displaying meetings in progress. */
 "SLUG-IN-PROGRESS"                                =    "In Progress";
 /* This is the Text Field "placeholder" text, for when the Main Screen is in Text Search Mode. */
 "SLUG-SEARCH-PLACEHOLDER"                         =    "Enter a meeting name";
@@ -78,10 +74,7 @@
 /* This is displayed in a little label, at the bottom of the screen, as instruction. */
 "SLUG-SWIPE-LABEL-TEXT"                           =    "← Swipe to change time →";
 
-/* This is the title for the segmented switch segment, for in-progress meetings, in the Main Screen.
-
-   NOTE TO TRANSLATOR: This needs to be very short. It will cause the segment it occupies to expand, horizontally. It is only one of nine, so it can't be too big.
- */
+/* Short title for the Now button in the day/time popover. */
 "SLUG-NOW"                                        =    "Now";
 
 // MARK: - MEETING INSPECTOR SCREEN -
@@ -116,17 +109,6 @@
 "SLUG-PHONE-BUTTON"                               =    "Phone";
 /* This is displayed under the globe icon, in the Meeting Inspector. */
 "SLUG-GLOBE-BUTTON"                               =    "Web";
-
-/* One of these is displayed under the video icon, in the Meeting Inspector. They denote the particular app that will be opened, by selecting the icon.
-
-   NOTE TO TRANSLATOR: These are corporate trade names. If there are no localized well-known substitutes, leave the English names.
- */
-"SLUG-DIRECT-URI-ZOOM"                            =    "Zoom";
-"SLUG-DIRECT-URI-GOTOMEETING"                     =    "GoToMeeting";
-"SLUG-DIRECT-URI-SKYPE"                           =    "Skype";
-"SLUG-DIRECT-URI-MEET"                            =    "Google Meet";
-"SLUG-DIRECT-URI-DISCORD"                         =    "Discord";
-"SLUG-DIRECT-URI-JITSI"                           =    "Jitsi Meet";
 
 /* This message is displayed for Mac Catalyst, when the user clicks on the "Web" icon, for a Zoom meeting. Apple does not allow direct Zoom access (because of the app download). */
 
@@ -190,8 +172,6 @@
 // MARK: -
 // MARK: - MAIN SCREEN -
 
-/* This is the label for the Bar Button item that selects the "I Attend" Screen. */
-"SLUG-ACC-TAB-1-BUTTON-LABEL"                   =    "My attendance";
 /* This is the hint for the Bar Button item that selects the "I Attend" Screen. */
 "SLUG-ACC-TAB-1-BUTTON-HINT"                    =    "Shows the meetings you’ve marked as ones you attend.";
 
@@ -200,55 +180,23 @@
 /* This is the hint for the Bar Button item that selects the Settings Screen. */
 "SLUG-ACC-SETTINGS-BUTTON-HINT"                 =    "Opens the app’s settings.";
 
-/* This is the label for the Bar Button item that opens the Control Panel (When closed). */
-"SLUG-ACC-DISCLOSURE-BUTTON-CLOSED-LABEL"       =    "Show day and time controls";
-/* This is the hint for the Bar Button item that opens the Control Panel (When closed). */
-"SLUG-ACC-DISCLOSURE-BUTTON-CLOSED-HINT"        =    "Opens controls for choosing a day and time.";
-
-/* This is the label for the Bar Button item that opens the Control Panel (When closed). */
-"SLUG-ACC-DISCLOSURE-BUTTON-OPEN-LABEL"         =    "Hide day and time controls";
-/* This is the hint for the Bar Button item that opens the Control Panel (When closed). */
-"SLUG-ACC-DISCLOSURE-BUTTON-OPEN-HINT"          =    "Closes the day and time controls.";
-
-/* This is the label for the segmented switch at the top of the Main Screen. */
-"SLUG-ACC-WEEKDAY-SWITCH-LABEL"                 =    "Choose a day or search";
-/* This is the hint for the segmented switch at the top of the Main Screen. */
-"SLUG-ACC-WEEKDAY-SWITCH-HINT"                  =    "Show meetings in progress, choose a day, or search by meeting name.";
-
 /* The individual segment label for the in-progress (Now) segment */
 "SLUG-ACC-WEEKDAY-SWITCH-0-LABEL"               =    "Meetings in progress";
 /* The individual segment hint for the in-progress (Now) segment */
 "SLUG-ACC-WEEKDAY-SWITCH-0-HINT"                =    "Shows meetings happening now.";
-
-/* The label for each weekday segment. The placeholder (%@) is replaced by the weekday represented by that segment. */
-"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-LABEL-FORMAT"  =    "Meetings: %@";
-/* The hint for each weekday segment. The placeholder is replaced by the weekday represented by that segment. */
-"SLUG-ACC-WEEKDAY-SWITCH-WEEKDAY-HINT-FORMAT"   =    "Shows meetings held on this day of the week: %@.";
 
 /* The individual segment label for the search segment */
 "SLUG-ACC-WEEKDAY-SWITCH-8-LABEL"               =    "Search by meeting name";
 /* The individual segment hint for the search segment */
 "SLUG-ACC-WEEKDAY-SWITCH-8-HINT"                =    "Opens the meeting name search.";
 
-/* This is the label for the enter search text text field. */
-"SLUG-ACC-ENTER-SEARCH-TEXT-LABEL"              =    "Meeting name";
 /* This is the hint for the enter search text text field. */
 "SLUG-ACC-ENTER-SEARCH-TEXT-HINT"               =    "Shows meetings whose names contain the text you enter.";
 
 /* This is the label for the close search mode button. */
 "SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL"            =    "Close search";
-/* This is the label for the close search mode button. */
+/* Hint for returning from name search to day/time browsing. */
 "SLUG-ACC-CLOSE-SEARCH-BUTTON-HINT"             =    "Returns to choosing meetings by day and time.";
-
-/* This is the label for the decrement (left) time button. */
-"SLUG-ACC-LEFT-BUTTON-LABEL"                    =    "Earlier time";
-/* This is the hint for the decrement (left) time button. */
-"SLUG-ACC-LEFT-BUTTON-HINT"                     =    "Shows meetings in the previous time slot.";
-
-/* This is the label for the increment (right) time button. */
-"SLUG-ACC-RIGHT-BUTTON-LABEL"                   =    "Later time";
-/* This is the hint for the increment (right) time button. */
-"SLUG-ACC-RIGHT-BUTTON-HINT"                    =    "Shows meetings in the next time slot.";
 
 /* Label for the navigation title button that opens the day/time popover. Its value is the displayed day/time or mode. */
 "SLUG-ACC-DAY-TIME-BUTTON-LABEL"                 =    "Day and time";
@@ -273,26 +221,6 @@
 "SLUG-ACC-SELECT-TIME-HINT"                      =    "Shows meetings at this time and closes the day and time popover.";
 /* Shown in the popover when a weekday has no available start times. */
 "SLUG-NO-MEETING-TIMES"                         =    "No meeting times are available for this day.";
-
-/* This is the label for the weekday/time label. */
-"SLUG-ACC-TIME-DISPLAY-LABEL"                   =    "Day and time";
-/* This is the hint for the weekday/time label. */
-"SLUG-ACC-TIME-DISPLAY-HINT"                    =    "The selected day and start time for the meetings below.";
-
-/* This is the label for the selected-time progress bar, below the segmented switch. */
-"SLUG-ACC-COMPLETION-DISPLAY-LABEL"             =    "Selected time of day";
-/* This is the hint for the selected-time progress bar, below the segmented switch. */
-"SLUG-ACC-COMPLETION-DISPLAY-HINT"              =    "Shows the selected time’s position in the day. Earlier times are on the left, later times on the right.";
-
-/* This is the label for the day/time picker. */
-"SLUG-ACC-DIRECT-PICKER-LABEL"                  =    "Choose day and time";
-/* This is the hint for the day/time picker. */
-"SLUG-ACC-DIRECT-PICKER-HINT"                   =    "Choose a day of the week and a meeting start time.";
-
-/* This is the label for the day/time picker. */
-"SLUG-ACC-DIRECT-EXIT-LABEL"                    =    "Back to time controls";
-/* This is the hint for the day/time picker. */
-"SLUG-ACC-DIRECT-EXIT-HINT"                     =    "Returns to the day and time controls.";
 
 // MARK: - MEETING INSPECTOR SCREEN -
 
@@ -341,8 +269,6 @@
 /* This hint is applied to the Web icon button in the Meeting Inspector Screen */
 "SLUG-ACC-WEB-MI-HINT"                          =    "Opens the meeting link in your browser or a supported app.";
 
-/* This label is applied to the video icon button in the Meeting Inspector Screen */
-"SLUG-ACC-VIDEO-MI-LABEL-FORMAT"                =    "Open in %@";
 /* This hint is applied to the video icon button in the Meeting Inspector Screen */
 "SLUG-ACC-VIDEO-MI-HINT-FORMAT"                 =    "Opens this meeting in %@.";
 
@@ -378,19 +304,29 @@
 
 // MARK: - SETTINGS SCREEN -
 
-/* This is the label for the switch to enable/disable Service meeting filtering. */
-"SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL"        =    "Hide service meetings";
 /* This is the hint for the switch to enable/disable Service meeting filtering. */
 "SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT"         =    "Hides meetings identified as NA service or business meetings. Some may still appear.";
 
-/* This is the label for the "About This App" button. */
-"SLUG-ACC-ABOUT-BUTTON-LABEL"                   =    "About this app";
 /* This is the hint for the "About This App" button. */
 "SLUG-ACC-ABOUT-BUTTON-HINT"                    =    "Shows app information and helpful links.";
 
 // MARK: -
 
-/* Spoken label for the checkmark beside a meeting marked as attended. */
-"SLUG-ACC-ATTEND-IMAGE-ON-LABEL" =    "I attend this meeting";
-/* Spoken explanation of the attendance checkmark. */
-"SLUG-ACC-ATTEND-IMAGE-ON-HINT" =    "You’ve added this meeting to your attendance list.";
+// MARK: - SHARED ACCESSIBILITY ACTIONS AND STATES -
+
+"SLUG-ACC-OPEN-WEBSITE-HINT" = "Opens this website in your browser.";
+"SLUG-ACC-BACK-HINT" = "Returns to the previous screen.";
+"SLUG-ACC-MEETING-ROW-HINT" = "Shows joining details, meeting formats, and location information.";
+"SLUG-ACC-ADD-ATTENDANCE" = "Add to my attendance";
+"SLUG-ACC-REMOVE-ATTENDANCE" = "Remove from my attendance";
+"SLUG-ACC-REFRESH-LABEL" = "Refresh meetings";
+"SLUG-ACC-REFRESH-HINT" = "Downloads an updated meeting list.";
+"SLUG-ACC-LATEST-TIME-LABEL" = "Select latest start at or before now";
+"SLUG-ACC-LATEST-TIME-HINT" = "Offers an action to select the latest available start at or before now.";
+"SLUG-ACC-ON" = "On";
+"SLUG-ACC-OFF" = "Off";
+"SLUG-ACC-EXPANDED" = "Expanded";
+"SLUG-ACC-COLLAPSED" = "Collapsed";
+"SLUG-ACC-EXPAND-SECTION-HINT" = "Shows the details in this section.";
+"SLUG-ACC-COLLAPSE-SECTION-HINT" = "Hides the details in this section.";
+"SLUG-ACC-MAP-HINT" = "Shows this meeting’s in-person location. Use Share meeting for map app options.";

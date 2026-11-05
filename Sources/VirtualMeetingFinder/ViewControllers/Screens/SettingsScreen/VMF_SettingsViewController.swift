@@ -25,15 +25,9 @@ import RVS_Generic_Swift_Toolbox
 // MARK: - Settings View Controller -
 /* ###################################################################################################################################### */
 /**
- This displays the settings screen.
- 
- NOTE: You will see a double-tap gesture recognizer in the IB file.
- 
- This "eats" double-taps. It prevents the switch from doing an "about face," if the user is too fast.
- 
- The single-tap gesture recognizer does the same thing, but is the principal trigger.
- 
- We use gesture recognizers, instead of controls. Messes with the accessibility a bit, but the delay in responding, means that the user can accidentally trigger multiple switches.
+ Edits the local service-meeting filter and opens the About screen.
+ The checkbox handles touch and accessibility activation through its value-changed action.
+ Its adjacent title also toggles the setting for sighted users; VoiceOver exposes one control.
  */
 class VMF_SettingsViewController: VMF_BaseViewController {
      /* ################################################################## */
@@ -41,8 +35,6 @@ class VMF_SettingsViewController: VMF_BaseViewController {
       The bar button item that takes you to the about screen.
       */
      @IBOutlet weak var infoBarButtonItem: UIBarButtonItem?
-     
-     @IBOutlet weak var filterServiceMeetingsSwitchContainer: UIView?
      
      /* ################################################################## */
      /**
@@ -55,17 +47,6 @@ class VMF_SettingsViewController: VMF_BaseViewController {
       The switch, that, if on, means that Service meetings will be removed from the data.
       */
      @IBOutlet weak var filterServiceMeetingsSwitch: UISwitch?
-     
-     /* ################################################################## */
-     /**
-      */
-     @IBOutlet weak var singleTapGestureRecognizer: UITapGestureRecognizer?
-     
-     /* ################################################################## */
-     /**
-      This is used to prevent double-taps.
-      */
-     @IBOutlet weak var doubleTapEaterGestureRecognizer: UITapGestureRecognizer?
      
      /* ################################################################## */
      /**
@@ -82,15 +63,14 @@ extension VMF_SettingsViewController {
      /**
       Called when either the label or switch to filter Service meetings is hit.
       
-      - parameter: ignored
+      - parameter inSender: The checkbox (already toggled), or its title button.
       */
-     @IBAction func filterServiceMeetingsHit(_: Any) {
+     @IBAction func filterServiceMeetingsHit(_ inSender: Any) {
           selectionHaptic()
-          let newValue = !(filterServiceMeetingsSwitch?.isOn ?? true)
+          let newValue = inSender is UISwitch ? (filterServiceMeetingsSwitch?.isOn ?? true) : !(filterServiceMeetingsSwitch?.isOn ?? true)
           filterServiceMeetingsSwitch?.setOn(newValue, animated: true)
-          filterServiceMeetingsSwitch?.isEnabled = false
           VMF_AppDelegate.prefs.excludeServiceMeetings = newValue
-          filterServiceMeetingsSwitch?.isEnabled = true
+          filterServiceMeetingsSwitch?.accessibilityValue = (newValue ? "SLUG-ACC-ON" : "SLUG-ACC-OFF").localizedVariant
      }
 }
 
@@ -105,16 +85,16 @@ extension VMF_SettingsViewController {
      override func viewDidLoad() {
           super.viewDidLoad()
           
-          guard let dtg = doubleTapEaterGestureRecognizer else { return }
-          singleTapGestureRecognizer?.require(toFail: dtg)
-          
-          infoBarButtonItem?.accessibilityLabel = "SLUG-ACC-ABOUT-BUTTON-LABEL".localizedVariant
+          infoBarButtonItem?.accessibilityLabel = "SLUG-ABOUT-SCREEN-TITLE".localizedVariant
           infoBarButtonItem?.accessibilityHint = "SLUG-ACC-ABOUT-BUTTON-HINT".localizedVariant
-          filterServiceMeetingsSwitchContainer?.accessibilityLabel = "SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL".localizedVariant
-          filterServiceMeetingsSwitchContainer?.accessibilityHint = "SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT".localizedVariant
+          filterServiceMeetingsSwitch?.accessibilityLabel = "SLUG-FILTER-SERVICE-MEETINGS".localizedVariant
+          filterServiceMeetingsSwitch?.accessibilityHint = "SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT".localizedVariant
           
           filterServiceMeetingsLabelButton?.setTitle(filterServiceMeetingsLabelButton?.title(for: .normal)?.localizedVariant, for: .normal)
           filterServiceMeetingsSwitch?.isOn = VMF_AppDelegate.prefs.excludeServiceMeetings
+          filterServiceMeetingsSwitch?.accessibilityValue = (VMF_AppDelegate.prefs.excludeServiceMeetings ? "SLUG-ACC-ON" : "SLUG-ACC-OFF").localizedVariant
+          filterServiceMeetingsLabelButton?.isAccessibilityElement = false
+          filterServiceMeetingsLabelButton?.accessibilityElementsHidden = true
           filterServiceMeetingsExplainLabel?.text = filterServiceMeetingsExplainLabel?.text?.localizedVariant
      }
 }

@@ -1,53 +1,95 @@
 # ``We_Are_Never_Alone``
 
-![Icon](icon.png)
-
-An app that makes it simple to discover and attend virtual (and hybrid) NA meetings.
+Discover and attend virtual and hybrid Narcotics Anonymous meetings in your local time zone.
 
 ## Overview
 
-This app works by downloading a large list of virtual (and hybrid) meetings from a worldwide database, then presents them to the user, in a form that is directly useful to the user.
+![We Are Never Alone app icon](icon.png)
 
-## Usage
+We Are Never Alone is a UIKit app for iPhone, iPad, and Mac Catalyst. It downloads
+meetings with a virtual component through SwiftBMLSDK and presents their schedules
+in the user's current time zone. This catalog documents the app's implementation
+for contributors; it is not a standalone SDK.
 
-This app connects to an instance of [`LGV_MeetingServer`](https://github.com/LittleGreenViper/LGV_MeetingServer), and downloads the entire dataset for all meetings that have a virtual component (Either full virtual, or hybrid Virtual/in-Person). It either does this, when starting "cold," after 4 hours have passed, or at the user's behest (by doing a "pull-to refresh" on the table).
+### Find a meeting
 
-It then converts the meeting start and end times to the user's current timezone, and presents the meetings as a list, segregated by the weekday, and meeting start time. The user can use a couple of simple controls to select a day and start time for the meeting.
+The main screen starts with meetings in progress. Select the **Day and time**
+navigation title to open a popover containing weekday selection, a scrolling list
+of available start times and meeting counts, **Now**, and meeting-name search.
+Weekdays follow the user's calendar order. Selecting a time shows those meetings
+and closes the popover.
 
-Each meeting can be inspected individually, in order to see things like formats, in-person addresses, and virtual URLs. Also, if the user has an app installed (for example, [Zoom](https://zoom.us)), and the meeting has a join URL, the app will translate it to that app's URL scheme, and open the app directly (without having to go through Safari).
+Search filters the main table as the query changes. **Show results**, the keyboard's
+Search key, or dismissing the popover leaves the results visible. Reopening the
+popover retains the query. Search ignores case, accents, character width, and
+equivalent Latin glyphs such as ligatures.
 
-Users can select a meeting as one they attend, which allows those meetings to be grouped into a separate screen.
+Outside search, swiping the meeting list moves through adjacent start times,
+skipping empty days and wrapping the week. The first swipe from Now selects the
+latest available start at or before the current local time.
 
-## The Specifics
+### Inspect and save
 
-### The Screens
+Select a meeting to inspect its schedule, joining options, formats, and any
+in-person location. Supported meeting apps appear when the app can open them;
+web and phone options depend on the meeting's supplied connection details.
 
-#### The Main Screen
+**I attend** saves a meeting ID locally. The main screen's attendance button opens
+the saved list when it is nonempty. These selections do not synchronize between
+devices. The inspector's share sheet can share the meeting link, prepare a weekly
+calendar event for review, or open available map apps. The separate **Open in
+Recovrr** button appears when Recovrr can be opened.
 
-![Main Screen](fig01.png)
+Settings controls whether recognized service meetings are hidden from weekday and
+name-search results. About provides the app version, privacy information, source,
+and dependency links.
 
-The Main Screen presents a list of meetings, surmounted by a segmented switch that allows the user to select a weekday (or mode), and a bar that allows the user to select a time.
+## Topics
 
-#### The Attendance Screen
+### Contributor Guides
 
-![Attendance Screen](fig02.png)
+- <doc:Architecture>
+- <doc:BuildingDocumentation>
+- <doc:AccessibilityAndLocalization>
 
-If the user has selected one or more meetings as ones they attend, a bar button enables in the Main Screen, allowing the user to bring in another screen, with just the meetings they marked as ones they attend.
+### App Lifecycle and Data
 
-#### The Meeting Inspector Screen
+- ``VMF_AppDelegate``
+- ``VMF_SceneDelegate``
+- ``VMF_Persistent_Prefs``
+- ``MeetingInstance``
 
-![Meeting Inspector Screen](fig03.png)
+### Meeting Screens
 
-If the user selects a single meeting from the list, another screen is brought in, that displays specific and detailed information about that meeting.
+- ``VMF_MainViewController``
+- ``VMF_DayTimeSelectionViewController``
+- ``VMF_DayTimeSearchPageViewController``
+- ``VMF_AttendanceViewController``
+- ``VMF_MeetingInspectorViewController``
+- ``VMF_SettingsViewController``
+- ``VMF_AboutViewController``
 
-#### The Settings Screen
+### Shared Views and Coordination
 
-![Settings Screen](fig04.png)
+- ``VMF_BaseViewController``
+- ``VMF_BaseProtocol``
+- ``VMF_MasterTableControllerProtocol``
+- ``VMF_EmbeddedTableControllerProtocol``
+- ``VMF_EmbeddedTableController``
+- ``VMF_TableCell``
+- ``VMF_ActionView``
+- ``VMF_ActionStackView``
+- ``VMF_URLButton``
+- ``VMF_RecovrrButton``
+- ``VMF_DisappearingBarButton``
+- ``VMF_StyledSegmentedControl``
+- ``VMF_DayTimePopoverBackgroundView``
+- ``VMF_MapAnnotation``
+- ``VMF_MapMarker``
 
-This is a screen that is brought in from the Main Screen, that allows the user to specify various settings.
+### Share-Sheet Activities
 
-#### The About This App Screen
-
-![About Screen](fig05.png)
-
-This is another screen that is brought in from the Settings Screen, that has information about the app, such as its specific version, and links to dependencies.
+- ``VMF_Base_Activity``
+- ``VMF_AddToCalendar_Activity``
+- ``VMF_OpenLocationIn_Activity``
+- ``VMF_OpenInRecovrr_Activity``

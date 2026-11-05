@@ -28,19 +28,19 @@ import UIKit
 class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
      /* ################################################################## */
      /**
-      If it's been over this many seconds since our last load, we force a new load, the next time we open.
+      The background interval after which the main screen considers its meeting collection stale (four hours).
       */
      static let forceReloadDelayInSeconds = TimeInterval(60 * 60 * 4)
      
      /* ################################################################## */
      /**
-      This is set to the last time we loaded.
-      While the app is up in the foreground, we won't be forcing a reload, but we will, if it enters the background, then comes back.
+      Records entry into the background. Distant future suppresses age-based reloads in the foreground.
       */
      static var lastReloadTime = Date.distantPast
      
      /* ################################################################## */
      /**
+      The pending meeting ID from an incoming link; zero means no meeting is pending.
       */
      static var urlMeetingID = Int(0)
 
@@ -74,7 +74,7 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
       
       Dismisses the day/time popover before suspension and records when the app was backgrounded.
       
-      - parameter: The scene instance (ignored).
+      The scene parameter is unused.
       */
      func sceneDidEnterBackground(_: UIScene) {
           VMF_AppDelegate.mainScreenController?.dismissDayTimeSelectionPopover()
@@ -85,7 +85,7 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
      /**
       Releases any startup cover when its scene is disconnected.
 
-      - parameter: The scene instance (ignored).
+      The scene parameter is unused.
       */
      func sceneDidDisconnect(_: UIScene) {
           _removeLaunchScreen()
@@ -97,7 +97,7 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
       
       We use this to show the meetings that are in progress, just like the Now button.
       
-      - parameter: The scene instance (ignored).
+      The scene parameter is unused.
       */
      func sceneWillEnterForeground(_: UIScene) {
           Self.sceneDelegateInstance = self
@@ -120,10 +120,10 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
      /**
       Called when the app is foregrounded via a URL.
       
-      - parameter: The scene instance (ignored).
-      - parameter openURLContexts: The Opening URL contexts (as a set).
+      - parameter inScene: The scene (unused).
+      - parameter inURLContexts: The incoming URL contexts.
       */
-     func scene(_: UIScene, openURLContexts inURLContexts: Set<UIOpenURLContext>) {
+     func scene(_ inScene: UIScene, openURLContexts inURLContexts: Set<UIOpenURLContext>) {
           inURLContexts.forEach { resolveURL($0.url) }
      }
      

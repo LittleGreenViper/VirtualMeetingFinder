@@ -4,7 +4,7 @@
  
  MIT License
  
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentationmap
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
  files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
  modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
  Software is furnished to do so, subject to the following conditions:
@@ -66,7 +66,7 @@ extension VMF_MainViewController {
      func updateDayTimeSelectionButton() {
           let selectionTitle = isNameSearchMode
                ? "SLUG-SEARCH-MODE-TITLE".localizedVariant
-               : (tableDisplayController as? UIViewController)?.title ?? "SLUG-ACC-DIRECT-PICKER-LABEL".localizedVariant
+               : (tableDisplayController as? UIViewController)?.title ?? "SLUG-ACC-DAY-TIME-BUTTON-LABEL".localizedVariant
           dayTimeSelectionButton.setTitle(selectionTitle, for: .normal)
           dayTimeSelectionButton.accessibilityValue = isNameSearchMode ? "SLUG-ACC-WEEKDAY-SWITCH-8-LABEL".localizedVariant : selectionTitle
           dayTimeSelectionButton.sizeToFit()
@@ -216,11 +216,11 @@ extension VMF_MainViewController {
      /**
       This returns a new destination controller to use for transitions.
       
-      NOTE: If the controller is in text search mode, then the name search controller is returned.
+      NOTE: If the controller is in text search mode, the same table controller displays the matching name-search results.
       
-      - parameter inDayIndex: The 0-based "day index." If it is 0, though, it is the "in-progress" display.
+      - parameter inDayIndex: The Sunday-based weekday (1 through 7), or 0 for meetings in progress.
       - parameter inTimeIndex: The 0-based time index. This is the index of the currently selected time slot.
-      - returns: A new (or reused) view controller, for the destination of the transition.
+      - returns: A newly instantiated meeting table, or nil if the storyboard cannot provide it.
       */
      func getTableDisplay(for inDayIndex: Int, time inTimeIndex: Int) -> VMF_EmbeddedTableController? {
          let dayIndex = max(0, min(organizedMeetings.count, inDayIndex))
@@ -282,9 +282,9 @@ extension VMF_MainViewController {
       
       NOTE: If the controller is in text search mode, then the search set is returned.
       
-      - parameter inDayIndex: The 0-based "day index." If it is 0, though, it is the "in-progress" display.
+      - parameter inDayIndex: The Sunday-based weekday (1 through 7), or 0 for meetings in progress.
       - parameter inTimeIndex: The 0-based time index. This is the index of the currently selected time slot.
-      - returns: A new (or reused) view controller, for the destination of the transition.
+      - returns: The matching meetings in name, in-progress, or weekday/time order.
       */
      func getCurentMeetings(for inDayIndex: Int = 0, time inTimeIndex: Int = 0) -> [MeetingInstance] {
           var meetings = [MeetingInstance]()
@@ -402,6 +402,7 @@ extension VMF_MainViewController {
           popover.permittedArrowDirections = .up
           popover.backgroundColor = VMF_DayTimeSelectionViewController.backgroundColor
           popover.popoverBackgroundViewClass = VMF_DayTimePopoverBackgroundView.self
+          hardImpactHaptic()
           present(controller, animated: true)
      }
 
@@ -438,7 +439,7 @@ extension VMF_MainViewController {
           VMF_AppDelegate.mainScreenController = self
           swipeLabel?.text = swipeLabel?.text?.localizedVariant
           myAttendanceBarButtonItem?.isAccessibilityElement = true
-          myAttendanceBarButtonItem?.accessibilityLabel = "SLUG-ACC-TAB-1-BUTTON-LABEL".localizedVariant
+          myAttendanceBarButtonItem?.accessibilityLabel = "SLUG-TAB-1-TITLE".localizedVariant
           myAttendanceBarButtonItem?.accessibilityHint = "SLUG-ACC-TAB-1-BUTTON-HINT".localizedVariant
           settingsBarButtonItem?.isAccessibilityElement = true
           settingsBarButtonItem?.accessibilityLabel = "SLUG-ACC-SETTINGS-BUTTON-LABEL".localizedVariant

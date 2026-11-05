@@ -53,9 +53,9 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ecF-pT-urt" userLabel="Filter Service Meetings Switch Container">
                                                         <rect key="frame" x="0.0" y="0.0" width="344" height="30"/>
                                                         <subviews>
-                                                            <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUr-un-v6W" customClass="RVS_Checkbox" customModule="RVS_Checkbox">
+                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUr-un-v6W" customClass="RVS_Checkbox" customModule="RVS_Checkbox">
                                                                 <rect key="frame" x="0.0" y="1" width="30" height="28"/>
-                                                                <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL"/>
+                                                                <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-FILTER-SERVICE-MEETINGS"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="bUr-un-v6W" secondAttribute="height" multiplier="1:1" id="roc-Gl-1cE"/>
                                                                 </constraints>
@@ -67,14 +67,20 @@
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="useHaptics" value="YES"/>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="useOffImageForClear" value="NO"/>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="filterServiceMeetingsHit:" destination="XMo-Ja-Ohb" eventType="valueChanged" id="AX-bUr-un-v6W-action"/>
+                                                                </connections>
                                                             </switch>
-                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZa-E4-u9W">
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZa-E4-u9W">
                                                                 <rect key="frame" x="32" y="0.0" width="312" height="30"/>
-                                                                <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL"/>
+                                                                <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-FILTER-SERVICE-MEETINGS"/>
                                                                 <gestureRecognizers/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" title="SLUG-FILTER-SERVICE-MEETINGS"/>
+                                                                <connections>
+                                                                    <action selector="filterServiceMeetingsHit:" destination="XMo-Ja-Ohb" eventType="touchUpInside" id="AX-tZa-E4-u9W-action"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <gestureRecognizers/>
@@ -82,10 +88,6 @@
                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="346" id="6l4-Wa-RTq"/>
                                                             <constraint firstAttribute="height" constant="30" id="gIT-WS-xeD"/>
                                                         </constraints>
-                                                        <connections>
-                                                            <outletCollection property="gestureRecognizers" destination="3rS-Sq-LVu" appends="YES" id="cIP-xN-nfW"/>
-                                                            <outletCollection property="gestureRecognizers" destination="3yv-XV-WKn" appends="YES" id="qhK-Xa-ig7"/>
-                                                        </connections>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="SLUG-FILTER-SERVICE-MEETINGS-EXPLAIN" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ayw-H0-aQQ">
                                                         <rect key="frame" x="18" y="34" width="308" height="671"/>
@@ -130,27 +132,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="doubleTapEaterGestureRecognizer" destination="3yv-XV-WKn" id="t6s-UH-z8M"/>
                         <outlet property="filterServiceMeetingsExplainLabel" destination="Ayw-H0-aQQ" id="V1u-EI-9bp"/>
                         <outlet property="filterServiceMeetingsLabelButton" destination="tZa-E4-u9W" id="HSZ-y2-YDi"/>
                         <outlet property="filterServiceMeetingsSwitch" destination="bUr-un-v6W" id="hkg-CO-kd5"/>
-                        <outlet property="filterServiceMeetingsSwitchContainer" destination="ecF-pT-urt" id="q21-AS-Wiz"/>
                         <outlet property="infoBarButtonItem" destination="Yoa-G1-2C2" id="KxB-sa-ggP"/>
-                        <outlet property="singleTapGestureRecognizer" destination="3rS-Sq-LVu" id="b7t-LT-KTX"/>
                         <outlet property="view" destination="h03-aE-qcW" id="zE9-Gc-kQV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qzb-WU-C37" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer numberOfTapsRequired="2" id="3yv-XV-WKn" userLabel="Service Filter Double-Tap Gesture Recognizer">
-                    <connections>
-                        <action selector="filterServiceMeetingsHit:" destination="XMo-Ja-Ohb" id="lri-ua-Wgh"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="3rS-Sq-LVu" userLabel="Service Filter Tap Gesture Recognizer">
-                    <connections>
-                        <action selector="filterServiceMeetingsHit:" destination="XMo-Ja-Ohb" id="jna-8Q-0mO"/>
-                    </connections>
-                </tapGestureRecognizer>
+
             </objects>
             <point key="canvasLocation" x="893.89312977099235" y="-718.30985915492965"/>
         </scene>
@@ -762,7 +752,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" distribution="fillEqually" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="hZz-Uk-7C5">
                                                         <rect key="frame" x="0.0" y="0.0" width="329" height="54"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="19P-e9-Hru">
+                                                            <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="19P-e9-Hru" customClass="VMF_ActionView" customModule="We_Are_Never_Alone" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="83" height="54"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Phone" translatesAutoresizingMaskIntoConstraints="NO" id="8HS-i2-77k">
@@ -798,7 +788,7 @@
                                                                     <outletCollection property="gestureRecognizers" destination="gv2-Fa-aaE" appends="YES" id="HPO-Z0-qme"/>
                                                                 </connections>
                                                             </view>
-                                                            <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="zgI-lN-ptg">
+                                                            <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="zgI-lN-ptg" customClass="VMF_ActionView" customModule="We_Are_Never_Alone" customModuleProvider="target">
                                                                 <rect key="frame" x="123" y="0.0" width="83" height="54"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Globe" translatesAutoresizingMaskIntoConstraints="NO" id="xxJ-Ri-d4y">
@@ -834,7 +824,7 @@
                                                                     <outletCollection property="gestureRecognizers" destination="pWp-Sv-bjz" appends="YES" id="hrC-YU-PBQ"/>
                                                                 </connections>
                                                             </view>
-                                                            <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="kmx-b1-5vF">
+                                                            <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="kmx-b1-5vF" customClass="VMF_ActionView" customModule="We_Are_Never_Alone" customModuleProvider="target">
                                                                 <rect key="frame" x="246" y="0.0" width="83" height="54"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Video" translatesAutoresizingMaskIntoConstraints="NO" id="IOc-dH-mgm">
@@ -908,7 +898,7 @@
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="64m-m1-rdV">
+                                            <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="64m-m1-rdV" customClass="VMF_ActionStackView" customModule="We_Are_Never_Alone" customModuleProvider="target">
                                                 <rect key="frame" x="41.666666666666657" y="481" width="245.99999999999997" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="SLUG-FORMATS-HEADER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ml1-yq-PeL">
@@ -942,7 +932,7 @@
                                                 <rect key="frame" x="0.0" y="523" width="329" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="byn-Ac-E0k">
+                                            <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="byn-Ac-E0k" customClass="VMF_ActionStackView" customModule="We_Are_Never_Alone" customModuleProvider="target">
                                                 <rect key="frame" x="35.333333333333343" y="585" width="258.66666666666663" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" text="SLUG-IN-PERSON-HEADER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFw-NF-FXN">

@@ -73,3 +73,11 @@
 /* The URL to download the Zoom App */
 "SLUG-ZOOM-DOWNLOAD-URL"                          =    "https://zoom.us/download?os=mac";
 // MARK: -
+
+/* App-name keys returned dynamically by SwiftBMLSDK. Shared product names require no translation. */
+"SLUG-DIRECT-URI-ZOOM" = "Zoom";
+"SLUG-DIRECT-URI-GOTOMEETING" = "GoToMeeting";
+"SLUG-DIRECT-URI-SKYPE" = "Skype";
+"SLUG-DIRECT-URI-MEET" = "Google Meet";
+"SLUG-DIRECT-URI-DISCORD" = "Discord";
+"SLUG-DIRECT-URI-JITSI" = "Jitsi Meet";

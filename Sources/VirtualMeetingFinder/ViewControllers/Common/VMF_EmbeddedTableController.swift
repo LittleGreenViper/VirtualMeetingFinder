@@ -25,7 +25,7 @@ import RVS_Generic_Swift_Toolbox
 // MARK: - Base Protocol -
 /* ###################################################################################################################################### */
 /**
- Protocol for both owners and tables
+ Links an embedded meeting table to the screen that owns it.
  */
 protocol VMF_BaseProtocol: NSObjectProtocol {
      /* ################################################################## */
@@ -82,7 +82,7 @@ protocol VMF_EmbeddedTableControllerProtocol: VMF_BaseProtocol {
 // MARK: - Protocol for "Owners" of Table Display -
 /* ###################################################################################################################################### */
 /**
- Protocol for owners
+ Coordinates an embedded table, refresh requests, and attendance availability.
  */
 protocol VMF_MasterTableControllerProtocol: VMF_BaseProtocol {
      /* ################################################################## */
@@ -151,7 +151,7 @@ class VMF_TableCell: UITableViewCell {
      
      /* ################################################################## */
      /**
-      This has an image that denotes what type of meeting we have.
+      Shows an attendance checkmark for meetings saved in local preferences.
       */
      @IBOutlet weak var typeImage: UIImageView?
      
@@ -203,25 +203,6 @@ extension VMF_TableCell {
 }
 
 /* ###################################################################################################################################### */
-// MARK: Callbacks
-/* ###################################################################################################################################### */
-extension VMF_TableCell {
-     /* ################################################################## */
-     /**
-      Called when someone double-taps on the row.
-      
-      - parameter: ignored
-      */
-     @IBAction func doubleTapped(_: Any) {
-          guard let myController = myController,
-                let myMeeting = myMeeting
-          else { return }
-          setSelected(false, animated: false)
-          myController.attendanceChanged(myMeeting)
-     }
-}
-
-/* ###################################################################################################################################### */
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
 extension VMF_TableCell {
@@ -253,13 +234,10 @@ extension VMF_TableCell {
           
           if meeting.iAttend {
                typeImage?.image = UIImage(systemName: "checkmark.square.fill")
-               typeImage?.isAccessibilityElement = true
-               typeImage?.accessibilityLabel = "SLUG-ACC-ATTEND-IMAGE-ON-LABEL".localizedVariant
-               typeImage?.accessibilityHint = "SLUG-ACC-ATTEND-IMAGE-ON-HINT".localizedVariant
           } else {
-               typeImage?.isAccessibilityElement = false
                typeImage?.image = nil
           }
+          typeImage?.isAccessibilityElement = false
           
           let meetingName = meeting.name
           let timeZoneString = myController.getMeetingTimeZone(meeting)
@@ -311,6 +289,20 @@ extension VMF_TableCell {
                     nextStartTime
                )
           }
+
+          // Speak a row as one target, including information otherwise conveyed by color or a checkmark.
+          isAccessibilityElement = true
+          accessibilityTraits = .button
+          accessibilityLabel = [meetingName, timeAndDayLabel?.text, timeZoneString,
+                                inProgress ? inProgressString : nil]
+               .compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: ". ")
+          accessibilityValue = (meeting.iAttend ? "SLUG-ACC-I-ATTEND-BAR-BUTTON-LABEL" : "SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-LABEL").localizedVariant
+          accessibilityHint = "SLUG-ACC-MEETING-ROW-HINT".localizedVariant
+          accessibilityCustomActions = [UIAccessibilityCustomAction(name: (meeting.iAttend ? "SLUG-ACC-REMOVE-ATTENDANCE" : "SLUG-ACC-ADD-ATTENDANCE").localizedVariant) { [weak self] _ in
+               guard let self = self, let meeting = self.myMeeting, let controller = self.myController else { return false }
+               controller.attendanceChanged(meeting)
+               return true
+          }]
      }
 }
 
@@ -366,6 +358,8 @@ class VMF_EmbeddedTableController: VMF_BaseViewController, VMF_EmbeddedTableCont
                if !noRefresh,
                   nil == _refreshControl {
                     let refresh = UIRefreshControl()
+                    refresh.accessibilityLabel = "SLUG-ACC-REFRESH-LABEL".localizedVariant
+                    refresh.accessibilityHint = "SLUG-ACC-REFRESH-HINT".localizedVariant
                     refresh.addTarget(self, action: #selector(refreshPulled), for: .valueChanged)
                     _refreshControl = refresh
                     valueTable?.refreshControl = refresh
@@ -419,6 +413,8 @@ extension VMF_EmbeddedTableController {
           super.viewDidLoad()
           if !noRefresh {
                let refresh = UIRefreshControl()
+               refresh.accessibilityLabel = "SLUG-ACC-REFRESH-LABEL".localizedVariant
+               refresh.accessibilityHint = "SLUG-ACC-REFRESH-HINT".localizedVariant
                refresh.addTarget(self, action: #selector(refreshPulled), for: .valueChanged)
                _refreshControl = refresh
                valueTable?.refreshControl = refresh
@@ -515,7 +511,7 @@ extension VMF_EmbeddedTableController {
      /**
       The refresh has been triggered.
       
-      - parameter: Ignored (and can be omitted).
+      The sender is ignored.
       */
      @objc func refreshPulled(_: Any) {
           _refreshControl?.endRefreshing()
@@ -563,11 +559,11 @@ extension VMF_EmbeddedTableController: UITableViewDelegate {
      /* ################################################################## */
      /**
       Called just before the selection. We use this to trigger a haptic, and bring in the meeting.
-      - parameter: The table view (ignored)
-      - parameter willSelectRowAt: The index path of the row
+      - parameter inTableView: The table view (unused).
+      - parameter inIndexPath: The index path of the row
       - returns: The index path (always)
       */
-     func tableView(_: UITableView, willSelectRowAt inIndexPath: IndexPath) -> IndexPath? {
+     func tableView(_ inTableView: UITableView, willSelectRowAt inIndexPath: IndexPath) -> IndexPath? {
           selectionHaptic()
           selectMeeting(filteredMeetings[inIndexPath.row])
           return inIndexPath

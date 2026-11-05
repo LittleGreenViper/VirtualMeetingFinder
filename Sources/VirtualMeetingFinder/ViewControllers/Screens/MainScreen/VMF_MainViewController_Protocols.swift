@@ -4,7 +4,7 @@
  
  MIT License
  
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentationmap
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
  files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
  modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
  Software is furnished to do so, subject to the following conditions:
@@ -60,6 +60,7 @@ extension VMF_MainViewController {
 // MARK: UIPageViewControllerDataSource Conformance
 /* ###################################################################################################################################### */
 extension VMF_MainViewController: UIPageViewControllerDataSource {
+     /// Supplies the previous time-slot page, or the latest start before now when leaving Now.
      func pageViewController(_: UIPageViewController, viewControllerBefore inController: UIViewController) -> UIViewController? {
           guard !isNameSearchMode,
                 let page = inController as? VMF_EmbeddedTableController,
@@ -67,6 +68,7 @@ extension VMF_MainViewController: UIPageViewControllerDataSource {
           return getTableDisplay(for: slot.dayIndex, time: slot.timeIndex)
      }
 
+     /// Supplies the next time-slot page, using the same Now exit rule as backward paging.
      func pageViewController(_: UIPageViewController, viewControllerAfter inController: UIViewController) -> UIViewController? {
           guard !isNameSearchMode,
                 let page = inController as? VMF_EmbeddedTableController,

@@ -1,6 +1,6 @@
 # Meeting Data and Navigation
 
-Understand how the app loads meetings, maps local schedules, and coordinates its screens.
+Understand how the app loads meetings, maps local schedules, and coordinates its screens and widget.
 
 ## Overview
 
@@ -13,8 +13,8 @@ navigation styling, localization of accessibility tokens, and haptics.
 
 ``VMF_AppDelegate`` reads `VMF_BaseServerURI` from the app's Info.plist and creates
 a SwiftBMLSDK query. Its shared `virtualService` holds an in-memory collection of
-virtual and hybrid meetings. The fetch has a 30-second timeout. There is no
-persistent on-disk meeting cache in this app.
+virtual and hybrid meetings. The fetch has a 30-second timeout. The app's screens
+use this collection; a separate on-disk snapshot supplies the widget.
 
 ``VMF_MainViewController`` loads the collection when absent or empty and supports
 pull-to-refresh outside name search. Its age check uses a four-hour interval
@@ -59,6 +59,30 @@ The main screen also embeds a ``VMF_DayTimeSearchPageViewController`` for paging
 setting in local user defaults. Meeting helpers access this separate preference
 store without changing the SDK record. The attendance list places in-progress
 meetings first, then sorts by next occurrence and name.
+
+### Home Screen widget
+
+``VMF_WidgetBridge`` publishes meeting data and preference copies to the App Group
+`group.org.littlegreenviper.VMF`. Existing preferences remain in their original
+store. Attendance and service-filter setters request new widget timelines.
+
+The app uses SwiftBMLSDK's next/previous occurrence methods to export absolute
+start/end intervals for eight upcoming occurrences and any current meeting.
+DST is resolved by the SDK before export. The lightweight `VMFWidgets` extension
+selects those intervals and formats dates in the member's current timezone;
+it does not link the SDK, resolve recurrences, or perform its own downloads.
+
+Atomic JSON files separate the public meeting snapshot from attendance/filter
+preferences. A failed or empty SDK fetch preserves the last usable snapshot.
+After the cached occurrences expire, the widget asks the member to open the app.
+Timelines include start/end boundaries for up to four hours, with a bounded entry
+count. WidgetKit controls when requested timeline reloads are delivered.
+
+Medium displays one attended meeting. Larger sizes reserve space for attendance,
+then fill complete rows with in-progress meetings and, when these fit, upcoming
+meetings. The service filter applies to every widget section. An icon Link and
+the widget's default URL use `lgv-vmf://open`, which opens the app without selecting
+a meeting inspector.
 
 ### Meeting links and external actions
 

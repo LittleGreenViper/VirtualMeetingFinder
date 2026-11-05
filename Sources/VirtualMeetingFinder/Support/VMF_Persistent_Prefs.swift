@@ -77,7 +77,10 @@ extension VMF_Persistent_Prefs {
       */
      var attendance: [Int] {
           get { values[Keys.attendance.rawValue] as? [Int] ?? [] }
-          set { values[Keys.attendance.rawValue] = newValue }
+          set {
+               values[Keys.attendance.rawValue] = newValue
+               VMF_WidgetBridge.preferencesChanged(self)
+          }
      }
      
      /* ################################################################## */
@@ -86,7 +89,10 @@ extension VMF_Persistent_Prefs {
       */
      var excludeServiceMeetings: Bool {
           get { values[Keys.excludeServiceMeetings.rawValue] as? Bool ?? true }
-          set { values[Keys.excludeServiceMeetings.rawValue] = newValue }
+          set {
+               values[Keys.excludeServiceMeetings.rawValue] = newValue
+               VMF_WidgetBridge.preferencesChanged(self)
+          }
      }
      
 }

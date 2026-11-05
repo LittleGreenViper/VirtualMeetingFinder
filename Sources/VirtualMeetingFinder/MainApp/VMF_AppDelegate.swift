@@ -132,6 +132,7 @@ extension VMF_AppDelegate {
                Self._timer = nil
                DispatchQueue.main.async {
                     virtualService = inCollection
+                    VMF_WidgetBridge.publish(inCollection)
                     inCompletion(virtualService)
                }
           }
@@ -204,7 +205,10 @@ extension VMF_AppDelegate: UIApplicationDelegate {
       - parameter didFinishLaunchingWithOptions: Launch options (also ignored).
       - returns: True (always).
       */
-     func application(_ inApplication: UIApplication, didFinishLaunchingWithOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool { true }
+     func application(_ inApplication: UIApplication, didFinishLaunchingWithOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+          VMF_WidgetBridge.preferencesChanged(Self.prefs)
+          return true
+     }
      
      /* ################################################################## */
      /**

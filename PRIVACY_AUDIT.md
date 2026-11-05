@@ -25,8 +25,9 @@ Apple documents that persistent User Defaults databases are included in device b
 | Feature | Information and storage | Destination or access |
 | --- | --- | --- |
 | Meeting download | Public virtual and hybrid meeting records are held in the app's in-memory collection. The request uses a fixed virtual/hybrid filter. | HTTPS to `https://meetings.recovrr.org/entrypoint.php`, through SwiftBMLSDK. No attendance list, typed search, account token, app-generated user identifier or device location is added by this flow. The server sees connection/request metadata. |
-| Attendance | Array of selected meeting IDs in `UserDefaults.standard`, through RVS_PersistentPrefs. | App-local preferences; not supplied to the meeting request. Subject to the operating system's storage, backup and restore behavior. |
-| Settings | `excludeServiceMeetings` Boolean in the same preferences store. | Used locally to filter the downloaded collection. |
+| Attendance | Array of selected meeting IDs in `UserDefaults.standard`, through RVS_PersistentPrefs, with an on-device App Group file copy for the widget. | App-local preferences; not supplied to the meeting request. Subject to the operating system's storage, backup and restore behavior. |
+| Settings | `excludeServiceMeetings` Boolean in the same preferences store and the widget's App Group preference file. | Used locally to filter the downloaded collection and all widget sections. |
+| Home Screen widget | Public meeting names, source timezones, service flags, and SDK-resolved start/end intervals are cached in the on-device App Group. Attendance/filter choices are stored in a separate shared file. Files use protection until first unlock. | Shared only between the app and its extension; no new network request or attendance upload. Widget content may be visible on the member's Home Screen. |
 | Search, selected day/time and timezone conversion | Search text and navigation state are in memory; the device's timezone and calendar are used locally. | Meeting-name matching occurs against downloaded records, not through server searches. |
 | Hybrid meeting map | Public meeting coordinates and map region are passed to MapKit. | Apple map services may receive map requests. No app call to obtain the device's current location was found; the app does not request location permission. |
 | Open in Maps | Selected meeting coordinates, plus its name for Apple Maps. | Apple Maps, Google Maps or Waze, on the user's action. The Apple Maps link currently uses `http://maps.apple.com`; prefer HTTPS as a small hardening change. This audit did not establish whether the OS handles that link locally or makes an HTTP request. |
@@ -78,7 +79,7 @@ The Xcode dependency checkouts matched both resolved package files exactly:
 | --- | --- | --- |
 | SwiftBMLSDK | 1.5.7 | No collection or tracking declared. |
 | PhoneNumberKit | 5.0.13 | No collection or tracking declared; parses public meeting telephone numbers locally. |
-| RVS_PersistentPrefs | 1.17.0 | No collection or tracking; declares User Defaults reasons CA92.1 and 1C8F.1. The shared-group capability is not used by this app. |
+| RVS_PersistentPrefs | 1.17.0 | No collection or tracking; declares User Defaults reasons CA92.1 and 1C8F.1. Its shared-group User Defaults capability is not used; the widget shares separate JSON files in an App Group. |
 | RVS_BasicGCDTimer | 1.8.0 | No collection or tracking declared. |
 | RVS_Checkbox | 3.1.0 | No collection or tracking declared. |
 | RVS_Generic_Swift_Toolbox | 1.18.1 | No collection or tracking declared. |

@@ -24,6 +24,18 @@ Each meeting can be inspected individually, in order to see things like formats,
 
 Users can select a meeting as one they attend, which allows those meetings to be grouped into a separate screen.
 
+### Home Screen widget
+
+Add **Meetings** from the We Are Never Alone widget gallery. Medium shows the next meeting marked **I attend**, including a meeting already in progress, or an empty-attendance message. Large and extra-large show attended meetings first, then meetings in progress, followed by upcoming meetings when space permits. Extra-large sizes are offered where the device and OS support them. The icon follows light, dark, and tinted appearances; tapping it opens the app normally.
+
+All primary times use the member's current timezone and locale. Attended meetings include a start–end span and, when their timezone differs, the source timezone and native start time. The widget honors the service-meeting filter and avoids repeating displayed attended meetings in the other sections.
+
+The app publishes its downloaded meeting collection and preferences to an on-device App Group. SwiftBMLSDK resolves eight upcoming occurrences per meeting, including DST, before dates reach the widget. The widget selects and formats these absolute dates; it does not calculate recurrences, apply offsets, or make its own meeting requests. Opening or refreshing the app renews the schedule; attendance and filter changes request a widget update. WidgetKit controls update timing. Before the first download, or when the cached dates run out, the widget asks the member to open the app.
+
+For device signing, enable the **App Groups** capability on both **We Are Never Alone** and **VMFWidgets**, using `group.org.littlegreenviper.VMF`. Both entitlement files already declare this group; the signing team must register it and include it in both provisioning profiles. The app target embeds the extension automatically. Keep the two targets' version/build numbers in sync, and update the widget's icon image sets when replacing the app icon artwork.
+
+Widget regression tests are included in the regular scheme's Test action. They cover service filtering, list priority, meeting boundaries, local formatting, and SDK date export across DST and midnight.
+
 ## The Specifics
 
 ### The Screens

@@ -39,7 +39,31 @@
 		D4E7C6CB2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7C6CA2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift */; };
 		D4F4BCED2C36DAFC0023C21B /* VMF_MapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4BCEC2C36DAFC0023C21B /* VMF_MapMarker.swift */; };
 		D4F8FC9E2C5A689000D6884E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4F8FC9D2C5A689000D6884E /* InfoPlist.strings */; };
+		A12611060000000000000065 /* VMF_WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000001; };
+		A12611060000000000000066 /* VMF_WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000001; };
+		A12611060000000000000067 /* VMF_WidgetBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000002; };
+		A12611060000000000000068 /* VMF_MeetingsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000003; };
+		A12611060000000000000069 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000004; };
+		A1261106000000000000006A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000007; };
+		A1261106000000000000006B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D4AD6A172C261BCA002E37F3; };
+		A1261106000000000000006C /* VMFWidgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A126110600000000000001FF; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A1261106000000000000006F /* VMFWidgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000070; };
+		A12611060000000000000071 /* SwiftBMLSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A1261106000000000000022C; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A126110600000000000001F9 = {isa = PBXContainerItemProxy; containerPortal = D49393292C2616C7006438AE; proxyType = 1; remoteGlobalIDString = A126110600000000000001F4; remoteInfo = VMFWidgets; };
+		A12611060000000000000228 = {isa = PBXContainerItemProxy; containerPortal = D49393292C2616C7006438AE; proxyType = 1; remoteGlobalIDString = D49393302C2616C7006438AE; remoteInfo = "We Are Never Alone"; };
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXTargetDependency section */
+		A126110600000000000001FA = {isa = PBXTargetDependency; target = A126110600000000000001F4; targetProxy = A126110600000000000001F9; };
+		A12611060000000000000229 = {isa = PBXTargetDependency; target = D49393302C2616C7006438AE; targetProxy = A12611060000000000000228; };
+/* End PBXTargetDependency section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A126110600000000000001F8 /* Embed App Extensions */ = {isa = PBXCopyFilesBuildPhase; buildActionMask = 2147483647; dstPath = ""; dstSubfolderSpec = 13; files = (A1261106000000000000006C, ); name = "Embed App Extensions"; runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A12611030000000000000002 /* NonLocalized.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = NonLocalized.strings; sourceTree = "<group>"; };
@@ -98,6 +122,16 @@
 		D4F8FCA02C5A68E700D6884E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D4F8FCA12C5A68E700D6884E /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D4F8FCA22C5A68E800D6884E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A12611060000000000000001 /* VMF_WidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_WidgetData.swift; sourceTree = "<group>"; };
+		A12611060000000000000002 /* VMF_WidgetBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_WidgetBridge.swift; sourceTree = "<group>"; };
+		A12611060000000000000003 /* VMF_MeetingsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_MeetingsWidget.swift; sourceTree = "<group>"; };
+		A12611060000000000000004 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A12611060000000000000005 /* VMFWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VMFWidgets.entitlements; sourceTree = "<group>"; };
+		A12611060000000000000006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A12611060000000000000007 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		A126110600000000000001FF /* VMFWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VMFWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A12611060000000000000070 /* VMFWidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests/VMFWidgetTests.swift; sourceTree = SOURCE_ROOT; };
+		A1261106000000000000022D /* VMFWidgetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = VMFWidgetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +147,8 @@
 				D4398E6A2C2892830001FAE3 /* RVS_UIKit_Toolbox in Frameworks */,
 			);
 		};
+		A126110600000000000001F5 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		A1261106000000000000022A /* Test Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (A12611060000000000000071, ); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -120,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				D49393332C2616C7006438AE /* VirtualMeetingFinder */,
+				A12611060000000000000209 /* Shared */,
+				A1261106000000000000020A /* VMFWidgets */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -128,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				D43A9C172C374198001285FC /* VMF_Persistent_Prefs.swift */,
+				A12611060000000000000002 /* VMF_WidgetBridge.swift */,
 				D43A9C182C374198001285FC /* VMF_Extensions.swift */,
 				D4F4BCEC2C36DAFC0023C21B /* VMF_MapMarker.swift */,
 				A12611050000000000000002 /* VMF_StyledSegmentedControl.swift */,
@@ -225,6 +264,7 @@
 				D419F3102C261762001EE006 /* Sources */,
 				D49393322C2616C7006438AE /* Products */,
 				D4FB82112C4D8FC80069815A /* Frameworks */,
+				A12611060000000000000070 /* VMFWidgetTests.swift */,
 			);
 			indentWidth = 5;
 			sourceTree = "<group>";
@@ -233,6 +273,8 @@
 			isa = PBXGroup;
 			children = (
 				D49393312C2616C7006438AE /* We Are Never Alone.app */,
+				A126110600000000000001FF /* VMFWidgets.appex */,
+				A1261106000000000000022D /* VMFWidgetTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -309,6 +351,8 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A12611060000000000000209 /* Shared */ = {isa = PBXGroup; children = (A12611060000000000000001, ); path = Shared; sourceTree = "<group>"; };
+		A1261106000000000000020A /* VMFWidgets */ = {isa = PBXGroup; children = (A12611060000000000000003, A12611060000000000000004, A12611060000000000000007, A12611060000000000000005, A12611060000000000000006, ); path = VMFWidgets; sourceTree = "<group>"; };
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -320,10 +364,12 @@
 				D493932D2C2616C7006438AE /* Sources */,
 				D493932E2C2616C7006438AE /* Frameworks */,
 				D493932F2C2616C7006438AE /* Resources */,
+				A126110600000000000001F8 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			name = "We Are Never Alone";
+			dependencies = (A126110600000000000001FA, );
 			packageProductDependencies = (
 				D4398E662C2892790001FAE3 /* RVS_Generic_Swift_Toolbox */,
 				D4398E692C2892830001FAE3 /* RVS_UIKit_Toolbox */,
@@ -337,6 +383,29 @@
 			productReference = D49393312C2616C7006438AE /* We Are Never Alone.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A126110600000000000001F4 /* VMFWidgets */ = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = A126110600000000000001FB;
+            buildPhases = (A126110600000000000001F6, A126110600000000000001F5, A126110600000000000001F7, );
+            buildRules = ();
+            dependencies = ();
+            name = VMFWidgets;
+            productName = VMFWidgets;
+            productReference = A126110600000000000001FF;
+            productType = "com.apple.product-type.app-extension";
+        };
+		A12611060000000000000226 /* VMFWidgetTests */ = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = A1261106000000000000022E;
+            buildPhases = (A1261106000000000000022B, A1261106000000000000022A, );
+            buildRules = ();
+            dependencies = (A12611060000000000000229, );
+            name = VMFWidgetTests;
+            packageProductDependencies = (A1261106000000000000022C, );
+            productName = VMFWidgetTests;
+            productReference = A1261106000000000000022D;
+            productType = "com.apple.product-type.bundle.unit-test";
+        };
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -347,8 +416,13 @@
 				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 2720;
 				TargetAttributes = {
+                    A126110600000000000001F4 = {
+                        CreatedOnToolsVersion = 27.2;
+                        SystemCapabilities = {com.apple.ApplicationGroups.iOS = {enabled = 1; }; };
+                    };
 					D49393302C2616C7006438AE = {
 						CreatedOnToolsVersion = 15.4;
+                        SystemCapabilities = {com.apple.ApplicationGroups.iOS = {enabled = 1; }; };
 					};
 				};
 			};
@@ -381,6 +455,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				A12611060000000000000226 /* VMFWidgetTests */,
+				A126110600000000000001F4 /* VMFWidgets */,
 				D49393302C2616C7006438AE /* We Are Never Alone */,
 			);
 		};
@@ -399,6 +475,7 @@
 				D493933C2C2616C7006438AE /* Base in Resources */,
 			);
 		};
+		A126110600000000000001F7 /* Widget Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (A12611060000000000000069, A1261106000000000000006A, A1261106000000000000006B, ); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -422,6 +499,8 @@
 			isa = PBXSourcesBuildPhase;
 			files = (
 				D49393352C2616C7006438AE /* VMF_AppDelegate.swift in Sources */,
+				A12611060000000000000065 /* VMF_WidgetData.swift in Sources */,
+				A12611060000000000000067 /* VMF_WidgetBridge.swift in Sources */,
 				D43A9C1A2C374198001285FC /* VMF_Extensions.swift in Sources */,
 				D4DDAB822C4039570018944E /* VMF_AboutViewController.swift in Sources */,
 				D47C2F0E2C2C5E6A0048C91C /* VMF_BaseViewController.swift in Sources */,
@@ -441,6 +520,8 @@
 				D45E42022C3F2BA7006578F6 /* VMF_SettingsViewController.swift in Sources */,
 			);
 		};
+		A126110600000000000001F6 /* Widget Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A12611060000000000000066, A12611060000000000000068, ); runOnlyForDeploymentPostprocessing = 0; };
+		A1261106000000000000022B /* Test Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A1261106000000000000006F, ); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -830,6 +911,132 @@
 			};
 			name = Release;
 		};
+		A126110600000000000001FC /* Debug configuration for VMFWidgets */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                APPLICATION_EXTENSION_API_ONLY = YES;
+                CODE_SIGN_ENTITLEMENTS = Sources/VMFWidgets/VMFWidgets.entitlements;
+                CODE_SIGN_STYLE = Automatic;
+                CURRENT_PROJECT_VERSION = 0004;
+                GENERATE_INFOPLIST_FILE = YES;
+                INFOPLIST_FILE = Sources/VMFWidgets/Info.plist;
+                INFOPLIST_KEY_CFBundleDisplayName = "We Are Never Alone";
+                INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+                IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+                LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks", "@executable_path/../../Frameworks", );
+                MARKETING_VERSION = 2.0.0;
+                PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF.Widgets;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SKIP_INSTALL = YES;
+                SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+                SUPPORTS_MACCATALYST = NO;
+                SWIFT_EMIT_LOC_STRINGS = YES;
+                SWIFT_VERSION = 5.0;
+                TARGETED_DEVICE_FAMILY = "1,2";
+            };
+            name = Debug;
+        };
+		A126110600000000000001FD /* Release configuration for VMFWidgets */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                APPLICATION_EXTENSION_API_ONLY = YES;
+                CODE_SIGN_ENTITLEMENTS = Sources/VMFWidgets/VMFWidgets.entitlements;
+                CODE_SIGN_STYLE = Automatic;
+                CURRENT_PROJECT_VERSION = 0004;
+                GENERATE_INFOPLIST_FILE = YES;
+                INFOPLIST_FILE = Sources/VMFWidgets/Info.plist;
+                INFOPLIST_KEY_CFBundleDisplayName = "We Are Never Alone";
+                INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+                IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+                LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks", "@executable_path/../../Frameworks", );
+                MARKETING_VERSION = 2.0.0;
+                PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF.Widgets;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SKIP_INSTALL = YES;
+                SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+                SUPPORTS_MACCATALYST = NO;
+                SWIFT_EMIT_LOC_STRINGS = YES;
+                SWIFT_VERSION = 5.0;
+                TARGETED_DEVICE_FAMILY = "1,2";
+            };
+            name = Release;
+        };
+		A126110600000000000001FE /* Screenshots configuration for VMFWidgets */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                APPLICATION_EXTENSION_API_ONLY = YES;
+                CODE_SIGN_ENTITLEMENTS = Sources/VMFWidgets/VMFWidgets.entitlements;
+                CODE_SIGN_STYLE = Automatic;
+                CURRENT_PROJECT_VERSION = 0004;
+                GENERATE_INFOPLIST_FILE = YES;
+                INFOPLIST_FILE = Sources/VMFWidgets/Info.plist;
+                INFOPLIST_KEY_CFBundleDisplayName = "We Are Never Alone";
+                INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+                IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+                LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks", "@executable_path/../../Frameworks", );
+                MARKETING_VERSION = 2.0.0;
+                PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF.Widgets;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SKIP_INSTALL = YES;
+                SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+                SUPPORTS_MACCATALYST = NO;
+                SWIFT_EMIT_LOC_STRINGS = YES;
+                SWIFT_VERSION = 5.0;
+                TARGETED_DEVICE_FAMILY = "1,2";
+            };
+            name = Screenshots;
+        };
+		A1261106000000000000022F /* Debug configuration for VMFWidgetTests */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                BUNDLE_LOADER = "$(TEST_HOST)";
+                CODE_SIGN_STYLE = Automatic;
+                GENERATE_INFOPLIST_FILE = YES;
+                IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+                LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks", "@loader_path/Frameworks", );
+                PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF.WidgetTests;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+                SWIFT_VERSION = 5.0;
+                TARGETED_DEVICE_FAMILY = "1,2";
+                TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We Are Never Alone.app/We Are Never Alone";
+            };
+            name = Debug;
+        };
+		A12611060000000000000230 /* Release configuration for VMFWidgetTests */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                BUNDLE_LOADER = "$(TEST_HOST)";
+                CODE_SIGN_STYLE = Automatic;
+                GENERATE_INFOPLIST_FILE = YES;
+                IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+                LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks", "@loader_path/Frameworks", );
+                PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF.WidgetTests;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+                SWIFT_VERSION = 5.0;
+                TARGETED_DEVICE_FAMILY = "1,2";
+                TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We Are Never Alone.app/We Are Never Alone";
+            };
+            name = Release;
+        };
+		A12611060000000000000231 /* Screenshots configuration for VMFWidgetTests */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                BUNDLE_LOADER = "$(TEST_HOST)";
+                CODE_SIGN_STYLE = Automatic;
+                GENERATE_INFOPLIST_FILE = YES;
+                IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+                LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks", "@loader_path/Frameworks", );
+                PRODUCT_BUNDLE_IDENTIFIER = org.littlegreenviper.VMF.WidgetTests;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+                SWIFT_VERSION = 5.0;
+                TARGETED_DEVICE_FAMILY = "1,2";
+                TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We Are Never Alone.app/We Are Never Alone";
+            };
+            name = Screenshots;
+        };
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -851,6 +1058,8 @@
 			);
 			defaultConfigurationName = Release;
 		};
+		A126110600000000000001FB /* Build configuration list for VMFWidgets */ = {isa = XCConfigurationList; buildConfigurations = (A126110600000000000001FC, A126110600000000000001FE, A126110600000000000001FD, ); defaultConfigurationName = Release; };
+		A1261106000000000000022E = {isa = XCConfigurationList; buildConfigurations = (A1261106000000000000022F, A12611060000000000000231, A12611060000000000000230, ); defaultConfigurationName = Release; };
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -948,6 +1157,7 @@
 			package = D49672E3309CD0AF00A90B03 /* XCRemoteSwiftPackageReference "RVS_Checkbox" */;
 			productName = RVS_Checkbox;
 		};
+		A1261106000000000000022C /* SwiftBMLSDK */ = {isa = XCSwiftPackageProductDependency; package = D41A54A02DE50BFF00EA9A56; productName = SwiftBMLSDK; };
 /* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D49393292C2616C7006438AE /* Project object */;

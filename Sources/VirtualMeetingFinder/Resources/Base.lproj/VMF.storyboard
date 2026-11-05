@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="25406"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Map view configurations" minToolsVersion="14.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -46,28 +47,40 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="qPV-d8-WEJ">
                                         <rect key="frame" x="16" y="0.0" width="361" height="705"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hdC-dV-Pyg" userLabel="Filter Service Meetings Container">
-                                                <rect key="frame" x="0.0" y="0.0" width="361" height="705"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="hdC-dV-Pyg" userLabel="Filter Service Meetings Container">
+                                                <rect key="frame" x="8.6666666666666572" y="0.0" width="344" height="705"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" distribution="fillProportionally" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ecF-pT-urt" userLabel="Filter Service Meetings Switch Container">
-                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="40"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ecF-pT-urt" userLabel="Filter Service Meetings Switch Container">
+                                                        <rect key="frame" x="0.0" y="0.0" width="344" height="30"/>
                                                         <subviews>
-                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZa-E4-u9W">
-                                                                <rect key="frame" x="0.0" y="2" width="298.66666666666669" height="36"/>
+                                                            <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUr-un-v6W" customClass="RVS_Checkbox" customModule="RVS_Checkbox">
+                                                                <rect key="frame" x="0.0" y="1" width="30" height="28"/>
+                                                                <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="bUr-un-v6W" secondAttribute="height" multiplier="1:1" id="roc-Gl-1cE"/>
+                                                                </constraints>
+                                                                <color key="tintColor" name="AccentColor"/>
+                                                                <color key="onTintColor" name="AccentColor"/>
+                                                                <color key="thumbTintColor" name="AccentColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThreeState" value="NO"/>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="useHaptics" value="YES"/>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="useOffImageForClear" value="NO"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </switch>
+                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZa-E4-u9W">
+                                                                <rect key="frame" x="32" y="0.0" width="312" height="30"/>
                                                                 <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL"/>
                                                                 <gestureRecognizers/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" title="SLUG-FILTER-SERVICE-MEETINGS"/>
                                                             </button>
-                                                            <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUr-un-v6W">
-                                                                <rect key="frame" x="302.66666666666669" y="6" width="60.333333333333314" height="28"/>
-                                                                <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-FILTER-SERVICE-MEETINGS-HINT" label="SLUG-ACC-FILTER-SERVICE-MEETINGS-LABEL"/>
-                                                            </switch>
                                                         </subviews>
                                                         <gestureRecognizers/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="40" id="gIT-WS-xeD"/>
+                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="346" id="6l4-Wa-RTq"/>
+                                                            <constraint firstAttribute="height" constant="30" id="gIT-WS-xeD"/>
                                                         </constraints>
                                                         <connections>
                                                             <outletCollection property="gestureRecognizers" destination="3rS-Sq-LVu" appends="YES" id="cIP-xN-nfW"/>
@@ -75,16 +88,12 @@
                                                         </connections>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="SLUG-FILTER-SERVICE-MEETINGS-EXPLAIN" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ayw-H0-aQQ">
-                                                        <rect key="frame" x="26.666666666666657" y="40" width="308" height="665"/>
+                                                        <rect key="frame" x="18" y="34" width="308" height="671"/>
                                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="ecF-pT-urt" firstAttribute="leading" secondItem="hdC-dV-Pyg" secondAttribute="leading" id="1lq-xy-ypr"/>
-                                                    <constraint firstAttribute="trailing" secondItem="ecF-pT-urt" secondAttribute="trailing" id="cEo-T1-scS"/>
-                                                </constraints>
                                             </stackView>
                                         </subviews>
                                     </stackView>
@@ -156,7 +165,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yeg-ff-4AE">
                                 <rect key="frame" x="0.0" y="113" width="393" height="705"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WRy-bi-C9o">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="WRy-bi-C9o">
                                         <rect key="frame" x="16" y="0.0" width="361" height="705"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R9r-NT-2KG">
@@ -173,19 +182,19 @@
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xh0-44-RVJ">
-                                                <rect key="frame" x="131.66666666666666" y="72" width="98" height="24"/>
+                                                <rect key="frame" x="131.66666666666666" y="68" width="98" height="24"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Slk-3y-QNF">
-                                                <rect key="frame" x="154.66666666666666" y="104" width="51.666666666666657" height="18"/>
+                                                <rect key="frame" x="154.66666666666666" y="96" width="51.666666666666657" height="18"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3wO-o4-uab">
-                                                <rect key="frame" x="73.666666666666671" y="130" width="213.66666666666663" height="40"/>
+                                                <rect key="frame" x="73.666666666666671" y="118" width="213.66666666666663" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="but-8i-P6u" customClass="VMF_URLButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="157" height="40"/>
@@ -217,7 +226,7 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fXx-9U-d8T">
-                                                <rect key="frame" x="0.0" y="178" width="361" height="4"/>
+                                                <rect key="frame" x="0.0" y="162" width="361" height="4"/>
                                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="4" id="q4t-h1-1ZO"/>
@@ -229,7 +238,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5O-wo-noS" customClass="VMF_URLButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
-                                                <rect key="frame" x="90.666666666666686" y="190" width="180" height="56.666666666666657"/>
+                                                <rect key="frame" x="90.666666666666686" y="170" width="180" height="94.666666666666686"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="SLUG-HELP-PAGE-LABEL"/>
@@ -241,7 +250,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKA-Ef-Oeq" customClass="VMF_URLButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
-                                                <rect key="frame" x="101.66666666666669" y="254.66666666666669" width="158" height="30"/>
+                                                <rect key="frame" x="101.66666666666669" y="268.66666666666669" width="158" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="SLUG-PRIVACY-LABEL"/>
@@ -253,7 +262,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqO-3Z-54c" customClass="VMF_URLButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
-                                                <rect key="frame" x="120.66666666666666" y="292.66666666666669" width="120" height="30"/>
+                                                <rect key="frame" x="120.66666666666666" y="302.66666666666669" width="120" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="SLUG-GH-LABEL"/>
@@ -265,7 +274,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEt-0e-hIf">
-                                                <rect key="frame" x="0.0" y="330.66666666666669" width="361" height="4"/>
+                                                <rect key="frame" x="0.0" y="336.66666666666669" width="361" height="4"/>
                                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="4" id="k3s-x5-by3"/>
@@ -277,13 +286,13 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="747" text="SLUG-DEPENDENCY-HEADER-LABEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uLW-2E-rrI">
-                                                <rect key="frame" x="31" y="342.66666666666669" width="299" height="20.333333333333314"/>
+                                                <rect key="frame" x="31" y="344.66666666666669" width="299" height="20.333333333333314"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cz-VL-ZHr" customClass="VMF_URLButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
-                                                <rect key="frame" x="106" y="371" width="149" height="30"/>
+                                                <rect key="frame" x="106" y="369" width="149" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="SLUG-PHONE-LABEL"/>
@@ -295,7 +304,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1k8-Vg-e2b" customClass="VMF_URLButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
-                                                <rect key="frame" x="111" y="409" width="139" height="30"/>
+                                                <rect key="frame" x="111" y="403" width="139" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="SLUG-BGCD-LABEL"/>
@@ -306,8 +315,20 @@
                                                     <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="7Kd-Ma-riY"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a70-UL-75Z" customClass="VMF_URLButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
+                                                <rect key="frame" x="91.666666666666686" y="437" width="178" height="30"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="SLUG-CHECKBOX-LABEL"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="urlString" value="SLUG-CHECKBOX-URL"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="urlButtonHit:" destination="njl-CG-MJ9" eventType="touchUpInside" id="fSP-Dl-pvn"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lB7-t4-4AI" customClass="VMF_URLButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
-                                                <rect key="frame" x="110.66666666666669" y="447" width="140" height="30"/>
+                                                <rect key="frame" x="110.66666666666669" y="471" width="140" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="SLUG-GSWT-LABEL"/>
@@ -319,7 +340,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQF-Hl-TYC" customClass="VMF_URLButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
-                                                <rect key="frame" x="122.66666666666666" y="485" width="116" height="30"/>
+                                                <rect key="frame" x="122.66666666666666" y="505" width="116" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="SLUG-PP-LABEL"/>
@@ -331,7 +352,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6E-27-5lY" customClass="VMF_URLButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
-                                                <rect key="frame" x="110" y="523" width="141" height="30"/>
+                                                <rect key="frame" x="110" y="539" width="141" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="SLUG-UIKTB-LABEL"/>
@@ -343,7 +364,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ad-HR-0Ir" customClass="VMF_URLButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
-                                                <rect key="frame" x="90.666666666666686" y="561" width="180" height="30"/>
+                                                <rect key="frame" x="90.666666666666686" y="573" width="180" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="SLUG-SWBMLSDK-LABEL"/>
@@ -355,7 +376,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2WV-WB-GuG" customClass="VMF_URLButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
-                                                <rect key="frame" x="121.66666666666666" y="599" width="118" height="30"/>
+                                                <rect key="frame" x="121.66666666666666" y="607" width="118" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="SLUG-ML-LABEL"/>
@@ -367,7 +388,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQ4-mD-52q" customClass="VMF_URLButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
-                                                <rect key="frame" x="123" y="637" width="115" height="30"/>
+                                                <rect key="frame" x="123" y="641" width="115" height="30"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="SLUG-TZ-LABEL"/>
@@ -441,7 +462,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zdh-eu-ih1">
-                                <rect key="frame" x="16" y="129" width="361" height="689"/>
+                                <rect key="frame" x="16" y="129" width="361" height="660.66666666666663"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="8"/>
@@ -458,7 +479,7 @@
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SLUG-SWIPE-LABEL-TEXT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGu-sf-GRR">
-                                <rect key="frame" x="16" y="818" width="361" height="20.333333333333371"/>
+                                <rect key="frame" x="16" y="789.66666666666663" width="361" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -485,24 +506,22 @@
                             <constraint firstItem="yRJ-fe-3Cl" firstAttribute="leading" secondItem="sFK-py-g0o" secondAttribute="leading" id="I2a-CP-Zfj"/>
                             <constraint firstItem="Zdh-eu-ih1" firstAttribute="leading" secondItem="pPU-8y-L0V" secondAttribute="leading" constant="16" id="J9t-bp-sYV"/>
                             <constraint firstItem="pPU-8y-L0V" firstAttribute="trailing" secondItem="Zdh-eu-ih1" secondAttribute="trailing" constant="16" id="JlR-Jz-wHy"/>
+                            <constraint firstItem="Zdh-eu-ih1" firstAttribute="top" secondItem="pPU-8y-L0V" secondAttribute="top" constant="16" id="RAN-d7-98l"/>
                             <constraint firstItem="BGu-sf-GRR" firstAttribute="top" secondItem="Zdh-eu-ih1" secondAttribute="bottom" id="Ush-O3-9Yb"/>
                             <constraint firstItem="BGu-sf-GRR" firstAttribute="leading" secondItem="pPU-8y-L0V" secondAttribute="leading" constant="16" id="aVl-A0-tVP"/>
                             <constraint firstAttribute="trailing" secondItem="yRJ-fe-3Cl" secondAttribute="trailing" id="eGN-f0-8fH"/>
-                            <constraint firstItem="BGu-sf-GRR" firstAttribute="bottom" secondItem="pPU-8y-L0V" secondAttribute="bottom" constant="-8" priority="749" id="jzp-y2-Q6P"/>
+                            <constraint firstItem="BGu-sf-GRR" firstAttribute="bottom" secondItem="pPU-8y-L0V" secondAttribute="bottom" priority="749" constant="-8" id="jzp-y2-Q6P"/>
                             <constraint firstItem="yRJ-fe-3Cl" firstAttribute="top" secondItem="sFK-py-g0o" secondAttribute="top" id="l9h-PB-NGL"/>
                             <constraint firstItem="pPU-8y-L0V" firstAttribute="trailing" secondItem="BGu-sf-GRR" secondAttribute="trailing" constant="16" id="mB0-sK-5IR"/>
-                            <constraint firstItem="Zdh-eu-ih1" firstAttribute="top" secondItem="pPU-8y-L0V" secondAttribute="top" constant="16" id="RAN-d7-98l"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SLUG-TAB-0-TITLE" id="88p-ma-gyu">
-                        <leftBarButtonItems>
-                            <barButtonItem id="3tP-yY-Fhw">
-                                <imageReference key="image" image="gear.circle" catalog="system" symbolScale="large"/>
-                                <connections>
-                                    <segue destination="XMo-Ja-Ohb" kind="show" id="xkf-XT-c6Q"/>
-                                </connections>
-                            </barButtonItem>
-                        </leftBarButtonItems>
+                        <barButtonItem key="leftBarButtonItem" id="3tP-yY-Fhw">
+                            <imageReference key="image" image="gear.circle" catalog="system" symbolScale="large"/>
+                            <connections>
+                                <segue destination="XMo-Ja-Ohb" kind="show" id="xkf-XT-c6Q"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="apy-uC-OrG" customClass="VMF_DisappearingBarButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
                             <imageReference key="image" image="checkmark.square.fill" catalog="system" symbolScale="large"/>
                             <connections>
@@ -574,7 +593,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" translatesAutoresizingMaskIntoConstraints="NO" id="8L8-qW-vGE" customClass="VMF_TableCell" customModule="We_Are_Never_Alone" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VirtualMeetingFinderTableCell" translatesAutoresizingMaskIntoConstraints="NO" id="8L8-qW-vGE" customClass="VMF_TableCell" customModule="We_Are_Never_Alone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="101"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8L8-qW-vGE" id="E3R-WY-hTi">
@@ -1125,19 +1144,16 @@
         <image name="LGV" width="128" height="90"/>
         <image name="Phone" width="612" height="612"/>
         <image name="Video" width="612" height="612"/>
-        <image name="arrowtriangle.left.fill" catalog="system" width="128" height="118"/>
         <image name="arrowtriangle.right.fill" catalog="system" width="128" height="118"/>
         <image name="checkmark.square.fill" catalog="system" width="128" height="119"/>
         <image name="gear.circle" catalog="system" width="128" height="128"/>
         <image name="info.circle.fill" catalog="system" width="128" height="128"/>
         <image name="magnifyingglass" catalog="system" width="128" height="121"/>
-        <image name="rectangle" catalog="system" width="128" height="97"/>
-        <image name="x.circle" catalog="system" width="128" height="128"/>
+        <namedColor name="AccentColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

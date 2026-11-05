@@ -24,6 +24,8 @@
 "SLUG-BMLT-LABEL"                                 =    "Basic Meeting List Toolbox (BMLT)";
 /* The format for a universal meeting link. The placeholder is replaced with the meeting's ID */
 "SLUG-UNIVERSAL-LINK-FORMAT"                      =    "https://vmf.littlegreenviper.com?%lu";
+/* The button string for the checkbox dependency */
+"SLUG-CHECKBOX-LABEL"                             =    "RVS_Checkbox";
 /* The button string for the PhoneNumberKit dependency */
 "SLUG-PHONE-LABEL"                                =    "PhoneNumberKit";
 /* The button string for the Basic GCD Timer button */
@@ -42,6 +44,8 @@
 "SLUG-TZ-LABEL"                                   =    "LGV_TZ_Lookup";
 /* The URL to the site. */
 "SLUG-PRESENTED-BY-URL"                           =    "https://littlegreenviper.com";
+/* URL for the checkbox dependency */
+"SLUG-CHECKBOX-URL"                               =    "https://github.com/RiftValleySoftware/RVS_Checkbox";
 /* The URL string for the Privacy button */
 "SLUG-PRIVACY-URL"                                =    "https://littlegreenviper.com/portfolio/the-virtual-na-meeting-finder-app/#privacy";
 /* The URL string for the PhoneNumberKit dependency */

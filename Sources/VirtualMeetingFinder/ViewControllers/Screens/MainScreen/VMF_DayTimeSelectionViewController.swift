@@ -54,6 +54,8 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
           super.viewDidLoad()
           view.backgroundColor = Self.backgroundColor
           view.isOpaque = true
+          view.layer.cornerRadius = VMF_DayTimePopoverBackgroundView.cornerRadius - VMF_DayTimePopoverBackgroundView.borderWidth / 2
+          view.clipsToBounds = true
           popoverPresentationController?.backgroundColor = Self.backgroundColor
           let accentColor = UIColor(named: "AccentColor") ?? .systemBlue
           view.tintColor = accentColor
@@ -349,6 +351,99 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
 }
 
 /* ###################################################################################################################################### */
+// MARK: Popover Outline
+/* ###################################################################################################################################### */
+/** Draws the opaque body and pointer as one shape, with a continuous one-point label-colored border. */
+final class VMF_DayTimePopoverBackgroundView: UIPopoverBackgroundView {
+     static let borderWidth: CGFloat = 1
+     static let cornerRadius: CGFloat = 40
+
+     private var storedArrowOffset: CGFloat = 0
+     private var storedArrowDirection: UIPopoverArrowDirection = .up
+
+     override var arrowOffset: CGFloat {
+          get { storedArrowOffset }
+          set { storedArrowOffset = newValue; setNeedsDisplay() }
+     }
+
+     override var arrowDirection: UIPopoverArrowDirection {
+          get { storedArrowDirection }
+          set { storedArrowDirection = newValue; setNeedsDisplay() }
+     }
+
+     override class func arrowBase() -> CGFloat { 26 }
+     override class func arrowHeight() -> CGFloat { 13 }
+     override class func contentViewInsets() -> UIEdgeInsets {
+          UIEdgeInsets(top: borderWidth, left: borderWidth, bottom: borderWidth, right: borderWidth)
+     }
+
+     override init(frame: CGRect) {
+          super.init(frame: frame)
+          configureDrawing()
+     }
+
+     required init?(coder: NSCoder) {
+          super.init(coder: coder)
+          configureDrawing()
+     }
+
+     private func configureDrawing() {
+          backgroundColor = .clear
+          isOpaque = false
+          contentMode = .redraw
+     }
+
+     override func draw(_ inRect: CGRect) {
+          let isHorizontal = arrowDirection == .left || arrowDirection == .right
+          let size = isHorizontal ? CGSize(width: bounds.height, height: bounds.width) : bounds.size
+          let inset = Self.borderWidth / 2
+          let body = CGRect(x: inset, y: Self.arrowHeight() + inset,
+                            width: size.width - Self.borderWidth, height: size.height - Self.arrowHeight() - Self.borderWidth)
+          guard body.width > 0, body.height > 0 else { return }
+          let radius = min(Self.cornerRadius, body.width / 2, body.height / 2)
+          let halfBase = min(Self.arrowBase() / 2, max(0, body.width / 2 - radius))
+          let offset = arrowDirection == .down || arrowDirection == .left ? -arrowOffset : arrowOffset
+          let center = max(body.minX + radius + halfBase, min(body.maxX - radius - halfBase, body.midX + offset))
+          let path = UIBezierPath()
+          path.move(to: CGPoint(x: body.minX + radius, y: body.minY))
+          path.addLine(to: CGPoint(x: center - halfBase, y: body.minY))
+          path.addCurve(to: CGPoint(x: center, y: inset),
+                        controlPoint1: CGPoint(x: center - halfBase / 2, y: body.minY),
+                        controlPoint2: CGPoint(x: center - 3, y: inset))
+          path.addCurve(to: CGPoint(x: center + halfBase, y: body.minY),
+                        controlPoint1: CGPoint(x: center + 3, y: inset),
+                        controlPoint2: CGPoint(x: center + halfBase / 2, y: body.minY))
+          path.addLine(to: CGPoint(x: body.maxX - radius, y: body.minY))
+          path.addArc(withCenter: CGPoint(x: body.maxX - radius, y: body.minY + radius), radius: radius,
+                      startAngle: -.pi / 2, endAngle: 0, clockwise: true)
+          path.addLine(to: CGPoint(x: body.maxX, y: body.maxY - radius))
+          path.addArc(withCenter: CGPoint(x: body.maxX - radius, y: body.maxY - radius), radius: radius,
+                      startAngle: 0, endAngle: .pi / 2, clockwise: true)
+          path.addLine(to: CGPoint(x: body.minX + radius, y: body.maxY))
+          path.addArc(withCenter: CGPoint(x: body.minX + radius, y: body.maxY - radius), radius: radius,
+                      startAngle: .pi / 2, endAngle: .pi, clockwise: true)
+          path.addLine(to: CGPoint(x: body.minX, y: body.minY + radius))
+          path.addArc(withCenter: CGPoint(x: body.minX + radius, y: body.minY + radius), radius: radius,
+                      startAngle: .pi, endAngle: .pi * 1.5, clockwise: true)
+          path.close()
+
+          // Draw one upward-pointing outline, then rotate it for UIKit's actual arrow direction.
+          switch arrowDirection {
+          case .down: path.apply(CGAffineTransform(a: -1, b: 0, c: 0, d: -1, tx: bounds.width, ty: bounds.height))
+          case .left: path.apply(CGAffineTransform(a: 0, b: -1, c: 1, d: 0, tx: 0, ty: bounds.height))
+          case .right: path.apply(CGAffineTransform(a: 0, b: 1, c: -1, d: 0, tx: bounds.width, ty: 0))
+          default: break
+          }
+          VMF_DayTimeSelectionViewController.backgroundColor.resolvedColor(with: traitCollection).setFill()
+          path.fill()
+          UIColor.label.resolvedColor(with: traitCollection).setStroke()
+          path.lineWidth = Self.borderWidth
+          path.lineJoinStyle = .round
+          path.stroke()
+     }
+}
+
+/* ###################################################################################################################################### */
 // MARK: Meeting Name Search
 /* ###################################################################################################################################### */
 extension VMF_DayTimeSelectionViewController: UITextFieldDelegate {
@@ -371,22 +466,29 @@ extension VMF_DayTimeSelectionViewController: UITableViewDataSource, UITableView
           let title = timeTitles[time] ?? ""
           let main = mainController
           let isSelected = main?.isNameSearchMode == false && selection?.dayIndex == selectedDayIndex && selection?.time == time
+          let foregroundColor: UIColor = isSelected ? Self.backgroundColor : view.tintColor
+          let textStyle: UIFont.TextStyle = isSelected ? .headline : .body
+          var background = UIBackgroundConfiguration.clear()
+          background.backgroundColor = isSelected ? view.tintColor : Self.backgroundColor
+          background.cornerRadius = isSelected ? 6 : 0
+          background.backgroundInsets = isSelected ? NSDirectionalEdgeInsets(top: 3, leading: 0, bottom: 3, trailing: 0) : .zero
+          cell.backgroundConfiguration = background
           let count = NumberFormatter.localizedString(from: NSNumber(value: timeCounts[time] ?? 0), number: .decimal)
           var content = cell.defaultContentConfiguration()
           content.text = title
-          content.textProperties.font = .preferredFont(forTextStyle: .body)
+          content.textProperties.font = .preferredFont(forTextStyle: textStyle)
           content.textProperties.adjustsFontForContentSizeCategory = true
-          content.textProperties.color = view.tintColor
+          content.textProperties.color = foregroundColor
           content.secondaryText = count
-          content.secondaryTextProperties.font = .preferredFont(forTextStyle: .body)
+          content.secondaryTextProperties.font = .preferredFont(forTextStyle: textStyle)
           content.secondaryTextProperties.adjustsFontForContentSizeCategory = true
-          content.secondaryTextProperties.color = view.tintColor
+          content.secondaryTextProperties.color = foregroundColor
           content.prefersSideBySideTextAndSecondaryText = true
           cell.contentConfiguration = content
-          cell.tintColor = view.tintColor
+          cell.tintColor = foregroundColor
           // Reserve the same trailing space so the counts line up on every row.
           let checkmark = (cell.accessoryView as? UIImageView) ?? UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-          checkmark.image = isSelected ? UIImage(systemName: "checkmark") : nil
+          checkmark.image = isSelected ? UIImage(systemName: "checkmark", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)) : nil
           checkmark.contentMode = .center
           checkmark.isAccessibilityElement = false
           cell.accessoryView = checkmark

@@ -29,6 +29,7 @@ import UIKit
 class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentationControllerDelegate {
      static let browsingSize = CGSize(width: 600, height: 500)
      static let searchSize = CGSize(width: 600, height: 180)
+     static let backgroundColor = UIColor { $0.userInterfaceStyle == .dark ? .black : .white }
 
      weak var mainController: VMF_MainViewController?
 
@@ -51,7 +52,9 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
 
      override func viewDidLoad() {
           super.viewDidLoad()
-          view.backgroundColor = .systemBackground
+          view.backgroundColor = Self.backgroundColor
+          view.isOpaque = true
+          popoverPresentationController?.backgroundColor = Self.backgroundColor
           let accentColor = UIColor(named: "AccentColor") ?? .systemBlue
           view.tintColor = accentColor
           view.accessibilityViewIsModal = true
@@ -98,6 +101,11 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
           weekdayLabel.textAlignment = .center
           weekdayLabel.numberOfLines = 2
           weekdayLabel.accessibilityTraits = .header
+          weekdayLabel.accessibilityIdentifier = "popover-weekday-heading"
+          weekdayLabel.isUserInteractionEnabled = true
+          let doubleTap = UITapGestureRecognizer(target: self, action: #selector(selectPreviousTimeSlot))
+          doubleTap.numberOfTapsRequired = 2
+          weekdayLabel.addGestureRecognizer(doubleTap)
           let actions = UIStackView(arrangedSubviews: [nowButton, weekdayLabel, searchButton])
           actions.alignment = .center
           actions.spacing = 8
@@ -113,16 +121,18 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
           weekdaySelector.accessibilityHint = "SLUG-ACC-POPOVER-WEEKDAY-HINT".localizedVariant
           weekdaySelector.accessibilityIdentifier = "popover-weekday-selector"
           weekdaySelector.selectedSegmentTintColor = accentColor
-          weekdaySelector.setTitleTextAttributes([.foregroundColor: accentColor], for: .normal)
-          weekdaySelector.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-          weekdaySelector.setTitleTextAttributes([.foregroundColor: UIColor.tertiaryLabel], for: .disabled)
-          let weekdayHeight = weekdaySelector.heightAnchor.constraint(equalToConstant: 30)
+          let weekdayFont = UIFont.systemFont(ofSize: 16, weight: .medium)
+          weekdaySelector.setTitleTextAttributes([.foregroundColor: accentColor, .font: weekdayFont], for: .normal)
+          weekdaySelector.setTitleTextAttributes([.foregroundColor: UIColor.white, .font: weekdayFont], for: .selected)
+          weekdaySelector.setTitleTextAttributes([.foregroundColor: UIColor.tertiaryLabel, .font: weekdayFont], for: .disabled)
+          let weekdayHeight = weekdaySelector.heightAnchor.constraint(equalToConstant: 36)
           weekdayHeight.priority = UILayoutPriority(999)
           weekdayHeight.isActive = true
           weekdaySelector.addTarget(self, action: #selector(selectWeekday), for: .valueChanged)
 
           timeTableView.dataSource = self
           timeTableView.delegate = self
+          timeTableView.backgroundColor = Self.backgroundColor
           timeTableView.register(UITableViewCell.self, forCellReuseIdentifier: "meeting-time")
           timeTableView.rowHeight = UITableView.automaticDimension
           timeTableView.estimatedRowHeight = 48
@@ -210,6 +220,7 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
 
      override func viewDidLayoutSubviews() {
           super.viewDidLayoutSubviews()
+          updateWeekdayTitles()
           // Segment titles can be abbreviated visually while VoiceOver speaks the full weekday.
           for index in 0..<7 {
                let day = mainController?.unMapWeekday(index + 1) ?? ((Calendar.current.firstWeekday + index - 1) % 7 + 1)
@@ -222,6 +233,24 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
                let index = mainController?.getNearestIndex(dayIndex: selectedDayIndex, time: selection?.time ?? mainController?.lastTime ?? 0) ?? 0
                timeTableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .middle, animated: false)
                didScrollToSelection = true
+          }
+     }
+
+     /** Keeps the larger font legible on narrow screens in every supported locale. */
+     private func updateWeekdayTitles() {
+          guard weekdaySelector.bounds.width > 0,
+                let font = weekdaySelector.titleTextAttributes(for: .normal)?[.font] as? UIFont else { return }
+          let calendar = Calendar.current
+          // Leave room for UIKit's title padding as well as the inset selection background.
+          let availableWidth = weekdaySelector.bounds.width / 7 - 20
+          let shortTitles = calendar.shortStandaloneWeekdaySymbols
+          let shortTitlesFit = shortTitles.allSatisfy { ($0 as NSString).size(withAttributes: [.font: font]).width <= availableWidth }
+          let titles = shortTitlesFit ? shortTitles : calendar.veryShortStandaloneWeekdaySymbols
+          for index in 0..<7 {
+               let day = mainController?.unMapWeekday(index + 1) ?? ((calendar.firstWeekday + index - 1) % 7 + 1)
+               if weekdaySelector.titleForSegment(at: index) != titles[day - 1] {
+                    weekdaySelector.setTitle(titles[day - 1], forSegmentAt: index)
+               }
           }
      }
 
@@ -249,6 +278,20 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
 
      @objc private func selectWeekday() {
           selectedDayIndex = mainController?.unMapWeekday(weekdaySelector.selectedSegmentIndex + 1) ?? 1
+          reloadTimes()
+          UISelectionFeedbackGenerator().selectionChanged()
+     }
+
+     /** Resets the day and time to the latest available start at or before now, keeping the picker open. */
+     @objc private func selectPreviousTimeSlot() {
+          guard !isShowingSearch,
+                let main = mainController,
+                let slot = main.adjacentTimeSlot(fromDay: 0, timeIndex: 0, forward: false),
+                let time = main.getTimeOf(dayIndex: slot.dayIndex, timeIndex: slot.timeIndex) else { return }
+          selectedDayIndex = slot.dayIndex
+          selection = (slot.dayIndex, time)
+          weekdaySelector.selectedSegmentIndex = main.mapWeekday(slot.dayIndex) - 1
+          main.openTo(dayIndex: slot.dayIndex, time: time)
           reloadTimes()
           UISelectionFeedbackGenerator().selectionChanged()
      }
@@ -323,6 +366,7 @@ extension VMF_DayTimeSelectionViewController: UITableViewDataSource, UITableView
 
      func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
           let cell = inTableView.dequeueReusableCell(withIdentifier: "meeting-time", for: inIndexPath)
+          cell.backgroundColor = Self.backgroundColor
           let time = timeSlots[inIndexPath.row]
           let title = timeTitles[time] ?? ""
           let main = mainController

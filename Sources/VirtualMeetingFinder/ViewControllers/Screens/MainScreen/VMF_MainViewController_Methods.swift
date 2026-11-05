@@ -400,6 +400,7 @@ extension VMF_MainViewController {
           popover.sourceView = dayTimeSelectionButton
           popover.sourceRect = dayTimeSelectionButton.bounds
           popover.permittedArrowDirections = .up
+          popover.backgroundColor = VMF_DayTimeSelectionViewController.backgroundColor
           present(controller, animated: true)
      }
 

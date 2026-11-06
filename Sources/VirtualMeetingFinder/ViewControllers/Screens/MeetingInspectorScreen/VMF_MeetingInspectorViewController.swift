@@ -100,9 +100,15 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
      
      /* ################################################################## */
      /**
-      The font to use for the "I Attend" bar button item.
+      The width cutoff for hiding the inspector title on standard layouts.
       */
-     private static let _barButtonLabelFont = UIFont.systemFont(ofSize: 17)
+     private static let _narrowNavigationBarWidth: CGFloat = 375
+
+     /// The fixed-size checkbox inside the attendance button.
+     private let _attendanceIndicator = UIImageView()
+
+     /// Tracks whether Duo's status controls occupy part of the navigation bar.
+     private var _usesCompactAttendanceLayout = false
      
      /* ################################################################## */
      /**
@@ -551,6 +557,8 @@ extension VMF_MeetingInspectorViewController {
           
           super.viewDidLoad()
 
+          _setUpAttendanceButton()
+
           phoneButtonContainer?.accessibilityActivation = { [weak self] in self?.phoneButtonHit(()) }
           globeButtonContainer?.accessibilityActivation = { [weak self] in self?.globeButtonHit(()) }
           videoButtonContainer?.accessibilityActivation = { [weak self] in self?.videoButtonHit(()) }
@@ -579,7 +587,7 @@ extension VMF_MeetingInspectorViewController {
                openInRecovrrButton?.isHidden = true
           }
           
-          _updateNavigationTitle()
+          _updateNavigationBar()
           
           setTimeZone()
           setTimeAndWeekday()
@@ -697,7 +705,7 @@ extension VMF_MeetingInspectorViewController {
           
           isFormatsOpen = false
           isLocationOpen = false
-          setBarButton()
+          _updateAttendanceButton()
      }
      
      /* ################################################################## */
@@ -721,7 +729,7 @@ extension VMF_MeetingInspectorViewController {
       */
      override func viewDidLayoutSubviews() {
           super.viewDidLayoutSubviews()
-          _updateNavigationTitle()
+          _updateNavigationBar()
           _openSezMe = true
      }
 }
@@ -730,12 +738,37 @@ extension VMF_MeetingInspectorViewController {
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
 extension VMF_MeetingInspectorViewController {
-     /// Gives the top bar to the inspector's buttons on both Duo displays.
-     private func _updateNavigationTitle() {
-          let title = (navigationController as? VMF_NavigationController)?.usesDuoLayout == true
+     /// Gives the top bar to the inspector's buttons at narrow widths and on both Duo displays.
+     private func _updateNavigationBar() {
+          let navigationController = navigationController as? VMF_NavigationController
+          let width = navigationController?.navigationBar.bounds.width ?? view.bounds.width
+          let hidesTitle = width <= Self._narrowNavigationBarWidth
+               || navigationController?.usesDuoLayout == true
+          let title = hidesTitle
                ? nil
                : (meeting?.meetingType == .hybrid ? "SLUG-HYBRID-MEETING" : "SLUG-VIRTUAL-MEETING").localizedVariant
           if navigationItem.title != title { navigationItem.title = title }
+
+          let usesCompactLayout = navigationController?.topBarSideOcclusion != nil
+          guard usesCompactLayout != _usesCompactAttendanceLayout,
+                let button = iAttendBarButton?.customView as? UIButton,
+                var configuration = button.configuration else { return }
+
+          _usesCompactAttendanceLayout = usesCompactLayout
+          let font = UIFont.systemFont(ofSize: 17)
+          // Leave room for Back, Share, and the checkbox beside the system controls.
+          let compactTitleWidth: CGFloat = 76
+          let titleWidth = (configuration.title ?? "").size(withAttributes: [.font: font]).width
+          configuration.titleTextAttributesTransformer = nil
+          if usesCompactLayout, titleWidth > compactTitleWidth {
+               let compactFont = font.withSize(font.pointSize * compactTitleWidth / titleWidth)
+               configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attributes in
+                    var attributes = attributes
+                    attributes.font = compactFont
+                    return attributes
+               }
+          }
+          button.configuration = configuration
      }
 
      /** Keeps each disclosure's spoken state and action aligned with its visible contents. */
@@ -907,37 +940,45 @@ extension VMF_MeetingInspectorViewController {
      
      /* ################################################################## */
      /**
-      Sets up the bar button item, with the state of attendance.
+      Configures the attendance button once so the label and checkbox keep their positions on tap.
       */
-     func setBarButton() {
-          guard let meeting = meeting else { return }
-          
-          let barButtonView = (iAttendBarButton?.customView as? UIButton) ?? UIButton(type: .system)
-          let useThisImage = meeting.iAttend ? Self._checkedImage : Self._uncheckedImage
+     private func _setUpAttendanceButton() {
+          guard let iAttendBarButton else { return }
+
+          let indicatorSize: CGFloat = 24
           var configuration = UIButton.Configuration.plain()
           configuration.title = "SLUG-I-ATTEND".localizedVariant
-          configuration.image = useThisImage
-          configuration.imagePlacement = .trailing
-          configuration.imagePadding = 4
-          configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
-          configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attributes in
-               var attributes = attributes
-               attributes.font = Self._barButtonLabelFont
-               return attributes
-          }
-          barButtonView.configuration = configuration
-          barButtonView.removeTarget(self, action: #selector(iAttendHit), for: .touchUpInside)
-          barButtonView.addTarget(self, action: #selector(iAttendHit), for: .touchUpInside)
-          barButtonView.accessibilityLabel = (meeting.iAttend ? "SLUG-ACC-I-ATTEND-BAR-BUTTON-LABEL" : "SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-LABEL").localizedVariant
-          barButtonView.accessibilityHint = (meeting.iAttend ? "SLUG-ACC-I-ATTEND-BAR-BUTTON-HINT" : "SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-HINT").localizedVariant
-          barButtonView.accessibilityTraits = meeting.iAttend ? [.button, .selected] : .button
-          iAttendBarButton?.customView = barButtonView
-          iAttendBarButton?.target = self
-          iAttendBarButton?.action = #selector(iAttendHit)
-          
-          iAttendBarButton?.accessibilityLabel = barButtonView.accessibilityLabel
-          iAttendBarButton?.accessibilityHint = barButtonView.accessibilityHint
-          removeNavigationBarItemBackgrounds()
+          configuration.baseForegroundColor = view.tintColor
+          configuration.contentInsets = .init(top: 12, leading: 0, bottom: 12, trailing: indicatorSize + 4)
+          let action = UIAction { [weak self] _ in self?._toggleAttendance() }
+          let button = UIButton(configuration: configuration, primaryAction: action)
+
+          _attendanceIndicator.contentMode = .scaleAspectFit
+          _attendanceIndicator.isUserInteractionEnabled = false
+          _attendanceIndicator.translatesAutoresizingMaskIntoConstraints = false
+          button.addSubview(_attendanceIndicator)
+          NSLayoutConstraint.activate([
+               _attendanceIndicator.trailingAnchor.constraint(equalTo: button.trailingAnchor),
+               _attendanceIndicator.centerYAnchor.constraint(equalTo: button.centerYAnchor),
+               _attendanceIndicator.widthAnchor.constraint(equalToConstant: indicatorSize),
+               _attendanceIndicator.heightAnchor.constraint(equalTo: _attendanceIndicator.widthAnchor)
+          ])
+          iAttendBarButton.customView = button
+     }
+
+     /// Updates the checkbox and its spoken state after an attendance change.
+     private func _updateAttendanceButton() {
+          guard let meeting, let iAttendBarButton else { return }
+
+          let attends = meeting.iAttend
+          _attendanceIndicator.image = attends ? Self._checkedImage : Self._uncheckedImage
+          let label = (attends ? "SLUG-ACC-I-ATTEND-BAR-BUTTON-LABEL" : "SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-LABEL").localizedVariant
+          let hint = (attends ? "SLUG-ACC-I-ATTEND-BAR-BUTTON-HINT" : "SLUG-ACC-I-DO-NOT-ATTEND-BAR-BUTTON-HINT").localizedVariant
+          iAttendBarButton.customView?.accessibilityLabel = label
+          iAttendBarButton.customView?.accessibilityHint = hint
+          iAttendBarButton.customView?.accessibilityTraits = attends ? [.button, .selected] : .button
+          iAttendBarButton.accessibilityLabel = label
+          iAttendBarButton.accessibilityHint = hint
      }
      
      /* ################################################################## */
@@ -1090,21 +1131,18 @@ extension VMF_MeetingInspectorViewController {
 
      /* ################################################################## */
      /**
-      The "I Attend" bar button item was hit.
-      
-      The sender is ignored.
+      Toggles attendance for the meeting displayed in the inspector.
       */
-     @objc func iAttendHit(_: Any) {
+     private func _toggleAttendance() {
           guard let meeting = meeting else { return }
-          let originalState = meeting.iAttend
-          meeting.setAttendance(!originalState)
+          meeting.setAttendance(!meeting.iAttend)
           
           selectionHaptic()
           
           // HACK ALERT!
           // This actually prevents that momentary delay, as the table recalculates, when we go back.
           (myController as? VMF_MainViewController)?.organizedMeetings = []
-          setBarButton()
+          _updateAttendanceButton()
      }
 }
 

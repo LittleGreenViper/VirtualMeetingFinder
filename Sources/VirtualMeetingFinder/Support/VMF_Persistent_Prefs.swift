@@ -46,6 +46,9 @@ class VMF_Persistent_Prefs: RVS_PersistentPrefs {
            If we want to exclude Service meetings from the displayed results, this Boolean is true.
            */
           case excludeServiceMeetings
+
+          // The preference library validates every key on write, including retired settings saved by older versions.
+          case openControlPanel
           
           /* ############################################################## */
           /**
@@ -54,7 +57,8 @@ class VMF_Persistent_Prefs: RVS_PersistentPrefs {
           static var allKeys: [String] {
                [
                     attendance.rawValue,
-                    excludeServiceMeetings.rawValue
+                    excludeServiceMeetings.rawValue,
+                    openControlPanel.rawValue
                ]
           }
      }

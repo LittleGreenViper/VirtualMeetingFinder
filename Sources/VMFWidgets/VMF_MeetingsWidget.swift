@@ -6,7 +6,6 @@ import WidgetKit
 struct VMF_WidgetEntry: TimelineEntry {
      let date: Date
      let state: VMF_WidgetState
-     var needsRefresh = false
 }
 
 struct VMF_WidgetProvider: TimelineProvider {
@@ -28,11 +27,12 @@ struct VMF_WidgetProvider: TimelineProvider {
      private func entries() -> [VMF_WidgetEntry] {
           let now = Date()
           guard let cache = VMF_WidgetStore.readCache(), now < cache.validUntil else {
-               return [VMF_WidgetEntry(date: now, state: VMF_WidgetState(), needsRefresh: true)]
+               return [VMF_WidgetEntry(date: now, state: VMF_WidgetState())]
           }
           let schedule = VMF_WidgetSchedule(meetings: cache.meetings, preferences: VMF_WidgetStore.readPreferences(), now: now)
           return schedule.timelineDates(now: now).map { date in
-               VMF_WidgetEntry(date: date, state: schedule.state(at: date), needsRefresh: date >= cache.validUntil)
+               let state = date < cache.validUntil ? schedule.state(at: date) : VMF_WidgetState()
+               return VMF_WidgetEntry(date: date, state: state)
           }
      }
 
@@ -62,59 +62,71 @@ struct VMF_WidgetView: View {
      @ScaledMetric(relativeTo: .caption) private var unit = 12.0
 
      private var columns: Int { family == .systemExtraLarge ? 2 : 1 }
+     private var hasAttendance: Bool { !entry.state.attendance.isEmpty }
+     private var headerLogoSize: CGFloat { hasAttendance ? 28 : 44 }
 
      var body: some View {
           GeometryReader { geometry in
-               VStack(alignment: .leading, spacing: 8) {
-                    header
-                    if entry.needsRefresh {
-                         Text("WIDGET-OPEN-TO-REFRESH")
-                              .font(.subheadline)
-                              .foregroundStyle(.secondary)
-                              .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                    } else if family == .systemMedium {
-                         medium
-                    } else {
-                         meetingLists(height: max(0, geometry.size.height - 36))
+               if family == .systemMedium && !hasAttendance {
+                    let size = min(geometry.size.width, geometry.size.height) * 0.55
+                    logoLink(size: size, destination: VMF_WidgetStore.openMainScreenURL)
+                         .frame(maxWidth: .infinity, maxHeight: .infinity)
+               } else {
+                    VStack(alignment: .leading, spacing: 8) {
+                         header.frame(height: headerLogoSize)
+                         if family == .systemMedium, let meeting = entry.state.attendance.first {
+                              medium(meeting)
+                         } else {
+                              meetingLists(height: max(0, geometry.size.height - headerLogoSize - 8))
+                         }
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                }
-               .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
           }
-          .containerBackground(.background, for: .widget)
-          .widgetURL(VMF_WidgetStore.openAppURL)
+          .containerBackground(for: .widget) {
+               Image("BackgroundGradient").resizable()
+                    .scaleEffect(x: 1.02, y: 1)
+                    .clipped()
+          }
+          .widgetURL(hasAttendance ? VMF_WidgetStore.openAppURL : VMF_WidgetStore.openMainScreenURL)
      }
 
-     private var header: some View {
-          HStack(spacing: 8) {
-               Link(destination: VMF_WidgetStore.openAppURL) {
-                    appIcon.frame(width: 28, height: 28).clipShape(RoundedRectangle(cornerRadius: 6))
+     @ViewBuilder private var header: some View {
+          if hasAttendance {
+               HStack(spacing: 8) {
+                    logoLink(size: headerLogoSize, destination: VMF_WidgetStore.openAppURL)
+                    Text("WIDGET-APP-NAME")
+                         .font(.caption.weight(.semibold))
+                         .lineLimit(1)
+                         .foregroundStyle(.secondary)
+                    Spacer(minLength: 0)
                }
-               .accessibilityLabel(Text("WIDGET-OPEN-APP"))
-               Text("WIDGET-APP-NAME")
-                    .font(.caption.weight(.semibold))
-                    .lineLimit(1)
-                    .foregroundStyle(.secondary)
-               Spacer(minLength: 0)
-          }
-          .frame(height: 28)
-     }
-
-     @ViewBuilder private var appIcon: some View {
-          if #available(iOS 18.0, *), renderingMode == .accented {
-               Image("WidgetTintedAppIcon").resizable().widgetAccentedRenderingMode(.accentedDesaturated)
           } else {
-               Image("WidgetAppIcon").resizable()
+               logoLink(size: headerLogoSize, destination: VMF_WidgetStore.openMainScreenURL)
+                    .frame(maxWidth: .infinity)
           }
      }
 
-     private var medium: some View {
+     private func logoLink(size: CGFloat, destination: URL) -> some View {
+          Link(destination: destination) {
+               splashLogo.scaledToFit().frame(width: size, height: size)
+          }
+          .accessibilityLabel(Text("WIDGET-OPEN-APP"))
+     }
+
+     @ViewBuilder private var splashLogo: some View {
+          let logo = Image("SplashLogo").resizable()
+          if #available(iOS 18.0, *), renderingMode == .accented {
+               logo.widgetAccentedRenderingMode(.accentedDesaturated)
+          } else {
+               logo
+          }
+     }
+
+     private func medium(_ meeting: VMF_WidgetOccurrence) -> some View {
           VStack(alignment: .leading, spacing: 3) {
                Text("WIDGET-I-ATTEND").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
-               if let meeting = entry.state.attendance.first {
-                    meetingLink(meeting, attendance: true)
-               } else {
-                    Text("WIDGET-NO-ATTENDANCE").font(.subheadline).foregroundStyle(.secondary)
-               }
+               meetingLink(meeting, attendance: true)
           }
           .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
      }
@@ -122,13 +134,8 @@ struct VMF_WidgetView: View {
      private func meetingLists(height: Double) -> some View {
           let layout = VMF_WidgetLayout(state: entry.state, height: height, unit: unit, columns: columns)
           return VStack(alignment: .leading, spacing: 0) {
-               sectionHeading("WIDGET-I-ATTEND")
-               if layout.attendance.isEmpty {
-                    Text("WIDGET-NO-ATTENDANCE")
-                         .font(.caption).foregroundStyle(.secondary)
-                         .frame(maxWidth: .infinity, alignment: .topLeading)
-                         .frame(height: unit * 3, alignment: .top)
-               } else {
+               if !layout.attendance.isEmpty {
+                    sectionHeading("WIDGET-I-ATTEND")
                     grid(layout.attendance, height: unit * 6, attendance: true)
                }
                if !layout.inProgress.isEmpty {

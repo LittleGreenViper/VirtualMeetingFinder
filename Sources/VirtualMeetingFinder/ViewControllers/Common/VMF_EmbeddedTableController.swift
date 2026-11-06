@@ -471,7 +471,7 @@ extension VMF_EmbeddedTableController {
       This checks to see if we need to open a linked meeting.
       */
      func checkForUniversalLink() {
-          VMF_SceneDelegate.sceneDelegateInstance?.openPendingMeeting()
+          VMF_SceneDelegate.sceneDelegateInstance?.openPendingLink()
      }
 }
 

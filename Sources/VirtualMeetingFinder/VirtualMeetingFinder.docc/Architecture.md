@@ -74,15 +74,18 @@ it does not link the SDK, resolve recurrences, or perform its own downloads.
 
 Atomic JSON files separate the public meeting snapshot from attendance/filter
 preferences. A failed or empty SDK fetch preserves the last usable snapshot.
-After the cached occurrences expire, the widget asks the member to open the app.
+The widget shows its centered icon before a snapshot is available and after it expires.
 Timelines include start/end boundaries for up to four hours, with a bounded entry
 count. WidgetKit controls when requested timeline reloads are delivered.
 
 Medium displays one attended meeting. Larger sizes reserve space for attendance,
 then fill complete rows with in-progress meetings and, when these fit, upcoming
-meetings. The service filter applies to every widget section. An icon Link and
-the widget's default URL use `lgv-vmf://open`, which opens the app without selecting
-a meeting inspector.
+meetings. The service filter applies to every widget section. With no attended
+meetings, medium displays only the centered splash logo. Larger sizes center it
+in the header above the meeting lists. The centered logo uses `lgv-vmf://main`
+to open the main meeting screen. Widgets with attendance use `lgv-vmf://open`
+for the header logo and background. The app and widget share the splash logo
+and background gradient in `LaunchArtwork.xcassets`.
 
 Each meeting row is a separate Link using `lgv-vmf://meeting?<ID>`. The scene
 delegate resolves these and existing public meeting links through the shared

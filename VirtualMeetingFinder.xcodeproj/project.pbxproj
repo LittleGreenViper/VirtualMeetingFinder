@@ -15,12 +15,14 @@
 		A12611060000000000000066 /* VMF_WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000001 /* VMF_WidgetData.swift */; };
 		A12611060000000000000067 /* VMF_WidgetBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000002 /* VMF_WidgetBridge.swift */; };
 		A12611060000000000000068 /* VMF_MeetingsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000003 /* VMF_MeetingsWidget.swift */; };
-		A12611060000000000000069 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000004 /* Assets.xcassets */; };
+		A12611060000000000000069 /* LaunchArtwork.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000004 /* LaunchArtwork.xcassets */; };
 		A1261106000000000000006A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000007 /* Localizable.xcstrings */; };
 		A1261106000000000000006B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D4AD6A172C261BCA002E37F3 /* PrivacyInfo.xcprivacy */; };
 		A1261106000000000000006C /* VMFWidgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A126110600000000000001FF /* VMFWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A1261106000000000000006F /* Tests/VMFWidgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000070 /* Tests/VMFWidgetTests.swift */; };
 		A12611060000000000000071 /* SwiftBMLSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A1261106000000000000022C /* SwiftBMLSDK */; };
+		A12611060000000000000301 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000302 /* InfoPlist.xcstrings */; };
+		A12611060000000000000303 /* LaunchArtwork.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000004 /* LaunchArtwork.xcassets */; };
 		D40128C02F676B600076EB62 /* RVS_PersistentPrefs in Frameworks */ = {isa = PBXBuildFile; productRef = D40128BF2F676B600076EB62 /* RVS_PersistentPrefs */; };
 		D40133692C320C070018076B /* VMF_MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40133682C320C070018076B /* VMF_MainViewController.swift */; };
 		D401336B2C320D520018076B /* VMF_EmbeddedTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */; };
@@ -49,7 +51,6 @@
 		D4E7C6CB2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7C6CA2C4294FE0045ACE6 /* VMF_MainViewController_Protocols.swift */; };
 		D4F4BCED2C36DAFC0023C21B /* VMF_MapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F4BCEC2C36DAFC0023C21B /* VMF_MapMarker.swift */; };
 		D4F8FC9E2C5A689000D6884E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4F8FC9D2C5A689000D6884E /* InfoPlist.strings */; };
-		A12611060000000000000301 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A12611060000000000000302; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,13 +89,14 @@
 		A12611060000000000000001 /* VMF_WidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_WidgetData.swift; sourceTree = "<group>"; };
 		A12611060000000000000002 /* VMF_WidgetBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_WidgetBridge.swift; sourceTree = "<group>"; };
 		A12611060000000000000003 /* VMF_MeetingsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMF_MeetingsWidget.swift; sourceTree = "<group>"; };
-		A12611060000000000000004 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A12611060000000000000004 /* LaunchArtwork.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LaunchArtwork.xcassets; sourceTree = "<group>"; };
 		A12611060000000000000005 /* VMFWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VMFWidgets.entitlements; sourceTree = "<group>"; };
 		A12611060000000000000006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A12611060000000000000007 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		A12611060000000000000070 /* Tests/VMFWidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests/VMFWidgetTests.swift; sourceTree = SOURCE_ROOT; };
 		A126110600000000000001FF /* VMFWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VMFWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1261106000000000000022D /* VMFWidgetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = VMFWidgetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A12611060000000000000302 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		D40133682C320C070018076B /* VMF_MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_MainViewController.swift; sourceTree = "<group>"; };
 		D401336A2C320D520018076B /* VMF_EmbeddedTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMF_EmbeddedTableController.swift; sourceTree = "<group>"; };
 		D42997D32C57B05D00164E46 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -148,7 +150,6 @@
 		D4F8FCA02C5A68E700D6884E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D4F8FCA12C5A68E700D6884E /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D4F8FCA22C5A68E800D6884E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A12611060000000000000302 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				A12611060000000000000001 /* VMF_WidgetData.swift */,
+				A12611060000000000000004 /* LaunchArtwork.xcassets */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -190,7 +192,6 @@
 			isa = PBXGroup;
 			children = (
 				A12611060000000000000003 /* VMF_MeetingsWidget.swift */,
-				A12611060000000000000004 /* Assets.xcassets */,
 				A12611060000000000000007 /* Localizable.xcstrings */,
 				A12611060000000000000302 /* InfoPlist.xcstrings */,
 				A12611060000000000000005 /* VMFWidgets.entitlements */,
@@ -533,7 +534,7 @@
 		A126110600000000000001F7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
-				A12611060000000000000069 /* Assets.xcassets in Resources */,
+				A12611060000000000000069 /* LaunchArtwork.xcassets in Resources */,
 				A1261106000000000000006A /* Localizable.xcstrings in Resources */,
 				A12611060000000000000301 /* InfoPlist.xcstrings in Resources */,
 				A1261106000000000000006B /* PrivacyInfo.xcprivacy in Resources */,
@@ -544,6 +545,7 @@
 			files = (
 				A12611050000000000000003 /* PrivacyInfo.xcprivacy in Resources */,
 				D493933E2C2616C8006438AE /* Assets.xcassets in Resources */,
+				A12611060000000000000303 /* LaunchArtwork.xcassets in Resources */,
 				D4F8FC9E2C5A689000D6884E /* InfoPlist.strings in Resources */,
 				D49349722C29A6D100C58390 /* Localizable.strings in Resources */,
 				A12611030000000000000001 /* NonLocalized.strings in Resources */,
@@ -748,7 +750,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Meta/VirtualMeetingFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0005;
+				CURRENT_PROJECT_VERSION = 0006;
 				DOCC_MINIMUM_ACCESS_LEVEL = internal;
 				DRIVERKIT_DEPLOYMENT_TARGET = "$(RECOMMENDED_DRIVERKIT_DEPLOYMENT_TARGET)";
 				ENABLE_APP_SANDBOX = YES;
@@ -795,7 +797,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = Sources/VMFWidgets/VMFWidgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0005;
+				CURRENT_PROJECT_VERSION = 0006;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/VMFWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "We Are Never Alone";
@@ -824,7 +826,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = Sources/VMFWidgets/VMFWidgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0005;
+				CURRENT_PROJECT_VERSION = 0006;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/VMFWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "We Are Never Alone";
@@ -853,7 +855,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = Sources/VMFWidgets/VMFWidgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0005;
+				CURRENT_PROJECT_VERSION = 0006;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/VMFWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "We Are Never Alone";
@@ -1075,7 +1077,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Meta/VirtualMeetingFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0005;
+				CURRENT_PROJECT_VERSION = 0006;
 				DOCC_MINIMUM_ACCESS_LEVEL = internal;
 				DRIVERKIT_DEPLOYMENT_TARGET = "$(RECOMMENDED_DRIVERKIT_DEPLOYMENT_TARGET)";
 				ENABLE_APP_SANDBOX = YES;
@@ -1121,7 +1123,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Meta/VirtualMeetingFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0005;
+				CURRENT_PROJECT_VERSION = 0006;
 				DOCC_MINIMUM_ACCESS_LEVEL = internal;
 				DRIVERKIT_DEPLOYMENT_TARGET = "$(RECOMMENDED_DRIVERKIT_DEPLOYMENT_TARGET)";
 				ENABLE_APP_SANDBOX = YES;

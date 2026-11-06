@@ -56,6 +56,7 @@ enum VMF_WidgetStore {
      static let groupID = "group.org.littlegreenviper.VMF"
      static let kind = "VMF_MeetingsWidget"
      static let openAppURL = URL(string: "lgv-vmf://open")!
+     static let openMainScreenURL = URL(string: "lgv-vmf://main")!
 
      private static func file(_ name: String) -> URL? {
           FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupID)?
@@ -110,13 +111,12 @@ struct VMF_WidgetLayout {
           let attendanceHeight = unit * 6
           let compactHeight = unit * 3
           var remaining = height
-          if state.attendance.isEmpty {
-               remaining -= heading + unit * 3
-          } else {
+          if !state.attendance.isEmpty {
                let liveReservation = state.inProgress.isEmpty ? 0 : heading + compactHeight
                let rows = max(1, min(3, Int((height - heading - liveReservation) / attendanceHeight)))
                attendance = Array(state.attendance.prefix(rows * columns))
-               remaining -= heading + Double((attendance.count + columns - 1) / columns) * attendanceHeight
+               let attendanceRows = (attendance.count + columns - 1) / columns
+               remaining -= heading + Double(attendanceRows) * attendanceHeight
           }
           let shown = Set(attendance.map(\.id))
           let active = state.inProgress.filter { !shown.contains($0.id) }

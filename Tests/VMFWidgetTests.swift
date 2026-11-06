@@ -46,12 +46,13 @@ final class VMFWidgetTests: XCTestCase {
           XCTAssertEqual(unfiltered.inProgress.map(\.id), [1, 3])
      }
 
-     func testNoAttendanceDoesNotHideOtherMeetings() {
+     func testNoAttendanceLeavesRoomForLiveAndUpcomingRows() {
           let state = VMF_WidgetSchedule(meetings: [meeting(1, offset: -1800), meeting(2, offset: 900)], preferences: .init(), now: now).state(at: now)
           XCTAssertTrue(state.attendance.isEmpty)
-          let layout = VMF_WidgetLayout(state: state, height: 270, unit: 12, columns: 1)
+          let layout = VMF_WidgetLayout(state: state, height: 120, unit: 12, columns: 1)
+          XCTAssertTrue(layout.attendance.isEmpty)
           XCTAssertEqual(layout.inProgress.map(\.id), [1])
-          XCTAssertEqual(layout.upcoming.first?.id, 2)
+          XCTAssertEqual(layout.upcoming.map(\.id), [2])
      }
 
      func testLayoutPrioritizesLiveMeetingsAndAvoidsDuplicates() {
@@ -134,7 +135,7 @@ final class VMFWidgetTests: XCTestCase {
           for language in languages {
                let app = try XCTUnwrap(Bundle(path: Bundle.main.path(forResource: language, ofType: "lproj")!))
                let localized = try XCTUnwrap(Bundle(path: widget.path(forResource: language, ofType: "lproj")!))
-               for key in ["WIDGET-TITLE", "WIDGET-DESCRIPTION", "WIDGET-APP-NAME", "WIDGET-I-ATTEND", "WIDGET-IN-PROGRESS", "WIDGET-UPCOMING", "WIDGET-NO-ATTENDANCE", "WIDGET-OPEN-APP", "WIDGET-OPEN-TO-REFRESH", "WIDGET-OPEN-MEETING-HINT"] {
+               for key in ["WIDGET-TITLE", "WIDGET-DESCRIPTION", "WIDGET-APP-NAME", "WIDGET-I-ATTEND", "WIDGET-IN-PROGRESS", "WIDGET-UPCOMING", "WIDGET-OPEN-APP", "WIDGET-OPEN-MEETING-HINT"] {
                     let value = localized.localizedString(forKey: key, value: nil, table: "Localizable")
                     XCTAssertFalse(value.isEmpty)
                     XCTAssertNotEqual(value, key, "Missing \(language) widget translation for \(key)")
@@ -166,6 +167,7 @@ final class VMFWidgetTests: XCTestCase {
           let navigation = UINavigationController(rootViewController: main)
           let table = try XCTUnwrap(UIStoryboard(name: "VMF", bundle: .main).instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController)
           let scene = VMF_SceneDelegate()
+          scene.window = window
           var availableMeetings: [MeetingInstance]?
           scene.meetingSource = { availableMeetings }
           defer {
@@ -201,7 +203,7 @@ final class VMFWidgetTests: XCTestCase {
           scene.resolveURL(try XCTUnwrap(VMF_MeetingLink.url(for: firstID)))
 
           availableMeetings = collection.meetings.map(\.meeting)
-          scene.openPendingMeeting()
+          scene.openPendingLink()
           XCTAssertEqual((navigation.topViewController as? VMF_MeetingInspectorViewController)?.meeting?.id, UInt64(firstID))
           XCTAssertEqual(VMF_SceneDelegate.urlMeetingID, 0)
 
@@ -227,6 +229,13 @@ final class VMFWidgetTests: XCTestCase {
 
           scene.resolveURL(VMF_WidgetStore.openAppURL)
           XCTAssertEqual(VMF_SceneDelegate.urlMeetingID, 0, "The icon's normal-open URL must not select a meeting")
+
+          availableMeetings = nil
+          scene.resolveURL(VMF_WidgetStore.openMainScreenURL)
+          let returnedToMain = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in
+               navigation.topViewController === main && navigation.viewControllers.count == 1
+          }, object: nil)
+          wait(for: [returnedToMain], timeout: 3)
      }
 
      func testSDKResolvesSpringDSTBeforeExport() throws {

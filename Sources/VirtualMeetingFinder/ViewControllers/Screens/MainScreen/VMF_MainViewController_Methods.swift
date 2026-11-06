@@ -333,7 +333,7 @@ extension VMF_MainViewController {
           tableDisplayController = newViewController
           // The page must be attached before a cold-start meeting link can segue.
           DispatchQueue.main.async {
-               VMF_SceneDelegate.sceneDelegateInstance?.openPendingMeeting()
+               VMF_SceneDelegate.sceneDelegateInstance?.openPendingLink()
           }
      }
      

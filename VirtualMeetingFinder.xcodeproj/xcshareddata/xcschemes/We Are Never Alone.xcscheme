@@ -30,8 +30,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
       <Testables>
-         <TestableReference skipped = "NO">
-            <BuildableReference BuildableIdentifier = "primary" BlueprintIdentifier = "A12611060000000000000226" BuildableName = "VMFWidgetTests.xctest" BlueprintName = "VMFWidgetTests" ReferencedContainer = "container:VirtualMeetingFinder.xcodeproj"/>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A12611060000000000000226"
+               BuildableName = "VMFWidgetTests.xctest"
+               BlueprintName = "VMFWidgetTests"
+               ReferencedContainer = "container:VirtualMeetingFinder.xcodeproj">
+            </BuildableReference>
          </TestableReference>
       </Testables>
    </TestAction>

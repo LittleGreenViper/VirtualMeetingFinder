@@ -99,7 +99,7 @@
 /* This is the header, over the Formats display, in the Meeting Inspector. */
 "SLUG-FORMATS-HEADER"                             =    "Μορφές συγκέντρωσης";
 /* This is the header, over the in-person meeting address, in the Meeting Inspector. */
-"SLUG-IN-PERSON-HEADER"                           =    "Τοποθεσία συγκέντρωσης με φυσική παρουσία";
+"SLUG-IN-PERSON-HEADER"                           =    "Τοποθεσία συνάντησης";
 /* This is the button that is shown, if Recovrr is also installed. It allows the user to inspect the meeting in the Recovrr app. */
 "SLUG-OPEN-IN-RECOVRR-BUTTON"                     =    "Άνοιγμα στο Recovrr";
 

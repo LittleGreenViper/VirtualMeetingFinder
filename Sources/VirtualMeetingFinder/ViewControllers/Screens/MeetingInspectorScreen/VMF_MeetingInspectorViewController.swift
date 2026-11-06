@@ -104,6 +104,23 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
       */
      private static let _narrowNavigationBarWidth: CGFloat = 375
 
+     /// Fits the localized title into the space between the navigation buttons.
+     private let _navigationTitleLabel: UILabel = {
+          let label = UILabel()
+          label.font = .systemFont(ofSize: 17, weight: .semibold)
+          label.textColor = .label
+          label.textAlignment = .center
+          label.baselineAdjustment = .alignCenters
+          label.adjustsFontSizeToFitWidth = true
+          label.minimumScaleFactor = 0.65
+          label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+          label.accessibilityTraits.insert(.header)
+          return label
+     }()
+
+     /// Gives the label the width UIKit allocates to the custom title view.
+     private lazy var _navigationTitleView = UIStackView(arrangedSubviews: [_navigationTitleLabel])
+
      /// The fixed-size checkbox inside the attendance button.
      private let _attendanceIndicator = UIImageView()
 
@@ -748,6 +765,9 @@ extension VMF_MeetingInspectorViewController {
                ? nil
                : (meeting?.meetingType == .hybrid ? "SLUG-HYBRID-MEETING" : "SLUG-VIRTUAL-MEETING").localizedVariant
           if navigationItem.title != title { navigationItem.title = title }
+          if _navigationTitleLabel.text != title { _navigationTitleLabel.text = title }
+          let titleView = hidesTitle ? nil : _navigationTitleView
+          if navigationItem.titleView !== titleView { navigationItem.titleView = titleView }
 
           let usesCompactLayout = navigationController?.topBarSideOcclusion != nil
           guard usesCompactLayout != _usesCompactAttendanceLayout,

@@ -579,7 +579,7 @@ extension VMF_MeetingInspectorViewController {
                openInRecovrrButton?.isHidden = true
           }
           
-          navigationItem.title = ((.hybrid == meeting?.meetingType) ? "SLUG-HYBRID-MEETING" : "SLUG-VIRTUAL-MEETING").localizedVariant
+          _updateNavigationTitle()
           
           setTimeZone()
           setTimeAndWeekday()
@@ -721,6 +721,7 @@ extension VMF_MeetingInspectorViewController {
       */
      override func viewDidLayoutSubviews() {
           super.viewDidLayoutSubviews()
+          _updateNavigationTitle()
           _openSezMe = true
      }
 }
@@ -729,6 +730,14 @@ extension VMF_MeetingInspectorViewController {
 // MARK: Instance Methods
 /* ###################################################################################################################################### */
 extension VMF_MeetingInspectorViewController {
+     /// Gives the top bar to the inspector's buttons on both Duo displays.
+     private func _updateNavigationTitle() {
+          let title = (navigationController as? VMF_NavigationController)?.usesDuoLayout == true
+               ? nil
+               : (meeting?.meetingType == .hybrid ? "SLUG-HYBRID-MEETING" : "SLUG-VIRTUAL-MEETING").localizedVariant
+          if navigationItem.title != title { navigationItem.title = title }
+     }
+
      /** Keeps each disclosure's spoken state and action aligned with its visible contents. */
      func updateDisclosureAccessibility() {
           for (header, title, isOpen) in [(formatHeader, "SLUG-FORMATS-HEADER", isFormatsOpen),

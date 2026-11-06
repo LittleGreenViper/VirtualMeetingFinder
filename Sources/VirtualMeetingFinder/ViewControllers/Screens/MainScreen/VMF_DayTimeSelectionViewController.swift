@@ -29,13 +29,23 @@ import UIKit
 class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentationControllerDelegate {
      /// Preferred popover size while browsing weekday start times.
      static let browsingSize = CGSize(width: 600, height: 500)
-     /// Preferred popover size while entering a meeting-name query.
-     static let searchSize = CGSize(width: 600, height: 180)
+     /// Preferred popover height while entering a meeting-name query.
+     private static let searchHeight: CGFloat = 180
      /// Opaque light/dark background shared with the popover outline.
      static let backgroundColor = UIColor { $0.userInterfaceStyle == .dark ? .black : .white }
 
      /// Owns the meeting data and receives time selections and live search changes.
      weak var mainController: VMF_MainViewController?
+
+     private let backgroundDimmingView: UIView = {
+          let dimmingView = UIView()
+          dimmingView.backgroundColor = UIColor.black.withAlphaComponent(0.32)
+          dimmingView.alpha = 0
+          dimmingView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+          dimmingView.isUserInteractionEnabled = false
+          dimmingView.accessibilityElementsHidden = true
+          return dimmingView
+     }()
 
      private let weekdaySelector = VMF_WeekdaySegmentedControl()
      private let weekdayLabel = UILabel()
@@ -222,6 +232,16 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
           setSearchMode(mainController?.isNameSearchMode ?? false)
      }
 
+     /// Mutes the presenting screen while UIKit keeps the popover above it.
+     override func viewWillAppear(_ inIsAnimated: Bool) {
+          super.viewWillAppear(inIsAnimated)
+          if let background = mainController?.navigationController?.viewIfLoaded ?? mainController?.viewIfLoaded {
+               backgroundDimmingView.frame = background.bounds
+               background.addSubview(backgroundDimmingView)
+               setBackgroundDimmingVisible(true)
+          }
+     }
+
      /// Focuses the retained search field when the popover opens in search mode.
      override func viewDidAppear(_ inIsAnimated: Bool) {
           super.viewDidAppear(inIsAnimated)
@@ -231,9 +251,26 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
      /// Releases the search keyboard and confirms dismissal with a sharp haptic while the scene is active.
      override func viewWillDisappear(_ inIsAnimated: Bool) {
           super.viewWillDisappear(inIsAnimated)
+          setBackgroundDimmingVisible(false)
           searchTextField.resignFirstResponder()
           if isBeingDismissed, view.window?.windowScene?.activationState == .foregroundActive {
                mainController?.hardImpactHaptic()
+          }
+     }
+
+     /// Clears the dimming layer after every dismissal path.
+     override func viewDidDisappear(_ inIsAnimated: Bool) {
+          super.viewDidDisappear(inIsAnimated)
+          backgroundDimmingView.removeFromSuperview()
+     }
+
+     private func setBackgroundDimmingVisible(_ inIsVisible: Bool) {
+          let dimmingView = backgroundDimmingView
+          guard let background = dimmingView.superview else { return }
+
+          let alpha: CGFloat = inIsVisible ? 1 : 0
+          if transitionCoordinator?.animateAlongsideTransition(in: background, animation: { _ in dimmingView.alpha = alpha }) != true {
+               dimmingView.alpha = alpha
           }
      }
 
@@ -337,7 +374,7 @@ class VMF_DayTimeSelectionViewController: UIViewController, UIPopoverPresentatio
           searchButton.configuration = configuration
           searchButton.accessibilityLabel = (inIsSearching ? "SLUG-ACC-CLOSE-SEARCH-BUTTON-LABEL" : "SLUG-ACC-WEEKDAY-SWITCH-8-LABEL").localizedVariant
           searchButton.accessibilityHint = (inIsSearching ? "SLUG-ACC-CLOSE-SEARCH-BUTTON-HINT" : "SLUG-ACC-WEEKDAY-SWITCH-8-HINT").localizedVariant
-          preferredContentSize = inIsSearching ? Self.searchSize : Self.browsingSize
+          preferredContentSize.height = inIsSearching ? Self.searchHeight : Self.browsingSize.height
           if !inIsSearching {
                searchTextField.resignFirstResponder()
                timeTableView.reloadData()
@@ -565,10 +602,12 @@ extension VMF_DayTimeSelectionViewController: UITableViewDataSource, UITableView
           var background = UIBackgroundConfiguration.clear()
           background.backgroundColor = isSelected ? view.tintColor : Self.backgroundColor
           background.cornerRadius = isSelected ? 6 : 0
-          background.backgroundInsets = isSelected ? NSDirectionalEdgeInsets(top: 3, leading: 0, bottom: 3, trailing: 0) : .zero
+          background.backgroundInsets = isSelected ? NSDirectionalEdgeInsets(top: 3, leading: 8, bottom: 3, trailing: 8) : .zero
           cell.backgroundConfiguration = background
           let count = NumberFormatter.localizedString(from: NSNumber(value: timeCounts[time] ?? 0), number: .decimal)
           var content = cell.defaultContentConfiguration()
+          // Match the accessory's trailing spacing so both ends of the highlight have the same padding.
+          content.directionalLayoutMargins.leading = 24
           content.text = title
           content.textProperties.font = .preferredFont(forTextStyle: textStyle)
           content.textProperties.adjustsFontForContentSizeCategory = true

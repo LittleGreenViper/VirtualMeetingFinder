@@ -14,7 +14,7 @@
         <!--Main Navigation-->
         <scene sceneID="QCo-5c-Mxs">
             <objects>
-                <navigationController toolbarHidden="NO" id="U2c-9b-Eip" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="U2c-9b-Eip" customClass="VMF_NavigationController" customModule="We_Are_Never_Alone" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Main Navigation" id="Tdm-it-zYg">
                         <imageReference key="image" image="magnifyingglass" catalog="system" symbolScale="large"/>
                     </tabBarItem>
@@ -987,17 +987,8 @@
                                                     <constraint firstAttribute="height" id="afA-rx-knH"/>
                                                 </constraints>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="muY-vL-JjX" customClass="VMF_RecovrrButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
-                                                <rect key="frame" x="39" y="639" width="251" height="30"/>
-                                                <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-OPEN-IN-RECOVRR-BUTTON-HINT" label="SLUG-ACC-OPEN-IN-RECOVRR-BUTTON-LABEL"/>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" title="SLUG-OPEN-IN-RECOVRR-BUTTON"/>
-                                                <connections>
-                                                    <action selector="openInRecovrrButtonHit:" destination="P9w-wB-EO1" eventType="touchUpInside" id="I8q-VG-o6G"/>
-                                                </connections>
-                                            </button>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="250" rotateEnabled="NO" pitchEnabled="NO" showsCompass="NO" showsPointsOfInterest="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bIq-s0-xoL">
-                                                <rect key="frame" x="16.333333333333343" y="681" width="296.33333333333326" height="0.0"/>
+                                                <rect key="frame" x="16.333333333333343" y="639" width="296.33333333333326" height="0.0"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" id="v6u-tG-PVg"/>
                                                 </constraints>
@@ -1017,6 +1008,15 @@
                                                     <outlet property="delegate" destination="P9w-wB-EO1" id="Csl-3M-kMj"/>
                                                 </connections>
                                             </mapView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="muY-vL-JjX" customClass="VMF_RecovrrButton" customModule="We_Are_Never_Alone" customModuleProvider="target">
+                                                <rect key="frame" x="39" y="651" width="251" height="30"/>
+                                                <accessibility key="accessibilityConfiguration" hint="SLUG-ACC-OPEN-IN-RECOVRR-BUTTON-HINT" label="SLUG-ACC-OPEN-IN-RECOVRR-BUTTON-LABEL"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="SLUG-OPEN-IN-RECOVRR-BUTTON"/>
+                                                <connections>
+                                                    <action selector="openInRecovrrButtonHit:" destination="P9w-wB-EO1" eventType="touchUpInside" id="I8q-VG-o6G"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GER-7R-iCr" secondAttribute="trailing" id="0gJ-uC-GSN"/>

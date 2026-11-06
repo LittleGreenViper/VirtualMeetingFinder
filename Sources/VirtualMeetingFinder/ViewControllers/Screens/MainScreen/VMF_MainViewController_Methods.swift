@@ -71,10 +71,9 @@ extension VMF_MainViewController {
           dayTimeSelectionButton.accessibilityValue = isNameSearchMode ? "SLUG-ACC-WEEKDAY-SWITCH-8-LABEL".localizedVariant : selectionTitle
           dayTimeSelectionButton.sizeToFit()
           navigationController?.navigationBar.setNeedsLayout()
-          if let popover = presentedViewController?.popoverPresentationController,
-             popover.sourceView === dayTimeSelectionButton {
+          if let controller = presentedViewController as? VMF_DayTimeSelectionViewController {
                navigationController?.navigationBar.layoutIfNeeded()
-               popover.sourceRect = dayTimeSelectionButton.bounds
+               _layoutDayTimePopover(controller)
           }
      }
 
@@ -401,13 +400,49 @@ extension VMF_MainViewController {
           controller.preferredContentSize = VMF_DayTimeSelectionViewController.browsingSize
           guard let popover = controller.popoverPresentationController else { return }
           popover.delegate = controller
-          popover.sourceView = dayTimeSelectionButton
-          popover.sourceRect = dayTimeSelectionButton.bounds
+          _layoutDayTimePopover(controller)
           popover.permittedArrowDirections = .up
           popover.backgroundColor = VMF_DayTimeSelectionViewController.backgroundColor
           popover.popoverBackgroundViewClass = VMF_DayTimePopoverBackgroundView.self
           hardImpactHaptic()
           present(controller, animated: true)
+     }
+
+     /// Uses the right panel beside an active hinge, or the full width below the folded display's system controls.
+     private func _layoutDayTimePopover(_ inController: VMF_DayTimeSelectionViewController) {
+          guard let popover = inController.popoverPresentationController else { return }
+
+          let safeFrame = view.safeAreaLayoutGuide.layoutFrame
+          var rightPanelStart: CGFloat?
+          if #available(iOS 27.1, *) {
+               rightPanelStart = view.reservedRegions(kind: .division).map(\.frame).first {
+                    $0.width > 0 && $0.height > $0.width && safeFrame.minX < $0.minX && $0.maxX < safeFrame.maxX
+               }?.maxX
+          }
+
+          var sourceView: UIView = dayTimeSelectionButton
+          var sourceRect = dayTimeSelectionButton.bounds
+          var margins = UIEdgeInsets.zero
+          var width = VMF_DayTimeSelectionViewController.browsingSize.width
+          let occlusion = (navigationController as? VMF_NavigationController)?.topBarSideOcclusion
+          if let window = view.window,
+             rightPanelStart != nil || (traitCollection.horizontalSizeClass == .compact && occlusion != nil) {
+               let buttonFrame = dayTimeSelectionButton.convert(dayTimeSelectionButton.bounds, to: view)
+               let panelStart = rightPanelStart ?? safeFrame.minX
+               let anchorX = rightPanelStart.map { max($0 + 8, buttonFrame.maxX) } ?? buttonFrame.midX
+               let anchorY = max(safeFrame.minY, occlusion.map { view.convert($0, from: window).maxY } ?? safeFrame.minY)
+               let panelOrigin = view.convert(CGPoint(x: panelStart, y: anchorY), to: window)
+               let leftMargin = rightPanelStart == nil ? 8 : panelOrigin.x - window.bounds.minX + 8
+               sourceView = view
+               sourceRect = CGRect(x: anchorX, y: anchorY, width: 1, height: 1)
+               margins = UIEdgeInsets(top: panelOrigin.y - window.bounds.minY, left: leftMargin, bottom: 8, right: 8)
+               width = min(width, max(1, safeFrame.maxX - panelStart - 32))
+          }
+
+          if popover.sourceView !== sourceView { popover.sourceView = sourceView }
+          if popover.sourceRect != sourceRect { popover.sourceRect = sourceRect }
+          if popover.popoverLayoutMargins != margins { popover.popoverLayoutMargins = margins }
+          if inController.preferredContentSize.width != width { inController.preferredContentSize.width = width }
      }
 
      /* ################################################################## */
@@ -496,11 +531,14 @@ extension VMF_MainViewController {
      
      /* ################################################################## */
      /**
-      Updates the attendance button after layout.
+      Updates the attendance button and the popover anchor after layout.
       */
      override func viewDidLayoutSubviews() {
           super.viewDidLayoutSubviews()
           setAttendance()
+          if let controller = presentedViewController as? VMF_DayTimeSelectionViewController {
+               _layoutDayTimePopover(controller)
+          }
      }
      
      /* ################################################################## */

@@ -36,8 +36,9 @@ import SwiftBMLSDK
  ``VMF_DayTimeSelectionViewController`` presents the weekday/time picker and search field
  from the navigation title button. ``VMF_DayTimeSearchPageViewController`` embeds the
  current meeting table and allows adjacent time-slot swipes outside search mode.
- Selecting Now explicitly displays all meetings in progress. The first swipe from Now
- selects the latest available start at or before the current local time.
+ Selecting Now explicitly displays all meetings in progress. The first forward swipe from Now
+ selects the first available start after the current local time; the first backward swipe
+ selects the latest start at or before now.
 
  Search filters the name-sorted collection as text changes and preserves the underlying
  time selection. Local attendance selections are available from a separate

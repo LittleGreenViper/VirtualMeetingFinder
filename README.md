@@ -44,7 +44,7 @@ Widget regression tests are included in the regular scheme's Test action. They c
 
 #### The Main Screen
 
-The navigation title shows the selected weekday and time, or the current search/Now mode. Its popover contains the weekday selector, the available start times, Now, and search. Weekdays follow the user's local calendar order. Swiping the meeting list still moves between time slots. From Now, the first swipe opens the latest available start at or before the current local time. Further swipes move through adjacent start times, skipping days without meetings.
+The navigation title shows the selected weekday and time, or the current search/Now mode. Its popover contains the weekday selector, the available start times, Now, and search. Weekdays follow the user's local calendar order. Swiping the meeting list still moves between time slots. From Now, the first forward swipe opens the first available start after the current local time; the first backward swipe opens the latest start at or before now. Further swipes move through adjacent start times, skipping days without meetings.
 
 #### The Attendance Screen
 

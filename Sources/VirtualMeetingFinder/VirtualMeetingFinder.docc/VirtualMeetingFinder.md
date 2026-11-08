@@ -25,8 +25,9 @@ popover retains the query. Search ignores case, accents, character width, and
 equivalent Latin glyphs such as ligatures.
 
 Outside search, swiping the meeting list moves through adjacent start times,
-skipping empty days and wrapping the week. The first swipe from Now selects the
-latest available start at or before the current local time.
+skipping empty days and wrapping the week. The first forward swipe from Now selects
+the first available start after the current local time. The first backward swipe
+selects the latest available start at or before now.
 
 ### Inspect and save
 

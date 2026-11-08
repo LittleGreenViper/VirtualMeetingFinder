@@ -24,25 +24,31 @@ import UIKit
 /* ###################################################################################################################################### */
 extension VMF_MainViewController {
      /**
-      Resolves Now to the latest available start at or before the current local time.
+      Resolves Now to the first start after the current local time when moving forward,
+      or the latest start at or before now when moving backward.
       Regular pages move one slot at a time, skipping empty weekdays and wrapping the week.
       Now is entered explicitly from the popover, rather than appearing between time slots.
       */
      func adjacentTimeSlot(fromDay inDay: Int, timeIndex inIndex: Int, forward inIsForward: Bool) -> (dayIndex: Int, timeIndex: Int)? {
+          let step = inIsForward ? 1 : -1
           if inDay == 0 {
                let now = nowIs
                guard (1...7).contains(now.weekday) else { return nil }
                for offset in 0...7 {
-                    let day = (now.weekday - 1 - offset + 7) % 7 + 1
+                    let day = (now.weekday - 1 + offset * step + 7) % 7 + 1
                     let times = getDailyMeetings(for: day).keys.sorted()
-                    let index = offset == 0 ? times.lastIndex(where: { $0 <= now.currentIntegerTime }) : times.indices.last
+                    let index: Int?
+                    if offset == 0 {
+                         index = inIsForward ? times.firstIndex(where: { $0 > now.currentIntegerTime }) : times.lastIndex(where: { $0 <= now.currentIntegerTime })
+                    } else {
+                         index = inIsForward ? times.indices.first : times.indices.last
+                    }
                     if let index = index { return (day, index) }
                }
                return nil
           }
 
           guard (1...7).contains(inDay) else { return nil }
-          let step = inIsForward ? 1 : -1
           let nextIndex = inIndex + step
           if (0..<getDailyMeetings(for: inDay).count).contains(nextIndex) {
                return (inDay, nextIndex)
@@ -68,7 +74,7 @@ extension VMF_MainViewController: UIPageViewControllerDataSource {
           return getTableDisplay(for: slot.dayIndex, time: slot.timeIndex)
      }
 
-     /// Supplies the next time-slot page, using the same Now exit rule as backward paging.
+     /// Supplies the next time-slot page, or the first start after now when leaving Now.
      func pageViewController(_: UIPageViewController, viewControllerAfter inController: UIViewController) -> UIViewController? {
           guard !isNameSearchMode,
                 let page = inController as? VMF_EmbeddedTableController,

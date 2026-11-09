@@ -1,30 +1,32 @@
-# We Are Never Alone
+# <img src="icon.png" alt="We Are Never Alone app icon" width="64" height="64"> We Are Never Alone
 
-An app that makes it simple to discover and attend virtual (and hybrid) NA meetings.
+**Version 2.0.0** — Discover and attend virtual and hybrid Narcotics Anonymous meetings in your local time zone.
 
 ## Overview
 
-![Icon](icon.png)
+We Are Never Alone brings a worldwide meeting directory to iPhone, iPad, and compatible Macs running the iPhone/iPad app. Find a meeting in progress, browse by day and time, search meeting names, and keep the meetings you attend close at hand.
 
-This app works by downloading a large list of virtual (and hybrid) meetings from a worldwide database, then presents them to the user, in a form that is directly useful to the user.
+Version 2.0.0 introduces refreshed app and splash artwork, light and dark backgrounds, a day/time and search popover, and Home Screen widgets. Greek and Latin American Spanish join the existing translations, with terminology aligned with Recovrr.
 
-### Get the application, itself
+The app is free on the Apple App Store.
 
-|The app is available for free, from the iOS/iPadOS/MacOS Apple App Store|
-|:-:|
-|[![Apple App Store Badge](img/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg)](https://apps.apple.com/us/app/we-are-never-alone/id6504826025)|
+[![Download on the App Store](img/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg)](https://apps.apple.com/us/app/we-are-never-alone/id6504826025)
+
+See [CHANGELOG.md](CHANGELOG.md) for the version history.
 
 ## Usage
 
-This app connects to an instance of [`LGV_MeetingServer`](https://github.com/LittleGreenViper/LGV_MeetingServer), and downloads the entire dataset for all meetings that have a virtual component (Either full virtual, or hybrid Virtual/in-Person). It either does this, when starting "cold," after 4 hours have passed, or at the user's behest (by doing a "pull-to refresh" on the table).
+The app uses [`SwiftBMLSDK`](https://github.com/LittleGreenViper/SwiftBMLSDK) to download virtual and hybrid meetings from [`LGV_MeetingServer`](https://github.com/LittleGreenViper/LGV_MeetingServer). It loads the directory when needed at startup, checks for a refresh after four hours away, and supports pull-to-refresh outside name search.
 
 It then converts meeting start and end times to the user's current timezone. Select the weekday and time in the navigation bar to open the day/time popover. Choose a weekday to see its available meeting start times, then tap a time to display those meetings and close the popover. The time list scrolls when needed. **Now** shows meetings in progress, and the search button opens the meeting-name field inside the popover and filters the main table as you type. Select **Show results**, use the keyboard’s Search key, or dismiss the popover to view the results; reopening it preserves your query. Search ignores case, accents, character-width differences, and equivalent Latin glyphs such as ligatures.
 
-Each meeting can be inspected individually, in order to see things like formats, in-person addresses, and virtual URLs. Also, if the user has an app installed (for example, [Zoom](https://zoom.us)), and the meeting has a join URL, the app will translate it to that app's URL scheme, and open the app directly (without having to go through Safari).
+Select a meeting to inspect its schedule, formats, joining details, and any in-person location. Supported installed meeting apps can open directly from the inspector. Web and phone options depend on the connection details supplied by the meeting.
 
-Users can select a meeting as one they attend, which allows those meetings to be grouped into a separate screen.
+Mark **I attend** to add a meeting to your attendance list and widget. The inspector's share sheet can share a meeting link, prepare a weekly calendar event for review, or open an available map app. A separate **Open in Recovrr** button appears when Recovrr is available.
 
 ### Home Screen widget
+
+![Large Meetings widget in light appearance](img/fig07.png)
 
 Add **Meetings** from the We Are Never Alone widget gallery. Medium shows the next meeting marked **I attend**, including a meeting already in progress. Large and extra-large show attended meetings first, then meetings in progress, followed by upcoming meetings when space permits. Extra-large sizes are offered where the device and OS support them. The widget shares the app’s splash logo and light and dark gradients.
 
@@ -38,47 +40,67 @@ For device signing, enable the **App Groups** capability on both **We Are Never 
 
 Widget regression tests are included in the regular scheme's Test action. They cover service filtering, list priority, meeting boundaries, local formatting, and SDK date export across DST and midnight.
 
-## The Specifics
+## The Screens
 
-### The Screens
+### The Main Screen
 
-#### The Main Screen
+![Meetings in progress in version 2.0.0](img/fig01.png)
 
-The navigation title shows the selected weekday and time, or the current search/Now mode. Its popover contains the weekday selector, the available start times, Now, and search. Weekdays follow the user's local calendar order. Swiping the meeting list still moves between time slots. From Now, the first forward swipe opens the first available start after the current local time; the first backward swipe opens the latest start at or before now. Further swipes move through adjacent start times, skipping days without meetings.
+The main screen starts with meetings in progress. The navigation title shows the selected weekday and time, or the current search/Now mode. Its popover contains the weekday selector, the available start times and meeting counts, Now, and search. Weekdays follow the user's local calendar order.
 
-#### The Attendance Screen
+![Day and time popover in dark appearance](img/fig02.png)
+
+Swiping the meeting list moves between time slots. From Now, the first forward swipe opens the first available start after the current local time; the first backward swipe opens the latest start at or before now. Further swipes move through adjacent start times, skipping days without meetings. Paging is disabled during name search.
+
+### The Attendance Screen
 
 ![Attendance Screen](img/fig03.png)
 
-If the user has selected one or more meetings as ones they attend, a bar button enables in the Main Screen, allowing the user to bring in another screen, with just the meetings they marked as ones they attend.
+After you mark one or more meetings **I attend**, the attendance button on the main screen opens your saved list. Meetings in progress appear first, followed by the next upcoming occurrences. Attendance stays on your device and does not synchronize with other devices.
 
-#### The Meeting Inspector Screen
+### The Meeting Inspector Screen
 
 ![Meeting Inspector Screen](img/fig04.png)
 
-If the user selects a single meeting from the list, another screen is brought in, that displays specific and detailed information about that meeting.
+Select a meeting from any list to see its details. Expand formats or the in-person location, use the available joining controls, change attendance, share the meeting, or prepare a calendar event. Times are shown in your local time zone, with source time-zone information when it differs.
 
-#### The Settings Screen
+### The Settings Screen
 
 ![Settings Screen](img/fig05.png)
 
-This is a screen that is brought in from the Main Screen, that allows the user to specify various settings.
+Open Settings from the main screen to choose whether recognized service meetings are hidden from day/time and name-search results. The widget also honors this preference. Settings links to the About screen.
 
-#### The About This App Screen
+### The About This App Screen
 
 ![About Screen](img/fig06.png)
 
-This is another screen that is brought in from the Settings Screen, that has information about the app, such as its specific version, and links to dependencies.
+About shows the installed version and build, the app's artwork, publisher information, privacy and source links, and its dependencies. The icon changes with light and dark appearance.
 
 ## Screenshots
 
-Select the **We Are Never Alone (For Screenshots)** scheme and an iPhone or iPad simulator. Its Screenshots configuration displays the supported virtual-meeting app control for the meeting's connection URL, even when that app is not installed, and displays Open in Recovrr. These controls are for screenshot presentation; the simulator does not gain cameras or installed apps.
+For App Store screenshots, run **We Are Never Alone (For Screenshots)** on all three designated simulators: **Screenshot 0 (\*)**, **Screenshot 1 (\*)**, and **Screenshot 2 (\*)**. Capture a complete set for each App Store localization in the order listed below, alternating light and dark appearance between consecutive screenshots in each set.
+
+Keep finished screenshots in `/Volumes/RedT5/We Are Never Alone Screenshots/`. Keep drafts, previews, temporary captures, and screenshot build output (including DerivedData) in a separate working directory on `/Volumes/RedT5/`.
+
+The Screenshots configuration displays the supported virtual-meeting app control for the meeting's connection URL, even when that app is not installed, and displays Open in Recovrr. These controls are for screenshot presentation; the simulator does not gain cameras or installed apps.
 
 Archiving is disabled in the scheme, and a build guard rejects archive/install actions using the Screenshots configuration. Regular Debug and Release builds retain their normal availability checks.
 
 ## Localization
 
-The app supports English, German, Greek, Spanish, Latin American Spanish, French, Italian, and Brazilian Portuguese. App text, alerts, and VoiceOver labels and hints share `Localizable.strings` in each language’s resource folder. The app’s `String.localizedVariant` accessor uses RVS_Generic_Swift_Toolbox to check Accessibility, Errors, and Localizable, then falls back to the shared NonLocalized table.
+The app and widget support English, French, German, Greek, Italian, Brazilian Portuguese, Spanish (Spain), and Latin American Spanish. Dates, times, and weekday order follow the user's locale; meeting names stay in their source language. VoiceOver labels, hints, and meeting-row attendance actions are localized alongside visible text.
+
+For version 2.0.0 and later, App Store localizations use this order:
+
+1. English (U.S.), the primary localization
+2. French
+3. German
+4. Greek
+5. Italian
+6. Portuguese (Brazil)
+7. Spanish (Spain)
+
+App text, alerts, and VoiceOver labels and hints share `Localizable.strings` in each language’s resource folder. The app’s `String.localizedVariant` accessor uses RVS_Generic_Swift_Toolbox to check Accessibility, Errors, and Localizable, then falls back to the shared NonLocalized table.
 
 `Resources/NonLocalized.strings` holds shared product names, URLs, and universal-link formats in one nonlocalized resource. This includes the six `SLUG-DIRECT-URI-*` app-name keys supplied dynamically by SwiftBMLSDK; retain these even though they have no literal callers in app source. Callers use `String.localizedVariant` for both shared values and translated text, without choosing a table. Keep this table out of the language-specific folders and translation work.
 
@@ -105,6 +127,8 @@ Open `/tmp/VMFDocumentation/Build/Products/Debug-iphonesimulator/We Are Never Al
 
 - [`RVS_BasicGCDTimer`](https://github.com/RiftValleySoftware/RVS_BasicGCDTimer)
 
+- [`RVS_Checkbox`](https://github.com/RiftValleySoftware/RVS_Checkbox)
+
 - [`RVS_Generic_Swift_Toolbox`](https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox)
 
 - [`RVS_PersistentPrefs`](https://github.com/RiftValleySoftware/RVS_PersistentPrefs)
@@ -112,6 +136,8 @@ Open `/tmp/VMFDocumentation/Build/Products/Debug-iphonesimulator/We Are Never Al
 - [`RVS_UIKit_Toolbox`](https://github.com/RiftValleySoftware/RVS_UIKit_Toolbox)
 
 - [`SwiftBMLSDK`](https://github.com/LittleGreenViper/SwiftBMLSDK)
+
+- [`PhoneNumberKit`](https://github.com/PhoneNumberKit/PhoneNumberKit)
 
 - [`LGV_MeetingServer`](https://github.com/LittleGreenViper/LGV_MeetingServer)
 
@@ -131,7 +157,7 @@ Open `/tmp/VMFDocumentation/Build/Products/Debug-iphonesimulator/We Are Never Al
 
 This project collects **absolutely no information at all**, from anyone, at any time.
 
-The "I Attend" data is kept local, on your device, using [User Defaults](https://developer.apple.com/documentation/foundation/userdefaults) (which means that deleting the app, also deletes this information, and it will not sync to your other devices).
+Attendance selections and settings stay on your device in [User Defaults](https://developer.apple.com/documentation/foundation/userdefaults). The app also writes a local meeting snapshot and a copy of these preferences to an App Group so its widget can display your schedule. Attendance does not synchronize with other devices. The widget uses that local snapshot and does not make its own meeting requests.
 
 ## Source Code
 

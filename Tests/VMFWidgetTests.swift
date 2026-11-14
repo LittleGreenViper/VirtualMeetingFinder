@@ -87,6 +87,27 @@ final class VMFWidgetTests: XCTestCase {
           XCTAssertEqual(layout.upcoming.map(\.id), [4])
      }
 
+     func testAttendanceOnlyUsesAvailableRowsAndHidesOtherMeetings() {
+          let state = VMF_WidgetSchedule(meetings: (1...8).map { meeting($0, offset: Double($0) * 900) } + [meeting(9, offset: -900)],
+                                        preferences: .init(attendance: Set(1...6)), now: now).state(at: now)
+          let layout = VMF_WidgetLayout(state: state, height: 320, unit: 12, columns: 1, onlyAttendance: true)
+          XCTAssertEqual(layout.attendance.map(\.id), [1, 2, 3, 4])
+          XCTAssertTrue(layout.inProgress.isEmpty)
+          XCTAssertTrue(layout.upcoming.isEmpty)
+          XCTAssertLessThanOrEqual(24 + Double(layout.attendance.count) * 72, 320)
+     }
+
+     func testAttendanceOnlyFallsBackWhenLastAttendedMeetingIsRemovedOrFiltered() {
+          let meetings = [meeting(1, offset: 900, service: true), meeting(2, offset: -900), meeting(3, offset: 1800)]
+          for attendance: Set<Int> in [[], [1]] {
+               let state = VMF_WidgetSchedule(meetings: meetings, preferences: .init(attendance: attendance), now: now).state(at: now)
+               let layout = VMF_WidgetLayout(state: state, height: 240, unit: 12, columns: 1, onlyAttendance: true)
+               XCTAssertTrue(layout.attendance.isEmpty)
+               XCTAssertEqual(layout.inProgress.map(\.id), [2])
+               XCTAssertEqual(layout.upcoming.map(\.id), [3])
+          }
+     }
+
      func testLocalFormattingUsesResolvedDateWithoutAddingAnOffset() {
           let occurrence = VMF_WidgetSchedule(meetings: [meeting(1)], preferences: .init(), now: now).state(at: now).inProgress[0]
           let zone = TimeZone(identifier: "America/Los_Angeles")!
@@ -135,7 +156,7 @@ final class VMFWidgetTests: XCTestCase {
           for language in languages {
                let app = try XCTUnwrap(Bundle(path: Bundle.main.path(forResource: language, ofType: "lproj")!))
                let localized = try XCTUnwrap(Bundle(path: widget.path(forResource: language, ofType: "lproj")!))
-               for key in ["WIDGET-TITLE", "WIDGET-DESCRIPTION", "WIDGET-APP-NAME", "WIDGET-I-ATTEND", "WIDGET-IN-PROGRESS", "WIDGET-UPCOMING", "WIDGET-OPEN-APP", "WIDGET-OPEN-MEETING-HINT"] {
+               for key in ["WIDGET-TITLE", "WIDGET-DESCRIPTION", "WIDGET-APP-NAME", "WIDGET-NEXT-MEETING", "WIDGET-IN-PROGRESS", "WIDGET-UPCOMING", "WIDGET-OPEN-APP", "WIDGET-OPEN-MEETING-HINT", "WIDGET-ONLY-ATTENDANCE", "WIDGET-FILTER-ON", "WIDGET-FILTER-OFF", "WIDGET-ATTENDANCE-REQUIRED"] {
                     let value = localized.localizedString(forKey: key, value: nil, table: "Localizable")
                     XCTAssertFalse(value.isEmpty)
                     XCTAssertNotEqual(value, key, "Missing \(language) widget translation for \(key)")
@@ -143,7 +164,6 @@ final class VMFWidgetTests: XCTestCase {
                let appName = app.localizedString(forKey: "CFBundleDisplayName", value: nil, table: "InfoPlist")
                XCTAssertEqual(localized.localizedString(forKey: "WIDGET-APP-NAME", value: nil, table: "Localizable"), appName)
                XCTAssertEqual(localized.localizedString(forKey: "CFBundleDisplayName", value: nil, table: "InfoPlist"), appName)
-               XCTAssertEqual(localized.localizedString(forKey: "WIDGET-I-ATTEND", value: nil, table: "Localizable"), app.localizedString(forKey: "SLUG-I-ATTEND", value: nil, table: "Localizable"))
           }
      }
 

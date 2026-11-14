@@ -1,38 +1,87 @@
 // © Copyright 2026, Little Green Viper Software Development LLC. MIT License.
 
+import AppIntents
 import SwiftUI
 import WidgetKit
 
 struct VMF_WidgetEntry: TimelineEntry {
      let date: Date
      let state: VMF_WidgetState
+     var onlyAttendance = false
 }
 
-struct VMF_WidgetProvider: TimelineProvider {
+/// A dynamic choice keeps On unavailable until the app has attended meetings.
+struct VMF_WidgetAttendanceChoice: AppEntity {
+     static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "WIDGET-ONLY-ATTENDANCE")
+     static var defaultQuery = VMF_WidgetAttendanceQuery()
+     let id: String
+
+     static let off = Self(id: "off")
+     static let on = Self(id: "on")
+
+     var displayRepresentation: DisplayRepresentation {
+          if VMF_WidgetStore.readPreferences().attendance.isEmpty {
+               return DisplayRepresentation(title: "WIDGET-FILTER-OFF", subtitle: "WIDGET-ATTENDANCE-REQUIRED")
+          }
+          return DisplayRepresentation(title: id == Self.on.id ? "WIDGET-FILTER-ON" : "WIDGET-FILTER-OFF")
+     }
+}
+
+struct VMF_WidgetAttendanceQuery: EntityQuery {
+     func entities(for identifiers: [String]) async throws -> [VMF_WidgetAttendanceChoice] {
+          identifiers.filter { $0 == "off" || $0 == "on" }.map { VMF_WidgetAttendanceChoice(id: $0) }
+     }
+
+     func suggestedEntities() async throws -> [VMF_WidgetAttendanceChoice] {
+          VMF_WidgetStore.readPreferences().attendance.isEmpty ? [.off] : [.off, .on]
+     }
+
+     func defaultResult() async -> VMF_WidgetAttendanceChoice? { .off }
+}
+
+struct VMF_WidgetIntent: WidgetConfigurationIntent {
+     static var title: LocalizedStringResource = "WIDGET-TITLE"
+     static var description = IntentDescription("WIDGET-DESCRIPTION")
+
+     @Parameter(title: "WIDGET-ONLY-ATTENDANCE")
+     var attendanceOnly: VMF_WidgetAttendanceChoice
+
+     init() { attendanceOnly = .off }
+
+     static var parameterSummary: some ParameterSummary {
+          Switch(.widgetFamily) {
+               Case(.systemLarge) {
+                    Summary { \.$attendanceOnly }
+               }
+               DefaultCase { Summary() }
+          }
+     }
+}
+
+struct VMF_WidgetProvider: AppIntentTimelineProvider {
      func placeholder(in context: Context) -> VMF_WidgetEntry { Self.preview }
 
-     func getSnapshot(in context: Context, completion: @escaping (VMF_WidgetEntry) -> Void) {
-          guard !context.isPreview else {
-               completion(Self.preview)
-               return
-          }
-          completion(entries().first!)
+     func snapshot(for configuration: VMF_WidgetIntent, in context: Context) async -> VMF_WidgetEntry {
+          guard !context.isPreview else { return Self.preview }
+          return entries(configuration: configuration, family: context.family).first!
      }
 
-     func getTimeline(in context: Context, completion: @escaping (Timeline<VMF_WidgetEntry>) -> Void) {
-          let entries = entries()
-          completion(Timeline(entries: entries, policy: .after(entries.last!.date.addingTimeInterval(60))))
+     func timeline(for configuration: VMF_WidgetIntent, in context: Context) async -> Timeline<VMF_WidgetEntry> {
+          let entries = entries(configuration: configuration, family: context.family)
+          return Timeline(entries: entries, policy: .after(entries.last!.date.addingTimeInterval(60)))
      }
 
-     private func entries() -> [VMF_WidgetEntry] {
+     private func entries(configuration: VMF_WidgetIntent, family: WidgetFamily) -> [VMF_WidgetEntry] {
           let now = Date()
           guard let cache = VMF_WidgetStore.readCache(), now < cache.validUntil else {
                return [VMF_WidgetEntry(date: now, state: VMF_WidgetState())]
           }
-          let schedule = VMF_WidgetSchedule(meetings: cache.meetings, preferences: VMF_WidgetStore.readPreferences(), now: now)
+          let preferences = VMF_WidgetStore.readPreferences()
+          let onlyAttendance = family == .systemLarge && configuration.attendanceOnly.id == "on" && !preferences.attendance.isEmpty
+          let schedule = VMF_WidgetSchedule(meetings: cache.meetings, preferences: preferences, now: now)
           return schedule.timelineDates(now: now).map { date in
                let state = date < cache.validUntil ? schedule.state(at: date) : VMF_WidgetState()
-               return VMF_WidgetEntry(date: date, state: state)
+               return VMF_WidgetEntry(date: date, state: state, onlyAttendance: onlyAttendance && !state.attendance.isEmpty)
           }
      }
 
@@ -63,12 +112,12 @@ struct VMF_WidgetView: View {
 
      private var columns: Int { family == .systemExtraLarge ? 2 : 1 }
      private var hasAttendance: Bool { !entry.state.attendance.isEmpty }
-     private var headerLogoSize: CGFloat { hasAttendance ? 28 : 44 }
+     private var headerLogoSize: CGFloat { hasAttendance ? 28 : 88 }
 
      var body: some View {
           GeometryReader { geometry in
                if family == .systemMedium && !hasAttendance {
-                    let size = min(geometry.size.width, geometry.size.height) * 0.55
+                    let size = min(geometry.size.width, geometry.size.height)
                     logoLink(size: size, destination: VMF_WidgetStore.openMainScreenURL)
                          .frame(maxWidth: .infinity, maxHeight: .infinity)
                } else {
@@ -83,11 +132,9 @@ struct VMF_WidgetView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                }
           }
-          .containerBackground(for: .widget) {
-               Image("BackgroundGradient").resizable()
-                    .scaleEffect(x: 1.02, y: 1)
-                    .clipped()
-          }
+          .fontDesign(.default)
+          .foregroundStyle(.primary)
+          .containerBackground(.background, for: .widget)
           .widgetURL(hasAttendance ? VMF_WidgetStore.openAppURL : VMF_WidgetStore.openMainScreenURL)
      }
 
@@ -125,17 +172,18 @@ struct VMF_WidgetView: View {
 
      private func medium(_ meeting: VMF_WidgetOccurrence) -> some View {
           VStack(alignment: .leading, spacing: 3) {
-               Text("WIDGET-I-ATTEND").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
+               Text("WIDGET-NEXT-MEETING").font(.caption).foregroundStyle(.secondary)
                meetingLink(meeting, attendance: true)
           }
           .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
      }
 
      private func meetingLists(height: Double) -> some View {
-          let layout = VMF_WidgetLayout(state: entry.state, height: height, unit: unit, columns: columns)
+          let layout = VMF_WidgetLayout(state: entry.state, height: height, unit: unit, columns: columns,
+                                        onlyAttendance: family == .systemLarge && entry.onlyAttendance)
           return VStack(alignment: .leading, spacing: 0) {
                if !layout.attendance.isEmpty {
-                    sectionHeading("WIDGET-I-ATTEND")
+                    sectionHeading("WIDGET-NEXT-MEETING", weight: .regular)
                     grid(layout.attendance, height: unit * 6, attendance: true)
                }
                if !layout.inProgress.isEmpty {
@@ -150,8 +198,8 @@ struct VMF_WidgetView: View {
           }
      }
 
-     private func sectionHeading(_ key: LocalizedStringKey) -> some View {
-          Text(key).font(.caption.weight(.semibold)).foregroundStyle(.secondary)
+     private func sectionHeading(_ key: LocalizedStringKey, weight: Font.Weight = .semibold) -> some View {
+          Text(key).font(.caption.weight(weight)).foregroundStyle(.secondary)
                .frame(maxWidth: .infinity, alignment: .leading)
                .frame(height: unit * 2, alignment: .top)
                .accessibilityAddTraits(.isHeader)
@@ -203,7 +251,7 @@ struct VMF_WidgetView: View {
 @main
 struct VMF_MeetingsWidget: Widget {
      var body: some WidgetConfiguration {
-          StaticConfiguration(kind: VMF_WidgetStore.kind, provider: VMF_WidgetProvider()) { entry in
+          AppIntentConfiguration(kind: VMF_WidgetStore.kind, intent: VMF_WidgetIntent.self, provider: VMF_WidgetProvider()) { entry in
                VMF_WidgetView(entry: entry)
           }
           .configurationDisplayName("WIDGET-TITLE")

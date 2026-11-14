@@ -106,10 +106,16 @@ struct VMF_WidgetLayout {
      var inProgress: [VMF_WidgetOccurrence] = []
      var upcoming: [VMF_WidgetOccurrence] = []
 
-     init(state: VMF_WidgetState, height: Double, unit: Double, columns: Int) {
+     init(state: VMF_WidgetState, height: Double, unit: Double, columns: Int, onlyAttendance: Bool = false) {
           let heading = unit * 2
           let attendanceHeight = unit * 6
           let compactHeight = unit * 3
+          // An empty attendance list always falls back to the normal meeting lists.
+          if onlyAttendance, !state.attendance.isEmpty {
+               let rows = max(0, Int((height - heading) / attendanceHeight))
+               attendance = Array(state.attendance.prefix(rows * columns))
+               return
+          }
           var remaining = height
           if !state.attendance.isEmpty {
                let liveReservation = state.inProgress.isEmpty ? 0 : heading + compactHeight

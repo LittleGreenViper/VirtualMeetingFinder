@@ -54,6 +54,59 @@
         }
       }
     },
+    "WIDGET-ATTENDANCE-REQUIRED" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Markiere in der App ein Meeting mit „Ich nehme teil“, um diese Option zu aktivieren."
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Σημείωσε μια συγκέντρωση με «Συμμετέχω» στην εφαρμογή για να ενεργοποιήσεις αυτή την επιλογή."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mark a meeting “I attend” in the app to enable this option."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marca una reunión con «Asisto» en la app para activar esta opción."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marca una reunión con «Asisto» en la app para activar esta opción."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coche « Je participe » pour une réunion dans l’app afin d’activer cette option."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleziona «Partecipo» per una riunione nell’app per attivare questa opzione."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marque uma reunião com “Participo” no app para ativar esta opção."
+          }
+        }
+      }
+    },
     "WIDGET-DESCRIPTION" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -107,55 +160,108 @@
         }
       }
     },
-    "WIDGET-I-ATTEND" : {
+    "WIDGET-FILTER-OFF" : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ich nehme teil"
+            "value" : "Aus"
           }
         },
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Συμμετέχω"
+            "value" : "Ανενεργό"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I attend"
+            "value" : "Off"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Asisto"
+            "value" : "Desactivado"
           }
         },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Asisto"
+            "value" : "Desactivado"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Je participe"
+            "value" : "Désactivé"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Partecipo"
+            "value" : "Disattivato"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Participo"
+            "value" : "Desativado"
+          }
+        }
+      }
+    },
+    "WIDGET-FILTER-ON" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ενεργό"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activado"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activé"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attivo"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ativado"
           }
         }
       }
@@ -209,6 +315,113 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Em andamento"
+          }
+        }
+      }
+    },
+    "WIDGET-NEXT-MEETING" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mein nächstes Meeting"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Η επόμενη συνάντησή μου"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Next Meeting"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mi próxima reunión"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mi próxima reunión"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ma prochaine réunion"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La mia prossima riunione"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minha próxima reunião"
+          }
+        }
+      },
+      "comment" : "Heading above the next meetings marked I attend; matches Recovrr’s My Next Meeting widget prompt."
+    },
+    "WIDGET-ONLY-ATTENDANCE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nur Meetings anzeigen, an denen ich teilnehme."
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Να εμφανίζονται μόνο οι συγκεντρώσεις στις οποίες συμμετέχω."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only show meetings that I attend."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar solo las reuniones a las que asisto."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar solo las reuniones a las que asisto."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher uniquement les réunions auxquelles je participe."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra solo le riunioni a cui partecipo."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar apenas as reuniões de que participo."
           }
         }
       }

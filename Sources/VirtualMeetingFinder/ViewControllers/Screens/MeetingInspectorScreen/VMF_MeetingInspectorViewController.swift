@@ -90,13 +90,13 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
      /**
       The image to use, for the bar button item, of a meeting that is selected for attendance.
       */
-     private static let _checkedImage = UIImage(systemName: "checkmark.square.fill")
+     private static let _checkedImage = UIImage(systemName: "checkmark.square.fill", withConfiguration: VMF_NavigationController.symbolConfiguration)
      
      /* ################################################################## */
      /**
       The image to use, for the bar button item, of a meeting that is not selected for attendance.
       */
-     private static let _uncheckedImage = UIImage(systemName: "square")
+     private static let _uncheckedImage = UIImage(systemName: "square", withConfiguration: VMF_NavigationController.symbolConfiguration)
      
      /* ################################################################## */
      /**
@@ -107,8 +107,8 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
      /// Fits the localized title into the space between the navigation buttons.
      private let _navigationTitleLabel: UILabel = {
           let label = UILabel()
-          label.font = .systemFont(ofSize: 17, weight: .semibold)
-          label.textColor = .label
+          label.font = VMF_NavigationController.titleFont
+          label.textColor = VMF_NavigationController.accentColor
           label.textAlignment = .center
           label.baselineAdjustment = .alignCenters
           label.adjustsFontSizeToFitWidth = true
@@ -765,7 +765,9 @@ extension VMF_MeetingInspectorViewController {
                ? nil
                : (meeting?.meetingType == .hybrid ? "SLUG-HYBRID-MEETING" : "SLUG-VIRTUAL-MEETING").localizedVariant
           if navigationItem.title != title { navigationItem.title = title }
-          if _navigationTitleLabel.text != title { _navigationTitleLabel.text = title }
+          if _navigationTitleLabel.text != title {
+               _navigationTitleLabel.attributedText = title.map { NSAttributedString(string: $0, attributes: VMF_NavigationController.titleAttributes) }
+          }
           let titleView = hidesTitle ? nil : _navigationTitleView
           if navigationItem.titleView !== titleView { navigationItem.titleView = titleView }
 
@@ -775,18 +777,17 @@ extension VMF_MeetingInspectorViewController {
                 var configuration = button.configuration else { return }
 
           _usesCompactAttendanceLayout = usesCompactLayout
-          let font = UIFont.systemFont(ofSize: 17)
+          let font = VMF_NavigationController.buttonFont
           // Leave room for Back, Share, and the checkbox beside the system controls.
           let compactTitleWidth: CGFloat = 76
           let titleWidth = (configuration.title ?? "").size(withAttributes: [.font: font]).width
-          configuration.titleTextAttributesTransformer = nil
-          if usesCompactLayout, titleWidth > compactTitleWidth {
-               let compactFont = font.withSize(font.pointSize * compactTitleWidth / titleWidth)
-               configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attributes in
-                    var attributes = attributes
-                    attributes.font = compactFont
-                    return attributes
-               }
+          let attendanceFont = usesCompactLayout && titleWidth > compactTitleWidth
+               ? font.withSize(font.pointSize * compactTitleWidth / titleWidth)
+               : font
+          configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attributes in
+               var attributes = attributes
+               attributes.font = attendanceFont
+               return attributes
           }
           button.configuration = configuration
      }
@@ -965,14 +966,20 @@ extension VMF_MeetingInspectorViewController {
      private func _setUpAttendanceButton() {
           guard let iAttendBarButton else { return }
 
-          let indicatorSize: CGFloat = 24
+          let indicatorSize: CGFloat = 17
           var configuration = UIButton.Configuration.plain()
           configuration.title = "SLUG-I-ATTEND".localizedVariant
-          configuration.baseForegroundColor = view.tintColor
+          configuration.baseForegroundColor = VMF_NavigationController.accentColor
+          configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attributes in
+               var attributes = attributes
+               attributes.font = VMF_NavigationController.buttonFont
+               return attributes
+          }
           configuration.contentInsets = .init(top: 12, leading: 0, bottom: 12, trailing: indicatorSize + 4)
           let action = UIAction { [weak self] _ in self?._toggleAttendance() }
           let button = UIButton(configuration: configuration, primaryAction: action)
 
+          _attendanceIndicator.tintColor = VMF_NavigationController.accentColor
           _attendanceIndicator.contentMode = .scaleAspectFit
           _attendanceIndicator.isUserInteractionEnabled = false
           _attendanceIndicator.translatesAutoresizingMaskIntoConstraints = false

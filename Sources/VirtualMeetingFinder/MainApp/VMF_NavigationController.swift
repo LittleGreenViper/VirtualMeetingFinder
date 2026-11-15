@@ -20,9 +20,46 @@
 import UIKit
 
 /**
- Keeps the app's navigation bar at the top on iPhone Duo.
+ Shares navigation typography and symbols, and keeps the bar at the top on iPhone Duo.
  */
 final class VMF_NavigationController: UINavigationController {
+     /// Matches Recovrr's navigation titles, with WANA's adaptive accent color.
+     static let titleFont = UIFont.systemFont(ofSize: 16, weight: .thin, width: UIFont.Width(0.5))
+     static let buttonFont = UIFont.systemFont(ofSize: 17, weight: .regular)
+     static let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 17, weight: .light, scale: .medium)
+     static var accentColor: UIColor { UIColor(named: "AccentColor") ?? .systemBlue }
+     static var titleAttributes: [NSAttributedString.Key: Any] {
+          [.font: titleFont, .foregroundColor: accentColor, .kern: 1]
+     }
+
+     override func viewDidLoad() {
+          super.viewDidLoad()
+
+          let bar = navigationBar
+          bar.tintColor = Self.accentColor
+          bar.prefersLargeTitles = false
+
+          // Preserve the existing bar backgrounds in every presentation mode.
+          func styled(_ appearance: UINavigationBarAppearance) -> UINavigationBarAppearance {
+               let appearance = appearance.copy()
+               appearance.titleTextAttributes = Self.titleAttributes
+               let backImage = UIImage(systemName: "chevron.backward", withConfiguration: Self.symbolConfiguration)
+               appearance.setBackIndicatorImage(backImage, transitionMaskImage: backImage)
+               for button in [appearance.buttonAppearance, appearance.doneButtonAppearance, appearance.backButtonAppearance] {
+                    let attributes: [NSAttributedString.Key: Any] = [.font: Self.buttonFont, .foregroundColor: Self.accentColor]
+                    button.normal.titleTextAttributes = attributes
+                    button.highlighted.titleTextAttributes = attributes
+                    button.disabled.titleTextAttributes = [.font: Self.buttonFont, .foregroundColor: Self.accentColor.withAlphaComponent(0.35)]
+               }
+               return appearance
+          }
+
+          bar.standardAppearance = styled(bar.standardAppearance)
+          bar.scrollEdgeAppearance = bar.scrollEdgeAppearance.map(styled)
+          bar.compactAppearance = bar.compactAppearance.map(styled)
+          bar.compactScrollEdgeAppearance = bar.compactScrollEdgeAppearance.map(styled)
+     }
+
      /// The system controls occupying one end of the horizontal bar on Duo.
      var topBarSideOcclusion: CGRect? {
           guard #available(iOS 27.1, *), traitCollection.userInterfaceIdiom == .phone,

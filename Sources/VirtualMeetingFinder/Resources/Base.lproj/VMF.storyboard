@@ -125,7 +125,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Qnu-js-FBD">
                         <barButtonItem key="rightBarButtonItem" id="Yoa-G1-2C2">
-                            <imageReference key="image" image="info.circle.fill" catalog="system" symbolScale="large"/>
+                            <imageReference key="image" image="info" catalog="system"/>
                             <connections>
                                 <segue destination="njl-CG-MJ9" kind="show" id="sjv-98-xPF"/>
                             </connections>
@@ -507,7 +507,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="SLUG-TAB-0-TITLE" id="88p-ma-gyu">
                         <barButtonItem key="leftBarButtonItem" id="3tP-yY-Fhw">
-                            <imageReference key="image" image="gear.circle" catalog="system" symbolScale="large"/>
+                            <imageReference key="image" image="gear" catalog="system"/>
                             <connections>
                                 <segue destination="XMo-Ja-Ohb" kind="show" id="xkf-XT-c6Q"/>
                             </connections>
@@ -1056,7 +1056,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="HIN-Hl-qtA">
-                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="mqY-PR-8LM">
+                        <barButtonItem key="leftBarButtonItem" id="mqY-PR-8LM">
+                            <imageReference key="image" image="square.and.arrow.up" catalog="system"/>
                             <connections>
                                 <action selector="actionItemHit:" destination="P9w-wB-EO1" id="prx-lx-Jds"/>
                             </connections>
@@ -1136,9 +1137,10 @@
         <image name="Video" width="612" height="612"/>
         <image name="arrowtriangle.right.fill" catalog="system" width="128" height="118"/>
         <image name="checkmark.square.fill" catalog="system" width="128" height="119"/>
-        <image name="gear.circle" catalog="system" width="128" height="128"/>
-        <image name="info.circle.fill" catalog="system" width="128" height="128"/>
+        <image name="gear" catalog="system" width="128" height="128"/>
+        <image name="info" catalog="system" width="128" height="128"/>
         <image name="magnifyingglass" catalog="system" width="128" height="121"/>
+        <image name="square.and.arrow.up" catalog="system" width="17" height="22"/>
         <namedColor name="AccentColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -172,8 +172,15 @@ extension VMF_BaseViewController {
           backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
           view.insertSubview(backgroundView, at: 0)
 
-          navigationController?.navigationBar.tintColor = UIColor(named: "AccentColor")
-          view?.tintColor = UIColor(named: "AccentColor")
+          navigationController?.navigationBar.tintColor = VMF_NavigationController.accentColor
+          view?.tintColor = VMF_NavigationController.accentColor
+          navigationItem.backButtonDisplayMode = .minimal
+          navigationItem.largeTitleDisplayMode = .never
+          let barButtons = (navigationItem.leftBarButtonItems ?? []) + (navigationItem.rightBarButtonItems ?? [])
+          barButtons.forEach { button in
+               button.tintColor = VMF_NavigationController.accentColor
+               button.image = button.image?.applyingSymbolConfiguration(VMF_NavigationController.symbolConfiguration)?.withRenderingMode(.alwaysTemplate)
+          }
           navigationController?.isToolbarHidden = true
           removeNavigationBarItemBackgrounds()
           feedbackGenerator = UIImpactFeedbackGenerator(style: .rigid)
@@ -302,10 +309,11 @@ extension VMF_BaseViewController {
                      leftButtons.isEmpty || navigationItem.leftItemsSupplementBackButton
                else { return }
 
-               let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
+               let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward", withConfiguration: VMF_NavigationController.symbolConfiguration),
                                                 style: .plain,
                                                 target: self,
                                                 action: #selector(_goBack))
+               backButton.tintColor = VMF_NavigationController.accentColor
                backButton.accessibilityLabel = "SLUG-BACK".localizedVariant
                backButton.accessibilityHint = "SLUG-ACC-BACK-HINT".localizedVariant
                backButton.hidesSharedBackground = true

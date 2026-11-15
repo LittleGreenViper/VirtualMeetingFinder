@@ -29,7 +29,8 @@ extension VMF_MainViewController {
       */
      private func _setUpDayTimeSelectionButton() {
           var configuration = UIButton.Configuration.plain()
-          configuration.image = UIImage(systemName: "chevron.down")
+          configuration.image = UIImage(systemName: "chevron.down", withConfiguration: VMF_NavigationController.symbolConfiguration)
+          configuration.baseForegroundColor = VMF_NavigationController.accentColor
           configuration.imagePlacement = .trailing
           configuration.imagePadding = 4
           configuration.titleAlignment = .center
@@ -37,7 +38,8 @@ extension VMF_MainViewController {
           configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 4)
           configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attributes in
                var attributes = attributes
-               attributes.font = UIFont.preferredFont(forTextStyle: .headline)
+               attributes.font = VMF_NavigationController.titleFont
+               attributes.kern = 1
                return attributes
           }
           dayTimeSelectionButton.configuration = configuration
@@ -47,8 +49,6 @@ extension VMF_MainViewController {
           dayTimeSelectionButton.titleLabel?.numberOfLines = 2
           dayTimeSelectionButton.titleLabel?.textAlignment = .center
           dayTimeSelectionButton.titleLabel?.lineBreakMode = .byTruncatingTail
-          dayTimeSelectionButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
-          dayTimeSelectionButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
           dayTimeSelectionButton.isAccessibilityElement = true
           dayTimeSelectionButton.accessibilityLabel = "SLUG-ACC-DAY-TIME-BUTTON-LABEL".localizedVariant
           dayTimeSelectionButton.accessibilityHint = "SLUG-ACC-DAY-TIME-BUTTON-HINT".localizedVariant
@@ -70,6 +70,10 @@ extension VMF_MainViewController {
           dayTimeSelectionButton.setTitle(selectionTitle, for: .normal)
           dayTimeSelectionButton.accessibilityValue = isNameSearchMode ? "SLUG-ACC-WEEKDAY-SWITCH-8-LABEL".localizedVariant : selectionTitle
           dayTimeSelectionButton.sizeToFit()
+          // The navigation bar sizes its title container from this frame. Keep the tap area
+          // at least 44 points without required size constraints that conflict with that container.
+          dayTimeSelectionButton.frame.size = CGSize(width: max(44, dayTimeSelectionButton.bounds.width),
+                                                   height: max(44, dayTimeSelectionButton.bounds.height))
           navigationController?.navigationBar.setNeedsLayout()
           if let controller = presentedViewController as? VMF_DayTimeSelectionViewController {
                navigationController?.navigationBar.layoutIfNeeded()

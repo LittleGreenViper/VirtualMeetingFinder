@@ -292,7 +292,7 @@ class VMF_DisappearingBarButton: UIBarButtonItem {
         get { super.isEnabled }
         set {
             super.isEnabled = newValue
-             super.tintColor = newValue ? nil : .clear
+             super.tintColor = newValue ? VMF_NavigationController.accentColor : .clear
         }
     }
 }

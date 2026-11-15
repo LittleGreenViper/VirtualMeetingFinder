@@ -112,7 +112,7 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
           label.textAlignment = .center
           label.baselineAdjustment = .alignCenters
           label.adjustsFontSizeToFitWidth = true
-          label.minimumScaleFactor = 0.65
+          label.minimumScaleFactor = 0.5
           label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
           label.accessibilityTraits.insert(.header)
           return label
@@ -120,6 +120,10 @@ class VMF_MeetingInspectorViewController: VMF_BaseViewController {
 
      /// Gives the label the width UIKit allocates to the custom title view.
      private lazy var _navigationTitleView = UIStackView(arrangedSubviews: [_navigationTitleLabel])
+     /// Remembers a bar width where the localized title could not fit at a readable size.
+     private var _navigationTitleHiddenAtWidth: CGFloat?
+     /// Intermediate rotation layouts must not be remembered as the final available space.
+     private var _isTransitioningNavigationTitle = false
 
      /// The fixed-size checkbox inside the attendance button.
      private let _attendanceIndicator = UIImageView()
@@ -422,7 +426,7 @@ extension VMF_MeetingInspectorViewController {
          var notes = [String]()
          
          if TimeZone.current.identifier != meeting.timeZone.identifier,
-            let zoneName = meeting.timeZone.localizedName(for: .standard, locale: .current),
+            let zoneName = meeting.timeZone.localizedName(for: meeting.timeZone.isDaylightSavingTime(for: nextStart) ? .daylightSaving : .standard, locale: .current),
             !zoneName.isEmpty {
              let formatter = DateFormatter()
              formatter.locale = .current
@@ -749,6 +753,16 @@ extension VMF_MeetingInspectorViewController {
           _updateNavigationBar()
           _openSezMe = true
      }
+
+     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+          super.viewWillTransition(to: size, with: coordinator)
+          _isTransitioningNavigationTitle = true
+          coordinator.animate(alongsideTransition: nil) { [weak self] _ in
+               self?._isTransitioningNavigationTitle = false
+               self?._navigationTitleHiddenAtWidth = nil
+               self?._updateNavigationBar()
+          }
+     }
 }
 
 /* ###################################################################################################################################### */
@@ -759,11 +773,23 @@ extension VMF_MeetingInspectorViewController {
      private func _updateNavigationBar() {
           let navigationController = navigationController as? VMF_NavigationController
           let width = navigationController?.navigationBar.bounds.width ?? view.bounds.width
+          let localizedTitle = (meeting?.meetingType == .hybrid ? "SLUG-HYBRID-MEETING" : "SLUG-VIRTUAL-MEETING").localizedVariant
+          let minimumTitleWidth = (localizedTitle as NSString).size(withAttributes: VMF_NavigationController.titleAttributes).width * _navigationTitleLabel.minimumScaleFactor
+          // Use the space UIKit actually gives the label, including all navigation controls.
+          // A changed bar width gets another layout opportunity before deciding to hide it.
+          if !_isTransitioningNavigationTitle,
+             navigationItem.titleView === _navigationTitleView,
+             _navigationTitleLabel.text == localizedTitle,
+             _navigationTitleLabel.bounds.width > 0,
+             minimumTitleWidth > _navigationTitleLabel.bounds.width {
+               _navigationTitleHiddenAtWidth = width
+          }
           let hidesTitle = width <= Self._narrowNavigationBarWidth
                || navigationController?.usesDuoLayout == true
+               || _navigationTitleHiddenAtWidth == width
           let title = hidesTitle
                ? nil
-               : (meeting?.meetingType == .hybrid ? "SLUG-HYBRID-MEETING" : "SLUG-VIRTUAL-MEETING").localizedVariant
+               : localizedTitle
           if navigationItem.title != title { navigationItem.title = title }
           if _navigationTitleLabel.text != title {
                _navigationTitleLabel.attributedText = title.map { NSAttributedString(string: $0, attributes: VMF_NavigationController.titleAttributes) }

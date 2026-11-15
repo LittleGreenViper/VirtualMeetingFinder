@@ -21,7 +21,6 @@ import UIKit
 import Intents
 import SwiftBMLSDK
 import RVS_Generic_Swift_Toolbox
-import RVS_BasicGCDTimer
 
 /* ###################################################################################################################################### */
 // MARK: - Main App Delegate -
@@ -70,9 +69,9 @@ class VMF_AppDelegate: UIResponder {
      
      /* ################################################################## */
      /**
-      The timer for fetching data.
+      Callers waiting for the current download. Accessed only on the main queue.
       */
-     private static var _timer: RVS_BasicGCDTimer?
+     private static var _meetingLoadCompletions: [(SwiftBMLSDK_MeetingLocalTimezoneCollection?) -> Void] = []
      
      /* ################################################################## */
      /**
@@ -107,33 +106,43 @@ extension VMF_AppDelegate {
      /**
       Fetches all of the virtual meetings (hybrid and pure virtual).
       
-      - parameter inCompletion: A tail completion handler. One parameter, with the virtual service (nil, if error). May be called in any thread.
+      - parameter inCompletion: Called once on the main queue with the collection, or nil on failure.
       */
      class func findMeetings(completion inCompletion: @escaping (SwiftBMLSDK_MeetingLocalTimezoneCollection?) -> Void) {
-          virtualService = nil
-          
-          guard let queryInstance = Self._queryInstance else {
-               inCompletion(nil)
-               return
-          }
-          
-          Self._timer = RVS_BasicGCDTimer(Self._fetchTimeoutInSeconds) { inTimer, inComplete in
-               Self._timer = nil
-               guard inComplete else { return }
-               DispatchQueue.main.async {
-                    inCompletion(nil)
+          findMeetings(query: Self._queryInstance, timeout: Self._fetchTimeoutInSeconds, completion: inCompletion)
+     }
+
+     /// Coalesces concurrent requests and keeps the last usable collection if a refresh fails.
+     /// The explicit query and timeout also allow offline regression checks.
+     class func findMeetings(query inQuery: SwiftBMLSDK_Query?, timeout inTimeout: TimeInterval,
+                            completion inCompletion: @escaping (SwiftBMLSDK_MeetingLocalTimezoneCollection?) -> Void) {
+          DispatchQueue.main.async {
+               Self._meetingLoadCompletions.append(inCompletion)
+               guard Self._meetingLoadCompletions.count == 1 else { return }
+
+               var didFinish = false
+               var timeout: DispatchWorkItem?
+               let finish: (SwiftBMLSDK_MeetingLocalTimezoneCollection?) -> Void = { collection in
+                    guard !didFinish else { return }
+                    didFinish = true
+                    timeout?.cancel()
+                    timeout = nil
+                    let result = collection.flatMap { $0.meetings.isEmpty ? nil : $0 }
+                    if let result {
+                         Self.virtualService = result
+                         VMF_WidgetBridge.publish(result)
+                    }
+                    let completions = Self._meetingLoadCompletions
+                    Self._meetingLoadCompletions.removeAll()
+                    completions.forEach { $0(result) }
                }
-          }
-          
-          Self._timer?.isRunning = true
-          
-          _ = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: queryInstance) { inCollection in
-               Self._timer?.isRunning = false
-               Self._timer = nil
-               DispatchQueue.main.async {
-                    virtualService = inCollection
-                    VMF_WidgetBridge.publish(inCollection)
-                    inCompletion(virtualService)
+
+               guard let query = inQuery else { finish(nil); return }
+               let timeoutWork = DispatchWorkItem { finish(nil) }
+               timeout = timeoutWork
+               DispatchQueue.main.asyncAfter(deadline: .now() + inTimeout, execute: timeoutWork)
+               _ = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: query) { collection in
+                    DispatchQueue.main.async { finish(collection) }
                }
           }
      }

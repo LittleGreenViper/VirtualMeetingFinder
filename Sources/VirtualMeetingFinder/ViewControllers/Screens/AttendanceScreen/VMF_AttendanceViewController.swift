@@ -40,6 +40,11 @@ class VMF_AttendanceViewController: VMF_BaseViewController, VMF_MasterTableContr
 // MARK: Computed Properties
 /* ###################################################################################################################################### */
 extension VMF_AttendanceViewController {
+     /// Updates the saved list after a row action or a change in the inspector.
+     func setAttendance() {
+          tableDisplayController?.meetings = meetings
+     }
+
      /* ################################################################## */
      /**
       The meetings we are tracking.
@@ -74,6 +79,11 @@ extension VMF_AttendanceViewController {
      override func viewDidLoad() {
           super.viewDidLoad()
           navigationItem.title = "SLUG-TAB-1-TITLE".localizedVariant
+     }
+
+     override func viewWillAppear(_ inIsAnimated: Bool) {
+          super.viewWillAppear(inIsAnimated)
+          setAttendance()
      }
      
      /* ################################################################## */

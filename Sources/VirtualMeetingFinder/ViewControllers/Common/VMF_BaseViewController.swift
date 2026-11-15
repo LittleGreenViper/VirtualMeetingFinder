@@ -132,12 +132,12 @@ extension VMF_BaseViewController {
       - returns: The timezone string.
       */
      func getMeetingTimeZone(_ inMeeting: MeetingInstance) -> String {
+         let nativeTime = inMeeting.isMeetingInProgress() ? inMeeting.previousOccurrenceDateFast() : inMeeting.nextOccurrenceDateFast()
+         let style: TimeZone.NameStyle = inMeeting.timeZone.isDaylightSavingTime(for: nativeTime) ? .daylightSaving : .standard
          guard TimeZone.current.identifier != inMeeting.timeZone.identifier,
-               let zoneName = inMeeting.timeZone.localizedName(for: .standard, locale: .current),
+               let zoneName = inMeeting.timeZone.localizedName(for: style, locale: .current),
                !zoneName.isEmpty
          else { return "" }
-         
-         let nativeTime = inMeeting.nextOccurrenceDateFast()
          
          let formatter = DateFormatter()
          formatter.locale = .current

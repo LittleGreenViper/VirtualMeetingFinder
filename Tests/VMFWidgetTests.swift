@@ -242,6 +242,10 @@ final class VMFWidgetTests: XCTestCase {
 
           availableMeetings = collection.meetings.map(\.meeting)
           scene.openPendingLink()
+          let initiallyOpened = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in
+               (navigation.topViewController as? VMF_MeetingInspectorViewController)?.meeting?.id == UInt64(firstID)
+          }, object: nil)
+          wait(for: [initiallyOpened], timeout: 3)
           XCTAssertEqual((navigation.topViewController as? VMF_MeetingInspectorViewController)?.meeting?.id, UInt64(firstID))
           XCTAssertEqual(VMF_SceneDelegate.urlMeetingID, 0)
 
@@ -274,6 +278,15 @@ final class VMFWidgetTests: XCTestCase {
                navigation.topViewController === main && navigation.viewControllers.count == 1
           }, object: nil)
           wait(for: [returnedToMain], timeout: 3)
+
+          availableMeetings = collection.meetings.map(\.meeting)
+          scene.resolveURL(try XCTUnwrap(VMF_MeetingLink.url(for: firstID)))
+          scene.resolveURL(try XCTUnwrap(VMF_MeetingLink.url(for: secondID)))
+          let latestLink = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in
+               (navigation.topViewController as? VMF_MeetingInspectorViewController)?.meeting?.id == UInt64(secondID)
+                    && navigation.viewControllers.count == 2
+          }, object: nil)
+          wait(for: [latestLink], timeout: 3)
      }
 
      func testSDKResolvesSpringDSTBeforeExport() throws {
@@ -284,6 +297,175 @@ final class VMFWidgetTests: XCTestCase {
           XCTAssertEqual(span.start, meeting.nextOccurrenceDateFast(from: reference))
           XCTAssertEqual(span.start, ISO8601DateFormatter().date(from: "2026-03-08T07:30:00Z"))
           XCTAssertEqual(span.end.timeIntervalSince(span.start), 7200)
+     }
+
+     private func reviewQuery(host: String = "review-fixture.invalid") -> SwiftBMLSDK_Query {
+          let configuration = URLSessionConfiguration.ephemeral
+          configuration.protocolClasses = [VMF_ReviewFixtureProtocol.self]
+          return SwiftBMLSDK_Query(serverBaseURI: URL(string: "https://\(host)/"), session: URLSession(configuration: configuration))
+     }
+
+     private func reviewCollection() -> SwiftBMLSDK_MeetingLocalTimezoneCollection {
+          let loaded = expectation(description: "Review fixture loaded")
+          let collection = SwiftBMLSDK_MeetingLocalTimezoneCollection(query: reviewQuery()) { _ in loaded.fulfill() }
+          wait(for: [loaded], timeout: 3)
+          XCTAssertEqual(collection.meetings.count, 2)
+          XCTAssertEqual(collection.meetings.filter { $0.meeting.isServiceMeeting }.count, 1)
+          return collection
+     }
+
+     /// Hosted tests may begin while the app's normal startup download is still running.
+     /// Join that request before starting an isolated fixture download.
+     private func waitForStartupDownload() {
+          let settled = expectation(description: "Startup download settled")
+          VMF_AppDelegate.findMeetings(query: nil, timeout: 0) { _ in settled.fulfill() }
+          wait(for: [settled], timeout: 35)
+     }
+
+     @MainActor func testServiceFilterUpdatesWeekdayAndSearchAfterSettings() throws {
+          let original = VMF_AppDelegate.virtualService
+          let originalMain = VMF_AppDelegate.mainScreenController
+          let filter = VMF_AppDelegate.prefs.excludeServiceMeetings
+          defer {
+               VMF_AppDelegate.virtualService = original
+               VMF_AppDelegate.mainScreenController = originalMain
+               VMF_AppDelegate.prefs.excludeServiceMeetings = filter
+          }
+          VMF_AppDelegate.virtualService = reviewCollection()
+          VMF_AppDelegate.prefs.excludeServiceMeetings = false
+          let navigation = try XCTUnwrap(UIStoryboard(name: "VMF", bundle: .main).instantiateInitialViewController() as? UINavigationController)
+          let main = try XCTUnwrap(navigation.viewControllers.first as? VMF_MainViewController)
+          main.loadViewIfNeeded()
+          main.reorganizeMeetings()
+          let meeting = try XCTUnwrap(VMF_AppDelegate.virtualService?.meetings.first?.meeting)
+          main.openTo(dayIndex: meeting.adjustedWeekday, time: meeting.adjustedIntegerStartTime)
+          XCTAssertEqual(main.tableDisplayController?.meetings.count, 2)
+
+          VMF_AppDelegate.prefs.excludeServiceMeetings = true
+          main.viewWillAppear(false)
+          XCTAssertEqual(main.tableDisplayController?.meetings.count, 1)
+          XCTAssertFalse(main.tableDisplayController?.meetings.contains(where: \.isServiceMeeting) ?? true)
+
+          main.isNameSearchMode = true
+          main.searchText = "Review fixture"
+          VMF_AppDelegate.prefs.excludeServiceMeetings = false
+          main.viewWillAppear(false)
+          XCTAssertTrue(main.isNameSearchMode)
+          XCTAssertEqual(main.searchText, "Review fixture")
+          XCTAssertEqual(main.tableDisplayController?.meetings.count, 2)
+          VMF_AppDelegate.prefs.excludeServiceMeetings = true
+          main.viewWillAppear(false)
+          XCTAssertEqual(main.tableDisplayController?.meetings.count, 1)
+     }
+
+     @MainActor func testNowUsesTheServiceMeetingFilter() {
+          let original = VMF_AppDelegate.virtualService
+          let filter = VMF_AppDelegate.prefs.excludeServiceMeetings
+          defer { VMF_AppDelegate.virtualService = original; VMF_AppDelegate.prefs.excludeServiceMeetings = filter }
+          VMF_AppDelegate.virtualService = reviewCollection()
+          let main = VMF_MainViewController()
+          VMF_AppDelegate.prefs.excludeServiceMeetings = false
+          XCTAssertEqual(main.inProgressMeetings.count, 2)
+          VMF_AppDelegate.prefs.excludeServiceMeetings = true
+          XCTAssertEqual(main.inProgressMeetings.count, 1)
+          XCTAssertFalse(main.inProgressMeetings.contains(where: \.isServiceMeeting))
+     }
+
+     @MainActor func testTimeZoneLabelsFollowDaylightSavingAtTheMeetingStart() throws {
+          let controller = VMF_BaseViewController()
+          // The opposite hemispheres exercise daylight-saving names throughout the year.
+          for zone in ["America/New_York", "Australia/Sydney"] where zone != TimeZone.current.identifier {
+               let meeting = try sdkMeeting(time: "12:00:00", zone: zone)
+               let date = meeting.isMeetingInProgress() ? meeting.previousOccurrenceDateFast() : meeting.nextOccurrenceDateFast()
+               let style: TimeZone.NameStyle = meeting.timeZone.isDaylightSavingTime(for: date) ? .daylightSaving : .standard
+               let name = try XCTUnwrap(meeting.timeZone.localizedName(for: style, locale: .current))
+               XCTAssertTrue(controller.getMeetingTimeZone(meeting).contains(name))
+          }
+     }
+
+     @MainActor func testAttendanceRemovalUpdatesSavedListAndReturnFromInspector() throws {
+          let original = VMF_AppDelegate.virtualService
+          let attendance = VMF_AppDelegate.prefs.attendance
+          defer { VMF_AppDelegate.virtualService = original; VMF_AppDelegate.prefs.attendance = attendance }
+          VMF_AppDelegate.virtualService = reviewCollection()
+          let records = try XCTUnwrap(VMF_AppDelegate.virtualService?.meetings.map(\.meeting))
+          VMF_AppDelegate.prefs.attendance = records.map { Int($0.id) }
+          let controller = VMF_AttendanceViewController()
+          let table = VMF_EmbeddedTableController()
+          table.myController = controller
+          controller.tableDisplayController = table
+          controller.setAttendance()
+          XCTAssertEqual(table.meetings.count, 2)
+          table.attendanceChanged(records[0])
+          XCTAssertEqual(table.meetings.map(\.id), [records[1].id])
+          records[1].setAttendance(false)
+          controller.viewWillAppear(false)
+          XCTAssertTrue(table.meetings.isEmpty)
+     }
+
+     @MainActor func testFailedAndEmptyRefreshKeepTheLoadedCollection() {
+          waitForStartupDownload()
+          let original = VMF_AppDelegate.virtualService
+          defer { VMF_AppDelegate.virtualService = original }
+          let loaded = reviewCollection()
+          VMF_AppDelegate.virtualService = loaded
+          for host in ["review-error.invalid", "review-empty.invalid"] {
+               let finished = expectation(description: host)
+               VMF_AppDelegate.findMeetings(query: reviewQuery(host: host), timeout: 1) { result in
+                    XCTAssertTrue(Thread.isMainThread)
+                    XCTAssertNil(result)
+                    XCTAssertTrue(VMF_AppDelegate.virtualService === loaded)
+                    finished.fulfill()
+               }
+               wait(for: [finished], timeout: 3)
+          }
+     }
+
+     @MainActor func testTimedOutDownloadCannotCompleteAgainOrReplaceNewerData() {
+          waitForStartupDownload()
+          let original = VMF_AppDelegate.virtualService
+          defer { VMF_AppDelegate.virtualService = original }
+          let timedOut = expectation(description: "Timeout completes once")
+          var completionCount = 0
+          VMF_AppDelegate.findMeetings(query: reviewQuery(host: "review-slow.invalid"), timeout: 0.03) { result in
+               completionCount += 1
+               XCTAssertNil(result)
+               timedOut.fulfill()
+          }
+          wait(for: [timedOut], timeout: 3)
+          let refreshed = expectation(description: "Newer download completes")
+          var newer: SwiftBMLSDK_MeetingLocalTimezoneCollection?
+          VMF_AppDelegate.findMeetings(query: reviewQuery(), timeout: 1) { result in
+               newer = result
+               refreshed.fulfill()
+          }
+          wait(for: [refreshed], timeout: 3)
+          let lateResponse = expectation(description: "Late response has arrived")
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { lateResponse.fulfill() }
+          wait(for: [lateResponse], timeout: 3)
+          XCTAssertNotNil(newer)
+          XCTAssertEqual(completionCount, 1)
+          XCTAssertTrue(VMF_AppDelegate.virtualService === newer)
+     }
+
+     @MainActor func testConcurrentDownloadCallersReceiveTheSameCollection() {
+          waitForStartupDownload()
+          let original = VMF_AppDelegate.virtualService
+          defer { VMF_AppDelegate.virtualService = original }
+          let finished = expectation(description: "Both callers finish")
+          finished.expectedFulfillmentCount = 2
+          var results: [SwiftBMLSDK_MeetingLocalTimezoneCollection] = []
+          let completion: (SwiftBMLSDK_MeetingLocalTimezoneCollection?) -> Void = { result in
+               XCTAssertTrue(Thread.isMainThread)
+               XCTAssertNotNil(result)
+               if let result { results.append(result) }
+               finished.fulfill()
+          }
+          VMF_AppDelegate.findMeetings(query: reviewQuery(host: "review-slow.invalid"), timeout: 1, completion: completion)
+          VMF_AppDelegate.findMeetings(query: nil, timeout: 0, completion: completion)
+          wait(for: [finished], timeout: 3)
+          XCTAssertEqual(results.count, 2)
+          if results.count == 2 { XCTAssertTrue(results[0] === results[1]) }
      }
 
      func testSDKResolvesRepeatedAutumnHourBeforeExport() throws {
@@ -327,6 +509,42 @@ private final class VMF_WidgetFixtureProtocol: URLProtocol {
           client?.urlProtocol(self, didReceive: HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: ["Content-Type": "application/json"])!, cacheStoragePolicy: .notAllowed)
           client?.urlProtocol(self, didLoad: data)
           client?.urlProtocolDidFinishLoading(self)
+     }
+     override func stopLoading() { }
+}
+
+/// Local responses for service filtering, refresh failures, and late downloads.
+private final class VMF_ReviewFixtureProtocol: URLProtocol {
+     override class func canInit(with request: URLRequest) -> Bool { request.url?.host?.hasPrefix("review-") == true }
+     override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+     override func startLoading() {
+          if request.url?.host == "review-error.invalid" {
+               client?.urlProtocol(self, didFailWithError: URLError(.notConnectedToInternet))
+               return
+          }
+          let respond = { [self] in
+               let date = Date().addingTimeInterval(-1800)
+               var calendar = Calendar(identifier: .gregorian)
+               calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+               let formatter = DateFormatter()
+               formatter.locale = Locale(identifier: "en_US_POSIX")
+               formatter.timeZone = calendar.timeZone
+               formatter.dateFormat = "HH:mm:00"
+               let records: [[String: Any]] = self.request.url?.host == "review-empty.invalid" ? [] : (1...2).map { id in
+                    ["server_id": 1, "meeting_id": id, "organization_key": "na", "name": "Review fixture \(id)",
+                     "weekday": calendar.component(.weekday, from: date), "start_time": formatter.string(from: date),
+                     "duration": 7200, "time_zone": "UTC", "virtual_information": ["url": "https://example.com/meeting"],
+                     "formats": id == 2 ? [["id": 1, "key": "ASM", "name": "Service", "description": "Service meeting"]] : []]
+               }
+               let response: [String: Any] = ["meta": ["actual_size": records.count, "page_size": -1, "starting_index": 0, "total": records.count, "total_pages": 1, "page": 0, "search_time": 0.0], "meetings": records]
+               let data = try! JSONSerialization.data(withJSONObject: response)
+               self.client?.urlProtocol(self, didReceive: HTTPURLResponse(url: self.request.url!, statusCode: 200, httpVersion: nil, headerFields: ["Content-Type": "application/json"])!, cacheStoragePolicy: .notAllowed)
+               self.client?.urlProtocol(self, didLoad: data)
+               self.client?.urlProtocolDidFinishLoading(self)
+          }
+          if request.url?.host == "review-slow.invalid" {
+               DispatchQueue.global().asyncAfter(deadline: .now() + 0.2, execute: respond)
+          } else { respond() }
      }
      override func stopLoading() { }
 }

@@ -118,6 +118,7 @@ class VMF_SceneDelegate: UIResponder, UIWindowSceneDelegate {
                VMF_AppDelegate.mainScreenController?.isThrobbing = true
                virtualService.refreshCaches() { _ in
                     VMF_AppDelegate.mainScreenController?.isThrobbing = false
+                    VMF_AppDelegate.mainScreenController?.reorganizeMeetings()
                     VMF_AppDelegate.mainScreenController?.openTo(dayIndex: 0)
                     self.window?.setNeedsLayout()
                     self.openPendingLink()
@@ -299,9 +300,16 @@ extension VMF_SceneDelegate {
           _openMainScreenPending = false
           if let destination, let inspector = navigation.topViewController as? VMF_MeetingInspectorViewController,
              inspector.meeting?.id == destination.meeting.id { return }
+          // Older UIKit versions can defer the storyboard's push until the next main-queue turn.
+          // Keep a second incoming link pending until that push has had a chance to begin.
+          _isResolvingLink = true
           navigation.popToViewController(main, animated: false)
           if let destination {
                destination.table.selectMeeting(destination.meeting)
+          }
+          DispatchQueue.main.async { [weak self] in
+               self?._isResolvingLink = false
+               self?.openPendingLink()
           }
      }
 }

@@ -82,6 +82,8 @@ class VMF_MainViewController: VMF_BaseViewController, VMF_MasterTableControllerP
      private(set) var searchMeetingNames: [String] = []
      /// Local weekday groups: index 0 is Sunday, index 6 is Saturday.
      var organizedMeetings: [[MeetingInstance]] = []
+     /// The filter used to build the cached weekday and name-search groups.
+     var appliedServiceMeetingFilter: Bool?
 
      /** Search retains the underlying weekday/time selection for returning to browsing. */
      var isNameSearchMode = false {
@@ -156,7 +158,7 @@ extension VMF_MainViewController {
       */
      var inProgressMeetings: [MeetingInstance] {
          VMF_AppDelegate.virtualService?.meetings
-             .compactMap { $0.isInProgress ? $0.meeting : nil }
+             .compactMap { $0.isInProgress && !(VMF_AppDelegate.prefs.excludeServiceMeetings && $0.meeting.isServiceMeeting) ? $0.meeting : nil }
              .sorted { a, b in
                  let aDate = a.previousOccurrenceDateFast()
                  let bDate = b.previousOccurrenceDateFast()

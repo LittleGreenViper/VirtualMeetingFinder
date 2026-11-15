@@ -110,6 +110,7 @@ extension VMF_MainViewController {
       */
      func reorganizeMeetings() {
           let exclude = VMF_AppDelegate.prefs.excludeServiceMeetings
+          appliedServiceMeetingFilter = exclude
           
           // First, we populate the search set, which is a one-dimensional Array, sorted by meeting name, then timezone, then local start time.
           searchMeetings = VMF_AppDelegate.virtualService?.meetings.compactMap { !(exclude && $0.meeting.isServiceMeeting) ? $0.meeting : nil }.sorted { a, b in
@@ -166,7 +167,6 @@ extension VMF_MainViewController {
       */
      func loadMeetings(completion inCompletion: @escaping () -> Void) {
           isThrobbing = true
-          VMF_AppDelegate.virtualService = nil
           
           VMF_AppDelegate.findMeetings { [weak self] inVirtualService in
                guard !(inVirtualService?.meetings.isEmpty ?? true)
@@ -502,7 +502,19 @@ extension VMF_MainViewController {
      override func viewWillAppear(_ inIsAnimated: Bool) {
           super.viewWillAppear(inIsAnimated)
           
-          if organizedMeetings.isEmpty { reorganizeMeetings() }
+          let filterChanged = appliedServiceMeetingFilter != VMF_AppDelegate.prefs.excludeServiceMeetings
+          if organizedMeetings.isEmpty || filterChanged {
+               let page = tableDisplayController
+               let time = page.flatMap { getTimeOf(dayIndex: $0.dayIndex, timeIndex: $0.timeIndex) } ?? lastTime
+               reorganizeMeetings()
+               if filterChanged, let page {
+                    if isNameSearchMode {
+                         page.meetings = getCurentMeetings()
+                    } else {
+                         openTo(dayIndex: page.dayIndex, time: time)
+                    }
+               }
+          }
           if needsReload { isNameSearchMode = false }
           setAttendance()
      }

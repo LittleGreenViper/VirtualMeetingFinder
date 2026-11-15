@@ -50,10 +50,10 @@ struct VMF_WidgetIntent: WidgetConfigurationIntent {
 
      static var parameterSummary: some ParameterSummary {
           Switch(.widgetFamily) {
-               Case(.systemLarge) {
+               Case(.systemMedium) { Summary() }
+               DefaultCase {
                     Summary { \.$attendanceOnly }
                }
-               DefaultCase { Summary() }
           }
      }
 }
@@ -63,21 +63,21 @@ struct VMF_WidgetProvider: AppIntentTimelineProvider {
 
      func snapshot(for configuration: VMF_WidgetIntent, in context: Context) async -> VMF_WidgetEntry {
           guard !context.isPreview else { return Self.preview }
-          return entries(configuration: configuration, family: context.family).first!
+          return entries(configuration: configuration).first!
      }
 
      func timeline(for configuration: VMF_WidgetIntent, in context: Context) async -> Timeline<VMF_WidgetEntry> {
-          let entries = entries(configuration: configuration, family: context.family)
+          let entries = entries(configuration: configuration)
           return Timeline(entries: entries, policy: .after(entries.last!.date.addingTimeInterval(60)))
      }
 
-     private func entries(configuration: VMF_WidgetIntent, family: WidgetFamily) -> [VMF_WidgetEntry] {
+     private func entries(configuration: VMF_WidgetIntent) -> [VMF_WidgetEntry] {
           let now = Date()
           guard let cache = VMF_WidgetStore.readCache(), now < cache.validUntil else {
                return [VMF_WidgetEntry(date: now, state: VMF_WidgetState())]
           }
           let preferences = VMF_WidgetStore.readPreferences()
-          let onlyAttendance = family == .systemLarge && configuration.attendanceOnly.id == "on" && !preferences.attendance.isEmpty
+          let onlyAttendance = configuration.attendanceOnly.id == "on" && !preferences.attendance.isEmpty
           let schedule = VMF_WidgetSchedule(meetings: cache.meetings, preferences: preferences, now: now)
           return schedule.timelineDates(now: now).map { date in
                let state = date < cache.validUntil ? schedule.state(at: date) : VMF_WidgetState()
@@ -180,7 +180,7 @@ struct VMF_WidgetView: View {
 
      private func meetingLists(height: Double) -> some View {
           let layout = VMF_WidgetLayout(state: entry.state, height: height, unit: unit, columns: columns,
-                                        onlyAttendance: family == .systemLarge && entry.onlyAttendance)
+                                        onlyAttendance: entry.onlyAttendance)
           return VStack(alignment: .leading, spacing: 0) {
                if !layout.attendance.isEmpty {
                     sectionHeading("WIDGET-NEXT-MEETING", weight: .regular)

@@ -108,6 +108,24 @@ final class VMFWidgetTests: XCTestCase {
           }
      }
 
+     func testAttendanceOnlyKeepsNextMeetingFirstInTallAndWideLayouts() {
+          // Match the reported mix: one attended meeting in progress, three
+          // attended meetings ahead, and other live/upcoming meetings to hide.
+          let schedule = VMF_WidgetSchedule(meetings: [meeting(4, offset: 3600), meeting(5, offset: -7200, duration: 14400),
+                                                       meeting(2, offset: 900), meeting(1, offset: -1800),
+                                                       meeting(6, offset: 600), meeting(3, offset: 1800)],
+                                            preferences: .init(attendance: [1, 2, 3, 4]), now: now)
+          for columns in [1, 2] {
+               for (date, expected) in [(now, [1, 2, 3, 4]), (now.addingTimeInterval(1800), [2, 3, 4, 1])] {
+                    let layout = VMF_WidgetLayout(state: schedule.state(at: date), height: 480, unit: 12,
+                                                  columns: columns, onlyAttendance: true)
+                    XCTAssertEqual(layout.attendance.map(\.id), expected)
+                    XCTAssertTrue(layout.inProgress.isEmpty)
+                    XCTAssertTrue(layout.upcoming.isEmpty)
+               }
+          }
+     }
+
      func testLocalFormattingUsesResolvedDateWithoutAddingAnOffset() {
           let occurrence = VMF_WidgetSchedule(meetings: [meeting(1)], preferences: .init(), now: now).state(at: now).inProgress[0]
           let zone = TimeZone(identifier: "America/Los_Angeles")!

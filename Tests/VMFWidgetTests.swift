@@ -152,6 +152,88 @@ final class VMFWidgetTests: XCTestCase {
           return try XCTUnwrap(parser.meetings.first)
      }
 
+     @MainActor func testMeetingCellRetainsAllTextWhenOptionalLabelsChange() throws {
+          let controller = try XCTUnwrap(UIStoryboard(name: "VMF", bundle: .main).instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController)
+          controller.loadViewIfNeeded()
+          let table = try XCTUnwrap(controller.valueTable)
+          let cell = try XCTUnwrap(table.dequeueReusableCell(withIdentifier: VMF_TableCell.reuseID) as? VMF_TableCell)
+          cell.myController = controller
+          let name = try XCTUnwrap(cell.nameLabel)
+          let time = try XCTUnwrap(cell.timeAndDayLabel)
+          let zone = try XCTUnwrap(cell.timeZoneLabel)
+          let progress = try XCTUnwrap(cell.inProgressLabel)
+
+          // Live name search reuses the same cell for meetings with different optional lines.
+          for width: CGFloat in [320, 368, 700] {
+               cell.frame = CGRect(x: 0, y: 0, width: width, height: 150)
+               cell.setNeedsLayout()
+               cell.layoutIfNeeded()
+               for showsZone in [true, false, true, false, true] {
+                    for showsProgress in [false, true, false] {
+                         name.text = "'Je' devient 'Nous'"
+                         time.text = "Saturday, 5:00 AM – 6:30 AM"
+                         zone.text = "Time zone: Central European Standard Time (11:00 AM)"
+                         zone.isHidden = !showsZone
+                         progress.text = "In progress"
+                         progress.isHidden = !showsProgress
+                         let size = cell.contentView.systemLayoutSizeFitting(CGSize(width: width, height: 0),
+                              withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+                         cell.frame = CGRect(x: 0, y: 0, width: width, height: size.height)
+                         cell.setNeedsLayout()
+                         cell.layoutIfNeeded()
+
+                         let visibleLabels = [name, time, zone, progress].filter { !$0.isHidden }
+                         for label in visibleLabels {
+                              XCTAssertGreaterThanOrEqual(label.bounds.height, label.font.lineHeight - 1,
+                                   "Clipped \(label.text ?? "") after changing optional lines at width \(width)")
+                              let frame = label.convert(label.bounds, to: cell.contentView)
+                              XCTAssertGreaterThanOrEqual(frame.minY, 7)
+                              XCTAssertLessThanOrEqual(frame.maxY, cell.contentView.bounds.maxY - 7)
+                         }
+                         for (above, below) in zip(visibleLabels, visibleLabels.dropFirst()) {
+                              XCTAssertGreaterThanOrEqual(below.frame.minY, above.frame.maxY + 3)
+                         }
+                    }
+               }
+          }
+     }
+
+     @MainActor func testSearchReloadSizesFirstMeetingRowAfterOptionalLinesChange() async throws {
+          let controller = try XCTUnwrap(UIStoryboard(name: "VMF", bundle: .main).instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController)
+          let main = VMF_WidgetLinkTestController()
+          main.isNameSearchMode = true
+          main.tableDisplayController = controller
+          controller.myController = main
+          let weekday = Calendar.current.component(.weekday, from: Date().addingTimeInterval(86400))
+          let local = try sdkMeeting(time: "12:00:00", weekday: weekday, zone: TimeZone.current.identifier)
+          let foreignZone = TimeZone.current.identifier == "Europe/Paris" ? "America/New_York" : "Europe/Paris"
+          let foreign = try sdkMeeting(time: "12:00:00", weekday: weekday, zone: foreignZone)
+          let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 402, height: 874))
+          window.rootViewController = controller
+          window.isHidden = false
+          defer { window.isHidden = true }
+          let table = try XCTUnwrap(controller.valueTable)
+
+          for meetings in [[local], [foreign], [], [local, foreign], [foreign, local], [local], [foreign]] {
+               main.searchMeetings = meetings
+               main.searchText = "fixture"
+               controller.view.setNeedsLayout()
+               controller.view.layoutIfNeeded()
+               table.layoutIfNeeded()
+               try await Task.sleep(nanoseconds: 50_000_000)
+               guard !meetings.isEmpty else { continue }
+               let cell = try XCTUnwrap(table.cellForRow(at: IndexPath(row: 0, section: 0)) as? VMF_TableCell)
+               let labels = [cell.nameLabel, cell.timeAndDayLabel, cell.timeZoneLabel, cell.inProgressLabel]
+                    .compactMap { $0 }.filter { !$0.isHidden }
+               for label in labels {
+                    XCTAssertGreaterThanOrEqual(label.bounds.height, label.font.lineHeight - 1,
+                         "First search row clipped \(label.text ?? "")")
+                    XCTAssertLessThanOrEqual(label.convert(label.bounds, to: cell.contentView).maxY,
+                         cell.contentView.bounds.maxY - 7)
+               }
+          }
+     }
+
      func testWidgetMeetingLinksRetainFullSDKIdentifiers() throws {
           for id in [1, 17592186044417, Int.max] {
                let url = try XCTUnwrap(VMF_MeetingLink.url(for: id))

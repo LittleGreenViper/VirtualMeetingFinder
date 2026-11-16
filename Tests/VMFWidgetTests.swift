@@ -142,8 +142,8 @@ final class VMFWidgetTests: XCTestCase {
           XCTAssertEqual(decoded.validUntil, cache.validUntil)
      }
 
-     private func sdkMeeting(time: String, weekday: Int = 1, zone: String = "America/New_York") throws -> MeetingInstance {
-          let record: [String: Any] = ["server_id": 1, "meeting_id": 1, "organization_key": "na", "name": "DST fixture",
+     private func sdkMeeting(time: String, weekday: Int = 1, zone: String = "America/New_York", name: String = "DST fixture") throws -> MeetingInstance {
+          let record: [String: Any] = ["server_id": 1, "meeting_id": 1, "organization_key": "na", "name": name,
                                        "weekday": weekday, "start_time": time, "duration": 7200,
                                        "time_zone": zone, "virtual_information": ["url": "https://example.com/meeting"]]
           let response: [String: Any] = ["meta": ["actual_size": 1, "page_size": -1, "starting_index": 0, "total": 1,
@@ -205,33 +205,172 @@ final class VMFWidgetTests: XCTestCase {
           main.tableDisplayController = controller
           controller.myController = main
           let weekday = Calendar.current.component(.weekday, from: Date().addingTimeInterval(86400))
-          let local = try sdkMeeting(time: "12:00:00", weekday: weekday, zone: TimeZone.current.identifier)
+          let local = try sdkMeeting(time: "12:00:00", weekday: weekday, zone: TimeZone.current.identifier, name: "Local fixture")
           let foreignZone = TimeZone.current.identifier == "Europe/Paris" ? "America/New_York" : "Europe/Paris"
-          let foreign = try sdkMeeting(time: "12:00:00", weekday: weekday, zone: foreignZone)
-          let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 402, height: 874))
-          window.rootViewController = controller
-          window.isHidden = false
-          defer { window.isHidden = true }
+          let foreign = try sdkMeeting(time: "12:00:00", weekday: weekday, zone: foreignZone, name: "Foreign fixture with a long meeting name that wraps onto another line")
+          let scene = try XCTUnwrap(UIApplication.shared.connectedScenes.first as? UIWindowScene)
+          let originalWindow = scene.keyWindow
+          let window = UIWindow(windowScene: scene)
+          window.rootViewController = main
+          main.loadViewIfNeeded()
+          main.addChild(controller)
+          main.view.addSubview(controller.view)
+          controller.view.frame = main.view.bounds
+          controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+          controller.didMove(toParent: main)
+          window.makeKeyAndVisible()
+          defer {
+               window.isHidden = true
+               originalWindow?.makeKeyAndVisible()
+          }
           let table = try XCTUnwrap(controller.valueTable)
 
-          for meetings in [[local], [foreign], [], [local, foreign], [foreign, local], [local], [foreign]] {
-               main.searchMeetings = meetings
-               main.searchText = "fixture"
+          main.searchMeetings = [local, foreign] + (try (0..<40).map { index in
+               try sdkMeeting(time: "12:00:00", weekday: weekday,
+                    zone: index.isMultiple(of: 2) ? TimeZone.current.identifier : foreignZone,
+                    name: "\(index.isMultiple(of: 2) ? "Local" : "Foreign") fixture \(index)" + (index.isMultiple(of: 3) ? " with a longer name that wraps onto another line in the meeting list" : ""))
+          })
+          for query in ["", "local", "local", "foreign", "foreign", "missing", "", "fixture", "local", "foreign", ""] {
+               main.searchText = query
                controller.view.setNeedsLayout()
                controller.view.layoutIfNeeded()
                table.layoutIfNeeded()
-               try await Task.sleep(nanoseconds: 50_000_000)
-               guard !meetings.isEmpty else { continue }
-               let cell = try XCTUnwrap(table.cellForRow(at: IndexPath(row: 0, section: 0)) as? VMF_TableCell)
-               let labels = [cell.nameLabel, cell.timeAndDayLabel, cell.timeZoneLabel, cell.inProgressLabel]
-                    .compactMap { $0 }.filter { !$0.isHidden }
-               for label in labels {
-                    XCTAssertGreaterThanOrEqual(label.bounds.height, label.font.lineHeight - 1,
-                         "First search row clipped \(label.text ?? "")")
-                    XCTAssertLessThanOrEqual(label.convert(label.bounds, to: cell.contentView).maxY,
-                         cell.contentView.bounds.maxY - 7)
+               let expectedMeetings = main.getCurentMeetings()
+               XCTAssertEqual(table.numberOfRows(inSection: 0), expectedMeetings.count)
+               if !expectedMeetings.isEmpty {
+                    table.scrollToRow(at: IndexPath(row: expectedMeetings.count - 1, section: 0), at: .bottom, animated: false)
+                    table.layoutIfNeeded()
+               }
+               // Check again after UIKit's deferred stack layout and visibility updates.
+               for delay: UInt64 in [50_000_000, 200_000_000] {
+                    try await Task.sleep(nanoseconds: delay)
+                    XCTAssertEqual(table.visibleCells.isEmpty, expectedMeetings.isEmpty)
+                    for cell in table.visibleCells.compactMap({ $0 as? VMF_TableCell }) {
+                         let meeting = try XCTUnwrap(cell.myMeeting)
+                         let indexPath = try XCTUnwrap(table.indexPath(for: cell))
+                         XCTAssertTrue(meeting === expectedMeetings[indexPath.row])
+                         let zone = try XCTUnwrap(cell.timeZoneLabel)
+                         let expectedZone = controller.getMeetingTimeZone(meeting)
+                         XCTAssertEqual(zone.isHidden, expectedZone.isEmpty, "Timezone visibility changed after search: \(query)")
+                         XCTAssertEqual(zone.text, expectedZone.isEmpty ? nil : expectedZone)
+                         let progress = try XCTUnwrap(cell.inProgressLabel)
+                         XCTAssertEqual(progress.isHidden, !meeting.isMeetingInProgress())
+                         let labels = [cell.nameLabel, cell.timeAndDayLabel, zone, progress]
+                              .compactMap { $0 }.filter { !$0.isHidden }
+                         for label in labels {
+                              XCTAssertEqual(label.alpha, 1)
+                              XCTAssertGreaterThanOrEqual(label.bounds.height, label.font.lineHeight - 1,
+                                   "Search row clipped \(label.text ?? "")")
+                              XCTAssertLessThanOrEqual(label.convert(label.bounds, to: cell.contentView).maxY,
+                                   cell.contentView.bounds.maxY - 7)
+                         }
+                         let last = try XCTUnwrap(labels.last)
+                         XCTAssertEqual(last.convert(last.bounds, to: cell.contentView).maxY + 8,
+                              cell.contentView.bounds.height, accuracy: 1, "Search row retained a blank gap")
+                    }
                }
           }
+
+          func descendants(of view: UIView) -> [UIView] {
+               [view] + view.subviews.flatMap { descendants(of: $0) }
+          }
+          for _ in 0..<3 {
+               let picker = VMF_DayTimeSelectionViewController()
+               picker.mainController = main
+               picker.modalPresentationStyle = .popover
+               picker.preferredContentSize = CGSize(width: 350, height: 180)
+               let popover = try XCTUnwrap(picker.popoverPresentationController)
+               popover.delegate = picker
+               popover.sourceView = main.view
+               popover.sourceRect = CGRect(x: 100, y: 60, width: 1, height: 1)
+               main.present(picker, animated: true)
+               try await Task.sleep(nanoseconds: 600_000_000)
+               let controls = descendants(of: picker.view)
+               let field = try XCTUnwrap(controls.first { $0.accessibilityIdentifier == "popover-meeting-name-search" } as? UITextField)
+               let showResults = try XCTUnwrap(controls.first { $0.accessibilityIdentifier == "show-meeting-search-results" } as? UIButton)
+               field.text = "g"
+               field.sendActions(for: .editingChanged)
+               try await Task.sleep(nanoseconds: 100_000_000)
+               field.text = "ge"
+               field.sendActions(for: .editingChanged)
+               try await Task.sleep(nanoseconds: 100_000_000)
+               showResults.sendActions(for: .touchUpInside)
+               try await Task.sleep(nanoseconds: 600_000_000)
+               XCTAssertNil(main.presentedViewController)
+               XCTAssertFalse(table.visibleCells.isEmpty)
+               for cell in table.visibleCells.compactMap({ $0 as? VMF_TableCell }) {
+                    let meeting = try XCTUnwrap(cell.myMeeting)
+                    let zone = try XCTUnwrap(cell.timeZoneLabel)
+                    let expectedZone = controller.getMeetingTimeZone(meeting)
+                    XCTAssertEqual(zone.isHidden, expectedZone.isEmpty)
+                    XCTAssertEqual(zone.text, expectedZone.isEmpty ? nil : expectedZone)
+                    if !expectedZone.isEmpty {
+                         XCTAssertEqual(zone.alpha, 1)
+                         XCTAssertEqual(zone.layer.opacity, 1)
+                         XCTAssertGreaterThanOrEqual(zone.bounds.height, zone.font.lineHeight - 1)
+                    }
+                    let labels = [cell.nameLabel, cell.timeAndDayLabel, zone, cell.inProgressLabel].compactMap { $0 }.filter { !$0.isHidden }
+                    let last = try XCTUnwrap(labels.last)
+                    XCTAssertEqual(last.convert(last.bounds, to: cell.contentView).maxY + 8,
+                         cell.contentView.bounds.height, accuracy: 1, "Show Results left a blank gap")
+               }
+          }
+     }
+
+     @MainActor func testMeetingCellVisibilitySurvivesRepeatedConfiguration() async throws {
+          let controller = try XCTUnwrap(UIStoryboard(name: "VMF", bundle: .main).instantiateViewController(withIdentifier: VMF_EmbeddedTableController.storyboardID) as? VMF_EmbeddedTableController)
+          controller.loadViewIfNeeded()
+          let table = try XCTUnwrap(controller.valueTable)
+          let cell = try XCTUnwrap(table.dequeueReusableCell(withIdentifier: VMF_TableCell.reuseID) as? VMF_TableCell)
+          cell.myController = controller
+          let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 320, height: 640))
+          let host = UIViewController()
+          window.rootViewController = host
+          host.view.addSubview(cell)
+          cell.frame = CGRect(x: 0, y: 0, width: 320, height: 150)
+          window.isHidden = false
+          defer { window.isHidden = true }
+          let weekday = Calendar.current.component(.weekday, from: Date().addingTimeInterval(86400))
+          let local = try sdkMeeting(time: "12:00:00", weekday: weekday, zone: TimeZone.current.identifier)
+          let foreignZone = TimeZone.current.identifier == "Europe/Paris" ? "America/New_York" : "Europe/Paris"
+          let foreign = try sdkMeeting(time: "12:00:00", weekday: weekday, zone: foreignZone)
+          let zone = try XCTUnwrap(cell.timeZoneLabel)
+          for _ in 0..<5 {
+               for meeting in [local, foreign] {
+                    // Reuse/reload can configure a row several times before a layout pass.
+                    for _ in 0..<5 { cell.myMeeting = meeting }
+                    cell.setNeedsLayout()
+                    cell.layoutIfNeeded()
+                    try await Task.sleep(nanoseconds: 50_000_000)
+                    XCTAssertEqual(zone.isHidden, meeting === local)
+                    XCTAssertEqual(zone.text, meeting === local ? nil : controller.getMeetingTimeZone(meeting),
+                         "A reused row retained another meeting's timezone text")
+                    XCTAssertNil(cell.inProgressLabel?.text, "An upcoming meeting retained an old in-progress line")
+               }
+          }
+          // A search can reconfigure cells while the keyboard/popover is animating.
+          for _ in 0..<5 {
+               for meeting in [local, foreign] {
+                    UIView.animate(withDuration: 0.2) {
+                         cell.myMeeting = meeting
+                         cell.layoutIfNeeded()
+                    }
+                    try await Task.sleep(nanoseconds: 50_000_000)
+               }
+          }
+          cell.myMeeting = foreign
+          cell.layoutIfNeeded()
+          try await Task.sleep(nanoseconds: 400_000_000)
+          XCTAssertFalse(zone.isHidden)
+          XCTAssertEqual(zone.alpha, 1)
+          XCTAssertEqual(zone.layer.opacity, 1)
+          XCTAssertGreaterThanOrEqual(zone.bounds.height, zone.font.lineHeight - 1)
+          cell.prepareForReuse()
+          XCTAssertNil(cell.myMeeting)
+          XCTAssertNil(zone.text)
+          XCTAssertTrue(zone.isHidden)
+          XCTAssertNil(cell.inProgressLabel?.text)
+          XCTAssertEqual(cell.inProgressLabel?.isHidden, true)
      }
 
      func testWidgetMeetingLinksRetainFullSDKIdentifiers() throws {

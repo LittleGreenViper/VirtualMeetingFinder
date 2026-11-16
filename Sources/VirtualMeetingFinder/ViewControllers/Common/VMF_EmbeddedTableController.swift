@@ -186,6 +186,17 @@ class VMF_TableCell: UITableViewCell {
 extension VMF_TableCell {
      /* ################################################################## */
      /**
+      Discards optional lines before the cell is assigned to another meeting.
+      */
+     override func prepareForReuse() {
+          super.prepareForReuse()
+          myMeeting = nil
+          _setOptionalText(nil, on: timeZoneLabel)
+          _setOptionalText(nil, on: inProgressLabel)
+     }
+
+     /* ################################################################## */
+     /**
       Called when the view is laid out.
       */
      override func layoutSubviews() {
@@ -256,19 +267,8 @@ extension VMF_TableCell {
           
           nameLabel?.text = meetingName
           
-          if !timeZoneString.isEmpty {
-               timeZoneLabel?.isHidden = false
-               timeZoneLabel?.text = timeZoneString
-          } else {
-               timeZoneLabel?.isHidden = true
-          }
-          
-          if inProgress {
-               inProgressLabel?.isHidden = false
-               inProgressLabel?.text = inProgressString
-          } else {
-               inProgressLabel?.isHidden = true
-          }
+          _setOptionalText(timeZoneString, on: timeZoneLabel)
+          _setOptionalText(inProgress ? inProgressString : nil, on: inProgressLabel)
           
           let nextStart = meeting.nextOccurrenceDateFast()
           let weekday = weekdayFormatter.string(from: nextStart)
@@ -303,6 +303,23 @@ extension VMF_TableCell {
                controller.attendanceChanged(meeting)
                return true
           }]
+     }
+
+     /* ################################################################## */
+     /**
+      Replaces optional content before changing stack visibility. A recycled row must
+      not retain another meeting's text or animate its disappearance with the keyboard.
+      */
+     private func _setOptionalText(_ inText: String?, on inLabel: UILabel?) {
+          guard let label = inLabel else { return }
+          let text = inText.flatMap { $0.isEmpty ? nil : $0 }
+          UIView.performWithoutAnimation {
+               label.text = text
+               let isHidden = nil == text
+               if label.isHidden != isHidden {
+                    label.isHidden = isHidden
+               }
+          }
      }
 }
 
